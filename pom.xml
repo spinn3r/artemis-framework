@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <version>5.1.547</version>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spinn3r.artemis.framework</groupId>
+    <artifactId>artemis-framework</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>artemis-util</module>
+    </modules>
+
+    <distributionManagement>
+
+        <repository>
+            <id>ssh-repository</id>
+            <url>sftp://util0063.ger.he.spinn3r.com/d0/maven-repo/public</url>
+        </repository>
+
+    </distributionManagement>
+
+    <build>
+
+        <extensions>
+
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.8</version>
+            </extension>
+
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>2.8</version>
+            </extension>
+
+        </extensions>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <!-- turn on the jdeb plugin for all projects but skip it. This way
+                 we can run jdeb:jdeb from our parent project so that all
+                 packages in all submodules will be made -->
+
+            <plugin>
+
+                <artifactId>jdeb</artifactId>
+                <groupId>org.vafer</groupId>
+                <version>1.1.1</version>
+
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

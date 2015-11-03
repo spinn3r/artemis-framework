@@ -1,0 +1,288 @@
+#!/bin/bash
+
+### WARNING: THIS IS AN AUTO-GENERATED FILE
+#
+# artemis-core/src/main/init.d
+#
+# We are using the maven resources plugin.  Fields are defined in pom.xml and
+# the file is expanded and template applied for every build.
+
+export STACK_SIZE=${daemon.stackSize}
+export MIN_MEMORY=${daemon.minMemory}
+export MAX_MEMORY=${daemon.maxMemory}
+export PERM_SIZE=30M
+export MAX_PERM_SIZE=120M
+
+# Java mission control settings.
+export JMC_ENABLED=false
+
+# Change the likelyhood that the OOM killer will nuke this daemon.  Valid
+# values are integers in the range of -1000 to 1000 for oom_score_adj. The lower
+# the value, the lower the chance that it's going to be killed. Should be
+# configured in the /etc/default file for this daemon.  The default 0 is no
+# adjustment.
+
+export OOM_SCORE_ADJ=0
+
+export JMX_PORT="${daemon.jmxPort}"
+
+### the amount of time we wait for a daemon to start (in milliseconds)
+export START_TIMEOUT_MS=180000
+
+### the maximum amount of time we will wait for a daemon to stop before we
+# send it a kill -9 (in seconds)
+
+export STOP_TIMEOUT=120
+
+####
+# source a file with the daemon setup so that we can override MAX_MEMORY, etc
+# on a per -daemon basis.  Some daemons require more memory, others require,
+# far less memory
+export DEFAULT_FILE="/etc/default/${project.name}"
+
+####
+# specify extra command line options to include for the daemon.  This is added
+# as arguments provided to the main() method of the daemon.
+export EXTRA_OPTS=""
+
+export LOG_DIR="/var/log/${project.name}"
+
+export STDOUT_DEST="/var/log/${project.name}/artemis.out"
+export STDERR_DEST="/var/log/${project.name}/artemis.err"
+
+###
+# set the niceness of this daemon.  This way we allow other daemons on the box
+# to have higher priority.  Usually robots, the fetcher, watcher should not
+# preempt other daemons as these are important to schedule first.
+export NICE_PRIORITY=18
+
+### default ulimit value for max file handles.
+export NR_FILE_HANDLES=500000
+
+###
+# the command used to run Java.  This allows us to switch to a different version
+# of Java at runtime (usually Java 8).
+export JAVA=java
+
+###
+# when true, we change the version of Java we're running to Java 8.  We now use
+# Java 8 by default on all our daemons.
+export USE_JAVA8=true
+
+export DAEMON_NAME="${project.name}"
+
+export DAEMON_DIR="/usr/share/${project.name}"
+export DAEMON_PORT="${daemon.port}"
+
+export CLASSNAME="${daemon.classname}"
+
+export LIBDIR="/usr/share/${project.name}/lib"
+export EXT_LIBDIR="/usr/share/${project.name}/lib/ext"
+
+export PREFER_IPV6="${daemon.preferIPv6Addresses}"
+
+export JAVA_OPTS=""
+
+## now load the default file to overload system settings.
+if [ -e ${DEFAULT_FILE} ]; then
+    echo "Loading init.d default file: ${DEFAULT_FILE}"
+    source ${DEFAULT_FILE}
+fi
+
+if [ "${USE_JAVA8}" = "true" ]; then
+    echo "Using Java 8"
+    JAVA=/usr/lib/jvm/java-8-oracle/jre/bin/java
+fi
+
+mkdir -p ${LOG_DIR}
+
+###
+# run the given command for infinity, if it quits, run it again.
+respawn() {
+
+    while [ true ]; do
+
+        cmd=$@
+
+        #now run the command we want to respawn
+        $cmd
+
+        result=$?
+
+        echo "Running command again via respawn. Exit code was: $result"
+        echo "$cmd"
+
+        # add some sleep so that if the command is having a problem running
+        # that we don't put it in a fast while/infinite loop which would just
+        # waste a done of CPU.
+        sleep 1
+
+    done
+
+}
+
+start() {
+
+    export JMX_OPTS=""
+
+    if [ "$JMX_PORT" != "" ]; then
+
+        echo "Starting up JMX on port $JMX_PORT"
+
+        JMX_OPTS="-Dcom.sun.management.jmxremote \
+                  -Dcom.sun.management.jmxremote.port=$JMX_PORT \
+                  -Dcom.sun.management.jmxremote.local.only=true \
+                  -Dcom.sun.management.jmxremote.authenticate=false \
+                  -Dcom.sun.management.jmxremote.ssl=false"
+
+        if [ "$JMC_ENABLED" = "true" ]; then
+
+            echo "Enabling Java Mission Control"
+
+            # -Dcom.sun.management.jdp.name=spinn3r/$DAEMON_NAME \
+            # -Dcom.sun.management.jdp.address=224.0.23.178 \
+            # -Dcom.sun.management.jdp.port=5666 \
+            # -Dcom.sun.management.jdp.ttl=15 \
+
+            export JAVA_OPTS="-XX:+UnlockCommercialFeatures \
+                              -XX:+FlightRecorder \
+                              $JAVA_OPTS"
+
+        fi
+
+    fi
+
+    # TODO: we can add the following to track down core dumps
+    #
+    # -XX:+HeapDumpOnOutOfMemoryError \
+    # -XX:HeapDumpPath=$LOG_DIR \
+    # -XX:+UseG1GC
+
+    export JAVA_OPTS="-server \
+                      -Ddaemon.name=$DAEMON_NAME \
+                      -Ddaemon.port=$DAEMON_PORT \
+                      -Djava.awt.headless=true \
+                      -Xms$MIN_MEMORY \
+                      -Xmx$MAX_MEMORY \
+                      -Xss$STACK_SIZE \
+                      -XX:+PrintGCDetails \
+                      -XX:+PrintGCTimeStamps \
+                      -XX:PermSize=$PERM_SIZE \
+                      -XX:-OmitStackTraceInFastThrow \
+                      -Xloggc:/var/log/$DAEMON_NAME/gc.log \
+                      -XX:+UseGCLogFileRotation \
+                      -XX:NumberOfGCLogFiles=10 \
+                      -XX:GCLogFileSize=100M \
+                      $JMX_OPTS \
+                      $JAVA_OPTS"
+
+    if [ "${PREFER_IPV6}" = "true" ]; then
+        export JAVA_OPTS="${JAVA_OPTS} -Djava.net.preferIPv6Addresses=true"
+    fi
+
+    echo "Starting ${project.name} with MAX_MEMORY=$MAX_MEMORY"
+
+    ulimit -n ${NR_FILE_HANDLES}
+
+    nohup nice -n ${NICE_PRIORITY} ${JAVA} ${JAVA_OPTS} -cp "$LIBDIR/*:$EXT_LIBDIR/*" ${CLASSNAME} ${EXTRA_OPTS} < /dev/null > ${STDOUT_DEST} 2> ${STDERR_DEST} &
+
+    daemon_pid=$!
+
+    # spin until we can connect to the port of the daemon.  In the future,
+    # systemd will do this for us.
+    if [ "${daemon.port}" != "-1" ]; then
+        ${JAVA} -cp "$LIBDIR/*" com.spinn3r.artemis.util.daemon.WaitForPort --port=${daemon.port} --host=127.0.0.1 --timeout=${START_TIMEOUT_MS}
+        result=$?
+
+        if [ "$result" != "0" ]; then
+            echo "ERROR: Daemon startup failed." >&2
+            exit ${result}
+        fi
+
+    fi
+
+    if [ "${OOM_SCORE_ADJ}" != "" ]; then
+        echo "Changing oom_score_adj to ${OOM_SCORE_ADJ}"
+        echo "${OOM_SCORE_ADJ}" > /proc/${daemon_pid}/oom_score_adj
+    fi
+
+    echo STARTED > /var/log/${project.name}/artemis.state
+
+}
+
+stop() {
+
+    # TODO: use jpsgrep here
+    pid=$(pgrep -f 'java.*-Ddaemon.name=${project.name}')
+
+    if [ "$pid" != "" ]; then
+
+        echo "Stopping ${project.name} ..."
+        echo "Sending kill signal to pid $pid"
+        kill $pid
+
+        echo -n "Waiting for daemon to terminate..."
+
+        waitForPidThenTerminate $pid
+
+        echo "done"
+
+    else
+        echo "Daemon ${project.name} is already stopped."
+    fi
+
+    echo STOPPED > /var/log/${project.name}/artemis.state
+
+}
+
+restart() {
+
+    stop
+
+    start
+
+}
+
+waitForPidThenTerminate() {
+
+    # TODO there is no timeout here... we need to hard wire a timeout to
+    # kill -9 it...
+
+    # the amount of time we've been waiting...
+    waiting=0
+
+    for pid in "$@"; do
+        while kill -0 "$pid" 2> /dev/null; do
+            echo -n "."
+            sleep 1
+
+            waiting=$(expr $waiting + 1)
+
+            if [ "${waiting}" = "${STOP_TIMEOUT}" ]; then
+                echo "Sending -9 to kill ${pid}"
+                kill -9 ${pid}
+            fi
+
+        done
+    done
+
+    echo "done"
+
+}
+
+case $1 in
+
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    restart)
+        restart
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+
+esac
