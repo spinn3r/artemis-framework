@@ -26,6 +26,7 @@
         <snapshotRepository>
             <id>bintray-burtonator-spinn3r-public</id>
             <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
+
         </snapshotRepository>
 
     </distributionManagement>
