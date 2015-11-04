@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<settings xsi:schemaLocation='http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd'
+          xmlns='http://maven.apache.org/SETTINGS/1.0.0' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+
+    <!-- this is a template used by circleci to get access to our bintray
+         to perform package installs.  NO PASSWORDS are stored here because
+         they are filled in with environment variables.  This file is copied
+         to ~/.m2 and then the variables are filled in via the environment.
+    -->
+
+    <servers>
+
+        <server>
+            <id>bintray-burtonator-spinn3r-public</id>
+            <username>burtonator</username>
+            <password>${env.BINTRAY_PASSWORD}</password>
+        </server>
+
+    </servers>
+
+</settings>
