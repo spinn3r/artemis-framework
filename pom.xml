@@ -4,7 +4,7 @@
     <version>5.1.547</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.spinn3r.artemis.framework</groupId>
+    <groupId>com.spinn3r.artemis</groupId>
     <artifactId>artemis-framework</artifactId>
     <packaging>pom</packaging>
 
