@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <version>SNAPSHOT</version>
+    <version>5.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spinn3r.artemis</groupId>
@@ -19,9 +19,18 @@
     <distributionManagement>
 
         <repository>
-            <id>ssh-repository</id>
-            <url>sftp://util0063.ger.he.spinn3r.com/d0/maven-repo/public</url>
+
+            <id>bintray-burtonator-spinn3r-public</id>
+            <name>bintray</name>
+            <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
+
         </repository>
+
+        <snapshotRepository>
+            <id>bintray-burtonator-spinn3r-public</id>
+            <name>bintray</name>
+            <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
+        </snapshotRepository>
 
     </distributionManagement>
 
