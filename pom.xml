@@ -12,6 +12,10 @@
         <module>artemis-util</module>
     </modules>
 
+    <description>
+        Init scripts and Debian control files for building Debian packages.
+    </description>
+
     <distributionManagement>
 
         <repository>
