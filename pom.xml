@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <version>5.1-SNAPSHOT</version>
+    <version>5.1-LATEST</version>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spinn3r.artemis</groupId>
@@ -19,16 +19,12 @@
     <distributionManagement>
 
         <repository>
-
             <id>bintray-burtonator-spinn3r-public</id>
-            <name>bintray</name>
             <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
-
         </repository>
 
         <snapshotRepository>
             <id>bintray-burtonator-spinn3r-public</id>
-            <name>bintray</name>
             <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
         </snapshotRepository>
 
@@ -62,6 +58,12 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
             </plugin>
 
             <!-- turn on the jdeb plugin for all projects but skip it. This way
