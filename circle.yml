@@ -5,6 +5,6 @@ machine:
 
 test:
   pre:
-    - cp settings.yml ~/.m2/
+    - cp settings.xml ~/.m2/
   post:
     - mvn deploy
