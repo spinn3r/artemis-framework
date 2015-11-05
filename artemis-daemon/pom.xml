@@ -39,7 +39,9 @@
                 </executions>
                 <configuration>
                     <includes>
-                        <include>**/*</include>
+                        <include>artemis-daemon/**/*</include>
+                        <!--<include>*</include>-->
+                        <!--<include>artemis-daemon/control/control</include>-->
                     </includes>
                 </configuration>
             </plugin>
