@@ -7,5 +7,4 @@ test:
   pre:
     - cp settings.xml ~/.m2/
   post:
-    - cp settings.xml ~/.m2/
     - mvn -X deploy
