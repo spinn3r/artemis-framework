@@ -20,6 +20,9 @@
         <module>artemis-fluent</module>
         <module>artemis-json</module>
         <module>artemis-jackson</module>
+        <module>artemis-metrics</module>
+        <module>artemis-sequence-none</module>
+        <module>artemis-sequence</module>
     </modules>
 
     <description>
