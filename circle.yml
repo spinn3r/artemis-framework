@@ -6,6 +6,7 @@ machine:
 test:
   pre:
     - cp settings.xml ~/.m2
-    - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6kEoMbd6z+xhDc5pmD28FBxbDKFtfEBIX5UBhZo12r5G2C8RZjGzjWLvsIAqNcsi/pfKIzrPHNJ+e66vUuBz41MgERB5hk//NBvcmek79Tz4s9C0vjZbbP0bXHA0xl/Bop9mn2rDayJ1zD8nlZWPHTDlGweRVP9KLL2T+XlG+DYzS9aqSt7MGxFpmxIC+2QrsxI1MIZD88aome0skYJFS/l7ghVsbFX1tuEUuSuRNNr8lvDa95+wKZLTJy5Cxme8l5zbgUv0dlFYoZJWUNUxKkuYNKF9Z75YY1MdADp6YQdx/c6nGHklU4cBosgYduC79RVX8OONHQ+NddE4cKDb" > ~/.ssh/authorized_keys
+    - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6kEoMbd6z+xhDc5pmD28FBxbDKFtfEBIX5UBhZo12r5G2C8RZjGzjWLvsIAqNcsi/pfKIzrPHNJ+e66vUuBz41MgERB5hk//NBvcmek79Tz4s9C0vjZbbP0bXHA0xl/Bop9mn2rDayJ1zD8nlZWPHTDlGweRVP9KLL2T+XlG+DYzS9aqSt7MGxFpmxIC+2QrsxI1MIZD88aome0skYJFS/l7ghVsbFX1tuEUuSuRNNr8lvDa95+wKZLTJy5Cxme8l5zbgUv0dlFYoZJWUNUxKkuYNKF9Z75YY1MdADp6YQdx/c6nGHklU4cBosgYduC79RVX8OONHQ+NddE4cKDb ansible-generated on util0063
+" > ~/.ssh/authorized_keys
   post:
     - mvn -X deploy
