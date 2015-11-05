@@ -23,6 +23,15 @@
         <module>artemis-metrics</module>
         <module>artemis-sequence-none</module>
         <module>artemis-sequence</module>
+        <module>artemis-http</module>
+        <module>artemis-http-init</module>
+        <module>artemis-http-lib</module>
+        <module>artemis-network</module>
+        <module>artemis-network-lib</module>
+        <module>artemis-test-core</module>
+        <module>artemis-init-servlets</module>
+        <module>artemis-test</module>
+        <module>artemis-cassandra-driver</module>
     </modules>
 
     <description>

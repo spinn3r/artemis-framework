@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<!--
+
+    The content of the log4j:configuration element must match:
+    (renderer*,appender*,(category|logger)*,root?,categoryFactory?)
+
+    http://logging.apache.org/log4j/docs/api/org/apache/log4j/DailyRollingFileAppender.html
+
+    http://wiki.apache.org/logging-log4j/Log4jXmlFormat
+
+    http://cvs.apache.org/viewcvs.cgi/*checkout*/logging-log4j/src/java/org/apache/log4j/xml/log4j.dtd
+
+    For a visual of log levels:
+
+     |- Logger Level
+     |
+     V           Will output messages of level:
+     =================================================
+     |       | DEBUG | INFO  | WARN  | ERROR | FATAL |
+     =================================================
+     | DEBUG | YYYYY | YYYYY | YYYYY | YYYYY | YYYYY |
+     | INFO  | NNNNN | YYYYY | YYYYY | YYYYY | YYYYY |
+     | WARN  | NNNNN | NNNNN | YYYYY | YYYYY | YYYYY |
+     | ERROR | NNNNN | NNNNN | NNNNN | YYYYY | YYYYY |
+     | FATAL | NNNNN | NNNNN | NNNNN | NNNNN | YYYYY |
+     =================================================
+     | ALL   | YYYYY | YYYYY | YYYYY | YYYYY | YYYYY |
+     | OFF   | NNNNN | NNNNN | NNNNN | NNNNN | NNNNN |
+     =================================================
+
+     Note: PatternConversion in log4j 1.3 will have a new %thowable pattern to
+     print a stack everytime an message is hit.  This will be really useful in
+     some situations to log something and include the full trace.
+
+-->
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="root" class="org.apache.log4j.ConsoleAppender">
+
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{ISO8601} %p [%t] %c %m%n"/>
+
+        </layout>
+
+    </appender>
+
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="root"/>
+    </root>
+
+</log4j:configuration>
+
