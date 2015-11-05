@@ -18,6 +18,7 @@
 
     <distributionManagement>
 
+        <!--
         <repository>
             <id>bintray-burtonator-spinn3r-public</id>
             <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
@@ -28,6 +29,12 @@
             <url>https://api.bintray.com/maven/burtonator/spinn3r-public/artemis-framework/;publish=1</url>
 
         </snapshotRepository>
+        -->
+
+        <repository>
+            <id>ssh-repository</id>
+            <url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>
+        </repository>
 
     </distributionManagement>
 
