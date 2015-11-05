@@ -6,6 +6,6 @@ machine:
 test:
   pre:
     - cp settings.xml ~/.m2
-    - echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC6kEoMbd6z+xhDc5pmD28FBxbDKFtfEBIX5UBhZo12r5G2C8RZjGzjWLvsIAqNcsi/pfKIzrPHNJ+e66vUuBz41MgERB5hk//NBvcmek79Tz4s9C0vjZbbP0bXHA0xl/Bop9mn2rDayJ1zD8nlZWPHTDlGweRVP9KLL2T+XlG+DYzS9aqSt7MGxFpmxIC+2QrsxI1MIZD88aome0skYJFS/l7ghVsbFX1tuEUuSuRNNr8lvDa95+wKZLTJy5Cxme8l5zbgUv0dlFYoZJWUNUxKkuYNKF9Z75YY1MdADp6YQdx/c6nGHklU4cBosgYduC79RVX8OONHQ+NddE4cKDb ansible-generated on util0063" > ~/.ssh/authorized_keys
+    - echo "util0063.ger.he.spinn3r.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLEXFHtebb6b33mN5fhx2Nhk+QoV3TceLbiRX9PJE51HloVNe6f4Hcz9XQ0S33Iimh6HAeyMIUGCdgKV9NYUHTIypq+HvmxM5YJGfTjbOaWirrjdAXFuCGCPQxsej3j71BWj8qfuaSK5kvsFK7dIAQPU77YEKuJSFMK5sOh9Rjfetku6kPurIOSoSxQnaytHvMkWRwWPE6bAE6Ru9nuDkgeE03S5pObrigQDKPQZY+OnjD1rzhBa8gcepLwqCVrCq8SA0Sse/UC0QtguJzmrkKOfHH/mBOA/4A13NHMt+QuWJqepahFi73Cb5MYEniKxCzuDDlYUk1oetLDdaa27x9" > ~/.ssh/known_hosts
   post:
     - mvn -X deploy
