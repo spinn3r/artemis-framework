@@ -42,6 +42,7 @@
         <module>artemis-test</module>
         <module>artemis-cassandra-driver</module>
         <module>artemis-daemon</module>
+        <module>artemis-schema-core</module>
     </modules>
 
     <description>

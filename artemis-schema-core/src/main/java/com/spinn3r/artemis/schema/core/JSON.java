@@ -1,0 +1,123 @@
+package com.spinn3r.artemis.schema.core;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
+
+/**
+ * Various helper functions for working with JSON.
+ */
+public class JSON {
+
+    public static void writeStringLongMap( JsonGenerator generator, String name, Map<String,Long> map ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( map.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartObject();
+
+        for (Map.Entry<String, Long> entry : map.entrySet()) {
+            generator.writeObjectField( entry.getKey(), entry.getValue() );
+        }
+
+        generator.writeEndObject();
+
+    }
+
+    public static void writeStringMap( JsonGenerator generator, String name, Map<String,?> map ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( map.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartObject();
+
+        for (Map.Entry<String, ?> entry : map.entrySet()) {
+            generator.writeObjectField( entry.getKey(), entry.getValue() );
+        }
+
+        generator.writeEndObject();
+
+    }
+
+    public static void writeLongMap( JsonGenerator generator, String name, Map<Long,Double> map ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( map.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartObject();
+
+        for (Map.Entry<Long, ?> entry : map.entrySet()) {
+            generator.writeObjectField( entry.getKey().toString(), entry.getValue() );
+        }
+
+        generator.writeEndObject();
+
+    }
+
+
+    public static void writeStringSet( JsonGenerator generator, String name, Collection<String> set ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( set.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartArray();
+
+        for ( String member : set ) {
+            generator.writeString( member );
+        }
+
+        generator.writeEndArray();
+
+    }
+
+    public static void writeIntegerSet( JsonGenerator generator, String name, Collection<Integer> set ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( set.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartArray();
+
+        for ( int member : set ) {
+            generator.writeNumber( member );
+        }
+
+        generator.writeEndArray();
+
+    }
+
+    public static void writeLongSet( JsonGenerator generator, String name, Collection<Long> set ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( set.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartArray();
+
+        for ( long member : set ) {
+            generator.writeNumber( member );
+        }
+
+        generator.writeEndArray();
+
+    }
+
+}
