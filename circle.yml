@@ -5,6 +5,6 @@ machine:
 
 test:
   pre:
-    - cat ~/.ssh/id_dsa.pub
+    - cp settings.xml ~/.m2
   post:
     - mvn -X deploy
