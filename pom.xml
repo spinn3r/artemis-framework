@@ -8,6 +8,14 @@
     <artifactId>artemis-framework</artifactId>
     <packaging>pom</packaging>
 
+    <properties>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <artemis.surefire.maxMemory>2000M</artemis.surefire.maxMemory>
+
+    </properties>
+
     <modules>
         <module>artemis-util</module>
         <module>artemis-littleproxy</module>

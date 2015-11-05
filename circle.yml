@@ -11,5 +11,9 @@ test:
   pre:
     - cp settings.xml ~/.m2
     - echo "util0063.ger.he.spinn3r.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDLEXFHtebb6b33mN5fhx2Nhk+QoV3TceLbiRX9PJE51HloVNe6f4Hcz9XQ0S33Iimh6HAeyMIUGCdgKV9NYUHTIypq+HvmxM5YJGfTjbOaWirrjdAXFuCGCPQxsej3j71BWj8qfuaSK5kvsFK7dIAQPU77YEKuJSFMK5sOh9Rjfetku6kPurIOSoSxQnaytHvMkWRwWPE6bAE6Ru9nuDkgeE03S5pObrigQDKPQZY+OnjD1rzhBa8gcepLwqCVrCq8SA0Sse/UC0QtguJzmrkKOfHH/mBOA/4A13NHMt+QuWJqepahFi73Cb5MYEniKxCzuDDlYUk1oetLDdaa27x9" > ~/.ssh/known_hosts
-  post:
-    - mvn -X deploy
+
+deployment:
+  staging:
+    branch: master
+    commands:
+      - mvn -T 4 deploy

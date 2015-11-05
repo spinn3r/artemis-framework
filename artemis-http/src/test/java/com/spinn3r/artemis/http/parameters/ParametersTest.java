@@ -35,7 +35,6 @@ public class ParametersTest {
                       fromMap( params ).get( "asdf" )
                         .values() );
 
-
     }
 
 }
