@@ -11,6 +11,7 @@
     <properties>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <artemis.surefire.maxMemory>2000M</artemis.surefire.maxMemory>
         <project.updatePolicy>never</project.updatePolicy>
@@ -44,6 +45,7 @@
         <module>artemis-daemon</module>
         <module>artemis-schema-core</module>
         <module>artemis-guava</module>
+        <module>spinn3r-artemis-client-api</module>
     </modules>
 
     <description>
