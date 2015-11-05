@@ -13,6 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <artemis.surefire.maxMemory>2000M</artemis.surefire.maxMemory>
+        <project.updatePolicy>never</project.updatePolicy>
 
     </properties>
 
@@ -40,6 +41,7 @@
         <module>artemis-init-servlets</module>
         <module>artemis-test</module>
         <module>artemis-cassandra-driver</module>
+        <module>artemis-daemon</module>
     </modules>
 
     <description>
@@ -123,7 +125,7 @@
         <repository>
 
             <releases>
-                <updatePolicy>always</updatePolicy>
+                <updatePolicy>${project.updatePolicy}</updatePolicy>
             </releases>
 
             <id>spinn3r-public</id>
