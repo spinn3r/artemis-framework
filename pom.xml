@@ -10,6 +10,7 @@
 
     <modules>
         <module>artemis-util</module>
+        <module>artemis-littleproxy</module>
     </modules>
 
     <description>
