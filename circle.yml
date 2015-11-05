@@ -4,5 +4,7 @@ machine:
 
 
 test:
+  pre:
+    - cat ~/.ssh/id_rsa.pub
   post:
     - mvn -X deploy
