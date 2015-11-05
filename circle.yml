@@ -16,4 +16,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - mvn -T 4 deploy
+      - mvn -T 4 -DskipTests deploy
