@@ -2,6 +2,10 @@ machine:
   java:
     version: oraclejdk8
 
+dependencies:
+  override:
+    - time mvn -T 4 -DskipTests install
+    - time mvn -e -T 4 dependency:go-offline
 
 test:
   pre:
