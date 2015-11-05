@@ -4,7 +4,5 @@ machine:
 
 
 test:
-  pre:
-    - cp settings.xml ~/.m2/
   post:
     - mvn -X deploy
