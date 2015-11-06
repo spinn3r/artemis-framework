@@ -117,16 +117,16 @@
 
     <distributionManagement>
 
-        <!--<repository>-->
-            <!--<id>ssh-repository</id>-->
-            <!--<url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>-->
-        <!--</repository>-->
-
         <repository>
-            <id>spinn3r</id>
-            <name>spinn3r-releases</name>
-            <url>https://spinn3r.artifactoryonline.com/spinn3r/ext-release-local</url>
+            <id>ssh-repository</id>
+            <url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>
         </repository>
+
+        <!--<repository>-->
+            <!--<id>spinn3r</id>-->
+            <!--<name>spinn3r-releases</name>-->
+            <!--<url>https://spinn3r.artifactoryonline.com/spinn3r/ext-release-local</url>-->
+        <!--</repository>-->
 
     </distributionManagement>
 
