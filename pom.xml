@@ -46,6 +46,7 @@
         <module>artemis-schema-core</module>
         <module>artemis-guava</module>
         <module>spinn3r-artemis-client-api</module>
+        <module>artemis-zookeeper</module>
     </modules>
 
     <description>
