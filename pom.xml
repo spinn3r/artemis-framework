@@ -185,6 +185,11 @@
                     <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-snapshot</url>
                 </repository>
 
+                <repository>
+                    <id>spinn3r-public</id>
+                    <url>http://public.maven.spinn3r.com/</url>
+                </repository>
+
             </repositories>
 
         </profile>
