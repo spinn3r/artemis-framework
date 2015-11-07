@@ -11,10 +11,11 @@
     <artifactId>artemis-log5j</artifactId>
 
     <dependencies>
+
         <dependency>
             <groupId>com.spinn3r.log5j</groupId>
             <artifactId>log5j</artifactId>
-            <version>2.1.6</version>
+            <version>2.2.0</version>
         </dependency>
 
         <dependency>

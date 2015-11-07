@@ -78,6 +78,7 @@
     <orderEntry type="module" module-name="artemis-init-test" />
     <orderEntry type="module" module-name="artemis-test-core" scope="TEST" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
+    <orderEntry type="module" module-name="artemis-log5j" scope="TEST" />
     <orderEntry type="module" module-name="artemis-network-lib" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
