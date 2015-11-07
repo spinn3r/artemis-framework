@@ -177,6 +177,9 @@
                     <id>artifactory-releases</id>
                     <name>libs-release</name>
                     <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-release</url>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
                 </repository>
 
                 <repository>
@@ -189,6 +192,9 @@
                 <repository>
                     <id>spinn3r-public</id>
                     <url>http://public.maven.spinn3r.com/</url>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
                 </repository>
 
             </repositories>
