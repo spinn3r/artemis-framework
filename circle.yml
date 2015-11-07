@@ -18,4 +18,4 @@ deployment:
   staging:
     branch: master
     commands:
-      - mvn -T 4 -DskipTests deploy
+      - mvn -P artifactory -T 4 -DskipTests deploy

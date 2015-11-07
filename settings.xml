@@ -11,15 +11,21 @@
     <servers>
 
         <server>
-            <id>ssh-repository</id>
+            <id>spinn3r</id>
             <username>maven</username>
             <password>${env.MAVEN_PASSWORD}</password>
         </server>
 
         <server>
+            <id>artifactory-releases</id>
             <username>admin</username>
-            <password>${env.ARTIFACTORY_PASSWORD}}</password>
-            <id>spinn3r</id>
+            <password>leop3ac3</password>
+        </server>
+
+        <server>
+            <id>artifactory-snapshots</id>
+            <username>admin</username>
+            <password>leop3ac3</password>
         </server>
 
     </servers>
