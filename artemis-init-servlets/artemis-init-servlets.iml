@@ -39,7 +39,8 @@
     <orderEntry type="module" module-name="artemis-sequence" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-core:3.1.2" level="project" />
     <orderEntry type="module" module-name="metrics-kairosdb" />
-    <orderEntry type="library" name="Maven: com.spinn3r.log5j:log5j:2.1.6" level="project" />
+    <orderEntry type="module" module-name="artemis-log5j" />
+    <orderEntry type="module" module-name="log5j" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-log4j:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-jvm:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-json:3.1.2" level="project" />

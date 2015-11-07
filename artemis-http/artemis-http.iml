@@ -17,7 +17,8 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-core:3.1.2" level="project" />
     <orderEntry type="module" module-name="metrics-kairosdb" />
-    <orderEntry type="library" name="Maven: com.spinn3r.log5j:log5j:2.1.6" level="project" />
+    <orderEntry type="module" module-name="artemis-log5j" />
+    <orderEntry type="module" module-name="log5j" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-log4j:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-jvm:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-json:3.1.2" level="project" />
@@ -78,7 +79,6 @@
     <orderEntry type="module" module-name="artemis-init-test" />
     <orderEntry type="module" module-name="artemis-test-core" scope="TEST" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
-    <orderEntry type="module" module-name="artemis-log5j" scope="TEST" />
     <orderEntry type="module" module-name="artemis-network-lib" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" level="project" />

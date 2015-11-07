@@ -45,7 +45,6 @@
     <orderEntry type="module" module-name="artemis-sequence" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-core:3.1.2" level="project" />
     <orderEntry type="module" module-name="metrics-kairosdb" />
-    <orderEntry type="library" name="Maven: com.spinn3r.log5j:log5j:2.1.6" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-log4j:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-jvm:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-json:3.1.2" level="project" />
@@ -132,7 +131,8 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-math:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-proxy:1.0" level="project" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
-    <orderEntry type="module" module-name="artemis-log5j" scope="TEST" />
+    <orderEntry type="module" module-name="artemis-log5j" />
+    <orderEntry type="module" module-name="log5j" />
     <orderEntry type="module" module-name="artemis-network-lib" scope="TEST" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-core:1.10.19" level="project" />

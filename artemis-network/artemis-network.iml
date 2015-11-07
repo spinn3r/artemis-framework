@@ -12,7 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="artemis-log5j" />
-    <orderEntry type="library" name="Maven: com.spinn3r.log5j:log5j:2.1.6" level="project" />
+    <orderEntry type="module" module-name="log5j" />
     <orderEntry type="module" module-name="artemis-time" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />

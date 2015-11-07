@@ -19,13 +19,13 @@
         <server>
             <id>artifactory-releases</id>
             <username>admin</username>
-            <password>leop3ac3</password>
+            <password>${env.ARTIFACTORY_PASSWORD}</password>
         </server>
 
         <server>
             <id>artifactory-snapshots</id>
             <username>admin</username>
-            <password>leop3ac3</password>
+            <password>env.ARTIFACTORY_PASSWORD</password>
         </server>
 
     </servers>
