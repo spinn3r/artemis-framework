@@ -116,32 +116,77 @@
 
     </dependencies>
 
-    <distributionManagement>
+    <profiles>
 
-        <repository>
-            <id>ssh-repository</id>
-            <url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>
-        </repository>
+        <profile>
 
-        <!--<repository>-->
-            <!--<id>spinn3r</id>-->
-            <!--<name>spinn3r-releases</name>-->
-            <!--<url>https://spinn3r.artifactoryonline.com/spinn3r/ext-release-local</url>-->
-        <!--</repository>-->
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
 
-    </distributionManagement>
+            <id>spinn3r</id>
 
-    <repositories>
+            <distributionManagement>
+                <repository>
+                    <id>ssh-repository</id>
+                    <url>sftp://maven@util0063.ger.he.spinn3r.com/public</url>
+                </repository>
+            </distributionManagement>
 
-        <repository>
-            <releases>
-                <updatePolicy>${project.updatePolicy}</updatePolicy>
-            </releases>
-            <id>spinn3r-public</id>
-            <url>http://public.maven.spinn3r.com/</url>
-        </repository>
+            <repositories>
 
-    </repositories>
+                <repository>
+                    <releases>
+                        <updatePolicy>${project.updatePolicy}</updatePolicy>
+                    </releases>
+                    <id>spinn3r-public</id>
+                    <url>http://public.maven.spinn3r.com/</url>
+                </repository>
+
+            </repositories>
+
+        </profile>
+
+        <profile>
+
+            <id>artifactory</id>
+
+            <repositories>
+                <repository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>libs-release</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-release</url>
+                </repository>
+                <repository>
+                    <snapshots />
+                    <id>snapshots</id>
+                    <name>libs-snapshot</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/libs-snapshot</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                    <id>central</id>
+                    <name>plugins-release</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/plugins-release</url>
+                </pluginRepository>
+                <pluginRepository>
+                    <snapshots />
+                    <id>snapshots</id>
+                    <name>plugins-snapshot</name>
+                    <url>https://spinn3r.artifactoryonline.com/spinn3r/plugins-snapshot</url>
+                </pluginRepository>
+            </pluginRepositories>
+
+        </profile>
+
+    </profiles>
 
     <build>
 
