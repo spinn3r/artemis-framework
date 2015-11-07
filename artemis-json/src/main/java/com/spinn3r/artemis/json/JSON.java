@@ -85,6 +85,9 @@ public class JSON {
 
     public static <T> T fromJSON( Class<T> clazz, InputStream inputStream ) {
 
+        if ( inputStream == null )
+            throw new NullPointerException( "content" );
+
         try {
 
             ObjectMapper objectMapper = new ObjectMapper();
@@ -96,6 +99,21 @@ public class JSON {
 
     }
 
+    public static <T> T fromJSON( Class<T> clazz, byte[] data ) {
+
+        if ( data == null )
+            throw new NullPointerException( "content" );
+
+        try {
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue( data, clazz );
+
+        } catch (IOException e) {
+            throw new RuntimeException( e );
+        }
+
+    }
 
     private static class PrettyPrinter extends DefaultPrettyPrinter {
         public static final PrettyPrinter instance = new PrettyPrinter();
