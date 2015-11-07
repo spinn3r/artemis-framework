@@ -4,8 +4,8 @@ machine:
 
 dependencies:
   override:
-    - time mvn -T 4 -DskipTests install
-    - time mvn -e -T 4 dependency:go-offline
+    - time mvn -T 4 -Dproject.updatePolicy=always -DskipTests install
+    - time mvn -e -T 4 -Dproject.updatePolicy=always dependency:go-offline
 
 test:
   pre:
