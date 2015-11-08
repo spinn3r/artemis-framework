@@ -6,6 +6,6 @@ package com.spinn3r.artemis.init;
  */
 interface LaunchHandler {
 
-    public void onLaunch( ServicesTool servicesTool ) throws Exception;
+    void onLaunch( ServicesTool servicesTool ) throws Exception;
 
 }

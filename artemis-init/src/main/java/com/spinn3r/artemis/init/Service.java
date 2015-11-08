@@ -8,26 +8,30 @@ import com.spinn3r.artemis.init.tracer.Tracer;
  */
 public interface Service extends Tracer {
 
-    public Advertised getAdvertised();
+    Advertised getAdvertised();
 
-    public void setAdvertised(Advertised advertised);
+    void setAdvertised(Advertised advertised);
 
-    public Tracer getTracer();
+    Tracer getTracer();
 
-    public void setTracer( Tracer tracer );
+    void setTracer( Tracer tracer );
 
-    public ConfigLoader getConfigLoader();
+    ConfigLoader getConfigLoader();
 
-    public void setConfigLoader(ConfigLoader configLoader);
+    void setConfigLoader(ConfigLoader configLoader);
 
-    public Services getServices();
+    Services getServices();
 
-    public void setServices(Services services);
+    void setServices(Services services);
 
-    public void init();
+    void init();
 
-    public void start() throws Exception;
+    void start() throws Exception;
 
-    public void stop() throws Exception;
+    void stop() throws Exception;
+
+    Includer getIncluder();
+
+    void setIncluder(Includer includer);
 
 }

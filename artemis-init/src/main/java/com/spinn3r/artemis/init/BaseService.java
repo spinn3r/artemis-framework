@@ -18,6 +18,8 @@ public abstract class BaseService implements Service {
 
     protected Tracer tracer;
 
+    protected Includer includer;
+
     /**
      */
     protected ConfigLoader configLoader = null;
@@ -64,6 +66,20 @@ public abstract class BaseService implements Service {
             throw new RuntimeException( "no services" );
 
         this.services = services;
+    }
+
+    @Override
+    public Includer getIncluder() {
+        return includer;
+    }
+
+    @Override
+    public void setIncluder(Includer includer) {
+        this.includer = includer;
+    }
+
+    protected void include( Class<? extends Service> serviceClass ) {
+        includer.include( serviceClass );
     }
 
     protected <T,V extends T> void advertise(Class<T> clazz, V instance) {

@@ -18,8 +18,7 @@ public class ServicesTool {
 
     private Services services;
 
-    public ServicesTool( Launcher launcher,
-                         Services services ) {
+    public ServicesTool( Launcher launcher, Services services ) {
 
         this.launcher = launcher;
         this.services = services;
@@ -27,28 +26,40 @@ public class ServicesTool {
     }
 
     /**
-     * Perform init on configurables.
+     * Perform init on all services for this services tool..
      */
-    public <S> void init() {
-
-        Advertised advertised = launcher.getAdvertised();
+    public void init() {
 
         for (Service service : services) {
 
-            TracerFactory tracerFactory = advertised.require( TracerFactory.class );
-
-            service.setAdvertised( advertised );
-            service.setTracer( tracerFactory.newTracer( service ) );
-            service.setConfigLoader( launcher.getConfigLoader() );
-            service.setServices( launcher.getServices() );
-
-            ServiceReference serviceReference = new ServiceReference( service.getClass() );
-
-            ServiceInitializer serviceInitializer = new ServiceInitializer( launcher );
-            serviceInitializer.init( serviceReference );
-            service.init();
+            init( service );
 
         }
+
+    }
+
+    /**
+     * Init a specific service.
+     *
+     * @param service
+     */
+    public void init(Service service) {
+
+        Advertised advertised = launcher.getAdvertised();
+
+        TracerFactory tracerFactory = advertised.require( TracerFactory.class );
+
+        ServiceReference serviceReference = new ServiceReference( service.getClass() );
+
+        service.setAdvertised( advertised );
+        service.setTracer( tracerFactory.newTracer( service ) );
+        service.setConfigLoader( launcher.getConfigLoader() );
+        service.setServices( launcher.getServices() );
+        service.setIncluder( new Includer( launcher, serviceReference ) );
+
+        ServiceInitializer serviceInitializer = new ServiceInitializer( launcher );
+        serviceInitializer.init( serviceReference );
+        service.init();
 
     }
 

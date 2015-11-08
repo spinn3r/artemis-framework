@@ -54,13 +54,18 @@ public class Initializer {
         advertise( Initializer.class, this );
     }
 
-    public Initializer launch( ServiceReference... references ) throws Exception {
-        return launch( new ServiceReferences( references ) );
-    }
-
+    /**
+     * Perform basic init. Mostly used so that test code can verify that
+     * bindings are working properly.
+     *
+     */
     public Initializer init( ServiceReferences serviceReferences ) throws Exception {
         launcher.init( serviceReferences );
         return this;
+    }
+
+    public Initializer launch( ServiceReference... references ) throws Exception {
+        return launch( new ServiceReferences( references ) );
     }
 
     public Initializer launch( ServiceReferences serviceReferences ) throws Exception {

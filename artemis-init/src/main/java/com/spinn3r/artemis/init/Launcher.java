@@ -13,6 +13,8 @@ import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
+import java.util.Iterator;
+
 /**
  *
  * Launches all services for a daemon.
@@ -40,6 +42,8 @@ public class Launcher {
      */
     private Injector injector = null;
 
+    private ServiceReferences serviceReferences;
+
     public Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
         this.advertised = advertised;
@@ -48,6 +52,15 @@ public class Launcher {
         // to call stop on itself after being launched.
         advertise( Launcher.class, this );
         provider( Lifecycle.class, lifecycleProvider );
+    }
+
+    /**
+     * Perform basic init. Mostly used so that test code can verify that
+     * bindings are working properly.
+     *
+     */
+    public Launcher init( ServiceReferences references ) throws Exception {
+        return launch( references, (servicesTool) -> { servicesTool.init(); } );
     }
 
     public Launcher launch() throws Exception {
@@ -60,29 +73,11 @@ public class Launcher {
 
     }
 
-    public Launcher init( ServiceReferences references ) throws Exception {
-
-        return launch( references, new LaunchHandler() {
-
-            @Override
-            public void onLaunch(ServicesTool servicesTool) throws Exception {
-                servicesTool.init();
-            }
-
-        } );
-
-    }
-
     public Launcher launch( ServiceReferences references ) throws Exception {
 
-        return launch( references, new LaunchHandler() {
-
-            @Override
-            public void onLaunch(ServicesTool servicesTool) throws Exception {
+        return launch( references, (servicesTool) -> {
                 servicesTool.init();
                 servicesTool.start();
-            }
-
         } );
 
     }
@@ -105,31 +100,37 @@ public class Launcher {
      * instantiate each one.
      *
      */
-    public Launcher launch( ServiceReferences references, LaunchHandler launchHandler ) throws Exception {
+    public Launcher launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
 
-        info( "Launching services: \n%s", references.format() );
+        this.serviceReferences = serviceReferences;
+
+        info( "Launching services: \n%s", serviceReferences.format() );
 
         lifecycleProvider.set( Lifecycle.STARTING );
 
         ServiceInitializer serviceInitializer = new ServiceInitializer( this );
 
-        for ( ServiceReference ref : references ) {
+        // we iterate with a for loop so that if a service includes another
+        // service we can incorporate it into our pipeline.
+        for (int i = 0; i < serviceReferences.size(); i++) {
+
+            ServiceReference serviceReference = serviceReferences.get( i );
 
             try {
 
-                serviceInitializer.init( ref );
+                serviceInitializer.init( serviceReference );
 
                 Injector injector = getAdvertised().createInjector();
-                Service current = injector.getInstance( ref.getBacking() );
+                Service current = injector.getInstance( serviceReference.getBacking() );
                 launch0( launchHandler, current );
 
                 services.add( current );
-                started.add( ref );
+                started.add( serviceReference );
 
             } catch ( ConfigurationException|CreationException e ) {
 
                 String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
-                                                ref.getBacking().getName(), started.format(), advertised.format() );
+                                                serviceReference.getBacking().getName(), started.format(), advertised.format() );
 
                 throw new Exception( message, e );
 
@@ -207,9 +208,21 @@ public class Launcher {
         return advertised;
     }
 
-    //public <T> void advertise(Classes<T> classes) {
-    //    getAdvertised().advertise( this, classes );
-    //}
+    public ServiceReferences getServiceReferences() {
+        return serviceReferences;
+    }
+
+    public void include( ServiceReference currentServiceReference, Class<? extends Service> includedService ) {
+
+        int index = this.serviceReferences.indexOf( currentServiceReference );
+
+        if ( index == -1 ) {
+            throw new RuntimeException( String.format( "Could not find index of: %s in %s", currentServiceReference, serviceReferences ) );
+        }
+
+        this.serviceReferences.add( index + 1, new ServiceReference( includedService ) );
+
+    }
 
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {
         getAdvertised().provider( this.getClass(), clazz, provider );
@@ -232,11 +245,7 @@ public class Launcher {
     }
 
     public Injector createInjector() {
-
-        Injector result = getAdvertised().createInjector();
-
-        return result;
-
+        return getAdvertised().createInjector();
     }
 
     public Injector getInjector() {
@@ -253,8 +262,7 @@ public class Launcher {
 
     private Tracer getTracer() {
         TracerFactory tracerFactory = advertised.require( TracerFactory.class );
-        Tracer tracer = tracerFactory.newTracer( this );
-        return tracer;
+        return tracerFactory.newTracer( this );
     }
 
     public void info( String format, Object... args ) {
