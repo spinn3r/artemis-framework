@@ -49,6 +49,10 @@ public class HostPort {
 
     }
 
+    public String format() {
+        return String.format( "%s:%s", hostname, port );
+    }
+
     @Override
     public String toString() {
         return "HostPort{" +
