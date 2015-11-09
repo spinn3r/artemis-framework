@@ -49,6 +49,7 @@
         <module>artemis-zookeeper</module>
         <module>artemis-sequence-zookeeper</module>
         <module>log5j</module>
+        <module>artemis-sequence-support</module>
     </modules>
 
     <description>
