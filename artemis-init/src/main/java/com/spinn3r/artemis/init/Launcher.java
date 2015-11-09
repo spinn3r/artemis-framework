@@ -14,6 +14,7 @@ import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -212,7 +213,7 @@ public class Launcher {
         return serviceReferences;
     }
 
-    public void include( ServiceReference currentServiceReference, Class<? extends Service> includedService ) {
+    public void include( ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
 
         int index = this.serviceReferences.indexOf( currentServiceReference );
 
@@ -220,7 +221,11 @@ public class Launcher {
             throw new RuntimeException( String.format( "Could not find index of: %s in %s", currentServiceReference, serviceReferences ) );
         }
 
-        this.serviceReferences.add( index + 1, new ServiceReference( includedService ) );
+        int newServiceIndex = index + 1;
+
+        for (ServiceReference additionalServiceReference : additionalServiceReferences) {
+            this.serviceReferences.add( newServiceIndex++, additionalServiceReference );
+        }
 
     }
 

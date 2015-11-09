@@ -12,10 +12,7 @@ import static org.junit.Assert.*;
 /**
  *
  */
-public class TestIncludeService {
-
-    @Inject
-    Hostname hostname;
+public class TestIncludeMultipleServicesOrder {
 
     static List<Class<? extends Service>> serviceInitOrder = Lists.newArrayList();
 
@@ -27,14 +24,10 @@ public class TestIncludeService {
 
         launcher.getInjector().injectMembers( this );
 
-        assertEquals( "fake.example.com", hostname.getValue() );
-
-        assertEquals( "[class com.spinn3r.artemis.init.TestIncludeService$FirstService, class com.spinn3r.artemis.init.TestIncludeService$FakeHostnameService, class com.spinn3r.artemis.init.TestIncludeService$LastService]",
+        assertEquals( "[class com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$FirstService, class com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$SecondService, class com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$ThirdService, class com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$LastService]",
                       serviceInitOrder.toString() );
 
-        // assert the ServiceReferences by calling launcher.getServiceReferences
-
-        assertEquals( "[com.spinn3r.artemis.init.TestIncludeService$FirstService, com.spinn3r.artemis.init.TestIncludeService$FakeHostnameService, com.spinn3r.artemis.init.TestIncludeService$LastService]",
+        assertEquals( "[com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$FirstService, com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$SecondService, com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$ThirdService, com.spinn3r.artemis.init.TestIncludeMultipleServicesOrder$LastService]",
                       launcher.getServiceReferences().toString() );
 
     }
@@ -50,19 +43,29 @@ public class TestIncludeService {
 
         @Override
         public void init() {
-            include( FakeHostnameService.REF );
+            include( SecondService.REF, ThirdService.REF );
             serviceInitOrder.add( this.getClass() );
         }
 
     }
 
-    static class FakeHostnameService extends BaseService {
+    static class SecondService extends BaseService {
 
-        public static final ServiceReference REF = new ServiceReference( FakeHostnameService.class );
+        public static final ServiceReference REF = new ServiceReference( SecondService.class );
 
         @Override
         public void init() {
-            advertise( Hostname.class, new Hostname( "fake.example.com" ) );
+            serviceInitOrder.add( this.getClass() );
+        }
+
+    }
+
+    static class ThirdService extends BaseService {
+
+        public static final ServiceReference REF = new ServiceReference( ThirdService.class );
+
+        @Override
+        public void init() {
             serviceInitOrder.add( this.getClass() );
         }
 

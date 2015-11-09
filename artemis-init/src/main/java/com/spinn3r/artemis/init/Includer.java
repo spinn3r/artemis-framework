@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.init;
 
+import java.util.List;
+
 /**
  *
  */
@@ -14,8 +16,8 @@ public class Includer {
         this.serviceReference = serviceReference;
     }
 
-    public void include( Class<? extends Service> serviceClass ) {
-        launcher.include( serviceReference, serviceClass );
+    public void include( List<ServiceReference> additionalServiceReferences ) {
+        launcher.include( serviceReference, additionalServiceReferences );
     }
 
 }

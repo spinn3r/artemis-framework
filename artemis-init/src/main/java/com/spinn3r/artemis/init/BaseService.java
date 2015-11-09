@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -78,8 +79,16 @@ public abstract class BaseService implements Service {
         this.includer = includer;
     }
 
-    protected void include( Class<? extends Service> serviceClass ) {
-        includer.include( serviceClass );
+    protected void include( ServiceReference... additionalServiceReferences ) {
+        includer.include( Lists.newArrayList( additionalServiceReferences ) );
+    }
+
+    /**
+     * Include any services that should be included dynamically after this one.
+     * @param additionalServiceReferences
+     */
+    protected void include( List<ServiceReference> additionalServiceReferences ) {
+        includer.include( additionalServiceReferences );
     }
 
     protected <T,V extends T> void advertise(Class<T> clazz, V instance) {

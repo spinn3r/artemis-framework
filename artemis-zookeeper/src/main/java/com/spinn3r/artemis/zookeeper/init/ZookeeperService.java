@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
+import com.spinn3r.artemis.init.ServiceReference;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
@@ -17,6 +18,8 @@ import org.apache.curator.retry.RetryNTimes;
          required = true,
          implementation = ZookeeperConfig.class )
 public class ZookeeperService extends BaseService {
+
+    public static final ServiceReference REF = new ServiceReference( ZookeeperService.class );
 
     private static final String NAMESPACE = "artemis";
 
