@@ -47,6 +47,7 @@
         <module>artemis-guava</module>
         <module>spinn3r-artemis-client-api</module>
         <module>artemis-zookeeper</module>
+        <module>artemis-sequence-zookeeper</module>
         <module>log5j</module>
     </modules>
 
