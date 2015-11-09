@@ -214,19 +214,7 @@ public class Launcher {
     }
 
     public void include( ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
-
-        int index = this.serviceReferences.indexOf( currentServiceReference );
-
-        if ( index == -1 ) {
-            throw new RuntimeException( String.format( "Could not find index of: %s in %s", currentServiceReference, serviceReferences ) );
-        }
-
-        int newServiceIndex = index + 1;
-
-        for (ServiceReference additionalServiceReference : additionalServiceReferences) {
-            this.serviceReferences.add( newServiceIndex++, additionalServiceReference );
-        }
-
+        this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {

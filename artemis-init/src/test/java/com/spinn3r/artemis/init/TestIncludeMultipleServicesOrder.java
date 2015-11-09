@@ -33,10 +33,12 @@ public class TestIncludeMultipleServicesOrder {
     }
 
     static class TestServiceReferences extends ServiceReferences {
+
         public TestServiceReferences() {
             add( FirstService.class );
             add( LastService.class );
         }
+
     }
 
     static class FirstService extends BaseService {
