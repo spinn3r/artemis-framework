@@ -32,7 +32,7 @@ public class Initializer {
         this( "artemis", role, config );
     }
 
-    public Initializer( String product, String role, String config ) {
+    protected Initializer( String product, String role, String config ) {
         this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, config ) ) ) );
     }
 
