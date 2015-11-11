@@ -129,11 +129,6 @@
     <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.6" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.18.1-GA" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-math:2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.testng:testng:6.9.9" level="project" />
-    <orderEntry type="library" name="Maven: com.beust:jcommander:1.48" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant:1.7.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.ant:ant-launcher:1.7.0" level="project" />
-    <orderEntry type="library" name="Maven: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-proxy:1.0" level="project" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
     <orderEntry type="module" module-name="artemis-log5j" />
