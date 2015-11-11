@@ -50,6 +50,7 @@
         <module>artemis-sequence-zookeeper</module>
         <module>log5j</module>
         <module>artemis-sequence-support</module>
+        <module>artemis-byte-block-stream</module>
     </modules>
 
     <description>
