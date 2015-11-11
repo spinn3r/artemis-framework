@@ -27,8 +27,8 @@ public class WebserverService extends BaseService {
     protected final RequestLogReferences requestLogReferences;
 
     @Inject
-    WebserverService(WebserverConfig config, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences) {
-        this.config = config;
+    WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences) {
+        this.config = webserverConfig;
         this.servletReferences = servletReferences;
         this.filterReferences = filterReferences;
         this.requestLogReferences = requestLogReferences;
@@ -60,6 +60,7 @@ public class WebserverService extends BaseService {
         }
 
         serverBuilder.setRequestLogReferences( requestLogReferences );
+        serverBuilder.setUseLocalhost( config.getUseLocalHost() );
 
         server = serverBuilder.build();
 

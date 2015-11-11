@@ -12,6 +12,8 @@ public class WebserverConfig {
 
     private int maxThreads = 500;
 
+    private boolean useLocalHost = false;
+
     public WebserverConfig() {}
 
     public WebserverConfig(int port) {
@@ -22,16 +24,12 @@ public class WebserverConfig {
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
     public int getMaxThreads() {
         return maxThreads;
     }
 
-    public void setMaxThreads(int maxThreads) {
-        this.maxThreads = maxThreads;
+    public boolean getUseLocalHost() {
+        return useLocalHost;
     }
 
     @Override
@@ -39,6 +37,7 @@ public class WebserverConfig {
         return "WebserverConfig{" +
                  "port=" + port +
                  ", maxThreads=" + maxThreads +
+                 ", useLocalHost=" + useLocalHost +
                  '}';
     }
 

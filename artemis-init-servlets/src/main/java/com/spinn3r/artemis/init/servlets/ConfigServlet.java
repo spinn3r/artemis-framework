@@ -21,7 +21,6 @@ import java.util.TreeMap;
 public class ConfigServlet extends DefaultServlet {
 
     private static final String APPLICATION_JSON = "application/json";
-
     private static final String UTF_8 = "UTF-8";
 
     private final Advertised advertised;
