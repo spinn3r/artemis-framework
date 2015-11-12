@@ -51,6 +51,7 @@
         <module>log5j</module>
         <module>artemis-sequence-support</module>
         <module>artemis-byte-block-stream</module>
+        <module>artemis-jcommander</module>
     </modules>
 
     <description>
