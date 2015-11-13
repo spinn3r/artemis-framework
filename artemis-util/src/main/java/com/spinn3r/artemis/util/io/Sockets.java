@@ -54,4 +54,32 @@ public class Sockets {
 
     }
 
+    public static void waitForOpenPort(String host, int port) {
+
+        Throwable cause = null;
+
+        System.out.printf( "Waiting to connect to %s:%s ...", host, port );
+
+        for (int i = 0; i < 15; i++) {
+
+            try ( Socket socket = new Socket( host, port ); ) {
+
+                if (socket.isConnected()) {
+                    System.out.printf( " OPEN\n" );
+                    return;
+                }
+
+            } catch( IOException e ) {
+                cause = e;
+            }
+
+            System.out.printf( "." );
+            Uninterruptibles.sleepUninterruptibly( 1_000, TimeUnit.MILLISECONDS );
+
+        }
+
+        throw new RuntimeException( cause );
+
+    }
+
 }
