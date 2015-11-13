@@ -12,7 +12,6 @@
 
     <groupId>com.spinn3r.log5j</groupId>
     <artifactId>log5j</artifactId>
-    <version>2.2.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
