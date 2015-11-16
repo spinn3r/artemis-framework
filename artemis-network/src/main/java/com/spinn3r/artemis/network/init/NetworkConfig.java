@@ -31,7 +31,7 @@ public class NetworkConfig {
 
     private boolean requireProxy = false;
 
-    private List<RequestSettings> requests = Lists.newArrayList();
+    private Map<String,RequestSettings> requests = new HashMap<>();
 
     public String getUserAgent() {
         return userAgent;
@@ -93,7 +93,7 @@ public class NetworkConfig {
         this.requireProxy = requireProxy;
     }
 
-    public List<RequestSettings> getRequests() {
+    public Map<String, RequestSettings> getRequests() {
         return requests;
     }
 
@@ -113,4 +113,6 @@ public class NetworkConfig {
     }
 
 }
+
+
 
