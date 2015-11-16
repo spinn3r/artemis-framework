@@ -68,7 +68,7 @@ public class NetworkService extends BaseService {
 
         if ( defaultProxy != null ) {
 
-            NetworkConfig.ProxySettings proxySettings = config.getProxies().get( defaultProxy );
+            ProxySettings proxySettings = config.getProxies().get( defaultProxy );
 
             if ( proxySettings == null ) {
                 throw new RuntimeException( "Default proxy has no entry in proxies." );
@@ -84,10 +84,10 @@ public class NetworkService extends BaseService {
 
         List<ProxyReference> proxyReferenceList = Lists.newArrayList();
 
-        for (Map.Entry<String, NetworkConfig.ProxySettings> entry : config.getProxies().entrySet()) {
+        for (Map.Entry<String, ProxySettings> entry : config.getProxies().entrySet()) {
 
             String name = entry.getKey();
-            NetworkConfig.ProxySettings proxySettings = entry.getValue();
+            ProxySettings proxySettings = entry.getValue();
 
             proxyReferenceList.add( createAndTestProxyReference( name, proxySettings ) );
 
@@ -101,7 +101,7 @@ public class NetworkService extends BaseService {
 
     }
 
-    private ProxyReference createAndTestProxyReference(String name, NetworkConfig.ProxySettings proxySettings) throws Exception {
+    private ProxyReference createAndTestProxyReference(String name, ProxySettings proxySettings) throws Exception {
 
         info( "Waiting for proxy on %s:%s", proxySettings.getHost(), proxySettings.getPort() );
 

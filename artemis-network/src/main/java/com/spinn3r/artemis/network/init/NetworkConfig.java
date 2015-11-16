@@ -112,47 +112,5 @@ public class NetworkConfig {
                  '}';
     }
 
-    @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class ProxySettings {
-
-        public ProxySettings() {
-        }
-
-        private String host;
-
-        private int port;
-
-        private String regex;
-
-        private int priority;
-
-        public String getHost() {
-            return host;
-        }
-
-        public int getPort() {
-            return port;
-        }
-
-        public String getRegex() {
-            return regex;
-        }
-
-        public int getPriority() {
-            return priority;
-        }
-
-        @Override
-        public String toString() {
-            return "ProxySettings{" +
-                     "host='" + host + '\'' +
-                     ", port=" + port +
-                     ", regex='" + regex + '\'' +
-                     ", priority=" + priority +
-                     '}';
-        }
-
-    }
-
 }
 
