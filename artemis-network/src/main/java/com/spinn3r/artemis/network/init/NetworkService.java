@@ -9,6 +9,8 @@ import com.spinn3r.artemis.network.builder.config.NetworkConfigRequestRegistry;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.util.daemon.WaitForPort;
@@ -42,7 +44,7 @@ public class NetworkService extends BaseService {
 
     private final AtomicReferenceProvider<ProxyRegistry> proxyRegistryAtomicReferenceProvider = new AtomicReferenceProvider<>( null );
 
-    private final AtomicReferenceProvider<NetworkConfigRequestRegistry> networkConfigRequestRegistryProvider = new AtomicReferenceProvider<>( null );
+    private final AtomicReferenceProvider<RequestSettingsRegistry> requestSettingsRegistryProvider = new AtomicReferenceProvider<>( null );
 
     @Inject
     public NetworkService(NetworkConfig config, WaitForPort waitForPort) {
@@ -58,7 +60,7 @@ public class NetworkService extends BaseService {
         advertise( RequestListeners.class, new RequestListeners() );
         provider( Proxy.class, proxyAtomicReferenceProvider );
         provider( ProxyRegistry.class, proxyRegistryAtomicReferenceProvider );
-        provider( NetworkConfigRequestRegistry.class, networkConfigRequestRegistryProvider );
+        provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
     }
 
     @Override
@@ -96,8 +98,8 @@ public class NetworkService extends BaseService {
         ProxyRegistry proxyRegistry = new ProxyRegistry( proxyReferenceList );
         proxyRegistryAtomicReferenceProvider.set( proxyRegistry );
 
-        NetworkConfigRequestRegistry networkConfigRequestRegistry = new NetworkConfigRequestRegistry( config.getRequests().values() );
-        networkConfigRequestRegistryProvider.set( networkConfigRequestRegistry );
+        RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( config.getRequests() );
+        requestSettingsRegistryProvider.set( requestSettingsRegistry );
 
     }
 

@@ -20,10 +20,10 @@ public class RequestSettingsReference {
 
     private Pattern pattern;
 
-    public RequestSettingsReference(String name, int priority, String regex, RequestSettings requestSettings) {
+    public RequestSettingsReference(String name, RequestSettings requestSettings) {
         this.name = name;
-        this.priority = priority;
-        this.regex = regex;
+        this.priority = requestSettings.getPriority();
+        this.regex = requestSettings.getRegex();
         this.requestSettings = requestSettings;
         this.pattern = Pattern.compile( regex );
     }
