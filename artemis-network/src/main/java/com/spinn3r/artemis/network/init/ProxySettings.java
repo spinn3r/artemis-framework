@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProxySettings {
 
-    public ProxySettings() {
-    }
-
     private String host;
 
     private int port;
