@@ -1,6 +1,6 @@
 package com.spinn3r.artemis.network.builder.config;
 
-import com.spinn3r.artemis.network.init.NetworkConfig;
+import com.spinn3r.artemis.network.init.RequestSettings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,16 +10,16 @@ import java.util.regex.Pattern;
  */
 public class NetworkConfigRequestHolder {
 
-    private final NetworkConfig.RequestSettings networkConfigRequest;
+    private final RequestSettings networkConfigRequest;
 
     private final Pattern pattern;
 
-    public NetworkConfigRequestHolder(NetworkConfig.RequestSettings networkConfigRequest) {
+    public NetworkConfigRequestHolder(RequestSettings networkConfigRequest) {
         this.networkConfigRequest = networkConfigRequest;
         this.pattern = Pattern.compile( networkConfigRequest.getRegex() );
     }
 
-    public NetworkConfig.RequestSettings getNetworkConfigRequest() {
+    public RequestSettings getNetworkConfigRequest() {
         return networkConfigRequest;
     }
 

@@ -1,7 +1,7 @@
 package com.spinn3r.artemis.network.builder.config;
 
 import com.google.common.collect.Lists;
-import com.spinn3r.artemis.network.init.NetworkConfig;
+import com.spinn3r.artemis.network.init.RequestSettings;
 
 import java.util.Collections;
 import java.util.List;
@@ -13,12 +13,12 @@ public class NetworkConfigRequestRegistry {
 
     private final List<NetworkConfigRequestHolder> networkConfigRequestHolders = Lists.newArrayList();
 
-    public NetworkConfigRequestRegistry(List<NetworkConfig.RequestSettings> networkConfigRequests) {
+    public NetworkConfigRequestRegistry(List<RequestSettings> networkConfigRequests) {
 
         if ( networkConfigRequests == null )
             return;
 
-        for (NetworkConfig.RequestSettings networkConfigRequest : networkConfigRequests) {
+        for (RequestSettings networkConfigRequest : networkConfigRequests) {
             this.networkConfigRequestHolders.add( new NetworkConfigRequestHolder( networkConfigRequest ) );
         }
 
@@ -33,7 +33,7 @@ public class NetworkConfigRequestRegistry {
      * @param link
      * @return
      */
-    public NetworkConfig.RequestSettings find( String link ) {
+    public RequestSettings find( String link ) {
 
         for (NetworkConfigRequestHolder networkConfigRequestHolder : networkConfigRequestHolders) {
 
