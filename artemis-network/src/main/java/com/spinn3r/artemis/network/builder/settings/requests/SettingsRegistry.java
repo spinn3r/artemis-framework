@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network.builder.settings;
+package com.spinn3r.artemis.network.builder.settings.requests;
 
 import com.google.common.collect.ImmutableList;
 

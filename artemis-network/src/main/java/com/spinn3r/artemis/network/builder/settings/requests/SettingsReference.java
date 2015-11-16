@@ -1,4 +1,6 @@
-package com.spinn3r.artemis.network.builder.settings;
+package com.spinn3r.artemis.network.builder.settings.requests;
+
+import com.spinn3r.artemis.network.init.RequestSettings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,18 +10,21 @@ import java.util.regex.Pattern;
  */
 public class SettingsReference {
 
-    private String name;
+    private final String name;
 
-    private int priority;
+    private final int priority;
 
-    private String regex;
+    private final String regex;
+
+    private final RequestSettings requestSettings;
 
     private Pattern pattern;
 
-    public SettingsReference(String name, int priority, String regex) {
+    public SettingsReference(String name, int priority, String regex, RequestSettings requestSettings) {
         this.name = name;
         this.priority = priority;
         this.regex = regex;
+        this.requestSettings = requestSettings;
         this.pattern = Pattern.compile( regex );
     }
 
@@ -33,6 +38,10 @@ public class SettingsReference {
 
     public String getRegex() {
         return regex;
+    }
+
+    public RequestSettings getRequestSettings() {
+        return requestSettings;
     }
 
     /**
@@ -53,7 +62,7 @@ public class SettingsReference {
                  "name='" + name + '\'' +
                  ", priority=" + priority +
                  ", regex='" + regex + '\'' +
-                 ", pattern=" + pattern +
+                 ", requestSettings=" + requestSettings +
                  '}';
     }
 

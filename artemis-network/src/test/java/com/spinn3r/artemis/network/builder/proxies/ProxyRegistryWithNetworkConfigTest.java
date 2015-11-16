@@ -40,7 +40,7 @@ public class ProxyRegistryWithNetworkConfigTest extends BaseLauncherTest {
     @Test
     public void testVerifyConfig() throws Exception {
 
-        assertEquals( "NetworkConfig{userAgent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36', blockSSL=false, defaultProxy='default', proxies={default=ProxySettings{host='127.0.0.1', port=9997, regex='.*', priority=1}, facebook=ProxySettings{host='127.0.0.1', port=9996, regex='https?://(([a-zA-Z0-9]+)\\.)?facebook\\.com', priority=10}}, defaultMaxContentLength=2000000, defaultReadTimeout=30000, defaultConnectTimeout=30000, requireProxy=true, requests=[]}",
+        assertEquals( "NetworkConfig{userAgent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36', blockSSL=false, defaultProxy='default', proxies={default=ProxySettings{host='127.0.0.1', port=9997, regex='.*', priority=1}, facebook=ProxySettings{host='127.0.0.1', port=9996, regex='https?://(([a-zA-Z0-9]+)\\.)?facebook\\.com', priority=10}}, defaultMaxContentLength=2000000, defaultReadTimeout=30000, defaultConnectTimeout=30000, requireProxy=true, requests={}}",
                       networkConfig.toString() );
 
     }
