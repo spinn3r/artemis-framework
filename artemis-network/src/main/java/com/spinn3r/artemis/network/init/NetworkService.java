@@ -96,7 +96,7 @@ public class NetworkService extends BaseService {
         ProxyRegistry proxyRegistry = new ProxyRegistry( proxyReferenceList );
         proxyRegistryAtomicReferenceProvider.set( proxyRegistry );
 
-        NetworkConfigRequestRegistry networkConfigRequestRegistry = new NetworkConfigRequestRegistry( config.getRequestSettings() );
+        NetworkConfigRequestRegistry networkConfigRequestRegistry = new NetworkConfigRequestRegistry( config.getRequests().values() );
         networkConfigRequestRegistryProvider.set( networkConfigRequestRegistry );
 
     }
