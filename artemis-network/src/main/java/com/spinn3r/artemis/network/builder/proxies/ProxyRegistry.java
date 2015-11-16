@@ -15,10 +15,8 @@ public class ProxyRegistry {
     private List<ProxyReference> proxyReferences = Lists.newCopyOnWriteArrayList();
 
     public ProxyRegistry(List<ProxyReference> proxyReferences) {
-        this.proxyReferences = proxyReferences;
-
         Collections.sort( proxyReferences, (o1,o2) -> o2.getPriority() - o1.getPriority() );
-
+        this.proxyReferences = proxyReferences;
     }
 
     /**
