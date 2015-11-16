@@ -33,6 +33,7 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
         withUserAgent( config.getUserAgent() );
         withProxy( proxyProvider.get() );
         withProxyRegistry( proxyRegistryProvider.get() );
+        withRequestSettingsRegistry( requestSettingsRegistryProvider.get() );
         withRequestListeners( requestListeners );
         withDefaultMaxContentLength( config.getDefaultMaxContentLength() );
         withDefaultConnectTimeout( config.getDefaultConnectTimeout() );
