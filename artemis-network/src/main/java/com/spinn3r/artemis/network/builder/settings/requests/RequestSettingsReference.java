@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  *
  */
-public class SettingsReference {
+public class RequestSettingsReference {
 
     private final String name;
 
@@ -20,7 +20,7 @@ public class SettingsReference {
 
     private Pattern pattern;
 
-    public SettingsReference(String name, int priority, String regex, RequestSettings requestSettings) {
+    public RequestSettingsReference(String name, int priority, String regex, RequestSettings requestSettings) {
         this.name = name;
         this.priority = priority;
         this.regex = regex;
