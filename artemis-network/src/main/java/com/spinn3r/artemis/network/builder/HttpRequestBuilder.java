@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 
 import java.net.Proxy;
 import java.util.Map;
@@ -14,6 +15,8 @@ public interface HttpRequestBuilder {
     HttpRequestBuilder withRequireProxy( boolean requireProxy );
 
     HttpRequestBuilder withProxyRegistry( ProxyRegistry proxyRegistry );
+
+    HttpRequestBuilder withRequestSettingsRegistry(RequestSettingsRegistry requestSettingsRegistry);
 
     HttpRequestBuilder withProxy(Proxy proxy);
 

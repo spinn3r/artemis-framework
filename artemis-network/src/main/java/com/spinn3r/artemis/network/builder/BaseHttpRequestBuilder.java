@@ -5,6 +5,7 @@ import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.proxies.Proxies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.log5j.Logger;
 
 import java.net.InetSocketAddress;
@@ -27,6 +28,8 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
 
     protected ProxyRegistry proxyRegistry = null;
 
+    protected RequestSettingsRegistry requestSettingsRegistry;
+
     protected String userAgent = URLResourceRequest.USER_AGENT;
 
     @Override
@@ -38,6 +41,12 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
     @Override
     public HttpRequestBuilder withProxyRegistry(ProxyRegistry proxyRegistry) {
         this.proxyRegistry = proxyRegistry;
+        return this;
+    }
+
+    @Override
+    public HttpRequestBuilder withRequestSettingsRegistry(RequestSettingsRegistry requestSettingsRegistry) {
+        this.requestSettingsRegistry = requestSettingsRegistry;
         return this;
     }
 
