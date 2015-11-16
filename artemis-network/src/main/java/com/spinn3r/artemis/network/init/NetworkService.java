@@ -68,13 +68,13 @@ public class NetworkService extends BaseService {
 
         if ( defaultProxy != null ) {
 
-            NetworkConfig.Proxy proxyConfig = config.getProxies().get( defaultProxy );
+            NetworkConfig.ProxySettings proxySettings = config.getProxies().get( defaultProxy );
 
-            if ( proxyConfig == null ) {
+            if ( proxySettings == null ) {
                 throw new RuntimeException( "Default proxy has no entry in proxies." );
             }
 
-            ProxyReference proxyReference = createAndTestProxyReference( defaultProxy, proxyConfig );
+            ProxyReference proxyReference = createAndTestProxyReference( defaultProxy, proxySettings );
 
             proxyAtomicReferenceProvider.set( proxyReference.getProxy() );
 
@@ -84,12 +84,12 @@ public class NetworkService extends BaseService {
 
         List<ProxyReference> proxyReferenceList = Lists.newArrayList();
 
-        for (Map.Entry<String, NetworkConfig.Proxy> entry : config.getProxies().entrySet()) {
+        for (Map.Entry<String, NetworkConfig.ProxySettings> entry : config.getProxies().entrySet()) {
 
             String name = entry.getKey();
-            NetworkConfig.Proxy proxyConfig = entry.getValue();
+            NetworkConfig.ProxySettings proxySettings = entry.getValue();
 
-            proxyReferenceList.add( createAndTestProxyReference( name, proxyConfig ) );
+            proxyReferenceList.add( createAndTestProxyReference( name, proxySettings ) );
 
         }
 
@@ -101,22 +101,22 @@ public class NetworkService extends BaseService {
 
     }
 
-    private ProxyReference createAndTestProxyReference(String name, NetworkConfig.Proxy proxyConfig) throws Exception {
+    private ProxyReference createAndTestProxyReference(String name, NetworkConfig.ProxySettings proxySettings) throws Exception {
 
-        info( "Waiting for proxy on %s:%s", proxyConfig.getHost(), proxyConfig.getPort() );
+        info( "Waiting for proxy on %s:%s", proxySettings.getHost(), proxySettings.getPort() );
 
         // *** make sure we can connect to the port that is open, if not we
         // need to fail.
 
-        waitForPort.waitFor( proxyConfig.getHost(), proxyConfig.getPort(), TIMEOUT );
+        waitForPort.waitFor( proxySettings.getHost(), proxySettings.getPort(), TIMEOUT );
 
-        SocketAddress addr = new InetSocketAddress( proxyConfig.getHost(), proxyConfig.getPort() );
+        SocketAddress addr = new InetSocketAddress( proxySettings.getHost(), proxySettings.getPort() );
 
         Proxy.Type type = Proxy.Type.HTTP;
 
         Proxy proxy = new Proxy( type, addr );
 
-        return new ProxyReference( name, proxyConfig.getPriority(), proxyConfig.getRegex(), proxy );
+        return new ProxyReference( name, proxySettings.getPriority(), proxySettings.getRegex(), proxy );
 
     }
 

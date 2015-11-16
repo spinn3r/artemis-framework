@@ -10,16 +10,16 @@ import java.util.regex.Pattern;
  */
 public class NetworkConfigRequestHolder {
 
-    private final NetworkConfig.Request networkConfigRequest;
+    private final NetworkConfig.RequestSettings networkConfigRequest;
 
     private final Pattern pattern;
 
-    public NetworkConfigRequestHolder(NetworkConfig.Request networkConfigRequest) {
+    public NetworkConfigRequestHolder(NetworkConfig.RequestSettings networkConfigRequest) {
         this.networkConfigRequest = networkConfigRequest;
         this.pattern = Pattern.compile( networkConfigRequest.getRegex() );
     }
 
-    public NetworkConfig.Request getNetworkConfigRequest() {
+    public NetworkConfig.RequestSettings getNetworkConfigRequest() {
         return networkConfigRequest;
     }
 

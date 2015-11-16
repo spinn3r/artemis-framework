@@ -13,18 +13,16 @@ public class NetworkConfigRequestRegistry {
 
     private final List<NetworkConfigRequestHolder> networkConfigRequestHolders = Lists.newArrayList();
 
-    public NetworkConfigRequestRegistry(List<NetworkConfig.Request> networkConfigRequests) {
+    public NetworkConfigRequestRegistry(List<NetworkConfig.RequestSettings> networkConfigRequests) {
 
         if ( networkConfigRequests == null )
             return;
 
-        for (NetworkConfig.Request networkConfigRequest : networkConfigRequests) {
+        for (NetworkConfig.RequestSettings networkConfigRequest : networkConfigRequests) {
             this.networkConfigRequestHolders.add( new NetworkConfigRequestHolder( networkConfigRequest ) );
         }
 
-        Collections.sort( this.networkConfigRequestHolders, (o1, o2) -> {
-            return o2.getNetworkConfigRequest().getPriority() - o1.getNetworkConfigRequest().getPriority();
-        } );
+        Collections.sort( this.networkConfigRequestHolders, (o1, o2) -> o2.getNetworkConfigRequest().getPriority() - o1.getNetworkConfigRequest().getPriority() );
 
     }
 
@@ -35,7 +33,7 @@ public class NetworkConfigRequestRegistry {
      * @param link
      * @return
      */
-    public NetworkConfig.Request find( String link ) {
+    public NetworkConfig.RequestSettings find( String link ) {
 
         for (NetworkConfigRequestHolder networkConfigRequestHolder : networkConfigRequestHolders) {
 

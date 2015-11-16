@@ -1,8 +1,6 @@
 package com.spinn3r.artemis.network.builder.settings;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
-import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 
 import java.util.Collections;
 import java.util.List;
@@ -12,27 +10,27 @@ import java.util.List;
  */
 public class SettingsRegistry {
 
-    private final ImmutableList<Settings> settingsIndex;
+    private final ImmutableList<SettingsReference> settingsReferenceIndex;
 
-    public SettingsRegistry(List<Settings> settingsIndex) {
-        Collections.sort( settingsIndex, (o1, o2) -> o2.getPriority() - o1.getPriority() );
-        this.settingsIndex = ImmutableList.copyOf( settingsIndex );
+    public SettingsRegistry(List<SettingsReference> settingsReferenceIndex) {
+        Collections.sort( settingsReferenceIndex, (o1, o2) -> o2.getPriority() - o1.getPriority() );
+        this.settingsReferenceIndex = ImmutableList.copyOf( settingsReferenceIndex );
     }
 
-    public ImmutableList<Settings> getSettingsIndex() {
-        return settingsIndex;
+    public ImmutableList<SettingsReference> getSettingsReferenceIndex() {
+        return settingsReferenceIndex;
     }
 
     /**
      * Find a ProxyReference that supports the given URL or null if no proxy is found.
      *
      */
-    public Settings find( String link ) {
+    public SettingsReference find( String link ) {
 
-        for (Settings settings : settingsIndex) {
+        for (SettingsReference settingsReference : settingsReferenceIndex) {
 
-            if ( settings.supports( link ) ) {
-                return settings;
+            if ( settingsReference.supports( link ) ) {
+                return settingsReference;
             }
 
         }
@@ -44,7 +42,7 @@ public class SettingsRegistry {
     @Override
     public String toString() {
         return "SettingsRegistry{" +
-                 "settingsIndex=" + settingsIndex +
+                 "settingsIndex=" + settingsReferenceIndex +
                  '}';
     }
 

@@ -1,13 +1,12 @@
 package com.spinn3r.artemis.network.builder.settings;
 
-import java.net.Proxy;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  *
  */
-public class Settings {
+public class SettingsReference {
 
     private String name;
 
@@ -15,15 +14,12 @@ public class Settings {
 
     private String regex;
 
-    private Boolean followContentRedirects = null;
-
     private Pattern pattern;
 
-    public Settings(String name, int priority, String regex, Boolean followContentRedirects) {
+    public SettingsReference(String name, int priority, String regex) {
         this.name = name;
         this.priority = priority;
         this.regex = regex;
-        this.followContentRedirects = followContentRedirects;
         this.pattern = Pattern.compile( regex );
     }
 
@@ -37,10 +33,6 @@ public class Settings {
 
     public String getRegex() {
         return regex;
-    }
-
-    public Boolean getFollowContentRedirects() {
-        return followContentRedirects;
     }
 
     /**
@@ -57,11 +49,11 @@ public class Settings {
 
     @Override
     public String toString() {
-        return "Settings{" +
+        return "SettingsReference{" +
                  "name='" + name + '\'' +
                  ", priority=" + priority +
                  ", regex='" + regex + '\'' +
-                 ", followContentRedirects=" + followContentRedirects +
+                 ", pattern=" + pattern +
                  '}';
     }
 

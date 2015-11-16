@@ -21,7 +21,7 @@ public class NetworkConfig {
 
     private String defaultProxy;
 
-    private Map<String,Proxy> proxies = new HashMap<>();
+    private Map<String,ProxySettings> proxies = new HashMap<>();
 
     private int defaultMaxContentLength = URLResourceRequest.MAX_CONTENT_LENGTH;
 
@@ -31,7 +31,7 @@ public class NetworkConfig {
 
     private boolean requireProxy = false;
 
-    private List<Request> requests = Lists.newArrayList();
+    private List<RequestSettings> requests = Lists.newArrayList();
 
     public String getUserAgent() {
         return userAgent;
@@ -57,7 +57,7 @@ public class NetworkConfig {
         this.defaultProxy = defaultProxy;
     }
 
-    public Map<String, Proxy> getProxies() {
+    public Map<String, ProxySettings> getProxies() {
         return proxies;
     }
 
@@ -93,7 +93,7 @@ public class NetworkConfig {
         this.requireProxy = requireProxy;
     }
 
-    public List<Request> getRequests() {
+    public List<RequestSettings> getRequests() {
         return requests;
     }
 
@@ -116,7 +116,7 @@ public class NetworkConfig {
      * Configurations for HTTP requests defined by regex.
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Request {
+    public static class RequestSettings {
 
         private String regex;
 
@@ -189,9 +189,9 @@ public class NetworkConfig {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    public static class Proxy {
+    public static class ProxySettings {
 
-        public Proxy() {
+        public ProxySettings() {
         }
 
         private String host;
@@ -220,7 +220,7 @@ public class NetworkConfig {
 
         @Override
         public String toString() {
-            return "Proxy{" +
+            return "ProxySettings{" +
                      "host='" + host + '\'' +
                      ", port=" + port +
                      ", regex='" + regex + '\'' +
