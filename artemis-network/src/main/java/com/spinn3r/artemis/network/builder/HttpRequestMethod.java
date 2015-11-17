@@ -43,6 +43,12 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withReadTimeout( long timeout );
 
+    HttpRequestMethod withFollowRedirects(boolean followRedirects);
+
+    HttpRequestMethod withFollowContentRedirects( boolean followContentRedirects );
+
+    HttpRequestMethod withProxy(Proxy proxy);
+
     /**
      * The class executing this HTTP request.
      */
@@ -56,13 +62,9 @@ public interface HttpRequestMethod {
 
     HttpRequestMeta getHttpRequestMeta();
 
+    boolean getFollowContentRedirects();
+
     Class<?> getExecutor();
-
-    HttpRequestMethod withFollowRedirects(boolean followRedirects);
-
-    HttpRequestMethod withFollowContentRedirects( boolean followContentRedirects );
-
-    HttpRequestMethod withProxy(Proxy proxy);
 
     @VisibleForTesting
     Proxy getProxy();

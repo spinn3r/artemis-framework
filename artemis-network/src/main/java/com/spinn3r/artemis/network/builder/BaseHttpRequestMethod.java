@@ -107,6 +107,11 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     }
 
     @Override
+    public boolean getFollowContentRedirects() {
+        return this.followContentRedirects;
+    }
+
+    @Override
     public Class<?> getExecutor() {
         return executor;
     }

@@ -6,6 +6,9 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.init.RequestSettings;
 
 import java.net.Proxy;
 import java.util.Map;
@@ -60,6 +63,8 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         Preconditions.checkNotNull( resource );
 
+        // *** apply proxies...
+
         if ( defaultHttpRequestBuilder.proxyRegistry != null ) {
 
             ProxyReference proxyReference = defaultHttpRequestBuilder.proxyRegistry.find( resource );
@@ -72,6 +77,26 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         if ( defaultHttpRequestBuilder.requireProxy && proxy == null ) {
             throw new NetworkException( "Proxy required while fetching URL: " + resource );
+        }
+
+        // *** now set site specific options...
+
+        RequestSettingsRegistry requestSettingsRegistry = defaultHttpRequestBuilder.requestSettingsRegistry;
+
+        if ( requestSettingsRegistry != null ) {
+
+            RequestSettingsReference requestSettingsReference = requestSettingsRegistry.find( resource );
+
+            if ( requestSettingsReference != null ) {
+
+                RequestSettings requestSettings = requestSettingsReference.getRequestSettings();
+
+                if ( requestSettings.getFollowContentRedirects() != null ) {
+                    withFollowContentRedirects( requestSettings.getFollowContentRedirects() );
+                }
+
+            }
+
         }
 
         ResourceRequest resourceRequest = ResourceRequestFactory.getResourceRequest( resource, modifiedSince, etag, proxy, true );
