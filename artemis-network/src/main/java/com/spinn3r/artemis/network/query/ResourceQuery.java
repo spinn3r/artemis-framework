@@ -19,18 +19,18 @@ public class ResourceQuery {
     public ResourceQuery tokenize() {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( ResourceTokenizer.tokenize4( value ) );
+        return ResourceQueries.resource( ResourceTokenizer.tokenize4( value ) );
 
     }
 
     public ResourceQuery removeScheme() {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( value.replaceFirst( "https?://", "" ) );
+        return ResourceQueries.resource( value.replaceFirst( "https?://", "" ) );
 
     }
 
@@ -43,9 +43,9 @@ public class ResourceQuery {
     public ResourceQuery expand( String relative ) {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( ResourceExpander.expand( value, relative ) );
+        return ResourceQueries.resource( ResourceExpander.expand( value, relative ) );
 
     }
 
@@ -59,9 +59,9 @@ public class ResourceQuery {
         // parts of the URL like
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( value.replaceFirst( ":[0-9]{2,4}", "" ) );
+        return ResourceQueries.resource( value.replaceFirst( ":[0-9]{2,4}", "" ) );
 
     }
 
@@ -88,9 +88,9 @@ public class ResourceQuery {
     public ResourceQuery domain() {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( ResourceTokenizer.rootDomainTokenize( value ) );
+        return ResourceQueries.resource( ResourceTokenizer.rootDomainTokenize( value ) );
 
     }
 
@@ -112,9 +112,9 @@ public class ResourceQuery {
     public ResourceQuery site() {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
-        return resource( ResourceTokenizer.domainTokenize( value ) );
+        return ResourceQueries.resource( ResourceTokenizer.domainTokenize( value ) );
 
     }
 
@@ -125,7 +125,7 @@ public class ResourceQuery {
     public ResourceQuery pathAndQuery() {
 
         if ( value == null )
-            return resource();
+            return ResourceQueries.resource();
 
         String result = value;
 
@@ -136,10 +136,10 @@ public class ResourceQuery {
         if ( end > -1 ) {
             result = result.substring( end, result.length() );
         } else {
-            return resource( "" );
+            return ResourceQueries.resource( "" );
         }
 
-        return resource( result );
+        return ResourceQueries.resource( result );
 
     }
 
@@ -156,14 +156,6 @@ public class ResourceQuery {
     @Override
     public String toString() {
         return value;
-    }
-
-    protected static ResourceQuery resource() {
-        return resource(null);
-    }
-
-    public static ResourceQuery resource( String value ) {
-        return new ResourceQuery( value );
     }
 
 }
