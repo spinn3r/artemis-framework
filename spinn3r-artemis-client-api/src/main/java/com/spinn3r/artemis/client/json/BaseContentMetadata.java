@@ -1585,6 +1585,38 @@ public abstract class BaseContentMetadata
 
     protected String parentResource;
 
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasLikes = 0;
+
+    public int hasModifiedLikes = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedLikes = false;
+
+    protected int likes;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasComments = 0;
+
+    public int hasModifiedComments = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedComments = false;
+
+    protected int comments;
+
     // **** methods for this POJO
 
     public BaseContentMetadata setPermalink ( String permalink ) {
@@ -7628,6 +7660,176 @@ public abstract class BaseContentMetadata
         return this.hasDefinedParentResource;
     }
 
+    public BaseContentMetadata setLikes ( int likes ) {
+
+        ++this.hasLikes;
+        ++this.hasModifiedLikes;
+
+        this.likes = likes;
+
+        hasDefinedLikes = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: likes
+     * </p>
+     */
+    public int getLikes () {
+
+        if ( this.constructed == false && this.hasLikes == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.likes" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.likes;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: likes
+     * </p>
+     */
+    public int getLikes ( int _default ) {
+
+        if ( ! hasLikes() ) {
+            return _default;
+        }
+
+        return getLikes();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasLikes () {
+        return this.hasLikes > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearLikes () {
+        this.hasLikes = 0;
+        this.hasModifiedLikes = 0;
+        this.hasDefinedLikes = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedLikes () {
+        return this.hasModifiedLikes > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedLikes () {
+        return this.hasDefinedLikes;
+    }
+
+    public BaseContentMetadata setComments ( int comments ) {
+
+        ++this.hasComments;
+        ++this.hasModifiedComments;
+
+        this.comments = comments;
+
+        hasDefinedComments = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: comments
+     * </p>
+     */
+    public int getComments () {
+
+        if ( this.constructed == false && this.hasComments == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.comments" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.comments;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: comments
+     * </p>
+     */
+    public int getComments ( int _default ) {
+
+        if ( ! hasComments() ) {
+            return _default;
+        }
+
+        return getComments();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasComments () {
+        return this.hasComments > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearComments () {
+        this.hasComments = 0;
+        this.hasModifiedComments = 0;
+        this.hasDefinedComments = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedComments () {
+        return this.hasModifiedComments > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedComments () {
+        return this.hasDefinedComments;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -7915,6 +8117,14 @@ public abstract class BaseContentMetadata
 
         if ( obj.hasParentResource() ) {
             setParentResource( obj.getParentResource() );
+        }
+
+        if ( obj.hasLikes() ) {
+            setLikes( obj.getLikes() );
+        }
+
+        if ( obj.hasComments() ) {
+            setComments( obj.getComments() );
         }
 
     }
@@ -8209,6 +8419,14 @@ public abstract class BaseContentMetadata
             setParentResource( obj.getParentResource() );
         }
 
+        if ( ! hasLikes() && obj.hasLikes() ) {
+            setLikes( obj.getLikes() );
+        }
+
+        if ( ! hasComments() && obj.hasComments() ) {
+            setComments( obj.getComments() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -8355,6 +8573,10 @@ public abstract class BaseContentMetadata
         this.hasModifiedParentLang = 0;
 
         this.hasModifiedParentResource = 0;
+
+        this.hasModifiedLikes = 0;
+
+        this.hasModifiedComments = 0;
 
     }
 
@@ -8644,6 +8866,14 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedParentResource() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedLikes() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedComments() ) {
             return true;
         }
 
@@ -9229,6 +9459,22 @@ public abstract class BaseContentMetadata
 
             buff.append( "parentResource=" );
             buff.append( parentResource );
+            buff.append( " " );
+
+        }
+
+        if ( hasLikes > 0 ) {
+
+            buff.append( "likes=" );
+            buff.append( likes );
+            buff.append( " " );
+
+        }
+
+        if ( hasComments > 0 ) {
+
+            buff.append( "comments=" );
+            buff.append( comments );
             buff.append( " " );
 
         }
@@ -9882,6 +10128,24 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( parentResource, cmp.parentResource ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasLikes() != cmp.hasLikes() ) {
+            return false;
+        }
+
+        if ( likes != cmp.likes ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasComments() != cmp.hasComments() ) {
+            return false;
+        }
+
+        if ( comments != cmp.comments ) {
             return false;
         }
 
@@ -11193,6 +11457,36 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member likes from int
+
+            __name = "likes";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "likes";
+            }
+
+            if ( this.hasLikes > 0 ) {
+
+                if ( hasDefinedLikes )
+                    generator.writeNumberField( __name, likes );
+
+            }
+
+            // ***** json encode member comments from int
+
+            __name = "comments";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "comments";
+            }
+
+            if ( this.hasComments > 0 ) {
+
+                if ( hasDefinedComments )
+                    generator.writeNumberField( __name, comments );
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -11944,6 +12238,26 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setParentResource( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member likes from int
+
+                case "likes":
+
+                    jParser.nextToken();
+                    setLikes( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member comments from int
+
+                case "comments":
+
+                    jParser.nextToken();
+                    setComments( jParser.getIntValue() );
 
                     break;
 
