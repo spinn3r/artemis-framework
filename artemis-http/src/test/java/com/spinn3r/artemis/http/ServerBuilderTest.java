@@ -99,10 +99,9 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         assertEquals( "hello world", content );
 
         await().until( () -> {
-            assertTrue( out.toString().contains( "GET / HTTP/1.1" ) );
+            assertTrue( out.toString().contains( "GET //localhost:8081/ HTTP/1.1" ) );
             assertTrue( out.toString().contains( "org.eclipse.jetty.server.RequestLog 127.0.0.1" ) );
-            assertTrue( out.toString().contains( "{HTTP/1.1}{0.0.0.0:8081}" ) );
-
+            assertTrue( out.toString().contains( "{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}" ) );
         } );
 
     }
@@ -127,9 +126,9 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         assertEquals( "hello world", content );
 
         await().until( () -> {
-            assertTrue( out.toString().contains( "GET / HTTP/1.1" ) );
+            assertTrue( out.toString().contains( "GET //localhost:8081/ HTTP/1.1" ) );
             assertTrue( out.toString().contains( "org.eclipse.jetty.server.RequestLog 127.0.0.1" ) );
-            assertTrue( out.toString().contains( "{HTTP/1.1}{127.0.0.1:8081}" ) );
+            assertTrue( out.toString().contains( "{HTTP/1.1,[http/1.1]}{127.0.0.1:8081}" ) );
         } );
 
     }
