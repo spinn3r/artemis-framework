@@ -52,6 +52,7 @@
         <module>artemis-sequence-support</module>
         <module>artemis-byte-block-stream</module>
         <module>artemis-jcommander</module>
+        <module>artemis-metrics-test-framework</module>
     </modules>
 
     <description>
