@@ -20,8 +20,6 @@ public class TagList extends ArrayList<Tag> {
 
     /**
      * Create a tag list using the given metric config.
-     *
-     * @param metricsConfig
      */
     public TagList(MetricsConfig metricsConfig, TagsProvider tagProvider ) {
         super();
