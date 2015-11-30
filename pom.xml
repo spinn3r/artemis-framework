@@ -53,6 +53,7 @@
         <module>artemis-byte-block-stream</module>
         <module>artemis-jcommander</module>
         <module>artemis-metrics-test-framework</module>
+        <module>../artemis-wikipedia/artemis-wikipedia-export</module>
     </modules>
 
     <description>
