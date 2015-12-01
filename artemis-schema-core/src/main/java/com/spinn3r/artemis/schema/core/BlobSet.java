@@ -8,17 +8,37 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * Set that supports byte arrays.
  */
 @SuppressWarnings("serial")
-public class BlobSet extends TreeSet<byte[]> implements Set<byte[]> {
+public class BlobSet extends TreeSet<ByteBuffer> implements Set<ByteBuffer> {
 
     public BlobSet() {
-        super( new ByteArrayComparator() );
+        super( new ByteBufferComparator() );
     }
 
     public BlobSet( Set<ByteBuffer> set ) {
-        this();
+        super( new ByteBufferComparator() );
         for( ByteBuffer current : set ) {
-            this.add( current.array() );
+            this.add( current );
         }
+
+    }
+
+    public void add( byte[] data ) {
+        super.add( ByteBuffer.wrap( data ) );
+    }
+
+    public Set<byte[]> toByteArraySet() {
+
+        Set<byte[]> result = new TreeSet<>( new ByteArrayComparator() );
+
+        // create a copy as this is how the older API implemented this.
+        for (ByteBuffer current : this) {
+            current = current.duplicate();
+            byte[] data = new byte[current.remaining()];
+            current.get(data);
+            result.add(data);
+        }
+
+        return result;
 
     }
 
@@ -26,8 +46,9 @@ public class BlobSet extends TreeSet<byte[]> implements Set<byte[]> {
 
         List<ByteBuffer> list = new ArrayList<>( size() );
 
-        for (byte[] current : this) {
-            list.add( ByteBuffer.wrap( current ) );
+        // create a copy as this is how the older API implemented this.
+        for (ByteBuffer current : this) {
+            list.add( current );
         }
 
         return new CopyOnWriteArraySet<>( list );
