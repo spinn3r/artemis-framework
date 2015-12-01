@@ -26,6 +26,14 @@ public class BlobSet extends TreeSet<ByteBuffer> implements Set<ByteBuffer> {
         super.add( ByteBuffer.wrap( data ) );
     }
 
+    public boolean contains( byte[] data ) {
+        return super.contains( ByteBuffer.wrap( data ) );
+    }
+
+    public void remove( byte[] data ) {
+        super.remove( ByteBuffer.wrap( data ) );
+    }
+
     public Set<byte[]> toByteArraySet() {
 
         Set<byte[]> result = new TreeSet<>( new ByteArrayComparator() );
