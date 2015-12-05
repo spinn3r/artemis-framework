@@ -754,7 +754,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
     }
 
-    //TODO: make this a fail() cause...
     private NetworkException newNetworkException( IOException e ) {
 
         String message = null;

@@ -71,7 +71,7 @@ public class NetworkException extends IOException {
         // do not attempt to read the status if we timed out...
 
         if ( _urlConnection != null && ! timeout ) {
-            this.status = (String)_urlConnection.getHeaderField( null );
+            this.status = _urlConnection.getHeaderField( null );
         }
 
         initCause( e );
