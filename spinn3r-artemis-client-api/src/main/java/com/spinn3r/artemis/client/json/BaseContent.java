@@ -597,6 +597,64 @@ public abstract class BaseContent
 
     }
 
+    public enum SourceSettingAuthorPolicy {
+
+        /**
+         * Default author policy.  Which is essentially take no special action.
+         */
+        DEFAULT( 0 ) ,
+
+        /**
+         * This is a composite source.  At this point we create a new source or update an existing source for each author.
+         */
+        COMPOSITE( 1 ) ,
+
+        ;
+
+        SourceSettingAuthorPolicy( int value ) {
+            this.value = value;
+        }
+
+        private int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        public static SourceSettingAuthorPolicy fromValue( int value ) {
+
+            switch( value ) {
+
+                case 0:
+                    return DEFAULT;
+
+                case 1:
+                    return COMPOSITE;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+        public static SourceSettingAuthorPolicy fromValue( String value ) {
+
+            switch( value ) {
+
+                case "DEFAULT":
+                    return DEFAULT;
+
+                case "COMPOSITE":
+                    return COMPOSITE;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+    }
+
     public enum SourceFeedFormat {
 
         /**
@@ -1541,6 +1599,22 @@ public abstract class BaseContent
     public boolean hasDefinedSourceSettingIndexStrategy = false;
 
     protected SourceSettingIndexStrategy sourceSettingIndexStrategy;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSourceSettingAuthorPolicy = 0;
+
+    public int hasModifiedSourceSettingAuthorPolicy = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourceSettingAuthorPolicy = false;
+
+    protected SourceSettingAuthorPolicy sourceSettingAuthorPolicy;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -5942,6 +6016,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceSettingIndexStrategy () {
         return this.hasDefinedSourceSettingIndexStrategy;
+    }
+
+    public BaseContent setSourceSettingAuthorPolicy ( SourceSettingAuthorPolicy sourceSettingAuthorPolicy ) {
+
+        ++this.hasSourceSettingAuthorPolicy;
+        ++this.hasModifiedSourceSettingAuthorPolicy;
+
+        this.sourceSettingAuthorPolicy = sourceSettingAuthorPolicy;
+
+        hasDefinedSourceSettingAuthorPolicy = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Policy on handling author metadata. 
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_setting_author_policy
+     * </p>
+     */
+    public SourceSettingAuthorPolicy getSourceSettingAuthorPolicy () {
+
+        if ( this.constructed == false && this.hasSourceSettingAuthorPolicy == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourceSettingAuthorPolicy" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourceSettingAuthorPolicy;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * Policy on handling author metadata. 
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_setting_author_policy
+     * </p>
+     */
+    public SourceSettingAuthorPolicy getSourceSettingAuthorPolicy ( SourceSettingAuthorPolicy _default ) {
+
+        if ( ! hasSourceSettingAuthorPolicy() ) {
+            return _default;
+        }
+
+        return getSourceSettingAuthorPolicy();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourceSettingAuthorPolicy () {
+        return this.hasSourceSettingAuthorPolicy > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourceSettingAuthorPolicy () {
+        this.hasSourceSettingAuthorPolicy = 0;
+        this.hasModifiedSourceSettingAuthorPolicy = 0;
+        this.hasDefinedSourceSettingAuthorPolicy = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourceSettingAuthorPolicy () {
+        return this.hasModifiedSourceSettingAuthorPolicy > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourceSettingAuthorPolicy () {
+        return this.hasDefinedSourceSettingAuthorPolicy;
     }
 
     public BaseContent setSourcePshbHub ( String sourcePshbHub ) {
@@ -14929,6 +15088,10 @@ public abstract class BaseContent
             setSourceSettingIndexStrategy( obj.getSourceSettingIndexStrategy() );
         }
 
+        if ( obj.hasSourceSettingAuthorPolicy() ) {
+            setSourceSettingAuthorPolicy( obj.getSourceSettingAuthorPolicy() );
+        }
+
         if ( obj.hasSourcePshbHub() ) {
             setSourcePshbHub( obj.getSourcePshbHub() );
         }
@@ -15481,6 +15644,10 @@ public abstract class BaseContent
             setSourceSettingIndexStrategy( obj.getSourceSettingIndexStrategy() );
         }
 
+        if ( sourceSettingAuthorPolicy == null && obj.hasSourceSettingAuthorPolicy() && obj.getSourceSettingAuthorPolicy() != null ) {
+            setSourceSettingAuthorPolicy( obj.getSourceSettingAuthorPolicy() );
+        }
+
         if ( ! hasSourcePshbHub() && obj.hasSourcePshbHub() ) {
             setSourcePshbHub( obj.getSourcePshbHub() );
         }
@@ -15966,6 +16133,8 @@ public abstract class BaseContent
 
         this.hasModifiedSourceSettingIndexStrategy = 0;
 
+        this.hasModifiedSourceSettingAuthorPolicy = 0;
+
         this.hasModifiedSourcePshbHub = 0;
 
         this.hasModifiedSourcePshbTopic = 0;
@@ -16306,6 +16475,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceSettingIndexStrategy() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSourceSettingAuthorPolicy() ) {
             return true;
         }
 
@@ -16995,6 +17168,14 @@ public abstract class BaseContent
 
             buff.append( "sourceSettingIndexStrategy=" );
             buff.append( sourceSettingIndexStrategy );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourceSettingAuthorPolicy > 0 ) {
+
+            buff.append( "sourceSettingAuthorPolicy=" );
+            buff.append( sourceSettingAuthorPolicy );
             buff.append( " " );
 
         }
@@ -18129,6 +18310,15 @@ public abstract class BaseContent
         }
 
         if ( sourceSettingIndexStrategy != cmp.sourceSettingIndexStrategy ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSourceSettingAuthorPolicy() != cmp.hasSourceSettingAuthorPolicy() ) {
+            return false;
+        }
+
+        if ( sourceSettingAuthorPolicy != cmp.sourceSettingAuthorPolicy ) {
             return false;
         }
 
@@ -19742,6 +19932,21 @@ public abstract class BaseContent
 
                 if ( sourceSettingIndexStrategy != null )
                     generator.writeStringField( __name, sourceSettingIndexStrategy.toString() );
+
+            }
+
+            // ***** json encode member source_setting_author_policy from int
+
+            __name = "sourceSettingAuthorPolicy";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_setting_author_policy";
+            }
+
+            if ( this.hasSourceSettingAuthorPolicy > 0 ) {
+
+                if ( sourceSettingAuthorPolicy != null )
+                    generator.writeStringField( __name, sourceSettingAuthorPolicy.toString() );
 
             }
 
@@ -21755,6 +21960,15 @@ public abstract class BaseContent
                 // ***** json decode member source_setting_index_strategy from int
 
                 case "source_setting_index_strategy":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member source_setting_author_policy from int
+
+                case "source_setting_author_policy":
 
                     // FIXME not implemented yet.
 
