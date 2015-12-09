@@ -14,7 +14,7 @@ import static com.spinn3r.artemis.init.Services.ref;
  */
 public class BaseLauncherTest {
 
-    private Launcher launcher;
+    protected Launcher launcher;
 
     /**
      * Setup with no services but run an injector.

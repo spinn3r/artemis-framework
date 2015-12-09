@@ -17,4 +17,8 @@ public class Hashcodes {
 
     }
 
+    public static Hashcode hash( String data  ) {
+        return new Hashcode( getHashcode( data ) );
+    }
+
 }
