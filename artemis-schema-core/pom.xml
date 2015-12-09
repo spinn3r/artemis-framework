@@ -3,14 +3,14 @@
     <parent>
         <artifactId>artemis-framework</artifactId>
         <groupId>com.spinn3r.artemis</groupId>
-        <version>5.1-LATEST</version>
+        <version>5.1-LATEST-2</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spinn3r.artemis.schema.core</groupId>
     <artifactId>artemis-schema-core</artifactId>
-    <version>5.1-LATEST</version>
+    <version>5.1-LATEST-2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

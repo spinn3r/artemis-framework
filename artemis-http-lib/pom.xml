@@ -3,13 +3,13 @@
     <parent>
         <artifactId>artemis-framework</artifactId>
         <groupId>com.spinn3r.artemis</groupId>
-        <version>5.1-LATEST</version>
+        <version>5.1-LATEST-2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spinn3r.artemis.http</groupId>
     <artifactId>artemis-http-lib</artifactId>
-    <version>5.1-LATEST</version>
+    <version>5.1-LATEST-2</version>
 
     <dependencies>
 
