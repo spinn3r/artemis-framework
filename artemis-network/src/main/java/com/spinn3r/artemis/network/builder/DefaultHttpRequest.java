@@ -91,7 +91,7 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Set<String> getRequestHeaders() {
+    public Set<String> getRequestHeaderNames() {
         return resourceRequest.getRequestHeaders();
     }
 
@@ -106,7 +106,7 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Set<String> getResponseHeaders() {
+    public Set<String> getResponseHeaderNames() {
         return resourceRequest.getResponseHeaders();
     }
 

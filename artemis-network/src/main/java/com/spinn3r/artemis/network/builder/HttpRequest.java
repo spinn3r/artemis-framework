@@ -62,13 +62,13 @@ public interface HttpRequest {
 
     String getRequestHeader(String name);
 
-    Set<String> getRequestHeaders();
+    Set<String> getRequestHeaderNames();
 
     Map<String,String> getRequestHeadersMap();
 
     String getResponseHeader(String name);
 
-    Set<String> getResponseHeaders();
+    Set<String> getResponseHeaderNames();
 
     Map<String,List<String>> getResponseHeadersMap();
 
