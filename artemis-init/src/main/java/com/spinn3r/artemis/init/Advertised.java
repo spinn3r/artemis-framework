@@ -193,6 +193,28 @@ public class Advertised {
                            Class<? extends T> c1,
                            Class<? extends T> c2,
                            Class<? extends T> c3,
+                           Class<? extends T> c4,
+                           Class<? extends T> c5 ) {
+
+        List<Class<? extends T>> list = Lists.newArrayList();
+
+        list.add( c0 );
+        list.add( c1 );
+        list.add( c2 );
+        list.add( c3 );
+        list.add( c4 );
+        list.add( c5 );
+
+        return delegate( source, clazz, list );
+
+    }
+
+    public <T> T delegate( Class source,
+                           Class<T> clazz,
+                           Class<? extends T> c0,
+                           Class<? extends T> c1,
+                           Class<? extends T> c2,
+                           Class<? extends T> c3,
                            Class<? extends T> c4 ) {
 
         List<Class<? extends T>> list = Lists.newArrayList();
