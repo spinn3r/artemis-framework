@@ -3281,6 +3281,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasDislikes = 0;
+
+    public int hasModifiedDislikes = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedDislikes = false;
+
+    protected int dislikes;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasComments = 0;
 
     public int hasModifiedComments = 0;
@@ -3293,6 +3309,22 @@ public abstract class BaseContent
     public boolean hasDefinedComments = false;
 
     protected int comments;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasViews = 0;
+
+    public int hasModifiedViews = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedViews = false;
+
+    protected int views;
 
     // **** methods for this POJO
 
@@ -14870,6 +14902,91 @@ public abstract class BaseContent
         return this.hasDefinedLikes;
     }
 
+    public BaseContent setDislikes ( int dislikes ) {
+
+        ++this.hasDislikes;
+        ++this.hasModifiedDislikes;
+
+        this.dislikes = dislikes;
+
+        hasDefinedDislikes = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: dislikes
+     * </p>
+     */
+    public int getDislikes () {
+
+        if ( this.constructed == false && this.hasDislikes == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.dislikes" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.dislikes;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: dislikes
+     * </p>
+     */
+    public int getDislikes ( int _default ) {
+
+        if ( ! hasDislikes() ) {
+            return _default;
+        }
+
+        return getDislikes();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasDislikes () {
+        return this.hasDislikes > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearDislikes () {
+        this.hasDislikes = 0;
+        this.hasModifiedDislikes = 0;
+        this.hasDefinedDislikes = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedDislikes () {
+        return this.hasModifiedDislikes > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedDislikes () {
+        return this.hasDefinedDislikes;
+    }
+
     public BaseContent setComments ( int comments ) {
 
         ++this.hasComments;
@@ -14953,6 +15070,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedComments () {
         return this.hasDefinedComments;
+    }
+
+    public BaseContent setViews ( int views ) {
+
+        ++this.hasViews;
+        ++this.hasModifiedViews;
+
+        this.views = views;
+
+        hasDefinedViews = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: views
+     * </p>
+     */
+    public int getViews () {
+
+        if ( this.constructed == false && this.hasViews == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.views" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.views;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: views
+     * </p>
+     */
+    public int getViews ( int _default ) {
+
+        if ( ! hasViews() ) {
+            return _default;
+        }
+
+        return getViews();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasViews () {
+        return this.hasViews > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearViews () {
+        this.hasViews = 0;
+        this.hasModifiedViews = 0;
+        this.hasDefinedViews = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedViews () {
+        return this.hasModifiedViews > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedViews () {
+        return this.hasDefinedViews;
     }
 
     /**
@@ -15504,8 +15706,16 @@ public abstract class BaseContent
             setLikes( obj.getLikes() );
         }
 
+        if ( obj.hasDislikes() ) {
+            setDislikes( obj.getDislikes() );
+        }
+
         if ( obj.hasComments() ) {
             setComments( obj.getComments() );
+        }
+
+        if ( obj.hasViews() ) {
+            setViews( obj.getViews() );
         }
 
     }
@@ -16060,8 +16270,16 @@ public abstract class BaseContent
             setLikes( obj.getLikes() );
         }
 
+        if ( ! hasDislikes() && obj.hasDislikes() ) {
+            setDislikes( obj.getDislikes() );
+        }
+
         if ( ! hasComments() && obj.hasComments() ) {
             setComments( obj.getComments() );
+        }
+
+        if ( ! hasViews() && obj.hasViews() ) {
+            setViews( obj.getViews() );
         }
 
     }
@@ -16341,7 +16559,11 @@ public abstract class BaseContent
 
         this.hasModifiedLikes = 0;
 
+        this.hasModifiedDislikes = 0;
+
         this.hasModifiedComments = 0;
+
+        this.hasModifiedViews = 0;
 
     }
 
@@ -16894,7 +17116,15 @@ public abstract class BaseContent
             return true;
         }
 
+        if ( this.hasModifiedDislikes() ) {
+            return true;
+        }
+
         if ( this.hasModifiedComments() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedViews() ) {
             return true;
         }
 
@@ -18004,10 +18234,26 @@ public abstract class BaseContent
 
         }
 
+        if ( hasDislikes > 0 ) {
+
+            buff.append( "dislikes=" );
+            buff.append( dislikes );
+            buff.append( " " );
+
+        }
+
         if ( hasComments > 0 ) {
 
             buff.append( "comments=" );
             buff.append( comments );
+            buff.append( " " );
+
+        }
+
+        if ( hasViews > 0 ) {
+
+            buff.append( "views=" );
+            buff.append( views );
             buff.append( " " );
 
         }
@@ -19250,11 +19496,29 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
+        if ( hasDislikes() != cmp.hasDislikes() ) {
+            return false;
+        }
+
+        if ( dislikes != cmp.dislikes ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasComments() != cmp.hasComments() ) {
             return false;
         }
 
         if ( comments != cmp.comments ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasViews() != cmp.hasViews() ) {
+            return false;
+        }
+
+        if ( views != cmp.views ) {
             return false;
         }
 
@@ -21577,6 +21841,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member dislikes from int
+
+            __name = "dislikes";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "dislikes";
+            }
+
+            if ( this.hasDislikes > 0 ) {
+
+                if ( hasDefinedDislikes )
+                    generator.writeNumberField( __name, dislikes );
+
+            }
+
             // ***** json encode member comments from int
 
             __name = "comments";
@@ -21589,6 +21868,21 @@ public abstract class BaseContent
 
                 if ( hasDefinedComments )
                     generator.writeNumberField( __name, comments );
+
+            }
+
+            // ***** json encode member views from int
+
+            __name = "views";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "views";
+            }
+
+            if ( this.hasViews > 0 ) {
+
+                if ( hasDefinedViews )
+                    generator.writeNumberField( __name, views );
 
             }
 
@@ -23018,12 +23312,32 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member dislikes from int
+
+                case "dislikes":
+
+                    jParser.nextToken();
+                    setDislikes( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member comments from int
 
                 case "comments":
 
                     jParser.nextToken();
                     setComments( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member views from int
+
+                case "views":
+
+                    jParser.nextToken();
+                    setViews( jParser.getIntValue() );
 
                     break;
 
