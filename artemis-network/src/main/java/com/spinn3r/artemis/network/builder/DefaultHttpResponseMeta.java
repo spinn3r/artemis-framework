@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.Cookie;
@@ -18,13 +19,20 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
 
     private final int responseCode;
 
-    private final ImmutableMap<String,ImmutableList<String>> responseHeaderMap;
+    private final ImmutableMap<String,ImmutableList<String>> responseHeadersMap;
 
-    public DefaultHttpResponseMeta(String resource, String resourceFromRedirect, int responseCode, ImmutableMap<String,ImmutableList<String>> responseHeaderMap) {
+    private final ImmutableMap<String,Cookie> cookies;
+
+    public DefaultHttpResponseMeta( @JsonProperty("resource") String resource,
+                                    @JsonProperty("resourceFromRedirect") String resourceFromRedirect,
+                                    @JsonProperty("responseCode") int responseCode,
+                                    @JsonProperty("responseHeadersMap") ImmutableMap<String, ImmutableList<String>> responseHeadersMap,
+                                    @JsonProperty("cookies") ImmutableMap<String, Cookie> cookies) {
         this.resource = resource;
         this.resourceFromRedirect = resourceFromRedirect;
         this.responseCode = responseCode;
-        this.responseHeaderMap = responseHeaderMap;
+        this.responseHeadersMap = responseHeadersMap;
+        this.cookies = cookies;
     }
 
     @Override
@@ -44,12 +52,12 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
 
     @Override
     public ImmutableMap<String, ImmutableList<String>> getResponseHeadersMap() {
-        return responseHeaderMap;
+        return responseHeadersMap;
     }
 
     @Override
     public ImmutableMap<String,Cookie> getCookies() {
-        return Cookies.fromResponseHeadersMap( getResponseHeadersMap() );
+        return cookies;
     }
 
     @Override
@@ -58,7 +66,8 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
                  "resource='" + resource + '\'' +
                  ", resourceFromRedirect='" + resourceFromRedirect + '\'' +
                  ", responseCode=" + responseCode +
-                 ", responseHeaderMap=" + responseHeaderMap +
+                 ", responseHeadersMap=" + responseHeadersMap +
+                 ", cookies=" + cookies +
                  '}';
     }
 

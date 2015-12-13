@@ -34,7 +34,6 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
     }
 
     @Test
-    @Ignore
     public void testGet() throws Exception {
 
         String link = "http://cnn.com";

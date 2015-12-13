@@ -2,7 +2,7 @@
   "resource" : "http://www.cnn.com/",
   "resourceFromRedirect" : "http://www.cnn.com/",
   "responseCode" : 200,
-  "responseHeaderMap" : {
+  "responseHeadersMap" : {
     "X-Cache" : [
       "HIT, HIT"
     ],

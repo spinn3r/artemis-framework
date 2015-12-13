@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -67,11 +68,11 @@ public class JSON {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = createObjectMapper();
             return objectMapper.readValue( content, clazz );
 
             /*
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = createObjectMapper();
             objectMapper.getFactory().enable( com.fasterxml.jackson.core.JsonParser.Feature.ALLOW_COMMENTS );
             objectMapper.setPropertyNamingStrategy( new PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy() );
             return objectMapper.readValue( content, clazz );
@@ -90,7 +91,7 @@ public class JSON {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = createObjectMapper();
             return objectMapper.readValue( inputStream, clazz );
 
         } catch (IOException e) {
@@ -106,13 +107,19 @@ public class JSON {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = createObjectMapper();
             return objectMapper.readValue( data, clazz );
 
         } catch (IOException e) {
             throw new RuntimeException( e );
         }
 
+    }
+
+    private static ObjectMapper createObjectMapper() {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new GuavaModule());
+        return mapper;
     }
 
     private static class PrettyPrinter extends DefaultPrettyPrinter {
