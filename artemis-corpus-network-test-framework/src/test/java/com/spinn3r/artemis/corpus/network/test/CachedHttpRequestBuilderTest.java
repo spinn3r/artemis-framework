@@ -6,6 +6,7 @@ import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpResponseMeta;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
+import com.spinn3r.artemis.util.text.MapFormatter;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -42,7 +43,7 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
         HttpResponseMeta httpResponseMeta = networkCorporaCache.meta( link );
 
         assertNotNull( httpRequest );
-        corporaAsserter.assertEquals( "responseHeadersMap", httpResponseMeta.getResponseHeadersMap().toString() );
+        corporaAsserter.assertEquals( "responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
 
     }
 
