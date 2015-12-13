@@ -63,6 +63,8 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         checkNotNull( link, "link" );
 
+        // FIXME: the request headers and post body ALSO need to be factored
+        // into computing the key.
         String key = Base64.encode( SHA1.encode( link ) );
 
         // the key here is raw... so we can add a suffix to include the metadata
@@ -91,7 +93,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
 
-                    cache.write( key + "-meta", JSON.toJSON(httpResponseMeta) );
+                    cache.write( key + "-response-meta", JSON.toJSON(httpResponseMeta) );
 
                     return contentWithEncoding;
 
@@ -114,16 +116,22 @@ public class NetworkCorporaCache implements ContentFetcher {
      * Get just the metadata for a link (if it's present in the cache) or null
      * if it's absent.
      */
-    public HttpResponseMeta meta( String link ) throws IOException {
+    public HttpResponseMeta meta( String link ) throws NetworkException {
 
-        String key = Base64.encode( SHA1.encode( link ) ) + "-meta";
+        try {
 
-        if ( cache.contains( key ) ) {
-            String json = cache.read( key );
-            return JSON.fromJSON( DefaultHttpResponseMeta.class, json );
+            String key = Base64.encode( SHA1.encode( link ) ) + "-response-meta";
+
+            if ( cache.contains( key ) ) {
+                String json = cache.read( key );
+                return JSON.fromJSON( DefaultHttpResponseMeta.class, json );
+            }
+
+            return null;
+
+        } catch (IOException e) {
+            throw new NetworkException( e );
         }
-
-        return null;
 
     }
 

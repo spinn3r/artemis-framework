@@ -6,16 +6,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.HttpContentResponseMeta;
-import com.spinn3r.artemis.network.builder.HttpRequest;
-import com.spinn3r.artemis.network.builder.HttpRequestMethod;
-import com.spinn3r.artemis.network.builder.HttpResponseMeta;
+import com.spinn3r.artemis.network.builder.*;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.net.Proxy;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -26,8 +21,11 @@ public class CachedHttpRequest implements HttpRequest {
 
     private final CachedHttpRequestMethod cachedHttpRequestMethod;
 
-    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod) {
+    private final HttpResponseMeta httpResponseMeta;
+
+    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod, HttpResponseMeta httpResponseMeta) {
         this.cachedHttpRequestMethod = cachedHttpRequestMethod;
+        this.httpResponseMeta = httpResponseMeta;
     }
 
     @Override
@@ -82,11 +80,16 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public Set<String> getResponseHeaderNames() {
-        return Sets.newHashSet();
+        return getResponseHeadersMap().keySet();
     }
 
     @Override
     public ImmutableMap<String,ImmutableList<String>> getResponseHeadersMap() {
+
+        if ( httpResponseMeta != null ) {
+            return httpResponseMeta.getResponseHeadersMap();
+        }
+
         return null;
     }
 
@@ -97,7 +100,13 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public String getResourceFromRedirect() {
+
+        if ( httpResponseMeta != null ) {
+            return httpResponseMeta.getResourceFromRedirect();
+        }
+
         return getResource();
+
     }
 
     @Override
@@ -137,12 +146,12 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public HttpResponseMeta getHttpResponseMeta() throws NetworkException {
-        return null;
+        return httpResponseMeta;
     }
 
     @Override
     public HttpContentResponseMeta getHttpContentResponseMeta() throws NetworkException {
-        return null;
+        return new DefaultHttpContentResponseMeta( httpResponseMeta, getContentWithEncoding() );
     }
 
 }

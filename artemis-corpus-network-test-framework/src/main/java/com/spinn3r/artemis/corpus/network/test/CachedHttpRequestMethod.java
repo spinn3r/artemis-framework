@@ -6,6 +6,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMeta;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.HttpResponseMeta;
 
 import java.net.Proxy;
 import java.util.LinkedHashMap;
@@ -106,8 +107,9 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     public HttpRequest execute() throws NetworkException {
 
         this.content = cachedHttpRequestBuilder.networkCorporaCache.fetch( resource, requestHeaders, cookies );
+        HttpResponseMeta httpResponseMeta = cachedHttpRequestBuilder.networkCorporaCache.meta( resource );
 
-        return new CachedHttpRequest( this );
+        return new CachedHttpRequest( this, httpResponseMeta );
 
     }
 
@@ -123,7 +125,7 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        return null;
+        return new HttpRequestMeta( resource );
     }
 
     @Override

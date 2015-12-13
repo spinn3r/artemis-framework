@@ -11,10 +11,29 @@ public class DefaultHttpContentResponseMeta extends DefaultHttpResponseMeta impl
 
     private final String contentWithEncoding;
 
-    public DefaultHttpContentResponseMeta(String resource, String resourceFromRedirect, int responseCode, ImmutableMap<String,ImmutableList<String>> responseHeaderMap, ImmutableMap<String, Cookie> cookies, String contentWithEncoding) {
+    public DefaultHttpContentResponseMeta(HttpResponseMeta httpResponseMeta,
+                                          String contentWithEncoding) {
+
+        this( httpResponseMeta.getResource(),
+              httpResponseMeta.getResourceFromRedirect(),
+              httpResponseMeta.getResponseCode(),
+              httpResponseMeta.getResponseHeadersMap(),
+              httpResponseMeta.getCookies(),
+              contentWithEncoding );
+
+    }
+
+    public DefaultHttpContentResponseMeta(String resource,
+                                          String resourceFromRedirect,
+                                          int responseCode,
+                                          ImmutableMap<String,ImmutableList<String>> responseHeaderMap,
+                                          ImmutableMap<String, Cookie> cookies,
+                                          String contentWithEncoding) {
         super( resource, resourceFromRedirect, responseCode, responseHeaderMap, cookies );
         this.contentWithEncoding = contentWithEncoding;
     }
+
+
 
     @Override
     public String getContentWithEncoding() {
