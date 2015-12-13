@@ -126,6 +126,14 @@ public class DefaultHttpRequest implements HttpRequest {
 
         Map<String,ImmutableList<String>> tmp = Maps.newHashMap();
         for (Map.Entry<String, List<String>> entry : responseHeadersMap.entrySet()) {
+
+            if ( entry.getKey() == null ) {
+                // the HTTP status line is included here as a null key which is
+                // really ugly and we should hide it.  It also yields bugs
+                // for example Jackson refuses to encode it.
+                continue;
+            }
+
             tmp.put( entry.getKey(), ImmutableList.copyOf( entry.getValue() ) );
         }
 

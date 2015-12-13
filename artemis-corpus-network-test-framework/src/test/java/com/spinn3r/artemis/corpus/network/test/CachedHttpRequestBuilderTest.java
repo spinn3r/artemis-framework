@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.corpus.network.test;
 
 import com.google.inject.Inject;
+import com.spinn3r.artemis.corpus.test.CorporaAsserter;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
@@ -14,6 +15,8 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
 
     @Inject
     CachedHttpRequestBuilder cachedHttpRequestBuilder;
+
+    CorporaAsserter corporaAsserter = new CorporaAsserter( getClass() );
 
     @Override
     @Before
