@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.Maps;
+import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 
@@ -62,6 +64,20 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     public HttpRequestMethod withCookies( Map<String,String> cookies ) {
         this.cookies = cookies;
         return this;
+    }
+
+    @Override
+    public HttpRequestMethod withCookieIndex( Map<String,Cookie> cookies ) {
+
+        Map<String,String> cookieMap = Maps.newHashMap();
+
+        for (Map.Entry<String, Cookie> entry : cookies.entrySet()) {
+            cookieMap.put( entry.getKey(), entry.getValue().getValue() );
+        }
+
+        this.cookies = cookieMap;
+        return this;
+
     }
 
     @Override

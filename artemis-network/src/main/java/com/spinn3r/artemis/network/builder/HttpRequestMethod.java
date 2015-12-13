@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.NetworkException;
 
 import java.net.Proxy;
@@ -38,6 +39,8 @@ public interface HttpRequestMethod {
     HttpRequestMethod withMaxContentLength( int maxContentLength );
 
     HttpRequestMethod withCookies( Map<String,String> cookies );
+
+    HttpRequestMethod withCookieIndex( Map<String,Cookie> cookies );
 
     HttpRequestMethod withConnectTimeout( long timeout );
 

@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.spinn3r.artemis.network.Cookie;
+
 import java.util.List;
 import java.util.Map;
 
@@ -35,5 +37,11 @@ public interface HttpResponseMeta {
      * @return
      */
     Map<String, List<String>> getResponseHeaderMap();
+
+    /**
+     * Get the HTTP cookies associated with this request.  Return an emtpy map
+     * if there are no cookies.
+     */
+    Map<String,Cookie> getCookies();
 
 }

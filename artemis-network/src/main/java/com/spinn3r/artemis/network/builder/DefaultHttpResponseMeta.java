@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.spinn3r.artemis.network.Cookie;
+import com.spinn3r.artemis.network.Cookies;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +46,11 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
     @Override
     public Map<String, List<String>> getResponseHeaderMap() {
         return responseHeaderMap;
+    }
+
+    @Override
+    public Map<String,Cookie> getCookies() {
+        return Cookies.fromResponseHeadersMap( getResponseHeaderMap() );
     }
 
     @Override
