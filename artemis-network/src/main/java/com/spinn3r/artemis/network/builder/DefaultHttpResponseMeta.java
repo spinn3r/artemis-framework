@@ -5,9 +5,6 @@ import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.Cookies;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Metadata about an HTTP response including the HTTP status code, etc.  This does
  * NOT include any methods that can operate on the HTTP response directly as
@@ -46,13 +43,13 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
     }
 
     @Override
-    public ImmutableMap<String, ImmutableList<String>> getResponseHeaderMap() {
+    public ImmutableMap<String, ImmutableList<String>> getResponseHeadersMap() {
         return responseHeaderMap;
     }
 
     @Override
     public ImmutableMap<String,Cookie> getCookies() {
-        return Cookies.fromResponseHeadersMap( getResponseHeaderMap() );
+        return Cookies.fromResponseHeadersMap( getResponseHeadersMap() );
     }
 
     @Override

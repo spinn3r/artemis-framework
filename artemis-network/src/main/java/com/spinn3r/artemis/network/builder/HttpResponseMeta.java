@@ -38,7 +38,7 @@ public interface HttpResponseMeta {
      *
      * @return
      */
-    ImmutableMap<String, ImmutableList<String>> getResponseHeaderMap();
+    ImmutableMap<String, ImmutableList<String>> getResponseHeadersMap();
 
     /**
      * Get the HTTP cookies associated with this request.  Return an emtpy map

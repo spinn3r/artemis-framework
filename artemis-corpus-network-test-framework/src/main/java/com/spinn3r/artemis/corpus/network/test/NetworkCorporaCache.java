@@ -110,6 +110,23 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     }
 
+    /**
+     * Get just the metadata for a link (if it's present in the cache) or null
+     * if it's absent.
+     */
+    public HttpResponseMeta meta( String link ) throws IOException {
+
+        String key = Base64.encode( SHA1.encode( link ) ) + "-meta";
+
+        if ( cache.contains( key ) ) {
+            String json = cache.read( key );
+            return JSON.fromJSON( DefaultHttpResponseMeta.class, json );
+        }
+
+        return null;
+
+    }
+
     private static Class<?> classForCaller( Caller caller ) {
 
         try {
