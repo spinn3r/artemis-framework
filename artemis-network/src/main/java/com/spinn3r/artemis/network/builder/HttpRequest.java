@@ -95,4 +95,8 @@ public interface HttpRequest {
 
     Class<?> getExecutor();
 
+    HttpResponseMeta getHttpResponseMeta() throws NetworkException;
+
+    HttpContentResponseMeta getHttpContentResponseMeta() throws NetworkException;
+
 }

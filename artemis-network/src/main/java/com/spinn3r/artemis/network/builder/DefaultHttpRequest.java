@@ -24,6 +24,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
     private final ResourceRequest resourceRequest;
 
+    private String contentWithEncoding = null;
+
     public DefaultHttpRequest( DefaultHttpRequestBuilder defaultHttpRequestBuilder,
                                DefaultHttpRequestMethod method,
                                ResourceRequest resourceRequest) {
@@ -37,12 +39,16 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public String getContentWithEncoding() throws NetworkException {
 
-        String contentWithEncoding = resourceRequest.getContentWithEncoding();
+        if ( contentWithEncoding == null ) {
 
-        if ( defaultHttpRequestBuilder.requestListeners != null ) {
+            contentWithEncoding = resourceRequest.getContentWithEncoding();
 
-            for (RequestListener requestListener : defaultHttpRequestBuilder.requestListeners) {
-                requestListener.onContentWithEncoding( method.getHttpRequestMeta(), contentWithEncoding );
+            if (defaultHttpRequestBuilder.requestListeners != null) {
+
+                for (RequestListener requestListener : defaultHttpRequestBuilder.requestListeners) {
+                    requestListener.onContentWithEncoding( method.getHttpRequestMeta(), contentWithEncoding );
+                }
+
             }
 
         }
@@ -158,6 +164,24 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public Class<?> getExecutor() {
         return method.executor;
+    }
+
+    @Override
+    public HttpResponseMeta getHttpResponseMeta() throws NetworkException {
+
+        connect();
+
+        return new DefaultHttpResponseMeta( getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap() );
+
+    }
+
+    @Override
+    public HttpContentResponseMeta getHttpContentResponseMeta() throws NetworkException {
+
+        String contentWithEncoding = getContentWithEncoding();
+
+        return new DefaultHttpContentResponseMeta( getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), contentWithEncoding );
+
     }
 
 }
