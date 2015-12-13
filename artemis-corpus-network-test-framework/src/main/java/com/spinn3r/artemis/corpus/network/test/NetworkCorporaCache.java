@@ -116,7 +116,7 @@ public class NetworkCorporaCache implements ContentFetcher {
      * Get just the metadata for a link (if it's present in the cache) or null
      * if it's absent.
      */
-    public HttpResponseMeta meta( String link ) throws NetworkException {
+    public HttpResponseMeta responseMeta(String link ) throws NetworkException {
 
         try {
 

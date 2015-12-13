@@ -3,10 +3,7 @@ package com.spinn3r.artemis.corpus.network.test;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.HttpRequest;
-import com.spinn3r.artemis.network.builder.HttpRequestMeta;
-import com.spinn3r.artemis.network.builder.HttpRequestMethod;
-import com.spinn3r.artemis.network.builder.HttpResponseMeta;
+import com.spinn3r.artemis.network.builder.*;
 
 import java.net.Proxy;
 import java.util.LinkedHashMap;
@@ -107,7 +104,7 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     public HttpRequest execute() throws NetworkException {
 
         this.content = cachedHttpRequestBuilder.networkCorporaCache.fetch( resource, requestHeaders, cookies );
-        HttpResponseMeta httpResponseMeta = cachedHttpRequestBuilder.networkCorporaCache.meta( resource );
+        HttpResponseMeta httpResponseMeta = cachedHttpRequestBuilder.networkCorporaCache.responseMeta( resource );
 
         return new CachedHttpRequest( this, httpResponseMeta );
 
@@ -125,7 +122,8 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        return new HttpRequestMeta( resource );
+        //return new DefaultHttpRequestMeta( getResource(), getHttpRequestMeta() );
+        return null; // FIXME
     }
 
     @Override

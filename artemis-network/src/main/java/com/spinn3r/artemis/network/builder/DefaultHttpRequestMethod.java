@@ -135,7 +135,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        return new HttpRequestMeta( getResource() );
+        return new DefaultHttpRequestMeta( getResource(), requestHeaders );
     }
 
     @Override

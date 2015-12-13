@@ -2,7 +2,6 @@ package com.spinn3r.artemis.network.builder.listener;
 
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.HttpRequestMeta;
-import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 
 /**
  *
@@ -15,6 +14,6 @@ public interface RequestListener {
      *
      * @throws NetworkException
      */
-    void onContentWithEncoding( HttpRequestMeta httpRequestMeta, String content ) throws NetworkException;
+    void onContentWithEncoding(HttpRequestMeta httpRequestMeta, String content ) throws NetworkException;
 
 }

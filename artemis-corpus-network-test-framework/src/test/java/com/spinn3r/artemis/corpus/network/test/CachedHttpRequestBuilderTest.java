@@ -8,7 +8,6 @@ import com.spinn3r.artemis.network.builder.HttpResponseMeta;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.util.text.MapFormatter;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -40,7 +39,7 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
         String link = "http://cnn.com";
         HttpRequest httpRequest = cachedHttpRequestBuilder.get( link ).execute();
         String contentWithEncoding = httpRequest.getContentWithEncoding();
-        HttpResponseMeta httpResponseMeta = networkCorporaCache.meta( link );
+        HttpResponseMeta httpResponseMeta = networkCorporaCache.responseMeta( link );
 
         assertNotNull( httpRequest );
         corporaAsserter.assertEquals( "responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
