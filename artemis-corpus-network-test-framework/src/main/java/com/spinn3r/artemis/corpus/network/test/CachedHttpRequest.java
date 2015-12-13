@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.corpus.network.test;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.network.NetworkException;
@@ -84,7 +86,7 @@ public class CachedHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Map<String, List<String>> getResponseHeadersMap() {
+    public ImmutableMap<String,ImmutableList<String>> getResponseHeadersMap() {
         return null;
     }
 

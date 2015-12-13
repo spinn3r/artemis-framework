@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.NetworkException;
 
 import java.io.IOException;
@@ -70,7 +72,7 @@ public interface HttpRequest {
 
     Set<String> getResponseHeaderNames();
 
-    Map<String,List<String>> getResponseHeadersMap();
+    ImmutableMap<String,ImmutableList<String>> getResponseHeadersMap();
 
     String getResource();
 

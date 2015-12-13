@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.Cookies;
 
@@ -19,9 +21,9 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
 
     private final int responseCode;
 
-    private final Map<String,List<String>> responseHeaderMap;
+    private final ImmutableMap<String,ImmutableList<String>> responseHeaderMap;
 
-    public DefaultHttpResponseMeta(String resource, String resourceFromRedirect, int responseCode, Map<String, List<String>> responseHeaderMap) {
+    public DefaultHttpResponseMeta(String resource, String resourceFromRedirect, int responseCode, ImmutableMap<String,ImmutableList<String>> responseHeaderMap) {
         this.resource = resource;
         this.resourceFromRedirect = resourceFromRedirect;
         this.responseCode = responseCode;
@@ -44,12 +46,12 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
     }
 
     @Override
-    public Map<String, List<String>> getResponseHeaderMap() {
+    public ImmutableMap<String, ImmutableList<String>> getResponseHeaderMap() {
         return responseHeaderMap;
     }
 
     @Override
-    public Map<String,Cookie> getCookies() {
+    public ImmutableMap<String,Cookie> getCookies() {
         return Cookies.fromResponseHeadersMap( getResponseHeaderMap() );
     }
 

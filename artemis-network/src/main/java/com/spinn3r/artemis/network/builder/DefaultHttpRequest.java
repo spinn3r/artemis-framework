@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.URLResourceRequest;
@@ -117,8 +120,17 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Map<String, List<String>> getResponseHeadersMap() {
-        return resourceRequest.getResponseHeadersMap();
+    public ImmutableMap<String,ImmutableList<String>> getResponseHeadersMap() {
+
+        Map<String, List<String>> responseHeadersMap = resourceRequest.getResponseHeadersMap();
+
+        Map<String,ImmutableList<String>> tmp = Maps.newHashMap();
+        for (Map.Entry<String, List<String>> entry : responseHeadersMap.entrySet()) {
+            tmp.put( entry.getKey(), ImmutableList.copyOf( entry.getValue() ) );
+        }
+
+        return ImmutableMap.copyOf( tmp );
+
     }
 
     @Override

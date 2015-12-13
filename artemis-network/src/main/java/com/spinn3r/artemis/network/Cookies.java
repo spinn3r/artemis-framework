@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 
@@ -11,18 +13,18 @@ import java.util.Map;
  */
 public class Cookies {
 
-    public static Map<String,Cookie> fromHttpRequest(HttpRequest httpRequest ) {
+    public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
 
-    public static Map<String,Cookie> fromResponseHeadersMap(Map<String,List<String>>  responseHeadersMap ) {
+    public static ImmutableMap<String,Cookie> fromResponseHeadersMap( ImmutableMap<String,ImmutableList<String>> responseHeadersMap ) {
 
         Map<String,Cookie> cookies = Maps.newHashMap();
 
         List<String> setCookies = responseHeadersMap.get( "Set-Cookie" );
 
         if ( setCookies == null ) {
-            return cookies;
+            return ImmutableMap.copyOf( cookies );
         }
 
         for (String setCookie : setCookies) {
@@ -36,7 +38,7 @@ public class Cookies {
             cookies.put( cookie.getName(), cookie );
         }
 
-        return cookies;
+        return ImmutableMap.copyOf( cookies );
 
     }
 

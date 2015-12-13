@@ -5,10 +5,9 @@ import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaCache;
 import com.spinn3r.artemis.init.advertisements.Caller;
+import com.spinn3r.artemis.json.JSON;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.HttpRequest;
-import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
@@ -66,6 +65,9 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         String key = Base64.encode( SHA1.encode( link ) );
 
+        // the key here is raw... so we can add a suffix to include the metadata
+        // we want to include.. .
+
         try {
 
             if ( ! cache.contains( key ) ) {
@@ -84,6 +86,12 @@ public class NetworkCorporaCache implements ContentFetcher {
                         .getContentWithEncoding();
 
                     cache.write( key, contentWithEncoding );
+
+                    // now write the extended metadata...
+
+                    HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
+
+                    cache.write( key + "-meta", JSON.toJSON(httpResponseMeta) );
 
                     return contentWithEncoding;
 

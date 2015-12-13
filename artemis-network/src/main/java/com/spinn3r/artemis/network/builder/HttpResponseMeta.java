@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.Cookie;
 
 import java.util.List;
@@ -36,12 +38,12 @@ public interface HttpResponseMeta {
      *
      * @return
      */
-    Map<String, List<String>> getResponseHeaderMap();
+    ImmutableMap<String, ImmutableList<String>> getResponseHeaderMap();
 
     /**
      * Get the HTTP cookies associated with this request.  Return an emtpy map
      * if there are no cookies.
      */
-    Map<String,Cookie> getCookies();
+    ImmutableMap<String,Cookie> getCookies();
 
 }
