@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>artemis-framework</artifactId>
+        <groupId>com.spinn3r.artemis</groupId>
+        <version>5.1-LATEST-2</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spinn3r.artemis.corpus.network.test</groupId>
+    <artifactId>artemis-corpus-network-test-framework</artifactId>
+
+    <description>
+        Allows us to cache files locally for unit tests using our standard
+        networking code.
+    </description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.network</groupId>
+            <artifactId>artemis-network</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.corpus.test</groupId>
+            <artifactId>artemis-corpus-test-framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
