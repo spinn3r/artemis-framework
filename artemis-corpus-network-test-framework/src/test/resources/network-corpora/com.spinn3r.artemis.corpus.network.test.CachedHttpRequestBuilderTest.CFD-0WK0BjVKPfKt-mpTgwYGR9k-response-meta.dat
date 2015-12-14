@@ -1,0 +1,29 @@
+{
+  "resource" : "https://httpbin.org/post",
+  "resourceFromRedirect" : "https://httpbin.org/post",
+  "responseCode" : 200,
+  "responseHeadersMap" : {
+    "Server" : [
+      "nginx"
+    ],
+    "Access-Control-Allow-Origin" : [
+      "*"
+    ],
+    "Access-Control-Allow-Credentials" : [
+      "true"
+    ],
+    "Connection" : [
+      "close"
+    ],
+    "Content-Length" : [
+      "669"
+    ],
+    "Date" : [
+      "Mon, 14 Dec 2015 04:13:59 GMT"
+    ],
+    "Content-Type" : [
+      "application/json"
+    ]
+  },
+  "cookies" : { }
+}

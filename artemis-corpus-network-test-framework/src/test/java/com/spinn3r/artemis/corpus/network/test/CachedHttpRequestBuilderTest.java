@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.corpus.network.test;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaAsserter;
 import com.spinn3r.artemis.init.BaseLauncherTest;
@@ -10,6 +11,8 @@ import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.util.text.MapFormatter;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -75,6 +78,40 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
 
         corporaAsserter.assertEquals( "testGetWithCustomHeaders#requestHeadersMap", MapFormatter.table( httpRequest.getRequestHeadersMap() ) );
         corporaAsserter.assertEquals( "testGetWithCustomHeaders#responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
+
+    }
+
+    @Test
+    public void testWithPost1() throws Exception {
+
+        Map<String,String> parameters = Maps.newHashMap();
+
+        parameters.put( "hello", "world" );
+        parameters.put( "cat", "dog" );
+
+        String link = "https://httpbin.org/post";
+        HttpRequest httpRequest =
+          cachedHttpRequestBuilder
+            .post( link, parameters )
+            .withRequestHeader( "X-foo", "bar" )
+            .execute();
+
+        String contentWithEncoding = httpRequest.getContentWithEncoding();
+        HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
+        HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
+
+        assertNotNull( httpRequest );
+
+        assertNotNull( httpResponseMeta );
+        assertNotNull( httpResponseMeta.getResponseHeadersMap() );
+
+        assertNotNull( httpRequestMeta );
+        assertNotNull( httpRequestMeta.getRequestHeadersMap() );
+
+        assertEquals( "bar", httpRequestMeta.getRequestHeadersMap().get( "X-foo" ) );
+
+        corporaAsserter.assertEquals( "testWithPost1#requestHeadersMap", MapFormatter.table( httpRequest.getRequestHeadersMap() ) );
+        corporaAsserter.assertEquals( "testWithPost1#responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
 
     }
 

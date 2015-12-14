@@ -1,0 +1,23 @@
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "cat": "dog", 
+    "hello": "world"
+  }, 
+  "headers": {
+    "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2", 
+    "Accept-Encoding": "gzip", 
+    "Cache-Control": "no-cache", 
+    "Content-Length": "19", 
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8", 
+    "Host": "httpbin.org", 
+    "Pragma": "no-cache", 
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36", 
+    "X-Foo": "bar"
+  }, 
+  "json": null, 
+  "origin": "172.11.199.181", 
+  "url": "https://httpbin.org/post"
+}
