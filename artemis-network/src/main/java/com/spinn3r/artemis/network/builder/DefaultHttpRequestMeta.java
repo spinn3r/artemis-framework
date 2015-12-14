@@ -11,9 +11,18 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final ImmutableMap<String,String> requestHeadersMap;
 
-    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap) {
+    private final String outputContent;
+
+    private final String outputContentEncoding;
+
+    private final String outputContentType;
+
+    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap, String outputContent, String outputContentEncoding, String outputContentType) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
+        this.outputContent = outputContent;
+        this.outputContentEncoding = outputContentEncoding;
+        this.outputContentType = outputContentType;
     }
 
     @Override
@@ -25,11 +34,26 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
         return requestHeadersMap;
     }
 
+    public String getOutputContent() {
+        return outputContent;
+    }
+
+    public String getOutputContentEncoding() {
+        return outputContentEncoding;
+    }
+
+    public String getOutputContentType() {
+        return outputContentType;
+    }
+
     @Override
     public String toString() {
         return "DefaultHttpRequestMeta{" +
                  "resource='" + resource + '\'' +
                  ", requestHeadersMap=" + requestHeadersMap +
+                 ", outputContent='" + outputContent + '\'' +
+                 ", outputContentEncoding='" + outputContentEncoding + '\'' +
+                 ", outputContentType='" + outputContentType + '\'' +
                  '}';
     }
 

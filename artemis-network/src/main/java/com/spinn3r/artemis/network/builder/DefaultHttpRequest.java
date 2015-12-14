@@ -188,7 +188,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        return new DefaultHttpRequestMeta( getResource(), getRequestHeadersMap() );
+        return new DefaultHttpRequestMeta( getResource(), getRequestHeadersMap(), method.outputContent, method.outputContentEncoding, method.outputContentType );
     }
 
     @Override
