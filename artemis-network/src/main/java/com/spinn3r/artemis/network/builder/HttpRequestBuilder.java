@@ -26,24 +26,24 @@ public interface HttpRequestBuilder {
      * HTTP
      *
      */
-    HttpRequestBuilder withProxy(String type, String host, int port);
+    HttpRequestBuilder withProxy( String type, String host, int port );
 
     /**
      * Set a proxy in the form of scheme://host:port
      * @param proxy
      * @return
      */
-    HttpRequestBuilder withProxy(String proxy);
+    HttpRequestBuilder withProxy( String proxy );
 
-    HttpRequestBuilder withUserAgent(String userAgent);
+    HttpRequestBuilder withUserAgent( String userAgent) ;
 
-    HttpRequestMethod get(String resource) throws NetworkException;
+    HttpRequestMethod get( String resource ) throws NetworkException;
 
-    HttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException;
+    HttpRequestMethod post( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
 
-    HttpRequestMethod post(String resource, Map<String,?> parameters ) throws NetworkException;
+    HttpRequestMethod post( String resource, Map<String,?> parameters ) throws NetworkException;
 
-    HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
+    HttpRequestMethod put( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
 
     ProxyRegistry getProxyRegistry();
 

@@ -60,10 +60,13 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     @Override
     public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
-        return fetchCachedContent( link, requestHeaders, cookies ).getContent();
+        return fetchCachedContent( HttpMethod.GET, link, requestHeaders, cookies ).getContent();
     }
 
-    public CachedContent fetchCachedContent(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
+    public CachedContent fetchCachedContent( HttpMethod httpMethod,
+                                             String link,
+                                             ImmutableMap<String, String> requestHeaders,
+                                             ImmutableMap<String, String> cookies ) throws NetworkException {
 
         checkNotNull( link, "link" );
 
@@ -78,16 +81,29 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                 if ( updateMode ) {
 
-                    HttpRequest httpRequest =
-                      directHttpRequestBuilder
-                        .get( link )
-                        .withRequestHeaders( requestHeaders )
-                        .withCookies( cookies )
-                        .execute();
+                    HttpRequest httpRequest;
 
-                    String contentWithEncoding =
-                      httpRequest
-                        .getContentWithEncoding();
+                    switch ( httpMethod ) {
+
+                        case GET:
+
+                            httpRequest =
+                              directHttpRequestBuilder
+                                .get( link )
+                                .withRequestHeaders( requestHeaders )
+                                .withCookies( cookies )
+                                .execute();
+
+                            break;
+
+//                        case POST:
+//                            break;
+
+                        default:
+                            throw new NetworkException( "HTTP method not yet supported: " + httpMethod );
+                    }
+
+                    String contentWithEncoding = httpRequest.getContentWithEncoding();
 
                     cache.write( key, contentWithEncoding );
 

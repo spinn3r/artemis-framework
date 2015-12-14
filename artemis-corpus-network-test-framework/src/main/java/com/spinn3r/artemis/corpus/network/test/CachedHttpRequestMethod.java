@@ -17,6 +17,8 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     protected final CachedHttpRequestBuilder cachedHttpRequestBuilder;
 
+    protected final HttpMethod httpMethod;
+
     protected final String resource;
 
     protected String content;
@@ -27,8 +29,9 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     protected Class<?> executor = null;
 
-    public CachedHttpRequestMethod(CachedHttpRequestBuilder cachedHttpRequestBuilder, String resource) {
+    public CachedHttpRequestMethod(CachedHttpRequestBuilder cachedHttpRequestBuilder, HttpMethod httpMethod, String resource) {
         this.cachedHttpRequestBuilder = cachedHttpRequestBuilder;
+        this.httpMethod = httpMethod;
         this.resource = resource;
     }
 
@@ -105,11 +108,12 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     public HttpRequest execute() throws NetworkException {
 
         // FIXME: we have support GET, POST and PUT here including the HTTP
-        // headers/etc.
+        // headers/etc and send the type of post to
 
         CachedContent cachedContent =
           cachedHttpRequestBuilder.networkCorporaCache
-            .fetchCachedContent( resource,
+            .fetchCachedContent( httpMethod,
+                                 resource,
                                  ImmutableMap.copyOf( requestHeaders ),
                                  ImmutableMap.copyOf( cookies ) );
 
@@ -148,4 +152,5 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     public Proxy getProxy() {
         return null;
     }
+
 }

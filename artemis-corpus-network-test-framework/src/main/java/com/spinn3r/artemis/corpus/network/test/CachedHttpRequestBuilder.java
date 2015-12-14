@@ -2,6 +2,7 @@ package com.spinn3r.artemis.corpus.network.test;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.builder.BaseHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
@@ -15,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * A HttpRequestBuilder that uses the NetworkCorporaCache.
  */
-public class CachedHttpRequestBuilder implements HttpRequestBuilder {
+public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder {
 
     protected final NetworkCorporaCache networkCorporaCache;
 
@@ -64,7 +65,7 @@ public class CachedHttpRequestBuilder implements HttpRequestBuilder {
 
         checkNotNull( resource, "resource" );
 
-        return new CachedHttpRequestMethod( this, resource );
+        return new CachedHttpRequestMethod( this, HttpMethod.GET, resource );
 
     }
 
