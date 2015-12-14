@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network.builder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.Cookies;
 
@@ -33,6 +34,25 @@ public class DefaultHttpResponseMeta implements HttpResponseMeta {
         this.responseCode = responseCode;
         this.responseHeadersMap = responseHeadersMap;
         this.cookies = cookies;
+    }
+
+    public DefaultHttpResponseMeta( String resource, HttpResponseMeta template ) {
+
+        if ( template != null ) {
+            this.resource = template.getResource();
+            this.resourceFromRedirect = template.getResourceFromRedirect();
+            this.responseCode = template.getResponseCode();
+            this.responseHeadersMap = template.getResponseHeadersMap();
+            this.cookies = template.getCookies();
+
+        } else {
+            this.resource = resource;
+            this.resourceFromRedirect = resource;
+            this.responseCode = 200;
+            this.responseHeadersMap = ImmutableMap.copyOf( Maps.newHashMap() );
+            this.cookies = ImmutableMap.copyOf( Maps.newHashMap() );
+        }
+
     }
 
     @Override

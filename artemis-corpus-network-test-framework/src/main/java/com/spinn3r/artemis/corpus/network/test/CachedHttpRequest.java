@@ -158,7 +158,7 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public HttpContentResponseMeta getHttpContentResponseMeta() throws NetworkException {
-        return new DefaultHttpContentResponseMeta( httpResponseMeta, getContentWithEncoding() );
+        return new DefaultHttpContentResponseMeta( getResource(), httpResponseMeta, getContentWithEncoding() );
     }
 
 }

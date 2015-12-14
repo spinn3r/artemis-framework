@@ -11,15 +11,12 @@ public class DefaultHttpContentResponseMeta extends DefaultHttpResponseMeta impl
 
     private final String contentWithEncoding;
 
-    public DefaultHttpContentResponseMeta(HttpResponseMeta httpResponseMeta,
-                                          String contentWithEncoding) {
+    public DefaultHttpContentResponseMeta( String resource,
+                                           HttpResponseMeta httpResponseMeta,
+                                           String contentWithEncoding) {
 
-        this( httpResponseMeta.getResource(),
-              httpResponseMeta.getResourceFromRedirect(),
-              httpResponseMeta.getResponseCode(),
-              httpResponseMeta.getResponseHeadersMap(),
-              httpResponseMeta.getCookies(),
-              contentWithEncoding );
+        super( resource, httpResponseMeta );
+        this.contentWithEncoding = contentWithEncoding;
 
     }
 

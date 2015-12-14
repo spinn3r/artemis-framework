@@ -9,25 +9,25 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.time:artemis-time:5.1-LATEST-2" level="project" />
+    <orderEntry type="module" module-name="artemis-time" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.inject:guice:4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.init:artemis-init:5.1-LATEST-2" level="project" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.util:artemis-util:5.1-LATEST-2" level="project" />
+    <orderEntry type="module" module-name="artemis-init" />
+    <orderEntry type="module" module-name="artemis-util" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-all:1.3" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.java-diff-utils:diffutils:1.2.1" level="project" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.fluent:artemis-fluent:5.1-LATEST-2" level="project" />
+    <orderEntry type="module" module-name="artemis-fluent" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.json:artemis-json:5.1-LATEST-2" level="project" />
+    <orderEntry type="module" module-name="artemis-json" />
     <orderEntry type="library" name="Maven: com.jasonclawson:jackson-dataformat-hocon:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.4.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.4.1" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.4.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.typesafe:config:1.2.1" level="project" />
-    <orderEntry type="library" name="Maven: com.spinn3r.artemis.jackson:artemis-jackson:5.1-LATEST-2" level="project" />
+    <orderEntry type="module" module-name="artemis-jackson" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.msgpack:jackson-dataformat-msgpack:0.7.0-p9" level="project" />
