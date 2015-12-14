@@ -6,7 +6,9 @@ import com.google.common.collect.ImmutableMap;
  *
  */
 public interface HttpRequestMeta {
+
     String getResource();
 
-    ImmutableMap<String, String> getRequestHeaders();
+    ImmutableMap<String, String> getRequestHeadersMap();
+
 }

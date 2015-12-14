@@ -69,8 +69,9 @@ public class CachedHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Map<String, String> getRequestHeadersMap() {
-        return Maps.newHashMap();
+    public ImmutableMap<String, String> getRequestHeadersMap() {
+        // FIXME: this is wrong...
+        return ImmutableMap.copyOf( Maps.newHashMap() );
     }
 
     @Override
@@ -142,6 +143,12 @@ public class CachedHttpRequest implements HttpRequest {
     @Override
     public Class<?> getExecutor() {
         return cachedHttpRequestMethod.executor;
+    }
+
+    @Override
+    public HttpRequestMeta getHttpRequestMeta() {
+        // FIXME: this is wrong
+        return null;
     }
 
     @Override

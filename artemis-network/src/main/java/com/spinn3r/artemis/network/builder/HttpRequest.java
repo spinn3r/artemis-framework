@@ -66,7 +66,7 @@ public interface HttpRequest {
 
     Set<String> getRequestHeaderNames();
 
-    Map<String,String> getRequestHeadersMap();
+    ImmutableMap<String,String> getRequestHeadersMap();
 
     String getResponseHeader(String name);
 
@@ -96,6 +96,8 @@ public interface HttpRequest {
     void setCause( NetworkException ne );
 
     Class<?> getExecutor();
+
+    HttpRequestMeta getHttpRequestMeta();
 
     HttpResponseMeta getHttpResponseMeta() throws NetworkException;
 

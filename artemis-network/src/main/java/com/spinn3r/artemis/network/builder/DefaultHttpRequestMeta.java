@@ -9,11 +9,11 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final String resource;
 
-    private final ImmutableMap<String,String> requestHeaders;
+    private final ImmutableMap<String,String> requestHeadersMap;
 
-    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeaders) {
+    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap) {
         this.resource = resource;
-        this.requestHeaders = requestHeaders;
+        this.requestHeadersMap = requestHeadersMap;
     }
 
     @Override
@@ -21,16 +21,15 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
         return resource;
     }
 
-    @Override
-    public ImmutableMap<String, String> getRequestHeaders() {
-        return requestHeaders;
+    public ImmutableMap<String, String> getRequestHeadersMap() {
+        return requestHeadersMap;
     }
 
     @Override
     public String toString() {
         return "DefaultHttpRequestMeta{" +
                  "resource='" + resource + '\'' +
-                 ", requestHeaders=" + requestHeaders +
+                 ", requestHeadersMap=" + requestHeadersMap +
                  '}';
     }
 

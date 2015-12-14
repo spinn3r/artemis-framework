@@ -63,8 +63,6 @@ public interface HttpRequestMethod {
 
     String getResource();
 
-    HttpRequestMeta getHttpRequestMeta();
-
     boolean getFollowContentRedirects();
 
     Class<?> getExecutor();

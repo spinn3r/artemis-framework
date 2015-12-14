@@ -121,12 +121,6 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     }
 
     @Override
-    public HttpRequestMeta getHttpRequestMeta() {
-        //return new DefaultHttpRequestMeta( getResource(), getHttpRequestMeta() );
-        return null; // FIXME
-    }
-
-    @Override
     public boolean getFollowContentRedirects() {
         return true;
     }

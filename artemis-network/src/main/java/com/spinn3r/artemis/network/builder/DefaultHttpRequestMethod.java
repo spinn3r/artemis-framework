@@ -134,11 +134,6 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
     }
 
     @Override
-    public HttpRequestMeta getHttpRequestMeta() {
-        return new DefaultHttpRequestMeta( getResource(), requestHeaders );
-    }
-
-    @Override
     public HttpRequestMethod withProxy(Proxy proxy) {
         this.proxy = proxy;
         return this;

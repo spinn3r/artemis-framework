@@ -49,7 +49,7 @@ public class DefaultHttpRequest implements HttpRequest {
             if (defaultHttpRequestBuilder.requestListeners != null) {
 
                 for (RequestListener requestListener : defaultHttpRequestBuilder.requestListeners) {
-                    requestListener.onContentWithEncoding( method.getHttpRequestMeta(), contentWithEncoding );
+                    requestListener.onContentWithEncoding( getHttpRequestMeta(), contentWithEncoding );
                 }
 
             }
@@ -105,8 +105,8 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public Map<String,String> getRequestHeadersMap() {
-        return resourceRequest.getRequestHeadersMap();
+    public ImmutableMap<String,String> getRequestHeadersMap() {
+        return ImmutableMap.copyOf( resourceRequest.getRequestHeadersMap() );
     }
 
     @Override
@@ -184,6 +184,11 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public Class<?> getExecutor() {
         return method.executor;
+    }
+
+    @Override
+    public HttpRequestMeta getHttpRequestMeta() {
+        return new DefaultHttpRequestMeta( getResource(), getRequestHeadersMap() );
     }
 
     @Override
