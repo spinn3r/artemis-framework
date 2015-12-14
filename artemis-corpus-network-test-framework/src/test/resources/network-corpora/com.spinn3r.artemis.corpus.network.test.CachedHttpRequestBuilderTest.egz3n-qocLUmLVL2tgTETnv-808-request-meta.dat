@@ -1,0 +1,9 @@
+{
+  "resource" : "https://httpbin.org/get",
+  "requestHeadersMap" : {
+    "X-foo" : "bar"
+  },
+  "outputContent" : null,
+  "outputContentEncoding" : null,
+  "outputContentType" : null
+}

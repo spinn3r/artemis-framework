@@ -1,0 +1,12 @@
+{
+  "args": {}, 
+  "headers": {
+    "Accept": "text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2", 
+    "Accept-Encoding": "gzip", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36", 
+    "X-Foo": "bar"
+  }, 
+  "origin": "172.11.199.181", 
+  "url": "https://httpbin.org/get"
+}

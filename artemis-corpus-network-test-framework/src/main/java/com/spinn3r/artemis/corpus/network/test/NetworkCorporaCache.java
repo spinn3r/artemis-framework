@@ -13,6 +13,7 @@ import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
 import com.spinn3r.artemis.util.misc.Stack;
+import org.apache.http.HttpResponse;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -49,9 +50,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     @Override
     public String fetch( String link ) throws NetworkException {
-
         return fetch( link, EMPTY_MAP, EMPTY_MAP );
-
     }
 
     @Override
@@ -61,12 +60,14 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     @Override
     public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
+        return fetchCachedContent( link, requestHeaders, cookies ).getContent();
+    }
+
+    public CachedContent fetchCachedContent(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
 
         checkNotNull( link, "link" );
 
-        // FIXME: the request headers and post body ALSO need to be factored
-        // into computing the key.
-        String key = Base64.encode( SHA1.encode( link ) );
+        String key = computeKey( link, requestHeaders, cookies );
 
         // the key here is raw... so we can add a suffix to include the metadata
         // we want to include.. .
@@ -92,10 +93,13 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     // now write the extended metadata...
 
-                    cache.write( key + "-request-meta", JSON.toJSON(httpRequest.getHttpRequestMeta()) );
-                    cache.write( key + "-response-meta", JSON.toJSON(httpRequest.getHttpResponseMeta()) );
+                    HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
+                    HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
 
-                    return contentWithEncoding;
+                    cache.write( key + "-request-meta", JSON.toJSON( httpRequestMeta ) );
+                    cache.write( key + "-response-meta", JSON.toJSON( httpResponseMeta ) );
+
+                    return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
 
                 } else {
                     throw new IOException( String.format( "URL is not in the cache: %s (Use -D%s=true to force update)",
@@ -104,7 +108,11 @@ public class NetworkCorporaCache implements ContentFetcher {
 
             }
 
-            return cache.read( key );
+            String contentWithEncoding = cache.read( key );
+            HttpRequestMeta httpRequestMeta = requestMeta( key );
+            HttpResponseMeta httpResponseMeta = responseMeta( key );
+
+            return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
 
         } catch (IOException e) {
             throw new NetworkException( e );
@@ -112,45 +120,41 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     }
 
-    private String computeKey( String link, HttpRequest httpRequest ) {
+    private String computeKey( String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies ) {
 
         StringBuilder data = new StringBuilder();
 
         data.append( link );
 
-        if ( httpRequest != null ) {
+        if ( requestHeaders != null && requestHeaders.size() > 0 ) {
+            data.append( requestHeaders.toString() );
+        }
 
-            // the request headers and post body ALSO need to be factored
-            // into computing the key.
-
-            HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
-
-            data.append( httpRequestMeta.getRequestHeadersMap().toString() );
-
-            if ( httpRequestMeta.getOutputContent() != null ) {
-                data.append( httpRequestMeta.getOutputContent() );
-            }
-
+        if ( cookies != null && cookies.size() > 0 ) {
+            data.append( cookies.toString() );
         }
 
         return Base64.encode( SHA1.encode( data.toString() ) );
 
     }
 
+    private HttpResponseMeta responseMeta( String key ) throws NetworkException {
+        return parseMeta( key, "-response-meta", DefaultHttpResponseMeta.class );
+    }
 
-    /**
-     * Get just the metadata for a link (if it's present in the cache) or null
-     * if it's absent.
-     */
-    public HttpResponseMeta responseMeta( String link ) throws NetworkException {
+    private HttpRequestMeta requestMeta( String key ) throws NetworkException {
+        return parseMeta( key, "-request-meta", DefaultHttpRequestMeta.class );
+    }
+
+    public <T> T parseMeta( String key, String keySuffix, Class<T> clazz ) throws NetworkException {
 
         try {
 
-            String key = Base64.encode( SHA1.encode( link ) ) + "-response-meta";
+            key = key + keySuffix;
 
             if ( cache.contains( key ) ) {
                 String json = cache.read( key );
-                return JSON.fromJSON( DefaultHttpResponseMeta.class, json );
+                return JSON.fromJSON( clazz, json );
             }
 
             return null;

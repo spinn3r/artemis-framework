@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaAsserter;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.HttpRequest;
+import com.spinn3r.artemis.network.builder.HttpRequestMeta;
 import com.spinn3r.artemis.network.builder.HttpResponseMeta;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.util.text.MapFormatter;
@@ -39,10 +40,41 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
         String link = "http://cnn.com";
         HttpRequest httpRequest = cachedHttpRequestBuilder.get( link ).execute();
         String contentWithEncoding = httpRequest.getContentWithEncoding();
-        HttpResponseMeta httpResponseMeta = networkCorporaCache.responseMeta( link );
+        HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
 
         assertNotNull( httpRequest );
-        corporaAsserter.assertEquals( "responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
+        assertNotNull( httpResponseMeta );
+        assertNotNull( httpResponseMeta.getResponseHeadersMap() );
+        corporaAsserter.assertEquals( "testGet#responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
+
+    }
+
+    @Test
+    public void testGetWithCustomHeaders() throws Exception {
+
+        String link = "https://httpbin.org/get";
+        HttpRequest httpRequest =
+          cachedHttpRequestBuilder
+            .get( link )
+            .withRequestHeader( "X-foo", "bar" )
+            .execute();
+
+        String contentWithEncoding = httpRequest.getContentWithEncoding();
+        HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
+        HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
+
+        assertNotNull( httpRequest );
+
+        assertNotNull( httpResponseMeta );
+        assertNotNull( httpResponseMeta.getResponseHeadersMap() );
+
+        assertNotNull( httpRequestMeta );
+        assertNotNull( httpRequestMeta.getRequestHeadersMap() );
+
+        assertEquals( "bar", httpRequestMeta.getRequestHeadersMap().get( "X-foo" ) );
+
+        corporaAsserter.assertEquals( "testGetWithCustomHeaders#requestHeadersMap", MapFormatter.table( httpRequest.getRequestHeadersMap() ) );
+        corporaAsserter.assertEquals( "testGetWithCustomHeaders#responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
 
     }
 

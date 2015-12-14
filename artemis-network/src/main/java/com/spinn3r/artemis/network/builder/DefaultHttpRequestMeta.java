@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableMap;
 
 /**
@@ -25,7 +26,11 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
         this.outputContentType = null;
     }
 
-    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap, String outputContent, String outputContentEncoding, String outputContentType) {
+    public DefaultHttpRequestMeta( @JsonProperty("resource") String resource,
+                                   @JsonProperty("requestHeadersMap") ImmutableMap<String, String> requestHeadersMap,
+                                   @JsonProperty("outputContent") String outputContent,
+                                   @JsonProperty("outputContentEncoding") String outputContentEncoding,
+                                   @JsonProperty("outputContentType") String outputContentType) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
         this.outputContent = outputContent;

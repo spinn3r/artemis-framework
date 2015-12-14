@@ -107,10 +107,15 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
         // FIXME: we have support GET, POST and PUT here including the HTTP
         // headers/etc.
 
-        this.content = cachedHttpRequestBuilder.networkCorporaCache.fetch( resource, ImmutableMap.copyOf( requestHeaders ), ImmutableMap.copyOf( cookies ) );
-        HttpResponseMeta httpResponseMeta = cachedHttpRequestBuilder.networkCorporaCache.responseMeta( resource );
+        CachedContent cachedContent =
+          cachedHttpRequestBuilder.networkCorporaCache
+            .fetchCachedContent( resource,
+                                 ImmutableMap.copyOf( requestHeaders ),
+                                 ImmutableMap.copyOf( cookies ) );
 
-        return new CachedHttpRequest( this, httpResponseMeta );
+        this.content = cachedContent.getContent();
+
+        return new CachedHttpRequest( this, cachedContent.getHttpRequestMeta(),  cachedContent.getHttpResponseMeta() );
 
     }
 

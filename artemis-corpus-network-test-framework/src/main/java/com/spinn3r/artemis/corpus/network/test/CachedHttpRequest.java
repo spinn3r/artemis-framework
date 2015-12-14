@@ -11,7 +11,6 @@ import com.spinn3r.artemis.network.builder.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -21,10 +20,13 @@ public class CachedHttpRequest implements HttpRequest {
 
     private final CachedHttpRequestMethod cachedHttpRequestMethod;
 
+    private final HttpRequestMeta httpRequestMeta;
+
     private final HttpResponseMeta httpResponseMeta;
 
-    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod, HttpResponseMeta httpResponseMeta) {
+    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod, HttpRequestMeta httpRequestMeta, HttpResponseMeta httpResponseMeta) {
         this.cachedHttpRequestMethod = cachedHttpRequestMethod;
+        this.httpRequestMeta = httpRequestMeta;
         this.httpResponseMeta = httpResponseMeta;
     }
 
@@ -70,8 +72,7 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public ImmutableMap<String, String> getRequestHeadersMap() {
-        // FIXME: this is wrong...
-        return ImmutableMap.copyOf( Maps.newHashMap() );
+        return httpRequestMeta.getRequestHeadersMap();
     }
 
     @Override
@@ -147,8 +148,7 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        // FIXME: this is wrong
-        return null;
+        return httpRequestMeta;
     }
 
     @Override
