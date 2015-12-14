@@ -64,12 +64,6 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     }
 
     @Override
-    public HttpRequestMethod post(String resource, Map<String, ?> parameters) throws NetworkException {
-        String outputContent = PostEncoder.encode( parameters );
-        return post( resource, outputContent, "UTF-8", "application/x-www-form-urlencoded" );
-    }
-
-    @Override
     public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
         return configure( new DefaultHttpRequestMethod( this, resource, PUT_METHOD, outputContent, outputContentEncoding, outputContentType ) );
     }

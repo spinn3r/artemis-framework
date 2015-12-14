@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.proxies.Proxies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
@@ -12,6 +14,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -98,6 +101,12 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
     @Override
     public String getUserAgent() {
         return userAgent;
+    }
+
+    @Override
+    public HttpRequestMethod post(String resource, Map<String, ?> parameters) throws NetworkException {
+        String outputContent = PostEncoder.encode( parameters );
+        return post( resource, outputContent, "UTF-8", "application/x-www-form-urlencoded" );
     }
 
 }
