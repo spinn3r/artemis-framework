@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
@@ -8,6 +9,8 @@ import com.spinn3r.artemis.network.URLResourceRequest;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -62,18 +65,22 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     @Override
     public HttpRequestMethod withCookie(String name, String value) {
+        checkNotNull( name, "name" );
+        checkNotNull( value, "value" );
         this.cookies.put( name, value );
         return this;
     }
 
     @Override
     public HttpRequestMethod withCookies( Map<String,String> cookies ) {
+        checkNotNull( cookies );
         this.cookies.putAll( cookies );
         return this;
     }
 
     @Override
     public HttpRequestMethod withCookieIndex( Map<String,Cookie> cookies ) {
+        checkNotNull( cookies );
 
         Map<String,String> newCookies = Maps.newHashMap();
 
