@@ -112,6 +112,32 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     }
 
+    private String computeKey( String link, HttpRequest httpRequest ) {
+
+        StringBuilder data = new StringBuilder();
+
+        data.append( link );
+
+        if ( httpRequest != null ) {
+
+            // the request headers and post body ALSO need to be factored
+            // into computing the key.
+
+            HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
+
+            data.append( httpRequestMeta.getRequestHeadersMap().toString() );
+
+            if ( httpRequestMeta.getOutputContent() != null ) {
+                data.append( httpRequestMeta.getOutputContent() );
+            }
+
+        }
+
+        return Base64.encode( SHA1.encode( data.toString() ) );
+
+    }
+
+
     /**
      * Get just the metadata for a link (if it's present in the cache) or null
      * if it's absent.

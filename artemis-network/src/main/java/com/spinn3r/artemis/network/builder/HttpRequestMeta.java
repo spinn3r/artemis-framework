@@ -11,4 +11,10 @@ public interface HttpRequestMeta {
 
     ImmutableMap<String, String> getRequestHeadersMap();
 
+    String getOutputContent();
+
+    String getOutputContentEncoding();
+
+    String getOutputContentType();
+
 }

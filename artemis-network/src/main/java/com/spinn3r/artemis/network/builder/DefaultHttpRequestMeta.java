@@ -17,6 +17,14 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final String outputContentType;
 
+    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap) {
+        this.resource = resource;
+        this.requestHeadersMap = requestHeadersMap;
+        this.outputContent = null;
+        this.outputContentEncoding = null;
+        this.outputContentType = null;
+    }
+
     public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap, String outputContent, String outputContentEncoding, String outputContentType) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
