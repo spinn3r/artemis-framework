@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  *
  */
@@ -15,7 +17,11 @@ public class Cookie {
 
     private final boolean httpOnly;
 
-    public Cookie(String name, String value, String path, String domain, boolean httpOnly) {
+    public Cookie( @JsonProperty("name") String name,
+                   @JsonProperty("value") String value,
+                   @JsonProperty("path") String path,
+                   @JsonProperty("domain") String domain,
+                   @JsonProperty("httpOnly") boolean httpOnly) {
         this.name = name;
         this.value = value;
         this.path = path;
