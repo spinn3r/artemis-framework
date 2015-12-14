@@ -1,0 +1,7 @@
+{
+  "resource" : "http://www.cnn.com/",
+  "requestHeadersMap" : { },
+  "outputContent" : null,
+  "outputContentEncoding" : null,
+  "outputContentType" : null
+}

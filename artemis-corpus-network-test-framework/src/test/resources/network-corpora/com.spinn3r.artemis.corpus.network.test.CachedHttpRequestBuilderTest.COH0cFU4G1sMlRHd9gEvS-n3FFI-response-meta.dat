@@ -13,10 +13,10 @@
       "close"
     ],
     "Date" : [
-      "Sun, 13 Dec 2015 23:39:43 GMT"
+      "Mon, 14 Dec 2015 02:28:58 GMT"
     ],
     "X-Timer" : [
-      "S1450049983.834151,VS0,VE0"
+      "S1450060138.281409,VS0,VE0"
     ],
     "Via" : [
       "1.1 varnish",
@@ -32,7 +32,7 @@
       "max-age=60"
     ],
     "X-Served-By" : [
-      "cache-iad2141-IAD, cache-sjc3121-SJC"
+      "cache-iad2142-IAD, cache-sjc3133-SJC"
     ],
     "Content-Security-Policy" : [
       "default-src 'self' http://*.cnn.com:* https://*.cnn.com:* *.cnn.net:* *.turner.com:* *.ugdturner.com:* *.vgtf.net:*; script-src 'unsafe-inline' 'unsafe-eval' 'self' *; style-src 'unsafe-inline' 'self' *; frame-src 'self' *; object-src 'self' *; img-src 'self' * data:; media-src 'self' *; font-src 'self' *; connect-src 'self' *;"
@@ -44,19 +44,19 @@
       "Accept-Encoding"
     ],
     "Content-Length" : [
-      "20349"
+      "21185"
     ],
     "X-XSS-Protection" : [
       "1; mode=block"
     ],
     "X-Cache-Hits" : [
-      "1, 426"
+      "1, 154"
     ],
     "Age" : [
-      "282"
+      "120"
     ],
     "x-servedByHost" : [
-      "prd-10-60-168-49.nodes.56m.dmtio.net"
+      "prd-10-60-165-19.nodes.56m.dmtio.net"
     ],
     "Content-Type" : [
       "text/html; charset=utf-8"

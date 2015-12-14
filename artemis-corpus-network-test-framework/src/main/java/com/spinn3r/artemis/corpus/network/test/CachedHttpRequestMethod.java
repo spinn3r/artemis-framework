@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.corpus.network.test;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.NetworkException;
@@ -20,7 +21,7 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     protected String content;
 
-    protected Map<String,String> cookies = null;
+    protected Map<String,String> cookies = new LinkedHashMap<>();
 
     protected Map<String,String> requestHeaders = new LinkedHashMap<>();
 
@@ -103,7 +104,10 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     @Override
     public HttpRequest execute() throws NetworkException {
 
-        this.content = cachedHttpRequestBuilder.networkCorporaCache.fetch( resource, requestHeaders, cookies );
+        // FIXME: we have support GET, POST and PUT here including the HTTP
+        // headers/etc.
+
+        this.content = cachedHttpRequestBuilder.networkCorporaCache.fetch( resource, ImmutableMap.copyOf( requestHeaders ), ImmutableMap.copyOf( cookies ) );
         HttpResponseMeta httpResponseMeta = cachedHttpRequestBuilder.networkCorporaCache.responseMeta( resource );
 
         return new CachedHttpRequest( this, httpResponseMeta );

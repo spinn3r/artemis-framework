@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.corpus.network.test;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaCache;
@@ -24,7 +25,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class NetworkCorporaCache implements ContentFetcher {
 
-    private static final Map<String,String> EMPTY_MAP = new HashMap<>();
+    private static final ImmutableMap<String,String> EMPTY_MAP = ImmutableMap.copyOf( Maps.newHashMap() );
 
     private static final String UPDATE_MODE_PROPERTY_NAME = "network-corpora-cache.update_mode";
 
@@ -54,12 +55,12 @@ public class NetworkCorporaCache implements ContentFetcher {
     }
 
     @Override
-    public String fetch(String link, Map<String, String> requestHeaders) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders) throws NetworkException {
         return fetch( link, requestHeaders, EMPTY_MAP );
     }
 
     @Override
-    public String fetch(String link, Map<String, String> requestHeaders, Map<String, String> cookies) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
 
         checkNotNull( link, "link" );
 
@@ -91,9 +92,8 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     // now write the extended metadata...
 
-                    HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
-
-                    cache.write( key + "-response-meta", JSON.toJSON(httpResponseMeta) );
+                    cache.write( key + "-request-meta", JSON.toJSON(httpRequest.getHttpRequestMeta()) );
+                    cache.write( key + "-response-meta", JSON.toJSON(httpRequest.getHttpResponseMeta()) );
 
                     return contentWithEncoding;
 
@@ -142,7 +142,7 @@ public class NetworkCorporaCache implements ContentFetcher {
      * Get just the metadata for a link (if it's present in the cache) or null
      * if it's absent.
      */
-    public HttpResponseMeta responseMeta(String link ) throws NetworkException {
+    public HttpResponseMeta responseMeta( String link ) throws NetworkException {
 
         try {
 

@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.fetcher;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
@@ -24,7 +25,7 @@ public class DefaultContentFetcher implements ContentFetcher {
     }
 
     @Override
-    public String fetch(String link, Map<String, String> requestHeaders) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders) throws NetworkException {
         return httpRequestBuilder.get( link )
                  .withRequestHeaders( requestHeaders )
                  .execute()
@@ -32,7 +33,7 @@ public class DefaultContentFetcher implements ContentFetcher {
     }
 
     @Override
-    public String fetch(String link, Map<String, String> requestHeaders, Map<String, String> cookies) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
         return httpRequestBuilder.get( link )
                  .withRequestHeaders( requestHeaders )
                  .withCookies( cookies )
