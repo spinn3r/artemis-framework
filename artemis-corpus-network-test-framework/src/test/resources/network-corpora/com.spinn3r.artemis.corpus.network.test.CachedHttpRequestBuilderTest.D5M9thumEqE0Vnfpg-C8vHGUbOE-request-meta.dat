@@ -1,0 +1,12 @@
+{
+  "resource" : "https://httpbin.org/post",
+  "requestHeadersMap" : {
+    "X-foo" : "bar"
+  },
+  "cookies" : {
+    "cookie0" : "value0"
+  },
+  "outputContent" : "cat=dog&hello=world",
+  "outputContentEncoding" : "UTF-8",
+  "outputContentType" : "application/x-www-form-urlencoded"
+}

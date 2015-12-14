@@ -23,18 +23,18 @@ public class DefaultHttpRequest implements HttpRequest {
 
     private final DefaultHttpRequestBuilder defaultHttpRequestBuilder;
 
-    private final DefaultHttpRequestMethod method;
+    private final DefaultHttpRequestMethod defaultHttpRequestMethod;
 
     private final ResourceRequest resourceRequest;
 
     private String contentWithEncoding = null;
 
     public DefaultHttpRequest( DefaultHttpRequestBuilder defaultHttpRequestBuilder,
-                               DefaultHttpRequestMethod method,
+                               DefaultHttpRequestMethod defaultHttpRequestMethod,
                                ResourceRequest resourceRequest) {
 
         this.defaultHttpRequestBuilder = defaultHttpRequestBuilder;
-        this.method = method;
+        this.defaultHttpRequestMethod = defaultHttpRequestMethod;
         this.resourceRequest = resourceRequest;
 
     }
@@ -110,6 +110,11 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
+    public ImmutableMap<String, String> getCookies() {
+        return ImmutableMap.copyOf( defaultHttpRequestMethod.cookies );
+    }
+
+    @Override
     public String getResponseHeader(String name) {
         return resourceRequest.getResponseHeader( name );
     }
@@ -168,7 +173,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
     @Override
     public HttpRequestMethod getMethod() {
-        return method;
+        return defaultHttpRequestMethod;
     }
 
     @Override
@@ -183,12 +188,19 @@ public class DefaultHttpRequest implements HttpRequest {
 
     @Override
     public Class<?> getExecutor() {
-        return method.executor;
+        return defaultHttpRequestMethod.executor;
     }
 
     @Override
     public HttpRequestMeta getHttpRequestMeta() {
-        return new DefaultHttpRequestMeta( getResource(), getRequestHeadersMap(), method.outputContent, method.outputContentEncoding, method.outputContentType );
+
+        return new DefaultHttpRequestMeta( getResource(),
+                                           getRequestHeadersMap(),
+                                           ImmutableMap.copyOf( defaultHttpRequestMethod.cookies ),
+                                           defaultHttpRequestMethod.outputContent,
+                                           defaultHttpRequestMethod.outputContentEncoding,
+                                           defaultHttpRequestMethod.outputContentType );
+
     }
 
     @Override

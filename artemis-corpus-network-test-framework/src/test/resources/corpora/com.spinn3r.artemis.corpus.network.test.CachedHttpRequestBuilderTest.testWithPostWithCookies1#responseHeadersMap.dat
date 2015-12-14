@@ -1,0 +1,7 @@
+Server: [nginx]
+Access-Control-Allow-Origin: [*]
+Access-Control-Allow-Credentials: [true]
+Connection: [close]
+Content-Length: [702]
+Date: [Mon, 14 Dec 2015 20:32:57 GMT]
+Content-Type: [application/json]

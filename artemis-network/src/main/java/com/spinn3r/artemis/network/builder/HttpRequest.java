@@ -68,6 +68,8 @@ public interface HttpRequest {
 
     ImmutableMap<String,String> getRequestHeadersMap();
 
+    ImmutableMap<String,String> getCookies();
+
     String getResponseHeader(String name);
 
     Set<String> getResponseHeaderNames();

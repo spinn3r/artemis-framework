@@ -115,4 +115,44 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
 
     }
 
+    @Test
+    public void testWithPostWithCookies1() throws Exception {
+
+        Map<String,String> parameters = Maps.newHashMap();
+
+        parameters.put( "hello", "world" );
+        parameters.put( "cat", "dog" );
+
+        Map<String,String> cookies = Maps.newHashMap();
+        cookies.put( "cookie0", "value0" );
+
+        String link = "https://httpbin.org/post";
+        HttpRequest httpRequest =
+          cachedHttpRequestBuilder
+            .post( link, parameters )
+            .withRequestHeader( "X-foo", "bar" )
+            .withCookies( cookies )
+            .execute();
+
+        String contentWithEncoding = httpRequest.getContentWithEncoding();
+        HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
+        HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
+
+        assertNotNull( httpRequest );
+
+        assertNotNull( httpResponseMeta );
+        assertNotNull( httpResponseMeta.getResponseHeadersMap() );
+
+        assertNotNull( httpRequestMeta );
+        assertNotNull( httpRequestMeta.getRequestHeadersMap() );
+        assertNotNull( httpRequestMeta.getCookies() );
+
+        assertEquals( "bar", httpRequestMeta.getRequestHeadersMap().get( "X-foo" ) );
+        assertEquals( "{cookie0=value0}", httpRequestMeta.getCookies().toString() );
+
+        corporaAsserter.assertEquals( "testWithPostWithCookies1#requestHeadersMap", MapFormatter.table( httpRequest.getRequestHeadersMap() ) );
+        corporaAsserter.assertEquals( "testWithPostWithCookies1#responseHeadersMap", MapFormatter.table( httpResponseMeta.getResponseHeadersMap() ) );
+
+    }
+
 }

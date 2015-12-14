@@ -11,6 +11,8 @@ public interface HttpRequestMeta {
 
     ImmutableMap<String, String> getRequestHeadersMap();
 
+    ImmutableMap<String, String> getCookies();
+
     String getOutputContent();
 
     String getOutputContentEncoding();

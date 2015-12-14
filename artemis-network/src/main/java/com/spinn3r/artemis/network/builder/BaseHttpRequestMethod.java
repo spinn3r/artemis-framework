@@ -24,7 +24,7 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     protected long connectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
-    protected Map<String,String> cookies = new HashMap<>();
+    protected Map<String,String> cookies = new LinkedHashMap<>();
 
     protected Map<String,String> properties = new LinkedHashMap<>( 2 );
 
@@ -61,21 +61,27 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     }
 
     @Override
+    public HttpRequestMethod withCookie(String name, String value) {
+        this.cookies.put( name, value );
+        return this;
+    }
+
+    @Override
     public HttpRequestMethod withCookies( Map<String,String> cookies ) {
-        this.cookies = cookies;
+        this.cookies.putAll( cookies );
         return this;
     }
 
     @Override
     public HttpRequestMethod withCookieIndex( Map<String,Cookie> cookies ) {
 
-        Map<String,String> cookieMap = Maps.newHashMap();
+        Map<String,String> newCookies = Maps.newHashMap();
 
         for (Map.Entry<String, Cookie> entry : cookies.entrySet()) {
-            cookieMap.put( entry.getKey(), entry.getValue().getValue() );
+            newCookies.put( entry.getKey(), entry.getValue().getValue() );
         }
 
-        this.cookies = cookieMap;
+        this.cookies.putAll( newCookies );
         return this;
 
     }
@@ -130,6 +136,11 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     @Override
     public Class<?> getExecutor() {
         return executor;
+    }
+
+    @Override
+    public Map<String, String> getProperties() {
+        return properties;
     }
 
 }

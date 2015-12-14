@@ -3,7 +3,6 @@ package com.spinn3r.artemis.corpus.network.test;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.*;
@@ -24,10 +23,16 @@ public class CachedHttpRequest implements HttpRequest {
 
     private final HttpResponseMeta httpResponseMeta;
 
-    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod, HttpRequestMeta httpRequestMeta, HttpResponseMeta httpResponseMeta) {
+    private final ImmutableMap<String, String> cookies;
+
+    private final Class<?> executor;
+
+    public CachedHttpRequest(CachedHttpRequestMethod cachedHttpRequestMethod, HttpRequestMeta httpRequestMeta, HttpResponseMeta httpResponseMeta, ImmutableMap<String, String> cookies, Class<?> executor) {
         this.cachedHttpRequestMethod = cachedHttpRequestMethod;
         this.httpRequestMeta = httpRequestMeta;
         this.httpResponseMeta = httpResponseMeta;
+        this.cookies = cookies;
+        this.executor = executor;
     }
 
     @Override
@@ -73,6 +78,11 @@ public class CachedHttpRequest implements HttpRequest {
     @Override
     public ImmutableMap<String, String> getRequestHeadersMap() {
         return httpRequestMeta.getRequestHeadersMap();
+    }
+
+    @Override
+    public ImmutableMap<String, String> getCookies() {
+        return cookies;
     }
 
     @Override
@@ -143,7 +153,7 @@ public class CachedHttpRequest implements HttpRequest {
 
     @Override
     public Class<?> getExecutor() {
-        return cachedHttpRequestMethod.executor;
+        return executor;
     }
 
     @Override

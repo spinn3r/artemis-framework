@@ -124,11 +124,6 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
     }
 
     @Override
-    public Map<String, String> getProperties() {
-        return properties;
-    }
-
-    @Override
     public String getResource() {
         return resource;
     }
