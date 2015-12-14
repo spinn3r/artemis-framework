@@ -60,17 +60,20 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     @Override
     public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
-        return fetchCachedContent( HttpMethod.GET, link, requestHeaders, cookies ).getContent();
+        return fetchCachedContent( HttpMethod.GET, link, requestHeaders, cookies, null, null, null ).getContent();
     }
 
     public CachedContent fetchCachedContent( HttpMethod httpMethod,
                                              String link,
                                              ImmutableMap<String, String> requestHeaders,
-                                             ImmutableMap<String, String> cookies ) throws NetworkException {
+                                             ImmutableMap<String, String> cookies,
+                                             String outputContent,
+                                             String outputContentEncoding,
+                                             String outputContentType ) throws NetworkException {
 
         checkNotNull( link, "link" );
 
-        String key = computeKey( link, requestHeaders, cookies );
+        String key = computeKey( httpMethod, link, requestHeaders, cookies, outputContent, outputContentEncoding, outputContentType );
 
         // the key here is raw... so we can add a suffix to include the metadata
         // we want to include.. .
@@ -96,8 +99,14 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                             break;
 
-//                        case POST:
-//                            break;
+                        case POST:
+                            httpRequest =
+                              directHttpRequestBuilder
+                                .post( link, outputContent, outputContentEncoding, outputContentType )
+                                .withRequestHeaders( requestHeaders )
+                                .withCookies( cookies )
+                                .execute();
+                            break;
 
                         default:
                             throw new NetworkException( "HTTP method not yet supported: " + httpMethod );
@@ -136,9 +145,19 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     }
 
-    private String computeKey( String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies ) {
+    private String computeKey( HttpMethod httpMethod,
+                               String link,
+                               ImmutableMap<String, String> requestHeaders,
+                               ImmutableMap<String, String> cookies,
+                               String outputContent,
+                               String outputContentEncoding,
+                               String outputContentType ) {
 
         StringBuilder data = new StringBuilder();
+
+        if ( ! httpMethod.equals( HttpMethod.GET ) ) {
+            data.append( httpMethod.toString() );
+        }
 
         data.append( link );
 
@@ -148,6 +167,12 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         if ( cookies != null && cookies.size() > 0 ) {
             data.append( cookies.toString() );
+        }
+
+        if ( outputContent != null ) {
+            data.append( outputContent );
+            data.append( outputContentEncoding );
+            data.append( outputContentType );
         }
 
         return Base64.encode( SHA1.encode( data.toString() ) );

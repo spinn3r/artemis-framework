@@ -21,6 +21,12 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
 
     protected final String resource;
 
+    protected String outputContent;
+
+    protected String outputContentEncoding;
+
+    protected String outputContentType;
+
     protected String content;
 
     protected Map<String,String> cookies = new LinkedHashMap<>();
@@ -33,6 +39,15 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
         this.cachedHttpRequestBuilder = cachedHttpRequestBuilder;
         this.httpMethod = httpMethod;
         this.resource = resource;
+    }
+
+    public CachedHttpRequestMethod(CachedHttpRequestBuilder cachedHttpRequestBuilder, HttpMethod httpMethod, String resource, String outputContent, String outputContentEncoding, String outputContentType) {
+        this.cachedHttpRequestBuilder = cachedHttpRequestBuilder;
+        this.httpMethod = httpMethod;
+        this.resource = resource;
+        this.outputContent = outputContent;
+        this.outputContentEncoding = outputContentEncoding;
+        this.outputContentType = outputContentType;
     }
 
     @Override
@@ -107,15 +122,15 @@ public class CachedHttpRequestMethod implements HttpRequestMethod {
     @Override
     public HttpRequest execute() throws NetworkException {
 
-        // FIXME: we have support GET, POST and PUT here including the HTTP
-        // headers/etc and send the type of post to
-
         CachedContent cachedContent =
           cachedHttpRequestBuilder.networkCorporaCache
             .fetchCachedContent( httpMethod,
                                  resource,
                                  ImmutableMap.copyOf( requestHeaders ),
-                                 ImmutableMap.copyOf( cookies ) );
+                                 ImmutableMap.copyOf( cookies ),
+                                 outputContent,
+                                 outputContentEncoding,
+                                 outputContentType);
 
         this.content = cachedContent.getContent();
 

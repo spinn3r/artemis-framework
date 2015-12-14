@@ -62,26 +62,21 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
 
     @Override
     public HttpRequestMethod get(String resource) throws NetworkException {
-
         checkNotNull( resource, "resource" );
-
         return new CachedHttpRequestMethod( this, HttpMethod.GET, resource );
 
     }
 
     @Override
     public HttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
-        throw new RuntimeException( "not implemented" );
-    }
-
-    @Override
-    public HttpRequestMethod post(String resource, Map<String, ?> parameters) throws NetworkException {
-        throw new RuntimeException( "not implemented" );
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.POST, resource, outputContent, outputContentEncoding, outputContentType );
     }
 
     @Override
     public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
-        throw new RuntimeException( "not implemented" );
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.PUT, resource, outputContent, outputContentEncoding, outputContentType );
     }
 
     @Override
