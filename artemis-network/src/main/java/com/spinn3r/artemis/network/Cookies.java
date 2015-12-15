@@ -23,7 +23,7 @@ public class Cookies {
 
         List<String> setCookies = responseHeadersMap.get( "Set-Cookie" );
 
-        if ( setCookies == null ) {
+        if ( setCookies == null || setCookies.size() == 0 ) {
             return ImmutableMap.copyOf( cookies );
         }
 
@@ -36,6 +36,7 @@ public class Cookies {
 
 
             cookies.put( cookie.getName(), cookie );
+
         }
 
         return ImmutableMap.copyOf( cookies );

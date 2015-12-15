@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.network;
 
-import com.spinn3r.artemis.fluent.Tuple;
-
 /**
  *
  */
@@ -16,6 +14,10 @@ public class CookieDecoder {
         }
 
         NVP main = nameValuePair( parts[0] );
+
+        if ( main == null ) {
+            return null;
+        }
 
         String name = main.getName();
         String value = main.getValue();
