@@ -218,9 +218,15 @@ public class CollectionUtils {
      *
      */
     public static <T extends Comparable<T>> List<T> sort( Collection<T> input ) {
-        List<T> copy = Lists.newArrayList( input );
-        Collections.sort(copy);
-        return copy;
+        List<T> result = Lists.newArrayList( input );
+        Collections.sort(result);
+        return result;
+    }
+
+    public static <T> List<T> sort( Collection<T> input, Comparator<T> comparator ) {
+        List<T> result = Lists.newArrayList( input );
+        Collections.sort(result, comparator);
+        return result;
     }
 
     /**
