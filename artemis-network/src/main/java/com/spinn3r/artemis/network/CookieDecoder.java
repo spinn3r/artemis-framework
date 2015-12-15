@@ -24,6 +24,7 @@ public class CookieDecoder {
         String path = null;
         String domain = null;
         boolean httpOnly = false;
+        boolean secure = false;
 
         for (int i = 1; i < parts.length; i++) {
             String part = parts[i];
@@ -33,11 +34,19 @@ public class CookieDecoder {
                 continue;
             }
 
+            if ( "secure".equals( part ) ) {
+                secure = true;
+                continue;
+            }
+
             if ( part.contains( "=" ) ) {
 
                 NVP nvp = nameValuePair( part );
 
-                switch ( nvp.getName() ) {
+                if ( nvp == null )
+                    continue;
+
+                switch ( nvp.getName().toLowerCase() ) {
 
                     case "path":
                         path = nvp.getValue();

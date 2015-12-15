@@ -16,4 +16,14 @@ public class CookieDecoderTest {
         assertEquals( "Cookie{name='YSC', value='fNc9hMYIAEo', path='/', domain='.youtube.com', httpOnly=true}", cookie.toString() );
 
     }
+
+    @Test
+    public void testDecode1() throws Exception {
+
+        Cookie cookie = CookieDecoder.decode( "NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN_NAME; secure" );
+        assertNotNull( cookie );
+        assertEquals( "Cookie{name='NAME', value='VALUE', path='PATH', domain='DOMAIN_NAME', httpOnly=false}", cookie.toString() );
+
+    }
+
 }

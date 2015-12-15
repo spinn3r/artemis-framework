@@ -18,10 +18,12 @@ public class Cookies {
     }
 
     public static ImmutableMap<String,Cookie> fromResponseHeadersMap( ImmutableMap<String,ImmutableList<String>> responseHeadersMap ) {
+        return fromSetCookiesList( responseHeadersMap.get( "Set-Cookie" ) );
+    }
+
+    public static ImmutableMap<String,Cookie> fromSetCookiesList( List<String> setCookies ) {
 
         Map<String,Cookie> cookies = Maps.newHashMap();
-
-        List<String> setCookies = responseHeadersMap.get( "Set-Cookie" );
 
         if ( setCookies == null || setCookies.size() == 0 ) {
             return ImmutableMap.copyOf( cookies );

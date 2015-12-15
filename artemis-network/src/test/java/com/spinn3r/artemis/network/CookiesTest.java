@@ -1,0 +1,38 @@
+package com.spinn3r.artemis.network;
+
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import org.junit.Test;
+
+import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.*;
+
+public class CookiesTest {
+
+    @Test
+    public void testInstagram1() throws Exception {
+
+        // test parsing cookies sent by instagram.
+
+        List<String> setCookies =
+          Lists.newArrayList(
+            "csrftoken=201a762b9af5f6d96f08edbf7342263a; expires=Tue, 13-Dec-2016 19:14:01 GMT; Max-Age=31449600; Path=/",
+            "target_sig=; expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+            "target=; expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+            "mid=VnBmeQAEAAHoKkHWDef1Ex8tvA2w; expires=Mon, 10-Dec-2035 19:14:01 GMT; Max-Age=630720000; Path=/" );
+
+        ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList( setCookies );
+
+        // FIXME: this is broken because target_sig and target_ don't have values.
+        // we don't include Max-Age .. or Expires either.
+
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "csrftoken" ).toString() );
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "target_sig" ).toString() );
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "target" ).toString() );
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "mid" ).toString() );
+
+    }
+
+}
