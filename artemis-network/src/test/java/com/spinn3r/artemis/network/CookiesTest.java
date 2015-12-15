@@ -25,13 +25,10 @@ public class CookiesTest {
 
         ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList( setCookies );
 
-        // FIXME: this is broken because target_sig and target_ don't have values.
-        // we don't include Max-Age .. or Expires either.
-
         assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "csrftoken" ).toString() );
-        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "target_sig" ).toString() );
-        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "target" ).toString() );
-        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "mid" ).toString() );
+        assertEquals( "Cookie{name='target_sig', value='', path='/', domain='null', httpOnly=false}", cookies.get( "target_sig" ).toString() );
+        assertEquals( "Cookie{name='target', value='', path='/', domain='null', httpOnly=false}", cookies.get( "target" ).toString() );
+        assertEquals( "Cookie{name='mid', value='VnBmeQAEAAHoKkHWDef1Ex8tvA2w', path='/', domain='null', httpOnly=false}", cookies.get( "mid" ).toString() );
 
     }
 

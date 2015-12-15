@@ -1,9 +1,14 @@
 package com.spinn3r.artemis.network;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  *
  */
 public class CookieDecoder {
+
+    private static final Pattern NAME_VALUE_PATTERN = Pattern.compile( "([^=]+)=([^=]*)" );
 
     public static Cookie decode( String data ) {
 
@@ -69,15 +74,15 @@ public class CookieDecoder {
 
     }
 
-    private static NVP nameValuePair( String value ) {
+    protected static NVP nameValuePair( String value ) {
 
-        String[] split = value.split( "=" );
+        Matcher matcher = NAME_VALUE_PATTERN.matcher( value );
 
-        if ( split.length != 2 ) {
+        if ( matcher.find() ) {
+            return new NVP( matcher.group(1), matcher.group(2) );
+        } else {
             return null;
         }
-
-        return new NVP( split[0], split[1] );
 
     }
 
@@ -100,6 +105,13 @@ public class CookieDecoder {
             return value;
         }
 
+        @Override
+        public String toString() {
+            return "NVP{" +
+                     "name='" + name + '\'' +
+                     ", value='" + value + '\'' +
+                     '}';
+        }
     }
 
 }

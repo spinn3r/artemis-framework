@@ -26,4 +26,13 @@ public class CookieDecoderTest {
 
     }
 
+    @Test
+    public void testParseNameValuePairWithEmptyValue() throws Exception {
+
+        CookieDecoder.NVP nameValuePair = CookieDecoder.nameValuePair( "foo=" );
+
+        assertNotNull( nameValuePair );
+        assertEquals( "NVP{name='foo', value=''}", nameValuePair.toString() );
+
+    }
 }
