@@ -48,10 +48,6 @@ public class NetworkException extends IOException {
     }
 
     /**
-     *
-     * Create a new <code>NetworkException</code> instance.
-     *
-     *
      */
     public NetworkException( String message,
                              Exception e,

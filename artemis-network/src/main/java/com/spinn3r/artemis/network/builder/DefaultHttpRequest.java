@@ -39,6 +39,13 @@ public class DefaultHttpRequest implements HttpRequest {
 
     }
 
+    /**
+     * Get the content of this URL with charset encoding applied.
+     *
+     * Note that this method is lazy and only decodes the content on the first
+     * call and then returns the previously encoded content with each additional
+     * call.
+     */
     @Override
     public String getContentWithEncoding() throws NetworkException {
 

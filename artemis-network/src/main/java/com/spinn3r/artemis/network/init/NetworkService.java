@@ -12,6 +12,8 @@ import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRefe
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
+import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
+import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 import com.spinn3r.artemis.util.daemon.WaitForPort;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
@@ -57,6 +59,7 @@ public class NetworkService extends BaseService {
         advertise( DirectHttpRequestBuilder.class, DefaultHttpRequestBuilder.class );
         advertise( ContentFetcher.class, DefaultContentFetcher.class );
         advertise( RequestListeners.class, new RequestListeners() );
+        advertise( HttpResponseValidators.class, new DefaultHttpResponseValidators() );
         provider( Proxy.class, proxyAtomicReferenceProvider );
         provider( ProxyRegistry.class, proxyRegistryAtomicReferenceProvider );
         provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
