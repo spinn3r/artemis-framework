@@ -6,4 +6,7 @@ package com.spinn3r.artemis.network.builder;
  * which are behind firewalls.
  */
 public interface DirectHttpRequestBuilder extends HttpRequestBuilder {
+
+
+
 }
