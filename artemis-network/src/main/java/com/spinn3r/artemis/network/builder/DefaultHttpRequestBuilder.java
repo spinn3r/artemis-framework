@@ -2,13 +2,11 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
-
-import java.util.Map;
+import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 
 /**
  * Builder interface preferred over using the ResourceRequestFactory.
@@ -23,6 +21,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     protected RequestListeners requestListeners;
 
+    protected final HttpResponseValidators httpResponseValidators;
+
     private int defaultMaxContentLength = URLResourceRequest.MAX_CONTENT_LENGTH;
 
     private long defaultReadTimeout = ResourceRequestFactory.DEFAULT_READ_TIMEOUT;
@@ -30,7 +30,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    public DefaultHttpRequestBuilder() {
+    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators) {
+        this.httpResponseValidators = httpResponseValidators;
     }
 
     public HttpRequestBuilder withRequestListeners( RequestListeners requestListeners ) {
