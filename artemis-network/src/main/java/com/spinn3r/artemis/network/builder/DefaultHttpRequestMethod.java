@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
@@ -9,6 +10,7 @@ import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.init.RequestSettings;
+import com.spinn3r.artemis.network.validators.HttpResponseValidator;
 
 import java.net.Proxy;
 import java.util.Map;
@@ -119,7 +121,21 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
             resourceRequest.setOutputContent( outputContent, outputContentEncoding, outputContentType );
         }
 
-        return new DefaultHttpRequest( defaultHttpRequestBuilder, this, resourceRequest );
+        DefaultHttpRequest httpRequest = new DefaultHttpRequest( defaultHttpRequestBuilder, this, resourceRequest );
+
+        validate( httpRequest );
+
+        return httpRequest;
+
+    }
+
+    private void validate( HttpRequest httpRequest ) throws NetworkException {
+
+        ImmutableList<HttpResponseValidator> responseValidators = defaultHttpRequestBuilder.httpResponseValidators.getResponseValidators();
+
+        for (HttpResponseValidator responseValidator : responseValidators) {
+            responseValidator.validate( httpRequest );
+        }
 
     }
 
