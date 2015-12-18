@@ -195,4 +195,12 @@ public class NetworkException extends IOException {
 
     }
 
+    public static class RequestBlockedDueToCaptcha extends NetworkException {
+
+        public RequestBlockedDueToCaptcha(String link ) {
+            super( "Request blocked due to captcha: " + link, 599 );
+        }
+
+    }
+
 }
