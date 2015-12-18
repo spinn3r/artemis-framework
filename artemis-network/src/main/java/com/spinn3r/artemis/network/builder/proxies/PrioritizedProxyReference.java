@@ -63,7 +63,6 @@ public class PrioritizedProxyReference extends ProxyReference {
                  ", priority=" + priority +
                  ", regex='" + regex + '\'' +
                  ", proxy=" + proxy +
-                 ", pattern=" + pattern +
                  "} " + super.toString();
     }
 

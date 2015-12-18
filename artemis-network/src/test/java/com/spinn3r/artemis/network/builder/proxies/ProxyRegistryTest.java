@@ -29,7 +29,7 @@ public class ProxyRegistryTest {
 
         ProxyRegistry proxyRegistry = new ProxyRegistry( prioritizedProxyReferences );
 
-        assertEquals( "[ProxyReference{name='beta', priority=4, regex='https?://cappa\\.com', proxy=null}, ProxyReference{name='beta', priority=3, regex='https?://delta\\.com', proxy=null}, ProxyReference{name='beta', priority=2, regex='https?://beta\\.com', proxy=null}, ProxyReference{name='default', priority=1, regex='.*', proxy=null}]",
+        assertEquals( "[PrioritizedProxyReference{name='beta', priority=4, regex='https?://cappa\\.com', proxy=null} ProxyReference{host='localhost', port=8080, proxy=null}, PrioritizedProxyReference{name='beta', priority=3, regex='https?://delta\\.com', proxy=null} ProxyReference{host='localhost', port=8080, proxy=null}, PrioritizedProxyReference{name='beta', priority=2, regex='https?://beta\\.com', proxy=null} ProxyReference{host='localhost', port=8080, proxy=null}, PrioritizedProxyReference{name='default', priority=1, regex='.*', proxy=null} ProxyReference{host='localhost', port=8080, proxy=null}]",
                       proxyRegistry.getPrioritizedProxyReferences().toString() );
 
         assertEquals( "default", proxyRegistry.find( "http://cnn.com" ).getName() );
