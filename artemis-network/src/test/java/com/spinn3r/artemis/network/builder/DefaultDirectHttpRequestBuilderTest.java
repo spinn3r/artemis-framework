@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.BaseLauncherTest;
+import com.spinn3r.artemis.init.config.TestResourcesConfigLoader;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,10 @@ public class DefaultDirectHttpRequestBuilderTest extends BaseLauncherTest {
     @Override
     @Before
     public void setUp() throws Exception {
-        super.setUp( DirectNetworkService.class );
+
+        TestResourcesConfigLoader configLoader = new TestResourcesConfigLoader( "src/test/resources/profiles/noproxy" );
+
+        super.setUp( configLoader, DirectNetworkService.class );
     }
 
     @Test
@@ -28,12 +32,6 @@ public class DefaultDirectHttpRequestBuilderTest extends BaseLauncherTest {
         httpRequestMethod.execute();
 
         assertFalse( httpRequestMethod.getFollowContentRedirects() );
-
-//        if ( getResource().matches( "https?://twitter\\.com(/.*)?" ) ) {
-//            delegate.withFollowContentRedirects( false );
-//
-//
-//        }
 
     }
 
