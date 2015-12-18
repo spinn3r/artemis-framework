@@ -55,6 +55,7 @@
         <module>artemis-metrics-test-framework</module>
         <module>artemis-corpus-test-framework</module>
         <module>artemis-corpus-network-test-framework</module>
+        <module>artemis-ahocorasick</module>
     </modules>
 
     <description>
