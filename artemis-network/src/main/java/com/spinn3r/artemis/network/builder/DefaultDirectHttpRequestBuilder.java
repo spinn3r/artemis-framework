@@ -11,7 +11,7 @@ import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 public class DefaultDirectHttpRequestBuilder extends DefaultHttpRequestBuilder implements DirectHttpRequestBuilder {
 
     @Inject
-    public DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators) {
+    DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators) {
         super( httpResponseValidators );
 
         RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
