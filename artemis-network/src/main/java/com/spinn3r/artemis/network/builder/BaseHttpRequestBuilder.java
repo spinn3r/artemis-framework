@@ -4,19 +4,16 @@ import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.Proxies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.log5j.Logger;
 
-import java.net.InetSocketAddress;
 import java.net.Proxy;
-import java.net.SocketAddress;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -54,12 +51,13 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
     }
 
     @Override
-    public HttpRequestBuilder withProxy(Proxy proxy) {
+    public HttpRequestBuilder withProxy(ProxyReference proxyReference) {
 
-        ProxyReference proxyReference = new ProxyReference( "default", 1, ".*", proxy );
+        PrioritizedProxyReference prioritizedProxyReference
+          = new PrioritizedProxyReference( "default", 1, ".*", proxyReference.getHost(), proxyReference.getPort(), proxyReference.getProxy());
 
-        List<ProxyReference> proxyReferences = Lists.newArrayList( proxyReference );
-        ProxyRegistry proxyRegistry = new ProxyRegistry( proxyReferences );
+        List<PrioritizedProxyReference> prioritizedProxyReferences = Lists.newArrayList( prioritizedProxyReference );
+        ProxyRegistry proxyRegistry = new ProxyRegistry( prioritizedProxyReferences );
         withProxyRegistry( proxyRegistry );
 
         return this;
@@ -71,11 +69,11 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
 
         checkNotNull( type );
 
-        Proxy proxy = Proxies.create(type, host, port);
+        ProxyReference proxyReference = Proxies.create(type, host, port);
 
         log.info( "Now using proxy type %s on %s:%s", type, host, port );
 
-        return withProxy( proxy );
+        return withProxy( proxyReference );
 
     }
 

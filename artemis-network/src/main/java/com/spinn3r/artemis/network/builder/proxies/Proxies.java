@@ -15,7 +15,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class Proxies {
 
-    public static Proxy create( String type, String host, int port ) {
+    public static ProxyReference create( String type, String host, int port ) {
 
         checkNotNull( type );
 
@@ -34,11 +34,12 @@ public class Proxies {
 
         SocketAddress addr = new InetSocketAddress( host, port );
 
-        return new Proxy( proxyType, addr );
+        Proxy proxy = new Proxy( proxyType, addr );
+        return new ProxyReference( host, port, proxy );
 
     }
 
-    public static Proxy create( String proxy ) {
+    public static ProxyReference create( String proxy ) {
 
         Pattern pattern = Pattern.compile( "(http)://([^:]+):([0-9]+)" );
 

@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network.builder;
 import com.google.common.annotations.VisibleForTesting;
 import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 
 import java.net.Proxy;
 import java.util.Map;
@@ -60,7 +61,7 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withFollowContentRedirects( boolean followContentRedirects );
 
-    HttpRequestMethod withProxy(Proxy proxy);
+    HttpRequestMethod withProxy(ProxyReference proxyReference);
 
     /**
      * The class executing this HTTP request.

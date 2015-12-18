@@ -9,58 +9,35 @@ import java.util.regex.Pattern;
  */
 public class ProxyReference {
 
-    private String name;
+    private final String host;
 
-    private int priority;
+    private final int port;
 
-    private String regex;
+    private final Proxy proxy;
 
-    private Proxy proxy;
-
-    private Pattern pattern;
-
-    public ProxyReference(String name, int priority, String regex, Proxy proxy) {
-        this.name = name;
-        this.priority = priority;
-        this.regex = regex;
+    public ProxyReference(String host, int port, Proxy proxy) {
+        this.host = host;
+        this.port = port;
         this.proxy = proxy;
-        this.pattern = Pattern.compile( regex );
     }
 
-    public String getName() {
-        return name;
+    public String getHost() {
+        return host;
     }
 
-    public int getPriority() {
-        return priority;
-    }
-
-    public String getRegex() {
-        return regex;
+    public int getPort() {
+        return port;
     }
 
     public Proxy getProxy() {
         return proxy;
     }
 
-    /**
-     * Return true if this proxy server supports the given link.
-     * @param link
-     * @return
-     */
-    public boolean supports( String link ) {
-
-        Matcher matcher = pattern.matcher( link );
-        return matcher.find();
-
-    }
-
     @Override
     public String toString() {
         return "ProxyReference{" +
-                 "name='" + name + '\'' +
-                 ", priority=" + priority +
-                 ", regex='" + regex + '\'' +
+                 "host='" + host + '\'' +
+                 ", port=" + port +
                  ", proxy=" + proxy +
                  '}';
     }

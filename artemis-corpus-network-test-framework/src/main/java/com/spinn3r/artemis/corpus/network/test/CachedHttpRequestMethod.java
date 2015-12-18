@@ -5,6 +5,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.BaseHttpRequestMethod;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 
 import java.net.Proxy;
 
@@ -71,7 +72,7 @@ public class CachedHttpRequestMethod extends BaseHttpRequestMethod implements Ht
     }
 
     @Override
-    public HttpRequestMethod withProxy(Proxy proxy) {
+    public HttpRequestMethod withProxy(ProxyReference proxyReference) {
         return this;
     }
 

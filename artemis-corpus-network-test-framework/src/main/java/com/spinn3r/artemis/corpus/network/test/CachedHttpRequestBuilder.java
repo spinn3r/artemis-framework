@@ -5,6 +5,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.BaseHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 
@@ -41,7 +42,7 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
     }
 
     @Override
-    public HttpRequestBuilder withProxy(Proxy proxy) {
+    public HttpRequestBuilder withProxy(ProxyReference proxyReference) {
         return this;
     }
 

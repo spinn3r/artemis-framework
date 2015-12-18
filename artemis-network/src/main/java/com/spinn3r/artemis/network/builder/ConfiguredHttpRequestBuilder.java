@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network.builder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.init.NetworkConfig;
@@ -17,31 +18,31 @@ import java.net.Proxy;
 public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
 
     @Inject
-    ConfiguredHttpRequestBuilder(NetworkConfig config,
-                                 Provider<Proxy> proxyProvider,
+    ConfiguredHttpRequestBuilder(NetworkConfig networkConfig,
+                                 Provider<ProxyReference> proxyReferenceProvider,
                                  Provider<ProxyRegistry> proxyRegistryProvider,
                                  Provider<RequestSettingsRegistry> requestSettingsRegistryProvider,
                                  RequestListeners requestListeners,
                                  HttpResponseValidators httpResponseValidators ) {
 
         super( httpResponseValidators );
-        if ( config.getUserAgent() == null ) {
-            throw new RuntimeException( "No user agent: " + config );
+        if ( networkConfig.getUserAgent() == null ) {
+            throw new RuntimeException( "No user agent: " + networkConfig );
         }
 
-        if ( config.getDefaultProxy() != null && proxyProvider.get() == null ) {
-            throw new RuntimeException( "Proxy configured but no proxy object: " + config );
+        if ( networkConfig.getDefaultProxy() != null && proxyReferenceProvider.get() == null ) {
+            throw new RuntimeException( "Default proxy configured but no proxy definitions found: " + networkConfig );
         }
 
-        withRequireProxy( config.getRequireProxy() );
-        withUserAgent( config.getUserAgent() );
-        withProxy( proxyProvider.get() );
+        withRequireProxy( networkConfig.getRequireProxy() );
+        withUserAgent( networkConfig.getUserAgent() );
+        withProxy( proxyReferenceProvider.get() );
         withProxyRegistry( proxyRegistryProvider.get() );
         withRequestSettingsRegistry( requestSettingsRegistryProvider.get() );
         withRequestListeners( requestListeners );
-        withDefaultMaxContentLength( config.getDefaultMaxContentLength() );
-        withDefaultConnectTimeout( config.getDefaultConnectTimeout() );
-        withDefaultReadTimeout( config.getDefaultReadTimeout() );
+        withDefaultMaxContentLength( networkConfig.getDefaultMaxContentLength() );
+        withDefaultConnectTimeout( networkConfig.getDefaultConnectTimeout() );
+        withDefaultReadTimeout( networkConfig.getDefaultReadTimeout() );
 
     }
 

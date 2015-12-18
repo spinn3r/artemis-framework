@@ -6,29 +6,31 @@ import org.junit.Test;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class ProxyRegistryTest {
 
     @Test
     public void testAdd() throws Exception {
 
-        ProxyReference proxyReference0 = new ProxyReference( "default", 1, ".*", null );
-        ProxyReference proxyReference1 = new ProxyReference( "beta", 2, "https?://beta\\.com", null );
-        ProxyReference proxyReference2 = new ProxyReference( "beta", 4, "https?://cappa\\.com", null );
-        ProxyReference proxyReference3 = new ProxyReference( "beta", 3, "https?://delta\\.com", null );
+        String host = "localhost";
+        int port = 8080;
 
-        List<ProxyReference> proxyReferenceList = Lists.newArrayList();
+        PrioritizedProxyReference proxyReference0 = new PrioritizedProxyReference( "default", 1, ".*", host, port, null );
+        PrioritizedProxyReference proxyReference1 = new PrioritizedProxyReference( "beta", 2, "https?://beta\\.com", host, port, null );
+        PrioritizedProxyReference proxyReference2 = new PrioritizedProxyReference( "beta", 4, "https?://cappa\\.com", host, port, null );
+        PrioritizedProxyReference proxyReference3 = new PrioritizedProxyReference( "beta", 3, "https?://delta\\.com", host, port, null );
 
-        proxyReferenceList.add( proxyReference0 );
-        proxyReferenceList.add( proxyReference1 );
-        proxyReferenceList.add( proxyReference2 );
-        proxyReferenceList.add( proxyReference3 );
+        List<PrioritizedProxyReference> prioritizedProxyReferences = Lists.newArrayList();
 
-        ProxyRegistry proxyRegistry = new ProxyRegistry( proxyReferenceList );
+        prioritizedProxyReferences.add( proxyReference0 );
+        prioritizedProxyReferences.add( proxyReference1 );
+        prioritizedProxyReferences.add( proxyReference2 );
+        prioritizedProxyReferences.add( proxyReference3 );
+
+        ProxyRegistry proxyRegistry = new ProxyRegistry( prioritizedProxyReferences );
 
         assertEquals( "[ProxyReference{name='beta', priority=4, regex='https?://cappa\\.com', proxy=null}, ProxyReference{name='beta', priority=3, regex='https?://delta\\.com', proxy=null}, ProxyReference{name='beta', priority=2, regex='https?://beta\\.com', proxy=null}, ProxyReference{name='default', priority=1, regex='.*', proxy=null}]",
-                      proxyRegistry.getProxyReferences().toString() );
+                      proxyRegistry.getPrioritizedProxyReferences().toString() );
 
         assertEquals( "default", proxyRegistry.find( "http://cnn.com" ).getName() );
         assertEquals( "beta", proxyRegistry.find( "http://beta.com" ).getName() );

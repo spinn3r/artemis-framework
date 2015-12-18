@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 
@@ -18,7 +19,7 @@ public interface HttpRequestBuilder {
 
     HttpRequestBuilder withRequestSettingsRegistry(RequestSettingsRegistry requestSettingsRegistry);
 
-    HttpRequestBuilder withProxy(Proxy proxy);
+    HttpRequestBuilder withProxy(ProxyReference proxyReference);
 
     /**
      * Configure with a proxy.  Only the the following types are supported:

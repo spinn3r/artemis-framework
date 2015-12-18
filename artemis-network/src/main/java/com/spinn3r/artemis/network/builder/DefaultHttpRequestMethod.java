@@ -145,8 +145,8 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
     }
 
     @Override
-    public HttpRequestMethod withProxy(Proxy proxy) {
-        this.proxy = proxy;
+    public HttpRequestMethod withProxy(ProxyReference proxyReference) {
+        this.proxy = proxyReference.getProxy();
         return this;
     }
 

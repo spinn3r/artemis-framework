@@ -3,7 +3,6 @@ package com.spinn3r.artemis.network.builder.proxies;
 import com.google.common.collect.Lists;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -12,31 +11,31 @@ import java.util.List;
  */
 public class ProxyRegistry {
 
-    private List<ProxyReference> proxyReferences = Lists.newCopyOnWriteArrayList();
+    private List<PrioritizedProxyReference> prioritizedProxyReferences = Lists.newCopyOnWriteArrayList();
 
-    public ProxyRegistry(List<ProxyReference> proxyReferences) {
-        Collections.sort( proxyReferences, (o1,o2) -> o2.getPriority() - o1.getPriority() );
-        this.proxyReferences = proxyReferences;
+    public ProxyRegistry(List<PrioritizedProxyReference> prioritizedProxyReferences) {
+        Collections.sort( prioritizedProxyReferences, (o1, o2) -> o2.getPriority() - o1.getPriority() );
+        this.prioritizedProxyReferences = prioritizedProxyReferences;
     }
 
     /**
      * Get the list of proxy references so that we can determine which proxy to
      * use.
      */
-    public List<ProxyReference> getProxyReferences() {
-        return proxyReferences;
+    public List<PrioritizedProxyReference> getPrioritizedProxyReferences() {
+        return prioritizedProxyReferences;
     }
 
     /**
      * Find a ProxyReference that supports the given URL or null if no proxy is found.
      *
      */
-    public ProxyReference find( String link ) {
+    public PrioritizedProxyReference find( String link ) {
 
-        for (ProxyReference proxyReference : proxyReferences) {
+        for (PrioritizedProxyReference prioritizedProxyReference : prioritizedProxyReferences) {
 
-            if ( proxyReference.supports( link ) ) {
-                return proxyReference;
+            if ( prioritizedProxyReference.supports( link ) ) {
+                return prioritizedProxyReference;
             }
 
         }
@@ -48,7 +47,7 @@ public class ProxyRegistry {
     @Override
     public String toString() {
         return "ProxyRegistry{" +
-                 "proxyReferences=" + proxyReferences +
+                 "prioritizedProxyReferences=" + prioritizedProxyReferences +
                  '}';
     }
 

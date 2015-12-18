@@ -3,12 +3,11 @@ package com.spinn3r.artemis.network.init;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
-import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
+import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
-import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
@@ -17,8 +16,6 @@ import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 import com.spinn3r.artemis.util.daemon.WaitForPort;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
-import com.spinn3r.artemis.network.builder.ConfiguredHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 
 import java.net.InetSocketAddress;
 import java.net.Proxy;
@@ -37,90 +34,117 @@ public class NetworkService extends BaseService {
 
     private static final int TIMEOUT = 60000;
 
-    private final NetworkConfig config;
+    private final NetworkConfig networkConfig;
 
     private final WaitForPort waitForPort;
 
-    private final AtomicReferenceProvider<Proxy> proxyAtomicReferenceProvider = new AtomicReferenceProvider<>( null );
+    private final AtomicReferenceProvider<Proxy> proxyProvider = new AtomicReferenceProvider<>( null );
 
-    private final AtomicReferenceProvider<ProxyRegistry> proxyRegistryAtomicReferenceProvider = new AtomicReferenceProvider<>( null );
+    private final AtomicReferenceProvider<ProxyReference> proxyReferenceProvider = new AtomicReferenceProvider<>( null );
+
+    private final AtomicReferenceProvider<ProxyRegistry> proxyRegistryProvider = new AtomicReferenceProvider<>( null );
 
     private final AtomicReferenceProvider<RequestSettingsRegistry> requestSettingsRegistryProvider = new AtomicReferenceProvider<>( null );
 
     @Inject
-    public NetworkService(NetworkConfig config, WaitForPort waitForPort) {
-        this.config = config;
+    public NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort) {
+        this.networkConfig = networkConfig;
         this.waitForPort = waitForPort;
     }
 
     @Override
     public void init() {
+
         advertise( HttpRequestBuilder.class, ConfiguredHttpRequestBuilder.class );
-        advertise( DirectHttpRequestBuilder.class, DefaultHttpRequestBuilder.class );
+        advertise( DirectHttpRequestBuilder.class, DefaultDirectHttpRequestBuilder.class );
         advertise( ContentFetcher.class, DefaultContentFetcher.class );
         advertise( RequestListeners.class, new RequestListeners() );
         advertise( HttpResponseValidators.class, new DefaultHttpResponseValidators() );
-        provider( Proxy.class, proxyAtomicReferenceProvider );
-        provider( ProxyRegistry.class, proxyRegistryAtomicReferenceProvider );
+        provider( Proxy.class, proxyProvider );
+        provider( ProxyReference.class, proxyReferenceProvider );
+        provider( ProxyRegistry.class, proxyRegistryProvider );
         provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
-    }
 
-    @Override
-    public void start() throws Exception {
+        // *** create the default proxy
 
-        String defaultProxy = config.getDefaultProxy();
+        String defaultProxy = networkConfig.getDefaultProxy();
 
         if ( defaultProxy != null ) {
 
-            ProxySettings proxySettings = config.getProxies().get( defaultProxy );
+            ProxySettings proxySettings = networkConfig.getProxies().get( defaultProxy );
 
             if ( proxySettings == null ) {
                 throw new RuntimeException( "Default proxy has no entry in proxies." );
             }
 
-            ProxyReference proxyReference = createAndTestProxyReference( defaultProxy, proxySettings );
+            ProxyReference proxyReference = createPrioritizedProxyReference( defaultProxy, proxySettings );
 
-            proxyAtomicReferenceProvider.set( proxyReference.getProxy() );
+            proxyProvider.set( proxyReference.getProxy() );
+            proxyReferenceProvider.set( proxyReference );
 
             info( "Using default proxy: %s", proxyReference.getProxy()  );
 
         }
 
-        List<ProxyReference> proxyReferenceList = Lists.newArrayList();
+        // *** configure the proxy registry...
 
-        for (Map.Entry<String, ProxySettings> entry : config.getProxies().entrySet()) {
+        List<PrioritizedProxyReference> prioritizedProxyReferences = Lists.newArrayList();
+
+        for (Map.Entry<String, ProxySettings> entry : networkConfig.getProxies().entrySet()) {
 
             String name = entry.getKey();
             ProxySettings proxySettings = entry.getValue();
 
-            proxyReferenceList.add( createAndTestProxyReference( name, proxySettings ) );
+            prioritizedProxyReferences.add( createPrioritizedProxyReference( name, proxySettings ) );
 
         }
 
-        ProxyRegistry proxyRegistry = new ProxyRegistry( proxyReferenceList );
-        proxyRegistryAtomicReferenceProvider.set( proxyRegistry );
+        ProxyRegistry proxyRegistry = new ProxyRegistry( prioritizedProxyReferences );
+        proxyRegistryProvider.set( proxyRegistry );
 
-        RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( config.getRequests() );
+        // *** now copy over settings.
+
+        RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
         requestSettingsRegistryProvider.set( requestSettingsRegistry );
 
     }
 
-    private ProxyReference createAndTestProxyReference(String name, ProxySettings proxySettings) throws Exception {
+    @Override
+    public void start() throws Exception {
 
-        info( "Waiting for proxy on %s:%s", proxySettings.getHost(), proxySettings.getPort() );
+        // test all our proxies to make sure they work.
 
-        // *** make sure we can connect to the port that is open, if not we
-        // need to fail.
+        testProxyReference( proxyReferenceProvider.get() );
 
-        waitForPort.waitFor( proxySettings.getHost(), proxySettings.getPort(), TIMEOUT );
+        for (ProxyReference proxyReference : proxyRegistryProvider.get().getPrioritizedProxyReferences()) {
+            testProxyReference( proxyReference );
+        }
 
-        SocketAddress addr = new InetSocketAddress( proxySettings.getHost(), proxySettings.getPort() );
+    }
+
+    private PrioritizedProxyReference createPrioritizedProxyReference(String name, ProxySettings proxySettings ) {
+
+        String host = proxySettings.getHost();
+        int port = proxySettings.getPort();
+
+        SocketAddress addr = new InetSocketAddress( host, port );
 
         Proxy.Type type = Proxy.Type.HTTP;
 
         Proxy proxy = new Proxy( type, addr );
 
-        return new ProxyReference( name, proxySettings.getPriority(), proxySettings.getRegex(), proxy );
+        return new PrioritizedProxyReference( name, proxySettings.getPriority(), proxySettings.getRegex(), host, port, proxy );
+
+    }
+
+    private void testProxyReference( ProxyReference proxyReference ) throws Exception {
+
+        String host = proxyReference.getHost();
+        int port = proxyReference.getPort();
+
+        info( "Waiting for proxy on %s:%s", host, port );
+
+        waitForPort.waitFor( host, port, TIMEOUT );
 
     }
 
