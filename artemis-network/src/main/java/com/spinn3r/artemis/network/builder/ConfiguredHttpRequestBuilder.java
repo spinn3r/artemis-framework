@@ -36,7 +36,11 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
 
         withRequireProxy( networkConfig.getRequireProxy() );
         withUserAgent( networkConfig.getUserAgent() );
-        withProxy( proxyReferenceProvider.get() );
+
+        if ( proxyReferenceProvider.get() != null ) {
+            withProxy( proxyReferenceProvider.get() );
+        }
+
         withProxyRegistry( proxyRegistryProvider.get() );
         withRequestSettingsRegistry( requestSettingsRegistryProvider.get() );
         withRequestListeners( requestListeners );
