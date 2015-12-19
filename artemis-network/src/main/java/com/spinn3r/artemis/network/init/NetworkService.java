@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.init;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
@@ -114,7 +115,9 @@ public class NetworkService extends BaseService {
 
         // test all our proxies to make sure they work.
 
-        testProxyReference( proxyReferenceProvider.get() );
+        if ( proxyReferenceProvider.get() != null ) {
+            testProxyReference( proxyReferenceProvider.get() );
+        }
 
         for (ProxyReference proxyReference : proxyRegistryProvider.get().getPrioritizedProxyReferences()) {
             testProxyReference( proxyReference );
@@ -138,6 +141,8 @@ public class NetworkService extends BaseService {
     }
 
     private void testProxyReference( ProxyReference proxyReference ) throws Exception {
+
+        Preconditions.checkNotNull( proxyReference );
 
         String host = proxyReference.getHost();
         int port = proxyReference.getPort();
