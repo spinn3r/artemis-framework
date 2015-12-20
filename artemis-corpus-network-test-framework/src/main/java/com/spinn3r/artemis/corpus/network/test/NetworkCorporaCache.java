@@ -114,6 +114,12 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     String contentWithEncoding = httpRequest.getContentWithEncoding();
 
+                    String contentType = httpRequest.getResponseHeader( "Content-Type" );
+
+                    if ( contentType != null && contentType.startsWith( "text/" ) ) {
+                        contentWithEncoding = contentWithEncoding.replaceAll( "\r\n", "\n" );
+                    }
+
                     cache.write( key, contentWithEncoding );
 
                     // now write the extended metadata...
