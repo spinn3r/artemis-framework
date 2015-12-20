@@ -31,8 +31,7 @@ public class CorporaCache {
 
     private static final boolean USE_CLASSLOADER = false;
 
-    // TODO: change this based on a system property.
-    private static String ROOT = "src/test/resources/";
+    private static String ROOT =  System.getProperty( "corpora-cache.root", "src/test/resources/" );
 
     private String extension = "dat";
 
