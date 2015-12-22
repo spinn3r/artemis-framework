@@ -204,7 +204,7 @@ public class HitIndex<T extends Comparable<T>> {
         List<T> result = read();
 
         if( result.size() > limit ) {
-            result = result.subList( 0, limit - 1 );
+            result = CollectionUtils.head( result, limit );
         }
 
         return result;
