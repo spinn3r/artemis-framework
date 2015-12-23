@@ -234,16 +234,32 @@ public class HitIndex<T extends Comparable<T>> {
 
     }
 
-    public void report() {
-        report( 50 );
+    public String report() {
+        return report( 50 );
     }
 
-    public void report( int max ) {
+    public String report( int limit ) {
 
-        System.out.println( "hitindex: " + name );
+        StringBuilder buff = new StringBuilder();
 
-        TreeSet<Entry<T>> set = new TreeSet<>();
-        set.addAll( values() );
+        buff.append( String.format( "hitindex: %s\n", name ) );
+
+        TreeSet<Entry<T>> set = new TreeSet<>( values() );
+
+        int count = 0;
+
+        for( Entry<T> entry : set ) {
+            buff.append( "  " );
+            buff.append( entry );
+            buff.append( "\n" );
+            ++count;
+
+            if ( count == limit)
+                break;
+
+        }
+
+        return buff.toString();
 
     }
 
