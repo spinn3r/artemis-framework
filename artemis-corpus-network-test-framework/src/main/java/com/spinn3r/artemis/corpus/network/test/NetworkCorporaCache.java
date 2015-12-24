@@ -32,6 +32,8 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     public static boolean DEFAULT_UPDATE_MODE = "true".equals( System.getProperty( UPDATE_MODE_PROPERTY_NAME ) );
 
+    private static String ROOT = System.getProperty( "network-corpora-cache.root", "/network-corpora" );
+
     private final DirectHttpRequestBuilder directHttpRequestBuilder;
 
     private CorporaCache cache;
@@ -45,7 +47,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     NetworkCorporaCache(DirectHttpRequestBuilder directHttpRequestBuilder, Class<?> callerClazz) {
         this.directHttpRequestBuilder = directHttpRequestBuilder;
-        this.cache = new CorporaCache( callerClazz, "/network-corpora" );
+        this.cache = new CorporaCache( callerClazz, ROOT );
     }
 
     @Override
