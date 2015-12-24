@@ -1,15 +1,19 @@
 package com.spinn3r.artemis.util.misc;
 
+import com.google.common.base.Preconditions;
 import com.google.common.primitives.Doubles;
 
+import java.util.Collection;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkState;
 
 /**
  *
  */
 public class Longs {
 
-    public static long sum( List<Long> values ) {
+    public static long sum( Collection<Long> values ) {
 
         long result = 0;
 
@@ -21,13 +25,20 @@ public class Longs {
 
     }
 
-    public static double mean( List<Long> values ) {
+    public static double mean( Collection<Long> values ) {
 
         if ( values.size() == 0 ) {
             return Double.NaN;
         }
 
         return sum( values ) / values.size();
+
+    }
+
+    public static long median( List<Long> values ) {
+        checkState( values.size() > 0 );
+
+        return values.get( values.size() / 2 );
 
     }
 
