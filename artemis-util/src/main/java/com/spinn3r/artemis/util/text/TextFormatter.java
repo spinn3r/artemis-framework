@@ -5,15 +5,19 @@ package com.spinn3r.artemis.util.text;
  */
 public class TextFormatter {
 
+    public static String indent(String input) {
+        return indent( input , "    " );
+    }
+
     /**
      * Indent all the lines in the input and return a new string.
      */
-    public static String indent( String input ) {
+    public static String indent(String input, String padding) {
 
         StringBuilder buff = new StringBuilder();
 
         for (String current : input.split( "\n" ) ) {
-            buff.append( "    " );
+            buff.append( padding );
             buff.append( current );
             buff.append( "\n" );
         }
@@ -21,6 +25,9 @@ public class TextFormatter {
         return buff.toString();
 
     }
+
+
+
 
     public static String vertical( String text ) {
 

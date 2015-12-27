@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import static com.spinn3r.artemis.util.text.TextFormatter.indent;
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class TextFormatterTest {
 
