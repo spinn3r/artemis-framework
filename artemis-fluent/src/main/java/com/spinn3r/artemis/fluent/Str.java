@@ -47,6 +47,15 @@ public class Str {
 
     }
 
+    public Str toLowerCase() {
+
+        if ( value == null )
+            return Tuples.str( null );
+
+        return new Str( value.toLowerCase() );
+
+    }
+
     public Str unescape() {
 
         if ( value == null )
@@ -82,7 +91,7 @@ public class Str {
      * Filter the current string if it does not contain the given substring.
      *
      */
-    public Str contains( String substr ) {
+    public Str find(String substr ) {
 
         if ( value == null )
             return Tuples.str( null );
@@ -92,6 +101,15 @@ public class Str {
         }
 
         return Tuples.str( null );
+
+    }
+
+    public boolean contains( String text ) {
+
+        if ( value == null )
+            return false;
+
+        return value.contains( text );
 
     }
 

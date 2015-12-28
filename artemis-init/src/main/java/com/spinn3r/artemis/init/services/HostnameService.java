@@ -45,9 +45,9 @@ public class HostnameService extends BaseService implements Provider<Hostname> {
 
         String result =
           Tuples.strs( Tuples.str( System.getenv( "HOSTNAME" ) ),
-                       Tuples.str( read( "/etc/artemis/hostname" ) ).contains( "." ),
-                       Tuples.str( read( "/etc/hostname" ) ).contains( "." ),
-                       Tuples.str( read( "/proc/sys/kernel/hostname" ) ).contains( "." ) )
+                       Tuples.str( read( "/etc/artemis/hostname" ) ).find( "." ),
+                       Tuples.str( read( "/etc/hostname" ) ).find( "." ),
+                       Tuples.str( read( "/proc/sys/kernel/hostname" ) ).find( "." ) )
             .first();
 
         if ( result == null )
