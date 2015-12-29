@@ -20,10 +20,15 @@ public class Reportables {
 
     }
 
+    public static String formatReport( Class<?> clazz , Map<String,?> map ) {
+        return formatReport( clazz.getSimpleName(), map );
+    }
 
     /**
      * Format a report in the form of a map where the keys are the names
-     * of the metadata into a pretty report.
+     * of the metadata into a pretty report.  We take into consideration
+     * embedded Reportable as well and call report() on them instead of
+     * toString.
      */
     public static String formatReport( String name , Map<String,?> map ) {
 

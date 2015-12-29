@@ -2,6 +2,7 @@ package com.spinn3r.artemis.util.text;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.spinn3r.artemis.util.reports.Reportable;
 
 import java.util.Collection;
 import java.util.Map;
@@ -35,7 +36,12 @@ public class CollectionFormatter {
         StringBuilder buff = new StringBuilder();
 
         for (Object value : collection) {
-            buff.append( String.format( "%s\n", value.toString() ) );
+            if ( value instanceof Reportable ) {
+                Reportable reportable = (Reportable)value;
+                buff.append( String.format( "%s\n", reportable.report()  ) );
+            } else {
+                buff.append( String.format( "%s\n", value.toString() ) );
+            }
         }
 
         return buff.toString();

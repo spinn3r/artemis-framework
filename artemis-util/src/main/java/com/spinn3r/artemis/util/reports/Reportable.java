@@ -10,6 +10,13 @@ package com.spinn3r.artemis.util.reports;
  * Should normally not be used in a production capacity except when building
  * admin tools.
  * </p>
+ *
+ * <p>
+ * Reports are almost always multiple lines where toString() and other methods
+ * usually are in one line.  This prevents us from putting complex reporting
+ * within toString() and accidentally printing it in production.
+ * </p>
+ *
  */
 public interface Reportable {
 
