@@ -1,4 +1,6 @@
-package com.spinn3r.artemis.util.text;
+package com.spinn3r.artemis.util.reports;
+
+import com.spinn3r.artemis.util.text.TextFormatter;
 
 import java.util.Collection;
 import java.util.Map;
