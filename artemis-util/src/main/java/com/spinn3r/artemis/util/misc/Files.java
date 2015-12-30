@@ -1,9 +1,12 @@
 package com.spinn3r.artemis.util.misc;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.io.CharStreams;
 
 import java.io.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -31,8 +34,9 @@ public class Files {
 
     }
 
-    public static final String toUTF8( InputStream is ) throws IOException {
-        return CharStreams.toString( new InputStreamReader( is, Charsets.UTF_8 ) );
+    public static final String toUTF8( InputStream inputStream ) throws IOException {
+        checkNotNull( inputStream );
+        return CharStreams.toString( new InputStreamReader( inputStream, Charsets.UTF_8 ) );
     }
 
     public static void mkdirs( String path ) throws IOException {
