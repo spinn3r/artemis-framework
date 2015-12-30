@@ -112,6 +112,10 @@ public class Strings {
 
     }
 
+    public static List<String> toLines( String data ) {
+        return toList( data.split( "\n" ) );
+    }
+
     /**
      * Create some padding for use in ASCII art and formatting.
      */
