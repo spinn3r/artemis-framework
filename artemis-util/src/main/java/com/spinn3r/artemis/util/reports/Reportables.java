@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.util.reports;
 
+import com.spinn3r.artemis.json.Msg;
 import com.spinn3r.artemis.util.text.TextFormatter;
 
 import java.util.Collection;
@@ -50,6 +51,18 @@ public class Reportables {
 
                 buff.append( indentedReport );
                 buff.append( "\n" );
+
+
+            } else if ( entry.getValue() instanceof Msg ) {
+
+                    buff.append( String.format( "    %s: \n", entry.getKey() ) );
+
+                    Msg msg = (Msg) entry.getValue();
+                    String json = msg.toJSON();
+                    String indentedJson = TextFormatter.indent( json, "        " );
+
+                    buff.append( indentedJson );
+                    buff.append( "\n" );
 
             } else if ( entry.getValue() instanceof Collection ) {
 

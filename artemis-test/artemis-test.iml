@@ -20,6 +20,7 @@
     <orderEntry type="library" name="Maven: io.netty:netty-codec:4.0.27.Final" level="project" />
     <orderEntry type="module" module-name="artemis-init" />
     <orderEntry type="module" module-name="artemis-util" />
+    <orderEntry type="module" module-name="artemis-json-framework" />
     <orderEntry type="library" name="Maven: com.googlecode.java-diff-utils:diffutils:1.2.1" level="project" />
     <orderEntry type="module" module-name="artemis-fluent" />
     <orderEntry type="module" module-name="artemis-time" />
