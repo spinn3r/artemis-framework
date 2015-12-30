@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.schema.core;
+package com.spinn3r.artemis.json;
 
 import java.util.Collection;
 

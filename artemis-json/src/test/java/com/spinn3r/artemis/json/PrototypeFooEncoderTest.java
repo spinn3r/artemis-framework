@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.json;
 
-import com.fasterxml.jackson.databind.util.ByteBufferBackedInputStream;
 import com.google.common.base.Charsets;
 import com.google.common.base.Stopwatch;
 import com.spinn3r.artemis.util.io.FastByteArrayOutputStream;

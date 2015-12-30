@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.schema.core;
+package com.spinn3r.artemis.json;
 
 /**
  * A message (msg) that can be sent over the wire and serialized and deserialized

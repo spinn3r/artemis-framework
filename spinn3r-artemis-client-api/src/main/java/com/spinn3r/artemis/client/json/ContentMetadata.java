@@ -1,6 +1,6 @@
 package com.spinn3r.artemis.client.json;
 
-import com.spinn3r.artemis.schema.core.Msg;
+import com.spinn3r.artemis.json.Msg;
 
 /**
  * High level extract fields parsed using semantic markup  and other techniques. These fields are populated by  multiple algorithms executing over the same HTML which  attempt to pick the best value from all alternatives.

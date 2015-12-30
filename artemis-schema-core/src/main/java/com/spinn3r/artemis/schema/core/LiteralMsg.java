@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.schema.core;
 
+import com.spinn3r.artemis.json.Msg;
+
 import static com.google.common.base.Preconditions.*;
 
 /**
