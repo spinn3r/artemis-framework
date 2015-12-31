@@ -40,23 +40,24 @@ public class ClasspathResourceFinder {
         String classPath = System.getProperty( "java.class.path", "." );
         String[] classPathElements = classPath.split(System.getProperty("path.separator"));
 
-        for( String element : classPathElements){
-            result.addAll( findResources(element, pattern));
+        for( String classPathElement : classPathElements){
+            File file = new File(classPathElement);
+            if ( ! file.exists() )
+                continue;
+
+            result.addAll( findResources(file, pattern));
         }
 
         return ImmutableList.copyOf( result );
 
     }
 
-    private Collection<ResourceReference> findResources(String element, Pattern pattern) throws IOException {
+    private Collection<ResourceReference> findResources(File file, Pattern pattern) throws IOException {
         List<ResourceReference> result = new ArrayList<>();
 
-
-        File file = new File(element);
-
-        if(file.isDirectory()){
+        if( file.isDirectory() ){
             result.addAll( findResourcesFromDirectory(file, pattern));
-        } else{
+        } else {
             result.addAll( findResourcesFromJarFile(file, pattern));
         }
 
