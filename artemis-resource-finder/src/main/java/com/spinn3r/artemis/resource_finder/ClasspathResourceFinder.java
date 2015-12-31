@@ -69,27 +69,32 @@ public class ClasspathResourceFinder {
 
         List<ResourceReference> result = new ArrayList<>();
 
-        try( ZipFile zf = new ZipFile(file); ) {
+        try {
+            try( ZipFile zf = new ZipFile(file) ) {
 
-            Enumeration e = zf.entries();
-            while (e.hasMoreElements()) {
-                ZipEntry ze = (ZipEntry) e.nextElement();
-                String fileName = ze.getName();
-                boolean accept = pattern.matcher( fileName ).matches();
-                if (accept) {
+                Enumeration e = zf.entries();
+                while (e.hasMoreElements()) {
+                    ZipEntry ze = (ZipEntry) e.nextElement();
+                    String fileName = ze.getName();
+                    boolean accept = pattern.matcher( fileName ).matches();
+                    if (accept) {
 
-                    ResourceReference resourceReference
-                      = new ZipEntryResourceReference( ResourceHolder.JAR, fileName, file, ze );
+                        ResourceReference resourceReference
+                          = new ZipEntryResourceReference( ResourceHolder.JAR, fileName, file, ze );
 
-                    result.add( resourceReference );
+                        result.add( resourceReference );
+
+                    }
 
                 }
 
             }
 
+            return result;
+        } catch (IOException e) {
+            throw new IOException( "Could not open zip file: " + file.getAbsolutePath(), e );
         }
 
-        return result;
     }
 
     private Collection<ResourceReference> findResourcesFromDirectory(File directory, Pattern pattern) throws IOException {
