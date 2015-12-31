@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.resource_finder;
 
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.resource_finder.references.FileResourceReference;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
 import com.spinn3r.artemis.resource_finder.references.ZipEntryResourceReference;
@@ -25,45 +27,44 @@ import java.util.zip.ZipFile;
  */
 public class ClasspathResourceFinder {
 
+    public ImmutableList<ResourceReference> findResources(String regex ) throws IOException {
+        return findResources( Pattern.compile( regex ) );
+    }
+
     /**
-     * for all elements of java.class.path get a Collection of resources Pattern
-     * pattern = Pattern.compile(".*"); gets all resources
-     *
-     * @param pattern
-     *            the pattern to match
-     * @return the resources in the order they are found
+     * Find all elements of java.class.path, get a Collection of resources
      */
-    public Collection<ResourceReference> getResources( Pattern pattern ) throws IOException {
+    public ImmutableList<ResourceReference> findResources(Pattern pattern ) throws IOException {
 
         List<ResourceReference> result = new ArrayList<>();
         String classPath = System.getProperty( "java.class.path", "." );
         String[] classPathElements = classPath.split(System.getProperty("path.separator"));
 
         for( String element : classPathElements){
-            result.addAll(getResources(element, pattern));
+            result.addAll( findResources(element, pattern));
         }
 
-        return result;
+        return ImmutableList.copyOf( result );
 
     }
 
-    private Collection<ResourceReference> getResources( String element, Pattern pattern) throws IOException {
+    private Collection<ResourceReference> findResources(String element, Pattern pattern) throws IOException {
         List<ResourceReference> result = new ArrayList<>();
 
 
         File file = new File(element);
 
         if(file.isDirectory()){
-            result.addAll(getResourcesFromDirectory(file, pattern));
+            result.addAll( findResourcesFromDirectory(file, pattern));
         } else{
-            result.addAll(getResourcesFromJarFile(file, pattern));
+            result.addAll( findResourcesFromJarFile(file, pattern));
         }
 
         return result;
 
     }
 
-    private Collection<ResourceReference> getResourcesFromJarFile( File file, Pattern pattern) throws IOException {
+    private Collection<ResourceReference> findResourcesFromJarFile(File file, Pattern pattern) throws IOException {
 
         List<ResourceReference> result = new ArrayList<>();
 
@@ -90,11 +91,11 @@ public class ClasspathResourceFinder {
         return result;
     }
 
-    private Collection<ResourceReference> getResourcesFromDirectory( File directory, Pattern pattern) throws IOException {
-        return getResourcesFromDirectory( directory, directory, pattern );
+    private Collection<ResourceReference> findResourcesFromDirectory(File directory, Pattern pattern) throws IOException {
+        return findResourcesFromDirectory( directory, directory, pattern );
     }
 
-    private Collection<ResourceReference> getResourcesFromDirectory( File root, File directory, Pattern pattern) throws IOException {
+    private Collection<ResourceReference> findResourcesFromDirectory(File root, File directory, Pattern pattern) throws IOException {
 
         Path rootDirectoryPath = Paths.get( root.getAbsolutePath() );
 
@@ -111,7 +112,7 @@ public class ClasspathResourceFinder {
             if( file.isDirectory() ) {
 
                 // recurs into the sub directories.
-                result.addAll(getResourcesFromDirectory( root, file, pattern));
+                result.addAll( findResourcesFromDirectory( root, file, pattern));
 
             } else{
 

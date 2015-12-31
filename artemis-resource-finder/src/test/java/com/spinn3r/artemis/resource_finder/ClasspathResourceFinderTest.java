@@ -20,7 +20,7 @@ public class ClasspathResourceFinderTest {
 
         ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
 
-        Collection<ResourceReference> resources = classpathResourceFinder.getResources( Pattern.compile( ".*/resource_finder/.*\\.txt" ) );
+        Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( ".*/resource_finder/.*\\.txt" ) );
 
         System.out.printf( "%s\n", CollectionFormatter.table( resources ) );
 
@@ -32,7 +32,7 @@ public class ClasspathResourceFinderTest {
 
         ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
 
-        Collection<ResourceReference> resources = classpathResourceFinder.getResources( Pattern.compile( ".*\\.txt" ) );
+        Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( ".*\\.txt" ) );
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
@@ -52,7 +52,7 @@ public class ClasspathResourceFinderTest {
 
         ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
 
-        Collection<ResourceReference> resources = classpathResourceFinder.getResources( Pattern.compile( "testing/.*\\.txt" ) );
+        Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( "testing/.*\\.txt" ) );
         ImmutableList<String> paths = ClasspathResources.toPaths( resources );
 
         System.out.printf( "%s\n", CollectionFormatter.table( resources ) );

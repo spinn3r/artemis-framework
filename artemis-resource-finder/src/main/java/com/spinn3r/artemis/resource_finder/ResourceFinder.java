@@ -24,6 +24,7 @@ import java.util.jar.JarFile;
  * We can then filter the resources by path.  This is the best way we've found
  * to do this so far and while expensive is currently reliable.
  */
+@Deprecated
 public class ResourceFinder {
 
     public ImmutableList<URL> findResources( String pattern ) {
