@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>artemis-framework</artifactId>
+        <groupId>com.spinn3r.artemis</groupId>
+        <version>5.1-LATEST-4</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spinn3r.artemis.resource_finder</groupId>
+    <artifactId>artemis-resource-finder</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis</groupId>
+            <artifactId>artemis-guava</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.corn</groupId>
+            <artifactId>corn-cps</artifactId>
+            <version>1.1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.util</groupId>
+            <artifactId>artemis-util</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

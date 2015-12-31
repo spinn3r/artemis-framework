@@ -57,6 +57,7 @@
         <module>artemis-corpus-network-test-framework</module>
         <module>artemis-ahocorasick</module>
         <module>artemis-json-framework</module>
+        <module>artemis-resource-finder</module>
     </modules>
 
     <description>
