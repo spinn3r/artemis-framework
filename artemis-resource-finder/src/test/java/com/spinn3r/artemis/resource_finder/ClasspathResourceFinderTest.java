@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.resource_finder;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
 import com.spinn3r.artemis.util.text.CollectionFormatter;
@@ -35,17 +36,39 @@ public class ClasspathResourceFinderTest {
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
-
             try( InputStream inputStream = resource.getInputStream() ) {
-
                 ByteStreams.toByteArray( inputStream );
-
             }
-
         }
 
         System.out.printf( "%s\n", CollectionFormatter.table( resources ) );
 
     }
+
+    @Test
+    public void testGetClasspathResourceSpecific() throws Exception {
+
+        System.out.printf( "%s\n", System.getProperty( "java.class.path" ) );
+
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+
+        Collection<ResourceReference> resources = classpathResourceFinder.getResources( Pattern.compile( "testing/.*\\.txt" ) );
+        ImmutableList<String> paths = ClasspathResources.toPaths( resources );
+
+        System.out.printf( "%s\n", CollectionFormatter.table( resources ) );
+
+        assertThat( paths, hasItem( "testing/first.txt" ) );
+        assertThat( paths, hasItem( "testing/fakedir/second.txt" ) );
+        assertThat( paths, hasItem( "testing/fakedir/nested/third.txt" ) );
+
+        // test that we can open them all...
+        for (ResourceReference resource : resources) {
+            try( InputStream inputStream = resource.getInputStream() ) {
+                ByteStreams.toByteArray( inputStream );
+            }
+        }
+
+    }
+
 
 }
