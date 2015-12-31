@@ -1,0 +1,1 @@
+Tehse test resources must be here to test using resources across modules.

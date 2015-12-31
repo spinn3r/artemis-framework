@@ -1,9 +1,11 @@
 package com.spinn3r.artemis.resource_finder;
 
+import com.google.common.io.ByteStreams;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
 import com.spinn3r.artemis.util.text.CollectionFormatter;
 import org.junit.Test;
 
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -25,11 +27,22 @@ public class ClasspathResourceFinderTest {
     }
 
     @Test
-    public void testGetResources2() throws Exception {
+    public void testClasspathResourcesFinder2() throws Exception {
 
         ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
 
         Collection<ResourceReference> resources = classpathResourceFinder.getResources( Pattern.compile( ".*\\.txt" ) );
+
+        // test that we can open them all...
+        for (ResourceReference resource : resources) {
+
+            try( InputStream inputStream = resource.getInputStream() ) {
+
+                ByteStreams.toByteArray( inputStream );
+
+            }
+
+        }
 
         System.out.printf( "%s\n", CollectionFormatter.table( resources ) );
 

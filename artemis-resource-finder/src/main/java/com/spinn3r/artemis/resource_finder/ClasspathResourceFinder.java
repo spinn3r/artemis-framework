@@ -20,6 +20,8 @@ import java.util.zip.ZipFile;
  * A resource loader that uses <q>java.class.path</q> to enumerate all the entries
  * one by one, using a ZipFile to enumerate the entries or just opening the
  * directory manually.
+ *
+ *
  */
 public class ClasspathResourceFinder {
 

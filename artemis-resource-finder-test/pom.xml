@@ -18,6 +18,14 @@
             <groupId>com.spinn3r.artemis.resource_finder</groupId>
             <artifactId>artemis-resource-finder</artifactId>
             <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.util</groupId>
+            <artifactId>artemis-util</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
