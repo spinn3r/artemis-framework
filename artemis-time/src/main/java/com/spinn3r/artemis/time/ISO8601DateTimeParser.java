@@ -14,9 +14,9 @@ public class ISO8601DateTimeParser {
     // ISODateTimeFormat is thread-safe and immutable, and the formatters it
     // returns are as well.
 
-    private static DateTimeFormatter FMT = ISODateTimeFormat.dateTime();
+    private static DateTimeFormatter FMT = ISODateTimeFormat.dateTime().withZoneUTC();
 
-    private static DateTimeFormatter YEAR_MONTH_DAY_FMT = ISODateTimeFormat.yearMonthDay();
+    private static DateTimeFormatter YEAR_MONTH_DAY_FMT = ISODateTimeFormat.yearMonthDay().withZoneUTC();
 
     public static DateTime parse( String value ) {
         return FMT.parseDateTime( value );
