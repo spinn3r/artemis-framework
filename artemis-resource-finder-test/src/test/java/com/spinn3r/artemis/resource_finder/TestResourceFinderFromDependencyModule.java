@@ -22,21 +22,6 @@ import static org.hamcrest.Matchers.*;
 public class TestResourceFinderFromDependencyModule {
 
     @Test
-    @Ignore
-    public void testGetResourceListing() throws Exception {
-
-        ResourceFinder resourceFinder = new ResourceFinder();
-        Set<String> resourceListing = resourceFinder.getResourceListing( ResourceFinder.class, "com/spinn3r/artemis/resource_finder" );
-
-        System.out.printf( "%s\n", resourceListing );
-
-        assertEquals( 3, resourceListing.size() );
-        assertEquals( "[com/spinn3r/artemis/resource_finder/fakedir, com/spinn3r/artemis/resource_finder/first.txt, com/spinn3r/artemis/resource_finder/ResourceFinderTest.class]",
-                      resourceListing.toString() );
-
-    }
-
-    @Test
     public void testGetClasspathResourceSpecific() throws Exception {
 
         System.out.printf( "%s\n", System.getProperty( "java.class.path" ) );
