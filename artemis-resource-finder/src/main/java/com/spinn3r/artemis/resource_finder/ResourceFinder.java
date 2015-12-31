@@ -62,28 +62,33 @@ public class ResourceFinder {
     public Set<String> getResourceListing(Class<?> clazz, String path) throws IOException {
 
         URL dirURL = null;
-        try {
-            dirURL = clazz.getClassLoader().getResource(path);
+//        try {
 
-            if (dirURL != null && dirURL.getProtocol().equals("file")) {
-                /* A file path: easy enough */
+            ClassLoader classLoader = clazz.getClassLoader();
 
-                Set<String> result = Sets.newHashSet();
-                File dir = new File( dirURL.toURI() );
-                for (String current : dir.list()) {
-                    result.add( path + "/" + current );
-                }
 
-                return result;
 
-            }
+//            dirURL = classLoader.getResource(path);
+//
+//            if (dirURL != null && dirURL.getProtocol().equals("file")) {
+//                /* A file path: easy enough */
+//
+//                Set<String> result = Sets.newHashSet();
+//                File dir = new File( dirURL.toURI() );
+//                for (String current : dir.list()) {
+//                    result.add( path + "/" + current );
+//                }
+//
+//                return result;
+//
+//            }
 
             if (dirURL == null) {
             /*
              * In case of a jar file, we can't actually find a directory.
              * Have to assume the same jar as clazz.
              */
-                String myClassName = clazz.getName().replace(".", "/") + ".class";
+                String myClassName =  clazz.getName().replace(".", "/") + ".class";
                 dirURL = clazz.getClassLoader().getResource(myClassName);
                 if ( dirURL == null ) {
                     throw new IOException( "Couldn't find dir URL for class " + clazz.getName() );
@@ -112,9 +117,9 @@ public class ResourceFinder {
 
                 return result;
             }
-        } catch (URISyntaxException e) {
-            throw new IOException( e );
-        }
+//        } catch (URISyntaxException e) {
+//            throw new IOException( e );
+//        }
 
         throw new UnsupportedOperationException( "Cannot list files for URL " + dirURL );
 

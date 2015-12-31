@@ -58,6 +58,7 @@
         <module>artemis-ahocorasick</module>
         <module>artemis-json-framework</module>
         <module>artemis-resource-finder</module>
+        <module>artemis-resource-finder-test</module>
     </modules>
 
     <description>
