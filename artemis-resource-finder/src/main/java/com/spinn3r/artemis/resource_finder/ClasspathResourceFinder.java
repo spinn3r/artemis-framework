@@ -121,7 +121,9 @@ public class ClasspathResourceFinder {
             return result;
 
         } catch (IOException e) {
-            throw new IOException( "Could not open zip file: " + file.getAbsolutePath(), e );
+            throw new IOException( String.format( "Could not open zip file: %s (length=%,d bytes)",
+                                                  file.getAbsolutePath(), file.length() ),
+                                   e );
         }
 
     }
