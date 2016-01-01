@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.resource_finder.references.FileResourceReference;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
 import com.spinn3r.artemis.resource_finder.references.ZipEntryResourceReference;
+import com.spinn3r.log5j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,16 +27,23 @@ import java.util.zip.ZipFile;
  */
 public class ClasspathResourceFinder {
 
+    private static final Logger log = Logger.getLogger();
+
     private final long maxJarFileSize;
 
-    private ClasspathResourceFinder(long maxJarFileSize) {
+    private final boolean ignoreBrokenJarFiles;
+
+    private ClasspathResourceFinder(long maxJarFileSize, boolean ignoreBrokenJarFiles) {
 
         this.maxJarFileSize = maxJarFileSize;
+        this.ignoreBrokenJarFiles = ignoreBrokenJarFiles;
     }
 
     public static class Builder {
 
         private long maxJarFileSize = 10_000_000;
+
+        private boolean ignoreBrokenJarFiles = false;
 
         /**
          * Don't attempt to open large .jar files as the JVM has trouble with
@@ -43,12 +51,18 @@ public class ClasspathResourceFinder {
          *
          * @param maxJarFileSize
          */
-        public void withMaxJarFileSize(long maxJarFileSize) {
+        public Builder withMaxJarFileSize(long maxJarFileSize) {
             this.maxJarFileSize = maxJarFileSize;
+            return this;
+        }
+
+        public Builder withIgnoreBrokenJarFiles(boolean ignoreBrokenJarFiles) {
+            this.ignoreBrokenJarFiles = ignoreBrokenJarFiles;
+            return this;
         }
 
         public ClasspathResourceFinder build() {
-            return new ClasspathResourceFinder( maxJarFileSize );
+            return new ClasspathResourceFinder( maxJarFileSize, ignoreBrokenJarFiles );
         }
 
     }
@@ -121,9 +135,17 @@ public class ClasspathResourceFinder {
             return result;
 
         } catch (IOException e) {
-            throw new IOException( String.format( "Could not open zip file: %s (length=%,d bytes)",
-                                                  file.getAbsolutePath(), file.length() ),
-                                   e );
+
+            String msg = String.format( "Could not open zip file: %s (length=%,d bytes)",
+                                        file.getAbsolutePath(), file.length() );
+
+            if ( ignoreBrokenJarFiles ) {
+                log.warn( msg );
+                return result;
+            } else {
+                throw new IOException( msg, e );
+            }
+
         }
 
     }

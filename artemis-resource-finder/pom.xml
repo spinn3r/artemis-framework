@@ -15,6 +15,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.log5j</groupId>
+            <artifactId>artemis-log5j</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis</groupId>
             <artifactId>artemis-guava</artifactId>
             <version>${project.version}</version>
