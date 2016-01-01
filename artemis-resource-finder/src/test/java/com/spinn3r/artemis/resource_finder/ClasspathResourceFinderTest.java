@@ -18,7 +18,7 @@ public class ClasspathResourceFinderTest {
     @Test
     public void testGetResources() throws Exception {
 
-        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder.Builder().build();
 
         Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( ".*/resource_finder/.*\\.txt" ) );
 
@@ -30,7 +30,7 @@ public class ClasspathResourceFinderTest {
     @Test
     public void testClasspathResourcesFinder2() throws Exception {
 
-        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder.Builder().build();
 
         Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( ".*\\.txt" ) );
 
@@ -50,7 +50,7 @@ public class ClasspathResourceFinderTest {
 
         System.out.printf( "%s\n", System.getProperty( "java.class.path" ) );
 
-        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder.Builder().build();
 
         Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( "testing/.*\\.txt" ) );
         ImmutableList<String> paths = ClasspathResources.toPaths( resources );

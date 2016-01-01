@@ -26,7 +26,7 @@ public class TestResourceFinderFromDependencyModule {
 
         System.out.printf( "%s\n", System.getProperty( "java.class.path" ) );
 
-        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder.Builder().build();
 
         Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( "testing/.*\\.txt" ) );
         ImmutableList<String> paths = ClasspathResources.toPaths( resources );
@@ -51,7 +51,7 @@ public class TestResourceFinderFromDependencyModule {
 
         System.out.printf( "%s\n", System.getProperty( "java.class.path" ) );
 
-        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder();
+        ClasspathResourceFinder classpathResourceFinder = new ClasspathResourceFinder.Builder().build();
 
         Collection<ResourceReference> resources = classpathResourceFinder.findResources( Pattern.compile( ".*\\.txt" ) );
         ImmutableList<String> paths = ClasspathResources.toPaths( resources );

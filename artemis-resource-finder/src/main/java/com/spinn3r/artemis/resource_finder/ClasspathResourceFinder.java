@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.resource_finder;
 
-import com.google.common.collect.ImmutableCollection;
 import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.resource_finder.references.FileResourceReference;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
@@ -27,6 +26,33 @@ import java.util.zip.ZipFile;
  */
 public class ClasspathResourceFinder {
 
+    private final long maxJarFileSize;
+
+    private ClasspathResourceFinder(long maxJarFileSize) {
+
+        this.maxJarFileSize = maxJarFileSize;
+    }
+
+    public static class Builder {
+
+        private long maxJarFileSize = 10_000_000;
+
+        /**
+         * Don't attempt to open large .jar files as the JVM has trouble with
+         * these sometimes.
+         *
+         * @param maxJarFileSize
+         */
+        public void withMaxJarFileSize(long maxJarFileSize) {
+            this.maxJarFileSize = maxJarFileSize;
+        }
+
+        public ClasspathResourceFinder build() {
+            return new ClasspathResourceFinder( maxJarFileSize );
+        }
+
+    }
+
     public ImmutableList<ResourceReference> findResources(String regex ) throws IOException {
         return findResources( Pattern.compile( regex ) );
     }
@@ -42,10 +68,15 @@ public class ClasspathResourceFinder {
 
         for( String classPathElement : classPathElements){
             File file = new File(classPathElement);
+
             if ( ! file.exists() )
                 continue;
 
+            if ( ! file.isDirectory() && file.length() > maxJarFileSize )
+                continue;
+
             result.addAll( findResources(file, pattern));
+
         }
 
         return ImmutableList.copyOf( result );
