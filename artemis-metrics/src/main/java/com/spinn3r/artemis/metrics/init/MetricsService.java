@@ -21,7 +21,7 @@ import java.lang.management.ManagementFactory;
  * servlets
  */
 @Config( path = "metrics.conf",
-         required = true,
+         required = false,
          implementation = MetricsConfig.class )
 public class MetricsService extends BaseService {
 
