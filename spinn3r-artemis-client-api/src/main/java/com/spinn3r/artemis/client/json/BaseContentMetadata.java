@@ -3,10 +3,15 @@ package com.spinn3r.artemis.client.json;
 import javax.annotation.Generated;
 import javax.xml.bind.DataBindingException;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -17,23 +22,31 @@ import com.fasterxml.jackson.core.JsonToken;
 
 import java.nio.charset.Charset;
 import java.nio.ByteBuffer;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.spinn3r.artemis.util.io.FastByteArrayOutputStream;
+import com.spinn3r.artemis.util.io.utf8.*;
 
 import com.spinn3r.artemis.schema.core.JSON;
 
 import com.spinn3r.artemis.json.Msg;
+import com.spinn3r.artemis.schema.core.ByteArray;
+import com.spinn3r.artemis.schema.core.BlobSet;
 import com.spinn3r.artemis.schema.core.NoNullSet;
+import com.spinn3r.artemis.schema.core.NoNullMap;
 import com.spinn3r.artemis.schema.core.ObjectMapperFactory;
 import com.spinn3r.artemis.schema.core.ISO8601;
 import com.spinn3r.artemis.schema.core.ByteBufferInputStreams;
