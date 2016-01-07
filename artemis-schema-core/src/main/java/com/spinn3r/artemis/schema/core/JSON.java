@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -46,6 +47,35 @@ public class JSON {
         generator.writeEndObject();
 
     }
+
+    public static void writeStringToMultiStringMap(JsonGenerator generator, String name, Map<String,List<String>> map ) throws IOException {
+
+        // we write JSON sparse ...
+        if ( map.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartObject();
+
+        for (Map.Entry<String, List<String>> entry : map.entrySet()) {
+
+            generator.writeFieldName( entry.getKey() );
+
+            generator.writeStartArray();
+
+            for (String value : entry.getValue()) {
+                generator.writeString( value );
+            }
+
+            generator.writeEndArray();
+
+        }
+
+        generator.writeEndObject();
+
+    }
+
 
     public static void writeLongMap( JsonGenerator generator, String name, Map<Long,Double> map ) throws IOException {
 
