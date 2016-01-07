@@ -14,21 +14,24 @@ import java.io.OutputStream;
  */
 public class SpeedTestServlet extends DefaultServlet {
 
-    private static final int WRITE_LENGTH = 4096;
+    private static final int BLOCK_SIZE = 4096;
+
+    private static final int LENGTH = BLOCK_SIZE * 200000;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // TODO: consider reading the length from the HTTP request.
-        int length = WRITE_LENGTH * 200000;
+        int length = LENGTH;
 
-        int nrWrites = length / WRITE_LENGTH;
+        if ( request.getParameter( "length" ) != null ) {
+            length = Integer.parseInt( request.getParameter( "length" ) );
+        }
+
+        int nrWrites = length / BLOCK_SIZE;
 
         byte[] data = new byte[4096];
 
-        int contentLength = data.length * nrWrites;
-
-        response.setContentLength( contentLength );
+        response.setContentLength( length );
 
         try( OutputStream out = response.getOutputStream() ) {
 
