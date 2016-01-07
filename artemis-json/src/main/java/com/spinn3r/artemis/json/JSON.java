@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.util.Map;
 
 /**
  *
@@ -113,6 +114,13 @@ public class JSON {
         } catch (IOException e) {
             throw new RuntimeException( e );
         }
+
+    }
+
+    public static <T> T fromJSON(Class<T> clazz, Map<String,Object> map) {
+
+        ObjectMapper objectMapper = createObjectMapper();
+        return objectMapper.convertValue( map, clazz );
 
     }
 
