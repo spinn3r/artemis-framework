@@ -58,6 +58,13 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     }
 
     @Override
+    public HttpRequestMethod withProperties( Map<String,String> properties ) {
+        checkNotNull( properties );
+        this.properties.putAll( properties );
+        return this;
+    }
+
+    @Override
     public HttpRequestMethod withMaxContentLength( int maxContentLength ) {
         this.maxContentLength = maxContentLength;
         return this;

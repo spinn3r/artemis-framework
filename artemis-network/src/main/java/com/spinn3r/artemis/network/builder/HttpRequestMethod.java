@@ -37,7 +37,9 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withRequestHeaders( Map<String,String> requestHeaders );
 
-    HttpRequestMethod withMaxContentLength( int maxContentLength );
+    HttpRequestMethod withProperties(Map<String, String> properties);
+
+    HttpRequestMethod withMaxContentLength(int maxContentLength );
 
     HttpRequestMethod withCookie( String name, String value );
 
