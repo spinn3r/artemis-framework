@@ -136,6 +136,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
         Map<String, List<String>> responseHeadersMap = resourceRequest.getResponseHeadersMap();
 
+        // FIXME: move to use Immtables.copyMultiMap
+
         Map<String,ImmutableList<String>> tmp = Maps.newHashMap();
         for (Map.Entry<String, List<String>> entry : responseHeadersMap.entrySet()) {
 
