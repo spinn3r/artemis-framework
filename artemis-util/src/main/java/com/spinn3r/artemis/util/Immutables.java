@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Immutables {
 
-    public static <K,V> ImmutableMap<K,ImmutableList<V>> copyOfMultiMap(Map<K,List<V>> input ) {
+    public static <K,V> ImmutableMap<K,ImmutableList<V>> copyOfMultiMap( Map<K,List<V>> input ) {
 
         Map<K,ImmutableList<V>> tmp = Maps.newLinkedHashMap();
 
@@ -27,6 +27,25 @@ public class Immutables {
         }
 
         return ImmutableMap.copyOf( tmp );
+
+    }
+
+    public static <K,V> Map<K,List<V>> mutableMultimap( ImmutableMap<K,ImmutableList<V>> input ) {
+
+        Map<K,List<V>> tmp = Maps.newLinkedHashMap();
+
+        for (Map.Entry<K, ImmutableList<V>> entry : input.entrySet()) {
+
+            if ( entry.getKey() == null ) {
+                // null keys are evil..
+                continue;
+            }
+
+            tmp.put( entry.getKey(), entry.getValue() );
+
+        }
+
+        return tmp;
 
     }
 
