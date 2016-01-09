@@ -41,10 +41,14 @@ public class NetworkException extends IOException {
         this.responseCode = responseCode;
     }
 
+    public NetworkException( String message, Throwable t ) {
+        super( message + ": " + t.getClass().getName() + ": " + t.getMessage() );
+        initCause( t );
+    }
+
     public NetworkException( Throwable t ) {
         super( t.getClass().getName() + ": " + t.getMessage() );
         initCause( t );
-
     }
 
     /**
