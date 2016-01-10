@@ -513,7 +513,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 }
 
-                if (followRedirect( parseSSLRedirect() )) {
+                if ( followRedirect( parseSSLRedirect() ) ) {
                     log.info( "Following SSL redirect..." );
                     return;
                 }
