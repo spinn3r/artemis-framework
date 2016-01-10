@@ -108,8 +108,12 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     @Override
     public HttpRequestMethod withRequestHeaders(Map<String, String> requestHeaders) {
-        this.requestHeaders.putAll( requestHeaders );
+
+        if ( requestHeaders != null )
+            this.requestHeaders.putAll( requestHeaders );
+
         return this;
+
     }
 
     @Override
