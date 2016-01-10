@@ -1,9 +1,12 @@
 package com.spinn3r.artemis.util.text;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
 import java.util.*;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -12,6 +15,7 @@ public class MapFormatter {
 
 
     public static  <K,V> String table(Map<K, V> map) {
+        checkNotNull( map );
 
         StringBuilder buff = new StringBuilder();
 
@@ -25,6 +29,8 @@ public class MapFormatter {
     }
 
     public static <K,V> String tableSortedByKey(Map<K,V> map) {
+        checkNotNull( map );
+
         Map<K,V> copy = new TreeMap<>();
         copy.putAll( map );
         return table( copy );
@@ -39,6 +45,7 @@ public class MapFormatter {
      * @return
      */
     public static String toString(Map<?, ?> map) {
+        checkNotNull( map );
 
         Map<String,Object> stringMap = Maps.newTreeMap();
 
