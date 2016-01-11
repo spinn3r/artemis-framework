@@ -486,8 +486,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             this.duration = (int)(after - before);
 
-            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, proxy=%s",
-                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), proxy );
+            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s proxy=%s",
+                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );
 
         }
 
