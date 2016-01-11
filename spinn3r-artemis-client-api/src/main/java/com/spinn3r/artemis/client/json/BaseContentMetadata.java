@@ -12591,6 +12591,7 @@ public abstract class BaseContentMetadata
     }
 
     public static ContentMetadata fromJSON( String value ) {
+
         try {
 
             ContentMetadata result = MAPPER.readValue( value, ContentMetadata.class );
@@ -12602,6 +12603,17 @@ public abstract class BaseContentMetadata
         } catch ( IOException e ) {
             throw new RuntimeException( e );
         }
+
+    }
+
+    public static ContentMetadata fromJSON( Map<String,Object> map ) {
+
+        ContentMetadata result = MAPPER.convertValue( map, ContentMetadata.class );
+        result.resetModified();
+        result.constructed = false;
+
+        return result;
+
     }
 
     public static ContentMetadata fromJSON( ByteBuffer byteBuffer ) {

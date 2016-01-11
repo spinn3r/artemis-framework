@@ -23357,6 +23357,7 @@ public abstract class BaseContent
     }
 
     public static Content fromJSON( String value ) {
+
         try {
 
             Content result = MAPPER.readValue( value, Content.class );
@@ -23368,6 +23369,17 @@ public abstract class BaseContent
         } catch ( IOException e ) {
             throw new RuntimeException( e );
         }
+
+    }
+
+    public static Content fromJSON( Map<String,Object> map ) {
+
+        Content result = MAPPER.convertValue( map, Content.class );
+        result.resetModified();
+        result.constructed = false;
+
+        return result;
+
     }
 
     public static Content fromJSON( ByteBuffer byteBuffer ) {
