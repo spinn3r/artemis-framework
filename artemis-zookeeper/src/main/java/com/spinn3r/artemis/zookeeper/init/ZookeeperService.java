@@ -1,4 +1,4 @@
-Zpackage com.spinn3r.artemis.zookeeper.init;
+package com.spinn3r.artemis.zookeeper.init;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
