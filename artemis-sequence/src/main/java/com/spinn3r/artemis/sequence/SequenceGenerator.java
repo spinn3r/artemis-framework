@@ -104,7 +104,7 @@ public class SequenceGenerator {
 
             long writerId = globalMutex.getValue();
 
-            long res = -1;
+            long result = -1;
 
             synchronized( MUTEX ) {
 
@@ -132,11 +132,11 @@ public class SequenceGenerator {
 
                 }
 
-                res = ( lastRollover  * SequenceReference.PADDING ) + writerId + sequence;
+                result = ( lastRollover  * SequenceReference.PADDING ) + writerId + sequence;
                 ++issued;
             }
 
-            return new SequenceReference( res );
+            return new SequenceReference( result );
 
         } catch (GlobalMutexExpiredException e) {
             throw new RuntimeException( e );

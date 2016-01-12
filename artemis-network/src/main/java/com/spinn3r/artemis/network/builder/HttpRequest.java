@@ -35,6 +35,24 @@ public interface HttpRequest {
      */
     int STATUS_CONNECT_TIMEOUT = -1025;
 
+    // TODO: refactor the name of this method as it is confusing when compared
+    // to the Content-Encoding HTTP header.  Technically this is something
+    // like
+    //   getContentWithCharsetEncodingApplied or
+    //   getContentWithCharsetEncoding
+    //
+    // There are two HTTP headers involved here.  The first is:
+    //
+    // Content-Type:  includes the media type (AKA text/html or application/rss+xml)
+    //                and an optional charset via ;charset=
+    //
+    //                Example: text/html; charset=utf-8
+    //
+    // Content-Encoding: specifies the encoding used for on the raw bytes to
+    //                   compress the data.  Usually just gzip.
+    //
+    // Once we fix this then we could add a getContentEncoding method which
+    // would return 'gzip' or 'null' and then we could have stats on this.
 
     String getContentWithEncoding() throws NetworkException;
 
