@@ -53,7 +53,9 @@ public class ZKGlobalMutexService extends BaseService {
                                         NAMESPACE );
 
         globalMutexFactoryProvider.set( zkGlobalMutexFactory );
-        globalMutexProvider.set( zkGlobalMutexFactory.acquire() );
+        GlobalMutex globalMutex = zkGlobalMutexFactory.acquire();
+        info( "Acquired global mutex value: %s", globalMutex.getValue() );
+        globalMutexProvider.set( globalMutex );
 
     }
 

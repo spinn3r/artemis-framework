@@ -47,7 +47,7 @@ public class SequenceGenerator {
      */
     public static final long MAX_VALUE = (Long.MAX_VALUE / SequenceReference.PADDING) * SequenceReference.PADDING + 99999999L;
 
-    private static final int ID_WIDTH    = 14;
+    private static final int ID_WIDTH = 14;
 
     private static final int SEQUENCE_WIDTH = 14;
 
