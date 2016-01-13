@@ -26,6 +26,9 @@ public class FileConfigLoader implements ConfigLoader {
 
         File file = new File( directory, path );
 
+        if ( ! file.exists() )
+            return null;
+
         try {
 
             return file.toURI().toURL();

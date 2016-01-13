@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.init.config;
 
+import com.google.common.collect.Lists;
+
 import java.net.URL;
 import java.util.List;
 
@@ -9,6 +11,10 @@ import java.util.List;
 public class MultiConfigLoader implements ConfigLoader {
 
     private List<ConfigLoader> configLoaders;
+
+    public MultiConfigLoader( ConfigLoader... configLoaders ) {
+        this( Lists.newArrayList(configLoaders) );
+    }
 
     public MultiConfigLoader(List<ConfigLoader> configLoaders) {
         this.configLoaders = configLoaders;

@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init.config;
 
+import java.io.IOException;
 import java.net.URL;
 
 /**
