@@ -8,6 +8,7 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.http.FilterReferences;
 import com.spinn3r.artemis.http.RequestLogReferences;
 import com.spinn3r.artemis.http.ServletReferences;
+import com.spinn3r.artemis.http.servlets.EchoServlet;
 import com.spinn3r.artemis.http.servlets.IndexServlet;
 import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.http.servlets.SpeedTestServlet;
@@ -77,6 +78,7 @@ public class DefaultWebserverReferencesService extends BaseService {
         servletReferences.add( "/host-meta", new HostMetaServlet( hostMeta ) );
         servletReferences.add( "/", new IndexServlet( servletReferences, hostnameProvider.get().getValue(), role.getValue() ) );
         servletReferences.add( "/request-meta", new RequestMetaServlet() );
+        servletReferences.add( "/echo", new EchoServlet() );
 
     }
 

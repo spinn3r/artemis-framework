@@ -37,7 +37,8 @@ public class WebserverService extends BaseService {
     @Override
     public void start() throws Exception {
 
-        info( "Starting HTTP server on port %s with maxThreads=%s...",  webserverConfig.getPort(), webserverConfig.getMaxThreads() );
+        info( "Starting HTTP server on port %s with maxThreads=%s requestHeaderSize=%s, responseHeaderSize=%s...",
+              webserverConfig.getPort(), webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize() );
 
         serverBuilder = new ServerBuilder()
             .setPort( webserverConfig.getPort() )
