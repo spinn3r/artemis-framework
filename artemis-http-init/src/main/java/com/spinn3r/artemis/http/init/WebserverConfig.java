@@ -14,9 +14,9 @@ public class WebserverConfig {
 
     private boolean useLocalHost = false;
 
-    private int requestHeaderSize = 64 * 1024;
+    private int requestHeaderSize = 128 * 1024;
 
-    private int responseHeaderSize = 64 * 1024;
+    private int responseHeaderSize = 128 * 1024;
 
     public WebserverConfig() {}
 

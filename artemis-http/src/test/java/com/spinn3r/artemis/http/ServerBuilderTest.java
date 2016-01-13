@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http;
 
 import com.google.inject.Inject;
+import com.spinn3r.artemis.http.servlets.EchoServlet;
 import com.spinn3r.artemis.http.servlets.HelloServlet;
 import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.init.Launcher;
@@ -11,6 +12,7 @@ import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.test.BaseTestWithCapturedOutput;
 import com.spinn3r.artemis.init.MockHostnameService;
+import com.spinn3r.artemis.util.misc.Strings;
 import org.eclipse.jetty.server.Server;
 import org.junit.After;
 import org.junit.Before;
@@ -80,7 +82,6 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
     }
 
-
     @Test
     public void test1() throws Exception {
 
@@ -106,6 +107,30 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
     }
 
+    @Test
+    public void testWithLargePost() throws Exception {
+
+        this.server = new ServerBuilder()
+                        .setPort( PORT )
+                        .setRequestHeaderSize( 64 * 1024 )
+                        .setResponseHeaderSize( 64 * 1024 )
+                        .addServlet( "/post", new EchoServlet() )
+                        .build();
+
+        this.server.start();
+
+        int dataLength = 32_000;
+
+        String data = Strings.repeat( "x", dataLength );
+
+        assertEquals( dataLength, data.length() );
+
+        String link = String.format( "http://localhost:%s/post", PORT );
+        String content = httpRequestBuilder.post( link, data, "UTF-8", "text/plain" ).execute().getContentWithEncoding();
+
+        assertEquals( data.length(), content.length() );
+
+    }
 
     @Test
     public void testUseLocalhost() throws Exception {

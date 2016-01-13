@@ -204,7 +204,7 @@ public class ServerBuilder {
         httpConfiguration.setRequestHeaderSize( requestHeaderSize );
         httpConfiguration.setResponseHeaderSize( responseHeaderSize );
 
-        HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory();
+        HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory( httpConfiguration );
 
         ServerConnector connector = new ServerConnector(server, httpConnectionFactory );
         connector.setPort(port);

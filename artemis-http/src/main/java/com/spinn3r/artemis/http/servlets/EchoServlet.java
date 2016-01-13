@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http.servlets;
 
 import com.google.common.base.Charsets;
+import com.google.common.io.ByteStreams;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
@@ -48,17 +49,10 @@ public class EchoServlet extends DefaultServlet {
 
         resp.setContentType( req.getContentType() );
 
-        byte[] buff = new byte[1024];
-
         try( InputStream is = req.getInputStream();
              OutputStream out = resp.getOutputStream() ) {
 
-            int count = is.read( buff );
-
-            if ( count == -1 )
-                return;
-
-            out.write( buff, 0, count );
+            ByteStreams.copy(is, out);
 
         }
 
