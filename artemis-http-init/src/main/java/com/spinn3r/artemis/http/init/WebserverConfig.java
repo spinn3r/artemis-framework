@@ -14,6 +14,10 @@ public class WebserverConfig {
 
     private boolean useLocalHost = false;
 
+    private int requestHeaderSize = 64 * 1024;
+
+    private int responseHeaderSize = 64 * 1024;
+
     public WebserverConfig() {}
 
     public WebserverConfig(int port) {
@@ -32,12 +36,22 @@ public class WebserverConfig {
         return useLocalHost;
     }
 
+    public int getRequestHeaderSize() {
+        return requestHeaderSize;
+    }
+
+    public int getResponseHeaderSize() {
+        return responseHeaderSize;
+    }
+
     @Override
     public String toString() {
         return "WebserverConfig{" +
                  "port=" + port +
                  ", maxThreads=" + maxThreads +
                  ", useLocalHost=" + useLocalHost +
+                 ", requestHeaderSize=" + requestHeaderSize +
+                 ", responseHeaderSize=" + responseHeaderSize +
                  '}';
     }
 

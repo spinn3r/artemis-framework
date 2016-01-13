@@ -18,7 +18,7 @@ public class WebserverService extends BaseService {
 
     protected ServerBuilder serverBuilder = new ServerBuilder();
 
-    protected final WebserverConfig config;
+    protected final WebserverConfig webserverConfig;
 
     protected final ServletReferences servletReferences;
 
@@ -28,7 +28,7 @@ public class WebserverService extends BaseService {
 
     @Inject
     WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences) {
-        this.config = webserverConfig;
+        this.webserverConfig = webserverConfig;
         this.servletReferences = servletReferences;
         this.filterReferences = filterReferences;
         this.requestLogReferences = requestLogReferences;
@@ -37,11 +37,11 @@ public class WebserverService extends BaseService {
     @Override
     public void start() throws Exception {
 
-        info( "Starting HTTP server on port %s with maxThreads=%s...",  config.getPort(), config.getMaxThreads() );
+        info( "Starting HTTP server on port %s with maxThreads=%s...",  webserverConfig.getPort(), webserverConfig.getMaxThreads() );
 
         serverBuilder = new ServerBuilder()
-            .setPort( config.getPort() )
-            .setMaxThreads( config.getMaxThreads() );
+            .setPort( webserverConfig.getPort() )
+            .setMaxThreads( webserverConfig.getMaxThreads() );
 
         for (ServletReference servletReference : servletReferences) {
 
@@ -60,14 +60,16 @@ public class WebserverService extends BaseService {
         }
 
         serverBuilder.setRequestLogReferences( requestLogReferences );
-        serverBuilder.setUseLocalhost( config.getUseLocalHost() );
+        serverBuilder.setUseLocalhost( webserverConfig.getUseLocalHost() );
+        serverBuilder.setRequestHeaderSize( webserverConfig.getRequestHeaderSize() );
+        serverBuilder.setResponseHeaderSize( webserverConfig.getResponseHeaderSize() );
 
         server = serverBuilder.build();
 
         try {
             server.start();
         } catch ( Exception e ) {
-            throw new Exception( "Unable to start webserver on port: " + config.getPort(), e );
+            throw new Exception( "Unable to start webserver on port: " + webserverConfig.getPort(), e );
         }
 
     }

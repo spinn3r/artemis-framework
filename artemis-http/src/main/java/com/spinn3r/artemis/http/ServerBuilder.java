@@ -28,6 +28,10 @@ public class ServerBuilder {
 
     private int maxThreads = 500;
 
+    private int requestHeaderSize = 64 * 1024;
+
+    private int responseHeaderSize = 64 * 1024;
+
     private ServletReferences servletReferences = new ServletReferences();
 
     private FilterReferences filterReferences = new FilterReferences();
@@ -81,6 +85,16 @@ public class ServerBuilder {
 
     public ServerBuilder setMaxThreads(int maxThreads) {
         this.maxThreads = maxThreads;
+        return this;
+    }
+
+    public ServerBuilder setRequestHeaderSize(int requestHeaderSize) {
+        this.requestHeaderSize = requestHeaderSize;
+        return this;
+    }
+
+    public ServerBuilder setResponseHeaderSize(int responseHeaderSize) {
+        this.responseHeaderSize = responseHeaderSize;
         return this;
     }
 
@@ -185,7 +199,14 @@ public class ServerBuilder {
 
         Server server = new Server( queuedThreadPool );
 
-        ServerConnector connector=new ServerConnector(server);
+        HttpConfiguration httpConfiguration = new HttpConfiguration();
+
+        httpConfiguration.setRequestHeaderSize( requestHeaderSize );
+        httpConfiguration.setResponseHeaderSize( responseHeaderSize );
+
+        HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory();
+
+        ServerConnector connector = new ServerConnector(server, httpConnectionFactory );
         connector.setPort(port);
         server.setConnectors( new Connector[]{ connector } );
 
