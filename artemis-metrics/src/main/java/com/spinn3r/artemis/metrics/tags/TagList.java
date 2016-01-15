@@ -74,6 +74,9 @@ public class TagList extends ArrayList<Tag> {
         if ( tagValues == null )
             return true;
 
+        if ( tagValue == null )
+            return false;
+
         // return true if the tag value is in the index.
         return tagValues.contains( tagValue );
 
