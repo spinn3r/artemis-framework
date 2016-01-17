@@ -1339,6 +1339,24 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasCreated = 0;
+
+    public int hasModifiedCreated = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedCreated = false;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+
+    protected Date created;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasUpdateIteration = 0;
 
     public int hasModifiedUpdateIteration = 0;
@@ -4702,6 +4720,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedVersion () {
         return this.hasDefinedVersion;
+    }
+
+    public BaseContent setCreated ( Date created ) {
+
+        ++this.hasCreated;
+        ++this.hasModifiedCreated;
+
+        this.created = created;
+
+        hasDefinedCreated = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The time this permalink task message was created
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: created
+     * </p>
+     */
+    public Date getCreated () {
+
+        if ( this.constructed == false && this.hasCreated == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.created" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.created;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The time this permalink task message was created
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: created
+     * </p>
+     */
+    public Date getCreated ( Date _default ) {
+
+        if ( ! hasCreated() ) {
+            return _default;
+        }
+
+        return getCreated();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasCreated () {
+        return this.hasCreated > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearCreated () {
+        this.hasCreated = 0;
+        this.hasModifiedCreated = 0;
+        this.hasDefinedCreated = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedCreated () {
+        return this.hasModifiedCreated > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedCreated () {
+        return this.hasDefinedCreated;
     }
 
     public BaseContent setUpdateIteration ( long updateIteration ) {
@@ -15327,6 +15430,10 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
+        if ( obj.hasCreated() ) {
+            setCreated( obj.getCreated() );
+        }
+
         if ( obj.hasUpdateIteration() ) {
             setUpdateIteration( obj.getUpdateIteration() );
         }
@@ -15895,6 +16002,10 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
+        if ( ! hasCreated() && obj.hasCreated() ) {
+            setCreated( obj.getCreated() );
+        }
+
         if ( ! hasUpdateIteration() && obj.hasUpdateIteration() ) {
             setUpdateIteration( obj.getUpdateIteration() );
         }
@@ -16428,6 +16539,8 @@ public abstract class BaseContent
 
         this.hasModifiedVersion = 0;
 
+        this.hasModifiedCreated = 0;
+
         this.hasModifiedUpdateIteration = 0;
 
         this.hasModifiedSourceHashcode = 0;
@@ -16744,6 +16857,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedVersion() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedCreated() ) {
             return true;
         }
 
@@ -17385,6 +17502,14 @@ public abstract class BaseContent
 
             buff.append( "version=" );
             buff.append( version );
+            buff.append( " " );
+
+        }
+
+        if ( hasCreated > 0 ) {
+
+            buff.append( "created=" );
+            buff.append( toISO8601( created ) );
             buff.append( " " );
 
         }
@@ -18535,6 +18660,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( version, cmp.version ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasCreated() != cmp.hasCreated() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( created, cmp.created ) ) {
             return false;
         }
 
@@ -20081,6 +20215,21 @@ public abstract class BaseContent
                 if ( version != null ) {
                     generator.writeStringField( __name, version );
                 }
+
+            }
+
+            // ***** json encode member created from Date
+
+            __name = "created";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "created";
+            }
+
+            if ( this.hasCreated > 0 ) {
+
+                if ( created != null )
+                    generator.writeStringField( __name, toISO8601( created ) );
 
             }
 
@@ -22231,6 +22380,20 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setVersion( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member created from Date
+
+                case "created":
+
+                    try {
+                        jParser.nextToken();
+                        setCreated( ISO8601.parse( jParser.getValueAsString() ) );
+                    } catch( ParseException e ) {
+                        throw new JsonParseException( "Could not parse field: created", jParser.getCurrentLocation(), e );
+                    }
 
                     break;
 
