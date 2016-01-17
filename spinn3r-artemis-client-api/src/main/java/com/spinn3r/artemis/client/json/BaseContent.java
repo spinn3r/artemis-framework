@@ -1339,6 +1339,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasUpdateIteration = 0;
+
+    public int hasModifiedUpdateIteration = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedUpdateIteration = false;
+
+    protected long updateIteration;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSourceHashcode = 0;
 
     public int hasModifiedSourceHashcode = 0;
@@ -4686,6 +4702,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedVersion () {
         return this.hasDefinedVersion;
+    }
+
+    public BaseContent setUpdateIteration ( long updateIteration ) {
+
+        ++this.hasUpdateIteration;
+        ++this.hasModifiedUpdateIteration;
+
+        this.updateIteration = updateIteration;
+
+        hasDefinedUpdateIteration = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of times we've updated this source.  Starts at 0 (for the first check) and then the first time it is updated the value is 1.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: update_iteration
+     * </p>
+     */
+    public long getUpdateIteration () {
+
+        if ( this.constructed == false && this.hasUpdateIteration == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.updateIteration" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.updateIteration;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of times we've updated this source.  Starts at 0 (for the first check) and then the first time it is updated the value is 1.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: update_iteration
+     * </p>
+     */
+    public long getUpdateIteration ( long _default ) {
+
+        if ( ! hasUpdateIteration() ) {
+            return _default;
+        }
+
+        return getUpdateIteration();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasUpdateIteration () {
+        return this.hasUpdateIteration > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearUpdateIteration () {
+        this.hasUpdateIteration = 0;
+        this.hasModifiedUpdateIteration = 0;
+        this.hasDefinedUpdateIteration = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedUpdateIteration () {
+        return this.hasModifiedUpdateIteration > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedUpdateIteration () {
+        return this.hasDefinedUpdateIteration;
     }
 
     public BaseContent setSourceHashcode ( String sourceHashcode ) {
@@ -15226,6 +15327,10 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
+        if ( obj.hasUpdateIteration() ) {
+            setUpdateIteration( obj.getUpdateIteration() );
+        }
+
         if ( obj.hasSourceHashcode() ) {
             setSourceHashcode( obj.getSourceHashcode() );
         }
@@ -15790,6 +15895,10 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
+        if ( ! hasUpdateIteration() && obj.hasUpdateIteration() ) {
+            setUpdateIteration( obj.getUpdateIteration() );
+        }
+
         if ( ! hasSourceHashcode() && obj.hasSourceHashcode() ) {
             setSourceHashcode( obj.getSourceHashcode() );
         }
@@ -16319,6 +16428,8 @@ public abstract class BaseContent
 
         this.hasModifiedVersion = 0;
 
+        this.hasModifiedUpdateIteration = 0;
+
         this.hasModifiedSourceHashcode = 0;
 
         this.hasModifiedSourceResource = 0;
@@ -16633,6 +16744,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedVersion() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedUpdateIteration() ) {
             return true;
         }
 
@@ -17270,6 +17385,14 @@ public abstract class BaseContent
 
             buff.append( "version=" );
             buff.append( version );
+            buff.append( " " );
+
+        }
+
+        if ( hasUpdateIteration > 0 ) {
+
+            buff.append( "updateIteration=" );
+            buff.append( updateIteration );
             buff.append( " " );
 
         }
@@ -18412,6 +18535,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( version, cmp.version ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasUpdateIteration() != cmp.hasUpdateIteration() ) {
+            return false;
+        }
+
+        if ( updateIteration != cmp.updateIteration ) {
             return false;
         }
 
@@ -19949,6 +20081,21 @@ public abstract class BaseContent
                 if ( version != null ) {
                     generator.writeStringField( __name, version );
                 }
+
+            }
+
+            // ***** json encode member update_iteration from long
+
+            __name = "updateIteration";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "update_iteration";
+            }
+
+            if ( this.hasUpdateIteration > 0 ) {
+
+                if ( hasDefinedUpdateIteration )
+                    generator.writeNumberField( __name, updateIteration );
 
             }
 
@@ -22084,6 +22231,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setVersion( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member update_iteration from long
+
+                case "update_iteration":
+
+                    jParser.nextToken();
+                    setUpdateIteration( jParser.getLongValue() );
 
                     break;
 
