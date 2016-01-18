@@ -338,7 +338,7 @@ public class HitIndex<T extends Comparable<T>> {
         }
 
         public void inc(int increase) {
-            count+=increase;
+            count += increase;
         }
 
         @Override
