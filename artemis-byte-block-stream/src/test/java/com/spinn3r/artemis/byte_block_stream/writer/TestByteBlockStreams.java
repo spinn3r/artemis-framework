@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.byte_block_stream.writer;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.spinn3r.artemis.byte_block_stream.ByteBlock;
 import com.spinn3r.artemis.byte_block_stream.reader.FileBackedRollingByteBlockReader;
 import com.spinn3r.artemis.byte_block_stream.reader.RollingByteBlockReader;
@@ -11,25 +13,24 @@ import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
 public class TestByteBlockStreams {
 
-
     @Test
     public void testWritingThenReading() throws Exception {
 
-        File dir = new File( "/tmp/test-bbs" );
+        String path = "/tmp/test-bbs";
 
-        if ( dir.exists() ) {
-            for(File file: dir.listFiles()) file.delete();
-        } else {
-            Files.createDirectory( dir.toPath() );
-        }
+        File dir = initPath( path );
 
         FileBackedByteBlockWriterFactory fileBackedByteBlockWriterFactory = new FileBackedByteBlockWriterFactory( dir );
+
+        Map<String,String> headers = Maps.newHashMap();
+        headers.put( "hello", "world" );
 
         int nrRecords = 400;
         try( RollingByteBlockWriter rollingByteBlockWriter = new RollingByteBlockWriter( fileBackedByteBlockWriterFactory, 1_000 ) ) {
@@ -42,7 +43,7 @@ public class TestByteBlockStreams {
                 buff.putInt( i );
                 buff.reset();
 
-                ByteBlock byteBlock = new ByteBlock( buff );
+                ByteBlock byteBlock = new ByteBlock( ImmutableMap.copyOf( headers ), buff );
                 rollingByteBlockWriter.write( byteBlock );
 
             }
@@ -57,6 +58,7 @@ public class TestByteBlockStreams {
                 ByteBlock byteBlock = rollingByteBlockReader.next();
 
                 assertEquals( found, byteBlock.getByteBuffer().getInt() );
+                assertEquals( headers, byteBlock.getHeaders() );
 
                 ++found;
             }
@@ -69,6 +71,17 @@ public class TestByteBlockStreams {
         Files.exists( Paths.get( "/tmp/test-bbs/00000.bbs"  ) );
         Files.exists( Paths.get( "/tmp/test-bbs/00035.bbs"  ) );
 
+    }
+
+    private File initPath(String path) throws IOException {
+        File dir = new File( path );
+
+        if ( dir.exists() ) {
+            for(File file: dir.listFiles()) file.delete();
+        } else {
+            Files.createDirectory( dir.toPath() );
+        }
+        return dir;
     }
 
     @Test( expected = BlockSequenceFilesExistException.class )

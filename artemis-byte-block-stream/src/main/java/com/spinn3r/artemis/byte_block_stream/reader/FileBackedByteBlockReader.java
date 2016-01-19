@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.byte_block_stream.reader;
 
+import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.spinn3r.artemis.byte_block_stream.ByteBlock;
 import com.spinn3r.artemis.byte_block_stream.Magic;
 import com.spinn3r.artemis.util.misc.ByteBuffers;
@@ -10,6 +13,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  *
@@ -51,6 +55,18 @@ public class FileBackedByteBlockReader implements ByteBlockReader {
     @Override
     public ByteBlock next() {
 
+        // now read the headers
+        int nrHeaders = backing.getInt();
+
+        Map<String,String> headers = Maps.newHashMap();
+
+        for (int i = 0; i < nrHeaders; i++) {
+            String headerName = readString();
+            String headerValue = readString();
+            headers.put( headerName, headerValue );
+        }
+
+        // now get the number of bytes of data to read.
         int length = backing.getInt();
 
         ByteBuffer slice = backing.slice();
@@ -59,8 +75,15 @@ public class FileBackedByteBlockReader implements ByteBlockReader {
 
         backing.position( backing.position() + length );
 
-        return new ByteBlock( slice );
+        return new ByteBlock( ImmutableMap.copyOf( headers ), slice );
 
+    }
+
+    private String readString() {
+        int len = backing.getInt();
+        byte[] data = new byte[ len ];
+        backing.get(data);
+        return new String( data, Charsets.UTF_8 );
     }
 
     @Override

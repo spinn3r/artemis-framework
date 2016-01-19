@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.byte_block_stream;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
+
 import java.nio.ByteBuffer;
 
 /**
@@ -11,14 +14,29 @@ import java.nio.ByteBuffer;
  */
 public class ByteBlock {
 
-    private ByteBuffer byteBuffer;
+    private final ImmutableMap<String,String> headers;
 
-    public ByteBlock( byte[] data )  {
-        this( ByteBuffer.wrap( data ) );
+    private final ByteBuffer byteBuffer;
+
+    public ByteBlock( byte[] data ) {
+        this( ImmutableMap.copyOf( Maps.newHashMap() ), data );
+    }
+
+    public ByteBlock( ImmutableMap<String,String> headers, byte[] data )  {
+        this( headers, ByteBuffer.wrap( data ) );
     }
 
     public ByteBlock(ByteBuffer byteBuffer) {
+        this( ImmutableMap.copyOf( Maps.newHashMap() ), byteBuffer );
+    }
+
+    public ByteBlock(ImmutableMap<String,String> headers, ByteBuffer byteBuffer) {
+        this.headers = headers;
         this.byteBuffer = byteBuffer;
+    }
+
+    public ImmutableMap<String, String> getHeaders() {
+        return headers;
     }
 
     public ByteBuffer getByteBuffer() {

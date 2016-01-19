@@ -7,5 +7,9 @@ Simple container format of files containing chunks of records.
 
 - add a magic number to the file. 
 
+- the file needs headers (can include descriptions, etc)
+
+- each record needs headers too..
+ 
 - 
    

@@ -8,6 +8,6 @@ import java.nio.ByteBuffer;
 public class Magic {
 
     public static final ByteBuffer HEADER
-      = ByteBuffer.wrap( new byte[] { (byte)'b', (byte)'b', (byte)'1' } );
+      = ByteBuffer.wrap( new byte[] { (byte)'b', (byte)'b', (byte)'2' } );
 
 }
