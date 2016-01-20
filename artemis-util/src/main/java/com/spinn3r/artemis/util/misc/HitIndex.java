@@ -362,4 +362,9 @@ public class HitIndex<T extends Comparable<T>> {
 
     }
 
+    @Override
+    public String toString() {
+        return delegate.toString();
+    }
+
 }

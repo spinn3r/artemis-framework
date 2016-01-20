@@ -19,6 +19,17 @@ public class Histograph<K extends Comparable<K>> {
 
     protected ConcurrentMap<K,AtomicInteger> delegate = Maps.newConcurrentMap();
 
+    public Histograph() {
+    }
+
+    public Histograph( Histograph<K> parent ) {
+
+        for (Map.Entry<K, AtomicInteger> entry : delegate.entrySet()) {
+            delegate.put( entry.getKey(), new AtomicInteger( entry.getValue().get() ) );
+        }
+
+    }
+
     /**
      * Increment a key with a delta of 1
      */
@@ -44,7 +55,7 @@ public class Histograph<K extends Comparable<K>> {
     /**
      * Get a given entry by key.
      */
-    public int get( String key ) {
+    public int get( K key ) {
         return delegate.get( key ).get();
     }
 
@@ -106,6 +117,15 @@ public class Histograph<K extends Comparable<K>> {
         return result;
 
     }
+
+    public void merge( Histograph<K> source ) {
+
+        for (Map.Entry<K, AtomicInteger> entry : source.delegate.entrySet()) {
+            incr( entry.getKey(), entry.getValue().get() );
+        }
+
+    }
+
 
     public String format() {
         return format( Integer.MAX_VALUE );
