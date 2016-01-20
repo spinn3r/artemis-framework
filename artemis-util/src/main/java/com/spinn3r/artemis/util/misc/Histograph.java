@@ -24,7 +24,7 @@ public class Histograph<K extends Comparable<K>> {
 
     public Histograph( Histograph<K> parent ) {
 
-        for (Map.Entry<K, AtomicInteger> entry : delegate.entrySet()) {
+        for (Map.Entry<K, AtomicInteger> entry : parent.delegate.entrySet()) {
             delegate.put( entry.getKey(), new AtomicInteger( entry.getValue().get() ) );
         }
 
