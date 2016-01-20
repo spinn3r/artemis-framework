@@ -1339,40 +1339,6 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
-    public int hasCreated = 0;
-
-    public int hasModifiedCreated = 0;
-
-    /**
-     * True when this field is defined and present in the database or set on the
-     * object.  This is used for JSON serialization because we skip undefined
-     * values.
-     */
-    public boolean hasDefinedCreated = false;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
-
-    protected Date created;
-
-    // if a value is modified, it means that we've called setX after the object
-    // has been created.
-
-    public int hasUpdateIteration = 0;
-
-    public int hasModifiedUpdateIteration = 0;
-
-    /**
-     * True when this field is defined and present in the database or set on the
-     * object.  This is used for JSON serialization because we skip undefined
-     * values.
-     */
-    public boolean hasDefinedUpdateIteration = false;
-
-    protected long updateIteration;
-
-    // if a value is modified, it means that we've called setX after the object
-    // has been created.
-
     public int hasSourceHashcode = 0;
 
     public int hasModifiedSourceHashcode = 0;
@@ -2021,24 +1987,6 @@ public abstract class BaseContent
     public boolean hasDefinedSourceFaviconHeight = false;
 
     protected int sourceFaviconHeight;
-
-    // if a value is modified, it means that we've called setX after the object
-    // has been created.
-
-    public int hasSourceCreated = 0;
-
-    public int hasModifiedSourceCreated = 0;
-
-    /**
-     * True when this field is defined and present in the database or set on the
-     * object.  This is used for JSON serialization because we skip undefined
-     * values.
-     */
-    public boolean hasDefinedSourceCreated = false;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
-
-    protected Date sourceCreated;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -4720,176 +4668,6 @@ public abstract class BaseContent
      */
     public boolean hasDefinedVersion () {
         return this.hasDefinedVersion;
-    }
-
-    public BaseContent setCreated ( Date created ) {
-
-        ++this.hasCreated;
-        ++this.hasModifiedCreated;
-
-        this.created = created;
-
-        hasDefinedCreated = true;
-
-        return this;
-
-    }
-
-    /**
-     * <p>
-     * The time this permalink task message was created
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: created
-     * </p>
-     */
-    public Date getCreated () {
-
-        if ( this.constructed == false && this.hasCreated == 0 ) {
-            Throwable cause = new IllegalArgumentException( "this.created" );
-            throw new DataBindingException( "Member is undefined: ", cause );
-        }
-
-        return this.created;
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The time this permalink task message was created
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: created
-     * </p>
-     */
-    public Date getCreated ( Date _default ) {
-
-        if ( ! hasCreated() ) {
-            return _default;
-        }
-
-        return getCreated();
-
-    }
-
-    /**
-     * Return true if this member has a defined value of this field.
-     */
-    public boolean hasCreated () {
-        return this.hasCreated > 0;
-    }
-
-    /**
-     * Clear this method so that it no longer has a value and won't be
-     * serialized or persisted.
-     */
-    public void clearCreated () {
-        this.hasCreated = 0;
-        this.hasModifiedCreated = 0;
-        this.hasDefinedCreated = false;
-    }
-
-    /**
-     * Return true if this member has been modified from the original value.
-     */
-    public boolean hasModifiedCreated () {
-        return this.hasModifiedCreated > 0;
-    }
-
-    /**
-     * Return true if this member has a defined value.
-     */
-    public boolean hasDefinedCreated () {
-        return this.hasDefinedCreated;
-    }
-
-    public BaseContent setUpdateIteration ( long updateIteration ) {
-
-        ++this.hasUpdateIteration;
-        ++this.hasModifiedUpdateIteration;
-
-        this.updateIteration = updateIteration;
-
-        hasDefinedUpdateIteration = true;
-
-        return this;
-
-    }
-
-    /**
-     * <p>
-     * The number of times we've updated this source.  Starts at 0 (for the first check) and then the first time it is updated the value is 1.
-     * </p>
-     *
-     * <p>
-     * Schema type: bigint , name: update_iteration
-     * </p>
-     */
-    public long getUpdateIteration () {
-
-        if ( this.constructed == false && this.hasUpdateIteration == 0 ) {
-            Throwable cause = new IllegalArgumentException( "this.updateIteration" );
-            throw new DataBindingException( "Member is undefined: ", cause );
-        }
-
-        return this.updateIteration;
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of times we've updated this source.  Starts at 0 (for the first check) and then the first time it is updated the value is 1.
-     * </p>
-     *
-     * <p>
-     * Schema type: bigint , name: update_iteration
-     * </p>
-     */
-    public long getUpdateIteration ( long _default ) {
-
-        if ( ! hasUpdateIteration() ) {
-            return _default;
-        }
-
-        return getUpdateIteration();
-
-    }
-
-    /**
-     * Return true if this member has a defined value of this field.
-     */
-    public boolean hasUpdateIteration () {
-        return this.hasUpdateIteration > 0;
-    }
-
-    /**
-     * Clear this method so that it no longer has a value and won't be
-     * serialized or persisted.
-     */
-    public void clearUpdateIteration () {
-        this.hasUpdateIteration = 0;
-        this.hasModifiedUpdateIteration = 0;
-        this.hasDefinedUpdateIteration = false;
-    }
-
-    /**
-     * Return true if this member has been modified from the original value.
-     */
-    public boolean hasModifiedUpdateIteration () {
-        return this.hasModifiedUpdateIteration > 0;
-    }
-
-    /**
-     * Return true if this member has a defined value.
-     */
-    public boolean hasDefinedUpdateIteration () {
-        return this.hasDefinedUpdateIteration;
     }
 
     public BaseContent setSourceHashcode ( String sourceHashcode ) {
@@ -8296,91 +8074,6 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceFaviconHeight () {
         return this.hasDefinedSourceFaviconHeight;
-    }
-
-    public BaseContent setSourceCreated ( Date sourceCreated ) {
-
-        ++this.hasSourceCreated;
-        ++this.hasModifiedSourceCreated;
-
-        this.sourceCreated = sourceCreated;
-
-        hasDefinedSourceCreated = true;
-
-        return this;
-
-    }
-
-    /**
-     * <p>
-     * The time this account was created and is provided from the source.  
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: source_created
-     * </p>
-     */
-    public Date getSourceCreated () {
-
-        if ( this.constructed == false && this.hasSourceCreated == 0 ) {
-            Throwable cause = new IllegalArgumentException( "this.sourceCreated" );
-            throw new DataBindingException( "Member is undefined: ", cause );
-        }
-
-        return this.sourceCreated;
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The time this account was created and is provided from the source.  
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: source_created
-     * </p>
-     */
-    public Date getSourceCreated ( Date _default ) {
-
-        if ( ! hasSourceCreated() ) {
-            return _default;
-        }
-
-        return getSourceCreated();
-
-    }
-
-    /**
-     * Return true if this member has a defined value of this field.
-     */
-    public boolean hasSourceCreated () {
-        return this.hasSourceCreated > 0;
-    }
-
-    /**
-     * Clear this method so that it no longer has a value and won't be
-     * serialized or persisted.
-     */
-    public void clearSourceCreated () {
-        this.hasSourceCreated = 0;
-        this.hasModifiedSourceCreated = 0;
-        this.hasDefinedSourceCreated = false;
-    }
-
-    /**
-     * Return true if this member has been modified from the original value.
-     */
-    public boolean hasModifiedSourceCreated () {
-        return this.hasModifiedSourceCreated > 0;
-    }
-
-    /**
-     * Return true if this member has a defined value.
-     */
-    public boolean hasDefinedSourceCreated () {
-        return this.hasDefinedSourceCreated;
     }
 
     public BaseContent setSourceLikes ( int sourceLikes ) {
@@ -15430,14 +15123,6 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
-        if ( obj.hasCreated() ) {
-            setCreated( obj.getCreated() );
-        }
-
-        if ( obj.hasUpdateIteration() ) {
-            setUpdateIteration( obj.getUpdateIteration() );
-        }
-
         if ( obj.hasSourceHashcode() ) {
             setSourceHashcode( obj.getSourceHashcode() );
         }
@@ -15596,10 +15281,6 @@ public abstract class BaseContent
 
         if ( obj.hasSourceFaviconHeight() ) {
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
-        }
-
-        if ( obj.hasSourceCreated() ) {
-            setSourceCreated( obj.getSourceCreated() );
         }
 
         if ( obj.hasSourceLikes() ) {
@@ -16002,14 +15683,6 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
-        if ( ! hasCreated() && obj.hasCreated() ) {
-            setCreated( obj.getCreated() );
-        }
-
-        if ( ! hasUpdateIteration() && obj.hasUpdateIteration() ) {
-            setUpdateIteration( obj.getUpdateIteration() );
-        }
-
         if ( ! hasSourceHashcode() && obj.hasSourceHashcode() ) {
             setSourceHashcode( obj.getSourceHashcode() );
         }
@@ -16168,10 +15841,6 @@ public abstract class BaseContent
 
         if ( ! hasSourceFaviconHeight() && obj.hasSourceFaviconHeight() ) {
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
-        }
-
-        if ( ! hasSourceCreated() && obj.hasSourceCreated() ) {
-            setSourceCreated( obj.getSourceCreated() );
         }
 
         if ( ! hasSourceLikes() && obj.hasSourceLikes() ) {
@@ -16539,10 +16208,6 @@ public abstract class BaseContent
 
         this.hasModifiedVersion = 0;
 
-        this.hasModifiedCreated = 0;
-
-        this.hasModifiedUpdateIteration = 0;
-
         this.hasModifiedSourceHashcode = 0;
 
         this.hasModifiedSourceResource = 0;
@@ -16622,8 +16287,6 @@ public abstract class BaseContent
         this.hasModifiedSourceFaviconWidth = 0;
 
         this.hasModifiedSourceFaviconHeight = 0;
-
-        this.hasModifiedSourceCreated = 0;
 
         this.hasModifiedSourceLikes = 0;
 
@@ -16860,14 +16523,6 @@ public abstract class BaseContent
             return true;
         }
 
-        if ( this.hasModifiedCreated() ) {
-            return true;
-        }
-
-        if ( this.hasModifiedUpdateIteration() ) {
-            return true;
-        }
-
         if ( this.hasModifiedSourceHashcode() ) {
             return true;
         }
@@ -17025,10 +16680,6 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceFaviconHeight() ) {
-            return true;
-        }
-
-        if ( this.hasModifiedSourceCreated() ) {
             return true;
         }
 
@@ -17506,22 +17157,6 @@ public abstract class BaseContent
 
         }
 
-        if ( hasCreated > 0 ) {
-
-            buff.append( "created=" );
-            buff.append( toISO8601( created ) );
-            buff.append( " " );
-
-        }
-
-        if ( hasUpdateIteration > 0 ) {
-
-            buff.append( "updateIteration=" );
-            buff.append( updateIteration );
-            buff.append( " " );
-
-        }
-
         if ( hasSourceHashcode > 0 ) {
 
             buff.append( "sourceHashcode=" );
@@ -17838,14 +17473,6 @@ public abstract class BaseContent
 
             buff.append( "sourceFaviconHeight=" );
             buff.append( sourceFaviconHeight );
-            buff.append( " " );
-
-        }
-
-        if ( hasSourceCreated > 0 ) {
-
-            buff.append( "sourceCreated=" );
-            buff.append( toISO8601( sourceCreated ) );
             buff.append( " " );
 
         }
@@ -18664,24 +18291,6 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
-        if ( hasCreated() != cmp.hasCreated() ) {
-            return false;
-        }
-
-        if ( ! equalsWithNull( created, cmp.created ) ) {
-            return false;
-        }
-
-        // they should either be both false or both true...
-        if ( hasUpdateIteration() != cmp.hasUpdateIteration() ) {
-            return false;
-        }
-
-        if ( updateIteration != cmp.updateIteration ) {
-            return false;
-        }
-
-        // they should either be both false or both true...
         if ( hasSourceHashcode() != cmp.hasSourceHashcode() ) {
             return false;
         }
@@ -19038,15 +18647,6 @@ public abstract class BaseContent
         }
 
         if ( sourceFaviconHeight != cmp.sourceFaviconHeight ) {
-            return false;
-        }
-
-        // they should either be both false or both true...
-        if ( hasSourceCreated() != cmp.hasSourceCreated() ) {
-            return false;
-        }
-
-        if ( ! equalsWithNull( sourceCreated, cmp.sourceCreated ) ) {
             return false;
         }
 
@@ -20218,36 +19818,6 @@ public abstract class BaseContent
 
             }
 
-            // ***** json encode member created from Date
-
-            __name = "created";
-
-            if ( ! builder.camelCaseNames ) {
-                __name = "created";
-            }
-
-            if ( this.hasCreated > 0 ) {
-
-                if ( created != null )
-                    generator.writeStringField( __name, toISO8601( created ) );
-
-            }
-
-            // ***** json encode member update_iteration from long
-
-            __name = "updateIteration";
-
-            if ( ! builder.camelCaseNames ) {
-                __name = "update_iteration";
-            }
-
-            if ( this.hasUpdateIteration > 0 ) {
-
-                if ( hasDefinedUpdateIteration )
-                    generator.writeNumberField( __name, updateIteration );
-
-            }
-
             // ***** json encode member source_hashcode from String
 
             __name = "sourceHashcode";
@@ -20868,21 +20438,6 @@ public abstract class BaseContent
 
                 if ( hasDefinedSourceFaviconHeight )
                     generator.writeNumberField( __name, sourceFaviconHeight );
-
-            }
-
-            // ***** json encode member source_created from Date
-
-            __name = "sourceCreated";
-
-            if ( ! builder.camelCaseNames ) {
-                __name = "source_created";
-            }
-
-            if ( this.hasSourceCreated > 0 ) {
-
-                if ( sourceCreated != null )
-                    generator.writeStringField( __name, toISO8601( sourceCreated ) );
 
             }
 
@@ -22384,30 +21939,6 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member created from Date
-
-                case "created":
-
-                    try {
-                        jParser.nextToken();
-                        setCreated( ISO8601.parse( jParser.getValueAsString() ) );
-                    } catch( ParseException e ) {
-                        throw new JsonParseException( "Could not parse field: created", jParser.getCurrentLocation(), e );
-                    }
-
-                    break;
-
-                // FIXME: handle camelCase and under_score
-                // ***** json decode member update_iteration from long
-
-                case "update_iteration":
-
-                    jParser.nextToken();
-                    setUpdateIteration( jParser.getLongValue() );
-
-                    break;
-
-                // FIXME: handle camelCase and under_score
                 // ***** json decode member source_hashcode from String
 
                 case "source_hashcode":
@@ -22821,20 +22352,6 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSourceFaviconHeight( jParser.getIntValue() );
-
-                    break;
-
-                // FIXME: handle camelCase and under_score
-                // ***** json decode member source_created from Date
-
-                case "source_created":
-
-                    try {
-                        jParser.nextToken();
-                        setSourceCreated( ISO8601.parse( jParser.getValueAsString() ) );
-                    } catch( ParseException e ) {
-                        throw new JsonParseException( "Could not parse field: source_created", jParser.getCurrentLocation(), e );
-                    }
 
                     break;
 
