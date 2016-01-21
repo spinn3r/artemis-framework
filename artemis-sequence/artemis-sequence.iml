@@ -14,7 +14,8 @@
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />
+    <orderEntry type="module" module-name="artemis-guava" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:16.0" level="project" />
     <orderEntry type="module" module-name="artemis-init" />
     <orderEntry type="module" module-name="artemis-util" />
     <orderEntry type="module" module-name="artemis-json-framework" />

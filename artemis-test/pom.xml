@@ -38,9 +38,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>15.0</version>
+            <groupId>com.spinn3r.artemis</groupId>
+            <artifactId>artemis-guava</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

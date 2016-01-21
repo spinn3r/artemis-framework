@@ -82,7 +82,8 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:9.3.6.v20151106" level="project" />
     <orderEntry type="module" module-name="artemis-init-test" />
     <orderEntry type="module" module-name="artemis-test-core" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />
+    <orderEntry type="module" module-name="artemis-guava" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:16.0" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: org.cassandraunit:cassandra-unit:2.2.2.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cassandra:cassandra-all:2.2.2" level="project" />

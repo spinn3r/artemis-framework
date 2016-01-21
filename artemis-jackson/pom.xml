@@ -45,9 +45,23 @@
         </dependency>
 
         <dependency>
+            <groupId>com.spinn3r.artemis</groupId>
+            <artifactId>artemis-guava</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-guava</artifactId>
             <version>${jackson.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+
         </dependency>
 
         <dependency>
