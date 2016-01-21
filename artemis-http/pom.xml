@@ -3,14 +3,14 @@
     <parent>
         <artifactId>artemis-framework</artifactId>
         <groupId>com.spinn3r.artemis</groupId>
-        <version>5.1-LATEST-4</version>
+        <version>5.1-LATEST-5</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.spinn3r.artemis.http</groupId>
     <artifactId>artemis-http</artifactId>
-    <version>5.1-LATEST-4</version>
+    <version>5.1-LATEST-5</version>
 
     <properties>
         <jetty.version>9.3.6.v20151106</jetty.version>

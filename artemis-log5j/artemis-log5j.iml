@@ -10,9 +10,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="log5j" />
+    <orderEntry type="library" name="Maven: com.spinn3r.log5j:log5j:5.1-LATEST-4" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
-    <orderEntry type="module" module-name="artemis-time" />
+    <orderEntry type="library" name="Maven: com.spinn3r.artemis.time:artemis-time:5.1-LATEST-4" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:15.0" level="project" />
     <orderEntry type="library" name="Maven: com.google.inject:guice:4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
