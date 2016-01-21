@@ -73,7 +73,7 @@ public class StaticBaseTestWithCassandra3 {
             cassandraConfigWriter.write( configFile.getPath() );
 
             // *** now stat with this config file.
-            EmbeddedCassandraServerHelper.startEmbeddedCassandra( configFile , tmpdir );
+            EmbeddedCassandraServerHelper.startEmbeddedCassandra( configFile , tmpdir, TIMEOUT );
             initKeyspace();
 
         } catch ( Exception e ) {
