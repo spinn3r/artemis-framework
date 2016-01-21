@@ -47,7 +47,7 @@
         <dependency>
             <groupId>com.spinn3r.artemis</groupId>
             <artifactId>artemis-guava</artifactId>
-            <version>${jackson.version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
