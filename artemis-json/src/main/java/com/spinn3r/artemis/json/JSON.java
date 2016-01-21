@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public class JSON {
 
+    private static final ObjectMapper OBJECT_MAPPER = createStaticObjectMapper();
+
     /**
      * Convert the object to JSON but also make it so that each arrays are pretty
      * printed one entry per line.
@@ -30,12 +32,7 @@ public class JSON {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper( new Factory() );
-
-            objectMapper.configure( SerializationFeature.INDENT_OUTPUT, true );
-            objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
-
-            return objectMapper.writeValueAsString( obj );
+            return OBJECT_MAPPER.writeValueAsString( obj );
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
@@ -47,12 +44,7 @@ public class JSON {
 
         try {
 
-            ObjectMapper objectMapper = new ObjectMapper( new Factory() );
-
-            objectMapper.configure( SerializationFeature.INDENT_OUTPUT, true );
-            objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
-
-            objectMapper.writeValue( outputStream, obj );
+            OBJECT_MAPPER.writeValue( outputStream, obj );
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
@@ -128,6 +120,15 @@ public class JSON {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new GuavaModule());
         return mapper;
+    }
+
+    private static ObjectMapper createStaticObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper( new Factory() );
+
+        objectMapper.configure( SerializationFeature.INDENT_OUTPUT, true );
+        objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
+
+        return objectMapper;
     }
 
     private static class PrettyPrinter extends DefaultPrettyPrinter {
