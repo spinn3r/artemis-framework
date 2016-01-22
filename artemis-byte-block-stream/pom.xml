@@ -13,6 +13,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.jcommander</groupId>
+            <artifactId>artemis-jcommander</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis</groupId>
             <artifactId>artemis-guava</artifactId>
             <version>${project.version}</version>

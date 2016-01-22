@@ -31,6 +31,7 @@ public class TestByteBlockStreams {
 
         Map<String,String> headers = Maps.newHashMap();
         headers.put( "hello", "world" );
+        headers.put( "cat", "dog" );
 
         int nrRecords = 400;
         try( RollingByteBlockWriter rollingByteBlockWriter = new RollingByteBlockWriter( fileBackedByteBlockWriterFactory, 1_000 ) ) {
