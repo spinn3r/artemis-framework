@@ -28,7 +28,6 @@ public class DebugWebserverReferencesService extends BaseService {
     @Override
     public void init() {
 
-        this.servletReferences.add( "/echo", echoServlet );
         this.servletReferences.add( "/chaos", chaosServlet );
 
     }
