@@ -29,7 +29,16 @@ public class ByteBuffers {
 
     }
 
-    public static String toString( ByteBuffer byteBuffer ) {
+    public static byte[] toByteArray(ByteBuffer byteBuffer ) {
+        int length = byteBuffer.limit() - byteBuffer.position();
+        byte[] data = new byte[ length ];
+        byteBuffer.get( data );
+        return data;
+    }
+
+
+    public static String toUTF8(ByteBuffer byteBuffer ) {
+        // TODO: this only works for array buffers.
         int length = byteBuffer.limit() - byteBuffer.position();
         return new String( byteBuffer.array(), byteBuffer.position(), length, Charsets.UTF_8 );
     }

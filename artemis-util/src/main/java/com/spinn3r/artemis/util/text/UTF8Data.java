@@ -21,7 +21,7 @@ public class UTF8Data {
 
     @Override
     public String toString() {
-        return ByteBuffers.toString( byteBuffer );
+        return ByteBuffers.toUTF8( byteBuffer );
     }
 
 }
