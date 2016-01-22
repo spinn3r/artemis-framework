@@ -13,6 +13,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>jline</groupId>
+            <artifactId>jline</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.init</groupId>
             <artifactId>artemis-init</artifactId>
             <version>${project.version}</version>
