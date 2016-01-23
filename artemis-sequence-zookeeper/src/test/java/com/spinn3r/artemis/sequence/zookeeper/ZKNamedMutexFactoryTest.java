@@ -37,9 +37,17 @@ public class ZKNamedMutexFactoryTest extends BaseZookeeperTest {
 
         NamedMutexFactory namedMutexFactory = namedMutexFactoryProvider.get();
 
-        NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" );
+        try( NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" ); ) {
 
-        namedMutex.close();
+            System.out.printf( "within the mutex... \n" );
+
+        }
+
+        try( NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" ); ) {
+
+            System.out.printf( "within the mutex... second time. \n" );
+
+        }
 
     }
 
