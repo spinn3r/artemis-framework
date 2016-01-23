@@ -35,8 +35,8 @@ public class BaseTestWithCassandra extends StaticBaseTestWithCassandra3 {
         createTable( "robot_link_filter" );
         createTable( "robot_flat_link_filter" );
 
-        createTable( "content_idx_resource" );
-        createTable( "content_idx_source_hashcode" );
+        //createTable( "content_idx_resource" );
+        //createTable( "content_idx_source_hashcode" );
         createTable( "user" );
         createTable( "vendor" );
         createTable( "discovery" );
