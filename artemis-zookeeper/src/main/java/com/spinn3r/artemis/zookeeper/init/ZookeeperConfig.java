@@ -15,13 +15,7 @@ public class ZookeeperConfig {
 
     private int sessionTimeout;
 
-    public ZookeeperConfig( @JsonProperty( "servers" ) List<String> servers,
-                            @JsonProperty( "connectTimeout" ) int connectTimeout,
-                            @JsonProperty( "sessionTimeout" ) int sessionTimeout) {
-        this.servers = servers;
-        this.connectTimeout = connectTimeout;
-        this.sessionTimeout = sessionTimeout;
-    }
+    private String namespace = "artemis";
 
     public List<String> getServers() {
         return servers;
@@ -35,12 +29,17 @@ public class ZookeeperConfig {
         return sessionTimeout;
     }
 
+    public String getNamespace() {
+        return namespace;
+    }
+
     @Override
     public String toString() {
         return "ZookeeperConfig{" +
                  "servers=" + servers +
                  ", connectTimeout=" + connectTimeout +
                  ", sessionTimeout=" + sessionTimeout +
+                 ", namespace='" + namespace + '\'' +
                  '}';
     }
 
