@@ -21,6 +21,7 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*html" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - find . -type f -regex ".*/target/surefire-reports/.*txt" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - find . -type f -regex ".*/target/site/.*\(html\|css\|gif\|jpg\|svg\|png\|jpeg\)" -exec cp {} --parents $CIRCLE_TEST_REPORTS/site/ \;
+    - find . -name "TEST-*.xml" | xargs cat |grep "<testcase" | sed -e 's/<testcase //g' | sed -e 's/ \(name\|classname\|time\)="/ /g' | sed -e 's/^ *//g' | sed -e 's/\"//g' | sed -e 's/>//g' | sed -e 's/\///g' |sort -n -r -k 3 > $CIRCLE_TEST_REPORTS/test-times.txt
 
 deployment:
   staging:
