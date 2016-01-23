@@ -35,7 +35,7 @@ public class MockNamedMutexFactory implements NamedMutexFactory {
         }
 
         @Override
-        public void release() throws NamedMutexException {
+        public void close() throws NamedMutexException {
 
             if ( released.get() ) {
                 throw new NamedMutexException.AlreadyReleasedException( "Mutex is already released: " + name );

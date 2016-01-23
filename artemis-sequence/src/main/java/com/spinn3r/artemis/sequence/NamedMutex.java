@@ -3,8 +3,9 @@ package com.spinn3r.artemis.sequence;
 /**
  * Represents a named mutex with a unique name across all instances.
  */
-public interface NamedMutex {
+public interface NamedMutex extends AutoCloseable {
 
-    void release() throws NamedMutexException;
+    @Override
+    void close() throws NamedMutexException;
 
 }

@@ -23,7 +23,7 @@ public class ZKNamedMutex implements NamedMutex {
     }
 
     @Override
-    public void release() throws NamedMutexException {
+    public void close() throws NamedMutexException {
 
         if ( released.get() ) {
             throw new NamedMutexException.AlreadyReleasedException( "Mutex is already released: " + path );

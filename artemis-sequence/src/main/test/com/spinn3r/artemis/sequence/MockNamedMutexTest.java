@@ -2,9 +2,6 @@ package com.spinn3r.artemis.sequence;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-
 public class MockNamedMutexTest {
 
     @Test
@@ -12,7 +9,7 @@ public class MockNamedMutexTest {
 
         NamedMutexFactory namedMutexFactory = new MockNamedMutexFactory();
         NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" );
-        namedMutex.release();
+        namedMutex.close();
 
     }
 
@@ -32,8 +29,8 @@ public class MockNamedMutexTest {
         NamedMutexFactory namedMutexFactory = new MockNamedMutexFactory();
 
         NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" );
-        namedMutex.release();
-        namedMutex.release();
+        namedMutex.close();
+        namedMutex.close();
 
     }
 

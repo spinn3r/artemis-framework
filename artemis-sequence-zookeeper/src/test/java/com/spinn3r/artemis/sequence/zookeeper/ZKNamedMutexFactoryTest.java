@@ -39,7 +39,7 @@ public class ZKNamedMutexFactoryTest extends BaseZookeeperTest {
 
         NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" );
 
-        namedMutex.release();
+        namedMutex.close();
 
     }
 
@@ -59,8 +59,8 @@ public class ZKNamedMutexFactoryTest extends BaseZookeeperTest {
         NamedMutexFactory namedMutexFactory = namedMutexFactoryProvider.get();
 
         NamedMutex namedMutex = namedMutexFactory.acquire( "testmutex" );
-        namedMutex.release();
-        namedMutex.release();
+        namedMutex.close();
+        namedMutex.close();
 
     }
 
