@@ -159,7 +159,7 @@
                     <forkCount>1</forkCount>
                     <reuseForks>false</reuseForks>
 
-                    <argLine>-Dfile.encoding=UTF-8 -Xmx${artemis.surefire.maxMemory}</argLine>
+                    <argLine>-Dfile.encoding=UTF-8 -Xmx${project.surefire.maxMemory}</argLine>
                     <rerunFailingTestsCount>3</rerunFailingTestsCount>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
 

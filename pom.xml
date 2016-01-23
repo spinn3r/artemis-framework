@@ -13,8 +13,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.javadoc.skip>true</maven.javadoc.skip>
-        <artemis.surefire.maxMemory>2000M</artemis.surefire.maxMemory>
         <project.updatePolicy>never</project.updatePolicy>
+
+        <project.surefire.maxMemory>2000M</project.surefire.maxMemory>
+        <project.surefire.version>2.19.1</project.surefire.version>
 
     </properties>
 
