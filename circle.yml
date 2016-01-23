@@ -20,7 +20,7 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - find . -type f -regex ".*/target/surefire-reports/.*html" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
     - find . -type f -regex ".*/target/surefire-reports/.*txt" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
-    - find . -type f -regex ".*/target/site/.*\(html\|css\|gif\|jpg|svg\)" -exec cp {} $CIRCLE_TEST_REPORTS/site/ \;
+    - find . -type f -regex ".*/target/site/.*\(html\|css\|gif\|jpg|svg\)" -exec cp {} --parents $CIRCLE_TEST_REPORTS/site/ \;
 
 deployment:
   staging:
