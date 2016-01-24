@@ -114,9 +114,11 @@ public class ServicesTool {
 
             tracer.info( "Stopping service: %s ...", service.getClass().getName() );
 
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
             service.stop();
 
-            tracer.info( "Stopping service: %s ...done", service.getClass().getName() );
+            tracer.info( "Stopping service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
 
         }
 
