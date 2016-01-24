@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
@@ -79,9 +80,11 @@ public class ServicesTool {
 
                 tracer.info( "Starting service: %s ...", service.getClass().getName() );
 
+                Stopwatch stopwatch = Stopwatch.createStarted();
+
                 service.start();
 
-                tracer.info( "Starting service: %s ...done", service.getClass().getName() );
+                tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
 
             } catch ( Exception e ) {
                 throw new Exception( "Failed to start: " + service.getClass().getName(), e );
