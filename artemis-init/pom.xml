@@ -16,6 +16,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis</groupId>
+            <artifactId>artemis-guava</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.util</groupId>
             <artifactId>artemis-util</artifactId>
             <version>${project.version}</version>
@@ -49,12 +55,6 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.spinn3r.artemis</groupId>
-            <artifactId>artemis-guava</artifactId>
-            <version>${project.version}</version>
         </dependency>
 
         <dependency>
