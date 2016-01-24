@@ -1,7 +1,9 @@
 package com.spinn3r.artemis.http.init;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.spinn3r.artemis.http.*;
+import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 import org.eclipse.jetty.server.Server;
@@ -26,6 +28,8 @@ public class WebserverService extends BaseService {
 
     protected final RequestLogReferences requestLogReferences;
 
+    protected final AtomicReferenceProvider<WebserverPort> webserverPortProvider = new AtomicReferenceProvider<>( null );
+
     @Inject
     WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences) {
         this.webserverConfig = webserverConfig;
@@ -35,13 +39,22 @@ public class WebserverService extends BaseService {
     }
 
     @Override
+    public void init() {
+        provider( WebserverPort.class, webserverPortProvider );
+    }
+
+    @Override
     public void start() throws Exception {
 
+        int port = webserverConfig.getPort();
+
         info( "Starting HTTP server on port %s with maxThreads=%s requestHeaderSize=%s, responseHeaderSize=%s...",
-              webserverConfig.getPort(), webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize() );
+              port, webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize() );
+
+        webserverPortProvider.set( new WebserverPort( port ) );
 
         serverBuilder = new ServerBuilder()
-            .setPort( webserverConfig.getPort() )
+            .setPort( port )
             .setMaxThreads( webserverConfig.getMaxThreads() );
 
         for (ServletReference servletReference : servletReferences) {
@@ -70,7 +83,7 @@ public class WebserverService extends BaseService {
         try {
             server.start();
         } catch ( Exception e ) {
-            throw new Exception( "Unable to start webserver on port: " + webserverConfig.getPort(), e );
+            throw new Exception( "Unable to start webserver on port: " + port, e );
         }
 
     }
