@@ -12,10 +12,11 @@ public class PortMutexesTest {
 
         PortMutexes portMutexes = new PortMutexes();
 
-        try( ResourceMutex resourceMutex = portMutexes.acquire( 8080, 9080 ) ) {
+        try( PortMutex portMutex = portMutexes.acquire( 8080, 9080 ) ) {
 
             System.out.printf( "acquired!\n" );
-            assertEquals( "", resourceMutex.backing.getAbsolutePath() );
+            assertEquals( "", portMutex.backing.getAbsolutePath() );
+            assertEquals( 8080, portMutex.getPort() );
 
         }
 

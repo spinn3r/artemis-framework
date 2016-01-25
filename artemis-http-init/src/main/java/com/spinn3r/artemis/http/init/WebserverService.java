@@ -1,11 +1,13 @@
 package com.spinn3r.artemis.http.init;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.spinn3r.artemis.http.*;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
+import com.spinn3r.artemis.init.resource_mutexes.ResourceMutex;
 import org.eclipse.jetty.server.Server;
 
 /**
@@ -28,14 +30,19 @@ public class WebserverService extends BaseService {
 
     protected final RequestLogReferences requestLogReferences;
 
+    protected final PortMutexes portMutexes;
+
     protected final AtomicReferenceProvider<WebserverPort> webserverPortProvider = new AtomicReferenceProvider<>( null );
 
+    protected PortMutex portMutex = null;
+
     @Inject
-    WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences) {
+    WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences, PortMutexes portMutexes) {
         this.webserverConfig = webserverConfig;
         this.servletReferences = servletReferences;
         this.filterReferences = filterReferences;
         this.requestLogReferences = requestLogReferences;
+        this.portMutexes = portMutexes;
     }
 
     @Override
@@ -47,6 +54,11 @@ public class WebserverService extends BaseService {
     public void start() throws Exception {
 
         int port = webserverConfig.getPort();
+
+        if ( port <= 0 ) {
+            this.portMutex = portMutexes.acquire( 8080, 9080 );
+            port = this.portMutex.getPort();
+        }
 
         info( "Starting HTTP server on port %s with maxThreads=%s requestHeaderSize=%s, responseHeaderSize=%s...",
               port, webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize() );
@@ -93,6 +105,10 @@ public class WebserverService extends BaseService {
 
         if ( server != null ) {
             server.stop();
+        }
+
+        if ( portMutex != null ) {
+            portMutex.close();
         }
 
     }

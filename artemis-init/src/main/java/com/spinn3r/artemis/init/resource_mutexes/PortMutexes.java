@@ -18,7 +18,7 @@ public class PortMutexes {
      *
      * @return
      */
-    public ResourceMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
+    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
 
         try {
 
@@ -32,7 +32,7 @@ public class PortMutexes {
                 File portFile = new File( parent, Integer.toString( port ) );
 
                 if ( ! portFile.exists() && portFile.createNewFile() ) {
-                    return new ResourceMutex( portFile );
+                    return new PortMutex( portFile, port );
                 }
 
             }
