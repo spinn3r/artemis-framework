@@ -4,6 +4,7 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
@@ -12,13 +13,21 @@ public class ResourceMutex implements Closeable {
 
     protected final File backing;
 
+    protected final AtomicBoolean closed = new AtomicBoolean( false );
+
     public ResourceMutex(File backing) {
         this.backing = backing;
     }
 
     @Override
     public void close() throws IOException {
+
+        if ( this.closed.get() )
+            return;
+
         Files.delete( backing.toPath() );
+        this.closed.set( true );
+
     }
 
 }

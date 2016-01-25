@@ -27,6 +27,8 @@ public class PortMutexes {
 
             File parent = new File( "/tmp/named-mutexes/ports" );
 
+            // TODO: consider randomizing the ports so that tests that might be
+            // accidentally hard code to the first port fail immediately.
             for (int port = startPort; port <= endPort; port++) {
 
                 File portFile = new File( parent, Integer.toString( port ) );

@@ -3,7 +3,7 @@ package com.spinn3r.artemis.init.resource_mutexes;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class PortMutexesTest {
 
@@ -15,8 +15,9 @@ public class PortMutexesTest {
         try( PortMutex portMutex = portMutexes.acquire( 8080, 9080 ) ) {
 
             System.out.printf( "acquired!\n" );
-            assertEquals( "", portMutex.backing.getAbsolutePath() );
+            assertEquals( "/tmp/named-mutexes/ports/8080", portMutex.backing.getAbsolutePath() );
             assertEquals( 8080, portMutex.getPort() );
+            assertTrue( portMutex.backing.exists() );
 
         }
 
@@ -27,9 +28,12 @@ public class PortMutexesTest {
 
         PortMutexes portMutexes = new PortMutexes();
 
-        portMutexes.acquire( 8080, 8081 );
-        portMutexes.acquire( 8080, 8081 );
-        portMutexes.acquire( 8080, 8081 );
+        try( PortMutex portMutex0 = portMutexes.acquire( 8080, 8081 );
+             PortMutex portMutex1 = portMutexes.acquire( 8080, 8081 );
+             PortMutex portMutex2 = portMutexes.acquire( 8080, 8081 ); ) {
+
+
+        }
 
     }
 

@@ -56,7 +56,7 @@ public class WebserverService extends BaseService {
         int port = webserverConfig.getPort();
 
         if ( port <= 0 ) {
-            this.portMutex = portMutexes.acquire( 8080, 9080 );
+            this.portMutex = portMutexes.acquire( 8081, 9080 );
             port = this.portMutex.getPort();
         }
 
