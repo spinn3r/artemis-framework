@@ -10,6 +10,7 @@ import java.net.InetAddress;
 /**
  *
  */
+@Deprecated // use EmbeddedZookeeperService
 public class BaseZookeeperTest {
 
     // we have to use a known port instead of using a different one each time.
