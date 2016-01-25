@@ -17,12 +17,6 @@ import java.net.InetAddress;
  */
 public class EmbeddedZookeeperService extends BaseService {
 
-    // FIXME: this test works but I'm not sure the right way to advertise the
-    // zookeeper port to the ZookeeperService.  POne way is to have a
-    // ZookeeperPort setup in another binding that could be configured via a
-    // service. or the zookeeper config itself could have a port that could
-    // be -1 but then we read it from a Provider...
-
     private final PortMutexes portMutexes;
 
     private final AtomicReferenceProvider<EmbeddedZookeeperPort> embeddedZookeeperPortProvider
