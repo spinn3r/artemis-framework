@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.zookeeper.init;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
@@ -23,7 +24,7 @@ public class ZookeeperService extends BaseService {
 
     private static final String NAMESPACE = "artemis";
 
-    private final ZookeeperConfig config;
+    private final ZookeeperConfig zookeeperConfig;
 
     private CuratorFramework curatorFramework;
 
@@ -34,8 +35,8 @@ public class ZookeeperService extends BaseService {
     private RetryPolicy retryPolicy = new RetryNTimes( 0, 0 );
 
     @Inject
-    ZookeeperService(ZookeeperConfig config) {
-        this.config = config;
+    ZookeeperService(ZookeeperConfig zookeeperConfig) {
+        this.zookeeperConfig = zookeeperConfig;
     }
 
     @Override
@@ -46,18 +47,19 @@ public class ZookeeperService extends BaseService {
     @Override
     public void start() throws Exception {
 
-        info( "Running with zookeeper config: %s", config );
+        info( "Running with zookeeper zookeeperConfig: %s", zookeeperConfig );
 
-        String connectString = StringUtils.join( config.getServers(), "," );
+        String connectString = StringUtils.join( zookeeperConfig.getServers(), "," );
 
-        curatorFramework = CuratorFrameworkFactory
-                          .builder()
-                          .connectString( connectString )
-                          .retryPolicy( retryPolicy )
-                          .connectionTimeoutMs( config.getConnectTimeout() )
-                          .sessionTimeoutMs( config.getSessionTimeout() )
-                          .namespace( NAMESPACE )
-                          .build();
+        curatorFramework =
+          CuratorFrameworkFactory
+              .builder()
+              .connectString( connectString )
+              .retryPolicy( retryPolicy )
+              .connectionTimeoutMs( zookeeperConfig.getConnectTimeout() )
+              .sessionTimeoutMs( zookeeperConfig.getSessionTimeout() )
+              .namespace( NAMESPACE )
+              .build();
 
         curatorFramework.start();
 

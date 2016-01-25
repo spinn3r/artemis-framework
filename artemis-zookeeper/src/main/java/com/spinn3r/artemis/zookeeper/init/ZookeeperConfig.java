@@ -11,11 +11,25 @@ public class ZookeeperConfig {
 
     private List<String> servers = new ArrayList<>();
 
-    private int connectTimeout;
+    private int connectTimeout = 60_000;
 
-    private int sessionTimeout;
+    private int sessionTimeout = 120_000;
 
     private String namespace = "artemis";
+
+    public ZookeeperConfig() {
+    }
+
+    public ZookeeperConfig(List<String> servers, int connectTimeout, int sessionTimeout, String namespace) {
+        this.servers = servers;
+        this.connectTimeout = connectTimeout;
+        this.sessionTimeout = sessionTimeout;
+        this.namespace = namespace;
+    }
+
+    public ZookeeperConfig(List<String> servers) {
+        this.servers = servers;
+    }
 
     public List<String> getServers() {
         return servers;

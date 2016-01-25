@@ -61,6 +61,7 @@
         <module>artemis-json-framework</module>
         <module>artemis-resource-finder</module>
         <module>artemis-resource-finder-test</module>
+        <module>artemis-zookeeper-embedded</module>
     </modules>
 
     <description>

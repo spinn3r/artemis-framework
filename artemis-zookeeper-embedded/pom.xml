@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>artemis-framework</artifactId>
+        <groupId>com.spinn3r.artemis</groupId>
+        <version>5.1-LATEST-5</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spinn3r.artemis.zookeeper.embedded</groupId>
+    <artifactId>artemis-zookeeper-embedded</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.zookeeper</groupId>
+            <artifactId>artemis-zookeeper</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.init</groupId>
+            <artifactId>artemis-init</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-test</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+
+    </dependencies>
+
+</project>
