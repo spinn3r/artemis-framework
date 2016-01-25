@@ -9,26 +9,33 @@ import com.spinn3r.artemis.sequence.NamedMutexException;
 import com.spinn3r.artemis.sequence.NamedMutexFactory;
 import com.spinn3r.artemis.sequence.zookeeper.init.ZKGlobalMutexService;
 import com.spinn3r.artemis.test.zookeeper.BaseZookeeperTest;
+import com.spinn3r.artemis.zookeeper.embedded.EmbeddedZookeeperService;
 import com.spinn3r.artemis.zookeeper.init.ZookeeperService;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ZKNamedMutexFactoryTest extends BaseZookeeperTest {
-
-    private int connectionTimeoutMs = 60000;
-    private int sessionTimeoutMs = 60000;
+public class ZKNamedMutexFactoryTest {
 
     @Inject
     Provider<NamedMutexFactory> namedMutexFactoryProvider;
 
-    @Override
+    Launcher launcher;
+
     @Before
     public void setUp() throws Exception {
-        super.setUp();
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        launcher = Launcher.forResourceConfigLoader().build();
         launcher.launch( new TestServiceReferences() );
         launcher.getInjector().injectMembers( this );
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+        if ( launcher != null )
+            launcher.stop();
 
     }
 
@@ -75,9 +82,11 @@ public class ZKNamedMutexFactoryTest extends BaseZookeeperTest {
     static class TestServiceReferences extends ServiceReferences {
 
         public TestServiceReferences() {
+            add( EmbeddedZookeeperService.class );
             add( ZookeeperService.class );
             add( ZKGlobalMutexService.class );
         }
+
     }
 
 }

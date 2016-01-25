@@ -1,28 +1,51 @@
 package com.spinn3r.artemis.sequence.zookeeper;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.spinn3r.artemis.init.Launcher;
+import com.spinn3r.artemis.init.ServiceReferences;
 import com.spinn3r.artemis.sequence.GlobalMutex;
 import com.spinn3r.artemis.sequence.GlobalMutexAcquireException;
+import com.spinn3r.artemis.sequence.GlobalMutexFactory;
+import com.spinn3r.artemis.sequence.zookeeper.init.ZKGlobalMutexService;
 import com.spinn3r.artemis.test.zookeeper.BaseZookeeperTest;
+import com.spinn3r.artemis.zookeeper.embedded.EmbeddedZookeeperService;
+import com.spinn3r.artemis.zookeeper.init.ZookeeperService;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class ZKGlobalMutexFactoryTest extends BaseZookeeperTest {
+public class ZKGlobalMutexFactoryTest {
 
-    private int connectionTimeoutMs = 60000;
-    private int sessionTimeoutMs = 60000;
+    @Inject
+    Provider<ZKGlobalMutexFactory> zkGlobalMutexFactoryProvider;
+
+    Launcher launcher;
+
+    @Before
+    public void setUp() throws Exception {
+
+        launcher = Launcher.forResourceConfigLoader().build();
+        launcher.launch( new TestServiceReferences() );
+        launcher.getInjector().injectMembers( this );
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
+
+        if ( launcher != null )
+            launcher.stop();
+
+    }
 
     @Test
     public void testAcquire() throws Exception {
 
-        String namespace = "artemis";
-        String connectString = getZookeeperConnectString();
-
-        ZKGlobalMutexFactory zkGlobalMutexFactory = new ZKGlobalMutexFactory( connectString,
-                                                                              connectionTimeoutMs,
-                                                                              sessionTimeoutMs,
-                                                                              namespace );
+        ZKGlobalMutexFactory zkGlobalMutexFactory = zkGlobalMutexFactoryProvider.get();
 
         assertNotNull( zkGlobalMutexFactory.acquire( 0 ) );
         assertNull( zkGlobalMutexFactory.acquire( 0 ) );
@@ -50,14 +73,10 @@ public class ZKGlobalMutexFactoryTest extends BaseZookeeperTest {
     @Ignore
     public void testLocksExhausted() throws Exception {
 
-        String namespace = "artemis";
-        String connectString = getZookeeperConnectString();
+        ZKGlobalMutexFactory zkGlobalMutexFactory = zkGlobalMutexFactoryProvider.get();
 
-        try( ZKGlobalMutexFactory zkGlobalMutexFactory = new ZKGlobalMutexFactory( connectString, connectionTimeoutMs, sessionTimeoutMs, namespace ) ) {
-
-            for (int i = 0; i < ZKGlobalMutexFactory.RANGE * 2; ++i) {
-                zkGlobalMutexFactory.acquire();
-            }
+        for (int i = 0; i < ZKGlobalMutexFactory.RANGE * 2; ++i) {
+            zkGlobalMutexFactory.acquire();
         }
 
     }
@@ -65,15 +84,10 @@ public class ZKGlobalMutexFactoryTest extends BaseZookeeperTest {
     @Test
     public void testFullLockRange() throws Exception {
 
-        String namespace = "artemis";
-        String connectString = getZookeeperConnectString();
+        ZKGlobalMutexFactory zkGlobalMutexFactory = zkGlobalMutexFactoryProvider.get();
 
-        try( ZKGlobalMutexFactory zkGlobalMutexFactory = new ZKGlobalMutexFactory( connectString, connectionTimeoutMs, sessionTimeoutMs, namespace ) ) {
-
-            for (int i = 0; i < ZKGlobalMutexFactory.RANGE; ++i) {
-                zkGlobalMutexFactory.acquire(i);
-            }
-
+        for (int i = 0; i < ZKGlobalMutexFactory.RANGE; ++i) {
+            zkGlobalMutexFactory.acquire(i);
         }
 
     }
@@ -81,24 +95,28 @@ public class ZKGlobalMutexFactoryTest extends BaseZookeeperTest {
     @Test(expected = GlobalMutexAcquireException.class)
     public void testTestFullLockRangeWithFailure() throws Exception {
 
-        // test the full lock range and one more...
-        String namespace = "artemis";
-        String connectString = getZookeeperConnectString();
+        ZKGlobalMutexFactory zkGlobalMutexFactory = zkGlobalMutexFactoryProvider.get();
 
-        try( ZKGlobalMutexFactory zkGlobalMutexFactory = new ZKGlobalMutexFactory( connectString, connectionTimeoutMs, sessionTimeoutMs, namespace ) ) {
-
-            for (int i = 0; i < ZKGlobalMutexFactory.RANGE; ++i) {
-                zkGlobalMutexFactory.acquire(i);
-            }
-
-            zkGlobalMutexFactory.acquire();
+        for (int i = 0; i < ZKGlobalMutexFactory.RANGE; ++i) {
+            zkGlobalMutexFactory.acquire(i);
         }
 
+        zkGlobalMutexFactory.acquire();
 
     }
 
     @Test
     public void testCreatePath() throws Exception {
+
+    }
+
+    static class TestServiceReferences extends ServiceReferences {
+
+        public TestServiceReferences() {
+            add( EmbeddedZookeeperService.class );
+            add( ZookeeperService.class );
+            add( ZKGlobalMutexService.class );
+        }
 
     }
 

@@ -27,7 +27,7 @@ public class ZKGlobalMutexService extends BaseService {
 
     private final AtomicReferenceProvider<GlobalMutex> globalMutexProvider = new AtomicReferenceProvider<>( null );
 
-    private final AtomicReferenceProvider<GlobalMutexFactory> globalMutexFactoryProvider = new AtomicReferenceProvider<>( null );
+    private final AtomicReferenceProvider<ZKGlobalMutexFactory> globalMutexFactoryProvider = new AtomicReferenceProvider<>( null );
 
     private final AtomicReferenceProvider<NamedMutexFactory> namedMutexFactoryProvider = new AtomicReferenceProvider<>( null );
 
@@ -42,6 +42,7 @@ public class ZKGlobalMutexService extends BaseService {
     public void init() {
         provider( GlobalMutex.class, globalMutexProvider );
         provider( GlobalMutexFactory.class, globalMutexFactoryProvider );
+        provider( ZKGlobalMutexFactory.class, globalMutexFactoryProvider );
         provider( NamedMutexFactory.class, namedMutexFactoryProvider );
     }
 

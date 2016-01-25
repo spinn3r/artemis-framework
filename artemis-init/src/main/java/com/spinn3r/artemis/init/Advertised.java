@@ -61,7 +61,7 @@ public class Advertised {
 
     }
 
-    public <T> void provider( Class source, Class<T> clazz, Provider<T> provider ) {
+    public <T> void provider( Class source, Class<T> clazz, Provider<? extends T> provider ) {
         assertAbsent( clazz, null );
         advertisements.put( clazz, provider );
         sources.put( clazz, source );

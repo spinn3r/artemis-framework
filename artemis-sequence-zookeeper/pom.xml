@@ -37,6 +37,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.spinn3r.artemis.zookeeper.embedded</groupId>
+            <artifactId>artemis-zookeeper-embedded</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>

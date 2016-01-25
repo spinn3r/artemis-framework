@@ -99,7 +99,7 @@ public abstract class BaseService implements Service {
         advertised.advertise( this, clazz, impl );
     }
 
-    protected <T> void provider( Class<T> clazz, Provider<T> provider ) {
+    protected <T> void provider( Class<T> clazz, Provider<? extends T> provider ) {
         advertised.provider( getClass(), clazz, provider );
     }
 
