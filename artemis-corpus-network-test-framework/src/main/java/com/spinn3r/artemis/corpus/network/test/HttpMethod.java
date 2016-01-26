@@ -9,6 +9,8 @@ public enum HttpMethod {
 
     POST,
 
-    PUT
+    PUT,
+
+    OPTIONS
 
 }

@@ -65,7 +65,6 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
     public HttpRequestMethod get(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.GET, resource );
-
     }
 
     @Override
@@ -78,6 +77,12 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
     public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.PUT, resource, outputContent, outputContentEncoding, outputContentType );
+    }
+
+    @Override
+    public HttpRequestMethod options(String resource) throws NetworkException {
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.OPTIONS, resource );
     }
 
     @Override

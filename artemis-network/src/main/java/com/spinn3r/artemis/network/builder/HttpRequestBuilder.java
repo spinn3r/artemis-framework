@@ -46,6 +46,8 @@ public interface HttpRequestBuilder {
 
     HttpRequestMethod put( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
 
+    HttpRequestMethod options( String resource ) throws NetworkException;
+
     ProxyRegistry getProxyRegistry();
 
     String getUserAgent();

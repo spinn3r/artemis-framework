@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http.servlets;
 
-import org.eclipse.jetty.servlet.DefaultServlet;
+import com.google.inject.Provider;
+import com.spinn3r.artemis.init.advertisements.Version;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,15 +12,15 @@ import java.io.OutputStream;
 /**
  *
  */
-public class HelloServlet extends DefaultServlet {
+public class HelloServlet extends CrossOriginServlet {
+
+    private Provider<Version> versionProvider;
 
     private String message;
 
-    public HelloServlet() {
-        this( "hello world" );
-    }
-
-    public HelloServlet(String message) {
+    HelloServlet(Provider<Version> versionProvider, String message) {
+        super( versionProvider );
+        this.versionProvider = versionProvider;
         this.message = message;
     }
 

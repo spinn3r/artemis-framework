@@ -3,6 +3,7 @@ package com.spinn3r.artemis.http;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.http.servlets.EchoServlet;
 import com.spinn3r.artemis.http.servlets.HelloServlet;
+import com.spinn3r.artemis.http.servlets.HelloServletFactory;
 import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockVersionService;
@@ -33,6 +34,9 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
     @Inject
     HttpRequestBuilder httpRequestBuilder;
+
+    @Inject
+    HelloServletFactory helloServletFactory;
 
     @Override
     @Before
@@ -87,7 +91,7 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
         this.server = new ServerBuilder()
                         .setPort( PORT )
-                        .addServlet( "/", new HelloServlet() )
+                        .addServlet( "/", helloServletFactory.create() )
                         .build();
 
         this.server.start();
@@ -138,7 +142,7 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         this.server = new ServerBuilder()
                         .setPort( PORT )
                         .setUseLocalhost( true )
-                        .addServlet( "/", new HelloServlet() )
+                        .addServlet( "/", helloServletFactory.create() )
                         .build();
 
         this.server.start();

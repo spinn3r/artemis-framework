@@ -16,6 +16,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String GET_METHOD = "GET";
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
+    private static final String OPTIONS_METHOD = "OPTIONS";
 
     protected NetworkEventListener listener = null;
 
@@ -67,6 +68,11 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     @Override
     public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
         return configure( new DefaultHttpRequestMethod( this, resource, PUT_METHOD, outputContent, outputContentEncoding, outputContentType ) );
+    }
+
+    @Override
+    public HttpRequestMethod options(String resource) throws NetworkException {
+        return configure( new DefaultHttpRequestMethod( this, resource, OPTIONS_METHOD ) );
     }
 
     private DefaultHttpRequestMethod configure( DefaultHttpRequestMethod defaultHttpRequestMethod ) {

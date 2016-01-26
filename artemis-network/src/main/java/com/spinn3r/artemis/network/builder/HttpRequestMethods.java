@@ -11,4 +11,6 @@ public class HttpRequestMethods {
 
     public static final String PUT = "PUT";
 
+    public static final String OPTIONS = "OPTIONS";
+
 }
