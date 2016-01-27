@@ -31,8 +31,6 @@ public interface HttpRequestBuilder {
 
     /**
      * Set a proxy in the form of scheme://host:port
-     * @param proxy
-     * @return
      */
     HttpRequestBuilder withProxy( String proxy );
 
@@ -47,6 +45,12 @@ public interface HttpRequestBuilder {
     HttpRequestMethod put( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
 
     HttpRequestMethod options( String resource ) throws NetworkException;
+
+    HttpRequestMethod head( String resource ) throws NetworkException;
+
+    HttpRequestMethod delete( String resource ) throws NetworkException;
+
+    HttpRequestMethod trace( String resource ) throws NetworkException;
 
     ProxyRegistry getProxyRegistry();
 

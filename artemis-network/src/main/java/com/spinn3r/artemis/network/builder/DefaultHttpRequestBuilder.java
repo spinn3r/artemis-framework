@@ -17,6 +17,10 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String POST_METHOD = "POST";
     private static final String PUT_METHOD = "PUT";
     private static final String OPTIONS_METHOD = "OPTIONS";
+    private static final String HEAD_METHOD = "HEAD";
+    private static final String DELETE_METHOD = "DELETE";
+    private static final String TRACE_METHOD = "TRACE";
+
 
     protected NetworkEventListener listener = null;
 
@@ -73,6 +77,21 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     @Override
     public HttpRequestMethod options(String resource) throws NetworkException {
         return configure( new DefaultHttpRequestMethod( this, resource, OPTIONS_METHOD ) );
+    }
+
+    @Override
+    public HttpRequestMethod head(String resource) throws NetworkException {
+        return configure( new DefaultHttpRequestMethod( this, resource, HEAD_METHOD ) );
+    }
+
+    @Override
+    public HttpRequestMethod delete(String resource) throws NetworkException {
+        return configure( new DefaultHttpRequestMethod( this, resource, DELETE_METHOD ) );
+    }
+
+    @Override
+    public HttpRequestMethod trace(String resource) throws NetworkException {
+        return configure( new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
     }
 
     private DefaultHttpRequestMethod configure( DefaultHttpRequestMethod defaultHttpRequestMethod ) {

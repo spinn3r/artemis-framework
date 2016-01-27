@@ -86,6 +86,24 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
     }
 
     @Override
+    public HttpRequestMethod head(String resource) throws NetworkException {
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.HEAD, resource );
+    }
+
+    @Override
+    public HttpRequestMethod delete(String resource) throws NetworkException {
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.DELETE, resource );
+    }
+
+    @Override
+    public HttpRequestMethod trace(String resource) throws NetworkException {
+        checkNotNull( resource, "resource" );
+        return new CachedHttpRequestMethod( this, HttpMethod.TRACE, resource );
+    }
+
+    @Override
     public ProxyRegistry getProxyRegistry() {
         return null;
     }
