@@ -18,11 +18,20 @@ public class CyclicalConcurrentIterator<E> implements Iterator<E> {
 
     protected final CopyOnWriteArrayList<E> members;
 
-    protected final AtomicInteger position = new AtomicInteger( Integer.MIN_VALUE );
+    protected final AtomicInteger position = new AtomicInteger( 0 );
 
     protected final int size;
 
     public CyclicalConcurrentIterator(Collection<E> members) {
+
+        // make sure we have no null items
+        for (E member : members) {
+
+            if ( member == null ) {
+                throw new NullPointerException( "Can not add null members" );
+            }
+
+        }
 
         this.members = new CopyOnWriteArrayList<>( members );
         this.size = members.size();
@@ -34,7 +43,17 @@ public class CyclicalConcurrentIterator<E> implements Iterator<E> {
     }
 
     public E next() {
-        return members.get( computeIndex() );
+
+        int index = computeIndex();
+
+        E result = members.get( index );
+
+        if ( result == null ) {
+            throw new IllegalStateException( "Null object found for index: " + index );
+        }
+
+        return result;
+
     }
 
     @Override
@@ -44,11 +63,12 @@ public class CyclicalConcurrentIterator<E> implements Iterator<E> {
 
     protected int computeIndex() {
 
-        long result = ((long)position.getAndIncrement()) + Integer.MAX_VALUE + 1;
+        // get the current position by taking the current value and incrementing
+        // it if the value is greater than or equal to zero and less than MAX_VALUE
+        // to prevent overflow.
 
-        result = (result % size);
-
-        return (int)result;
+        int pos = position.getAndUpdate( value -> value >= 0 && value < Integer.MAX_VALUE ? ++value : 0 );
+        return Math.abs( pos % size );
 
     }
 
