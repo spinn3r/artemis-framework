@@ -320,7 +320,6 @@ public class Advertised {
     }
 
     public Injector createInjector() {
-        //return Guice.createInjector( Stage.PRODUCTION, toModule() );
         return Guice.createInjector( toModule() );
     }
 
@@ -368,7 +367,7 @@ public class Advertised {
 
                     Class clazz = (Class) value;
 
-                    if (Provider.class.isAssignableFrom( clazz )) {
+                    if ( Provider.class.isAssignableFrom( clazz ) ) {
                         bind( key ).toProvider( clazz );
                     } else {
                         bind( key ).to( clazz );

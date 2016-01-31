@@ -61,7 +61,7 @@ public class Launcher {
      *
      */
     public Launcher init( ServiceReferences references ) throws Exception {
-        return launch( references, (servicesTool) -> { servicesTool.init(); } );
+        return launch( references, ServicesTool::init );
     }
 
     public Launcher launch() throws Exception {
@@ -141,7 +141,8 @@ public class Launcher {
 
         if ( injector == null ) {
             // only ever done if we're starting without any services, usually
-            // testing.
+            // only when we are in testing mode.  This is really just an empty
+            // injector at this point.
             injector = createInjector();
         }
 
@@ -177,8 +178,6 @@ public class Launcher {
 
     /**
      * Stop all services started on this launcher.
-     *
-     * @return
      */
     public Launcher stop() throws Exception {
 
@@ -237,6 +236,7 @@ public class Launcher {
         getAdvertised().verify();;
     }
 
+    @Deprecated // use getInjector
     public Injector createInjector() {
         return getAdvertised().createInjector();
     }
