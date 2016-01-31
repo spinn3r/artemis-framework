@@ -5,12 +5,12 @@ package com.spinn3r.artemis.init.tracer;
  */
 public interface Tracer {
 
-    public void info( String format, Object ... args );
+    void info( String format, Object ... args );
 
-    public void warn( String format, Object ... args );
+    void warn( String format, Object ... args );
 
-    public void error( String format, Object ... args );
+    void error( String format, Object ... args );
 
-    public void error( String format, Throwable throwable, Object ... args );
+    void error( String format, Throwable throwable, Object ... args );
 
 }

@@ -70,11 +70,6 @@ public abstract class BaseService implements Service {
     }
 
     @Override
-    public Includer getIncluder() {
-        return includer;
-    }
-
-    @Override
     public void setIncluder(Includer includer) {
         this.includer = includer;
     }

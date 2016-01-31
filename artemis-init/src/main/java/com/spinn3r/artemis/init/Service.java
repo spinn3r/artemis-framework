@@ -30,8 +30,6 @@ public interface Service extends Tracer {
 
     void stop() throws Exception;
 
-    Includer getIncluder();
-
     void setIncluder(Includer includer);
 
 }
