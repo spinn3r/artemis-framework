@@ -62,6 +62,7 @@
         <module>artemis-resource-finder</module>
         <module>artemis-resource-finder-test</module>
         <module>artemis-zookeeper-embedded</module>
+        <module>artemis-build-canary</module>
     </modules>
 
     <description>
@@ -240,10 +241,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>3.5</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <!--<compilerArgs>-->
+                        <!--<arg>-Xlint:all</arg>-->
+                        <!--<arg>-Werror</arg>-->
+                    <!--</compilerArgs>-->
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
 

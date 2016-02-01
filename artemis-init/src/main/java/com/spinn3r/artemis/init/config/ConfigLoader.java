@@ -17,6 +17,6 @@ public interface ConfigLoader {
      *
      * @return The resources loaded as a URL or null if it's not found.
      */
-    URL getResource(Class clazz, String path);
+    URL getResource(Class<?> clazz, String path);
 
 }

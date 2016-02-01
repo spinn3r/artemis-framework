@@ -110,6 +110,7 @@ public class ClasspathResourceFinder {
 
     }
 
+    @SuppressWarnings( "rawtypes" )
     private Collection<ResourceReference> findResourcesFromJarFile(File file, Pattern pattern) throws IOException {
 
         List<ResourceReference> result = new ArrayList<>();

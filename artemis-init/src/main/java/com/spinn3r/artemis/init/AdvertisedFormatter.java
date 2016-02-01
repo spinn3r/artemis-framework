@@ -16,6 +16,7 @@ class AdvertisedFormatter {
         this.advertised = advertised;
     }
 
+    @SuppressWarnings( "rawtypes" )
     public String format() {
 
         Map<String,String> formattedMap = new TreeMap<>();

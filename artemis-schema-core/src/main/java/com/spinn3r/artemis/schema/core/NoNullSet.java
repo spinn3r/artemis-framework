@@ -7,6 +7,7 @@ import java.util.LinkedHashSet;
  * A set used for the purposes of CQL that does not accept null values.  Nulls
  * fail when they are added.
  */
+@SuppressWarnings( "serial" )
 public class NoNullSet<T> extends LinkedHashSet<T> {
 
     private static final String ADD_ALL_MSG = "Attempt to addAll when collection contains null. (nulls not accepted).";

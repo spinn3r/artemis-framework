@@ -16,7 +16,11 @@ public class Tuple<T> {
 
     protected List<T> backing = Lists.newArrayList();
 
+    public Tuple() {
+    }
+
     @SafeVarargs
+    @SuppressWarnings("unchecked")
     public Tuple(T... elements) {
 
         for (T element : elements) {
@@ -33,6 +37,12 @@ public class Tuple<T> {
                 backing.add( element );
         }
 
+    }
+
+    protected void add( T value ) {
+        if ( value == null )
+            return;
+        backing.add( value );
     }
 
     public Tuple<T> filter( Matcher<? super T> matcher ) {

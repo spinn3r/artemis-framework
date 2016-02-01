@@ -16,11 +16,11 @@
 package com.spinn3r.log5j;
 
 public class LogFactory {
-    public static Log getLog(Class clazz) {
+    public static Log getLog(Class<?> clazz) {
         return getLog(clazz, true);
     }
 
-    public static Log getLog(Class clazz, boolean async) {
+    public static Log getLog(Class<?> clazz, boolean async) {
         return getLog(clazz.getName(), async);
     }
 

@@ -22,7 +22,7 @@ public class FileConfigLoader implements ConfigLoader {
     }
 
     @Override
-    public URL getResource(Class clazz, String path) {
+    public URL getResource(Class<?> clazz, String path) {
 
         File file = new File( directory, path );
 

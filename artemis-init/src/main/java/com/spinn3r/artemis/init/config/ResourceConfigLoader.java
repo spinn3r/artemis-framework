@@ -18,7 +18,7 @@ public class ResourceConfigLoader implements ConfigLoader {
         this.prefix = prefix;
     }
 
-    public URL getResource(Class clazz, String path) {
+    public URL getResource(Class<?> clazz, String path) {
 
         path = Paths.get( prefix , "/" , path ).toString();
 

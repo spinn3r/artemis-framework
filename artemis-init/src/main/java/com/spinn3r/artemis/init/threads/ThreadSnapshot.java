@@ -1,12 +1,11 @@
 package com.spinn3r.artemis.init.threads;
 
-import java.util.HashSet;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 /**
  *
  */
+@SuppressWarnings( "serial" )
 public class ThreadSnapshot extends TreeSet<ThreadReference> {
 
     public ThreadSnapshot copy() {

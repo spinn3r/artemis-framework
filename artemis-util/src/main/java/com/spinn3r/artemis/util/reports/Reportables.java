@@ -31,6 +31,7 @@ public class Reportables {
      * embedded Reportable as well and call report() on them instead of
      * toString.
      */
+    @SuppressWarnings( "rawtypes" )
     public static String formatReport( String name , Map<String,?> map ) {
 
         StringBuilder buff = new StringBuilder();

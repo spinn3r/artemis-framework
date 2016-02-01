@@ -5,6 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Class for handling subsystems init and start and stop.
  */
+@SuppressWarnings( "serial" )
 public class Services extends CopyOnWriteArrayList<Service> {
 
     public Services(Service... services) {

@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 /**
  *
  */
+@SuppressWarnings( "serial" )
 public class Classes<T> extends LinkedHashSet<Class<? extends T>> {
 
     public final Class<T> base;

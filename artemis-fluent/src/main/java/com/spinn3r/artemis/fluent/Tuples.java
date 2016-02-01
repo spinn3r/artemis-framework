@@ -13,8 +13,16 @@ public class Tuples {
      * Create a new tuple
      */
     @SafeVarargs
+    @SuppressWarnings("unchecked")
     public static <T> Tuple<T> tuple( T... values ) {
-        return new Tuple<>( values );
+
+        Tuple<T> result = new Tuple<>();
+        for (T value : values) {
+            result.add( value );
+        }
+
+        return result;
+
     }
 
     public static Str str(String value) {

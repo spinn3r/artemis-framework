@@ -9,7 +9,7 @@ import java.net.URL;
 public class NullConfigLoader implements ConfigLoader {
 
     @Override
-    public URL getResource(Class clazz, String path) {
+    public URL getResource(Class<?> clazz, String path) {
         return null;
     }
 

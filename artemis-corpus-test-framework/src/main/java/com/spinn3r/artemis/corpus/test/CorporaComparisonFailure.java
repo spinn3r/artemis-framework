@@ -6,6 +6,7 @@ import org.junit.ComparisonFailure;
  * A comparison failure that has a message that's a unified diff for easy use
  * in logs but still supports getExpected and getActual for use in tools.
  */
+@SuppressWarnings( "serial" )
 public class CorporaComparisonFailure extends ComparisonFailure {
 
     private String message;

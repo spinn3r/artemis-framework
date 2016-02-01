@@ -3,6 +3,7 @@ package com.spinn3r.artemis.init.resource_mutexes;
 /**
  *
  */
+@SuppressWarnings( "serial" )
 public class ResourceMutexException extends Exception {
 
     public ResourceMutexException() {

@@ -10,6 +10,7 @@ import java.lang.annotation.*;
 @Retention( value = RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Inherited
+@SuppressWarnings( "rawtypes" )
 public @interface Config {
 
     /**

@@ -21,7 +21,7 @@ public class MultiConfigLoader implements ConfigLoader {
     }
 
     @Override
-    public URL getResource(Class clazz, String path) {
+    public URL getResource(Class<?> clazz, String path) {
 
         for (ConfigLoader configLoader : configLoaders) {
 

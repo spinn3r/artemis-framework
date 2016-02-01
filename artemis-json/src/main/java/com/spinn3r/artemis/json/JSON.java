@@ -131,7 +131,7 @@ public class JSON {
         return objectMapper;
     }
 
-    @SuppressWarnings( "deprecation" )
+    @SuppressWarnings( { "deprecation", "serial" } )
     private static class PrettyPrinter extends DefaultPrettyPrinter {
         public static final PrettyPrinter instance = new PrettyPrinter();
 
@@ -141,6 +141,7 @@ public class JSON {
     }
 
 
+    @SuppressWarnings( "serial" )
     private static class Factory extends JsonFactory {
         @Override
         protected JsonGenerator _createGenerator(Writer out, IOContext ctxt) throws IOException {

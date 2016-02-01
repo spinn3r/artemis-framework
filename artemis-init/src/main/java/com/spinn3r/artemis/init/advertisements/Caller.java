@@ -20,7 +20,7 @@ public class Caller {
 
     private final String initialValue;
 
-    public Caller( Class clazz ) {
+    public Caller( Class<?> clazz ) {
         this( clazz.getName() );
     }
 

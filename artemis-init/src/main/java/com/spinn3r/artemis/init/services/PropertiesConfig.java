@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * A mapping of key to value for property names.
  */
+@SuppressWarnings( "serial" )
 public class PropertiesConfig extends HashMap<String,String> {
 
 }

@@ -71,6 +71,7 @@ public class Log4jInternalLoggerFactory implements InternalLoggerFactory {
         return __levelMapping.get(level);
     }
 
+    @SuppressWarnings( "serial" )
     static class InternalLoggingEvent extends LoggingEvent {
         private final String _threadName;
 

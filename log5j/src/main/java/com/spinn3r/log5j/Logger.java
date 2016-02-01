@@ -75,11 +75,11 @@ public class Logger extends AbstractLoggable {
 
     // factories
 
-    public static Logger getLogger(Class clazz) {
+    public static Logger getLogger(Class<?> clazz) {
         return getLogger(clazz, DEFAULT_ASYNC);
     }
 
-    public static Logger getLogger(Class clazz, boolean async) {
+    public static Logger getLogger(Class<?> clazz, boolean async) {
         return getLogger(clazz.getName(), async);
     }
 

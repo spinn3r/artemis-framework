@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Contains objects that are advertised by class name.
  */
-@SuppressWarnings( "unchecked" )
+@SuppressWarnings( { "unchecked", "rawtypes" } )
 public class Advertised {
 
     // TODO: this could/should be refactored into a set of reference objects so
