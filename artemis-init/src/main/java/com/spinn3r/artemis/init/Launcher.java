@@ -236,8 +236,7 @@ public class Launcher {
         getAdvertised().verify();;
     }
 
-    @Deprecated // use getInjector
-    public Injector createInjector() {
+    protected Injector createInjector() {
         return getAdvertised().createInjector();
     }
 

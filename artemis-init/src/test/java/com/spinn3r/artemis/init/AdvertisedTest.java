@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.init;
 
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import org.junit.Test;
 
@@ -73,7 +74,8 @@ public class AdvertisedTest {
         advertised.advertise( this, Caller.class, caller );
         advertised.advertise( this, Bar.class, DefaultBar.class );
 
-        Bar bar = advertised.getInstance( Bar.class );
+        Injector injector = advertised.createInjector();
+        Bar bar = injector.getInstance( Bar.class );
 
         assertEquals( "foo", bar.getCaller().get() );
         assertTrue( caller == bar.getCaller() );

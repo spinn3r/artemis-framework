@@ -149,7 +149,7 @@ public class Advertised {
      * arrive at FooImpl which is the final delegate.
      *
      */
-
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            List<Class<? extends T>> list ) {
@@ -187,6 +187,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            Class<? extends T> c0,
@@ -209,6 +210,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            Class<? extends T> c0,
@@ -229,6 +231,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            Class<? extends T> c0,
@@ -240,6 +243,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            Class<? extends T> c0,
@@ -250,6 +254,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> T delegate( Class source,
                            Class<T> clazz,
                            Class<? extends T> c0,
