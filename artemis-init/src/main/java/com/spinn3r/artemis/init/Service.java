@@ -1,12 +1,13 @@
 package com.spinn3r.artemis.init;
 
+import com.google.inject.Module;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.tracer.Tracer;
 
 /**
  * A service that has start and stop stages.
  */
-public interface Service extends Tracer {
+public interface Service extends Module, Tracer {
 
     Advertised getAdvertised();
 

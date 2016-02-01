@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
+import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class BaseService implements Service {
+public abstract class BaseService extends AbstractModule implements Service {
 
     private Advertised advertised;
 
@@ -151,6 +152,11 @@ public abstract class BaseService implements Service {
 
     @Override
     public void init() {
+
+    }
+
+    @Override
+    protected void configure() {
 
     }
 
