@@ -5,6 +5,7 @@ import com.spinn3r.log5j.Logger;
 import java.io.IOException;
 import java.net.*;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -102,7 +103,6 @@ public class ResourceTokenizer {
      * Note that this method needs to have a corresponding Detokenize method
      * which builds back the original string.
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     public static String webTokenize( String resource ) {
 
@@ -124,7 +124,6 @@ public class ResourceTokenizer {
      * Encode certain characters that can't be included within a URL string and
      * decoded.
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     @SuppressWarnings( "deprecation" )
     private static String webTokenizeEncode( String resource ) {
@@ -188,7 +187,7 @@ public class ResourceTokenizer {
             // add an http:// if no scheme specified
             // Brad Neuberg
             boolean hasScheme = hasSchemePattern.matcher(resource).matches();
-            if (hasScheme == false)
+            if ( ! hasScheme )
                 resource = "http://" + resource;
 
             //This is actually NOT safe and is somewhat risky if the host
@@ -220,7 +219,7 @@ public class ResourceTokenizer {
 
     }
 
-    private static HashSet INVALID_SCHEMES = new HashSet();
+    private static Set<String> INVALID_SCHEMES = new HashSet<>();
 
     static {
         INVALID_SCHEMES.add( "feed" );
@@ -502,7 +501,6 @@ public class ResourceTokenizer {
     /**
      *
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin A. Burton</a>
      */
     @SuppressWarnings( "deprecation" )
     private static String doRemoveRedirect( String resource ) {
@@ -618,7 +616,6 @@ public class ResourceTokenizer {
      *
      * http://peerfear.org/foo
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     private static String doRemoveTrailingSlash( String resource ) {
 
@@ -891,7 +888,6 @@ public class ResourceTokenizer {
      * This is all necessary because internally our RDF link graph needs
      * canonicalized URLs and if we strip www we could break some.
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     public static String expandResource( String resource ) throws UnknownHostException {
 
@@ -1012,7 +1008,6 @@ public class ResourceTokenizer {
      * > class B network numbers, and third block is a set of 256 contiguous
      * > class C network numbers.
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     public static boolean isNetworkAddressable( String resource ) throws IOException {
 
@@ -1046,7 +1041,6 @@ public class ResourceTokenizer {
      * example http: is secure and so might some P2P URI schemes (maybe magnet
      * URIs) or .torrent links but file: links aren't secure.
      *
-     * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
     public static boolean isSecureScheme( String resource ) {
 

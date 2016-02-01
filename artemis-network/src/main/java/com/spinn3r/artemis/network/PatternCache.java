@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
  */
 public class PatternCache {
 
-    static ThreadLocal cache = new ThreadLocal<HashMap>() {
-        protected synchronized HashMap initialValue() {
-            return new HashMap();
+    static ThreadLocal<HashMap<String,Pattern>> cache = new ThreadLocal<HashMap<String,Pattern>>() {
+        protected synchronized HashMap<String,Pattern> initialValue() {
+            return new HashMap<>();
         }
     };
 
@@ -22,9 +22,9 @@ public class PatternCache {
 
     public static Pattern getPattern( String regexp, int flags ) {
 
-        HashMap patterns = (HashMap)cache.get();
+        HashMap<String,Pattern> patterns = cache.get();
 
-        Pattern p = (Pattern)patterns.get( regexp );
+        Pattern p = patterns.get( regexp );
 
         if ( p == null ) {
             p = Pattern.compile( regexp, flags );
@@ -32,17 +32,6 @@ public class PatternCache {
         }
 
         return p;
-
-    }
-
-    /**
-     * @deprecated
-     */
-    public static Matcher getMatcher( String regexp, int flags, String content ) {
-
-        Pattern p = getPattern( regexp, flags );
-
-        return p.matcher( content );
 
     }
 

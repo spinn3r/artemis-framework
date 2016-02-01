@@ -80,7 +80,7 @@ public class Launcher {
 
     }
 
-    @SuppressWarnings("varargs")
+    @SuppressWarnings("unchecked")
     public Launcher launch( Class<? extends Service>... services ) throws Exception {
 
         ServiceReferences serviceReferences = new ServiceReferences();

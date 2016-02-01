@@ -25,6 +25,7 @@ public class DenormalizedBackedGauge implements Gauge<Long> {
     }
 
     @Override
+    @SuppressWarnings( "unchecked" )
     public Long getValue() {
 
         Collection<BackedGaugeIndex.Entry> entries = backedGaugeIndex.entries.values();
