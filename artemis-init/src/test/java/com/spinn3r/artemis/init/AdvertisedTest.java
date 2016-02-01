@@ -41,6 +41,7 @@ public class AdvertisedTest {
     }
 
     @Test
+    @SuppressWarnings( "deprecation" )
     public void testAdvertiseWithDelegation() throws Exception {
 
         Advertised advertised = new Advertised();

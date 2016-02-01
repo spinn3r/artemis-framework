@@ -56,9 +56,9 @@ public class EmbeddedCassandraServices extends BaseService {
     @Override
     public void stop() throws Exception {
 
-        // FIXME: this fucking sucks... it won't stop.. so I have now way
-        // to tell cassandra to shutdown.
-        EmbeddedCassandraServerHelper.stopEmbeddedCassandra();
+        // NOTE: in the past we stopped cassandra unit but it doesn't actually
+        // work so the method was deprecated and stop() in cassandra unit was
+        // a noop.
 
         Field field = EmbeddedCassandraServerHelper.class.getDeclaredField( "cassandraDaemon" );
 

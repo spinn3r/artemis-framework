@@ -65,8 +65,6 @@ public class LinkBuilder {
 
     /**
      * Get an HTTP parameter.
-     * @param key
-     * @return
      */
     public String get( String key ) {
         return parameters.get( key );
@@ -103,6 +101,7 @@ public class LinkBuilder {
         return format();
     }
 
+    @SuppressWarnings( "deprecation" )
     protected static String join( Map<String,String> parameters ) {
 
         StringBuilder buff = new StringBuilder();

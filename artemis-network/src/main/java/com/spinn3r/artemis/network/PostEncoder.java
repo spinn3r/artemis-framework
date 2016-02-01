@@ -8,6 +8,7 @@ import java.util.Map;
  */
 public class PostEncoder {
 
+    @SuppressWarnings( "deprecation" )
     public static String encode( Map<String,?> map ) {
 
         StringBuilder buff = new StringBuilder();

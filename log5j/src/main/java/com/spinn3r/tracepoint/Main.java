@@ -34,10 +34,10 @@ public class Main {
         Pattern p = Pattern.compile( "(?m)Exception tracepoint: (.*)\n(\t.*\n)+" );
         Matcher m = p.matcher( seq );
 
-        Map<String,String> traces = new HashMap();
-        Map<String,Integer> hits  = new HashMap();
+        Map<String,String> traces = new HashMap<>();
+        Map<String,Integer> hits  = new HashMap<>();
 
-        List<String> keys = new ArrayList();
+        List<String> keys = new ArrayList<>();
         
         while( m.find() ) {
 

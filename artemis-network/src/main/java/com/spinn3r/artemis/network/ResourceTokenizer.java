@@ -126,6 +126,7 @@ public class ResourceTokenizer {
      *
      * @author <a href="mailto:burton@rojo.com">Kevin Burton</a>
      */
+    @SuppressWarnings( "deprecation" )
     private static String webTokenizeEncode( String resource ) {
 
         StringBuilder buff = new StringBuilder( resource.length() * 2 );
@@ -503,6 +504,7 @@ public class ResourceTokenizer {
      *
      * @author <a href="mailto:burton@rojo.com">Kevin A. Burton</a>
      */
+    @SuppressWarnings( "deprecation" )
     private static String doRemoveRedirect( String resource ) {
 
         //FIXME: what happens with MULTIPLE redirect URLs are encoded?

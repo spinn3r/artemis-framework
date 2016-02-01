@@ -131,6 +131,7 @@ public class JSON {
         return objectMapper;
     }
 
+    @SuppressWarnings( "deprecation" )
     private static class PrettyPrinter extends DefaultPrettyPrinter {
         public static final PrettyPrinter instance = new PrettyPrinter();
 

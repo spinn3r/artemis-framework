@@ -99,25 +99,32 @@ public abstract class BaseService extends AbstractModule implements Service {
         advertised.provider( getClass(), clazz, provider );
     }
 
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, List<Class<? extends T>> list ) {
         return advertised.delegate( getClass(), clazz, list );
     }
 
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1, Class<? extends T> c2, Class<? extends T> c3, Class<? extends T> c4, Class<? extends T> c5 ) {
         return advertised.delegate( getClass(), clazz, c0, c1, c2, c3, c4, c5 );
     }
 
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1, Class<? extends T> c2, Class<? extends T> c3, Class<? extends T> c4 ) {
         return advertised.delegate( getClass(), clazz, c0, c1, c2, c3, c4 );
     }
 
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1, Class<? extends T> c2, Class<? extends T> c3 ) {
         return advertised.delegate( getClass(), clazz, c0, c1, c2, c3 );
     }
 
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1, Class<? extends T> c2 ) {
         return advertised.delegate( getClass(), clazz, c0, c1, c2 );
     }
+
+    @SuppressWarnings( "deprecation" )
     public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1 ) {
         return advertised.delegate( getClass(), clazz, c0, c1 );
     }

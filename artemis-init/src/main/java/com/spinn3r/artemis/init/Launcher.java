@@ -151,59 +151,6 @@ public class Launcher {
 
     }
 
-    public Launcher launchWithModules( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
-
-        this.serviceReferences = serviceReferences;
-
-        info( "Launching services: \n%s", serviceReferences.format() );
-
-        lifecycleProvider.set( Lifecycle.STARTING );
-
-        ServiceInitializer serviceInitializer = new ServiceInitializer( this );
-
-        // we iterate with a for loop so that if a service includes another
-        // service we can incorporate it into our pipeline.
-        for (int i = 0; i < serviceReferences.size(); i++) {
-
-            ServiceReference serviceReference = serviceReferences.get( i );
-
-            try {
-
-                serviceInitializer.init( serviceReference );
-
-                injector = Guice.createInjector( services );
-                Service current = injector.getInstance( serviceReference.getBacking() );
-                launch0( launchHandler, current );
-
-                services.add( current );
-                started.add( serviceReference );
-
-            } catch ( ConfigurationException|CreationException e ) {
-
-                String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
-                  serviceReference.getBacking().getName(), started.format(), advertised.format() );
-
-                throw new Exception( message, e );
-
-            }
-
-        }
-
-        if ( injector == null ) {
-            // only ever done if we're starting without any services, usually
-            // only when we are in testing mode.  This is really just an empty
-            // injector at this point.
-            injector = createInjector();
-        }
-
-        info( "Now running with the following advertisements: \n%s", advertised.format() );
-
-        lifecycleProvider.set( Lifecycle.STARTED );
-
-        return this;
-
-    }
-
     public void launch0( LaunchHandler launchHandler, Service... services  ) throws Exception {
         launch0( launchHandler, new Services( services ) );
     }

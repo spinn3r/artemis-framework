@@ -23,6 +23,7 @@ public class EmbeddedJettyTestTest extends EmbeddedJettyTest {
 
     @Override
     @Before
+    @SuppressWarnings( "unchecked" )
     public void setUp() throws Exception {
         super.setUp();
 

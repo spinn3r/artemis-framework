@@ -8,7 +8,6 @@ import com.spinn3r.artemis.sequence.NamedMutex;
 import com.spinn3r.artemis.sequence.NamedMutexException;
 import com.spinn3r.artemis.sequence.NamedMutexFactory;
 import com.spinn3r.artemis.sequence.zookeeper.init.ZKGlobalMutexService;
-import com.spinn3r.artemis.test.zookeeper.BaseZookeeperTest;
 import com.spinn3r.artemis.zookeeper.embedded.EmbeddedZookeeperService;
 import com.spinn3r.artemis.zookeeper.init.ZookeeperService;
 import org.junit.After;
