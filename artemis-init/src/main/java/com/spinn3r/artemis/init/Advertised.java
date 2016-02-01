@@ -291,8 +291,6 @@ public class Advertised {
      * Find all objects that have been advertised with the given interface.
      *
      * @param inter The interface to search for.
-     * @param <T>
-     * @return
      */
     public <T> List<T> interfaces( Class<T> inter ) {
 
