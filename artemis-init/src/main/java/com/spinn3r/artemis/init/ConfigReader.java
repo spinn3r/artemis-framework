@@ -13,6 +13,7 @@ import com.spinn3r.artemis.json.JSON;
  * </p>
  *
  */
+@SuppressWarnings( "unchecked" )
 public class ConfigReader {
 
     private final Advertised advertised;
@@ -24,8 +25,6 @@ public class ConfigReader {
     /**
      * Read the config of this object, in JSON, or return null if it's not
      * available.
-     *
-     * @return
      */
     public String read( Service service ) {
 

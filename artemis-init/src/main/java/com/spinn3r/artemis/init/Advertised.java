@@ -13,6 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Contains objects that are advertised by class name.
  */
+@SuppressWarnings( "unchecked" )
 public class Advertised {
 
     // TODO: this could/should be refactored into a set of reference objects so
@@ -357,6 +358,7 @@ public class Advertised {
         return new AdvertisedModule();
     }
 
+    @SuppressWarnings( "unchecked" )
     class AdvertisedModule extends AbstractModule {
 
         @Override

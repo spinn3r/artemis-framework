@@ -21,6 +21,7 @@ public class ServiceInitializer {
         this.launcher = launcher;
     }
 
+    @SuppressWarnings( "unchecked" )
     public void init( ServiceReference serviceReference  ) {
 
         Config config = Configs.readConfigAnnotation( serviceReference.getBacking() );
