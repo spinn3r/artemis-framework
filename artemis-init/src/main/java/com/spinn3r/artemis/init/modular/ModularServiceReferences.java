@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.spinn3r.artemis.init.ServiceReference;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,6 +16,8 @@ public class ModularServiceReferences {
     public void put( Class<? extends ServiceType> serviceType, Class<? extends ModularService> service ) {
         backing.put( serviceType, service );
     }
+
+    // TODO: we need to be able to support include() of more service...
 
     public String format() {
 
