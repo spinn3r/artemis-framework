@@ -1,9 +1,7 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.google.inject.ConfigurationException;
-import com.google.inject.CreationException;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
+import com.google.common.collect.Lists;
+import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -42,10 +40,14 @@ public class ModularLauncher {
 
     private final ModularServiceReferences modularServiceReferences;
 
+    private final List<Module> modules = Lists.newArrayList();
+
     public ModularLauncher(ConfigLoader configLoader, Advertised advertised, ModularServiceReferences modularServiceReferences) {
         this.configLoader = configLoader;
         this.advertised = advertised;
         this.modularServiceReferences = modularServiceReferences;
+
+        this.modules.add( new StandardModules() );
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being launched.
@@ -60,11 +62,13 @@ public class ModularLauncher {
      *
      */
     public ModularLauncher init() throws Exception {
+        // FIXME: don't use ServicesTool
         return launch( modularServiceReferences, ServicesTool::init );
     }
 
     public ModularLauncher launch() throws Exception {
 
+        // FIXME: don't use ServicesTool
         return launch( modularServiceReferences, (servicesTool) -> {
             servicesTool.init();
             servicesTool.start();
@@ -78,7 +82,6 @@ public class ModularLauncher {
      *
      */
     public ModularLauncher launch( ModularServiceReferences modularServiceReferences, LaunchHandler launchHandler ) throws Exception {
-
 
 // FIXME
 //        this.modularServiceReferences = modularServiceReferences;
@@ -255,6 +258,16 @@ public class ModularLauncher {
 
     public static ModularLauncherBuilder create(ConfigLoader configLoader, ModularServiceReferences modularServiceReferences ) {
         return new ModularLauncherBuilder( configLoader, modularServiceReferences );
+    }
+
+    class StandardModules extends AbstractModule {
+
+        @Override
+        protected void configure() {
+            bind( ModularLauncher.class ).toInstance( ModularLauncher.this );
+            bind( Lifecycle.class ).toProvider( lifecycleProvider );
+        }
+
     }
 
     public static class ModularLauncherBuilder {

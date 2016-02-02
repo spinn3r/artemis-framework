@@ -13,6 +13,22 @@ import java.util.List;
  */
 public class Links {
 
+    /**
+     * Return true if this is a valid and parseable HTTP URL.  It still might
+     * not be fetchable (perhaps because the URL is down) but at least its valid.
+     */
+    public static boolean isHttpURL( String link ) {
+
+        try {
+            URI uri = new URI( link );
+
+            return uri.getScheme().equals( "http" ) || uri.getScheme().equals( "https" );
+
+        } catch (URISyntaxException e) {
+            return false;
+        }
+
+    }
 
     public static Link parse( String link ) {
 
