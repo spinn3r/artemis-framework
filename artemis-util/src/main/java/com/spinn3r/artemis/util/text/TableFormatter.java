@@ -89,5 +89,4 @@ public class TableFormatter {
         return "%-" + len + "s";
     }
 
-
 }

@@ -26,9 +26,6 @@ public class TextFormatter {
 
     }
 
-
-
-
     public static String vertical( String text ) {
 
         StringBuilder buff = new StringBuilder();
