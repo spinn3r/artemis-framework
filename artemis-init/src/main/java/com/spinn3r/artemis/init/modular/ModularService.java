@@ -5,4 +5,5 @@ package com.spinn3r.artemis.init.modular;
  * can be referenced in bindings.
  */
 public interface ModularService {
+
 }

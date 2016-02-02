@@ -1,6 +1,9 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.spinn3r.artemis.init.ServiceReference;
+
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Contains a map of ServiceType to ModularService.  This way we can combine
@@ -14,6 +17,25 @@ public class ModularServiceReferences {
 
     public void put( Class<? extends ServiceType> serviceType, Class<? extends ModularService> service ) {
         backing.put( serviceType, service );
+    }
+
+    public String format() {
+
+        StringBuilder buff = new StringBuilder();
+
+        for (Map.Entry<Class<? extends ServiceType>, Class<? extends ModularService>> entry : backing.entrySet()) {
+
+            Class<? extends ServiceType> serviceType = entry.getKey();
+            Class<? extends ModularService> modularService = entry.getValue();
+
+            buff.append( "    " );
+            buff.append( String.format( "%s=%s", serviceType.getName(),  modularService.getName() ) );
+            buff.append( "\n" );
+
+        }
+
+        return buff.toString();
+
     }
 
 }
