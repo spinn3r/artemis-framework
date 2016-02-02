@@ -6,6 +6,8 @@ import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.advertisements.CallerServiceType;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.advertisements.VersionServiceType;
+import com.spinn3r.artemis.init.services.HostnameService;
+import com.spinn3r.artemis.init.services.VersionService;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -31,6 +33,28 @@ public class ModularServiceReferencesTest {
                         "                 com.spinn3r.artemis.init.advertisements.CallerServiceType = com.spinn3r.artemis.init.MockCallerService                            \n" +
                         "                com.spinn3r.artemis.init.advertisements.VersionServiceType = com.spinn3r.artemis.init.MockVersionService                           \n",
                       m0.format() );
+
+    }
+
+    @Test
+    public void testReplace() throws Exception {
+
+        ModularServiceReferences m0
+          = new ModularServiceReferences()
+              .put( HostnameServiceType.class, HostnameService.class )
+              .put( VersionServiceType.class, VersionService.class );
+
+        ModularServiceReferences m1
+          = new ModularServiceReferences()
+              .put( HostnameServiceType.class, MockHostnameService.class )
+              .put( VersionServiceType.class, MockVersionService.class );
+
+
+        m0.replace( m1 );
+
+        assertEquals( 2, m0.size() );
+        assertEquals( MockHostnameService.class, m0.get( HostnameServiceType.class ) );
+        assertEquals( MockVersionService.class, m0.get( VersionServiceType.class ) );
 
     }
 

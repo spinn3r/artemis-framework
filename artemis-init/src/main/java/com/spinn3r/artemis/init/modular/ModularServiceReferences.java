@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.spinn3r.artemis.util.text.MapFormatter;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -58,6 +56,24 @@ public class ModularServiceReferences {
 
     }
 
+    /**
+     * Replace service references in this mapping with the references in the
+     * given binding.
+     */
+    public void replace( ModularServiceReferences newServiceReferences ) {
+        backing.putAll( newServiceReferences.backing );
+    }
+
+    public <T extends ServiceType> Class<? extends ModularService> get( Class<T> serviceType ) {
+        return backing.get( serviceType );
+    }
+
+    /**
+     * @return the number of services references used.
+     */
+    public int size() {
+        return backing.size();
+    }
 
     public String format() {
 

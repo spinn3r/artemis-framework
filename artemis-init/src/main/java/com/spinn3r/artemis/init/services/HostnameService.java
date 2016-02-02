@@ -4,6 +4,8 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.fluent.Tuples;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
+import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
+import com.spinn3r.artemis.init.modular.ModularService;
 import com.spinn3r.artemis.util.misc.Files;
 
 import java.io.File;
@@ -12,13 +14,18 @@ import java.io.IOException;
 /**
  *
  */
-public class HostnameService extends BaseService implements Provider<Hostname> {
+public class HostnameService extends BaseService implements Provider<Hostname>, HostnameServiceType, ModularService {
 
     private Hostname hostname;
 
     @Override
     public void init() {
         provider( Hostname.class, this );
+    }
+
+    @Override
+    protected void configure() {
+        bind( Hostname.class ).toProvider( this );
     }
 
     @Override
