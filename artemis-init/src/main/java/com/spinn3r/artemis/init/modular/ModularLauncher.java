@@ -54,7 +54,7 @@ public class ModularLauncher {
         this.advertised = advertised;
         this.modularServiceReferences = modularServiceReferences;
 
-        this.modules.add( new StandardModules() );
+        this.modules.add( new StandardDependenciesModule() );
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being launched.
@@ -93,6 +93,12 @@ public class ModularLauncher {
                     modules.add( configModule );
                 }
 
+                ModularIncluder modularIncluder = new ModularIncluder( this, modularServiceType );
+
+                ServiceDependenciesModule serviceDependenciesModule = new ServiceDependenciesModule( modularIncluder );
+
+                modules.add( serviceDependenciesModule );
+
                 try {
 
                     Injector injector = Guice.createInjector( modules );
@@ -103,15 +109,16 @@ public class ModularLauncher {
                     service.setAdvertised( advertised );
                     service.setTracer( tracerFactory.newTracer( service ) );
                     service.setConfigLoader( getConfigLoader() );
-//                    // FIXME: this needs a ModularIncluder...
-//                    service.setIncluder( new Includer( launcher, serviceReference ) );
 
                     service.init();
 
                     modules.add( service );
                     services.add( service );
 
-                    // FIXME: started.put( modularServiceType, modularServiceClazz );
+                    // FIXME: this won't work due to issues with generics that
+                    // I'm still tracking down.
+
+                    //started.put( modularServiceType, modularServiceClazz );
 
                 } catch ( ConfigurationException|CreationException e ) {
 
@@ -396,7 +403,7 @@ public class ModularLauncher {
     /**
      * Contains standard modules we need for use within within services.
      */
-    class StandardModules extends AbstractModule {
+    class StandardDependenciesModule extends AbstractModule {
 
         @Override
         protected void configure() {
@@ -404,6 +411,25 @@ public class ModularLauncher {
             bind( Lifecycle.class ).toProvider( lifecycleProvider );
             bind( Tracer.class ).toInstance( tracer );
             bind( Role.class ).toInstance( role );
+            bind( ConfigLoader.class ).toInstance( configLoader );
+        }
+
+    }
+
+    /**
+     * Modules we create for each service as it's initialized.
+     */
+    class ServiceDependenciesModule extends AbstractModule {
+
+        private final ModularIncluder modularIncluder;
+
+        public ServiceDependenciesModule(ModularIncluder modularIncluder) {
+            this.modularIncluder = modularIncluder;
+        }
+
+        @Override
+        protected void configure() {
+            bind( ModularIncluder.class ).toInstance( modularIncluder );
         }
 
     }

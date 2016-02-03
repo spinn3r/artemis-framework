@@ -17,7 +17,6 @@ public class ModularServiceReferences {
 
         backing.put( serviceType, service );
         return this;
-
     }
 
     // TODO: we need to be able to support include() of more service...
@@ -75,9 +74,13 @@ public class ModularServiceReferences {
         return backing.size();
     }
 
+    /**
+     * Format the service setup.
+     */
     public String format() {
 
-        // TODO: might want to consider using the TableFormatter
+        // TODO: might want to consider using the TableFormatter in the future
+        // as that might be easier than manually printing a table.
 
         StringBuilder buff = new StringBuilder();
 
