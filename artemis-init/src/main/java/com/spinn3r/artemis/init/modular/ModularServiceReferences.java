@@ -1,7 +1,11 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.google.common.base.Preconditions;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Contains a map of ServiceType to ModularService.  This way we can combine
@@ -11,49 +15,43 @@ import java.util.Map;
  */
 public class ModularServiceReferences {
 
-    protected LinkedHashMap<Class<? extends ServiceType>,Class<? extends ModularService>> backing = new LinkedHashMap<>();
-
-    protected BackingMapFacade<ServiceType> backingMapFacade = new BackingMapFacade<>();
+    protected LinkedHashMap<Class<? extends ServiceType>,ServiceMapping> backing = new LinkedHashMap<>();
 
     public <T extends ServiceType> ModularServiceReferences put( Class<T> serviceType, Class<? extends T> service ) {
+        checkNotNull( serviceType );
+        checkNotNull( service );
 
         ServiceMapping serviceMapping = new ServiceMapping( serviceType, service );
-
-        //ClassMapping<T> classMapping = new ClassMapping<>( serviceType, service );
-        //ClassMapping<ServiceType> classMapping1 = new ClassMapping<>( serviceType, service );
-
-        //backingMap.put( serviceType, classMapping );
-        //backingMap.put( serviceType, service );
-
-        //backingMapFacade.put( serviceType, service );
-
-        backing.put( serviceType, service );
+        backing.put( serviceType, serviceMapping );
         return this;
 
     }
 
-    // TODO: we need to be able to support include() of more service...
+    public ModularServiceReferences put( Class<? extends ServiceType> serviceType, ServiceMapping serviceMapping ) {
+        backing.put( serviceType, serviceMapping );
+        return this;
+    }
 
     /**
      * Add additional services after the given pointer.  We DO NOT add services
      * if they are already in the index.
      */
-    public void include( Class<? extends ServiceType> serviceTypePointer, ModularServiceReferences additionalModularServiceReferences ) {
+    public ModularServiceReferences include( Class<? extends ServiceType> serviceTypePointer, ModularServiceReferences additionalModularServiceReferences ) {
 
-        LinkedHashMap<Class<? extends ServiceType>,Class<? extends ModularService>> newBacking = new LinkedHashMap<>();
+        LinkedHashMap<Class<? extends ServiceType>,ServiceMapping> newBacking = new LinkedHashMap<>();
 
         boolean found = false;
 
-        for (Map.Entry<Class<? extends ServiceType>, Class<? extends ModularService>> entry : backing.entrySet()) {
+        for ( ServiceMapping serviceMapping : backing.values() ) {
 
-            newBacking.put( entry.getKey(), entry.getValue() );
+            newBacking.put( serviceMapping.getSource(), serviceMapping );
 
-            if ( entry.getKey().equals( serviceTypePointer ) ) {
+            if ( serviceMapping.getSource().equals( serviceTypePointer ) ) {
 
                 found = true;
 
-                for (Map.Entry<Class<? extends ServiceType>, Class<? extends ModularService>> newEntry : additionalModularServiceReferences.backing.entrySet()) {
-                    newBacking.put( newEntry.getKey(), newEntry.getValue() );
+                for (ServiceMapping newServiceMapping : additionalModularServiceReferences.backing.values()) {
+                    newBacking.put( newServiceMapping.getSource(), newServiceMapping );
                 }
 
             }
@@ -65,6 +63,7 @@ public class ModularServiceReferences {
         }
 
         backing = newBacking;
+        return this;
 
     }
 
@@ -72,11 +71,12 @@ public class ModularServiceReferences {
      * Replace service references in this mapping with the references in the
      * given binding.
      */
-    public void replace( ModularServiceReferences newServiceReferences ) {
+    public ModularServiceReferences replace( ModularServiceReferences newServiceReferences ) {
         backing.putAll( newServiceReferences.backing );
+        return this;
     }
 
-    public <T extends ServiceType> Class<? extends ModularService> get( Class<T> serviceType ) {
+    public ServiceMapping get( Class<? extends ServiceType> serviceType ) {
         return backing.get( serviceType );
     }
 
@@ -97,13 +97,10 @@ public class ModularServiceReferences {
 
         StringBuilder buff = new StringBuilder();
 
-        for (Map.Entry<Class<? extends ServiceType>, Class<? extends ModularService>> entry : backing.entrySet()) {
-
-            Class<? extends ServiceType> serviceType = entry.getKey();
-            Class<? extends ModularService> modularService = entry.getValue();
+        for ( ServiceMapping serviceMapping : backing.values() ) {
 
             buff.append( "    " );
-            buff.append( String.format( "%70s = %-70s", serviceType.getName(),  modularService.getName() ) );
+            buff.append( String.format( "%70s = %-70s", serviceMapping.getSource().getName(),  serviceMapping.getTarget().getName() ) );
             buff.append( "\n" );
 
         }

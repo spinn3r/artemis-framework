@@ -76,13 +76,10 @@ public class ModularLauncher {
 
             lifecycleProvider.set( Lifecycle.INITIALIZING );
 
-            modularServiceReferences.backing.entrySet().forEach( entry -> {
+            for (ServiceMapping serviceMapping : modularServiceReferences.backing.values()) {
 
-                Class<? extends ServiceType> modularServiceType = entry.getKey();
-                Class<? extends ModularService> modularServiceClazz = entry.getValue();
-
-                // TODO load the config for this service using something like
-                // the serviceInitializer...
+                Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
+                Class<? extends ModularService> modularServiceClazz = serviceMapping.getTarget();
 
                 ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
 
@@ -115,22 +112,18 @@ public class ModularLauncher {
                     modules.add( service );
                     services.add( service );
 
-                    // FIXME: this won't work due to issues with generics that
-                    // I'm still tracking down.
-
-                    //started.put( modularServiceType, modularServiceClazz );
+                    started.put( serviceMapping.getSource(), serviceMapping );
 
                 } catch ( ConfigurationException|CreationException e ) {
 
                     String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
                                                     modularServiceClazz.getName(), started.format(), advertised.format() );
 
-//                     FIXME: this is because we're in a stupid forEach...
-//                     FIXME: throw new Exception( message, e );
+                    throw new Exception( message, e );
 
                 }
 
-            } );
+            }
 
             lifecycleProvider.set( Lifecycle.INITIALIZED );
 
