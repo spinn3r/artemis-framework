@@ -7,6 +7,9 @@ import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
+import com.spinn3r.artemis.init.modular.stages.StageRunner;
+import com.spinn3r.artemis.init.modular.stages.impl.InitStageRunner;
+import com.spinn3r.artemis.init.modular.stages.impl.StartStageRunner;
 import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
@@ -66,130 +69,32 @@ public class ModularLauncher {
 
     }
 
-    /**
-     * Perform basic init. Mostly used so that test code can verify that
-     * bindings are working properly.
-     *
-     */
     public ModularLauncher init() throws Exception {
 
         Preconditions.checkState( Lifecycle.IDLE.equals( lifecycleProvider.get() ) );
 
-        if ( lifecycleProvider.get().equals( Lifecycle.IDLE ) ) {
+        lifecycleProvider.set( Lifecycle.INITIALIZING );
 
-            lifecycleProvider.set( Lifecycle.INITIALIZING );
+        launch( new InitStageRunner( configLoader, advertised ) );
 
-            for (ServiceMapping serviceMapping : modularServiceReferences.backing.values()) {
-
-                Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
-                Class<? extends ModularService> modularServiceClazz = serviceMapping.getTarget();
-
-                ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
-
-                ModularServiceReference modularServiceReference = new ModularServiceReference( modularServiceClazz );
-                Module configModule = modularConfigLoader.load( modularServiceReference );
-
-                if ( configModule != null ) {
-                    modules.add( configModule );
-                }
-
-                ModularIncluder modularIncluder = new ModularIncluder( this, modularServiceType );
-
-                ServiceDependenciesModule serviceDependenciesModule = new ServiceDependenciesModule( modularIncluder );
-
-                modules.add( serviceDependenciesModule );
-
-                try {
-
-                    Injector injector = Guice.createInjector( modules );
-                    ModularService service = injector.getInstance( modularServiceClazz );
-
-                    TracerFactory tracerFactory = injector.getInstance( TracerFactory.class );
-
-                    service.setAdvertised( advertised );
-                    service.setTracer( tracerFactory.newTracer( service ) );
-                    service.setConfigLoader( getConfigLoader() );
-
-                    service.init();
-
-                    modules.add( service );
-                    services.add( service );
-
-                    started.put( serviceMapping.getSource(), serviceMapping );
-
-                } catch ( ConfigurationException|CreationException e ) {
-
-                    String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
-                                                    modularServiceClazz.getName(), started.format(), advertised.format() );
-
-                    throw new Exception( message, e );
-
-                }
-
-            }
-
-            lifecycleProvider.set( Lifecycle.INITIALIZED );
-
-        } else {
-            throw new IllegalStateException( "Called init at the wrong stage: " + lifecycleProvider.get() );
-        }
+        lifecycleProvider.set( Lifecycle.INITIALIZED );
 
         return this;
 
     }
 
-    /**
-     *
-     * @return
-     * @throws Exception
-     */
     public ModularLauncher start() throws Exception {
 
         Preconditions.checkState( Lifecycle.IDLE.equals( lifecycleProvider.get() ) );
 
         lifecycleProvider.set( Lifecycle.STARTING );
 
-        for (Service service : services) {
+        InitStageRunner initStageRunner = new InitStageRunner( configLoader, advertised );
+        new StartStageRunner( tracer );
 
-            service.start();
+        launch( (injector, modularService) -> {
 
-            // FIXME one big problem here is that I need to JUST use the modules
-            // UP to this service and have to start with one injector ...
-            //
-            // FIXME: maybe I should just go through MODULES one at a time
-            // and then re-create injectors for each one?
-
-            // FIXME: ACTUALLY... the issue is that before the strategy was either
-            // init, init, init (for 3 services) or init,start init,start init,start
-            // for the services, one after the other.
-            //
-            // so there really isn't a start() as much as there's a init then launch
-            //
-            // FIXME: and I should have the same pattern here as before and
-            // instead have a "launch0" (thouhg I should call it something else)
-            // like a bootstrap ... or something
-            // then I include the below
-            // for services that need starting.
-            //
-            // FIXME: trigger, inject, fire.. react...
-            //
-
-            try {
-
-                tracer.info( "Starting service: %s ...", service.getClass().getName() );
-
-                Stopwatch stopwatch = Stopwatch.createStarted();
-
-                service.start();
-
-                tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
-
-            } catch ( Exception e ) {
-                throw new Exception( "Failed to start: " + service.getClass().getName(), e );
-            }
-
-
-        }
+        } );
 
         lifecycleProvider.set( Lifecycle.STARTED );
 
@@ -197,10 +102,56 @@ public class ModularLauncher {
 
     }
 
-    protected ModularLauncher launch() throws Exception {
+    /**
+     * Perform basic init. Mostly used so that test code can verify that
+     * bindings are working properly.
+     *
+     */
+    protected ModularLauncher launch( StageRunner stageRunner ) throws Exception {
 
-        init();
-        start();
+        for (ServiceMapping serviceMapping : modularServiceReferences.backing.values()) {
+
+            Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
+            Class<? extends ModularService> modularServiceClazz = serviceMapping.getTarget();
+
+            ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
+
+            ModularServiceReference modularServiceReference = new ModularServiceReference( modularServiceClazz );
+            Module configModule = modularConfigLoader.load( modularServiceReference );
+
+            if ( configModule != null ) {
+                modules.add( configModule );
+            }
+
+            ModularIncluder modularIncluder = new ModularIncluder( this, modularServiceType );
+
+            ServiceDependenciesModule serviceDependenciesModule = new ServiceDependenciesModule( modularIncluder );
+
+            modules.add( serviceDependenciesModule );
+
+            try {
+
+                Injector injector = Guice.createInjector( modules );
+
+                ModularService service = injector.getInstance( modularServiceClazz );
+
+                stageRunner.run( injector, service );
+
+                modules.add( service );
+                services.add( service );
+
+                started.put( serviceMapping.getSource(), serviceMapping );
+
+            } catch ( ConfigurationException|CreationException e ) {
+
+                String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
+                                                modularServiceClazz.getName(), started.format(), advertised.format() );
+
+                throw new Exception( message, e );
+
+            }
+
+        }
 
         return this;
 
@@ -265,11 +216,7 @@ public class ModularLauncher {
 
     }
 
-    public void launch0( LaunchHandler launchHandler, Service... services  ) throws Exception {
-        launch0( launchHandler, new Services( services ) );
-    }
-
-    public void launch0( LaunchHandler launchHandler, Services newServices ) throws Exception {
+//    public void launch0( LaunchHandler launchHandler, Services newServices ) throws Exception {
 
 // FIXME
 //        threadSnapshot.addAll( ThreadSnapshots.create() );
@@ -285,8 +232,8 @@ public class ModularLauncher {
 //        launchHandler.onLaunch( servicesTool );
 //
 //        injector = createInjector();
-
-    }
+//
+//    }
 
     /**
      * Stop all services started on this launcher.
