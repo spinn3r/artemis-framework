@@ -53,7 +53,7 @@ public class ServicesTool {
         ServiceReference serviceReference = new ServiceReference( service.getClass() );
 
         service.setAdvertised( advertised );
-        service.setTracer( tracerFactory.newTracer( service ) );
+        service.setTracer( tracerFactory.create( service ) );
         service.setConfigLoader( launcher.getConfigLoader() );
         service.setIncluder( new Includer( launcher, serviceReference ) );
 
@@ -73,7 +73,7 @@ public class ServicesTool {
         for (Service service : services) {
 
             TracerFactory tracerFactory = launcher.getAdvertised().require( TracerFactory.class );
-            Tracer tracer = tracerFactory.newTracer( launcher );
+            Tracer tracer = tracerFactory.create( launcher );
 
             try {
 
@@ -109,7 +109,7 @@ public class ServicesTool {
         for (Service service : services) {
 
             TracerFactory tracerFactory = launcher.getAdvertised().require( TracerFactory.class );
-            Tracer tracer = tracerFactory.newTracer( launcher );
+            Tracer tracer = tracerFactory.create( launcher );
 
             tracer.info( "Stopping service: %s ...", service.getClass().getName() );
 

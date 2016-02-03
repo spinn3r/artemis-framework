@@ -10,7 +10,6 @@ import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -186,7 +185,7 @@ public class Launcher {
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
 
-        threadDiff.report( advertised.require( TracerFactory.class ).newTracer( this ) );
+        threadDiff.report( advertised.require( TracerFactory.class ).create( this ) );
 
         threadSnapshot = new ThreadSnapshot();
 
@@ -251,7 +250,7 @@ public class Launcher {
 
     private Tracer getTracer() {
         TracerFactory tracerFactory = advertised.require( TracerFactory.class );
-        return tracerFactory.newTracer( this );
+        return tracerFactory.create( this );
     }
 
     public void info( String format, Object... args ) {

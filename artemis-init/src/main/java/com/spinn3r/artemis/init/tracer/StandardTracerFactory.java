@@ -8,7 +8,7 @@ import com.spinn3r.artemis.init.Service;
 public class StandardTracerFactory implements TracerFactory {
 
     @Override
-    public Tracer newTracer(Object source) {
+    public Tracer create(Object source) {
         return new StandardTracer( source );
     }
 

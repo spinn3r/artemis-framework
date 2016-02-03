@@ -5,6 +5,6 @@ package com.spinn3r.artemis.init.tracer;
  */
 public interface TracerFactory {
 
-    public Tracer newTracer( Object service );
+    Tracer create(Object service );
 
 }

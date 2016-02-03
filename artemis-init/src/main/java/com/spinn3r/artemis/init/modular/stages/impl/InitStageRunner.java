@@ -27,7 +27,7 @@ public class InitStageRunner implements StageRunner {
         TracerFactory tracerFactory = injector.getInstance( TracerFactory.class );
 
         modularService.setAdvertised( advertised );
-        modularService.setTracer( tracerFactory.newTracer( modularService ) );
+        modularService.setTracer( tracerFactory.create( modularService ) );
         modularService.setConfigLoader( configLoader );
 
         modularService.init();

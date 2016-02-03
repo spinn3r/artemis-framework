@@ -7,12 +7,14 @@ import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
+import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.modular.stages.StageRunner;
 import com.spinn3r.artemis.init.modular.stages.impl.InitStageRunner;
 import com.spinn3r.artemis.init.modular.stages.impl.StartStageRunner;
 import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
+import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
@@ -24,6 +26,8 @@ import java.util.List;
  */
 public class ModularLauncher {
 
+    // FIXME: verify that thread snapshots work as before...
+
     private final ConfigLoader configLoader;
 
     private final Role role;
@@ -33,7 +37,7 @@ public class ModularLauncher {
     private final Advertised advertised;
 
     private final AtomicReferenceProvider<Lifecycle> lifecycleProvider
-      = new AtomicReferenceProvider<>( Lifecycle.STOPPED );
+      = new AtomicReferenceProvider<>( Lifecycle.IDLE );
 
     // ** taken before launch and after stop to help detect improperly
     // shutdown services which have leaky threads
@@ -45,8 +49,6 @@ public class ModularLauncher {
      * The main injector to use after launch is called.
      */
     private Injector injector = null;
-
-    private Tracer tracer = null;
 
     private final ModularServiceReferences modularServiceReferences;
 
@@ -64,7 +66,6 @@ public class ModularLauncher {
         // to call stop on itself after being launched.
         advertise( ModularLauncher.class, this );
         provider( Lifecycle.class, lifecycleProvider );
-        advertise( Tracer.class, tracer );
         advertise( Role.class, role );
 
     }
@@ -90,9 +91,12 @@ public class ModularLauncher {
         lifecycleProvider.set( Lifecycle.STARTING );
 
         InitStageRunner initStageRunner = new InitStageRunner( configLoader, advertised );
-        new StartStageRunner( tracer );
+        StartStageRunner startStageRunner = new StartStageRunner();
 
         launch( (injector, modularService) -> {
+
+            initStageRunner.run( injector, modularService );
+            startStageRunner.run( injector, modularService );
 
         } );
 
@@ -102,6 +106,45 @@ public class ModularLauncher {
 
     }
 
+
+    /**
+     * Stop all services started on this launcher.
+     */
+    public ModularLauncher stop() throws Exception {
+
+        Preconditions.checkState( Lifecycle.STARTED.equals( lifecycleProvider.get() ) );
+
+        lifecycleProvider.set( Lifecycle.STOPPING );
+
+        List<Service> reverse = Lists.newArrayList( services );
+        Collections.reverse( reverse );
+
+        for (Service service : services) {
+
+            TracerFactory tracerFactory = injector.getInstance( TracerFactory.class );
+            Tracer tracer = tracerFactory.create( service );
+
+            tracer.info( "Stopping service: %s ...", service.getClass().getName() );
+
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
+            service.stop();
+
+            tracer.info( "Stopping service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
+
+        }
+
+        lifecycleProvider.set( Lifecycle.STOPPED );
+
+        ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
+
+        threadDiff.report( advertised.require( TracerFactory.class ).create( this ) );
+
+        threadSnapshot = new ThreadSnapshot();
+
+        return this;
+
+    }
     /**
      * Perform basic init. Mostly used so that test code can verify that
      * bindings are working properly.
@@ -109,7 +152,7 @@ public class ModularLauncher {
      */
     protected ModularLauncher launch( StageRunner stageRunner ) throws Exception {
 
-        for (ServiceMapping serviceMapping : modularServiceReferences.backing.values()) {
+        for ( ServiceMapping serviceMapping : modularServiceReferences.backing.values() ) {
 
             Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
             Class<? extends ModularService> modularServiceClazz = serviceMapping.getTarget();
@@ -131,7 +174,7 @@ public class ModularLauncher {
 
             try {
 
-                Injector injector = Guice.createInjector( modules );
+                injector = Guice.createInjector( modules );
 
                 ModularService service = injector.getInstance( modularServiceClazz );
 
@@ -153,117 +196,9 @@ public class ModularLauncher {
 
         }
 
-        return this;
-
-    }
-
-    /**
-     * Launch services by class.  This allows us to use dependency injection to
-     * instantiate each one.
-     *
-     */
-    public ModularLauncher launch( ModularServiceReferences modularServiceReferences, LaunchHandler launchHandler ) throws Exception {
-
-// FIXME
-//        this.modularServiceReferences = modularServiceReferences;
-//
-//        info( "Launching services: \n%s", modularServiceReferences.format() );
-//
-//        lifecycleProvider.set( Lifecycle.STARTING );
-//
-//        ServiceInitializer serviceInitializer = new ServiceInitializer( this );
-//
-//        // we iterate with a for loop so that if a service includes another
-//        // service we can incorporate it into our pipeline.
-//        for (int i = 0; i < serviceReferences.size(); i++) {
-//
-//            ServiceReference serviceReference = serviceReferences.get( i );
-//
-//            try {
-//
-//                serviceInitializer.init( serviceReference );
-//
-//                Injector injector = getAdvertised().createInjector();
-//                Service current = injector.getInstance( serviceReference.getBacking() );
-//                launch0( launchHandler, current );
-//
-//                services.add( current );
-//                started.add( serviceReference );
-//
-//            } catch ( ConfigurationException |CreationException e ) {
-//
-//                String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
-//                  serviceReference.getBacking().getName(), started.format(), advertised.format() );
-//
-//                throw new Exception( message, e );
-//
-//            }
-//
-//        }
-//
-//        if ( injector == null ) {
-//            // only ever done if we're starting without any services, usually
-//            // only when we are in testing mode.  This is really just an empty
-//            // injector at this point.
-//            injector = createInjector();
-//        }
-//
-//        info( "Now running with the following advertisements: \n%s", advertised.format() );
-//
-//        lifecycleProvider.set( Lifecycle.STARTED );
-//
-        return this;
-
-    }
-
-//    public void launch0( LaunchHandler launchHandler, Services newServices ) throws Exception {
-
-// FIXME
-//        threadSnapshot.addAll( ThreadSnapshots.create() );
-//
-//        if ( advertised.find( ConfigLoader.class ) == null ) {
-//            advertised.advertise( this, ConfigLoader.class, configLoader );
-//        }
-//
-//        this.services.addAll( newServices );
-//
-//        ServicesTool servicesTool = new ServicesTool( this, newServices );
-//
-//        launchHandler.onLaunch( servicesTool );
-//
-//        injector = createInjector();
-//
-//    }
-
-    /**
-     * Stop all services started on this launcher.
-     */
-    public ModularLauncher stop() throws Exception {
-
-        lifecycleProvider.set( Lifecycle.STOPPING );
-
-        List<Service> reverse = Lists.newArrayList( services );
-        Collections.reverse( reverse );
-
-        for (Service service : services) {
-
-            tracer.info( "Stopping service: %s ...", service.getClass().getName() );
-
-            Stopwatch stopwatch = Stopwatch.createStarted();
-
-            service.stop();
-
-            tracer.info( "Stopping service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
-
-        }
-
-        lifecycleProvider.set( Lifecycle.STOPPED );
-
-        ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
-
-        threadDiff.report( advertised.require( TracerFactory.class ).newTracer( this ) );
-
-        threadSnapshot = new ThreadSnapshot();
+        // we need to inject one more time so that we can get the last service
+        // added to the set of modules.
+        injector = Guice.createInjector( modules );
 
         return this;
 
@@ -335,7 +270,7 @@ public class ModularLauncher {
 
     private Tracer getTracer() {
         TracerFactory tracerFactory = advertised.require( TracerFactory.class );
-        return tracerFactory.newTracer( this );
+        return tracerFactory.create( this );
     }
 
     public void info( String format, Object... args ) {
@@ -344,6 +279,10 @@ public class ModularLauncher {
 
     public void error( String format, Object... args ) {
         getTracer().error( format, args );
+    }
+
+    public static ModularLauncherBuilder create(ModularServiceReferences modularServiceReferences ) {
+        return new ModularLauncherBuilder( new ResourceConfigLoader(), modularServiceReferences );
     }
 
     public static ModularLauncherBuilder create(ConfigLoader configLoader, ModularServiceReferences modularServiceReferences ) {
@@ -359,9 +298,9 @@ public class ModularLauncher {
         protected void configure() {
             bind( ModularLauncher.class ).toInstance( ModularLauncher.this );
             bind( Lifecycle.class ).toProvider( lifecycleProvider );
-            bind( Tracer.class ).toInstance( tracer );
             bind( Role.class ).toInstance( role );
             bind( ConfigLoader.class ).toInstance( configLoader );
+            bind( TracerFactory.class ).to( StandardTracerFactory.class );
         }
 
     }
