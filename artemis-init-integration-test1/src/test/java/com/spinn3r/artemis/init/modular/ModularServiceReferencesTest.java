@@ -53,8 +53,11 @@ public class ModularServiceReferencesTest {
         m0.replace( m1 );
 
         assertEquals( 2, m0.size() );
-        assertEquals( MockHostnameService.class, m0.get( HostnameServiceType.class ) );
-        assertEquals( MockVersionService.class, m0.get( VersionServiceType.class ) );
+        assertEquals( "ClassMapping{source=interface com.spinn3r.artemis.init.advertisements.HostnameServiceType, target=class com.spinn3r.artemis.init.MockHostnameService}",
+                      m0.get( HostnameServiceType.class ).toString() );
+
+        assertEquals( "ClassMapping{source=interface com.spinn3r.artemis.init.advertisements.VersionServiceType, target=class com.spinn3r.artemis.init.MockVersionService}",
+                      m0.get( VersionServiceType.class ).toString() );
 
     }
 
