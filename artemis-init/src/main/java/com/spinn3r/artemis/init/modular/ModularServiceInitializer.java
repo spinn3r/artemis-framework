@@ -20,6 +20,9 @@ import java.net.URL;
  */
 public class ModularServiceInitializer {
 
+    // steal the NEW code from ServiceInitializer...
+
+
     private ModularLauncher modularLauncher;
 
     ModularServiceInitializer(ModularLauncher modularLauncher) {
