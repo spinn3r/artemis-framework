@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
@@ -131,13 +132,64 @@ public class ModularLauncher {
 
     }
 
+    public ModularLauncher start() throws Exception {
+
+        lifecycleProvider.set( Lifecycle.STARTING );
+
+        for (Service service : services) {
+
+            service.start();
+
+            // FIXME one big problem here is that I need to JUST use the modules
+            // UP to this service and have to start with one injector ...
+            //
+            // FIXME: maybe I should just go through MODULES one at a time
+            // and then re-create injectors for each one?
+
+            // FIXME: ACTUALLY... the issue is that before the strategy was either
+            // init, init, init (for 3 services) or init,start init,start init,start
+            // for the services, one after the other.
+            //
+            // so there really isn't a start() as much as there's a init then launch
+            //
+            // FIXME: and I should have the same pattern here as before and
+            // instead have a "launch0" (thouhg I should call it something else)
+            // like a bootstrap ... or something
+            // then I include the below
+            // for services that need starting.
+            //
+            // FIXME: trigger, inject, fire.. react...
+            //
+
+            try {
+
+                tracer.info( "Starting service: %s ...", service.getClass().getName() );
+
+                Stopwatch stopwatch = Stopwatch.createStarted();
+
+                service.start();
+
+                tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
+
+            } catch ( Exception e ) {
+                throw new Exception( "Failed to start: " + service.getClass().getName(), e );
+            }
+
+
+        }
+
+        lifecycleProvider.set( Lifecycle.STARTED );
+
+        return this;
+
+    }
+
     public ModularLauncher launch() throws Exception {
 
-        // FIXME: don't use ServicesTool
-        return launch( modularServiceReferences, (servicesTool) -> {
-            servicesTool.init();
-            servicesTool.start();
-        } );
+        init();
+        start();
+
+        return this;
 
     }
 
@@ -327,6 +379,9 @@ public class ModularLauncher {
         return new ModularLauncherBuilder( configLoader, modularServiceReferences );
     }
 
+    /**
+     * Contains standard modules we need for use within within services.
+     */
     class StandardModules extends AbstractModule {
 
         @Override
