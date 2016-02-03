@@ -21,10 +21,6 @@ public interface Service extends Module, Tracer {
 
     void setConfigLoader(ConfigLoader configLoader);
 
-    Services getServices();
-
-    void setServices(Services services);
-
     void init();
 
     void start() throws Exception;

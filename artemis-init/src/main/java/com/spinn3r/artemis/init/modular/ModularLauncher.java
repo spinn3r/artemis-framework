@@ -5,21 +5,20 @@ import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
-import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
-import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  *
  */
 public class ModularLauncher {
 
-    private ConfigLoader configLoader;
+    private final ConfigLoader configLoader;
+
+    private final Role role;
 
     private final Services services = new Services();
 
@@ -39,12 +38,15 @@ public class ModularLauncher {
      */
     private Injector injector = null;
 
+    private Tracer tracer = null;
+
     private final ModularServiceReferences modularServiceReferences;
 
     private final List<Module> modules = Lists.newArrayList();
 
-    public ModularLauncher(ConfigLoader configLoader, Advertised advertised, ModularServiceReferences modularServiceReferences) {
+    ModularLauncher(ConfigLoader configLoader, Role role, Advertised advertised, ModularServiceReferences modularServiceReferences) {
         this.configLoader = configLoader;
+        this.role = role;
         this.advertised = advertised;
         this.modularServiceReferences = modularServiceReferences;
 
@@ -54,6 +56,8 @@ public class ModularLauncher {
         // to call stop on itself after being launched.
         advertise( ModularLauncher.class, this );
         provider( Lifecycle.class, lifecycleProvider );
+        advertise( Tracer.class, tracer );
+        advertise( Role.class, role );
 
     }
 
@@ -70,35 +74,50 @@ public class ModularLauncher {
 
             modularServiceReferences.backing.entrySet().forEach( entry -> {
 
+                Class<? extends ServiceType> modularServiceType = entry.getKey();
                 Class<? extends ModularService> modularServiceClazz = entry.getValue();
 
                 // TODO load the config for this service using something like
                 // the serviceInitializer...
 
+                ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
 
+                ModularServiceReference modularServiceReference = new ModularServiceReference( modularServiceClazz );
+                Module configModule = modularConfigLoader.load( modularServiceReference );
 
-//                try {
-//
-//                    serviceInitializer.init( serviceReference );
-//
-//                    Injector injector = getAdvertised().createInjector();
-//                    Service current = injector.getInstance( serviceReference.getBacking() );
-//                    launch0( launchHandler, current );
-//
-//                    services.add( current );
-//                    started.add( serviceReference );
-//
-//                } catch ( ConfigurationException|CreationException e ) {
-//
-//                    String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
-//                      serviceReference.getBacking().getName(), started.format(), advertised.format() );
-//
-//                    throw new Exception( message, e );
-//
-//                }
-//
-//
+                if ( configModule != null ) {
+                    modules.add( configModule );
+                }
 
+                try {
+
+                    Injector injector = Guice.createInjector( modules );
+                    ModularService service = injector.getInstance( modularServiceClazz );
+
+                    TracerFactory tracerFactory = injector.getInstance( TracerFactory.class );
+
+                    service.setAdvertised( advertised );
+                    service.setTracer( tracerFactory.newTracer( service ) );
+                    service.setConfigLoader( getConfigLoader() );
+//                    // FIXME: this needs a ModularIncluder...
+//                    service.setIncluder( new Includer( launcher, serviceReference ) );
+
+                    service.init();
+
+                    modules.add( service );
+                    services.add( service );
+
+                    // FIXME: started.put( modularServiceType, modularServiceClazz );
+
+                } catch ( ConfigurationException|CreationException e ) {
+
+                    String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
+                                                    modularServiceClazz.getName(), started.format(), advertised.format() );
+
+//                     FIXME: this is because we're in a stupid forEach...
+//                     FIXME: throw new Exception( message, e );
+
+                }
 
             } );
 
@@ -314,6 +333,8 @@ public class ModularLauncher {
         protected void configure() {
             bind( ModularLauncher.class ).toInstance( ModularLauncher.this );
             bind( Lifecycle.class ).toProvider( lifecycleProvider );
+            bind( Tracer.class ).toInstance( tracer );
+            bind( Role.class ).toInstance( role );
         }
 
     }
@@ -350,12 +371,7 @@ public class ModularLauncher {
 
         public ModularLauncher build() {
 
-            ModularLauncher result = new ModularLauncher( configLoader, advertised, modularServiceReferences );
-
-            // FIXME
-            result.getAdvertised().advertise( this, Role.class, role );
-
-            return result;
+            return new ModularLauncher( configLoader, role, advertised, modularServiceReferences );
 
         }
 

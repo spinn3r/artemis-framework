@@ -74,7 +74,11 @@ public class DefaultWebserverReferencesService extends BaseService {
         //servletReferences.add( "/metrics", new MetricsServlet( taggedMetrics.getMetricRegistry() ) );
         servletReferences.add( "/ping", new PingServlet() );
         servletReferences.add( "/speed-test", new SpeedTestServlet() );
-        servletReferences.add( "/config", new ConfigServlet( getAdvertised(), getServices() ) );
+
+        // TODO: removed /config during refactor.  We shouldn't expose the raw
+        // services but should instead expose a map from ServiceClass to the
+        // config object it loaded via an dependency that we inject later
+        //servletReferences.add( "/config", new ConfigServlet( getAdvertised(), getServices() ) );
         servletReferences.add( "/host-meta", new HostMetaServlet( hostMeta ) );
         servletReferences.add( "/", new IndexServlet( servletReferences, hostnameProvider.get().getValue(), role.getValue() ) );
         servletReferences.add( "/request-meta", new RequestMetaServlet() );

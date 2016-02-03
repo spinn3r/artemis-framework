@@ -55,7 +55,6 @@ public class ServicesTool {
         service.setAdvertised( advertised );
         service.setTracer( tracerFactory.newTracer( service ) );
         service.setConfigLoader( launcher.getConfigLoader() );
-        service.setServices( launcher.getServices() );
         service.setIncluder( new Includer( launcher, serviceReference ) );
 
         ServiceInitializer serviceInitializer = new ServiceInitializer( launcher );

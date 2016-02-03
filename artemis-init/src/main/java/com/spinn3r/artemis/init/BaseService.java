@@ -16,8 +16,6 @@ public abstract class BaseService extends AbstractModule implements Service {
 
     private Advertised advertised;
 
-    protected Services services;
-
     protected Tracer tracer;
 
     protected Includer includer;
@@ -54,20 +52,6 @@ public abstract class BaseService extends AbstractModule implements Service {
     @Override
     public void setConfigLoader(ConfigLoader configLoader) {
         this.configLoader = configLoader;
-    }
-
-    @Override
-    public Services getServices() {
-        return services;
-    }
-
-    @Override
-    public void setServices(Services services) {
-
-        if (services.size() == 0)
-            throw new RuntimeException( "no services" );
-
-        this.services = services;
     }
 
     @Override
