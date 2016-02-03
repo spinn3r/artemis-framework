@@ -12,6 +12,7 @@ import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -62,8 +63,53 @@ public class ModularLauncher {
      *
      */
     public ModularLauncher init() throws Exception {
-        // FIXME: don't use ServicesTool
-        return launch( modularServiceReferences, ServicesTool::init );
+
+        if ( lifecycleProvider.get().equals( Lifecycle.WAITING ) ) {
+
+            lifecycleProvider.set( Lifecycle.INITIALIZING );
+
+            modularServiceReferences.backing.entrySet().forEach( entry -> {
+
+                Class<? extends ModularService> modularServiceClazz = entry.getValue();
+
+                // TODO load the config for this service using something like
+                // the serviceInitializer...
+
+
+
+//                try {
+//
+//                    serviceInitializer.init( serviceReference );
+//
+//                    Injector injector = getAdvertised().createInjector();
+//                    Service current = injector.getInstance( serviceReference.getBacking() );
+//                    launch0( launchHandler, current );
+//
+//                    services.add( current );
+//                    started.add( serviceReference );
+//
+//                } catch ( ConfigurationException|CreationException e ) {
+//
+//                    String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
+//                      serviceReference.getBacking().getName(), started.format(), advertised.format() );
+//
+//                    throw new Exception( message, e );
+//
+//                }
+//
+//
+
+
+            } );
+
+            lifecycleProvider.set( Lifecycle.INITIALIZED );
+
+        } else {
+            throw new IllegalStateException( "Called init at the wrong stage: " + lifecycleProvider.get() );
+        }
+
+        return this;
+
     }
 
     public ModularLauncher launch() throws Exception {
@@ -162,6 +208,8 @@ public class ModularLauncher {
      * Stop all services started on this launcher.
      */
     public ModularLauncher stop() throws Exception {
+
+        // FIXME: should be itempotent.
 
 // FIXME
 //        lifecycleProvider.set( Lifecycle.STOPPING );

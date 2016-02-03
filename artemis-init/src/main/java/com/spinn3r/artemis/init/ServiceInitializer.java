@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.init;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Charsets;
+import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.jasonclawson.jackson.dataformat.hocon.HoconFactory;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -53,6 +55,8 @@ public class ServiceInitializer {
             resource = configLoader.getResource( serviceReference.getBacking(), config.path() );
         }
 
+        Class<?> configClazz = config.implementation();
+
         try {
 
             if ( resource == null ) {
@@ -62,11 +66,18 @@ public class ServiceInitializer {
 
             try( InputStream inputStream = resource.openStream(); ) {
 
-                Object instance = parse( inputStream, config.implementation() );
+                byte[] data = ByteStreams.toByteArray( inputStream );
+                String content = new String( data, Charsets.UTF_8 );
 
-                launcher.info( "Using %s for config %s for service %s", resource, instance.getClass().getName(), serviceReference );
+                Loader<?> loader = new Loader( content, configClazz, launcher.getAdvertised() );
 
-                launcher.getAdvertised().advertise( this, config.implementation(), instance );
+                try {
+                    loader.load();
+                } catch (Exception e) {
+                    throw new RuntimeException( "Could not load config: ", e );
+                }
+
+                launcher.info( "Using %s for config %s for service %s", resource, configClazz, serviceReference );
 
             }
 
@@ -80,9 +91,9 @@ public class ServiceInitializer {
 
                 try {
 
-                    Object instance = parse( "{}", config.implementation() );
+                    Loader<?> loader = new Loader( "{}", configClazz, launcher.getAdvertised() );
 
-                    launcher.getAdvertised().advertise( this, config.implementation(), instance );
+                    loader.load();
 
                 } catch (Exception e1) {
                     throw new RuntimeException( "Unable to create default config object: ", e1 );
@@ -94,49 +105,53 @@ public class ServiceInitializer {
 
     }
 
-    public static <T> T parse( InputStream inputStream, Class<T> configClass ) {
+    /**
+     * Take the config and parse it into an instance then advertise it.
+     */
+    static class Loader<C> {
 
-        try {
+        private final String data;
+
+        private final Class<C> clazz;
+
+        private final Advertised advertised;
+
+        public Loader(String data, Class<C> clazz, Advertised advertised) {
+            this.data = data;
+            this.clazz = clazz;
+            this.advertised = advertised;
+        }
+
+        public void load() throws Exception {
+
+            C instance = parse( data, clazz );
+
+            advertised.advertise( this, clazz, instance );
+
+        }
+
+        private C parse(String data, Class<C> clazz ) throws Exception {
 
             try {
 
-                InputStreamReader reader = new InputStreamReader( inputStream );
+                ObjectMapper mapper = new ObjectMapper( new HoconFactory() );
 
-                String data = CharStreams.toString( reader );
+                return mapper.readValue( data, clazz );
 
-                return parse( data, configClass );
+            } catch ( Exception e ) {
 
-            } finally {
-
-                inputStream.close();
+                // TODO: don't print this to stdout .. use the tracer
+                System.out.printf( "Unable to parse: \n" );
+                System.out.printf( "=====\n" );
+                System.out.printf( "%s", data );
+                System.out.printf( "=====\n" );
+                throw e;
 
             }
 
-        } catch (Exception e) {
-            throw new RuntimeException( e );
         }
 
     }
 
-    public static <T> T parse( String data, Class<T> configClass ) throws Exception {
-
-        try {
-
-            ObjectMapper mapper = new ObjectMapper( new HoconFactory() );
-
-            return mapper.readValue( data, configClass );
-
-        } catch ( Exception e ) {
-
-            // TODO: don't print this to stdout .. use the tracer
-            System.out.printf( "Unable to parse: \n" );
-            System.out.printf( "=====\n" );
-            System.out.printf( "%s", data );
-            System.out.printf( "=====\n" );
-            throw e;
-
-        }
-
-    }
 }
 

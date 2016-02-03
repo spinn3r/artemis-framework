@@ -31,6 +31,6 @@ public @interface Config {
     /**
      * The class to use for the config object.
      */
-    Class implementation();
+    Class<? extends Object> implementation();
 
 }
