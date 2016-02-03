@@ -13,10 +13,23 @@ public class ModularServiceReferences {
 
     protected LinkedHashMap<Class<? extends ServiceType>,Class<? extends ModularService>> backing = new LinkedHashMap<>();
 
+    protected BackingMapFacade<ServiceType> backingMapFacade = new BackingMapFacade<>();
+
     public <T extends ServiceType> ModularServiceReferences put( Class<T> serviceType, Class<? extends T> service ) {
+
+        ServiceMapping serviceMapping = new ServiceMapping( serviceType, service );
+
+        //ClassMapping<T> classMapping = new ClassMapping<>( serviceType, service );
+        //ClassMapping<ServiceType> classMapping1 = new ClassMapping<>( serviceType, service );
+
+        //backingMap.put( serviceType, classMapping );
+        //backingMap.put( serviceType, service );
+
+        //backingMapFacade.put( serviceType, service );
 
         backing.put( serviceType, service );
         return this;
+
     }
 
     // TODO: we need to be able to support include() of more service...

@@ -5,6 +5,6 @@ import java.util.LinkedHashMap;
 /**
  *
  */
-public class BackingMap<T> extends LinkedHashMap<Class<? extends T>,Class<? extends T>> {
+public class BackingMap<T> extends LinkedHashMap<Class<? extends T>,ClassMapping<T>> {
 
 }

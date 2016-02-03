@@ -3,6 +3,7 @@ package com.spinn3r.artemis.init.modular;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
+import com.spinn3r.artemis.init.services.HostnameService;
 import org.junit.Test;
 
 import java.util.Map;
@@ -22,6 +23,8 @@ public class BackingMapFacadeTest {
         BackingMap<ServiceType> backing = new BackingMap<>();
 
         //backingMapFacade.put( HostnameServiceType.class, MockHostnameService.class );
+
+        //ClassMapping<ServiceType> classMapping = new ClassMapping<>( HostnameServiceType.class, HostnameService.class );
 
     }
 

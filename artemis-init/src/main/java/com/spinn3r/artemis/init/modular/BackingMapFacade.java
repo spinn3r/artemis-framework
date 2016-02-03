@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.google.common.base.Preconditions;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +18,9 @@ public class BackingMapFacade<T> {
     }
 
     public void put( Class<T> key, Class<? extends T> value ) {
-        backingMap.put( key, value );
+        Preconditions.checkNotNull( value );
+        ClassMapping<T> classMapping = new ClassMapping<>( key, value );
+        backingMap.put( key, classMapping );
     }
 
 }
