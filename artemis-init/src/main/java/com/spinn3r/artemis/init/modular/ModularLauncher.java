@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.inject.*;
@@ -72,7 +73,9 @@ public class ModularLauncher {
      */
     public ModularLauncher init() throws Exception {
 
-        if ( lifecycleProvider.get().equals( Lifecycle.WAITING ) ) {
+        Preconditions.checkState( Lifecycle.IDLE.equals( lifecycleProvider.get() ) );
+
+        if ( lifecycleProvider.get().equals( Lifecycle.IDLE ) ) {
 
             lifecycleProvider.set( Lifecycle.INITIALIZING );
 
@@ -135,7 +138,14 @@ public class ModularLauncher {
 
     }
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     public ModularLauncher start() throws Exception {
+
+        Preconditions.checkState( Lifecycle.IDLE.equals( lifecycleProvider.get() ) );
 
         lifecycleProvider.set( Lifecycle.STARTING );
 
@@ -187,7 +197,7 @@ public class ModularLauncher {
 
     }
 
-    public ModularLauncher launch() throws Exception {
+    protected ModularLauncher launch() throws Exception {
 
         init();
         start();

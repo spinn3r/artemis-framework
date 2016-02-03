@@ -12,10 +12,10 @@ import com.spinn3r.artemis.time.Started;
 public enum Lifecycle {
 
     /**
-     * Waiting for you to start the system.  Not yet initialized.  This is the
-     * beginning state.
+     * Idle state waiting for you to start the system.  Not yet initialized.
+     * This is the beginning state.
      */
-    WAITING,
+    IDLE,
     INITIALIZING,
     INITIALIZED,
     STARTING,
