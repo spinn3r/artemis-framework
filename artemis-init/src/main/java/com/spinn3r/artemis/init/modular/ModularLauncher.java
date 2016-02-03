@@ -329,9 +329,10 @@ public class ModularLauncher {
         return modularServiceReferences;
     }
 
-    public void include( ModularServiceReference currentModularServiceReference, List<ModularServiceReference> additionalModularServiceReferences ) {
-//FIXME
-//        this.modularServiceReferences.include( currentModularServiceReference, additionalModularServiceReferences );
+    public void include( Class<? extends ServiceType> serviceTypePointer, ModularServiceReferences additionalModularServiceReferences ) {
+
+        modularServiceReferences.include( serviceTypePointer, additionalModularServiceReferences );
+
     }
 
     @Deprecated
