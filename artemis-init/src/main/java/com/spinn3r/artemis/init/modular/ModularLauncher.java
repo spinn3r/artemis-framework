@@ -6,10 +6,13 @@ import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
+import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
+import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -280,21 +283,31 @@ public class ModularLauncher {
      */
     public ModularLauncher stop() throws Exception {
 
-        // FIXME: should be itempotent.
+        lifecycleProvider.set( Lifecycle.STOPPING );
 
-// FIXME
-//        lifecycleProvider.set( Lifecycle.STOPPING );
-//
-//        new ServicesTool( this, services ).stop();
-//
-//        lifecycleProvider.set( Lifecycle.STOPPED );
-//
-//        ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
-//
-//        threadDiff.report( advertised.require( TracerFactory.class ).newTracer( this ) );
-//
-//        threadSnapshot = new ThreadSnapshot();
-//
+        List<Service> reverse = Lists.newArrayList( services );
+        Collections.reverse( reverse );
+
+        for (Service service : services) {
+
+            tracer.info( "Stopping service: %s ...", service.getClass().getName() );
+
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
+            service.stop();
+
+            tracer.info( "Stopping service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
+
+        }
+
+        lifecycleProvider.set( Lifecycle.STOPPED );
+
+        ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
+
+        threadDiff.report( advertised.require( TracerFactory.class ).newTracer( this ) );
+
+        threadSnapshot = new ThreadSnapshot();
+
         return this;
 
     }
