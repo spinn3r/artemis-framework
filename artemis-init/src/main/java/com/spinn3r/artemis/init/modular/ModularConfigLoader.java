@@ -44,9 +44,9 @@ public class ModularConfigLoader {
             throw new NullPointerException( "config" );
         }
 
-        if ( modularLauncher.getAdvertised().find( config.implementation() ) != null ) {
-            return null;
-        }
+        //if ( modularLauncher.getAdvertised().find( config.implementation() ) != null ) {
+        //    return null;
+        //}
 
         ConfigLoader configLoader = modularLauncher.getConfigLoader();
 
@@ -74,7 +74,7 @@ public class ModularConfigLoader {
                 byte[] data = ByteStreams.toByteArray( inputStream );
                 String content = new String( data, Charsets.UTF_8 );
 
-                Loader<?> loader = new Loader( content, configClazz, modularLauncher.getAdvertised() );
+                Loader<?> loader = new Loader( content, configClazz );
 
                 try {
 
@@ -100,7 +100,7 @@ public class ModularConfigLoader {
 
                 try {
 
-                    Loader<?> loader = new Loader( "{}", configClazz, modularLauncher.getAdvertised() );
+                    Loader<?> loader = new Loader( "{}", configClazz );
 
                     return loader.load();
 
@@ -117,26 +117,20 @@ public class ModularConfigLoader {
     /**
      * Take the config and parse it into an instance then advertise it.
      */
-    static class Loader<C> {
+    class Loader<C> {
 
         private final String data;
 
         private final Class<C> clazz;
 
-        private final Advertised advertised;
-
-        public Loader(String data, Class<C> clazz, Advertised advertised) {
+        public Loader(String data, Class<C> clazz) {
             this.data = data;
             this.clazz = clazz;
-            this.advertised = advertised;
         }
 
         public ConfigModule<C> load() throws Exception {
 
             C instance = parse( data, clazz );
-
-            advertised.advertise( this, clazz, instance );
-
             return new ConfigModule<>( clazz, instance );
 
         }
@@ -150,12 +144,10 @@ public class ModularConfigLoader {
                 return mapper.readValue( data, clazz );
 
             } catch ( Exception e ) {
-
-                // TODO: don't print this to stdout .. use the tracer
-                System.out.printf( "Unable to parse: \n" );
-                System.out.printf( "=====\n" );
-                System.out.printf( "%s", data );
-                System.out.printf( "=====\n" );
+                tracer.error( "Unable to parse: \n" );
+                tracer.error( "=====\n" );
+                tracer.error( "%s", data );
+                tracer.error( "=====\n" );
                 throw e;
 
             }
@@ -167,7 +159,7 @@ public class ModularConfigLoader {
     /**
      * Module to use to inject this config into Guice.
      */
-    static class ConfigModule<C> extends AbstractModule {
+    class ConfigModule<C> extends AbstractModule {
 
         private final Class<C> clazz;
 
