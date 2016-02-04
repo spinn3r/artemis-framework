@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.inject.*;
+import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -38,6 +39,9 @@ public class ModularLauncher {
 
     private final AtomicReferenceProvider<Lifecycle> lifecycleProvider
       = new AtomicReferenceProvider<>( Lifecycle.IDLE );
+
+    private final AtomicReferenceProvider<ModularIncluder> modularIncluderProvider
+      = new AtomicReferenceProvider<>( null );
 
     // ** taken before launch and after stop to help detect improperly
     // shutdown services which have leaky threads
@@ -152,6 +156,8 @@ public class ModularLauncher {
      */
     protected ModularLauncher launch( StageRunner stageRunner ) throws Exception {
 
+        info( "Launching services: \n%s", modularServiceReferences.format() );
+
         for ( ServiceMapping serviceMapping : modularServiceReferences.backing.values() ) {
 
             Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
@@ -174,6 +180,7 @@ public class ModularLauncher {
 
             try {
 
+                //injector = Guice.createInjector( Modules.override( Lists.newArrayList() ).with( modules ) );
                 injector = Guice.createInjector( modules );
 
                 ModularService service = injector.getInstance( modularServiceClazz );
@@ -301,6 +308,7 @@ public class ModularLauncher {
             bind( Role.class ).toInstance( role );
             bind( ConfigLoader.class ).toInstance( configLoader );
             bind( TracerFactory.class ).to( StandardTracerFactory.class );
+            bind( ModularIncluder.class ).toProvider( modularIncluderProvider );
         }
 
     }
@@ -318,7 +326,8 @@ public class ModularLauncher {
 
         @Override
         protected void configure() {
-            bind( ModularIncluder.class ).toInstance( modularIncluder );
+            // FIXME
+            //bind( ModularIncluder.class ).toInstance( modularIncluder );
         }
 
     }

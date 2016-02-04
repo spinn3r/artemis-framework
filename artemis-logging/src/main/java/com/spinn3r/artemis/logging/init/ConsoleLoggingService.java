@@ -5,6 +5,7 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Version;
+import com.spinn3r.artemis.init.modular.ModularService;
 import com.spinn3r.artemis.init.tracer.Log4jTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -16,7 +17,7 @@ import java.nio.file.Paths;
 /**
  * Setup logging to stdout for console applications.
  */
-public class ConsoleLoggingService extends BaseService {
+public class ConsoleLoggingService extends BaseService implements ModularService, LoggingServiceType {
 
     private final Provider<Version> versionProvider;
 
@@ -26,6 +27,11 @@ public class ConsoleLoggingService extends BaseService {
     ConsoleLoggingService(Provider<Version> versionProvider, Provider<Hostname> hostnameProvider ) {
         this.versionProvider = versionProvider;
         this.hostnameProvider = hostnameProvider;
+    }
+
+    @Override
+    protected void configure() {
+
     }
 
     @Override

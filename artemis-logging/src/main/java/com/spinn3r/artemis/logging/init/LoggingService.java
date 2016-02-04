@@ -6,6 +6,7 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Version;
+import com.spinn3r.artemis.init.modular.ModularService;
 import com.spinn3r.artemis.init.tracer.Log4jTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -20,7 +21,7 @@ import java.nio.file.Paths;
 @Config( path = "logging.conf",
          required = true,
          implementation = LoggingConfig.class )
-public class LoggingService extends BaseService {
+public class LoggingService extends BaseService implements ModularService, LoggingServiceType {
 
     private final LoggingConfig config;
 
