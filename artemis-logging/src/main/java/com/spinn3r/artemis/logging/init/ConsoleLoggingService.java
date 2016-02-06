@@ -6,6 +6,7 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Version;
 import com.spinn3r.artemis.init.modular.ModularService;
+import com.spinn3r.artemis.init.tracer.Log4jTracer;
 import com.spinn3r.artemis.init.tracer.Log4jTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -31,7 +32,7 @@ public class ConsoleLoggingService extends BaseService implements ModularService
 
     @Override
     protected void configure() {
-
+        bind( TracerFactory.class ).to( Log4jTracerFactory.class );
     }
 
     @Override

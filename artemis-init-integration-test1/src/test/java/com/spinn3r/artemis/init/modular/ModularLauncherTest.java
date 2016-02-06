@@ -9,6 +9,7 @@ import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.advertisements.VersionServiceType;
 import com.spinn3r.artemis.init.services.HostnameService;
 import com.spinn3r.artemis.init.tracer.Tracer;
+import com.spinn3r.artemis.init.tracer.TracerFactory;
 import com.spinn3r.artemis.logging.init.ConsoleLoggingService;
 import com.spinn3r.artemis.logging.init.LoggingServiceType;
 import org.junit.Assert;
@@ -92,7 +93,12 @@ public class ModularLauncherTest {
 
         modularLauncher.getInjector().injectMembers( this );
 
-        Tracer tracer = modularLauncher.getInjector().getInstance( Tracer.class );
+        // FIXME: this has to be added as a queue by dependencies...
+        // we should have a TracerFactoryManager with push/pop methods.  These
+        // can take a new TracerFactory , push it on to the queue, and pop it off
+        // without conflicting with bindings.
+
+        TracerFactory tracerFactory = modularLauncher.getInjector().getInstance( TracerFactory.class );
 
         modularLauncher.stop();
 
