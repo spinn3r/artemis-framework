@@ -62,21 +62,25 @@ public class ServiceReferences {
         return delegate.contains( serviceReference );
     }
 
-    public void add( ServiceReference serviceReference ) {
+    public ServiceReferences add( ServiceReference serviceReference ) {
 
         if ( delegate.contains( serviceReference ) )
-            return;
+            return this;
 
         delegate.add( serviceReference );
 
+        return this;
+
     }
 
-    public void add( int index, ServiceReference serviceReference ) {
+    public ServiceReferences add( int index, ServiceReference serviceReference ) {
         delegate.add( index, serviceReference );
+        return this;
     }
 
-    public void add( Class<? extends Service> service ) {
+    public ServiceReferences add( Class<? extends Service> service ) {
         add( new ServiceReference( service ) );
+        return this;
     }
 
     public String format() {
