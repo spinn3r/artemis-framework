@@ -3,6 +3,7 @@ package com.spinn3r.artemis.corpus.network.test;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.BaseHttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
@@ -15,9 +16,11 @@ import java.util.Map;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * A HttpRequestBuilder that uses the NetworkCorporaCache.
+ * A HttpRequestBuilder that cached data locally. We also implement
+ * DirectHttpRequestBuilder so that we can test but it's a bit confusing since
+ * this isn't actually direct but this is only meant to be used for testing.
  */
-public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder {
+public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder, DirectHttpRequestBuilder {
 
     protected final NetworkCorporaCache networkCorporaCache;
 
