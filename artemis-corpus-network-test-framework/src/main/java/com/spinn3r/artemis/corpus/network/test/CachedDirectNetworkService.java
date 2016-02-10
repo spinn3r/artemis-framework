@@ -5,14 +5,14 @@ import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 
 /**
- * A service for keeping requests local for testing.
+ * Used with the Cached HTTP request builder to ALSO replace the direct HTTP
+ * request builder with caching.
  */
-public class CachedNetworkService extends BaseService {
+public class CachedDirectNetworkService extends BaseService {
 
     @Override
     public void init() {
-        replace( HttpRequestBuilder.class, CachedHttpRequestBuilder.class );
-        //replace( DirectHttpRequestBuilder.class, CachedHttpRequestBuilder.class );
+        replace( DirectHttpRequestBuilder.class, CachedHttpRequestBuilder.class );
     }
 
 }
