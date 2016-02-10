@@ -12,6 +12,7 @@ public class CachedNetworkService extends BaseService {
     @Override
     public void init() {
         replace( HttpRequestBuilder.class, CachedHttpRequestBuilder.class );
+        replace( DirectHttpRequestBuilder.class, CachedHttpRequestBuilder.class );
     }
 
 }

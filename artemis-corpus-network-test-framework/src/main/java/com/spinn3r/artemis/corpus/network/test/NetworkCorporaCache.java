@@ -41,7 +41,7 @@ public class NetworkCorporaCache implements ContentFetcher {
     private boolean updateMode = DEFAULT_UPDATE_MODE;
 
     @Inject
-    NetworkCorporaCache(DirectHttpRequestBuilder directHttpRequestBuilder, Caller caller) {
+    NetworkCorporaCache(DefaultDirectHttpRequestBuilder directHttpRequestBuilder, Caller caller) {
         this( directHttpRequestBuilder, classForCaller( caller ) );
     }
 
