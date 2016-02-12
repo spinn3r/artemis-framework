@@ -57,6 +57,7 @@ public class NetworkService extends BaseService {
     public void init() {
 
         advertise( HttpRequestBuilder.class, ConfiguredHttpRequestBuilder.class );
+        advertise( CrawlingHttpRequestBuilder.class, ConfiguredHttpRequestBuilder.class );
         advertise( DirectHttpRequestBuilder.class, DefaultDirectHttpRequestBuilder.class );
         advertise( ContentFetcher.class, DefaultContentFetcher.class );
         advertise( RequestListeners.class, new RequestListeners() );

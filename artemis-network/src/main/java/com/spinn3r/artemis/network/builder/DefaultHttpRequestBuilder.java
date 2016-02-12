@@ -11,7 +11,7 @@ import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 /**
  * Builder interface preferred over using the ResourceRequestFactory.
  */
-public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder, DirectHttpRequestBuilder {
+public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder, DirectHttpRequestBuilder, CrawlingHttpRequestBuilder {
 
     private static final String GET_METHOD = "GET";
     private static final String POST_METHOD = "POST";
