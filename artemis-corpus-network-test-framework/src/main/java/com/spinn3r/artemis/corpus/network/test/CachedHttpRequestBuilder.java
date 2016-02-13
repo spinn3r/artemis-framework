@@ -2,10 +2,7 @@ package com.spinn3r.artemis.corpus.network.test;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.BaseHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
@@ -20,7 +17,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * DirectHttpRequestBuilder so that we can test but it's a bit confusing since
  * this isn't actually direct but this is only meant to be used for testing.
  */
-public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder, DirectHttpRequestBuilder {
+public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements HttpRequestBuilder, DirectHttpRequestBuilder, CrawlingHttpRequestBuilder {
 
     protected final NetworkCorporaCache networkCorporaCache;
 
