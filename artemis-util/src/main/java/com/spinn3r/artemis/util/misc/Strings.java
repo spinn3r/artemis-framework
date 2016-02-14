@@ -147,7 +147,7 @@ public class Strings {
      * Safely convert a String to an Integer and minimize Exceptions thrown.  If
      * the string value does not represent an integer we return null.
      */
-    public static <T> Integer toInt( T value ) {
+    public static <T> Integer toInteger(T value ) {
 
         if ( value != null && value.toString().matches( "-?[0-9]+" ) ) {
 

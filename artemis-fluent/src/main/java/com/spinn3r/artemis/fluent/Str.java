@@ -3,7 +3,7 @@ package com.spinn3r.artemis.fluent;
 import com.spinn3r.artemis.time.ISO8601DateParser;
 import com.spinn3r.artemis.time.ISO8601DateTimeParser;
 import com.spinn3r.artemis.time.TimeZones;
-import com.spinn3r.artemis.util.primitives.liberal.IntParser;
+import com.spinn3r.artemis.util.primitives.liberal.LiberalIntParser;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.joda.time.DateTime;
 
@@ -124,7 +124,7 @@ public class Str {
 
         try {
 
-            return IntParser.parse( value );
+            return LiberalIntParser.parse( value );
 
         } catch ( NumberFormatException e ) {
             return _default;

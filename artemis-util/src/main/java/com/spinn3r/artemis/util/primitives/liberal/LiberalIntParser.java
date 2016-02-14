@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Liberal integer parser.
  */
-public class IntParser {
+public class LiberalIntParser {
 
     private static Pattern pattern = Pattern.compile( "([0-9.,]+)([kKmM])?" );
 
@@ -57,8 +57,18 @@ public class IntParser {
 
             return (int)result;
 
-        } throw new NumberFormatException( "Not an integer: " + value );
+        }
 
+        throw new NumberFormatException( "Not an integer: " + value );
+
+    }
+
+    public static Integer toInteger( String value ) {
+        try {
+            return parse( value );
+        } catch (NumberFormatException e) {
+            return null;
+        }
     }
 
 }
