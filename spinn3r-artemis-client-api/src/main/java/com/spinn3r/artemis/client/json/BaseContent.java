@@ -3324,6 +3324,22 @@ public abstract class BaseContent
 
     protected int metadataScore;
 
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasShares = 0;
+
+    public int hasModifiedShares = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedShares = false;
+
+    protected int shares;
+
     // **** methods for this POJO
 
     public BaseContent setBucket ( long bucket ) {
@@ -13130,7 +13146,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * True when this source was not published by the original user but actually shared from someone the source follows.  On twitter this is a retweet.  On Facebook this is a shared post. 
+     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
      * </p>
      *
      * <p>
@@ -13152,7 +13168,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * True when this source was not published by the original user but actually shared from someone the source follows.  On twitter this is a retweet.  On Facebook this is a shared post. 
+     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
      * </p>
      *
      * <p>
@@ -15155,6 +15171,91 @@ public abstract class BaseContent
         return this.hasDefinedMetadataScore;
     }
 
+    public BaseContent setShares ( int shares ) {
+
+        ++this.hasShares;
+        ++this.hasModifiedShares;
+
+        this.shares = shares;
+
+        hasDefinedShares = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of shares for this post.  For some microblogging platforms this could be a rewtweet but for others its a share.  Most platforms have this concept.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: shares
+     * </p>
+     */
+    public int getShares () {
+
+        if ( this.constructed == false && this.hasShares == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.shares" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.shares;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The number of shares for this post.  For some microblogging platforms this could be a rewtweet but for others its a share.  Most platforms have this concept.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: shares
+     * </p>
+     */
+    public int getShares ( int _default ) {
+
+        if ( ! hasShares() ) {
+            return _default;
+        }
+
+        return getShares();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasShares () {
+        return this.hasShares > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearShares () {
+        this.hasShares = 0;
+        this.hasModifiedShares = 0;
+        this.hasDefinedShares = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedShares () {
+        return this.hasModifiedShares > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedShares () {
+        return this.hasDefinedShares;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -15714,6 +15815,10 @@ public abstract class BaseContent
 
         if ( obj.hasMetadataScore() ) {
             setMetadataScore( obj.getMetadataScore() );
+        }
+
+        if ( obj.hasShares() ) {
+            setShares( obj.getShares() );
         }
 
     }
@@ -16280,6 +16385,10 @@ public abstract class BaseContent
             setMetadataScore( obj.getMetadataScore() );
         }
 
+        if ( ! hasShares() && obj.hasShares() ) {
+            setShares( obj.getShares() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -16562,6 +16671,8 @@ public abstract class BaseContent
         this.hasModifiedViews = 0;
 
         this.hasModifiedMetadataScore = 0;
+
+        this.hasModifiedShares = 0;
 
     }
 
@@ -17123,6 +17234,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedMetadataScore() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedShares() ) {
             return true;
         }
 
@@ -18252,6 +18367,14 @@ public abstract class BaseContent
 
             buff.append( "metadataScore=" );
             buff.append( metadataScore );
+            buff.append( " " );
+
+        }
+
+        if ( hasShares > 0 ) {
+
+            buff.append( "shares=" );
+            buff.append( shares );
             buff.append( " " );
 
         }
@@ -19517,6 +19640,15 @@ public abstract class BaseContent
         }
 
         if ( metadataScore != cmp.metadataScore ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasShares() != cmp.hasShares() ) {
+            return false;
+        }
+
+        if ( shares != cmp.shares ) {
             return false;
         }
 
@@ -21884,6 +22016,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member shares from int
+
+            __name = "shares";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shares";
+            }
+
+            if ( this.hasShares > 0 ) {
+
+                if ( hasDefinedShares )
+                    generator.writeNumberField( __name, shares );
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -23332,6 +23479,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setMetadataScore( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shares from int
+
+                case "shares":
+
+                    jParser.nextToken();
+                    setShares( jParser.getIntValue() );
 
                     break;
 
