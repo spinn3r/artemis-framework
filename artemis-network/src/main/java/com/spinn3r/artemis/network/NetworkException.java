@@ -183,10 +183,23 @@ public class NetworkException extends IOException {
     }
 
     /**
+     * Return true if this NetworkException is transient and may be resolve
+     * in the future.  This includes connect and read timeouts, HTTP 5xx, etc.
+     */
+    public boolean isTransient() {
+
+        int responseCode = getResponseCode();
+
+        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
+               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+               (responseCode >= 500 && responseCode <= 599);
+
+    }
+
+    /**
      * Return true if this is an exception from a proxy server, vs the origin server.
      * This isn't always authoritative, but if we return true we're CERTAIN that
      * it's a proxy error.  Returning false might STILL be a proxy error though.
-     * @return
      */
     public boolean isProxyError() {
 
