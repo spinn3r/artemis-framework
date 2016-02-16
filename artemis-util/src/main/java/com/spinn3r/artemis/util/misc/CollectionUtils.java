@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.util.misc;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import org.hamcrest.Matcher;
 
@@ -39,6 +40,7 @@ public class CollectionUtils {
      * @param <V>
      * @return
      */
+    @Deprecated // use streams
     public static <V> void filter( Collection<V> input, Predicate<V> predicate ) {
 
         Iterator<V> iterator = input.iterator();
@@ -55,6 +57,7 @@ public class CollectionUtils {
 
     }
 
+    @Deprecated // use streams
     public static <V> void filter( Collection<V> input, Matcher<V> matcher ) {
 
         Iterator<V> iterator = input.iterator();
@@ -77,6 +80,7 @@ public class CollectionUtils {
      * @param prefix
      * @param <V>
      */
+    @Deprecated // use streams
     public static <V> void startsWith( Collection<V> input, final String prefix ) {
 
         CollectionUtils.filter( input, new Predicate<V>() {
@@ -85,6 +89,26 @@ public class CollectionUtils {
                 return value.toString().startsWith( prefix );
             }
         } );
+
+    }
+
+    /**
+     * Finds values which have a toString starting with the given prefix.
+     *
+     * The result is sorted so that the list order is deterministic.
+     */
+    public static <V extends Comparable<V>> ImmutableList<V> startingWith( Collection<V> input, final String prefix  ) {
+
+        List<V> result = Lists.newArrayList();
+
+        for (V v : input) {
+            if ( v.toString().startsWith( prefix ) ) {
+                result.add( v );
+            }
+        }
+
+        List<V> sorted = sort( result );
+        return ImmutableList.copyOf( sorted );
 
     }
 
