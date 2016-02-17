@@ -576,18 +576,18 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
     public byte[] getError() throws NetworkException {
 
+        if (!( _urlConnection instanceof HttpURLConnection )) {
+            throw new NetworkException( "Unable to get error from non HTTP connection" );
+        }
+
         try {
 
-            if ( ! (_urlConnection instanceof HttpURLConnection) ) {
-                throw new NetworkException( "Unable to get error from non HTTP connection" );
-            }
-
-            HttpURLConnection httpconn = (HttpURLConnection)_urlConnection;
+            HttpURLConnection httpconn = (HttpURLConnection) _urlConnection;
 
             InputStream is = httpconn.getErrorStream();
 
             //first decompress
-            if ( GZIP_ENCODING.equals( _urlConnection.getContentEncoding() ) ) {
+            if (GZIP_ENCODING.equals( _urlConnection.getContentEncoding() )) {
 
                 //note.  the advanced input stream must be wrapped by a GZIP
                 //input stream and not vice-versa or we will end up with
@@ -601,7 +601,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             ByteArrayOutputStream bos = new ByteArrayOutputStream( ERROR_BUFFER_SIZE );
 
             //now process the Reader...
-            byte buff[] = new byte[2048];
+            byte buff[] = new byte[ 2048 ];
 
             int readCount = 0;
 
@@ -610,7 +610,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             //as we will never hit a read timeout.  We handle this case right now
             //for HTTP 200s but not errors.
 
-            while( ( readCount = is.read( buff ) ) > 0 ) {
+            while (( readCount = is.read( buff ) ) > 0) {
                 bos.write( buff, 0, readCount );
             }
 
@@ -620,7 +620,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             byte[] data = bos.toByteArray();
 
             return data;
-
         } catch ( IOException e ) {
             throw new NetworkException( e ) ;
         }

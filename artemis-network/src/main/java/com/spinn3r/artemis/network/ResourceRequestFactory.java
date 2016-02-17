@@ -120,7 +120,7 @@ public class ResourceRequestFactory {
 
         try {
 
-            ResourceRequest request = (ResourceRequest)clazz.newInstance();
+            ResourceRequest request = (ResourceRequest) clazz.newInstance();
 
             request.setResource( resource );
 
@@ -132,12 +132,14 @@ public class ResourceRequestFactory {
 
             request.setProxy( proxy );
 
-            if ( init ) {
+            if (init) {
                 request.init();
             }
 
             return request;
 
+        } catch ( NetworkException ne ) {
+            throw ne;
         } catch ( Exception t ) {
             throw new NetworkException( t );
         }
