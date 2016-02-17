@@ -82,13 +82,13 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         try {
 
-            if ( ! cache.contains( key ) ) {
+            if (!cache.contains( key )) {
 
-                if ( updateMode ) {
+                if (updateMode) {
 
                     HttpRequest httpRequest;
 
-                    switch ( httpMethod ) {
+                    switch (httpMethod) {
 
                         case GET:
 
@@ -118,7 +118,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     String contentType = httpRequest.getResponseHeader( "Content-Type" );
 
-                    if ( contentType != null && contentType.startsWith( "text/" ) ) {
+                    if (contentType != null && contentType.startsWith( "text/" )) {
                         contentWithEncoding = contentWithEncoding.replaceAll( "\r\n", "\n" );
                     }
 
@@ -136,7 +136,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                 } else {
                     throw new IOException( String.format( "URL is not in the cache: %s (Use -D%s=true to force update)",
-                                           link, UPDATE_MODE_PROPERTY_NAME ) );
+                      link, UPDATE_MODE_PROPERTY_NAME ) );
                 }
 
             }
@@ -147,6 +147,8 @@ public class NetworkCorporaCache implements ContentFetcher {
 
             return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
 
+        } catch ( NetworkException ne ) {
+            throw ne;
         } catch (IOException e) {
             throw new NetworkException( e );
         }

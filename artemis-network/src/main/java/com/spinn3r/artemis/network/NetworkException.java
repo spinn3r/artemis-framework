@@ -89,8 +89,9 @@ public class NetworkException extends IOException {
         this._url = _url;
         this._urlConnection = _urlConnection;
 
-        if ( _urlConnection != null )
+        if ( _urlConnection != null ) {
             this.status = _urlConnection.getHeaderField( null );
+        }
 
     }
 

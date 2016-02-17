@@ -497,33 +497,33 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             // which we can then use to process the content.
             fetchAndCacheLocally( getBackendInputStream() );
 
-            if ( getFollowRedirects() ) {
+            if (getFollowRedirects()) {
 
-                if ( ENABLE_FOLLOW_CONTENT_REDIRECTS && getFollowContentRedirects() ) {
+                if (ENABLE_FOLLOW_CONTENT_REDIRECTS && getFollowContentRedirects()) {
 
                     if (followRedirect( parseRedirectFromFrameContent( data ) )) {
                         log.info( "Following redirect from frame content..." );
                         return;
                     }
 
-                    if ( followRedirect( parseRedirectFromMetaRefreshEquiv( data ) ) ) {
+                    if (followRedirect( parseRedirectFromMetaRefreshEquiv( data ) )) {
                         log.info( "Following HTTP meta redirect..." );
                         return;
                     }
 
                 }
 
-                if ( followRedirect( parseSSLRedirect() ) ) {
+                if (followRedirect( parseSSLRedirect() )) {
                     log.info( "Following SSL redirect..." );
                     return;
                 }
 
             }
 
+        } catch ( NetworkException ne ) {
+            throw ne;
         } catch ( IOException e ) {
-
             throw newNetworkException( e );
-
         }
 
     }
@@ -684,23 +684,23 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             InputStream inputStream = _urlConnection.getInputStream();
 
-            if ( ENABLE_SAFE_GZIP )
+            if (ENABLE_SAFE_GZIP)
                 inputStream = new BufferedInputStream( inputStream );
 
             inputStream = new NetworkInputStream( inputStream, getMaxContentLength(), this );
 
             //first decompress
-            if ( GZIP_ENCODING.equals( _urlConnection.getContentEncoding() ) ) {
+            if (GZIP_ENCODING.equals( _urlConnection.getContentEncoding() )) {
 
                 boolean wrapInputStream = true;
 
-                if ( ENABLE_SAFE_GZIP ) {
+                if (ENABLE_SAFE_GZIP) {
 
                     try {
 
                         wrapInputStream = GZipDetector.detect( inputStream );
 
-                    } catch ( IOException e ) {
+                    } catch (IOException e) {
                         log.error( "Could not detect potential gzip input stream: ", e );
                     }
 
@@ -710,7 +710,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                 //input stream and not vice-versa or we will end up with
                 //incorrect results.
 
-                if ( wrapInputStream ) {
+                if (wrapInputStream) {
                     inputStream = new GZIPInputStream( inputStream );
                 }
 
@@ -718,10 +718,10 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             return inputStream;
 
+        } catch ( NetworkException ne ) {
+            throw ne;
         } catch ( IOException e ) {
-
             throw newNetworkException( e );
-
         }
 
     }
