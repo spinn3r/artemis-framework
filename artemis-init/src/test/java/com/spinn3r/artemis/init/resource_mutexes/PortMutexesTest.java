@@ -15,8 +15,7 @@ public class PortMutexesTest {
         try( PortMutex portMutex = portMutexes.acquire( 8080, 9080 ) ) {
 
             System.out.printf( "acquired!\n" );
-            assertEquals( "/tmp/named-mutexes/ports/8080", portMutex.backing.getAbsolutePath() );
-            assertEquals( 8080, portMutex.getPort() );
+            assertEquals( "/tmp/named-mutexes/ports/" + portMutex.getPort(), portMutex.backing.getAbsolutePath() );
             assertTrue( portMutex.backing.exists() );
 
         }
