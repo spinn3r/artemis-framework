@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class Sockets {
 
-
     public static void waitForClosedPort( InetAddress inetAddress, int port) {
         waitForClosedPort( inetAddress, port, 30000 );
     }
