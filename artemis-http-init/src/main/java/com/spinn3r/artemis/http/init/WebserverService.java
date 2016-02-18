@@ -8,7 +8,10 @@ import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
 import com.spinn3r.artemis.init.resource_mutexes.ResourceMutex;
+import com.spinn3r.artemis.util.io.Sockets;
 import org.eclipse.jetty.server.Server;
+
+import java.net.InetAddress;
 
 /**
  * HTTP webserver for our admin interface.
@@ -36,6 +39,10 @@ public class WebserverService extends BaseService {
 
     protected PortMutex portMutex = null;
 
+    // the effective port we're using taking into consideration the config
+    // and port mutexes.
+    protected int port;
+
     @Inject
     WebserverService(WebserverConfig webserverConfig, ServletReferences servletReferences, FilterReferences filterReferences, RequestLogReferences requestLogReferences, PortMutexes portMutexes) {
         this.webserverConfig = webserverConfig;
@@ -53,7 +60,7 @@ public class WebserverService extends BaseService {
     @Override
     public void start() throws Exception {
 
-        int port = webserverConfig.getPort();
+        port = webserverConfig.getPort();
 
         if ( port <= 0 ) {
             this.portMutex = portMutexes.acquire( 8081, 9080 );
@@ -110,6 +117,8 @@ public class WebserverService extends BaseService {
         if ( portMutex != null ) {
             portMutex.close();
         }
+
+        Sockets.waitForClosedPort( InetAddress.getByName( "localhost" ), port );
 
     }
 
