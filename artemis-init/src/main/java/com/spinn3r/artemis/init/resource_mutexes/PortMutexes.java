@@ -1,9 +1,13 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
+import com.google.common.collect.Lists;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Acquire a mutex based on TCP port numbers.
@@ -27,9 +31,16 @@ public class PortMutexes {
 
             File parent = new File( "/tmp/named-mutexes/ports" );
 
-            // TODO: consider randomizing the ports so that tests that might be
-            // accidentally hard code to the first port fail immediately.
+            List<Integer> ports = Lists.newArrayList();
             for (int port = startPort; port <= endPort; port++) {
+                ports.add( port );
+            }
+
+            // randomize the ports so that tests that might be accidentally
+            // hard code to the first port fail immediately.
+            Collections.shuffle( ports );
+
+            for (int port : ports) {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
