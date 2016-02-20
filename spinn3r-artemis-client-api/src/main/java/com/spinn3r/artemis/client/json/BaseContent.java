@@ -2327,6 +2327,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasMainAuthoritative = 0;
+
+    public int hasModifiedMainAuthoritative = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedMainAuthoritative = false;
+
+    protected boolean mainAuthoritative;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasMainFormat = 0;
 
     public int hasModifiedMainFormat = 0;
@@ -9895,6 +9911,91 @@ public abstract class BaseContent
         return this.hasDefinedMainChecksum;
     }
 
+    public BaseContent setMainAuthoritative ( boolean mainAuthoritative ) {
+
+        ++this.hasMainAuthoritative;
+        ++this.hasModifiedMainAuthoritative;
+
+        this.mainAuthoritative = mainAuthoritative;
+
+        hasDefinedMainAuthoritative = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * True when the main content is 100% accurate and the extract is not needed.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: main_authoritative
+     * </p>
+     */
+    public boolean getMainAuthoritative () {
+
+        if ( this.constructed == false && this.hasMainAuthoritative == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.mainAuthoritative" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.mainAuthoritative;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * True when the main content is 100% accurate and the extract is not needed.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: main_authoritative
+     * </p>
+     */
+    public boolean getMainAuthoritative ( boolean _default ) {
+
+        if ( ! hasMainAuthoritative() ) {
+            return _default;
+        }
+
+        return getMainAuthoritative();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasMainAuthoritative () {
+        return this.hasMainAuthoritative > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearMainAuthoritative () {
+        this.hasMainAuthoritative = 0;
+        this.hasModifiedMainAuthoritative = 0;
+        this.hasDefinedMainAuthoritative = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedMainAuthoritative () {
+        return this.hasModifiedMainAuthoritative > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedMainAuthoritative () {
+        return this.hasDefinedMainAuthoritative;
+    }
+
     public BaseContent setMainFormat ( MainFormat mainFormat ) {
 
         ++this.hasMainFormat;
@@ -15569,6 +15670,10 @@ public abstract class BaseContent
             setMainChecksum( obj.getMainChecksum() );
         }
 
+        if ( obj.hasMainAuthoritative() ) {
+            setMainAuthoritative( obj.getMainAuthoritative() );
+        }
+
         if ( obj.hasMainFormat() ) {
             setMainFormat( obj.getMainFormat() );
         }
@@ -16137,6 +16242,10 @@ public abstract class BaseContent
             setMainChecksum( obj.getMainChecksum() );
         }
 
+        if ( ! hasMainAuthoritative() && obj.hasMainAuthoritative() ) {
+            setMainAuthoritative( obj.getMainAuthoritative() );
+        }
+
         if ( mainFormat == null && obj.hasMainFormat() && obj.getMainFormat() != null ) {
             setMainFormat( obj.getMainFormat() );
         }
@@ -16547,6 +16656,8 @@ public abstract class BaseContent
         this.hasModifiedMainLength = 0;
 
         this.hasModifiedMainChecksum = 0;
+
+        this.hasModifiedMainAuthoritative = 0;
 
         this.hasModifiedMainFormat = 0;
 
@@ -16986,6 +17097,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedMainChecksum() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedMainAuthoritative() ) {
             return true;
         }
 
@@ -17871,6 +17986,14 @@ public abstract class BaseContent
 
             buff.append( "mainChecksum=" );
             buff.append( mainChecksum );
+            buff.append( " " );
+
+        }
+
+        if ( hasMainAuthoritative > 0 ) {
+
+            buff.append( "mainAuthoritative=" );
+            buff.append( mainAuthoritative );
             buff.append( " " );
 
         }
@@ -19082,6 +19205,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( mainChecksum, cmp.mainChecksum ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasMainAuthoritative() != cmp.hasMainAuthoritative() ) {
+            return false;
+        }
+
+        if ( mainAuthoritative != cmp.mainAuthoritative ) {
             return false;
         }
 
@@ -21038,6 +21170,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member main_authoritative from boolean
+
+            __name = "mainAuthoritative";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "main_authoritative";
+            }
+
+            if ( this.hasMainAuthoritative > 0 ) {
+
+                if ( hasDefinedMainAuthoritative )
+                    generator.writeBooleanField( __name, mainAuthoritative );
+
+            }
+
             // ***** json encode member main_format from int
 
             __name = "mainFormat";
@@ -22854,6 +23001,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setMainChecksum( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member main_authoritative from boolean
+
+                case "main_authoritative":
+
+                    jParser.nextToken();
+                    setMainAuthoritative( jParser.getBooleanValue() );
 
                     break;
 
