@@ -1,8 +1,6 @@
 package com.spinn3r.artemis.http.servlets;
 
 import com.google.common.base.Charsets;
-import com.google.common.collect.Maps;
-import com.spinn3r.artemis.json.JSON;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
@@ -12,12 +10,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Collections;
-import java.util.Map;
 
 /**
  * A servlet that prints HTTP request metadata as JSON
  */
 public class RequestMetaServlet extends DefaultServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handle( request, response );
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,22 +54,6 @@ public class RequestMetaServlet extends DefaultServlet {
 
             out.write( requestMeta.toJSON().getBytes( Charsets.UTF_8 ) );
 
-        }
-
-    }
-
-    static class RequestMeta {
-
-        protected String pathInfo;
-
-        protected String queryString;
-
-        protected Map<String,String> headers = Maps.newLinkedHashMap();
-
-        protected Map<String,String> parameters = Maps.newLinkedHashMap();
-
-        public String toJSON() {
-            return JSON.toJSON(this);
         }
 
     }
