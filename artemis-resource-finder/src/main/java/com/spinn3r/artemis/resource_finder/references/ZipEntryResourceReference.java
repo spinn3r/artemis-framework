@@ -24,7 +24,7 @@ public class ZipEntryResourceReference extends ResourceReference {
     }
 
     @Override
-    public InputStream getInputStream() throws IOException {
+    public InputStream open() throws IOException {
         ZipFile zip = new ZipFile( zipFile  );
         return new ZippedInputStream( zip, zip.getInputStream( zipEntry ) );
     }

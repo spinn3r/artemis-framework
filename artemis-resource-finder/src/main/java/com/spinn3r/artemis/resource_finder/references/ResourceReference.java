@@ -28,6 +28,6 @@ public abstract class ResourceReference {
         return path;
     }
 
-    public abstract InputStream getInputStream() throws IOException;
+    public abstract InputStream open() throws IOException;
 
 }

@@ -4,12 +4,10 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.spinn3r.artemis.resource_finder.references.ResourceReference;
 import com.spinn3r.artemis.util.text.CollectionFormatter;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.*;
@@ -39,7 +37,7 @@ public class TestResourceFinderFromDependencyModule {
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
-            try( InputStream inputStream = resource.getInputStream() ) {
+            try( InputStream inputStream = resource.open() ) {
                 ByteStreams.toByteArray( inputStream );
             }
         }
@@ -64,7 +62,7 @@ public class TestResourceFinderFromDependencyModule {
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
-            try( InputStream inputStream = resource.getInputStream() ) {
+            try( InputStream inputStream = resource.open() ) {
                 ByteStreams.toByteArray( inputStream );
             }
         }

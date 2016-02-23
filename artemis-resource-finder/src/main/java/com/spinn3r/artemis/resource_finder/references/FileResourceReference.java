@@ -20,7 +20,7 @@ public class FileResourceReference extends ResourceReference {
     }
 
     @Override
-    public InputStream getInputStream() throws IOException {
+    public InputStream open() throws IOException {
         return new FileInputStream( file );
     }
 

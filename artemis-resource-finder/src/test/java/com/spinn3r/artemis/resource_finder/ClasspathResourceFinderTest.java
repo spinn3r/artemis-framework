@@ -36,7 +36,7 @@ public class ClasspathResourceFinderTest {
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
-            try( InputStream inputStream = resource.getInputStream() ) {
+            try( InputStream inputStream = resource.open() ) {
                 ByteStreams.toByteArray( inputStream );
             }
         }
@@ -63,7 +63,7 @@ public class ClasspathResourceFinderTest {
 
         // test that we can open them all...
         for (ResourceReference resource : resources) {
-            try( InputStream inputStream = resource.getInputStream() ) {
+            try( InputStream inputStream = resource.open() ) {
                 ByteStreams.toByteArray( inputStream );
             }
         }
