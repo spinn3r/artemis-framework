@@ -34,6 +34,15 @@ public class ResourceQuery {
 
     }
 
+    public ResourceQuery removeNamedAnchor() {
+
+        if ( value == null )
+            return ResourceQueries.resource();
+
+        return ResourceQueries.resource( value.replaceFirst( "#.*", "" ) );
+
+    }
+
     /**
      * Expand a relative link.
      *
