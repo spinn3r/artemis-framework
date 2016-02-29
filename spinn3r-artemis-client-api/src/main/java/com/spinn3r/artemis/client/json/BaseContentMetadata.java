@@ -8664,7 +8664,17 @@ public abstract class BaseContentMetadata
             setPermalink( obj.getPermalink() );
         }
 
+        if ( hasPermalink() && getPermalink() == null &&
+            obj.hasPermalink() && obj.getPermalink() != null ) {
+            setPermalink( obj.getPermalink() );
+        }
+
         if ( ! hasPermalinkRedirect() && obj.hasPermalinkRedirect() ) {
+            setPermalinkRedirect( obj.getPermalinkRedirect() );
+        }
+
+        if ( hasPermalinkRedirect() && getPermalinkRedirect() == null &&
+            obj.hasPermalinkRedirect() && obj.getPermalinkRedirect() != null ) {
             setPermalinkRedirect( obj.getPermalinkRedirect() );
         }
 
@@ -8672,7 +8682,17 @@ public abstract class BaseContentMetadata
             setPermalinkRedirectDomain( obj.getPermalinkRedirectDomain() );
         }
 
+        if ( hasPermalinkRedirectDomain() && getPermalinkRedirectDomain() == null &&
+            obj.hasPermalinkRedirectDomain() && obj.getPermalinkRedirectDomain() != null ) {
+            setPermalinkRedirectDomain( obj.getPermalinkRedirectDomain() );
+        }
+
         if ( ! hasPermalinkRedirectSite() && obj.hasPermalinkRedirectSite() ) {
+            setPermalinkRedirectSite( obj.getPermalinkRedirectSite() );
+        }
+
+        if ( hasPermalinkRedirectSite() && getPermalinkRedirectSite() == null &&
+            obj.hasPermalinkRedirectSite() && obj.getPermalinkRedirectSite() != null ) {
             setPermalinkRedirectSite( obj.getPermalinkRedirectSite() );
         }
 
@@ -8680,7 +8700,17 @@ public abstract class BaseContentMetadata
             setLink( obj.getLink() );
         }
 
+        if ( hasLink() && getLink() == null &&
+            obj.hasLink() && obj.getLink() != null ) {
+            setLink( obj.getLink() );
+        }
+
         if ( ! hasLinkDomain() && obj.hasLinkDomain() ) {
+            setLinkDomain( obj.getLinkDomain() );
+        }
+
+        if ( hasLinkDomain() && getLinkDomain() == null &&
+            obj.hasLinkDomain() && obj.getLinkDomain() != null ) {
             setLinkDomain( obj.getLinkDomain() );
         }
 
@@ -8688,7 +8718,17 @@ public abstract class BaseContentMetadata
             setLinkSite( obj.getLinkSite() );
         }
 
+        if ( hasLinkSite() && getLinkSite() == null &&
+            obj.hasLinkSite() && obj.getLinkSite() != null ) {
+            setLinkSite( obj.getLinkSite() );
+        }
+
         if ( ! hasShortlink() && obj.hasShortlink() ) {
+            setShortlink( obj.getShortlink() );
+        }
+
+        if ( hasShortlink() && getShortlink() == null &&
+            obj.hasShortlink() && obj.getShortlink() != null ) {
             setShortlink( obj.getShortlink() );
         }
 
@@ -8696,7 +8736,17 @@ public abstract class BaseContentMetadata
             setCanonical( obj.getCanonical() );
         }
 
+        if ( hasCanonical() && getCanonical() == null &&
+            obj.hasCanonical() && obj.getCanonical() != null ) {
+            setCanonical( obj.getCanonical() );
+        }
+
         if ( ! hasDomain() && obj.hasDomain() ) {
+            setDomain( obj.getDomain() );
+        }
+
+        if ( hasDomain() && getDomain() == null &&
+            obj.hasDomain() && obj.getDomain() != null ) {
             setDomain( obj.getDomain() );
         }
 
@@ -8704,7 +8754,17 @@ public abstract class BaseContentMetadata
             setSite( obj.getSite() );
         }
 
+        if ( hasSite() && getSite() == null &&
+            obj.hasSite() && obj.getSite() != null ) {
+            setSite( obj.getSite() );
+        }
+
         if ( ! hasMain() && obj.hasMain() ) {
+            setMain( obj.getMain() );
+        }
+
+        if ( hasMain() && getMain() == null &&
+            obj.hasMain() && obj.getMain() != null ) {
             setMain( obj.getMain() );
         }
 
@@ -8713,6 +8773,11 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! hasMainChecksum() && obj.hasMainChecksum() ) {
+            setMainChecksum( obj.getMainChecksum() );
+        }
+
+        if ( hasMainChecksum() && getMainChecksum() == null &&
+            obj.hasMainChecksum() && obj.getMainChecksum() != null ) {
             setMainChecksum( obj.getMainChecksum() );
         }
 
@@ -8728,6 +8793,11 @@ public abstract class BaseContentMetadata
             setExtract( obj.getExtract() );
         }
 
+        if ( hasExtract() && getExtract() == null &&
+            obj.hasExtract() && obj.getExtract() != null ) {
+            setExtract( obj.getExtract() );
+        }
+
         if ( ! hasExtractLength() && obj.hasExtractLength() ) {
             setExtractLength( obj.getExtractLength() );
         }
@@ -8736,7 +8806,17 @@ public abstract class BaseContentMetadata
             setExtractChecksum( obj.getExtractChecksum() );
         }
 
+        if ( hasExtractChecksum() && getExtractChecksum() == null &&
+            obj.hasExtractChecksum() && obj.getExtractChecksum() != null ) {
+            setExtractChecksum( obj.getExtractChecksum() );
+        }
+
         if ( ! hasSummaryText() && obj.hasSummaryText() ) {
+            setSummaryText( obj.getSummaryText() );
+        }
+
+        if ( hasSummaryText() && getSummaryText() == null &&
+            obj.hasSummaryText() && obj.getSummaryText() != null ) {
             setSummaryText( obj.getSummaryText() );
         }
 
@@ -8744,7 +8824,17 @@ public abstract class BaseContentMetadata
             setTitle( obj.getTitle() );
         }
 
+        if ( hasTitle() && getTitle() == null &&
+            obj.hasTitle() && obj.getTitle() != null ) {
+            setTitle( obj.getTitle() );
+        }
+
         if ( ! hasPublisher() && obj.hasPublisher() ) {
+            setPublisher( obj.getPublisher() );
+        }
+
+        if ( hasPublisher() && getPublisher() == null &&
+            obj.hasPublisher() && obj.getPublisher() != null ) {
             setPublisher( obj.getPublisher() );
         }
 
@@ -8752,7 +8842,17 @@ public abstract class BaseContentMetadata
             setSection( obj.getSection() );
         }
 
+        if ( hasSection() && getSection() == null &&
+            obj.hasSection() && obj.getSection() != null ) {
+            setSection( obj.getSection() );
+        }
+
         if ( ! hasDescription() && obj.hasDescription() ) {
+            setDescription( obj.getDescription() );
+        }
+
+        if ( hasDescription() && getDescription() == null &&
+            obj.hasDescription() && obj.getDescription() != null ) {
             setDescription( obj.getDescription() );
         }
 
@@ -8788,11 +8888,26 @@ public abstract class BaseContentMetadata
             setAuthorName( obj.getAuthorName() );
         }
 
+        if ( hasAuthorName() && getAuthorName() == null &&
+            obj.hasAuthorName() && obj.getAuthorName() != null ) {
+            setAuthorName( obj.getAuthorName() );
+        }
+
         if ( ! hasAuthorLink() && obj.hasAuthorLink() ) {
             setAuthorLink( obj.getAuthorLink() );
         }
 
+        if ( hasAuthorLink() && getAuthorLink() == null &&
+            obj.hasAuthorLink() && obj.getAuthorLink() != null ) {
+            setAuthorLink( obj.getAuthorLink() );
+        }
+
         if ( ! hasAuthorHandle() && obj.hasAuthorHandle() ) {
+            setAuthorHandle( obj.getAuthorHandle() );
+        }
+
+        if ( hasAuthorHandle() && getAuthorHandle() == null &&
+            obj.hasAuthorHandle() && obj.getAuthorHandle() != null ) {
             setAuthorHandle( obj.getAuthorHandle() );
         }
 
@@ -8804,7 +8919,17 @@ public abstract class BaseContentMetadata
             setAuthorLocation( obj.getAuthorLocation() );
         }
 
+        if ( hasAuthorLocation() && getAuthorLocation() == null &&
+            obj.hasAuthorLocation() && obj.getAuthorLocation() != null ) {
+            setAuthorLocation( obj.getAuthorLocation() );
+        }
+
         if ( ! hasAuthorAvatarImg() && obj.hasAuthorAvatarImg() ) {
+            setAuthorAvatarImg( obj.getAuthorAvatarImg() );
+        }
+
+        if ( hasAuthorAvatarImg() && getAuthorAvatarImg() == null &&
+            obj.hasAuthorAvatarImg() && obj.getAuthorAvatarImg() != null ) {
             setAuthorAvatarImg( obj.getAuthorAvatarImg() );
         }
 
@@ -8820,7 +8945,17 @@ public abstract class BaseContentMetadata
             setAuthorTwitterHandle( obj.getAuthorTwitterHandle() );
         }
 
+        if ( hasAuthorTwitterHandle() && getAuthorTwitterHandle() == null &&
+            obj.hasAuthorTwitterHandle() && obj.getAuthorTwitterHandle() != null ) {
+            setAuthorTwitterHandle( obj.getAuthorTwitterHandle() );
+        }
+
         if ( ! hasAuthorTwitterUserid() && obj.hasAuthorTwitterUserid() ) {
+            setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
+        }
+
+        if ( hasAuthorTwitterUserid() && getAuthorTwitterUserid() == null &&
+            obj.hasAuthorTwitterUserid() && obj.getAuthorTwitterUserid() != null ) {
             setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
         }
 
@@ -8832,7 +8967,17 @@ public abstract class BaseContentMetadata
             setGeoLocation( obj.getGeoLocation() );
         }
 
+        if ( hasGeoLocation() && getGeoLocation() == null &&
+            obj.hasGeoLocation() && obj.getGeoLocation() != null ) {
+            setGeoLocation( obj.getGeoLocation() );
+        }
+
         if ( ! hasGeoFeaturename() && obj.hasGeoFeaturename() ) {
+            setGeoFeaturename( obj.getGeoFeaturename() );
+        }
+
+        if ( hasGeoFeaturename() && getGeoFeaturename() == null &&
+            obj.hasGeoFeaturename() && obj.getGeoFeaturename() != null ) {
             setGeoFeaturename( obj.getGeoFeaturename() );
         }
 
@@ -8840,7 +8985,17 @@ public abstract class BaseContentMetadata
             setGeoPoint( obj.getGeoPoint() );
         }
 
+        if ( hasGeoPoint() && getGeoPoint() == null &&
+            obj.hasGeoPoint() && obj.getGeoPoint() != null ) {
+            setGeoPoint( obj.getGeoPoint() );
+        }
+
         if ( ! hasGeoBox() && obj.hasGeoBox() ) {
+            setGeoBox( obj.getGeoBox() );
+        }
+
+        if ( hasGeoBox() && getGeoBox() == null &&
+            obj.hasGeoBox() && obj.getGeoBox() != null ) {
             setGeoBox( obj.getGeoBox() );
         }
 
@@ -8848,7 +9003,17 @@ public abstract class BaseContentMetadata
             setRatingValue( obj.getRatingValue() );
         }
 
+        if ( hasRatingValue() && getRatingValue() == null &&
+            obj.hasRatingValue() && obj.getRatingValue() != null ) {
+            setRatingValue( obj.getRatingValue() );
+        }
+
         if ( ! hasFaviconSrc() && obj.hasFaviconSrc() ) {
+            setFaviconSrc( obj.getFaviconSrc() );
+        }
+
+        if ( hasFaviconSrc() && getFaviconSrc() == null &&
+            obj.hasFaviconSrc() && obj.getFaviconSrc() != null ) {
             setFaviconSrc( obj.getFaviconSrc() );
         }
 
@@ -8861,6 +9026,11 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! hasImageSrc() && obj.hasImageSrc() ) {
+            setImageSrc( obj.getImageSrc() );
+        }
+
+        if ( hasImageSrc() && getImageSrc() == null &&
+            obj.hasImageSrc() && obj.getImageSrc() != null ) {
             setImageSrc( obj.getImageSrc() );
         }
 
@@ -8880,7 +9050,17 @@ public abstract class BaseContentMetadata
             setSharedProfileLink( obj.getSharedProfileLink() );
         }
 
+        if ( hasSharedProfileLink() && getSharedProfileLink() == null &&
+            obj.hasSharedProfileLink() && obj.getSharedProfileLink() != null ) {
+            setSharedProfileLink( obj.getSharedProfileLink() );
+        }
+
         if ( ! hasSharedProfileTitle() && obj.hasSharedProfileTitle() ) {
+            setSharedProfileTitle( obj.getSharedProfileTitle() );
+        }
+
+        if ( hasSharedProfileTitle() && getSharedProfileTitle() == null &&
+            obj.hasSharedProfileTitle() && obj.getSharedProfileTitle() != null ) {
             setSharedProfileTitle( obj.getSharedProfileTitle() );
         }
 
@@ -8889,6 +9069,11 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! hasVideoPlayer() && obj.hasVideoPlayer() ) {
+            setVideoPlayer( obj.getVideoPlayer() );
+        }
+
+        if ( hasVideoPlayer() && getVideoPlayer() == null &&
+            obj.hasVideoPlayer() && obj.getVideoPlayer() != null ) {
             setVideoPlayer( obj.getVideoPlayer() );
         }
 
@@ -8912,6 +9097,11 @@ public abstract class BaseContentMetadata
             setLang( obj.getLang() );
         }
 
+        if ( hasLang() && getLang() == null &&
+            obj.hasLang() && obj.getLang() != null ) {
+            setLang( obj.getLang() );
+        }
+
         if ( ! hasCategories() && obj.hasCategories() ) {
             setCategories( obj.getCategories() );
         }
@@ -8932,7 +9122,17 @@ public abstract class BaseContentMetadata
             setParentHashcode( obj.getParentHashcode() );
         }
 
+        if ( hasParentHashcode() && getParentHashcode() == null &&
+            obj.hasParentHashcode() && obj.getParentHashcode() != null ) {
+            setParentHashcode( obj.getParentHashcode() );
+        }
+
         if ( ! hasParentPermalink() && obj.hasParentPermalink() ) {
+            setParentPermalink( obj.getParentPermalink() );
+        }
+
+        if ( hasParentPermalink() && getParentPermalink() == null &&
+            obj.hasParentPermalink() && obj.getParentPermalink() != null ) {
             setParentPermalink( obj.getParentPermalink() );
         }
 
@@ -8940,11 +9140,26 @@ public abstract class BaseContentMetadata
             setParentTitle( obj.getParentTitle() );
         }
 
+        if ( hasParentTitle() && getParentTitle() == null &&
+            obj.hasParentTitle() && obj.getParentTitle() != null ) {
+            setParentTitle( obj.getParentTitle() );
+        }
+
         if ( ! hasParentLang() && obj.hasParentLang() ) {
             setParentLang( obj.getParentLang() );
         }
 
+        if ( hasParentLang() && getParentLang() == null &&
+            obj.hasParentLang() && obj.getParentLang() != null ) {
+            setParentLang( obj.getParentLang() );
+        }
+
         if ( ! hasParentResource() && obj.hasParentResource() ) {
+            setParentResource( obj.getParentResource() );
+        }
+
+        if ( hasParentResource() && getParentResource() == null &&
+            obj.hasParentResource() && obj.getParentResource() != null ) {
             setParentResource( obj.getParentResource() );
         }
 

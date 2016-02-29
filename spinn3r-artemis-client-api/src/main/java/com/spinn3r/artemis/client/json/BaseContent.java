@@ -15950,7 +15950,17 @@ public abstract class BaseContent
             setHashcode( obj.getHashcode() );
         }
 
+        if ( hasHashcode() && getHashcode() == null &&
+            obj.hasHashcode() && obj.getHashcode() != null ) {
+            setHashcode( obj.getHashcode() );
+        }
+
         if ( ! hasResource() && obj.hasResource() ) {
+            setResource( obj.getResource() );
+        }
+
+        if ( hasResource() && getResource() == null &&
+            obj.hasResource() && obj.getResource() != null ) {
             setResource( obj.getResource() );
         }
 
@@ -15970,11 +15980,21 @@ public abstract class BaseContent
             setHtml( obj.getHtml() );
         }
 
+        if ( hasHtml() && getHtml() == null &&
+            obj.hasHtml() && obj.getHtml() != null ) {
+            setHtml( obj.getHtml() );
+        }
+
         if ( ! hasHtmlLength() && obj.hasHtmlLength() ) {
             setHtmlLength( obj.getHtmlLength() );
         }
 
         if ( ! hasHtmlChecksum() && obj.hasHtmlChecksum() ) {
+            setHtmlChecksum( obj.getHtmlChecksum() );
+        }
+
+        if ( hasHtmlChecksum() && getHtmlChecksum() == null &&
+            obj.hasHtmlChecksum() && obj.getHtmlChecksum() != null ) {
             setHtmlChecksum( obj.getHtmlChecksum() );
         }
 
@@ -15990,6 +16010,11 @@ public abstract class BaseContent
             setHtmlBlobChecksum( obj.getHtmlBlobChecksum() );
         }
 
+        if ( hasHtmlBlobChecksum() && getHtmlBlobChecksum() == null &&
+            obj.hasHtmlBlobChecksum() && obj.getHtmlBlobChecksum() != null ) {
+            setHtmlBlobChecksum( obj.getHtmlBlobChecksum() );
+        }
+
         if ( ! hasExtractBlob() && obj.hasExtractBlob() ) {
             setExtractBlob( obj.getExtractBlob() );
         }
@@ -15998,7 +16023,17 @@ public abstract class BaseContent
             setVersion( obj.getVersion() );
         }
 
+        if ( hasVersion() && getVersion() == null &&
+            obj.hasVersion() && obj.getVersion() != null ) {
+            setVersion( obj.getVersion() );
+        }
+
         if ( ! hasSourceHashcode() && obj.hasSourceHashcode() ) {
+            setSourceHashcode( obj.getSourceHashcode() );
+        }
+
+        if ( hasSourceHashcode() && getSourceHashcode() == null &&
+            obj.hasSourceHashcode() && obj.getSourceHashcode() != null ) {
             setSourceHashcode( obj.getSourceHashcode() );
         }
 
@@ -16006,7 +16041,17 @@ public abstract class BaseContent
             setSourceResource( obj.getSourceResource() );
         }
 
+        if ( hasSourceResource() && getSourceResource() == null &&
+            obj.hasSourceResource() && obj.getSourceResource() != null ) {
+            setSourceResource( obj.getSourceResource() );
+        }
+
         if ( ! hasSourceLink() && obj.hasSourceLink() ) {
+            setSourceLink( obj.getSourceLink() );
+        }
+
+        if ( hasSourceLink() && getSourceLink() == null &&
+            obj.hasSourceLink() && obj.getSourceLink() != null ) {
             setSourceLink( obj.getSourceLink() );
         }
 
@@ -16050,6 +16095,11 @@ public abstract class BaseContent
             setSourceContentChecksum( obj.getSourceContentChecksum() );
         }
 
+        if ( hasSourceContentChecksum() && getSourceContentChecksum() == null &&
+            obj.hasSourceContentChecksum() && obj.getSourceContentChecksum() != null ) {
+            setSourceContentChecksum( obj.getSourceContentChecksum() );
+        }
+
         if ( ! hasSourceAssignedTags() && obj.hasSourceAssignedTags() ) {
             setSourceAssignedTags( obj.getSourceAssignedTags() );
         }
@@ -16070,7 +16120,17 @@ public abstract class BaseContent
             setSourcePshbHub( obj.getSourcePshbHub() );
         }
 
+        if ( hasSourcePshbHub() && getSourcePshbHub() == null &&
+            obj.hasSourcePshbHub() && obj.getSourcePshbHub() != null ) {
+            setSourcePshbHub( obj.getSourcePshbHub() );
+        }
+
         if ( ! hasSourcePshbTopic() && obj.hasSourcePshbTopic() ) {
+            setSourcePshbTopic( obj.getSourcePshbTopic() );
+        }
+
+        if ( hasSourcePshbTopic() && getSourcePshbTopic() == null &&
+            obj.hasSourcePshbTopic() && obj.getSourcePshbTopic() != null ) {
             setSourcePshbTopic( obj.getSourcePshbTopic() );
         }
 
@@ -16090,11 +16150,26 @@ public abstract class BaseContent
             setSourceTitle( obj.getSourceTitle() );
         }
 
+        if ( hasSourceTitle() && getSourceTitle() == null &&
+            obj.hasSourceTitle() && obj.getSourceTitle() != null ) {
+            setSourceTitle( obj.getSourceTitle() );
+        }
+
         if ( ! hasSourceDescription() && obj.hasSourceDescription() ) {
             setSourceDescription( obj.getSourceDescription() );
         }
 
+        if ( hasSourceDescription() && getSourceDescription() == null &&
+            obj.hasSourceDescription() && obj.getSourceDescription() != null ) {
+            setSourceDescription( obj.getSourceDescription() );
+        }
+
         if ( ! hasSourceHandle() && obj.hasSourceHandle() ) {
+            setSourceHandle( obj.getSourceHandle() );
+        }
+
+        if ( hasSourceHandle() && getSourceHandle() == null &&
+            obj.hasSourceHandle() && obj.getSourceHandle() != null ) {
             setSourceHandle( obj.getSourceHandle() );
         }
 
@@ -16122,7 +16197,17 @@ public abstract class BaseContent
             setSourceLocation( obj.getSourceLocation() );
         }
 
+        if ( hasSourceLocation() && getSourceLocation() == null &&
+            obj.hasSourceLocation() && obj.getSourceLocation() != null ) {
+            setSourceLocation( obj.getSourceLocation() );
+        }
+
         if ( ! hasSourceImageSrc() && obj.hasSourceImageSrc() ) {
+            setSourceImageSrc( obj.getSourceImageSrc() );
+        }
+
+        if ( hasSourceImageSrc() && getSourceImageSrc() == null &&
+            obj.hasSourceImageSrc() && obj.getSourceImageSrc() != null ) {
             setSourceImageSrc( obj.getSourceImageSrc() );
         }
 
@@ -16138,6 +16223,11 @@ public abstract class BaseContent
             setSourceTelephone( obj.getSourceTelephone() );
         }
 
+        if ( hasSourceTelephone() && getSourceTelephone() == null &&
+            obj.hasSourceTelephone() && obj.getSourceTelephone() != null ) {
+            setSourceTelephone( obj.getSourceTelephone() );
+        }
+
         if ( ! hasSourceTags() && obj.hasSourceTags() ) {
             setSourceTags( obj.getSourceTags() );
         }
@@ -16146,7 +16236,17 @@ public abstract class BaseContent
             setSourceRatingValue( obj.getSourceRatingValue() );
         }
 
+        if ( hasSourceRatingValue() && getSourceRatingValue() == null &&
+            obj.hasSourceRatingValue() && obj.getSourceRatingValue() != null ) {
+            setSourceRatingValue( obj.getSourceRatingValue() );
+        }
+
         if ( ! hasSourceFaviconSrc() && obj.hasSourceFaviconSrc() ) {
+            setSourceFaviconSrc( obj.getSourceFaviconSrc() );
+        }
+
+        if ( hasSourceFaviconSrc() && getSourceFaviconSrc() == null &&
+            obj.hasSourceFaviconSrc() && obj.getSourceFaviconSrc() != null ) {
             setSourceFaviconSrc( obj.getSourceFaviconSrc() );
         }
 
@@ -16178,7 +16278,17 @@ public abstract class BaseContent
             setSourceFeedHref( obj.getSourceFeedHref() );
         }
 
+        if ( hasSourceFeedHref() && getSourceFeedHref() == null &&
+            obj.hasSourceFeedHref() && obj.getSourceFeedHref() != null ) {
+            setSourceFeedHref( obj.getSourceFeedHref() );
+        }
+
         if ( ! hasSourceFeedTitle() && obj.hasSourceFeedTitle() ) {
+            setSourceFeedTitle( obj.getSourceFeedTitle() );
+        }
+
+        if ( hasSourceFeedTitle() && getSourceFeedTitle() == null &&
+            obj.hasSourceFeedTitle() && obj.getSourceFeedTitle() != null ) {
             setSourceFeedTitle( obj.getSourceFeedTitle() );
         }
 
@@ -16190,7 +16300,17 @@ public abstract class BaseContent
             setPermalink( obj.getPermalink() );
         }
 
+        if ( hasPermalink() && getPermalink() == null &&
+            obj.hasPermalink() && obj.getPermalink() != null ) {
+            setPermalink( obj.getPermalink() );
+        }
+
         if ( ! hasPermalinkRedirect() && obj.hasPermalinkRedirect() ) {
+            setPermalinkRedirect( obj.getPermalinkRedirect() );
+        }
+
+        if ( hasPermalinkRedirect() && getPermalinkRedirect() == null &&
+            obj.hasPermalinkRedirect() && obj.getPermalinkRedirect() != null ) {
             setPermalinkRedirect( obj.getPermalinkRedirect() );
         }
 
@@ -16198,7 +16318,17 @@ public abstract class BaseContent
             setPermalinkRedirectDomain( obj.getPermalinkRedirectDomain() );
         }
 
+        if ( hasPermalinkRedirectDomain() && getPermalinkRedirectDomain() == null &&
+            obj.hasPermalinkRedirectDomain() && obj.getPermalinkRedirectDomain() != null ) {
+            setPermalinkRedirectDomain( obj.getPermalinkRedirectDomain() );
+        }
+
         if ( ! hasPermalinkRedirectSite() && obj.hasPermalinkRedirectSite() ) {
+            setPermalinkRedirectSite( obj.getPermalinkRedirectSite() );
+        }
+
+        if ( hasPermalinkRedirectSite() && getPermalinkRedirectSite() == null &&
+            obj.hasPermalinkRedirectSite() && obj.getPermalinkRedirectSite() != null ) {
             setPermalinkRedirectSite( obj.getPermalinkRedirectSite() );
         }
 
@@ -16206,7 +16336,17 @@ public abstract class BaseContent
             setLink( obj.getLink() );
         }
 
+        if ( hasLink() && getLink() == null &&
+            obj.hasLink() && obj.getLink() != null ) {
+            setLink( obj.getLink() );
+        }
+
         if ( ! hasLinkDomain() && obj.hasLinkDomain() ) {
+            setLinkDomain( obj.getLinkDomain() );
+        }
+
+        if ( hasLinkDomain() && getLinkDomain() == null &&
+            obj.hasLinkDomain() && obj.getLinkDomain() != null ) {
             setLinkDomain( obj.getLinkDomain() );
         }
 
@@ -16214,7 +16354,17 @@ public abstract class BaseContent
             setLinkSite( obj.getLinkSite() );
         }
 
+        if ( hasLinkSite() && getLinkSite() == null &&
+            obj.hasLinkSite() && obj.getLinkSite() != null ) {
+            setLinkSite( obj.getLinkSite() );
+        }
+
         if ( ! hasShortlink() && obj.hasShortlink() ) {
+            setShortlink( obj.getShortlink() );
+        }
+
+        if ( hasShortlink() && getShortlink() == null &&
+            obj.hasShortlink() && obj.getShortlink() != null ) {
             setShortlink( obj.getShortlink() );
         }
 
@@ -16222,7 +16372,17 @@ public abstract class BaseContent
             setCanonical( obj.getCanonical() );
         }
 
+        if ( hasCanonical() && getCanonical() == null &&
+            obj.hasCanonical() && obj.getCanonical() != null ) {
+            setCanonical( obj.getCanonical() );
+        }
+
         if ( ! hasDomain() && obj.hasDomain() ) {
+            setDomain( obj.getDomain() );
+        }
+
+        if ( hasDomain() && getDomain() == null &&
+            obj.hasDomain() && obj.getDomain() != null ) {
             setDomain( obj.getDomain() );
         }
 
@@ -16230,7 +16390,17 @@ public abstract class BaseContent
             setSite( obj.getSite() );
         }
 
+        if ( hasSite() && getSite() == null &&
+            obj.hasSite() && obj.getSite() != null ) {
+            setSite( obj.getSite() );
+        }
+
         if ( ! hasMain() && obj.hasMain() ) {
+            setMain( obj.getMain() );
+        }
+
+        if ( hasMain() && getMain() == null &&
+            obj.hasMain() && obj.getMain() != null ) {
             setMain( obj.getMain() );
         }
 
@@ -16239,6 +16409,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasMainChecksum() && obj.hasMainChecksum() ) {
+            setMainChecksum( obj.getMainChecksum() );
+        }
+
+        if ( hasMainChecksum() && getMainChecksum() == null &&
+            obj.hasMainChecksum() && obj.getMainChecksum() != null ) {
             setMainChecksum( obj.getMainChecksum() );
         }
 
@@ -16254,6 +16429,11 @@ public abstract class BaseContent
             setExtract( obj.getExtract() );
         }
 
+        if ( hasExtract() && getExtract() == null &&
+            obj.hasExtract() && obj.getExtract() != null ) {
+            setExtract( obj.getExtract() );
+        }
+
         if ( ! hasExtractLength() && obj.hasExtractLength() ) {
             setExtractLength( obj.getExtractLength() );
         }
@@ -16262,7 +16442,17 @@ public abstract class BaseContent
             setExtractChecksum( obj.getExtractChecksum() );
         }
 
+        if ( hasExtractChecksum() && getExtractChecksum() == null &&
+            obj.hasExtractChecksum() && obj.getExtractChecksum() != null ) {
+            setExtractChecksum( obj.getExtractChecksum() );
+        }
+
         if ( ! hasSummaryText() && obj.hasSummaryText() ) {
+            setSummaryText( obj.getSummaryText() );
+        }
+
+        if ( hasSummaryText() && getSummaryText() == null &&
+            obj.hasSummaryText() && obj.getSummaryText() != null ) {
             setSummaryText( obj.getSummaryText() );
         }
 
@@ -16270,7 +16460,17 @@ public abstract class BaseContent
             setTitle( obj.getTitle() );
         }
 
+        if ( hasTitle() && getTitle() == null &&
+            obj.hasTitle() && obj.getTitle() != null ) {
+            setTitle( obj.getTitle() );
+        }
+
         if ( ! hasPublisher() && obj.hasPublisher() ) {
+            setPublisher( obj.getPublisher() );
+        }
+
+        if ( hasPublisher() && getPublisher() == null &&
+            obj.hasPublisher() && obj.getPublisher() != null ) {
             setPublisher( obj.getPublisher() );
         }
 
@@ -16278,7 +16478,17 @@ public abstract class BaseContent
             setSection( obj.getSection() );
         }
 
+        if ( hasSection() && getSection() == null &&
+            obj.hasSection() && obj.getSection() != null ) {
+            setSection( obj.getSection() );
+        }
+
         if ( ! hasDescription() && obj.hasDescription() ) {
+            setDescription( obj.getDescription() );
+        }
+
+        if ( hasDescription() && getDescription() == null &&
+            obj.hasDescription() && obj.getDescription() != null ) {
             setDescription( obj.getDescription() );
         }
 
@@ -16314,11 +16524,26 @@ public abstract class BaseContent
             setAuthorName( obj.getAuthorName() );
         }
 
+        if ( hasAuthorName() && getAuthorName() == null &&
+            obj.hasAuthorName() && obj.getAuthorName() != null ) {
+            setAuthorName( obj.getAuthorName() );
+        }
+
         if ( ! hasAuthorLink() && obj.hasAuthorLink() ) {
             setAuthorLink( obj.getAuthorLink() );
         }
 
+        if ( hasAuthorLink() && getAuthorLink() == null &&
+            obj.hasAuthorLink() && obj.getAuthorLink() != null ) {
+            setAuthorLink( obj.getAuthorLink() );
+        }
+
         if ( ! hasAuthorHandle() && obj.hasAuthorHandle() ) {
+            setAuthorHandle( obj.getAuthorHandle() );
+        }
+
+        if ( hasAuthorHandle() && getAuthorHandle() == null &&
+            obj.hasAuthorHandle() && obj.getAuthorHandle() != null ) {
             setAuthorHandle( obj.getAuthorHandle() );
         }
 
@@ -16330,7 +16555,17 @@ public abstract class BaseContent
             setAuthorLocation( obj.getAuthorLocation() );
         }
 
+        if ( hasAuthorLocation() && getAuthorLocation() == null &&
+            obj.hasAuthorLocation() && obj.getAuthorLocation() != null ) {
+            setAuthorLocation( obj.getAuthorLocation() );
+        }
+
         if ( ! hasAuthorAvatarImg() && obj.hasAuthorAvatarImg() ) {
+            setAuthorAvatarImg( obj.getAuthorAvatarImg() );
+        }
+
+        if ( hasAuthorAvatarImg() && getAuthorAvatarImg() == null &&
+            obj.hasAuthorAvatarImg() && obj.getAuthorAvatarImg() != null ) {
             setAuthorAvatarImg( obj.getAuthorAvatarImg() );
         }
 
@@ -16346,7 +16581,17 @@ public abstract class BaseContent
             setAuthorTwitterHandle( obj.getAuthorTwitterHandle() );
         }
 
+        if ( hasAuthorTwitterHandle() && getAuthorTwitterHandle() == null &&
+            obj.hasAuthorTwitterHandle() && obj.getAuthorTwitterHandle() != null ) {
+            setAuthorTwitterHandle( obj.getAuthorTwitterHandle() );
+        }
+
         if ( ! hasAuthorTwitterUserid() && obj.hasAuthorTwitterUserid() ) {
+            setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
+        }
+
+        if ( hasAuthorTwitterUserid() && getAuthorTwitterUserid() == null &&
+            obj.hasAuthorTwitterUserid() && obj.getAuthorTwitterUserid() != null ) {
             setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
         }
 
@@ -16358,7 +16603,17 @@ public abstract class BaseContent
             setGeoLocation( obj.getGeoLocation() );
         }
 
+        if ( hasGeoLocation() && getGeoLocation() == null &&
+            obj.hasGeoLocation() && obj.getGeoLocation() != null ) {
+            setGeoLocation( obj.getGeoLocation() );
+        }
+
         if ( ! hasGeoFeaturename() && obj.hasGeoFeaturename() ) {
+            setGeoFeaturename( obj.getGeoFeaturename() );
+        }
+
+        if ( hasGeoFeaturename() && getGeoFeaturename() == null &&
+            obj.hasGeoFeaturename() && obj.getGeoFeaturename() != null ) {
             setGeoFeaturename( obj.getGeoFeaturename() );
         }
 
@@ -16366,7 +16621,17 @@ public abstract class BaseContent
             setGeoPoint( obj.getGeoPoint() );
         }
 
+        if ( hasGeoPoint() && getGeoPoint() == null &&
+            obj.hasGeoPoint() && obj.getGeoPoint() != null ) {
+            setGeoPoint( obj.getGeoPoint() );
+        }
+
         if ( ! hasGeoBox() && obj.hasGeoBox() ) {
+            setGeoBox( obj.getGeoBox() );
+        }
+
+        if ( hasGeoBox() && getGeoBox() == null &&
+            obj.hasGeoBox() && obj.getGeoBox() != null ) {
             setGeoBox( obj.getGeoBox() );
         }
 
@@ -16374,7 +16639,17 @@ public abstract class BaseContent
             setRatingValue( obj.getRatingValue() );
         }
 
+        if ( hasRatingValue() && getRatingValue() == null &&
+            obj.hasRatingValue() && obj.getRatingValue() != null ) {
+            setRatingValue( obj.getRatingValue() );
+        }
+
         if ( ! hasFaviconSrc() && obj.hasFaviconSrc() ) {
+            setFaviconSrc( obj.getFaviconSrc() );
+        }
+
+        if ( hasFaviconSrc() && getFaviconSrc() == null &&
+            obj.hasFaviconSrc() && obj.getFaviconSrc() != null ) {
             setFaviconSrc( obj.getFaviconSrc() );
         }
 
@@ -16387,6 +16662,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasImageSrc() && obj.hasImageSrc() ) {
+            setImageSrc( obj.getImageSrc() );
+        }
+
+        if ( hasImageSrc() && getImageSrc() == null &&
+            obj.hasImageSrc() && obj.getImageSrc() != null ) {
             setImageSrc( obj.getImageSrc() );
         }
 
@@ -16406,7 +16686,17 @@ public abstract class BaseContent
             setSharedProfileLink( obj.getSharedProfileLink() );
         }
 
+        if ( hasSharedProfileLink() && getSharedProfileLink() == null &&
+            obj.hasSharedProfileLink() && obj.getSharedProfileLink() != null ) {
+            setSharedProfileLink( obj.getSharedProfileLink() );
+        }
+
         if ( ! hasSharedProfileTitle() && obj.hasSharedProfileTitle() ) {
+            setSharedProfileTitle( obj.getSharedProfileTitle() );
+        }
+
+        if ( hasSharedProfileTitle() && getSharedProfileTitle() == null &&
+            obj.hasSharedProfileTitle() && obj.getSharedProfileTitle() != null ) {
             setSharedProfileTitle( obj.getSharedProfileTitle() );
         }
 
@@ -16415,6 +16705,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasVideoPlayer() && obj.hasVideoPlayer() ) {
+            setVideoPlayer( obj.getVideoPlayer() );
+        }
+
+        if ( hasVideoPlayer() && getVideoPlayer() == null &&
+            obj.hasVideoPlayer() && obj.getVideoPlayer() != null ) {
             setVideoPlayer( obj.getVideoPlayer() );
         }
 
@@ -16438,6 +16733,11 @@ public abstract class BaseContent
             setLang( obj.getLang() );
         }
 
+        if ( hasLang() && getLang() == null &&
+            obj.hasLang() && obj.getLang() != null ) {
+            setLang( obj.getLang() );
+        }
+
         if ( ! hasCategories() && obj.hasCategories() ) {
             setCategories( obj.getCategories() );
         }
@@ -16458,7 +16758,17 @@ public abstract class BaseContent
             setParentHashcode( obj.getParentHashcode() );
         }
 
+        if ( hasParentHashcode() && getParentHashcode() == null &&
+            obj.hasParentHashcode() && obj.getParentHashcode() != null ) {
+            setParentHashcode( obj.getParentHashcode() );
+        }
+
         if ( ! hasParentPermalink() && obj.hasParentPermalink() ) {
+            setParentPermalink( obj.getParentPermalink() );
+        }
+
+        if ( hasParentPermalink() && getParentPermalink() == null &&
+            obj.hasParentPermalink() && obj.getParentPermalink() != null ) {
             setParentPermalink( obj.getParentPermalink() );
         }
 
@@ -16466,11 +16776,26 @@ public abstract class BaseContent
             setParentTitle( obj.getParentTitle() );
         }
 
+        if ( hasParentTitle() && getParentTitle() == null &&
+            obj.hasParentTitle() && obj.getParentTitle() != null ) {
+            setParentTitle( obj.getParentTitle() );
+        }
+
         if ( ! hasParentLang() && obj.hasParentLang() ) {
             setParentLang( obj.getParentLang() );
         }
 
+        if ( hasParentLang() && getParentLang() == null &&
+            obj.hasParentLang() && obj.getParentLang() != null ) {
+            setParentLang( obj.getParentLang() );
+        }
+
         if ( ! hasParentResource() && obj.hasParentResource() ) {
+            setParentResource( obj.getParentResource() );
+        }
+
+        if ( hasParentResource() && getParentResource() == null &&
+            obj.hasParentResource() && obj.getParentResource() != null ) {
             setParentResource( obj.getParentResource() );
         }
 
