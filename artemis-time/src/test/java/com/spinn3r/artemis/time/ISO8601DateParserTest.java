@@ -38,4 +38,13 @@ public class ISO8601DateParserTest {
 
     }
 
+    @Test
+    public void testDateParseWithJava8UsingPartials() throws Exception {
+
+        String date = "2016-03-02";
+
+        LocalDate aLD = LocalDate.parse(date);
+        System.out.println("Date: " + aLD);
+
+    }
 }
