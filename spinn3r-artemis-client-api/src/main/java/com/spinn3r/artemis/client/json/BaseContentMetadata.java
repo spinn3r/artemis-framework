@@ -1721,7 +1721,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: permalink
      * </p>
      */
-    public String getPermalink () {
+    public String getPermalink() {
 
         if ( this.constructed == false && this.hasPermalink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.permalink" );
@@ -1729,6 +1729,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.permalink;
+    }
+
+    /**
+     * <p>
+     * The unique URL to the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: permalink
+     * </p>
+     */
+    public Optional<String> getPermalinkAsOptional() {
+
+        if ( this.constructed == false && this.hasPermalink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.permalink );
+
     }
 
     /**
@@ -1806,7 +1825,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: permalink_redirect
      * </p>
      */
-    public String getPermalinkRedirect () {
+    public String getPermalinkRedirect() {
 
         if ( this.constructed == false && this.hasPermalinkRedirect == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.permalinkRedirect" );
@@ -1814,6 +1833,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.permalinkRedirect;
+    }
+
+    /**
+     * <p>
+     * Same as permalink but if the site performs a 301 or 302 redirect this is the URL we were redirected to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: permalink_redirect
+     * </p>
+     */
+    public Optional<String> getPermalinkRedirectAsOptional() {
+
+        if ( this.constructed == false && this.hasPermalinkRedirect == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.permalinkRedirect );
+
     }
 
     /**
@@ -1891,7 +1929,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: permalink_redirect_domain
      * </p>
      */
-    public String getPermalinkRedirectDomain () {
+    public String getPermalinkRedirectDomain() {
 
         if ( this.constructed == false && this.hasPermalinkRedirectDomain == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.permalinkRedirectDomain" );
@@ -1899,6 +1937,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.permalinkRedirectDomain;
+    }
+
+    /**
+     * <p>
+     * The domain for the permalink_redirect. Identical in semantics to the domain field.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: permalink_redirect_domain
+     * </p>
+     */
+    public Optional<String> getPermalinkRedirectDomainAsOptional() {
+
+        if ( this.constructed == false && this.hasPermalinkRedirectDomain == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.permalinkRedirectDomain );
+
     }
 
     /**
@@ -1976,7 +2033,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: permalink_redirect_site
      * </p>
      */
-    public String getPermalinkRedirectSite () {
+    public String getPermalinkRedirectSite() {
 
         if ( this.constructed == false && this.hasPermalinkRedirectSite == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.permalinkRedirectSite" );
@@ -1984,6 +2041,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.permalinkRedirectSite;
+    }
+
+    /**
+     * <p>
+     * The site for the permalink_redirect. The full hostname.  For example, www.cnn.com, alice.blogspot.com, etc.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: permalink_redirect_site
+     * </p>
+     */
+    public Optional<String> getPermalinkRedirectSiteAsOptional() {
+
+        if ( this.constructed == false && this.hasPermalinkRedirectSite == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.permalinkRedirectSite );
+
     }
 
     /**
@@ -2061,7 +2137,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: link
      * </p>
      */
-    public String getLink () {
+    public String getLink() {
 
         if ( this.constructed == false && this.hasLink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.link" );
@@ -2069,6 +2145,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.link;
+    }
+
+    /**
+     * <p>
+     * The primary link to the content.  The vast majority of the time, this is identical to permalink.  However, some publisher types (MEMETRACKER) have a different link to the content which is external to the site.  If the link is NOT the same as the permalink, then we include it in the links field for search and accuracy purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: link
+     * </p>
+     */
+    public Optional<String> getLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.link );
+
     }
 
     /**
@@ -2146,7 +2241,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: link_domain
      * </p>
      */
-    public String getLinkDomain () {
+    public String getLinkDomain() {
 
         if ( this.constructed == false && this.hasLinkDomain == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.linkDomain" );
@@ -2154,6 +2249,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.linkDomain;
+    }
+
+    /**
+     * <p>
+     * The domain for the link. Identical in semantics to the domain field.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: link_domain
+     * </p>
+     */
+    public Optional<String> getLinkDomainAsOptional() {
+
+        if ( this.constructed == false && this.hasLinkDomain == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.linkDomain );
+
     }
 
     /**
@@ -2231,7 +2345,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: link_site
      * </p>
      */
-    public String getLinkSite () {
+    public String getLinkSite() {
 
         if ( this.constructed == false && this.hasLinkSite == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.linkSite" );
@@ -2239,6 +2353,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.linkSite;
+    }
+
+    /**
+     * <p>
+     * The site for the link. The full hostname.  For example, www.cnn.com, alice.blogspot.com, etc.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: link_site
+     * </p>
+     */
+    public Optional<String> getLinkSiteAsOptional() {
+
+        if ( this.constructed == false && this.hasLinkSite == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.linkSite );
+
     }
 
     /**
@@ -2316,7 +2449,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: shortlink
      * </p>
      */
-    public String getShortlink () {
+    public String getShortlink() {
 
         if ( this.constructed == false && this.hasShortlink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.shortlink" );
@@ -2324,6 +2457,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.shortlink;
+    }
+
+    /**
+     * <p>
+     * The shortlink URL, if known.  This is the prefered 'short' URL discovered from either the content itself or through metdata.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shortlink
+     * </p>
+     */
+    public Optional<String> getShortlinkAsOptional() {
+
+        if ( this.constructed == false && this.hasShortlink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.shortlink );
+
     }
 
     /**
@@ -2401,7 +2553,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: canonical
      * </p>
      */
-    public String getCanonical () {
+    public String getCanonical() {
 
         if ( this.constructed == false && this.hasCanonical == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.canonical" );
@@ -2409,6 +2561,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.canonical;
+    }
+
+    /**
+     * <p>
+     * The canonical URL to the content (as specified by the publisher) in rel=canonical (and other specs such as og:url).
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: canonical
+     * </p>
+     */
+    public Optional<String> getCanonicalAsOptional() {
+
+        if ( this.constructed == false && this.hasCanonical == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.canonical );
+
     }
 
     /**
@@ -2486,7 +2657,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: domain
      * </p>
      */
-    public String getDomain () {
+    public String getDomain() {
 
         if ( this.constructed == false && this.hasDomain == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.domain" );
@@ -2494,6 +2665,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.domain;
+    }
+
+    /**
+     * <p>
+     * The domain name of the permalink.  blogspot.com, example,com, etc. 
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: domain
+     * </p>
+     */
+    public Optional<String> getDomainAsOptional() {
+
+        if ( this.constructed == false && this.hasDomain == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.domain );
+
     }
 
     /**
@@ -2571,7 +2761,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: site
      * </p>
      */
-    public String getSite () {
+    public String getSite() {
 
         if ( this.constructed == false && this.hasSite == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.site" );
@@ -2579,6 +2769,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.site;
+    }
+
+    /**
+     * <p>
+     * The site of the permalink including the full host name.  www.cnn.com would be a site and cnn.com would be a domain.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: site
+     * </p>
+     */
+    public Optional<String> getSiteAsOptional() {
+
+        if ( this.constructed == false && this.hasSite == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.site );
+
     }
 
     /**
@@ -2656,7 +2865,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: main
      * </p>
      */
-    public String getMain () {
+    public String getMain() {
 
         if ( this.constructed == false && this.hasMain == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.main" );
@@ -2664,6 +2873,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.main;
+    }
+
+    /**
+     * <p>
+     * The actual main content of the article.  The authoritative 'main' of the post derived by removing sidebar content. (html).  This content is sanitized, cleaned so that javascript, event handlers, etc are removed.  This is analagous to the HTML5 main element.  IE the main content of the page, with no header, footer, or sidebar content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: main
+     * </p>
+     */
+    public Optional<String> getMainAsOptional() {
+
+        if ( this.constructed == false && this.hasMain == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.main );
+
     }
 
     /**
@@ -2741,7 +2969,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: main_length
      * </p>
      */
-    public int getMainLength () {
+    public int getMainLength() {
 
         if ( this.constructed == false && this.hasMainLength == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.mainLength" );
@@ -2826,7 +3054,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: main_checksum
      * </p>
      */
-    public String getMainChecksum () {
+    public String getMainChecksum() {
 
         if ( this.constructed == false && this.hasMainChecksum == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.mainChecksum" );
@@ -2834,6 +3062,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.mainChecksum;
+    }
+
+    /**
+     * <p>
+     * The checksum of the main field.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: main_checksum
+     * </p>
+     */
+    public Optional<String> getMainChecksumAsOptional() {
+
+        if ( this.constructed == false && this.hasMainChecksum == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainChecksum );
+
     }
 
     /**
@@ -2911,7 +3158,7 @@ public abstract class BaseContentMetadata
      * Schema type: boolean , name: main_authoritative
      * </p>
      */
-    public boolean getMainAuthoritative () {
+    public boolean getMainAuthoritative() {
 
         if ( this.constructed == false && this.hasMainAuthoritative == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.mainAuthoritative" );
@@ -2996,7 +3243,7 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: main_format
      * </p>
      */
-    public MainFormat getMainFormat () {
+    public MainFormat getMainFormat() {
 
         if ( this.constructed == false && this.hasMainFormat == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.mainFormat" );
@@ -3081,7 +3328,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: extract
      * </p>
      */
-    public String getExtract () {
+    public String getExtract() {
 
         if ( this.constructed == false && this.hasExtract == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.extract" );
@@ -3089,6 +3336,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.extract;
+    }
+
+    /**
+     * <p>
+     * The extract of the content with applied chrome/boilerpipe removal algorithms applied.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: extract
+     * </p>
+     */
+    public Optional<String> getExtractAsOptional() {
+
+        if ( this.constructed == false && this.hasExtract == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.extract );
+
     }
 
     /**
@@ -3166,7 +3432,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: extract_length
      * </p>
      */
-    public int getExtractLength () {
+    public int getExtractLength() {
 
         if ( this.constructed == false && this.hasExtractLength == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.extractLength" );
@@ -3251,7 +3517,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: extract_checksum
      * </p>
      */
-    public String getExtractChecksum () {
+    public String getExtractChecksum() {
 
         if ( this.constructed == false && this.hasExtractChecksum == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.extractChecksum" );
@@ -3259,6 +3525,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.extractChecksum;
+    }
+
+    /**
+     * <p>
+     * The checksum of the extract field.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: extract_checksum
+     * </p>
+     */
+    public Optional<String> getExtractChecksumAsOptional() {
+
+        if ( this.constructed == false && this.hasExtractChecksum == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.extractChecksum );
+
     }
 
     /**
@@ -3336,7 +3621,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: summary_text
      * </p>
      */
-    public String getSummaryText () {
+    public String getSummaryText() {
 
         if ( this.constructed == false && this.hasSummaryText == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.summaryText" );
@@ -3344,6 +3629,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.summaryText;
+    }
+
+    /**
+     * <p>
+     * A summary of the document computed by our document summarizer. This summary is in plain text. If mulitiple paragraphs are present they are separated by a newline. If you would like to separate the paragraphs in your UI and you're rendering HTML you can split the summary text by newline and wrap each paragraph in a P element.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: summary_text
+     * </p>
+     */
+    public Optional<String> getSummaryTextAsOptional() {
+
+        if ( this.constructed == false && this.hasSummaryText == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.summaryText );
+
     }
 
     /**
@@ -3421,7 +3725,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: title
      * </p>
      */
-    public String getTitle () {
+    public String getTitle() {
 
         if ( this.constructed == false && this.hasTitle == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.title" );
@@ -3429,6 +3733,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.title;
+    }
+
+    /**
+     * <p>
+     * The title of the post.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: title
+     * </p>
+     */
+    public Optional<String> getTitleAsOptional() {
+
+        if ( this.constructed == false && this.hasTitle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.title );
+
     }
 
     /**
@@ -3506,7 +3829,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: publisher
      * </p>
      */
-    public String getPublisher () {
+    public String getPublisher() {
 
         if ( this.constructed == false && this.hasPublisher == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.publisher" );
@@ -3514,6 +3837,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.publisher;
+    }
+
+    /**
+     * <p>
+     * The publisher name.  (CNN, MSNBC, Techcrunch, etc)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: publisher
+     * </p>
+     */
+    public Optional<String> getPublisherAsOptional() {
+
+        if ( this.constructed == false && this.hasPublisher == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.publisher );
+
     }
 
     /**
@@ -3591,7 +3933,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: section
      * </p>
      */
-    public String getSection () {
+    public String getSection() {
 
         if ( this.constructed == false && this.hasSection == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.section" );
@@ -3599,6 +3941,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.section;
+    }
+
+    /**
+     * <p>
+     * Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: section
+     * </p>
+     */
+    public Optional<String> getSectionAsOptional() {
+
+        if ( this.constructed == false && this.hasSection == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.section );
+
     }
 
     /**
@@ -3676,7 +4037,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: description
      * </p>
      */
-    public String getDescription () {
+    public String getDescription() {
 
         if ( this.constructed == false && this.hasDescription == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.description" );
@@ -3684,6 +4045,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.description;
+    }
+
+    /**
+     * <p>
+     * A short description of the item (HTML)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: description
+     * </p>
+     */
+    public Optional<String> getDescriptionAsOptional() {
+
+        if ( this.constructed == false && this.hasDescription == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.description );
+
     }
 
     /**
@@ -3763,7 +4143,7 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: tags
      * </p>
      */
-    public Set<String> getTags () {
+    public Set<String> getTags() {
 
         if ( this.constructed == false && this.hasTags == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.tags" );
@@ -3850,7 +4230,7 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: mentions
      * </p>
      */
-    public Set<String> getMentions () {
+    public Set<String> getMentions() {
 
         if ( this.constructed == false && this.hasMentions == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.mentions" );
@@ -3937,7 +4317,7 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: links
      * </p>
      */
-    public Set<String> getLinks () {
+    public Set<String> getLinks() {
 
         if ( this.constructed == false && this.hasLinks == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.links" );
@@ -4022,7 +4402,7 @@ public abstract class BaseContentMetadata
      * Schema type: timestamp , name: published
      * </p>
      */
-    public Date getPublished () {
+    public Date getPublished() {
 
         if ( this.constructed == false && this.hasPublished == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.published" );
@@ -4030,6 +4410,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.published;
+    }
+
+    /**
+     * <p>
+     * Date of first broadcast/publication.
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: published
+     * </p>
+     */
+    public Optional<Date> getPublishedAsOptional() {
+
+        if ( this.constructed == false && this.hasPublished == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.published );
+
     }
 
     /**
@@ -4107,7 +4506,7 @@ public abstract class BaseContentMetadata
      * Schema type: timestamp , name: modified
      * </p>
      */
-    public Date getModified () {
+    public Date getModified() {
 
         if ( this.constructed == false && this.hasModified == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.modified" );
@@ -4115,6 +4514,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.modified;
+    }
+
+    /**
+     * <p>
+     * The date on which the content was most recently modified.
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: modified
+     * </p>
+     */
+    public Optional<Date> getModifiedAsOptional() {
+
+        if ( this.constructed == false && this.hasModified == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.modified );
+
     }
 
     /**
@@ -4192,7 +4610,7 @@ public abstract class BaseContentMetadata
      * Schema type: timestamp , name: published_partial
      * </p>
      */
-    public Date getPublishedPartial () {
+    public Date getPublishedPartial() {
 
         if ( this.constructed == false && this.hasPublishedPartial == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.publishedPartial" );
@@ -4200,6 +4618,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.publishedPartial;
+    }
+
+    /**
+     * <p>
+     * This is identical to `published` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: published_partial
+     * </p>
+     */
+    public Optional<Date> getPublishedPartialAsOptional() {
+
+        if ( this.constructed == false && this.hasPublishedPartial == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.publishedPartial );
+
     }
 
     /**
@@ -4277,7 +4714,7 @@ public abstract class BaseContentMetadata
      * Schema type: timestamp , name: modified_partial
      * </p>
      */
-    public Date getModifiedPartial () {
+    public Date getModifiedPartial() {
 
         if ( this.constructed == false && this.hasModifiedPartial == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.modifiedPartial" );
@@ -4285,6 +4722,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.modifiedPartial;
+    }
+
+    /**
+     * <p>
+     * This is identical to `modified` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: modified_partial
+     * </p>
+     */
+    public Optional<Date> getModifiedPartialAsOptional() {
+
+        if ( this.constructed == false && this.hasModifiedPartial == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.modifiedPartial );
+
     }
 
     /**
@@ -4362,7 +4818,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_name
      * </p>
      */
-    public String getAuthorName () {
+    public String getAuthorName() {
 
         if ( this.constructed == false && this.hasAuthorName == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorName" );
@@ -4370,6 +4826,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorName;
+    }
+
+    /**
+     * <p>
+     * The name of the author.  This is the human readable name like 'Barack Obama' or 'Michael Jordan'
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_name
+     * </p>
+     */
+    public Optional<String> getAuthorNameAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorName == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorName );
+
     }
 
     /**
@@ -4447,7 +4922,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_link
      * </p>
      */
-    public String getAuthorLink () {
+    public String getAuthorLink() {
 
         if ( this.constructed == false && this.hasAuthorLink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorLink" );
@@ -4455,6 +4930,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorLink;
+    }
+
+    /**
+     * <p>
+     * The link for the author.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_link
+     * </p>
+     */
+    public Optional<String> getAuthorLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorLink );
+
     }
 
     /**
@@ -4532,7 +5026,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_handle
      * </p>
      */
-    public String getAuthorHandle () {
+    public String getAuthorHandle() {
 
         if ( this.constructed == false && this.hasAuthorHandle == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorHandle" );
@@ -4540,6 +5034,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorHandle;
+    }
+
+    /**
+     * <p>
+     * The handle of the author.  This is a unique token/handle for the author across the whole site.  For example 'barackobama' and would never conflict with another account.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_handle
+     * </p>
+     */
+    public Optional<String> getAuthorHandleAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorHandle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorHandle );
+
     }
 
     /**
@@ -4617,7 +5130,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: author_followers
      * </p>
      */
-    public int getAuthorFollowers () {
+    public int getAuthorFollowers() {
 
         if ( this.constructed == false && this.hasAuthorFollowers == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorFollowers" );
@@ -4702,7 +5215,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_location
      * </p>
      */
-    public String getAuthorLocation () {
+    public String getAuthorLocation() {
 
         if ( this.constructed == false && this.hasAuthorLocation == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorLocation" );
@@ -4710,6 +5223,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorLocation;
+    }
+
+    /**
+     * <p>
+     * The location for this author.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_location
+     * </p>
+     */
+    public Optional<String> getAuthorLocationAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorLocation == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorLocation );
+
     }
 
     /**
@@ -4787,7 +5319,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_avatar_img
      * </p>
      */
-    public String getAuthorAvatarImg () {
+    public String getAuthorAvatarImg() {
 
         if ( this.constructed == false && this.hasAuthorAvatarImg == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorAvatarImg" );
@@ -4795,6 +5327,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorAvatarImg;
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_avatar_img
+     * </p>
+     */
+    public Optional<String> getAuthorAvatarImgAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorAvatarImg == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorAvatarImg );
+
     }
 
     /**
@@ -4872,7 +5423,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: author_avatar_width
      * </p>
      */
-    public int getAuthorAvatarWidth () {
+    public int getAuthorAvatarWidth() {
 
         if ( this.constructed == false && this.hasAuthorAvatarWidth == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorAvatarWidth" );
@@ -4957,7 +5508,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: author_avatar_height
      * </p>
      */
-    public int getAuthorAvatarHeight () {
+    public int getAuthorAvatarHeight() {
 
         if ( this.constructed == false && this.hasAuthorAvatarHeight == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorAvatarHeight" );
@@ -5042,7 +5593,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_twitter_handle
      * </p>
      */
-    public String getAuthorTwitterHandle () {
+    public String getAuthorTwitterHandle() {
 
         if ( this.constructed == false && this.hasAuthorTwitterHandle == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorTwitterHandle" );
@@ -5050,6 +5601,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorTwitterHandle;
+    }
+
+    /**
+     * <p>
+     * The twitter handle of the author of this post.  This is not just specific to twitter data as regular blog data can also specify the users twitter handle.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_twitter_handle
+     * </p>
+     */
+    public Optional<String> getAuthorTwitterHandleAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorTwitterHandle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorTwitterHandle );
+
     }
 
     /**
@@ -5127,7 +5697,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: author_twitter_userid
      * </p>
      */
-    public String getAuthorTwitterUserid () {
+    public String getAuthorTwitterUserid() {
 
         if ( this.constructed == false && this.hasAuthorTwitterUserid == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorTwitterUserid" );
@@ -5135,6 +5705,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.authorTwitterUserid;
+    }
+
+    /**
+     * <p>
+     * The twitter user ID of this account (when available).  The user ID is a string in case the user ID has some type of external representation like BAse64 or Hex encoding.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_twitter_userid
+     * </p>
+     */
+    public Optional<String> getAuthorTwitterUseridAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorTwitterUserid == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorTwitterUserid );
+
     }
 
     /**
@@ -5212,7 +5801,7 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: author_gender
      * </p>
      */
-    public AuthorGender getAuthorGender () {
+    public AuthorGender getAuthorGender() {
 
         if ( this.constructed == false && this.hasAuthorGender == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.authorGender" );
@@ -5297,7 +5886,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: geo_location
      * </p>
      */
-    public String getGeoLocation () {
+    public String getGeoLocation() {
 
         if ( this.constructed == false && this.hasGeoLocation == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.geoLocation" );
@@ -5305,6 +5894,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.geoLocation;
+    }
+
+    /**
+     * <p>
+     * The human readable location of the source.  Example: 'Washington, DC'
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_location
+     * </p>
+     */
+    public Optional<String> getGeoLocationAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoLocation == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoLocation );
+
     }
 
     /**
@@ -5382,7 +5990,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: geo_featurename
      * </p>
      */
-    public String getGeoFeaturename () {
+    public String getGeoFeaturename() {
 
         if ( this.constructed == false && this.hasGeoFeaturename == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.geoFeaturename" );
@@ -5390,6 +5998,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.geoFeaturename;
+    }
+
+    /**
+     * <p>
+     * Name of the feature we're representing.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_featurename
+     * </p>
+     */
+    public Optional<String> getGeoFeaturenameAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoFeaturename == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoFeaturename );
+
     }
 
     /**
@@ -5467,7 +6094,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: geo_point
      * </p>
      */
-    public String getGeoPoint () {
+    public String getGeoPoint() {
 
         if ( this.constructed == false && this.hasGeoPoint == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.geoPoint" );
@@ -5475,6 +6102,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.geoPoint;
+    }
+
+    /**
+     * <p>
+     * A point contains a single latitude-longitude pair, separated by whitespace.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_point
+     * </p>
+     */
+    public Optional<String> getGeoPointAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoPoint == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoPoint );
+
     }
 
     /**
@@ -5552,7 +6198,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: geo_box
      * </p>
      */
-    public String getGeoBox () {
+    public String getGeoBox() {
 
         if ( this.constructed == false && this.hasGeoBox == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.geoBox" );
@@ -5560,6 +6206,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.geoBox;
+    }
+
+    /**
+     * <p>
+     * A bounding box is a rectangular region, often used to define the extents of a map or a rough area of interest. A box contains two space seperate latitude-longitude pairs, with each pair separated by whitespace. The first pair is the lower corner, the second is the upper corner.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_box
+     * </p>
+     */
+    public Optional<String> getGeoBoxAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoBox == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoBox );
+
     }
 
     /**
@@ -5637,7 +6302,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: rating_value
      * </p>
      */
-    public String getRatingValue () {
+    public String getRatingValue() {
 
         if ( this.constructed == false && this.hasRatingValue == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.ratingValue" );
@@ -5645,6 +6310,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.ratingValue;
+    }
+
+    /**
+     * <p>
+     * The rating for this item provided by the user.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: rating_value
+     * </p>
+     */
+    public Optional<String> getRatingValueAsOptional() {
+
+        if ( this.constructed == false && this.hasRatingValue == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.ratingValue );
+
     }
 
     /**
@@ -5722,7 +6406,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: favicon_src
      * </p>
      */
-    public String getFaviconSrc () {
+    public String getFaviconSrc() {
 
         if ( this.constructed == false && this.hasFaviconSrc == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.faviconSrc" );
@@ -5730,6 +6414,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.faviconSrc;
+    }
+
+    /**
+     * <p>
+     * The URL to the favicon which represents this source.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: favicon_src
+     * </p>
+     */
+    public Optional<String> getFaviconSrcAsOptional() {
+
+        if ( this.constructed == false && this.hasFaviconSrc == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.faviconSrc );
+
     }
 
     /**
@@ -5807,7 +6510,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: favicon_width
      * </p>
      */
-    public int getFaviconWidth () {
+    public int getFaviconWidth() {
 
         if ( this.constructed == false && this.hasFaviconWidth == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.faviconWidth" );
@@ -5892,7 +6595,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: favicon_height
      * </p>
      */
-    public int getFaviconHeight () {
+    public int getFaviconHeight() {
 
         if ( this.constructed == false && this.hasFaviconHeight == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.faviconHeight" );
@@ -5977,7 +6680,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: image_src
      * </p>
      */
-    public String getImageSrc () {
+    public String getImageSrc() {
 
         if ( this.constructed == false && this.hasImageSrc == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.imageSrc" );
@@ -5985,6 +6688,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.imageSrc;
+    }
+
+    /**
+     * <p>
+     * The URL to the img which represents this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image_src
+     * </p>
+     */
+    public Optional<String> getImageSrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImageSrc == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.imageSrc );
+
     }
 
     /**
@@ -6062,7 +6784,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: image_width
      * </p>
      */
-    public int getImageWidth () {
+    public int getImageWidth() {
 
         if ( this.constructed == false && this.hasImageWidth == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.imageWidth" );
@@ -6147,7 +6869,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: image_height
      * </p>
      */
-    public int getImageHeight () {
+    public int getImageHeight() {
 
         if ( this.constructed == false && this.hasImageHeight == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.imageHeight" );
@@ -6232,7 +6954,7 @@ public abstract class BaseContentMetadata
      * Schema type: boolean , name: shared
      * </p>
      */
-    public boolean getShared () {
+    public boolean getShared() {
 
         if ( this.constructed == false && this.hasShared == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.shared" );
@@ -6317,7 +7039,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: shared_profile_link
      * </p>
      */
-    public String getSharedProfileLink () {
+    public String getSharedProfileLink() {
 
         if ( this.constructed == false && this.hasSharedProfileLink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.sharedProfileLink" );
@@ -6325,6 +7047,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.sharedProfileLink;
+    }
+
+    /**
+     * <p>
+     * The link to the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_profile_link
+     * </p>
+     */
+    public Optional<String> getSharedProfileLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedProfileLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedProfileLink );
+
     }
 
     /**
@@ -6402,7 +7143,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: shared_profile_title
      * </p>
      */
-    public String getSharedProfileTitle () {
+    public String getSharedProfileTitle() {
 
         if ( this.constructed == false && this.hasSharedProfileTitle == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.sharedProfileTitle" );
@@ -6410,6 +7151,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.sharedProfileTitle;
+    }
+
+    /**
+     * <p>
+     * The title of the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_profile_title
+     * </p>
+     */
+    public Optional<String> getSharedProfileTitleAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedProfileTitle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedProfileTitle );
+
     }
 
     /**
@@ -6487,7 +7247,7 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: card
      * </p>
      */
-    public Card getCard () {
+    public Card getCard() {
 
         if ( this.constructed == false && this.hasCard == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.card" );
@@ -6572,7 +7332,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: video_player
      * </p>
      */
-    public String getVideoPlayer () {
+    public String getVideoPlayer() {
 
         if ( this.constructed == false && this.hasVideoPlayer == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.videoPlayer" );
@@ -6580,6 +7340,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.videoPlayer;
+    }
+
+    /**
+     * <p>
+     * The URL to an iframe which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video_player
+     * </p>
+     */
+    public Optional<String> getVideoPlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideoPlayer == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.videoPlayer );
+
     }
 
     /**
@@ -6657,7 +7436,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: video_player_width
      * </p>
      */
-    public int getVideoPlayerWidth () {
+    public int getVideoPlayerWidth() {
 
         if ( this.constructed == false && this.hasVideoPlayerWidth == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.videoPlayerWidth" );
@@ -6742,7 +7521,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: video_player_height
      * </p>
      */
-    public int getVideoPlayerHeight () {
+    public int getVideoPlayerHeight() {
 
         if ( this.constructed == false && this.hasVideoPlayerHeight == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.videoPlayerHeight" );
@@ -6827,7 +7606,7 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: type
      * </p>
      */
-    public Type getType () {
+    public Type getType() {
 
         if ( this.constructed == false && this.hasType == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.type" );
@@ -6912,7 +7691,7 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: sentiment
      * </p>
      */
-    public Sentiment getSentiment () {
+    public Sentiment getSentiment() {
 
         if ( this.constructed == false && this.hasSentiment == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.sentiment" );
@@ -6997,7 +7776,7 @@ public abstract class BaseContentMetadata
      * Schema type: ascii , name: lang
      * </p>
      */
-    public String getLang () {
+    public String getLang() {
 
         if ( this.constructed == false && this.hasLang == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.lang" );
@@ -7005,6 +7784,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.lang;
+    }
+
+    /**
+     * <p>
+     * ISO language code for this source.  All our language codes are ISO 639 two letter lang codes. We use the special lang code of U when we are unable to determine the language from the underlying text - usually because we don't have enough data.
+     * </p>
+     *
+     * <p>
+     * Schema type: ascii , name: lang
+     * </p>
+     */
+    public Optional<String> getLangAsOptional() {
+
+        if ( this.constructed == false && this.hasLang == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.lang );
+
     }
 
     /**
@@ -7082,7 +7880,7 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;ascii,double&gt; , name: categories
      * </p>
      */
-    public Map<String,Double> getCategories () {
+    public Map<String,Double> getCategories() {
 
         if ( this.constructed == false && this.hasCategories == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.categories" );
@@ -7167,7 +7965,7 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;bigint,double&gt; , name: duplicates
      * </p>
      */
-    public Map<Long,Double> getDuplicates () {
+    public Map<Long,Double> getDuplicates() {
 
         if ( this.constructed == false && this.hasDuplicates == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.duplicates" );
@@ -7252,7 +8050,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: duplicates_count
      * </p>
      */
-    public int getDuplicatesCount () {
+    public int getDuplicatesCount() {
 
         if ( this.constructed == false && this.hasDuplicatesCount == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.duplicatesCount" );
@@ -7337,7 +8135,7 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;ascii,double&gt; , name: classifications
      * </p>
      */
-    public Map<String,Double> getClassifications () {
+    public Map<String,Double> getClassifications() {
 
         if ( this.constructed == false && this.hasClassifications == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.classifications" );
@@ -7422,7 +8220,7 @@ public abstract class BaseContentMetadata
      * Schema type: ascii , name: parent_hashcode
      * </p>
      */
-    public String getParentHashcode () {
+    public String getParentHashcode() {
 
         if ( this.constructed == false && this.hasParentHashcode == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.parentHashcode" );
@@ -7430,6 +8228,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.parentHashcode;
+    }
+
+    /**
+     * <p>
+     * See content.hashcode
+     * </p>
+     *
+     * <p>
+     * Schema type: ascii , name: parent_hashcode
+     * </p>
+     */
+    public Optional<String> getParentHashcodeAsOptional() {
+
+        if ( this.constructed == false && this.hasParentHashcode == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.parentHashcode );
+
     }
 
     /**
@@ -7507,7 +8324,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: parent_permalink
      * </p>
      */
-    public String getParentPermalink () {
+    public String getParentPermalink() {
 
         if ( this.constructed == false && this.hasParentPermalink == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.parentPermalink" );
@@ -7515,6 +8332,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.parentPermalink;
+    }
+
+    /**
+     * <p>
+     * See content.permalink
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: parent_permalink
+     * </p>
+     */
+    public Optional<String> getParentPermalinkAsOptional() {
+
+        if ( this.constructed == false && this.hasParentPermalink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.parentPermalink );
+
     }
 
     /**
@@ -7592,7 +8428,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: parent_title
      * </p>
      */
-    public String getParentTitle () {
+    public String getParentTitle() {
 
         if ( this.constructed == false && this.hasParentTitle == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.parentTitle" );
@@ -7600,6 +8436,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.parentTitle;
+    }
+
+    /**
+     * <p>
+     * See content.title
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: parent_title
+     * </p>
+     */
+    public Optional<String> getParentTitleAsOptional() {
+
+        if ( this.constructed == false && this.hasParentTitle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.parentTitle );
+
     }
 
     /**
@@ -7677,7 +8532,7 @@ public abstract class BaseContentMetadata
      * Schema type: ascii , name: parent_lang
      * </p>
      */
-    public String getParentLang () {
+    public String getParentLang() {
 
         if ( this.constructed == false && this.hasParentLang == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.parentLang" );
@@ -7685,6 +8540,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.parentLang;
+    }
+
+    /**
+     * <p>
+     * See content.lang
+     * </p>
+     *
+     * <p>
+     * Schema type: ascii , name: parent_lang
+     * </p>
+     */
+    public Optional<String> getParentLangAsOptional() {
+
+        if ( this.constructed == false && this.hasParentLang == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.parentLang );
+
     }
 
     /**
@@ -7762,7 +8636,7 @@ public abstract class BaseContentMetadata
      * Schema type: text , name: parent_resource
      * </p>
      */
-    public String getParentResource () {
+    public String getParentResource() {
 
         if ( this.constructed == false && this.hasParentResource == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.parentResource" );
@@ -7770,6 +8644,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.parentResource;
+    }
+
+    /**
+     * <p>
+     * See content.resource
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: parent_resource
+     * </p>
+     */
+    public Optional<String> getParentResourceAsOptional() {
+
+        if ( this.constructed == false && this.hasParentResource == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.parentResource );
+
     }
 
     /**
@@ -7847,7 +8740,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: likes
      * </p>
      */
-    public int getLikes () {
+    public int getLikes() {
 
         if ( this.constructed == false && this.hasLikes == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.likes" );
@@ -7932,7 +8825,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: dislikes
      * </p>
      */
-    public int getDislikes () {
+    public int getDislikes() {
 
         if ( this.constructed == false && this.hasDislikes == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.dislikes" );
@@ -8017,7 +8910,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: comments
      * </p>
      */
-    public int getComments () {
+    public int getComments() {
 
         if ( this.constructed == false && this.hasComments == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.comments" );
@@ -8102,7 +8995,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: views
      * </p>
      */
-    public int getViews () {
+    public int getViews() {
 
         if ( this.constructed == false && this.hasViews == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.views" );
@@ -8187,7 +9080,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: metadata_score
      * </p>
      */
-    public int getMetadataScore () {
+    public int getMetadataScore() {
 
         if ( this.constructed == false && this.hasMetadataScore == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.metadataScore" );
@@ -8272,7 +9165,7 @@ public abstract class BaseContentMetadata
      * Schema type: int , name: shares
      * </p>
      */
-    public int getShares () {
+    public int getShares() {
 
         if ( this.constructed == false && this.hasShares == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.shares" );
