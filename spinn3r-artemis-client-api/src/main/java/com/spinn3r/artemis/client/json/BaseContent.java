@@ -1403,6 +1403,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSourcePublisherSubtype = 0;
+
+    public int hasModifiedSourcePublisherSubtype = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourcePublisherSubtype = false;
+
+    protected String sourcePublisherSubtype;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSourceDateFound = 0;
 
     public int hasModifiedSourceDateFound = 0;
@@ -5246,6 +5262,110 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourcePublisherType () {
         return this.hasDefinedSourcePublisherType;
+    }
+
+    public BaseContent setSourcePublisherSubtype ( String sourcePublisherSubtype ) {
+
+        ++this.hasSourcePublisherSubtype;
+        ++this.hasModifiedSourcePublisherSubtype;
+
+        this.sourcePublisherSubtype = sourcePublisherSubtype;
+
+        hasDefinedSourcePublisherSubtype = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * A string representing the publisher sub type which is more specific than the publisher type.  The publisher subtype is usually the name of the social network hosting the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: source_publisher_subtype
+     * </p>
+     */
+    public String getSourcePublisherSubtype() {
+
+        if ( this.constructed == false && this.hasSourcePublisherSubtype == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourcePublisherSubtype" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourcePublisherSubtype;
+    }
+
+    /**
+     * <p>
+     * A string representing the publisher sub type which is more specific than the publisher type.  The publisher subtype is usually the name of the social network hosting the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: source_publisher_subtype
+     * </p>
+     */
+    public Optional<String> getSourcePublisherSubtypeAsOptional() {
+
+        if ( this.constructed == false && this.hasSourcePublisherSubtype == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourcePublisherSubtype );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * A string representing the publisher sub type which is more specific than the publisher type.  The publisher subtype is usually the name of the social network hosting the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: source_publisher_subtype
+     * </p>
+     */
+    public String getSourcePublisherSubtype ( String _default ) {
+
+        if ( ! hasSourcePublisherSubtype() ) {
+            return _default;
+        }
+
+        return getSourcePublisherSubtype();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourcePublisherSubtype () {
+        return this.hasSourcePublisherSubtype > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourcePublisherSubtype () {
+        this.hasSourcePublisherSubtype = 0;
+        this.hasModifiedSourcePublisherSubtype = 0;
+        this.hasDefinedSourcePublisherSubtype = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourcePublisherSubtype () {
+        return this.hasModifiedSourcePublisherSubtype > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourcePublisherSubtype () {
+        return this.hasDefinedSourcePublisherSubtype;
     }
 
     public BaseContent setSourceDateFound ( Date sourceDateFound ) {
@@ -16886,6 +17006,10 @@ public abstract class BaseContent
             setSourcePublisherType( obj.getSourcePublisherType() );
         }
 
+        if ( obj.hasSourcePublisherSubtype() ) {
+            setSourcePublisherSubtype( obj.getSourcePublisherSubtype() );
+        }
+
         if ( obj.hasSourceDateFound() ) {
             setSourceDateFound( obj.getSourceDateFound() );
         }
@@ -17501,6 +17625,15 @@ public abstract class BaseContent
 
         if ( sourcePublisherType == null && obj.hasSourcePublisherType() && obj.getSourcePublisherType() != null ) {
             setSourcePublisherType( obj.getSourcePublisherType() );
+        }
+
+        if ( ! hasSourcePublisherSubtype() && obj.hasSourcePublisherSubtype() ) {
+            setSourcePublisherSubtype( obj.getSourcePublisherSubtype() );
+        }
+
+        if ( hasSourcePublisherSubtype() && getSourcePublisherSubtype() == null &&
+            obj.hasSourcePublisherSubtype() && obj.getSourcePublisherSubtype() != null ) {
+            setSourcePublisherSubtype( obj.getSourcePublisherSubtype() );
         }
 
         if ( ! hasSourceDateFound() && obj.hasSourceDateFound() ) {
@@ -18312,6 +18445,8 @@ public abstract class BaseContent
 
         this.hasModifiedSourcePublisherType = 0;
 
+        this.hasModifiedSourcePublisherSubtype = 0;
+
         this.hasModifiedSourceDateFound = 0;
 
         this.hasModifiedSourceLastUpdated = 0;
@@ -18638,6 +18773,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourcePublisherType() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSourcePublisherSubtype() ) {
             return true;
         }
 
@@ -19299,6 +19438,14 @@ public abstract class BaseContent
 
             buff.append( "sourcePublisherType=" );
             buff.append( sourcePublisherType );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourcePublisherSubtype > 0 ) {
+
+            buff.append( "sourcePublisherSubtype=" );
+            buff.append( sourcePublisherSubtype );
             buff.append( " " );
 
         }
@@ -20461,6 +20608,15 @@ public abstract class BaseContent
         }
 
         if ( sourcePublisherType != cmp.sourcePublisherType ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSourcePublisherSubtype() != cmp.hasSourcePublisherSubtype() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sourcePublisherSubtype, cmp.sourcePublisherSubtype ) ) {
             return false;
         }
 
@@ -22043,6 +22199,22 @@ public abstract class BaseContent
 
                 if ( sourcePublisherType != null )
                     generator.writeStringField( __name, sourcePublisherType.toString() );
+
+            }
+
+            // ***** json encode member source_publisher_subtype from String
+
+            __name = "sourcePublisherSubtype";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_publisher_subtype";
+            }
+
+            if ( this.hasSourcePublisherSubtype > 0 ) {
+
+                if ( sourcePublisherSubtype != null ) {
+                    generator.writeStringField( __name, sourcePublisherSubtype );
+                }
 
             }
 
@@ -24184,6 +24356,16 @@ public abstract class BaseContent
                 case "source_publisher_type":
 
                     // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member source_publisher_subtype from String
+
+                case "source_publisher_subtype":
+
+                    jParser.nextToken();
+                    setSourcePublisherSubtype( jParser.getValueAsString() );
 
                     break;
 
