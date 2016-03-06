@@ -64,6 +64,8 @@
         <module>artemis-zookeeper-embedded</module>
         <module>artemis-build-canary</module>
         <module>artemis-init-integration-test1</module>
+        <module>artemis-datetime</module>
+        <module>artemis-streams</module>
     </modules>
 
     <description>
