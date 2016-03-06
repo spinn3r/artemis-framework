@@ -17,7 +17,8 @@ import java.util.stream.Collectors;
  */
 public class ZHDateTimeParser {
 
-    private static final Pattern PATTERN = Pattern.compile( "([0-9]{4})年([0-9]{2})月([0-9]{2})日 ?([0-9]{2}):([0-9]{2})" );
+    // one of the entries here is an NBSP which is rather confusing.
+    private static final Pattern PATTERN = Pattern.compile( "([0-9]{4})年([0-9]{2})月([0-9]{2})日[ \\s]*([0-9]{2}):([0-9]{2})" );
 
     public Optional<LocalDateTime> parse(String text ) {
 
