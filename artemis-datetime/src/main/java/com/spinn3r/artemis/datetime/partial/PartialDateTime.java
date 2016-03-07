@@ -21,4 +21,8 @@ public interface PartialDateTime {
         return Times.toTime(toDate());
     }
 
+    default String toISO8601() {
+        return toTime().toISO8601();
+    }
+
 }

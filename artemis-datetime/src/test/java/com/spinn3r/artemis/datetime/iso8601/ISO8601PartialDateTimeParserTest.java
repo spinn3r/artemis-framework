@@ -17,6 +17,12 @@ public class ISO8601PartialDateTimeParserTest {
     // we should test the cartesian product / powerset of these
 
     @Test
+    public void testWithYearMonthDay() throws Exception {
+        assertEquals( "Optional[2011-12-03T10:15:30Z]", ISO8601PartialDateTimeParser.parse( "2011-12-03T10:15:30Z" ).toString() );
+    }
+
+
+    @Test
     public void testParseStandardWithZone() throws Exception {
         assertEquals( "Optional[2011-12-03T10:15:30Z]", ISO8601PartialDateTimeParser.parse( "2011-12-03T10:15:30Z" ).toString() );
     }
@@ -32,7 +38,7 @@ public class ISO8601PartialDateTimeParserTest {
     }
 
     @Test
-    public void testParseStandardWithoutTime() throws Exception {
+    public void testYearMonthDay() throws Exception {
         assertEquals( "Optional[2011-12-03]", ISO8601PartialDateTimeParser.parse( "2011-12-03" ).toString() );
     }
 
