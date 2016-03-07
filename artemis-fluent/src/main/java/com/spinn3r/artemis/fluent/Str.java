@@ -8,6 +8,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.joda.time.DateTime;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -209,6 +210,10 @@ public class Str {
             return value;
         }
 
+    }
+
+    public Optional<String> toOptional() {
+        return Optional.ofNullable( this.value );
     }
 
     @Override
