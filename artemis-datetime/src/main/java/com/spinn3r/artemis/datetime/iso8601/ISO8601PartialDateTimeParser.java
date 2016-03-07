@@ -1,22 +1,40 @@
 package com.spinn3r.artemis.datetime.iso8601;
 
-import com.spinn3r.artemis.datetime.LocalDateTimes;
 import com.spinn3r.artemis.datetime.partial.PartialDateTime;
-import com.spinn3r.artemis.datetime.partial.PartialLocalDateTime;
+import com.spinn3r.artemis.datetime.partial.PartialZonedDateTime;
+import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
-import java.time.format.DateTimeFormatter;
+import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
- * Parse ISO8601 timestamps which are partial and lack time or timezone.
+ * ISO8601 parser which tries all formats of ISO8601
  */
 public class ISO8601PartialDateTimeParser {
 
-    private Optional<PartialDateTime> parseWithOffset(String text) {
+    public static Optional<PartialDateTime> parse(Optional<String> text) {
+        // FIXME: remove
+        return null;
+    }
 
-        return LocalDateTimes.parseOptionally( text, DateTimeFormatter.ISO_LOCAL_DATE_TIME )
-                 .map( PartialLocalDateTime::new );
+    public static Optional<PartialDateTime> parse(String text) {
+
+        if ( text == null )
+            return Optional.empty();
+
+        LazyFunctionStream<String,Optional<PartialDateTime>> lazyFunctionStream = new LazyFunctionStream<>( text );
+
+        return lazyFunctionStream
+                 .of( ISO8601PartialLocalDateParser::parse,
+                      ISO8601PartialLocalDateTimeParser::parse,
+                      ISO8601PartialZonedDateTimeParser::parse )
+                 .map( Supplier::get )
+                 .filter( Optional::isPresent )
+                 .map( Optional::get )
+                 .findFirst();
 
     }
+
 
 }

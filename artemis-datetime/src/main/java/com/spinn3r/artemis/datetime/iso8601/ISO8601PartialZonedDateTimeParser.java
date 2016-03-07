@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.datetime.iso8601;
 
 import com.spinn3r.artemis.datetime.ZonedDateTimes;
+import com.spinn3r.artemis.datetime.partial.PartialDateTime;
+import com.spinn3r.artemis.datetime.partial.PartialZonedDateTime;
 import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
 import java.time.ZonedDateTime;
@@ -11,9 +13,14 @@ import java.util.function.Supplier;
 /**
  * Date time parser to parse ISO8601 in multiple formats.
  */
-public class ISO8601DateTimeParser {
+public class ISO8601PartialZonedDateTimeParser {
 
-    public Optional<ZonedDateTime> parse(String text) {
+    // TODO: there are other ISO time formats here including:
+    //
+    // with and without seconds
+    // with and without milliseconds
+
+    public static Optional<PartialDateTime> parse(String text) {
 
         if ( text == null )
             return Optional.empty();
@@ -21,19 +28,20 @@ public class ISO8601DateTimeParser {
         LazyFunctionStream<String,Optional<ZonedDateTime>> lazyFunctionStream = new LazyFunctionStream<>( text );
 
         return lazyFunctionStream
-          .of( this::parseInstant, this::parseWithOffset )
+          .of( ISO8601PartialZonedDateTimeParser::parseInstant, ISO8601PartialZonedDateTimeParser::parseWithOffset )
           .map( Supplier::get )
           .filter( Optional::isPresent )
           .map( Optional::get )
-          .findFirst();
+          .findFirst()
+          .map( PartialZonedDateTime::new );
 
     }
 
-    private Optional<ZonedDateTime> parseWithOffset(String text) {
+    private static Optional<ZonedDateTime> parseWithOffset(String text) {
         return ZonedDateTimes.parseOptionally(text, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
-    private Optional<ZonedDateTime> parseInstant(String text) {
+    private static Optional<ZonedDateTime> parseInstant(String text) {
         return ZonedDateTimes.parseOptionally(text, DateTimeFormatter.ISO_INSTANT);
     }
 
