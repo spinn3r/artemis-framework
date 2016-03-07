@@ -2,7 +2,8 @@ package com.spinn3r.artemis.datetime.iso8601;
 
 import com.spinn3r.artemis.datetime.LocalDateTimes;
 import com.spinn3r.artemis.datetime.partial.PartialDateTime;
-import com.spinn3r.artemis.datetime.partial.PartialLocalDateTime;
+import com.spinn3r.artemis.datetime.partial.PartialDateTimes;
+import com.spinn3r.artemis.datetime.partial.decorators.LocalDateTimePartialDateTimeDecorator;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -19,7 +20,7 @@ public class ISO8601PartialLocalDateTimeParser {
     public static Optional<PartialDateTime> parse(String text) {
 
         return LocalDateTimes.parseOptionally( text, DateTimeFormatter.ISO_LOCAL_DATE_TIME )
-                 .map( PartialLocalDateTime::new );
+                 .map( PartialDateTimes::forLocalDateTime );
 
     }
 

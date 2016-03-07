@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.datetime.zh_datetime;
 
 
+import com.spinn3r.artemis.datetime.partial.PartialDateTime;
+import com.spinn3r.artemis.datetime.partial.decorators.LocalDateTimePartialDateTimeDecorator;
 import com.spinn3r.artemis.streams.optionals.OptionalInts;
 import com.spinn3r.artemis.streams.regex.Matchers;
 
@@ -20,7 +22,7 @@ public class ZHDateTimeParser {
     // one of the entries here is an NBSP which is rather confusing.
     private static final Pattern PATTERN = Pattern.compile( "([0-9]{4})年([0-9]{2})月([0-9]{2})日[ \\s]*([0-9]{2}):([0-9]{2})" );
 
-    public Optional<LocalDateTime> parse(String text ) {
+    public static Optional<PartialDateTime> parse(String text ) {
 
         Matcher matcher = PATTERN.matcher( text );
 
@@ -41,7 +43,8 @@ public class ZHDateTimeParser {
                                                             values.get( 2 ),
                                                             values.get( 3 ),
                                                             values.get( 4 ) );
-            return Optional.of( localDateTime );
+            return Optional.of( localDateTime )
+                     .map( LocalDateTimePartialDateTimeDecorator::new );
 
         }
 

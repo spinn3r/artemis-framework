@@ -1,10 +1,8 @@
 package com.spinn3r.artemis.datetime.iso8601;
 
 import com.spinn3r.artemis.datetime.partial.PartialDateTime;
-import com.spinn3r.artemis.datetime.partial.PartialZonedDateTime;
 import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
-import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -12,11 +10,6 @@ import java.util.function.Supplier;
  * ISO8601 parser which tries all formats of ISO8601
  */
 public class ISO8601PartialDateTimeParser {
-
-    public static Optional<PartialDateTime> parse(Optional<String> text) {
-        // FIXME: remove
-        return null;
-    }
 
     public static Optional<PartialDateTime> parse(String text) {
 
@@ -28,7 +21,8 @@ public class ISO8601PartialDateTimeParser {
         return lazyFunctionStream
                  .of( ISO8601PartialLocalDateParser::parse,
                       ISO8601PartialLocalDateTimeParser::parse,
-                      ISO8601PartialZonedDateTimeParser::parse )
+                      ISO8601PartialZonedDateTimeParser::parse,
+                      ISO8601PartialLegacyDateTimeParser::parse)
                  .map( Supplier::get )
                  .filter( Optional::isPresent )
                  .map( Optional::get )

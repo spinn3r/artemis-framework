@@ -2,7 +2,8 @@ package com.spinn3r.artemis.datetime.iso8601;
 
 import com.spinn3r.artemis.datetime.ZonedDateTimes;
 import com.spinn3r.artemis.datetime.partial.PartialDateTime;
-import com.spinn3r.artemis.datetime.partial.PartialZonedDateTime;
+import com.spinn3r.artemis.datetime.partial.PartialDateTimes;
+import com.spinn3r.artemis.datetime.partial.decorators.ZonedDateTimePartialDateTimeDecorator;
 import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
 import java.time.ZonedDateTime;
@@ -33,7 +34,7 @@ public class ISO8601PartialZonedDateTimeParser {
           .filter( Optional::isPresent )
           .map( Optional::get )
           .findFirst()
-          .map( PartialZonedDateTime::new );
+          .map( PartialDateTimes::forZonedDateTime );
 
     }
 

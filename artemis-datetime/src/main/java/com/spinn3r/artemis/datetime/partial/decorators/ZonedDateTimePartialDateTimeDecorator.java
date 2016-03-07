@@ -1,6 +1,7 @@
-package com.spinn3r.artemis.datetime.partial;
+package com.spinn3r.artemis.datetime.partial.decorators;
 
 import com.spinn3r.artemis.datetime.ZonedDateTimes;
+import com.spinn3r.artemis.datetime.partial.PartialDateTime;
 import com.spinn3r.artemis.time.Time;
 import com.spinn3r.artemis.time.Times;
 
@@ -10,11 +11,11 @@ import java.util.Date;
 /**
  *
  */
-public class PartialZonedDateTime implements PartialDateTime {
+public class ZonedDateTimePartialDateTimeDecorator implements PartialDateTime {
 
     private final ZonedDateTime zonedDateTime;
 
-    public PartialZonedDateTime(ZonedDateTime zonedDateTime) {
+    public ZonedDateTimePartialDateTimeDecorator(ZonedDateTime zonedDateTime) {
         this.zonedDateTime = zonedDateTime;
     }
 
@@ -34,9 +35,7 @@ public class PartialZonedDateTime implements PartialDateTime {
 
     @Override
     public String toString() {
-        return "PartialZonedDateTime{" +
-                 "zonedDateTime=" + zonedDateTime +
-                 '}';
+        return zonedDateTime.toString();
     }
 
 }

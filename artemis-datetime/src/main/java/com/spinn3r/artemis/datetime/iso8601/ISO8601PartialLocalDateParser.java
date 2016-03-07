@@ -2,7 +2,8 @@ package com.spinn3r.artemis.datetime.iso8601;
 
 import com.spinn3r.artemis.datetime.LocalDates;
 import com.spinn3r.artemis.datetime.partial.PartialDateTime;
-import com.spinn3r.artemis.datetime.partial.PartialLocalDate;
+import com.spinn3r.artemis.datetime.partial.PartialDateTimes;
+import com.spinn3r.artemis.datetime.partial.decorators.LocalDatePartialDateTimeDecorator;
 import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
 import java.time.LocalDate;
@@ -28,7 +29,7 @@ public class ISO8601PartialLocalDateParser {
                  .filter( Optional::isPresent )
                  .map( Optional::get )
                  .findFirst()
-                 .map( PartialLocalDate::new );
+                 .map( PartialDateTimes::forLocalDate );
 
     }
 

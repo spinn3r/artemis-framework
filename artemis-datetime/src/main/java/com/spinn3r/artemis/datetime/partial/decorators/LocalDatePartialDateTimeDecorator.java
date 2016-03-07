@@ -1,6 +1,7 @@
-package com.spinn3r.artemis.datetime.partial;
+package com.spinn3r.artemis.datetime.partial.decorators;
 
 import com.spinn3r.artemis.datetime.LocalDates;
+import com.spinn3r.artemis.datetime.partial.PartialDateTime;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -8,11 +9,11 @@ import java.util.Date;
 /**
  *
  */
-public class PartialLocalDate implements PartialDateTime {
+public class LocalDatePartialDateTimeDecorator implements PartialDateTime {
 
     private final LocalDate localDate;
 
-    public PartialLocalDate(LocalDate localDate) {
+    public LocalDatePartialDateTimeDecorator(LocalDate localDate) {
         this.localDate = localDate;
     }
 
@@ -24,6 +25,11 @@ public class PartialLocalDate implements PartialDateTime {
     @Override
     public Date toDate() {
         return LocalDates.toDate(localDate);
+    }
+
+    @Override
+    public String toString() {
+        return localDate.toString();
     }
 
 }
