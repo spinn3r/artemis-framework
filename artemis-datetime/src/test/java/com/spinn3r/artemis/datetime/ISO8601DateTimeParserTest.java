@@ -1,9 +1,9 @@
 package com.spinn3r.artemis.datetime;
 
+import com.spinn3r.artemis.datetime.iso8601.ISO8601DateTimeParser;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class ISO8601DateTimeParserTest {
 

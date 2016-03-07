@@ -1,11 +1,10 @@
-package com.spinn3r.artemis.datetime;
+package com.spinn3r.artemis.datetime.iso8601;
 
+import com.spinn3r.artemis.datetime.ZonedDateTimes;
 import com.spinn3r.artemis.streams.lazy.LazyFunctionStream;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -31,27 +30,11 @@ public class ISO8601DateTimeParser {
     }
 
     private Optional<ZonedDateTime> parseWithOffset(String text) {
-
-        try {
-            return Optional.ofNullable( ZonedDateTime.parse( text, DateTimeFormatter.ISO_OFFSET_DATE_TIME ) );
-        } catch ( DateTimeParseException e ) {
-            // not good to just swallow exceptions this would happen so often
-            // an empty value is a better solution.
-            return Optional.empty();
-        }
-
+        return ZonedDateTimes.parseOptionally(text, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
     }
 
     private Optional<ZonedDateTime> parseInstant(String text) {
-
-        try {
-            return Optional.ofNullable( ZonedDateTime.parse(text, DateTimeFormatter.ISO_INSTANT) );
-        } catch ( DateTimeParseException e ) {
-            // not good to just swallow exceptions this would happen so often
-            // an empty value is a better solution.
-            return Optional.empty();
-        }
-
+        return ZonedDateTimes.parseOptionally(text, DateTimeFormatter.ISO_INSTANT);
     }
 
 }
