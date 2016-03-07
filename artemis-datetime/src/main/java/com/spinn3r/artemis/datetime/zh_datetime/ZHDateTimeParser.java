@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * Date and time parser for
+ * Date and time parser for chinese content.  I'm not yet sure if this will
+ * work on all news sites in china though.
  */
 public class ZHDateTimeParser {
 
