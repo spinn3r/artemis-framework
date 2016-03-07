@@ -14,6 +14,9 @@ public class ISO8601PartialDateTimeParserTest {
     // seconds
     // milliseconds.
 
+
+    // FIXME: test continental US time zone abbreviations.
+
     // we should test the cartesian product / powerset of these
 
     @Test
