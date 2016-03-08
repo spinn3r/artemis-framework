@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.datetime.misc;
+package com.spinn3r.artemis.datetime.padded;
 
 import static org.junit.Assert.assertEquals;
 
