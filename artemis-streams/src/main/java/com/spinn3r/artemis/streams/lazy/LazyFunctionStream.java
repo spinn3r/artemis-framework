@@ -49,7 +49,76 @@ public class LazyFunctionStream<T,R> {
         suppliers.add( convert( f3 ) );
         return suppliers.stream();
     }
-
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        return suppliers.stream();
+    }
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4, Function<T,R> f5) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        suppliers.add( convert( f5 ) );
+        return suppliers.stream();
+    }
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4, Function<T,R> f5, Function<T,R> f6) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        suppliers.add( convert( f5 ) );
+        suppliers.add( convert( f6 ) );
+        return suppliers.stream();
+    }
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4, Function<T,R> f5, Function<T,R> f6, Function<T,R> f7) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        suppliers.add( convert( f5 ) );
+        suppliers.add( convert( f6 ) );
+        suppliers.add( convert( f7 ) );
+        return suppliers.stream();
+    }
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4, Function<T,R> f5, Function<T,R> f6, Function<T,R> f7, Function<T,R> f8) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        suppliers.add( convert( f5 ) );
+        suppliers.add( convert( f6 ) );
+        suppliers.add( convert( f7 ) );
+        suppliers.add( convert( f8 ) );
+        return suppliers.stream();
+    }
+    
+    public Stream<Supplier<R>> of (Function<T,R> f0, Function<T,R> f1, Function<T,R> f2, Function<T,R> f3, Function<T,R> f4, Function<T,R> f5, Function<T,R> f6, Function<T,R> f7, Function<T,R> f8, Function<T,R> f9) {
+        suppliers.add( convert( f0 ) );
+        suppliers.add( convert( f1 ) );
+        suppliers.add( convert( f2 ) );
+        suppliers.add( convert( f3 ) );
+        suppliers.add( convert( f4 ) );
+        suppliers.add( convert( f5 ) );
+        suppliers.add( convert( f6 ) );
+        suppliers.add( convert( f7 ) );
+        suppliers.add( convert( f8 ) );
+        suppliers.add( convert( f9 ) );
+        return suppliers.stream();
+    }
+    
     private Supplier<R> convert( Function<T,R> f ) {
         return () -> f.apply( input );
     }
