@@ -1,13 +1,8 @@
 package com.spinn3r.artemis.fluent;
 
-import com.spinn3r.artemis.time.ISO8601DateParser;
-import com.spinn3r.artemis.time.ISO8601DateTimeParser;
-import com.spinn3r.artemis.time.TimeZones;
 import com.spinn3r.artemis.util.primitives.liberal.LiberalIntParser;
 import org.apache.commons.lang3.StringEscapeUtils;
-import org.joda.time.DateTime;
 
-import java.util.Date;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -132,56 +127,6 @@ public class Str {
         }
 
     }
-
-    public Date fromISO8601() {
-
-        if ( value == null )
-            return null;
-
-        try {
-
-            // TODO: what about partials here like 2015-03-31
-            return ISO8601DateParser.parse( value );
-
-        } catch ( Exception e ) {
-            return null;
-        }
-
-    }
-
-    /**
-     * Convert it from ISO8601 into a Date object.  Partials are acceptable.
-     */
-    public Date fromISO8601Partial() {
-
-        if ( value == null )
-            return null;
-
-        Date result = fromISO8601();
-
-        // this is kind of a hack because we only fall back to date from datetime.
-        // IDEALLY any part of the date could be optional.
-
-        if ( result == null ) {
-
-            try {
-
-                DateTime dateTime = ISO8601DateTimeParser.yearMonthDay( value );
-
-                if ( dateTime != null ) {
-                    result = dateTime.toLocalDateTime().toDate( TimeZones.UTC );
-                }
-
-            } catch (Exception e) {
-                // no op.. we will return anyway.
-            }
-
-        }
-
-        return result;
-
-    }
-
 
     @Override
     public boolean equals(Object o) {
