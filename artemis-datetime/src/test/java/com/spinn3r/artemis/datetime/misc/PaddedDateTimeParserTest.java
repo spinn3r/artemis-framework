@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.spinn3r.artemis.datetime.padded.PaddedDateTimeParser;
+
 public class PaddedDateTimeParserTest {
 
     @Test

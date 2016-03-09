@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.datetime.misc;
+package com.spinn3r.artemis.datetime.padded;
 
 import static java.time.temporal.ChronoField.DAY_OF_MONTH;
 import static java.time.temporal.ChronoField.HOUR_OF_DAY;
