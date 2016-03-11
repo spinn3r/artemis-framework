@@ -27,23 +27,7 @@ public class BaseTestWithCassandra extends StaticBaseTestWithCassandra3 {
 
     @Before
     public void setUp() throws Exception {
-
-        // try to load our schema...
-        createTable( "source" );
-
-        createTable( "content" );
-        createTable( "robot_link_filter" );
-        createTable( "robot_flat_link_filter" );
-
-        //createTable( "content_idx_resource" );
-        //createTable( "content_idx_source_hashcode" );
-        createTable( "user" );
-        createTable( "vendor" );
-        createTable( "discovery" );
-        createTable( "twitter_graph" );
-        createTable( "twitter_link" );
-        createTable( "twitter_link_meta" );
-
+        createTables();
     }
 
     @After
@@ -63,6 +47,31 @@ public class BaseTestWithCassandra extends StaticBaseTestWithCassandra3 {
             System.out.printf( "Dropping table: %s\n", table.getName() );
             dropTable( table.getName() );
         }
+
+    }
+
+    /**
+     * Create the default tables we need. If you don't need these overriding
+     * this method means your tests will be faster.
+     *
+     */
+    public void createTables() throws Exception {
+
+        // try to load our schema...
+        createTable( "source" );
+
+        createTable( "content" );
+        createTable( "robot_link_filter" );
+        createTable( "robot_flat_link_filter" );
+
+        //createTable( "content_idx_resource" );
+        //createTable( "content_idx_source_hashcode" );
+        createTable( "user" );
+        createTable( "vendor" );
+        createTable( "discovery" );
+        createTable( "twitter_graph" );
+        createTable( "twitter_link" );
+        createTable( "twitter_link_meta" );
 
     }
 
