@@ -19,6 +19,8 @@ public class TestIncludeService {
 
     static List<Class<? extends Service>> serviceInitOrder = Lists.newArrayList();
 
+    static boolean STOPPED = false;
+
     @Test
     public void testLauncherAddingService() throws Exception {
 
@@ -36,6 +38,10 @@ public class TestIncludeService {
 
         assertEquals( "[com.spinn3r.artemis.init.TestIncludeService$FirstService, com.spinn3r.artemis.init.TestIncludeService$FakeHostnameService, com.spinn3r.artemis.init.TestIncludeService$LastService]",
                       launcher.getServiceReferences().toString() );
+
+        launcher.stop();
+
+        assertTrue( STOPPED );
 
     }
 
@@ -64,6 +70,11 @@ public class TestIncludeService {
         public void init() {
             advertise( Hostname.class, new Hostname( "fake.example.com" ) );
             serviceInitOrder.add( this.getClass() );
+        }
+
+        @Override
+        public void stop() throws Exception {
+            STOPPED = true;
         }
 
     }
