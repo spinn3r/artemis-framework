@@ -1,9 +1,12 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
 import com.google.common.collect.Lists;
+import com.google.common.net.InetAddresses;
+import com.spinn3r.artemis.util.io.Sockets;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.Collections;
@@ -19,8 +22,6 @@ public class PortMutexes {
      *
      * @param startPort The starting port (inclusive)
      * @param endPort The ending port (inclusive)
-     *
-     * @return
      */
     public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
 
@@ -30,6 +31,8 @@ public class PortMutexes {
             requireDir( "/tmp/named-mutexes/ports" );
 
             File parent = new File( "/tmp/named-mutexes/ports" );
+
+            // create the list of ports that we can use.
 
             List<Integer> ports = Lists.newArrayList();
             for (int port = startPort; port <= endPort; port++) {
@@ -44,8 +47,12 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( ! portFile.exists() && portFile.createNewFile() ) {
+                if ( Sockets.isClosed( InetAddress.getLocalHost(), port  ) &&
+                     ! portFile.exists() &&
+                     portFile.createNewFile() ) {
+
                     return new PortMutex( portFile, port );
+
                 }
 
             }

@@ -53,6 +53,10 @@ public class Sockets {
 
     }
 
+    public static boolean isClosed( InetAddress inetAddress, int port ) {
+        return ! isOpen( inetAddress, port );
+    }
+
     public static void waitForOpenPort(String host, int port) {
 
         Throwable cause = null;
