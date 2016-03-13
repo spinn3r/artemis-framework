@@ -7,6 +7,7 @@ import com.spinn3r.artemis.util.io.Sockets;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.Collections;
@@ -17,13 +18,23 @@ import java.util.List;
  */
 public class PortMutexes {
 
+    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
+
+        try {
+            return acquire( InetAddress.getLocalHost(), startPort, endPort );
+        } catch (UnknownHostException e) {
+            throw new ResourceMutexException.FailureException( e );
+        }
+
+    }
+
     /**
      * Acquire a mutex for a port in the given range.
      *
      * @param startPort The starting port (inclusive)
      * @param endPort The ending port (inclusive)
      */
-    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
+    public PortMutex acquire( InetAddress inetAddress, int startPort, int endPort ) throws ResourceMutexException {
 
         try {
 
@@ -47,7 +58,7 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( Sockets.isClosed( InetAddress.getLocalHost(), port  ) &&
+                if ( Sockets.isClosed( inetAddress, port  ) &&
                      ! portFile.exists() &&
                      portFile.createNewFile() ) {
 
