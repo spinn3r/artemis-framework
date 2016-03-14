@@ -8,6 +8,7 @@ import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.containsString;
@@ -26,6 +27,7 @@ public class RequestSettingsTest extends BaseLauncherTest {
     public void setUp() throws Exception {
         super.setUp( DirectNetworkService.class ) ;
     }
+
     @Test
     public void testFetchingContentWithDefaultFollowContent() throws Exception {
 
@@ -45,6 +47,7 @@ public class RequestSettingsTest extends BaseLauncherTest {
     }
 
     @Test
+    @Ignore
     public void testFetchingContentWithoutFollowContent() throws Exception {
 
         String link = "http://vk.com/cliqque";
