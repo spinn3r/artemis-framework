@@ -1719,6 +1719,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSourceSettingMinimumContentMetadataScore = 0;
+
+    public int hasModifiedSourceSettingMinimumContentMetadataScore = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourceSettingMinimumContentMetadataScore = false;
+
+    protected int sourceSettingMinimumContentMetadataScore;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSourceTitle = 0;
 
     public int hasModifiedSourceTitle = 0;
@@ -7069,6 +7085,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceUserInteractions () {
         return this.hasDefinedSourceUserInteractions;
+    }
+
+    public BaseContent setSourceSettingMinimumContentMetadataScore ( int sourceSettingMinimumContentMetadataScore ) {
+
+        ++this.hasSourceSettingMinimumContentMetadataScore;
+        ++this.hasModifiedSourceSettingMinimumContentMetadataScore;
+
+        this.sourceSettingMinimumContentMetadataScore = sourceSettingMinimumContentMetadataScore;
+
+        hasDefinedSourceSettingMinimumContentMetadataScore = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The minimum metadata score before we can persist content
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_setting_minimum_content_metadata_score
+     * </p>
+     */
+    public int getSourceSettingMinimumContentMetadataScore() {
+
+        if ( this.constructed == false && this.hasSourceSettingMinimumContentMetadataScore == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourceSettingMinimumContentMetadataScore" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourceSettingMinimumContentMetadataScore;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The minimum metadata score before we can persist content
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_setting_minimum_content_metadata_score
+     * </p>
+     */
+    public int getSourceSettingMinimumContentMetadataScore ( int _default ) {
+
+        if ( ! hasSourceSettingMinimumContentMetadataScore() ) {
+            return _default;
+        }
+
+        return getSourceSettingMinimumContentMetadataScore();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourceSettingMinimumContentMetadataScore () {
+        return this.hasSourceSettingMinimumContentMetadataScore > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourceSettingMinimumContentMetadataScore () {
+        this.hasSourceSettingMinimumContentMetadataScore = 0;
+        this.hasModifiedSourceSettingMinimumContentMetadataScore = 0;
+        this.hasDefinedSourceSettingMinimumContentMetadataScore = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourceSettingMinimumContentMetadataScore () {
+        return this.hasModifiedSourceSettingMinimumContentMetadataScore > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourceSettingMinimumContentMetadataScore () {
+        return this.hasDefinedSourceSettingMinimumContentMetadataScore;
     }
 
     public BaseContent setSourceTitle ( String sourceTitle ) {
@@ -17082,6 +17183,10 @@ public abstract class BaseContent
             setSourceUserInteractions( obj.getSourceUserInteractions() );
         }
 
+        if ( obj.hasSourceSettingMinimumContentMetadataScore() ) {
+            setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
+        }
+
         if ( obj.hasSourceTitle() ) {
             setSourceTitle( obj.getSourceTitle() );
         }
@@ -17721,6 +17826,10 @@ public abstract class BaseContent
 
         if ( ! hasSourceUserInteractions() && obj.hasSourceUserInteractions() ) {
             setSourceUserInteractions( obj.getSourceUserInteractions() );
+        }
+
+        if ( ! hasSourceSettingMinimumContentMetadataScore() && obj.hasSourceSettingMinimumContentMetadataScore() ) {
+            setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
         }
 
         if ( ! hasSourceTitle() && obj.hasSourceTitle() ) {
@@ -18483,6 +18592,8 @@ public abstract class BaseContent
 
         this.hasModifiedSourceUserInteractions = 0;
 
+        this.hasModifiedSourceSettingMinimumContentMetadataScore = 0;
+
         this.hasModifiedSourceTitle = 0;
 
         this.hasModifiedSourceDescription = 0;
@@ -18849,6 +18960,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceUserInteractions() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSourceSettingMinimumContentMetadataScore() ) {
             return true;
         }
 
@@ -19590,6 +19705,14 @@ public abstract class BaseContent
 
             buff.append( "sourceUserInteractions=" );
             buff.append( sourceUserInteractions );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourceSettingMinimumContentMetadataScore > 0 ) {
+
+            buff.append( "sourceSettingMinimumContentMetadataScore=" );
+            buff.append( sourceSettingMinimumContentMetadataScore );
             buff.append( " " );
 
         }
@@ -20779,6 +20902,15 @@ public abstract class BaseContent
         }
 
         if ( sourceUserInteractions != cmp.sourceUserInteractions ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSourceSettingMinimumContentMetadataScore() != cmp.hasSourceSettingMinimumContentMetadataScore() ) {
+            return false;
+        }
+
+        if ( sourceSettingMinimumContentMetadataScore != cmp.sourceSettingMinimumContentMetadataScore ) {
             return false;
         }
 
@@ -22491,6 +22623,21 @@ public abstract class BaseContent
 
                 if ( hasDefinedSourceUserInteractions )
                     generator.writeNumberField( __name, sourceUserInteractions );
+
+            }
+
+            // ***** json encode member source_setting_minimum_content_metadata_score from int
+
+            __name = "sourceSettingMinimumContentMetadataScore";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_setting_minimum_content_metadata_score";
+            }
+
+            if ( this.hasSourceSettingMinimumContentMetadataScore > 0 ) {
+
+                if ( hasDefinedSourceSettingMinimumContentMetadataScore )
+                    generator.writeNumberField( __name, sourceSettingMinimumContentMetadataScore );
 
             }
 
@@ -24566,6 +24713,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSourceUserInteractions( jParser.getLongValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member source_setting_minimum_content_metadata_score from int
+
+                case "source_setting_minimum_content_metadata_score":
+
+                    jParser.nextToken();
+                    setSourceSettingMinimumContentMetadataScore( jParser.getIntValue() );
 
                     break;
 
