@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * A background service which holds a runnable and continues running it at a
  * fixed rate.  We handle all details like using a unique thread name, the
- * interval, etc.
+ * interval it should run, etc.
  */
 public abstract class BackgroundScheduledService extends BaseService {
 
