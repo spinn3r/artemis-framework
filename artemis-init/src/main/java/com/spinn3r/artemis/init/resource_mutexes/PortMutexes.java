@@ -58,7 +58,7 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( Sockets.isClosed( inetAddress, port  ) &&
+                if ( Sockets.isClosed( inetAddress, port ) &&
                      ! portFile.exists() &&
                      portFile.createNewFile() ) {
 
