@@ -1,10 +1,15 @@
 package com.spinn3r.artemis.util.misc;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.function.Predicate;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import org.hamcrest.Matcher;
-
-import java.util.*;
 
 /**
  *
@@ -40,7 +45,6 @@ public class CollectionUtils {
      * @param <V>
      * @return
      */
-    @Deprecated // use streams
     public static <V> void filter( Collection<V> input, Predicate<V> predicate ) {
 
         Iterator<V> iterator = input.iterator();
@@ -49,24 +53,7 @@ public class CollectionUtils {
 
             V value = iterator.next();
 
-            if ( ! predicate.evaluate( value ) ) {
-                iterator.remove();
-            }
-
-        }
-
-    }
-
-    @Deprecated // use streams
-    public static <V> void filter( Collection<V> input, Matcher<V> matcher ) {
-
-        Iterator<V> iterator = input.iterator();
-
-        while( iterator.hasNext() ) {
-
-            V value = iterator.next();
-
-            if ( ! matcher.matches( value ) ) {
+            if ( ! predicate.test( value ) ) {
                 iterator.remove();
             }
 
@@ -80,15 +67,9 @@ public class CollectionUtils {
      * @param prefix
      * @param <V>
      */
-    @Deprecated // use streams
     public static <V> void startsWith( Collection<V> input, final String prefix ) {
 
-        CollectionUtils.filter( input, new Predicate<V>() {
-            @Override
-            public boolean evaluate(V value) {
-                return value.toString().startsWith( prefix );
-            }
-        } );
+        filter( input, (v) -> v.toString().startsWith( prefix ));
 
     }
 
