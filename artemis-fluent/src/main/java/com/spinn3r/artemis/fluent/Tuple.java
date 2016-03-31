@@ -1,13 +1,12 @@
 package com.spinn3r.artemis.fluent;
 
-import com.google.common.collect.Lists;
-import com.spinn3r.artemis.util.misc.CollectionUtils;
-import org.hamcrest.Matcher;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import com.google.common.collect.Lists;
+import com.spinn3r.artemis.util.misc.CollectionUtils;
 
 /**
  * A tuple of elements which are all non-null.
@@ -43,22 +42,6 @@ public class Tuple<T> {
         if ( value == null )
             return;
         backing.add( value );
-    }
-
-    public Tuple<T> filter( Matcher<? super T> matcher ) {
-
-        List<T> tmp = Lists.newArrayList();
-
-        for (T current : backing) {
-
-            if ( matcher.matches( current ) ) {
-                tmp.add( current );
-            }
-
-        }
-
-        return new Tuple<>( tmp );
-
     }
 
     public Tuple<T> filter( Predicate<T> predicate ) {
