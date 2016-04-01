@@ -91,8 +91,9 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public void connect() throws NetworkException {
+    public HttpRequest connect() throws NetworkException {
         resourceRequest.connect();
+        return this;
     }
 
     @Override

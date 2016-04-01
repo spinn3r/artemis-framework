@@ -1,12 +1,10 @@
 package com.spinn3r.artemis.network.init;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +30,8 @@ public class NetworkConfig {
     private boolean requireProxy = false;
 
     private Map<String,RequestSettings> requests = new HashMap<>();
+
+    private ExecutorConfig executor = new ExecutorConfig();
 
     public String getUserAgent() {
         return userAgent;
@@ -95,6 +95,10 @@ public class NetworkConfig {
 
     public Map<String, RequestSettings> getRequests() {
         return requests;
+    }
+
+    public ExecutorConfig getExecutor() {
+        return executor;
     }
 
     @Override

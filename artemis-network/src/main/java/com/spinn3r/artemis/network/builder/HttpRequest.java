@@ -76,7 +76,7 @@ public interface HttpRequest {
      *
      * @throws NetworkException
      */
-    void connect() throws NetworkException;
+    HttpRequest connect() throws NetworkException;
 
     int getResponseCode();
 

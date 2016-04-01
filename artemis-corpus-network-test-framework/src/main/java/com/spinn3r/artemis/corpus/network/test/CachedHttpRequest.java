@@ -51,8 +51,8 @@ public class CachedHttpRequest implements HttpRequest {
     }
 
     @Override
-    public void connect() throws NetworkException {
-
+    public HttpRequest connect() throws NetworkException {
+        return this;
     }
 
     @Override
