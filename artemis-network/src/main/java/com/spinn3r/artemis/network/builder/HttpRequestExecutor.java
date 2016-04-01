@@ -1,14 +1,14 @@
 package com.spinn3r.artemis.network.builder;
 
-import com.google.common.base.Preconditions;
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import java.util.concurrent.TimeUnit;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 /**
  * Execute HTTP request but wrap them in retry logic.
@@ -60,13 +60,8 @@ public class HttpRequestExecutor {
 
                 cause = e;
 
-                if ( e.getResponseCode() >= 500 && e.getResponseCode() <= 599 ) {
-
-                    // TODO: what about connect or read timeouts or DNS lookup issues?
-                    // we might only want to retry 500s...
-
+                if ( isTransientHttpException( e ) ) {
                     log.info( "HTTP request failed (sleeping for %,d ms): %s", sleepIntervalMillis, e.getMessage() );
-
                 } else {
                     break;
                 }
@@ -76,6 +71,18 @@ public class HttpRequestExecutor {
         }
 
         throw cause;
+
+    }
+
+    private boolean isTransientHttpException(NetworkException e) {
+
+        if ( e.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT )
+            return true;
+
+        if ( e.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT )
+            return true;
+
+        return e.getResponseCode() >= 500 && e.getResponseCode() <= 599;
 
     }
 
