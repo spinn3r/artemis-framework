@@ -18,6 +18,7 @@ public class LinkBuilder {
 
     private String path;
 
+    // TODO: this should be a linked multimap...
     private Map<String,String> parameters = new LinkedHashMap<>();
 
     public LinkBuilder(URI uri) {
@@ -60,6 +61,11 @@ public class LinkBuilder {
 
     public LinkBuilder put( String key, long value ) {
         parameters.put( key, "" + value );
+        return this;
+    }
+
+    public LinkBuilder remove( String key ) {
+        parameters.remove( key );
         return this;
     }
 
