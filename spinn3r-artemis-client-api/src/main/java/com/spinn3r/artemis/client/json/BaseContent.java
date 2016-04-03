@@ -406,6 +406,11 @@ public abstract class BaseContent
         ADAPTIVE( 1 ) ,
 
         /**
+         * The source content is pushed to us directly via push (pshb)
+         */
+        PUSH( 2 ) ,
+
+        /**
          * The source is updated only from a search feed.  It's not updated directly but a parent source updates it.
          */
         SEARCH( 3 ) ,
@@ -457,6 +462,9 @@ public abstract class BaseContent
                 case 1:
                     return ADAPTIVE;
 
+                case 2:
+                    return PUSH;
+
                 case 3:
                     return SEARCH;
 
@@ -490,6 +498,9 @@ public abstract class BaseContent
 
                 case "ADAPTIVE":
                     return ADAPTIVE;
+
+                case "PUSH":
+                    return PUSH;
 
                 case "SEARCH":
                     return SEARCH;
