@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.metrics;
 
-import com.google.common.collect.Lists;
 import com.spinn3r.artemis.metrics.tags.TagMap;
 import com.spinn3r.artemis.metrics.tags.TagsProvider;
 import com.spinn3r.log5j.Logger;
