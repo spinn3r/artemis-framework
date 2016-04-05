@@ -1746,6 +1746,24 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSourceNextUpdate = 0;
+
+    public int hasModifiedSourceNextUpdate = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourceNextUpdate = false;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+
+    protected Date sourceNextUpdate;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSourceTitle = 0;
 
     public int hasModifiedSourceTitle = 0;
@@ -6357,7 +6375,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The update stratey for computing the update interval.
+     * The update strategy for computing the update interval.
      * </p>
      *
      * <p>
@@ -6379,7 +6397,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The update stratey for computing the update interval.
+     * The update strategy for computing the update interval.
      * </p>
      *
      * <p>
@@ -7181,6 +7199,110 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceSettingMinimumContentMetadataScore () {
         return this.hasDefinedSourceSettingMinimumContentMetadataScore;
+    }
+
+    public BaseContent setSourceNextUpdate ( Date sourceNextUpdate ) {
+
+        ++this.hasSourceNextUpdate;
+        ++this.hasModifiedSourceNextUpdate;
+
+        this.sourceNextUpdate = sourceNextUpdate;
+
+        hasDefinedSourceNextUpdate = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Date getSourceNextUpdate() {
+
+        if ( this.constructed == false && this.hasSourceNextUpdate == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourceNextUpdate" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourceNextUpdate;
+    }
+
+    /**
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Optional<Date> getSourceNextUpdateAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceNextUpdate == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceNextUpdate );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Date getSourceNextUpdate ( Date _default ) {
+
+        if ( ! hasSourceNextUpdate() ) {
+            return _default;
+        }
+
+        return getSourceNextUpdate();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourceNextUpdate () {
+        return this.hasSourceNextUpdate > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourceNextUpdate () {
+        this.hasSourceNextUpdate = 0;
+        this.hasModifiedSourceNextUpdate = 0;
+        this.hasDefinedSourceNextUpdate = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourceNextUpdate () {
+        return this.hasModifiedSourceNextUpdate > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourceNextUpdate () {
+        return this.hasDefinedSourceNextUpdate;
     }
 
     public BaseContent setSourceTitle ( String sourceTitle ) {
@@ -17198,6 +17320,10 @@ public abstract class BaseContent
             setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
         }
 
+        if ( obj.hasSourceNextUpdate() ) {
+            setSourceNextUpdate( obj.getSourceNextUpdate() );
+        }
+
         if ( obj.hasSourceTitle() ) {
             setSourceTitle( obj.getSourceTitle() );
         }
@@ -17841,6 +17967,10 @@ public abstract class BaseContent
 
         if ( ! hasSourceSettingMinimumContentMetadataScore() && obj.hasSourceSettingMinimumContentMetadataScore() ) {
             setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
+        }
+
+        if ( ! hasSourceNextUpdate() && obj.hasSourceNextUpdate() ) {
+            setSourceNextUpdate( obj.getSourceNextUpdate() );
         }
 
         if ( ! hasSourceTitle() && obj.hasSourceTitle() ) {
@@ -18605,6 +18735,8 @@ public abstract class BaseContent
 
         this.hasModifiedSourceSettingMinimumContentMetadataScore = 0;
 
+        this.hasModifiedSourceNextUpdate = 0;
+
         this.hasModifiedSourceTitle = 0;
 
         this.hasModifiedSourceDescription = 0;
@@ -18975,6 +19107,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceSettingMinimumContentMetadataScore() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSourceNextUpdate() ) {
             return true;
         }
 
@@ -19724,6 +19860,14 @@ public abstract class BaseContent
 
             buff.append( "sourceSettingMinimumContentMetadataScore=" );
             buff.append( sourceSettingMinimumContentMetadataScore );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourceNextUpdate > 0 ) {
+
+            buff.append( "sourceNextUpdate=" );
+            buff.append( toISO8601( sourceNextUpdate ) );
             buff.append( " " );
 
         }
@@ -20922,6 +21066,15 @@ public abstract class BaseContent
         }
 
         if ( sourceSettingMinimumContentMetadataScore != cmp.sourceSettingMinimumContentMetadataScore ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSourceNextUpdate() != cmp.hasSourceNextUpdate() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sourceNextUpdate, cmp.sourceNextUpdate ) ) {
             return false;
         }
 
@@ -22649,6 +22802,21 @@ public abstract class BaseContent
 
                 if ( hasDefinedSourceSettingMinimumContentMetadataScore )
                     generator.writeNumberField( __name, sourceSettingMinimumContentMetadataScore );
+
+            }
+
+            // ***** json encode member source_next_update from Date
+
+            __name = "sourceNextUpdate";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_next_update";
+            }
+
+            if ( this.hasSourceNextUpdate > 0 ) {
+
+                if ( sourceNextUpdate != null )
+                    generator.writeStringField( __name, toISO8601( sourceNextUpdate ) );
 
             }
 
@@ -24734,6 +24902,20 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSourceSettingMinimumContentMetadataScore( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member source_next_update from Date
+
+                case "source_next_update":
+
+                    try {
+                        jParser.nextToken();
+                        setSourceNextUpdate( ISO8601.parse( jParser.getValueAsString() ) );
+                    } catch( ParseException e ) {
+                        throw new JsonParseException( "Could not parse field: source_next_update", jParser.getCurrentLocation(), e );
+                    }
 
                     break;
 
