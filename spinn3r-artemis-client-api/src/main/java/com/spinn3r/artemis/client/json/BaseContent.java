@@ -114,6 +114,11 @@ public abstract class BaseContent
          */
         FEED_TASK( 5 ) ,
 
+        /**
+         * Content indexed by the twitter task.
+         */
+        TWITTER_TASK( 6 ) ,
+
         ;
 
         IndexMethod( int value ) {
@@ -145,6 +150,9 @@ public abstract class BaseContent
                 case 5:
                     return FEED_TASK;
 
+                case 6:
+                    return TWITTER_TASK;
+
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -169,6 +177,9 @@ public abstract class BaseContent
 
                 case "FEED_TASK":
                     return FEED_TASK;
+
+                case "TWITTER_TASK":
+                    return TWITTER_TASK;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
