@@ -19598,7 +19598,11 @@ public abstract class BaseContent
         if ( hasDateFound > 0 ) {
 
             buff.append( "dateFound=" );
-            buff.append( toISO8601( dateFound ) );
+            if ( dateFound != null ) {
+                buff.append( toISO8601( dateFound ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19726,7 +19730,11 @@ public abstract class BaseContent
         if ( hasSourceDateFound > 0 ) {
 
             buff.append( "sourceDateFound=" );
-            buff.append( toISO8601( sourceDateFound ) );
+            if ( sourceDateFound != null ) {
+                buff.append( toISO8601( sourceDateFound ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19734,7 +19742,11 @@ public abstract class BaseContent
         if ( hasSourceLastUpdated > 0 ) {
 
             buff.append( "sourceLastUpdated=" );
-            buff.append( toISO8601( sourceLastUpdated ) );
+            if ( sourceLastUpdated != null ) {
+                buff.append( toISO8601( sourceLastUpdated ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19742,7 +19754,11 @@ public abstract class BaseContent
         if ( hasSourceLastPublished > 0 ) {
 
             buff.append( "sourceLastPublished=" );
-            buff.append( toISO8601( sourceLastPublished ) );
+            if ( sourceLastPublished != null ) {
+                buff.append( toISO8601( sourceLastPublished ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19750,7 +19766,11 @@ public abstract class BaseContent
         if ( hasSourceLastPosted > 0 ) {
 
             buff.append( "sourceLastPosted=" );
-            buff.append( toISO8601( sourceLastPosted ) );
+            if ( sourceLastPosted != null ) {
+                buff.append( toISO8601( sourceLastPosted ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19846,7 +19866,11 @@ public abstract class BaseContent
         if ( hasSourcePshbLastPosted > 0 ) {
 
             buff.append( "sourcePshbLastPosted=" );
-            buff.append( toISO8601( sourcePshbLastPosted ) );
+            if ( sourcePshbLastPosted != null ) {
+                buff.append( toISO8601( sourcePshbLastPosted ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19854,7 +19878,11 @@ public abstract class BaseContent
         if ( hasSourcePshbLeaseExpires > 0 ) {
 
             buff.append( "sourcePshbLeaseExpires=" );
-            buff.append( toISO8601( sourcePshbLeaseExpires ) );
+            if ( sourcePshbLeaseExpires != null ) {
+                buff.append( toISO8601( sourcePshbLeaseExpires ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19878,7 +19906,11 @@ public abstract class BaseContent
         if ( hasSourceNextUpdate > 0 ) {
 
             buff.append( "sourceNextUpdate=" );
-            buff.append( toISO8601( sourceNextUpdate ) );
+            if ( sourceNextUpdate != null ) {
+                buff.append( toISO8601( sourceNextUpdate ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20302,7 +20334,11 @@ public abstract class BaseContent
         if ( hasPublished > 0 ) {
 
             buff.append( "published=" );
-            buff.append( toISO8601( published ) );
+            if ( published != null ) {
+                buff.append( toISO8601( published ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20310,7 +20346,11 @@ public abstract class BaseContent
         if ( hasModified > 0 ) {
 
             buff.append( "modified=" );
-            buff.append( toISO8601( modified ) );
+            if ( modified != null ) {
+                buff.append( toISO8601( modified ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20318,7 +20358,11 @@ public abstract class BaseContent
         if ( hasPublishedPartial > 0 ) {
 
             buff.append( "publishedPartial=" );
-            buff.append( toISO8601( publishedPartial ) );
+            if ( publishedPartial != null ) {
+                buff.append( toISO8601( publishedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20326,7 +20370,11 @@ public abstract class BaseContent
         if ( hasModifiedPartial > 0 ) {
 
             buff.append( "modifiedPartial=" );
-            buff.append( toISO8601( modifiedPartial ) );
+            if ( modifiedPartial != null ) {
+                buff.append( toISO8601( modifiedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }

@@ -10797,7 +10797,11 @@ public abstract class BaseContentMetadata
         if ( hasPublished > 0 ) {
 
             buff.append( "published=" );
-            buff.append( toISO8601( published ) );
+            if ( published != null ) {
+                buff.append( toISO8601( published ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -10805,7 +10809,11 @@ public abstract class BaseContentMetadata
         if ( hasModified > 0 ) {
 
             buff.append( "modified=" );
-            buff.append( toISO8601( modified ) );
+            if ( modified != null ) {
+                buff.append( toISO8601( modified ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -10813,7 +10821,11 @@ public abstract class BaseContentMetadata
         if ( hasPublishedPartial > 0 ) {
 
             buff.append( "publishedPartial=" );
-            buff.append( toISO8601( publishedPartial ) );
+            if ( publishedPartial != null ) {
+                buff.append( toISO8601( publishedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -10821,7 +10833,11 @@ public abstract class BaseContentMetadata
         if ( hasModifiedPartial > 0 ) {
 
             buff.append( "modifiedPartial=" );
-            buff.append( toISO8601( modifiedPartial ) );
+            if ( modifiedPartial != null ) {
+                buff.append( toISO8601( modifiedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
