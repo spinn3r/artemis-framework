@@ -33,7 +33,7 @@ public class CollectionOptionals {
     public static <T> Optional<T> last(List<T> input) {
 
         if ( input.size() == 0 )
-            return null;
+            return Optional.empty();
 
         return Optional.of( input.get( input.size() - 1 ) );
 
