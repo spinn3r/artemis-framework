@@ -3169,6 +3169,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * True when the main content is 100% accurate and the extract is not needed.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: main_authoritative
+     * </p>
+     */
+    public Optional<Boolean> getMainAuthoritativeAsOptional() {
+
+        if ( this.constructed == false && this.hasMainAuthoritative == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainAuthoritative );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -6962,6 +6981,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.shared;
+    }
+
+    /**
+     * <p>
+     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: shared
+     * </p>
+     */
+    public Optional<Boolean> getSharedAsOptional() {
+
+        if ( this.constructed == false && this.hasShared == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.shared );
+
     }
 
     /**
