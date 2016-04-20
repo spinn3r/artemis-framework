@@ -114,6 +114,11 @@ public abstract class BaseContent
          */
         FEED_TASK( 5 ) ,
 
+        /**
+         * Content indexed by the twitter task.
+         */
+        TWITTER_TASK( 6 ) ,
+
         ;
 
         IndexMethod( int value ) {
@@ -145,6 +150,9 @@ public abstract class BaseContent
                 case 5:
                     return FEED_TASK;
 
+                case 6:
+                    return TWITTER_TASK;
+
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -169,6 +177,9 @@ public abstract class BaseContent
 
                 case "FEED_TASK":
                     return FEED_TASK;
+
+                case "TWITTER_TASK":
+                    return TWITTER_TASK;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
@@ -1746,6 +1757,24 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSourceNextUpdate = 0;
+
+    public int hasModifiedSourceNextUpdate = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourceNextUpdate = false;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+
+    protected Date sourceNextUpdate;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSourceTitle = 0;
 
     public int hasModifiedSourceTitle = 0;
@@ -2030,6 +2059,24 @@ public abstract class BaseContent
     public boolean hasDefinedSourceFaviconHeight = false;
 
     protected int sourceFaviconHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSourceCreated = 0;
+
+    public int hasModifiedSourceCreated = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSourceCreated = false;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+
+    protected Date sourceCreated;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -6357,7 +6404,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The update stratey for computing the update interval.
+     * The update strategy for computing the update interval.
      * </p>
      *
      * <p>
@@ -6379,7 +6426,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The update stratey for computing the update interval.
+     * The update strategy for computing the update interval.
      * </p>
      *
      * <p>
@@ -7183,6 +7230,110 @@ public abstract class BaseContent
         return this.hasDefinedSourceSettingMinimumContentMetadataScore;
     }
 
+    public BaseContent setSourceNextUpdate ( Date sourceNextUpdate ) {
+
+        ++this.hasSourceNextUpdate;
+        ++this.hasModifiedSourceNextUpdate;
+
+        this.sourceNextUpdate = sourceNextUpdate;
+
+        hasDefinedSourceNextUpdate = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Date getSourceNextUpdate() {
+
+        if ( this.constructed == false && this.hasSourceNextUpdate == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourceNextUpdate" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourceNextUpdate;
+    }
+
+    /**
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Optional<Date> getSourceNextUpdateAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceNextUpdate == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceNextUpdate );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The next time we've scheduled the source to update
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_next_update
+     * </p>
+     */
+    public Date getSourceNextUpdate ( Date _default ) {
+
+        if ( ! hasSourceNextUpdate() ) {
+            return _default;
+        }
+
+        return getSourceNextUpdate();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourceNextUpdate () {
+        return this.hasSourceNextUpdate > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourceNextUpdate () {
+        this.hasSourceNextUpdate = 0;
+        this.hasModifiedSourceNextUpdate = 0;
+        this.hasDefinedSourceNextUpdate = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourceNextUpdate () {
+        return this.hasModifiedSourceNextUpdate > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourceNextUpdate () {
+        return this.hasDefinedSourceNextUpdate;
+    }
+
     public BaseContent setSourceTitle ( String sourceTitle ) {
 
         ++this.hasSourceTitle;
@@ -7780,6 +7931,25 @@ public abstract class BaseContent
         }
 
         return this.sourceVerified;
+    }
+
+    /**
+     * <p>
+     * True when this user account is verified to be authentic.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: source_verified
+     * </p>
+     */
+    public Optional<Boolean> getSourceVerifiedAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceVerified == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceVerified );
+
     }
 
     /**
@@ -8867,6 +9037,110 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceFaviconHeight () {
         return this.hasDefinedSourceFaviconHeight;
+    }
+
+    public BaseContent setSourceCreated ( Date sourceCreated ) {
+
+        ++this.hasSourceCreated;
+        ++this.hasModifiedSourceCreated;
+
+        this.sourceCreated = sourceCreated;
+
+        hasDefinedSourceCreated = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The time this account was created and is provided from the source.  
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_created
+     * </p>
+     */
+    public Date getSourceCreated() {
+
+        if ( this.constructed == false && this.hasSourceCreated == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sourceCreated" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sourceCreated;
+    }
+
+    /**
+     * <p>
+     * The time this account was created and is provided from the source.  
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_created
+     * </p>
+     */
+    public Optional<Date> getSourceCreatedAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceCreated == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceCreated );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The time this account was created and is provided from the source.  
+     * </p>
+     *
+     * <p>
+     * Schema type: timestamp , name: source_created
+     * </p>
+     */
+    public Date getSourceCreated ( Date _default ) {
+
+        if ( ! hasSourceCreated() ) {
+            return _default;
+        }
+
+        return getSourceCreated();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSourceCreated () {
+        return this.hasSourceCreated > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSourceCreated () {
+        this.hasSourceCreated = 0;
+        this.hasModifiedSourceCreated = 0;
+        this.hasDefinedSourceCreated = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSourceCreated () {
+        return this.hasModifiedSourceCreated > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSourceCreated () {
+        return this.hasDefinedSourceCreated;
     }
 
     public BaseContent setSourceLikes ( int sourceLikes ) {
@@ -10971,6 +11245,25 @@ public abstract class BaseContent
         }
 
         return this.mainAuthoritative;
+    }
+
+    /**
+     * <p>
+     * True when the main content is 100% accurate and the extract is not needed.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: main_authoritative
+     * </p>
+     */
+    public Optional<Boolean> getMainAuthoritativeAsOptional() {
+
+        if ( this.constructed == false && this.hasMainAuthoritative == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainAuthoritative );
+
     }
 
     /**
@@ -14770,6 +15063,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: shared
+     * </p>
+     */
+    public Optional<Boolean> getSharedAsOptional() {
+
+        if ( this.constructed == false && this.hasShared == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.shared );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -17198,6 +17510,10 @@ public abstract class BaseContent
             setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
         }
 
+        if ( obj.hasSourceNextUpdate() ) {
+            setSourceNextUpdate( obj.getSourceNextUpdate() );
+        }
+
         if ( obj.hasSourceTitle() ) {
             setSourceTitle( obj.getSourceTitle() );
         }
@@ -17268,6 +17584,10 @@ public abstract class BaseContent
 
         if ( obj.hasSourceFaviconHeight() ) {
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
+        }
+
+        if ( obj.hasSourceCreated() ) {
+            setSourceCreated( obj.getSourceCreated() );
         }
 
         if ( obj.hasSourceLikes() ) {
@@ -17843,6 +18163,10 @@ public abstract class BaseContent
             setSourceSettingMinimumContentMetadataScore( obj.getSourceSettingMinimumContentMetadataScore() );
         }
 
+        if ( ! hasSourceNextUpdate() && obj.hasSourceNextUpdate() ) {
+            setSourceNextUpdate( obj.getSourceNextUpdate() );
+        }
+
         if ( ! hasSourceTitle() && obj.hasSourceTitle() ) {
             setSourceTitle( obj.getSourceTitle() );
         }
@@ -17953,6 +18277,10 @@ public abstract class BaseContent
 
         if ( ! hasSourceFaviconHeight() && obj.hasSourceFaviconHeight() ) {
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
+        }
+
+        if ( ! hasSourceCreated() && obj.hasSourceCreated() ) {
+            setSourceCreated( obj.getSourceCreated() );
         }
 
         if ( ! hasSourceLikes() && obj.hasSourceLikes() ) {
@@ -18605,6 +18933,8 @@ public abstract class BaseContent
 
         this.hasModifiedSourceSettingMinimumContentMetadataScore = 0;
 
+        this.hasModifiedSourceNextUpdate = 0;
+
         this.hasModifiedSourceTitle = 0;
 
         this.hasModifiedSourceDescription = 0;
@@ -18640,6 +18970,8 @@ public abstract class BaseContent
         this.hasModifiedSourceFaviconWidth = 0;
 
         this.hasModifiedSourceFaviconHeight = 0;
+
+        this.hasModifiedSourceCreated = 0;
 
         this.hasModifiedSourceLikes = 0;
 
@@ -18978,6 +19310,10 @@ public abstract class BaseContent
             return true;
         }
 
+        if ( this.hasModifiedSourceNextUpdate() ) {
+            return true;
+        }
+
         if ( this.hasModifiedSourceTitle() ) {
             return true;
         }
@@ -19047,6 +19383,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceFaviconHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSourceCreated() ) {
             return true;
         }
 
@@ -19451,7 +19791,11 @@ public abstract class BaseContent
         if ( hasDateFound > 0 ) {
 
             buff.append( "dateFound=" );
-            buff.append( toISO8601( dateFound ) );
+            if ( dateFound != null ) {
+                buff.append( toISO8601( dateFound ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19579,7 +19923,11 @@ public abstract class BaseContent
         if ( hasSourceDateFound > 0 ) {
 
             buff.append( "sourceDateFound=" );
-            buff.append( toISO8601( sourceDateFound ) );
+            if ( sourceDateFound != null ) {
+                buff.append( toISO8601( sourceDateFound ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19587,7 +19935,11 @@ public abstract class BaseContent
         if ( hasSourceLastUpdated > 0 ) {
 
             buff.append( "sourceLastUpdated=" );
-            buff.append( toISO8601( sourceLastUpdated ) );
+            if ( sourceLastUpdated != null ) {
+                buff.append( toISO8601( sourceLastUpdated ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19595,7 +19947,11 @@ public abstract class BaseContent
         if ( hasSourceLastPublished > 0 ) {
 
             buff.append( "sourceLastPublished=" );
-            buff.append( toISO8601( sourceLastPublished ) );
+            if ( sourceLastPublished != null ) {
+                buff.append( toISO8601( sourceLastPublished ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19603,7 +19959,11 @@ public abstract class BaseContent
         if ( hasSourceLastPosted > 0 ) {
 
             buff.append( "sourceLastPosted=" );
-            buff.append( toISO8601( sourceLastPosted ) );
+            if ( sourceLastPosted != null ) {
+                buff.append( toISO8601( sourceLastPosted ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19699,7 +20059,11 @@ public abstract class BaseContent
         if ( hasSourcePshbLastPosted > 0 ) {
 
             buff.append( "sourcePshbLastPosted=" );
-            buff.append( toISO8601( sourcePshbLastPosted ) );
+            if ( sourcePshbLastPosted != null ) {
+                buff.append( toISO8601( sourcePshbLastPosted ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19707,7 +20071,11 @@ public abstract class BaseContent
         if ( hasSourcePshbLeaseExpires > 0 ) {
 
             buff.append( "sourcePshbLeaseExpires=" );
-            buff.append( toISO8601( sourcePshbLeaseExpires ) );
+            if ( sourcePshbLeaseExpires != null ) {
+                buff.append( toISO8601( sourcePshbLeaseExpires ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19724,6 +20092,18 @@ public abstract class BaseContent
 
             buff.append( "sourceSettingMinimumContentMetadataScore=" );
             buff.append( sourceSettingMinimumContentMetadataScore );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourceNextUpdate > 0 ) {
+
+            buff.append( "sourceNextUpdate=" );
+            if ( sourceNextUpdate != null ) {
+                buff.append( toISO8601( sourceNextUpdate ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -19868,6 +20248,18 @@ public abstract class BaseContent
 
             buff.append( "sourceFaviconHeight=" );
             buff.append( sourceFaviconHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasSourceCreated > 0 ) {
+
+            buff.append( "sourceCreated=" );
+            if ( sourceCreated != null ) {
+                buff.append( toISO8601( sourceCreated ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20147,7 +20539,11 @@ public abstract class BaseContent
         if ( hasPublished > 0 ) {
 
             buff.append( "published=" );
-            buff.append( toISO8601( published ) );
+            if ( published != null ) {
+                buff.append( toISO8601( published ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20155,7 +20551,11 @@ public abstract class BaseContent
         if ( hasModified > 0 ) {
 
             buff.append( "modified=" );
-            buff.append( toISO8601( modified ) );
+            if ( modified != null ) {
+                buff.append( toISO8601( modified ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20163,7 +20563,11 @@ public abstract class BaseContent
         if ( hasPublishedPartial > 0 ) {
 
             buff.append( "publishedPartial=" );
-            buff.append( toISO8601( publishedPartial ) );
+            if ( publishedPartial != null ) {
+                buff.append( toISO8601( publishedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20171,7 +20575,11 @@ public abstract class BaseContent
         if ( hasModifiedPartial > 0 ) {
 
             buff.append( "modifiedPartial=" );
-            buff.append( toISO8601( modifiedPartial ) );
+            if ( modifiedPartial != null ) {
+                buff.append( toISO8601( modifiedPartial ) );
+            } else {
+                buff.append( "null" );
+            }
             buff.append( " " );
 
         }
@@ -20926,6 +21334,15 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
+        if ( hasSourceNextUpdate() != cmp.hasSourceNextUpdate() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sourceNextUpdate, cmp.sourceNextUpdate ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasSourceTitle() != cmp.hasSourceTitle() ) {
             return false;
         }
@@ -21084,6 +21501,15 @@ public abstract class BaseContent
         }
 
         if ( sourceFaviconHeight != cmp.sourceFaviconHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSourceCreated() != cmp.hasSourceCreated() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sourceCreated, cmp.sourceCreated ) ) {
             return false;
         }
 
@@ -22652,6 +23078,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member source_next_update from Date
+
+            __name = "sourceNextUpdate";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_next_update";
+            }
+
+            if ( this.hasSourceNextUpdate > 0 ) {
+
+                if ( sourceNextUpdate != null )
+                    generator.writeStringField( __name, toISO8601( sourceNextUpdate ) );
+
+            }
+
             // ***** json encode member source_title from String
 
             __name = "sourceTitle";
@@ -22933,6 +23374,21 @@ public abstract class BaseContent
 
                 if ( hasDefinedSourceFaviconHeight )
                     generator.writeNumberField( __name, sourceFaviconHeight );
+
+            }
+
+            // ***** json encode member source_created from Date
+
+            __name = "sourceCreated";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "source_created";
+            }
+
+            if ( this.hasSourceCreated > 0 ) {
+
+                if ( sourceCreated != null )
+                    generator.writeStringField( __name, toISO8601( sourceCreated ) );
 
             }
 
@@ -24738,6 +25194,20 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member source_next_update from Date
+
+                case "source_next_update":
+
+                    try {
+                        jParser.nextToken();
+                        setSourceNextUpdate( ISO8601.parse( jParser.getValueAsString() ) );
+                    } catch( ParseException e ) {
+                        throw new JsonParseException( "Could not parse field: source_next_update", jParser.getCurrentLocation(), e );
+                    }
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member source_title from String
 
                 case "source_title":
@@ -24912,6 +25382,20 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSourceFaviconHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member source_created from Date
+
+                case "source_created":
+
+                    try {
+                        jParser.nextToken();
+                        setSourceCreated( ISO8601.parse( jParser.getValueAsString() ) );
+                    } catch( ParseException e ) {
+                        throw new JsonParseException( "Could not parse field: source_created", jParser.getCurrentLocation(), e );
+                    }
 
                     break;
 

@@ -66,6 +66,7 @@
         <module>artemis-init-integration-test1</module>
         <module>artemis-datetime</module>
         <module>artemis-streams</module>
+        <module>artemis-jest</module>
     </modules>
 
     <description>

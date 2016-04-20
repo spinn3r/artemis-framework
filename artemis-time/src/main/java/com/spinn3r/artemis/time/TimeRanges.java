@@ -8,6 +8,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimeRanges {
 
+    public static TimeRange millis( long millis ) {
+        return new TimeRange( millis, TimeUnit.MILLISECONDS );
+    }
+
     /**
      * Compute the amount of time between these two dates.
      * @param d0
