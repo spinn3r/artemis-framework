@@ -2063,24 +2063,6 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
-    public int hasSourceCreated = 0;
-
-    public int hasModifiedSourceCreated = 0;
-
-    /**
-     * True when this field is defined and present in the database or set on the
-     * object.  This is used for JSON serialization because we skip undefined
-     * values.
-     */
-    public boolean hasDefinedSourceCreated = false;
-
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
-
-    protected Date sourceCreated;
-
-    // if a value is modified, it means that we've called setX after the object
-    // has been created.
-
     public int hasSourceLikes = 0;
 
     public int hasModifiedSourceLikes = 0;
@@ -7934,25 +7916,6 @@ public abstract class BaseContent
     }
 
     /**
-     * <p>
-     * True when this user account is verified to be authentic.
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: source_verified
-     * </p>
-     */
-    public Optional<Boolean> getSourceVerifiedAsOptional() {
-
-        if ( this.constructed == false && this.hasSourceVerified == 0 ) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable( this.sourceVerified );
-
-    }
-
-    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -9037,110 +9000,6 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceFaviconHeight () {
         return this.hasDefinedSourceFaviconHeight;
-    }
-
-    public BaseContent setSourceCreated ( Date sourceCreated ) {
-
-        ++this.hasSourceCreated;
-        ++this.hasModifiedSourceCreated;
-
-        this.sourceCreated = sourceCreated;
-
-        hasDefinedSourceCreated = true;
-
-        return this;
-
-    }
-
-    /**
-     * <p>
-     * The time this account was created and is provided from the source.  
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: source_created
-     * </p>
-     */
-    public Date getSourceCreated() {
-
-        if ( this.constructed == false && this.hasSourceCreated == 0 ) {
-            Throwable cause = new IllegalArgumentException( "this.sourceCreated" );
-            throw new DataBindingException( "Member is undefined: ", cause );
-        }
-
-        return this.sourceCreated;
-    }
-
-    /**
-     * <p>
-     * The time this account was created and is provided from the source.  
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: source_created
-     * </p>
-     */
-    public Optional<Date> getSourceCreatedAsOptional() {
-
-        if ( this.constructed == false && this.hasSourceCreated == 0 ) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable( this.sourceCreated );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The time this account was created and is provided from the source.  
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: source_created
-     * </p>
-     */
-    public Date getSourceCreated ( Date _default ) {
-
-        if ( ! hasSourceCreated() ) {
-            return _default;
-        }
-
-        return getSourceCreated();
-
-    }
-
-    /**
-     * Return true if this member has a defined value of this field.
-     */
-    public boolean hasSourceCreated () {
-        return this.hasSourceCreated > 0;
-    }
-
-    /**
-     * Clear this method so that it no longer has a value and won't be
-     * serialized or persisted.
-     */
-    public void clearSourceCreated () {
-        this.hasSourceCreated = 0;
-        this.hasModifiedSourceCreated = 0;
-        this.hasDefinedSourceCreated = false;
-    }
-
-    /**
-     * Return true if this member has been modified from the original value.
-     */
-    public boolean hasModifiedSourceCreated () {
-        return this.hasModifiedSourceCreated > 0;
-    }
-
-    /**
-     * Return true if this member has a defined value.
-     */
-    public boolean hasDefinedSourceCreated () {
-        return this.hasDefinedSourceCreated;
     }
 
     public BaseContent setSourceLikes ( int sourceLikes ) {
@@ -11245,25 +11104,6 @@ public abstract class BaseContent
         }
 
         return this.mainAuthoritative;
-    }
-
-    /**
-     * <p>
-     * True when the main content is 100% accurate and the extract is not needed.
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: main_authoritative
-     * </p>
-     */
-    public Optional<Boolean> getMainAuthoritativeAsOptional() {
-
-        if ( this.constructed == false && this.hasMainAuthoritative == 0 ) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable( this.mainAuthoritative );
-
     }
 
     /**
@@ -15063,25 +14903,6 @@ public abstract class BaseContent
     }
 
     /**
-     * <p>
-     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: shared
-     * </p>
-     */
-    public Optional<Boolean> getSharedAsOptional() {
-
-        if ( this.constructed == false && this.hasShared == 0 ) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable( this.shared );
-
-    }
-
-    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -17586,10 +17407,6 @@ public abstract class BaseContent
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
         }
 
-        if ( obj.hasSourceCreated() ) {
-            setSourceCreated( obj.getSourceCreated() );
-        }
-
         if ( obj.hasSourceLikes() ) {
             setSourceLikes( obj.getSourceLikes() );
         }
@@ -18277,10 +18094,6 @@ public abstract class BaseContent
 
         if ( ! hasSourceFaviconHeight() && obj.hasSourceFaviconHeight() ) {
             setSourceFaviconHeight( obj.getSourceFaviconHeight() );
-        }
-
-        if ( ! hasSourceCreated() && obj.hasSourceCreated() ) {
-            setSourceCreated( obj.getSourceCreated() );
         }
 
         if ( ! hasSourceLikes() && obj.hasSourceLikes() ) {
@@ -18971,8 +18784,6 @@ public abstract class BaseContent
 
         this.hasModifiedSourceFaviconHeight = 0;
 
-        this.hasModifiedSourceCreated = 0;
-
         this.hasModifiedSourceLikes = 0;
 
         this.hasModifiedSourceRelatedTags = 0;
@@ -19383,10 +19194,6 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSourceFaviconHeight() ) {
-            return true;
-        }
-
-        if ( this.hasModifiedSourceCreated() ) {
             return true;
         }
 
@@ -20248,18 +20055,6 @@ public abstract class BaseContent
 
             buff.append( "sourceFaviconHeight=" );
             buff.append( sourceFaviconHeight );
-            buff.append( " " );
-
-        }
-
-        if ( hasSourceCreated > 0 ) {
-
-            buff.append( "sourceCreated=" );
-            if ( sourceCreated != null ) {
-                buff.append( toISO8601( sourceCreated ) );
-            } else {
-                buff.append( "null" );
-            }
             buff.append( " " );
 
         }
@@ -21501,15 +21296,6 @@ public abstract class BaseContent
         }
 
         if ( sourceFaviconHeight != cmp.sourceFaviconHeight ) {
-            return false;
-        }
-
-        // they should either be both false or both true...
-        if ( hasSourceCreated() != cmp.hasSourceCreated() ) {
-            return false;
-        }
-
-        if ( ! equalsWithNull( sourceCreated, cmp.sourceCreated ) ) {
             return false;
         }
 
@@ -23374,21 +23160,6 @@ public abstract class BaseContent
 
                 if ( hasDefinedSourceFaviconHeight )
                     generator.writeNumberField( __name, sourceFaviconHeight );
-
-            }
-
-            // ***** json encode member source_created from Date
-
-            __name = "sourceCreated";
-
-            if ( ! builder.camelCaseNames ) {
-                __name = "source_created";
-            }
-
-            if ( this.hasSourceCreated > 0 ) {
-
-                if ( sourceCreated != null )
-                    generator.writeStringField( __name, toISO8601( sourceCreated ) );
 
             }
 
@@ -25382,20 +25153,6 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSourceFaviconHeight( jParser.getIntValue() );
-
-                    break;
-
-                // FIXME: handle camelCase and under_score
-                // ***** json decode member source_created from Date
-
-                case "source_created":
-
-                    try {
-                        jParser.nextToken();
-                        setSourceCreated( ISO8601.parse( jParser.getValueAsString() ) );
-                    } catch( ParseException e ) {
-                        throw new JsonParseException( "Could not parse field: source_created", jParser.getCurrentLocation(), e );
-                    }
 
                     break;
 
