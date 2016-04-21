@@ -67,6 +67,7 @@
         <module>artemis-datetime</module>
         <module>artemis-streams</module>
         <module>artemis-jest</module>
+        <module>artemis-velocity</module>
     </modules>
 
     <description>
