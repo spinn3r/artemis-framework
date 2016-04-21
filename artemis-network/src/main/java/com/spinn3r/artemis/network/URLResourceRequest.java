@@ -376,7 +376,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 try {
 
-                    if ( "POST".equals( requestMethod ) || "PUT".equals( requestMethod ) ) {
+                    if ( "GET".equals( requestMethod ) || "POST".equals( requestMethod ) || "PUT".equals( requestMethod ) ) {
 
                         httpURLConn.setDoInput(true);
                         httpURLConn.setDoOutput(true);

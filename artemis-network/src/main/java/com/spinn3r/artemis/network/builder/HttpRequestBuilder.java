@@ -38,6 +38,8 @@ public interface HttpRequestBuilder {
 
     HttpRequestMethod get( String resource ) throws NetworkException;
 
+    HttpRequestMethod get( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
+
     HttpRequestMethod post( String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException;
 
     HttpRequestMethod post( String resource, Map<String,?> parameters ) throws NetworkException;
