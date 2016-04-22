@@ -80,9 +80,9 @@
     <orderEntry type="library" name="Maven: io.dropwizard.metrics:metrics-healthchecks:3.1.2" level="project" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
     <orderEntry type="module" module-name="artemis-network-lib" scope="TEST" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpclient:4.3.5" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpcore:4.3.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: commons-codec:commons-codec:1.6" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: commons-codec:commons-codec:1.9" level="project" />
     <orderEntry type="module" module-name="artemis-test" scope="TEST" />
     <orderEntry type="module" module-name="artemis-time" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.2" level="project" />
