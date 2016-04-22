@@ -50,8 +50,6 @@ public class SequenceGenerator {
     // FIXME: I think this value is wrong too...
     public static final long MAX_VALUE = (Long.MAX_VALUE / GLOBAL_TIME_PADDING) * GLOBAL_TIME_PADDING + 99999999L;
 
-    /**
-     */
     public static final long MAX_SEQUENCE = 99999;
 
     public static final long MIN_WRITER_ID = 0;
