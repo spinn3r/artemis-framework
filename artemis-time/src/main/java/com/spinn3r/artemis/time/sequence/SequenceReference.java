@@ -11,14 +11,16 @@ public class SequenceReference implements Comparable<SequenceReference> {
 
     /**
      * Enough padding to allow us to add 2^28 (268435456) without shifting
-     * anything.
+     * anything and allows us to keep the values human readable.
      */
-    public static final long PADDING = 1000000000;
+    public static final long GLOBAL_TIME_PADDING = 1000000000;
+
+    public static final long LOCAL_WRITER_ID_PADDING = 100000;
 
     /**
      * Resolution of time component.
      */
-    public static final long RESOLUTION = 1000;
+    public static final long TIME_RESOLUTION = 1000;
 
     protected final long value;
 

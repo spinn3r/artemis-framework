@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.sequence;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -9,6 +8,9 @@ import com.spinn3r.artemis.time.sequence.SequenceReference;
 import com.spinn3r.log5j.Logger;
 
 import java.util.concurrent.TimeUnit;
+
+import static com.google.common.util.concurrent.Uninterruptibles.sleepUninterruptibly;
+import static com.spinn3r.artemis.time.sequence.SequenceReference.*;
 
 /**
  * This is a distributed, high performance, collision free, and fault tolerant
@@ -45,20 +47,12 @@ public class SequenceGenerator {
     /**
      * Compute the maximum sequence value without any loss of precision (9223372036099999999).
      */
-    public static final long MAX_VALUE = (Long.MAX_VALUE / SequenceReference.PADDING) * SequenceReference.PADDING + 99999999L;
-
-    private static final int ID_WIDTH = 14;
-
-    private static final int SEQUENCE_WIDTH = 14;
+    // FIXME: I think this value is wrong too...
+    public static final long MAX_VALUE = (Long.MAX_VALUE / GLOBAL_TIME_PADDING) * GLOBAL_TIME_PADDING + 99999999L;
 
     /**
-     * Max value of the sequences or (2^14) ...
      */
-    public static final long MAX_SEQUENCE =
-      (long)Math.pow( (double)2, (double)SEQUENCE_WIDTH );
-
-    private static final int MAX_ID =
-      (int)Math.pow( (double)2, (double)ID_WIDTH );
+    public static final long MAX_SEQUENCE = 99999;
 
     /**
      * Time in ms to sleep if we exhaust our sequence.
@@ -88,7 +82,7 @@ public class SequenceGenerator {
     public SequenceGenerator(Clock clock, Provider<GlobalMutex> globalMutexProvider) {
         this.clock = clock;
         this.globalMutexProvider = globalMutexProvider;
-        this.lastRollover = getTime();
+        this.lastRollover = getTimeAsSecondsSinceEpoch();
     }
 
     //////// public interface /////////
@@ -104,7 +98,7 @@ public class SequenceGenerator {
 
             long writerId = globalMutex.getValue();
 
-            long result = -1;
+            long result;
 
             synchronized( MUTEX ) {
 
@@ -112,7 +106,7 @@ public class SequenceGenerator {
 
                 while ( true ) {
 
-                    long now = getTime();
+                    long now = getTimeAsSecondsSinceEpoch();
 
                     if ( now > lastRollover ) {
                         sequence     = 0;
@@ -126,14 +120,19 @@ public class SequenceGenerator {
                         log.warn( "Sequence generator sleeping for %,d for sequence = %s, generator id = %s, last rollover = %s, issued=%s",
                                   SLEEP_TIME, sequence, writerId, lastRollover, issued );
 
-                        doSleep( SLEEP_TIME );
+                        // TODO: we could sleep EXACTLY the amount of time needed
+                        // until the next rollover but in practice this doesn't
+                        // happen very often..
+
+                        sleepUninterruptibly( SLEEP_TIME, TimeUnit.MILLISECONDS );
 
                     }
 
                 }
 
-                result = ( lastRollover  * SequenceReference.PADDING ) + writerId + sequence;
+                result = ( lastRollover  * GLOBAL_TIME_PADDING) + (writerId * LOCAL_WRITER_ID_PADDING) + sequence;
                 ++issued;
+
             }
 
             return new SequenceReference( result );
@@ -144,14 +143,8 @@ public class SequenceGenerator {
 
     }
 
-    /////// private interface ///////
-
-    private static void doSleep ( long sleep_time ) {
-        Uninterruptibles.sleepUninterruptibly( sleep_time, TimeUnit.MILLISECONDS );
-    }
-
-    private long getTime () {
-        return clock.currentTimeMillis() / SequenceReference.RESOLUTION;
+    protected long getTimeAsSecondsSinceEpoch() {
+        return clock.currentTimeMillis() / SequenceReference.TIME_RESOLUTION;
     }
 
 }

@@ -11,6 +11,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.6.2" level="project" />
     <orderEntry type="module" module-name="artemis-metrics" />
     <orderEntry type="module" module-name="artemis-sequence" />
     <orderEntry type="module" module-name="artemis-time" />

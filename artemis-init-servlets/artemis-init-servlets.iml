@@ -9,6 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.6.2" level="project" />
     <orderEntry type="module" module-name="artemis-init" />
     <orderEntry type="module" module-name="artemis-guava" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:16.0" level="project" />
