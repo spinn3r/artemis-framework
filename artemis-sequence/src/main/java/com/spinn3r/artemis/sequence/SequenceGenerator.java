@@ -54,6 +54,10 @@ public class SequenceGenerator {
      */
     public static final long MAX_SEQUENCE = 99999;
 
+    public static final long MIN_WRITER_ID = 0;
+
+    public static final long MAX_WRITER_ID = 9999;
+
     /**
      * Time in ms to sleep if we exhaust our sequence.
      */
@@ -62,11 +66,10 @@ public class SequenceGenerator {
     /**
      * Lock used to prevent thread corruption.
      */
-    private Object MUTEX = new Object();
-
-    ///// state vars ////
+    private final Object MUTEX = new Object();
 
     private long sequence = 0;
+
     private long lastRollover;
 
     /**
@@ -85,18 +88,24 @@ public class SequenceGenerator {
         this.lastRollover = getTimeAsSecondsSinceEpoch();
     }
 
-    //////// public interface /////////
-
     /**
      * Compute the next sequence identifier.
      */
-    public SequenceReference next () {
+    public SequenceReference next () throws SequenceGeneratorRuntimeException {
 
         try {
 
             GlobalMutex globalMutex = globalMutexProvider.get();
 
             long writerId = globalMutex.getValue();
+
+            if ( writerId < MIN_WRITER_ID ) {
+                throw new SequenceGeneratorRuntimeException.WriterIdTooSmall("Writer ID too small: " + writerId);
+            }
+
+            if ( writerId > MAX_WRITER_ID ) {
+                throw new SequenceGeneratorRuntimeException.WriterIdTooLarge("Writer ID too large: " + writerId);
+            }
 
             long result;
 
@@ -138,7 +147,7 @@ public class SequenceGenerator {
             return new SequenceReference( result );
 
         } catch (GlobalMutexExpiredException e) {
-            throw new RuntimeException( e );
+            throw new SequenceGeneratorRuntimeException.GlobalMutexExpired( e );
         }
 
     }
