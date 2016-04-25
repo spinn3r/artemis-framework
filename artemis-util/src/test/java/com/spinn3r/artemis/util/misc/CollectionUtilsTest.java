@@ -1,15 +1,20 @@
 package com.spinn3r.artemis.util.misc;
 
-import com.google.common.collect.Lists;
-import org.hamcrest.Matcher;
-import org.junit.Test;
+//import static org.hamcrest.Matchers.*;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.filter;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.first;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.group;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.head;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.last;
+import static com.spinn3r.artemis.util.misc.CollectionUtils.tail;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
+import java.util.function.Predicate;
 
-import static org.junit.Assert.*;
-//import static org.hamcrest.Matchers.*;
-import static com.spinn3r.artemis.util.misc.CollectionUtils.*;
-import static org.hamcrest.Matchers.*;
+import org.junit.Test;
+
+import com.google.common.collect.Lists;
 
 public class CollectionUtilsTest {
 
@@ -33,11 +38,8 @@ public class CollectionUtilsTest {
     @Test
     public void testFilter() throws Exception {
 
-        Predicate<String> predicate = new Predicate<String>() {
-            @Override
-            public boolean evaluate(String value) {
-                return ! value.trim().equals( "" ) && ! value.startsWith( "#" );
-            }
+        Predicate<String> predicate = (String value) -> {
+            return ! value.trim().equals( "" ) && ! value.startsWith( "#" );
         };
 
         // *** test1
@@ -54,24 +56,6 @@ public class CollectionUtilsTest {
 
         filter( test, predicate );
 
-        assertEquals( "[Hello]", test.toString() );
-
-    }
-
-    @Test
-    public void testFilter2() throws Exception {
-
-        Matcher<String> matcher = not( startsWith( "#" ) );
-        List<String> test;
-
-        // *** test1
-        test =  Lists.newArrayList( "" );
-        filter( test, matcher );
-        assertEquals( "[]", test.toString() );
-
-        // *** test2
-        test =  Lists.newArrayList( "Hello", "# Really" );
-        filter( test, matcher );
         assertEquals( "[Hello]", test.toString() );
 
     }
