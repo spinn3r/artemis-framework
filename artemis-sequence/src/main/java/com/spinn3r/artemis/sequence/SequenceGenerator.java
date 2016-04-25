@@ -8,6 +8,8 @@ import com.spinn3r.artemis.time.sequence.SequenceReference;
 import com.spinn3r.log5j.Logger;
 
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static com.google.common.util.concurrent.Uninterruptibles.sleepUninterruptibly;
 import static com.spinn3r.artemis.time.sequence.SequenceReference.*;
@@ -66,24 +68,24 @@ public class SequenceGenerator {
      */
     private final Object MUTEX = new Object();
 
-    private long sequence = 0;
+    private final Clock clock;
 
-    private long lastRollover;
+    private final Provider<GlobalMutex> globalMutexProvider;
+
+    private AtomicInteger sequence = new AtomicInteger(0);
+
+    private AtomicInteger lastRollover = new AtomicInteger(0);
 
     /**
      * Total number of issued sequence timestamps.
      */
-    private long issued = 0;
-
-    private final Clock clock;
-
-    private final Provider<GlobalMutex> globalMutexProvider;
+    private AtomicLong issued = new AtomicLong();
 
     @Inject
     public SequenceGenerator(Clock clock, Provider<GlobalMutex> globalMutexProvider) {
         this.clock = clock;
         this.globalMutexProvider = globalMutexProvider;
-        this.lastRollover = getTimeAsSecondsSinceEpoch();
+        this.lastRollover.set( getTimeAsSecondsSinceEpoch() );
     }
 
     /**
@@ -109,18 +111,18 @@ public class SequenceGenerator {
 
             synchronized( MUTEX ) {
 
-                ++sequence;
+                sequence.incrementAndGet();
 
                 while ( true ) {
 
-                    long now = getTimeAsSecondsSinceEpoch();
+                    int now = getTimeAsSecondsSinceEpoch();
 
-                    if ( now > lastRollover ) {
-                        sequence     = 0;
-                        lastRollover = now;
+                    if ( now > lastRollover.get() ) {
+                        sequence.set( 0 );
+                        lastRollover.set( now );
                     }
 
-                    if ( sequence < MAX_SEQUENCE ) {
+                    if ( sequence.get() < MAX_SEQUENCE ) {
                         break;
                     } else {
 
@@ -137,8 +139,8 @@ public class SequenceGenerator {
 
                 }
 
-                result = ( lastRollover  * GLOBAL_TIME_PADDING) + (writerId * LOCAL_WRITER_ID_PADDING) + sequence;
-                ++issued;
+                result = (lastRollover.get() * GLOBAL_TIME_PADDING) + (writerId * LOCAL_WRITER_ID_PADDING) + sequence.get();
+                issued.incrementAndGet();
 
             }
 
@@ -150,8 +152,8 @@ public class SequenceGenerator {
 
     }
 
-    protected long getTimeAsSecondsSinceEpoch() {
-        return clock.currentTimeMillis() / SequenceReference.TIME_RESOLUTION;
+    protected int getTimeAsSecondsSinceEpoch() {
+        return (int)(clock.currentTimeMillis() / SequenceReference.TIME_RESOLUTION);
     }
 
 }
