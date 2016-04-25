@@ -1,11 +1,11 @@
 package com.spinn3r.artemis.network.init;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
