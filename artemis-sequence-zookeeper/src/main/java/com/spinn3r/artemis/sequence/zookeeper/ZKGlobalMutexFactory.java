@@ -26,7 +26,7 @@ public class ZKGlobalMutexFactory implements GlobalMutexFactory, AutoCloseable {
 
     private static final Logger log = Logger.getLogger();
 
-    public static final int RANGE = 16384;
+    public static final int RANGE = 9999;
 
     private static final Random RANDOM = new Random( System.currentTimeMillis() );
     private static final String BASEDIR = "/mutexes";
