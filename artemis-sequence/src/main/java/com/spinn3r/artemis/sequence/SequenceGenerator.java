@@ -81,8 +81,7 @@ public class SequenceGenerator {
      */
     private AtomicLong issued = new AtomicLong();
 
-    @Inject
-    public SequenceGenerator(Clock clock, Provider<GlobalMutex> globalMutexProvider) {
+    SequenceGenerator(Clock clock, Provider<GlobalMutex> globalMutexProvider) {
         this.clock = clock;
         this.globalMutexProvider = globalMutexProvider;
         this.lastRollover.set( getTimeAsSecondsSinceEpoch() );
@@ -91,7 +90,7 @@ public class SequenceGenerator {
     /**
      * Compute the next sequence identifier.
      */
-    public SequenceReference next () throws SequenceGeneratorRuntimeException {
+    public SequenceReference next() throws SequenceGeneratorRuntimeException {
 
         try {
 
