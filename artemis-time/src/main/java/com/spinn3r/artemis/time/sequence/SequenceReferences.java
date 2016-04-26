@@ -15,16 +15,16 @@ public class SequenceReferences {
      * @return
      */
     public static SequenceReference fromDate(Date date) {
-        long result = (date.getTime() / 1000L) * SequenceReference.PADDING;
+        long result = (date.getTime() / 1000L) * SequenceReference.GLOBAL_TIME_PADDING;
         return new SequenceReference( result );
     }
 
     public static Date toDate(long value) {
 
-        long v = value / SequenceReference.PADDING;
+        long v = value / SequenceReference.GLOBAL_TIME_PADDING;
 
         // sequence timestamps don't include milliseconds but Java time does.
-        v = v * SequenceReference.RESOLUTION;
+        v = v * SequenceReference.TIME_RESOLUTION;
 
         return new Date( v );
 
