@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
@@ -117,7 +118,9 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
             resourceRequest.setRequestHeader( header.getKey(), header.getValue() );
         }
 
-        if ( method.equals( HttpRequestMethods.POST ) || method.equals( HttpRequestMethods.PUT ) ) {
+        if ( ( method.equals( HttpRequestMethods.GET ) || method.equals( HttpRequestMethods.POST ) || method.equals( HttpRequestMethods.PUT ) )
+               && !Strings.isNullOrEmpty( outputContent ) ) {
+
             resourceRequest.setOutputContent( outputContent, outputContentEncoding, outputContentType );
         }
 

@@ -65,6 +65,11 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     }
 
     @Override
+    public HttpRequestMethod get(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
+        return configure( new DefaultHttpRequestMethod( this, resource, GET_METHOD, outputContent, outputContentEncoding, outputContentType ) );
+    }
+
+    @Override
     public HttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
         return configure( new DefaultHttpRequestMethod( this, resource, POST_METHOD, outputContent, outputContentEncoding, outputContentType ) );
     }
