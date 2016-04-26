@@ -91,7 +91,7 @@ public class SequenceGenerator {
     /**
      * Compute the next sequence identifier.
      */
-    public SequenceReference next () throws SequenceGeneratorRuntimeException {
+    public SequenceReference next() throws SequenceGeneratorRuntimeException {
 
         try {
 
