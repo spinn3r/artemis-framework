@@ -13,6 +13,7 @@ import com.spinn3r.artemis.sequence.GlobalMutex;
 import com.spinn3r.artemis.sequence.GlobalMutexExpiredException;
 import com.spinn3r.metrics.kairosdb.KairosDb;
 import com.spinn3r.metrics.kairosdb.KairosDbReporter;
+import com.spinn3r.metrics.kairosdb.ReportWaiter;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -101,6 +102,8 @@ public class GlobalMetricsService extends MetricsService {
         kairosDbReporter = builder.build( kairosDb );
 
         kairosDbReporter.start( reporter.getInterval(), TimeUnit.MILLISECONDS );
+
+        advertise(ReportWaiter.class, kairosDbReporter.getReportWaiter());
 
     }
 
