@@ -118,8 +118,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
             resourceRequest.setRequestHeader( header.getKey(), header.getValue() );
         }
 
-        if ( ( method.equals( HttpRequestMethods.GET ) || method.equals( HttpRequestMethods.POST ) || method.equals( HttpRequestMethods.PUT ) )
-               && !Strings.isNullOrEmpty( outputContent ) ) {
+        if ( requiresOutputContent() ) {
 
             resourceRequest.setOutputContent( outputContent, outputContentEncoding, outputContentType );
         }
@@ -129,6 +128,20 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         validate( httpRequest );
 
         return httpRequest;
+
+    }
+
+    private boolean requiresOutputContent() {
+
+        if ( Strings.isNullOrEmpty(outputContent)) {
+            return false;
+        }
+
+        if ( ! (method.equals(HttpRequestMethods.GET) || method.equals(HttpRequestMethods.POST) || method.equals(HttpRequestMethods.PUT) ) ) {
+            return false;
+        }
+
+        return true;
 
     }
 
