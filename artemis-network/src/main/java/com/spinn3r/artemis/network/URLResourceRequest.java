@@ -376,7 +376,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 try {
 
-                    if ( "GET".equals( requestMethod ) || "POST".equals( requestMethod ) || "PUT".equals( requestMethod ) ) {
+                    if ( isGetRequestWithData() || "POST".equals( requestMethod ) || "PUT".equals( requestMethod ) ) {
 
                         httpURLConn.setDoInput(true);
                         httpURLConn.setDoOutput(true);
@@ -525,6 +525,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
         } catch ( IOException e ) {
             throw newNetworkException( e );
         }
+
+    }
+
+    private boolean isGetRequestWithData() {
+
+        return "GET".equals( requestMethod ) && outputContentLength > -1;
 
     }
 
