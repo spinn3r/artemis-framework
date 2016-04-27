@@ -2857,6 +2857,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasAuthorUserId = 0;
+
+    public int hasModifiedAuthorUserId = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedAuthorUserId = false;
+
+    protected String authorUserId;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasAuthorGender = 0;
 
     public int hasModifiedAuthorGender = 0;
@@ -13877,6 +13893,110 @@ public abstract class BaseContent
         return this.hasDefinedAuthorTwitterUserid;
     }
 
+    public BaseContent setAuthorUserId ( String authorUserId ) {
+
+        ++this.hasAuthorUserId;
+        ++this.hasModifiedAuthorUserId;
+
+        this.authorUserId = authorUserId;
+
+        hasDefinedAuthorUserId = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * User ID in the target platform (when available, twitter for instance)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_user_id
+     * </p>
+     */
+    public String getAuthorUserId() {
+
+        if ( this.constructed == false && this.hasAuthorUserId == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.authorUserId" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.authorUserId;
+    }
+
+    /**
+     * <p>
+     * User ID in the target platform (when available, twitter for instance)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_user_id
+     * </p>
+     */
+    public Optional<String> getAuthorUserIdAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorUserId == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorUserId );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * User ID in the target platform (when available, twitter for instance)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: author_user_id
+     * </p>
+     */
+    public String getAuthorUserId ( String _default ) {
+
+        if ( ! hasAuthorUserId() ) {
+            return _default;
+        }
+
+        return getAuthorUserId();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasAuthorUserId () {
+        return this.hasAuthorUserId > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearAuthorUserId () {
+        this.hasAuthorUserId = 0;
+        this.hasModifiedAuthorUserId = 0;
+        this.hasDefinedAuthorUserId = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedAuthorUserId () {
+        return this.hasModifiedAuthorUserId > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedAuthorUserId () {
+        return this.hasDefinedAuthorUserId;
+    }
+
     public BaseContent setAuthorGender ( AuthorGender authorGender ) {
 
         ++this.hasAuthorGender;
@@ -17782,6 +17902,10 @@ public abstract class BaseContent
             setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
         }
 
+        if ( obj.hasAuthorUserId() ) {
+            setAuthorUserId( obj.getAuthorUserId() );
+        }
+
         if ( obj.hasAuthorGender() ) {
             setAuthorGender( obj.getAuthorGender() );
         }
@@ -18620,6 +18744,15 @@ public abstract class BaseContent
             setAuthorTwitterUserid( obj.getAuthorTwitterUserid() );
         }
 
+        if ( ! hasAuthorUserId() && obj.hasAuthorUserId() ) {
+            setAuthorUserId( obj.getAuthorUserId() );
+        }
+
+        if ( hasAuthorUserId() && getAuthorUserId() == null &&
+            obj.hasAuthorUserId() && obj.getAuthorUserId() != null ) {
+            setAuthorUserId( obj.getAuthorUserId() );
+        }
+
         if ( authorGender == null && obj.hasAuthorGender() && obj.getAuthorGender() != null ) {
             setAuthorGender( obj.getAuthorGender() );
         }
@@ -19068,6 +19201,8 @@ public abstract class BaseContent
         this.hasModifiedAuthorTwitterHandle = 0;
 
         this.hasModifiedAuthorTwitterUserid = 0;
+
+        this.hasModifiedAuthorUserId = 0;
 
         this.hasModifiedAuthorGender = 0;
 
@@ -19579,6 +19714,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedAuthorTwitterUserid() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedAuthorUserId() ) {
             return true;
         }
 
@@ -20660,6 +20799,14 @@ public abstract class BaseContent
 
             buff.append( "authorTwitterUserid=" );
             buff.append( authorTwitterUserid );
+            buff.append( " " );
+
+        }
+
+        if ( hasAuthorUserId > 0 ) {
+
+            buff.append( "authorUserId=" );
+            buff.append( authorUserId );
             buff.append( " " );
 
         }
@@ -21942,6 +22089,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( authorTwitterUserid, cmp.authorTwitterUserid ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasAuthorUserId() != cmp.hasAuthorUserId() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( authorUserId, cmp.authorUserId ) ) {
             return false;
         }
 
@@ -24153,6 +24309,22 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member author_user_id from String
+
+            __name = "authorUserId";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "author_user_id";
+            }
+
+            if ( this.hasAuthorUserId > 0 ) {
+
+                if ( authorUserId != null ) {
+                    generator.writeStringField( __name, authorUserId );
+                }
+
+            }
+
             // ***** json encode member author_gender from int
 
             __name = "authorGender";
@@ -25886,6 +26058,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setAuthorTwitterUserid( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member author_user_id from String
+
+                case "author_user_id":
+
+                    jParser.nextToken();
+                    setAuthorUserId( jParser.getValueAsString() );
 
                     break;
 
