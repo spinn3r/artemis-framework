@@ -3497,6 +3497,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The bucket to write this content (timestamp prefix and suffix valued from 0-99).  This allows us to use the random partitioner and still get decent parallel client read performance.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: bucket
+     * </p>
+     */
+    public Optional<Long> getBucketAsOptional() {
+
+        if ( this.constructed == false && this.hasBucket == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.bucket );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -3582,6 +3601,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The time our robot saw the post and wrote it to the database.  This is a sequence timestamp and supports distributed write.  This can be used as an external primary key as it's gauranteed to always be unique.  The value is opaque and not designed to be readable by humans and the format can change at any time.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: sequence
+     * </p>
+     */
+    public Optional<Long> getSequenceAsOptional() {
+
+        if ( this.constructed == false && this.hasSequence == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sequence );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -3664,6 +3702,25 @@ public abstract class BaseContent
         }
 
         return this.sequenceRange;
+    }
+
+    /**
+     * <p>
+     * The sequence as a range of values between 0 and 999,999 (sequence % 100000).  This allows you to filter values by range to accept just a sample of values.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: sequence_range
+     * </p>
+     */
+    public Optional<Long> getSequenceRangeAsOptional() {
+
+        if ( this.constructed == false && this.hasSequenceRange == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sequenceRange );
+
     }
 
     /**
@@ -4338,6 +4395,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The length of the HTML
+     * </p>
+     *
+     * <p>
+     * Schema type: varint , name: html_length
+     * </p>
+     */
+    public Optional<Integer> getHtmlLengthAsOptional() {
+
+        if ( this.constructed == false && this.hasHtmlLength == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.htmlLength );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -4609,6 +4685,25 @@ public abstract class BaseContent
         }
 
         return this.htmlBlobLength;
+    }
+
+    /**
+     * <p>
+     * The length of the HTML
+     * </p>
+     *
+     * <p>
+     * Schema type: varint , name: html_blob_length
+     * </p>
+     */
+    public Optional<Integer> getHtmlBlobLengthAsOptional() {
+
+        if ( this.constructed == false && this.hasHtmlBlobLength == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.htmlBlobLength );
+
     }
 
     /**
@@ -5907,6 +6002,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of milliseconds between updates to re-fetch this source.  This is used to for cyclical updates of sources and usually depends on how often the source posts updates.
+     * </p>
+     *
+     * <p>
+     * Schema type: varint , name: source_update_interval
+     * </p>
+     */
+    public Optional<Long> getSourceUpdateIntervalAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceUpdateInterval == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceUpdateInterval );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -5989,6 +6103,25 @@ public abstract class BaseContent
         }
 
         return this.sourceHttpStatus;
+    }
+
+    /**
+     * <p>
+     * The HTTP status code of the last request to this source.
+     * </p>
+     *
+     * <p>
+     * Schema type: varint , name: source_http_status
+     * </p>
+     */
+    public Optional<Integer> getSourceHttpStatusAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceHttpStatus == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceHttpStatus );
+
     }
 
     /**
@@ -6077,6 +6210,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The probability, between 0 and 1, that this source is a spam source.  -1.0 if we have not yet classified it.
+     * </p>
+     *
+     * <p>
+     * Schema type: float , name: source_spam_probability
+     * </p>
+     */
+    public Optional<Float> getSourceSpamProbabilityAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceSpamProbability == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceSpamProbability );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -6159,6 +6311,25 @@ public abstract class BaseContent
         }
 
         return this.sourceContentLength;
+    }
+
+    /**
+     * <p>
+     * The length, in bytes, of this HTML from the last time we fetched the page.
+     * </p>
+     *
+     * <p>
+     * Schema type: varint , name: source_content_length
+     * </p>
+     */
+    public Optional<Integer> getSourceContentLengthAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceContentLength == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceContentLength );
+
     }
 
     /**
@@ -7109,6 +7280,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of user interactions from other sources on this social network computed from the graph as we index content.  This is periodically computed and loaded into our source index.  This could be the number of at mentions, comment replies, etc.
+     * </p>
+     *
+     * <p>
+     * Schema type: bigint , name: source_user_interactions
+     * </p>
+     */
+    public Optional<Long> getSourceUserInteractionsAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceUserInteractions == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceUserInteractions );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -7191,6 +7381,25 @@ public abstract class BaseContent
         }
 
         return this.sourceSettingMinimumContentMetadataScore;
+    }
+
+    /**
+     * <p>
+     * The minimum metadata score before we can persist content
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_setting_minimum_content_metadata_score
+     * </p>
+     */
+    public Optional<Integer> getSourceSettingMinimumContentMetadataScoreAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceSettingMinimumContentMetadataScore == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceSettingMinimumContentMetadataScore );
+
     }
 
     /**
@@ -7695,6 +7904,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of favorites this source has according to the website or social network.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_favorites
+     * </p>
+     */
+    public Optional<Integer> getSourceFavoritesAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFavorites == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFavorites );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -7780,6 +8008,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of followers this source has according to the website or social network.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_followers
+     * </p>
+     */
+    public Optional<Integer> getSourceFollowersAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFollowers == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFollowers );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -7862,6 +8109,25 @@ public abstract class BaseContent
         }
 
         return this.sourceFollowing;
+    }
+
+    /**
+     * <p>
+     * The number of users / friends this source is following.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_following
+     * </p>
+     */
+    public Optional<Integer> getSourceFollowingAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFollowing == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFollowing );
+
     }
 
     /**
@@ -8349,6 +8615,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the image.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_image_width
+     * </p>
+     */
+    public Optional<Integer> getSourceImageWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceImageWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceImageWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -8431,6 +8716,25 @@ public abstract class BaseContent
         }
 
         return this.sourceImageHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the image.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_image_height
+     * </p>
+     */
+    public Optional<Integer> getSourceImageHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceImageHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceImageHeight );
+
     }
 
     /**
@@ -8918,6 +9222,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the favicon.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_favicon_width
+     * </p>
+     */
+    public Optional<Integer> getSourceFaviconWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFaviconWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFaviconWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -9000,6 +9323,25 @@ public abstract class BaseContent
         }
 
         return this.sourceFaviconHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the favicon.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_favicon_height
+     * </p>
+     */
+    public Optional<Integer> getSourceFaviconHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFaviconHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFaviconHeight );
+
     }
 
     /**
@@ -9192,6 +9534,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of Facebook likes for this source.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_likes
+     * </p>
+     */
+    public Optional<Integer> getSourceLikesAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceLikes == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceLikes );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -9364,6 +9725,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of posts parsed/found when we last indexed this source.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_parsed_posts
+     * </p>
+     */
+    public Optional<Integer> getSourceParsedPostsAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceParsedPosts == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceParsedPosts );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -9446,6 +9826,25 @@ public abstract class BaseContent
         }
 
         return this.sourceParsedPostsMax;
+    }
+
+    /**
+     * <p>
+     * The maximum number of parsed posts we've ever seen.  If parsed_posts_max greater than zero and parsed_posts is 0 then we are probably hitting a throttle or failing to parse the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: source_parsed_posts_max
+     * </p>
+     */
+    public Optional<Integer> getSourceParsedPostsMaxAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceParsedPostsMax == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceParsedPostsMax );
+
     }
 
     /**
@@ -11075,6 +11474,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The length of the main field, in bytes.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: main_length
+     * </p>
+     */
+    public Optional<Integer> getMainLengthAsOptional() {
+
+        if ( this.constructed == false && this.hasMainLength == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainLength );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -11554,6 +11972,25 @@ public abstract class BaseContent
         }
 
         return this.extractLength;
+    }
+
+    /**
+     * <p>
+     * The length of the extract field, in bytes.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: extract_length
+     * </p>
+     */
+    public Optional<Integer> getExtractLengthAsOptional() {
+
+        if ( this.constructed == false && this.hasExtractLength == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.extractLength );
+
     }
 
     /**
@@ -13255,6 +13692,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of followers for this author.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: author_followers
+     * </p>
+     */
+    public Optional<Integer> getAuthorFollowersAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorFollowers == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorFollowers );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -13548,6 +14004,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the avatar img.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: author_avatar_width
+     * </p>
+     */
+    public Optional<Integer> getAuthorAvatarWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorAvatarWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorAvatarWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -13630,6 +14105,25 @@ public abstract class BaseContent
         }
 
         return this.authorAvatarHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the avatar img.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: author_avatar_height
+     * </p>
+     */
+    public Optional<Integer> getAuthorAvatarHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorAvatarHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorAvatarHeight );
+
     }
 
     /**
@@ -14739,6 +15233,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the favicon.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: favicon_width
+     * </p>
+     */
+    public Optional<Integer> getFaviconWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasFaviconWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.faviconWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -14821,6 +15334,25 @@ public abstract class BaseContent
         }
 
         return this.faviconHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the favicon.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: favicon_height
+     * </p>
+     */
+    public Optional<Integer> getFaviconHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasFaviconHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.faviconHeight );
+
     }
 
     /**
@@ -15013,6 +15545,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the image.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image_width
+     * </p>
+     */
+    public Optional<Integer> getImageWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImageWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.imageWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -15095,6 +15646,25 @@ public abstract class BaseContent
         }
 
         return this.imageHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the image.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image_height
+     * </p>
+     */
+    public Optional<Integer> getImageHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImageHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.imageHeight );
+
     }
 
     /**
@@ -15684,6 +16254,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The width of the player iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideoPlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideoPlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.videoPlayerWidth );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -15766,6 +16355,25 @@ public abstract class BaseContent
         }
 
         return this.videoPlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of the player iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideoPlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideoPlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.videoPlayerHeight );
+
     }
 
     /**
@@ -16295,6 +16903,25 @@ public abstract class BaseContent
         }
 
         return this.duplicatesCount;
+    }
+
+    /**
+     * <p>
+     * The total number of duplicates.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: duplicates_count
+     * </p>
+     */
+    public Optional<Integer> getDuplicatesCountAsOptional() {
+
+        if ( this.constructed == false && this.hasDuplicatesCount == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.duplicatesCount );
+
     }
 
     /**
@@ -16988,6 +17615,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: likes
+     * </p>
+     */
+    public Optional<Integer> getLikesAsOptional() {
+
+        if ( this.constructed == false && this.hasLikes == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.likes );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -17070,6 +17716,25 @@ public abstract class BaseContent
         }
 
         return this.dislikes;
+    }
+
+    /**
+     * <p>
+     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: dislikes
+     * </p>
+     */
+    public Optional<Integer> getDislikesAsOptional() {
+
+        if ( this.constructed == false && this.hasDislikes == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.dislikes );
+
     }
 
     /**
@@ -17158,6 +17823,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: comments
+     * </p>
+     */
+    public Optional<Integer> getCommentsAsOptional() {
+
+        if ( this.constructed == false && this.hasComments == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.comments );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -17240,6 +17924,25 @@ public abstract class BaseContent
         }
 
         return this.views;
+    }
+
+    /**
+     * <p>
+     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: views
+     * </p>
+     */
+    public Optional<Integer> getViewsAsOptional() {
+
+        if ( this.constructed == false && this.hasViews == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.views );
+
     }
 
     /**
@@ -17328,6 +18031,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: metadata_score
+     * </p>
+     */
+    public Optional<Integer> getMetadataScoreAsOptional() {
+
+        if ( this.constructed == false && this.hasMetadataScore == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.metadataScore );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -17410,6 +18132,25 @@ public abstract class BaseContent
         }
 
         return this.shares;
+    }
+
+    /**
+     * <p>
+     * The number of shares for this post.  For some microblogging platforms this could be a rewtweet but for others its a share.  Most platforms have this concept.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: shares
+     * </p>
+     */
+    public Optional<Integer> getSharesAsOptional() {
+
+        if ( this.constructed == false && this.hasShares == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.shares );
+
     }
 
     /**
