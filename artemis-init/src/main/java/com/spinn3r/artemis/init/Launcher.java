@@ -212,6 +212,10 @@ public class Launcher {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 
+    public <T> void provider( Class<T> clazz, T impl ) {
+        getAdvertised().provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
+    }
+
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {
         getAdvertised().provider( this.getClass(), clazz, provider );
     }
