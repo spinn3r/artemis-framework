@@ -249,4 +249,18 @@ public class CollectionUtils {
 
     }
 
+    public static <T> List<T> trim(List<T> list, int count) {
+
+        List<T> result = Lists.newArrayList(list);
+
+        for (int i = 0; i < count && result.size() > 0; i++) {
+            int idx = result.size() - 1;
+            result.remove(idx);
+        }
+
+        return ImmutableList.copyOf(result);
+
+    }
+
+
 }

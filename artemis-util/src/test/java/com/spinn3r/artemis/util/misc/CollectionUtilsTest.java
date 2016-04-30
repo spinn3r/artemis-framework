@@ -131,4 +131,43 @@ public class CollectionUtilsTest {
         assertEquals( new Integer( 2 ), last( list ) );
     }
 
+    @Test
+    public void testTrimWithNoEntries() throws Exception {
+
+        List<String> list = Lists.newArrayList();
+        assertEquals("[]", CollectionUtils.trim(list, 2).toString());
+
+    }
+
+    @Test
+    public void testTrimWithOneEntry() throws Exception {
+
+        List<String> list = Lists.newArrayList();
+        list.add("1");
+        assertEquals("[]", CollectionUtils.trim(list, 2).toString());
+
+    }
+
+    @Test
+    public void testTrimWithTwoEntries() throws Exception {
+
+        List<String> list = Lists.newArrayList();
+        list.add("1");
+        list.add("2");
+        assertEquals("[]", CollectionUtils.trim(list, 2).toString());
+
+    }
+
+    @Test
+    public void testTrimWithThreeEntries() throws Exception {
+
+        List<String> list = Lists.newArrayList();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+
+        assertEquals("[1]", CollectionUtils.trim(list, 2).toString());
+
+    }
+
 }
