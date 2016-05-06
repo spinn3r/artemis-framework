@@ -1156,6 +1156,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasGeoLocationId = 0;
+
+    public int hasModifiedGeoLocationId = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoLocationId = false;
+
+    protected String geoLocationId;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasGeoFeaturename = 0;
 
     public int hasModifiedGeoFeaturename = 0;
@@ -6202,6 +6218,110 @@ public abstract class BaseContentMetadata
         return this.hasDefinedGeoLocation;
     }
 
+    public BaseContentMetadata setGeoLocationId ( String geoLocationId ) {
+
+        ++this.hasGeoLocationId;
+        ++this.hasModifiedGeoLocationId;
+
+        this.geoLocationId = geoLocationId;
+
+        hasDefinedGeoLocationId = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The location identifier (if available) for this location.  This is platform specific.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_location_id
+     * </p>
+     */
+    public String getGeoLocationId() {
+
+        if ( this.constructed == false && this.hasGeoLocationId == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoLocationId" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoLocationId;
+    }
+
+    /**
+     * <p>
+     * The location identifier (if available) for this location.  This is platform specific.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_location_id
+     * </p>
+     */
+    public Optional<String> getGeoLocationIdAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoLocationId == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoLocationId );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The location identifier (if available) for this location.  This is platform specific.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_location_id
+     * </p>
+     */
+    public String getGeoLocationId ( String _default ) {
+
+        if ( ! hasGeoLocationId() ) {
+            return _default;
+        }
+
+        return getGeoLocationId();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoLocationId () {
+        return this.hasGeoLocationId > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoLocationId () {
+        this.hasGeoLocationId = 0;
+        this.hasModifiedGeoLocationId = 0;
+        this.hasDefinedGeoLocationId = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoLocationId () {
+        return this.hasModifiedGeoLocationId > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoLocationId () {
+        return this.hasDefinedGeoLocationId;
+    }
+
     public BaseContentMetadata setGeoFeaturename ( String geoFeaturename ) {
 
         ++this.hasGeoFeaturename;
@@ -9909,6 +10029,10 @@ public abstract class BaseContentMetadata
             setGeoLocation( obj.getGeoLocation() );
         }
 
+        if ( obj.hasGeoLocationId() ) {
+            setGeoLocationId( obj.getGeoLocationId() );
+        }
+
         if ( obj.hasGeoFeaturename() ) {
             setGeoFeaturename( obj.getGeoFeaturename() );
         }
@@ -10378,6 +10502,15 @@ public abstract class BaseContentMetadata
             setGeoLocation( obj.getGeoLocation() );
         }
 
+        if ( ! hasGeoLocationId() && obj.hasGeoLocationId() ) {
+            setGeoLocationId( obj.getGeoLocationId() );
+        }
+
+        if ( hasGeoLocationId() && getGeoLocationId() == null &&
+            obj.hasGeoLocationId() && obj.getGeoLocationId() != null ) {
+            setGeoLocationId( obj.getGeoLocationId() );
+        }
+
         if ( ! hasGeoFeaturename() && obj.hasGeoFeaturename() ) {
             setGeoFeaturename( obj.getGeoFeaturename() );
         }
@@ -10686,6 +10819,8 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedGeoLocation = 0;
 
+        this.hasModifiedGeoLocationId = 0;
+
         this.hasModifiedGeoFeaturename = 0;
 
         this.hasModifiedGeoPoint = 0;
@@ -10936,6 +11071,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedGeoLocation() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoLocationId() ) {
             return true;
         }
 
@@ -11461,6 +11600,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "geoLocation=" );
             buff.append( geoLocation );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoLocationId > 0 ) {
+
+            buff.append( "geoLocationId=" );
+            buff.append( geoLocationId );
             buff.append( " " );
 
         }
@@ -12151,6 +12298,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( geoLocation, cmp.geoLocation ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoLocationId() != cmp.hasGeoLocationId() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoLocationId, cmp.geoLocationId ) ) {
             return false;
         }
 
@@ -13349,6 +13505,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member geo_location_id from String
+
+            __name = "geoLocationId";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_location_id";
+            }
+
+            if ( this.hasGeoLocationId > 0 ) {
+
+                if ( geoLocationId != null ) {
+                    generator.writeStringField( __name, geoLocationId );
+                }
+
+            }
+
             // ***** json encode member geo_featurename from String
 
             __name = "geoFeaturename";
@@ -14385,6 +14557,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setGeoLocation( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_location_id from String
+
+                case "geo_location_id":
+
+                    jParser.nextToken();
+                    setGeoLocationId( jParser.getValueAsString() );
 
                     break;
 
