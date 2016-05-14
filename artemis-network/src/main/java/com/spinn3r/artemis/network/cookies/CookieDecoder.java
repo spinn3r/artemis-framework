@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.cookies;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,12 +35,12 @@ public class CookieDecoder {
         for (int i = 1; i < parts.length; i++) {
             String part = parts[i];
 
-            if ( "httponly".equals( part ) ) {
+            if ( "httponly".equalsIgnoreCase( part ) ) {
                 httpOnly = true;
                 continue;
             }
 
-            if ( "secure".equals( part ) ) {
+            if ( "secure".equalsIgnoreCase( part ) ) {
                 secure = true;
                 continue;
             }
@@ -70,7 +71,12 @@ public class CookieDecoder {
 
         }
 
-        return new Cookie( name, value, path, domain , httpOnly );
+        return new Cookie.Builder(name,value)
+            .setPath( Optional.ofNullable(path) )
+            .setDomain(Optional.ofNullable(domain))
+            .setHttpOnly(httpOnly)
+            .setSecure(secure)
+            .build();
 
     }
 
