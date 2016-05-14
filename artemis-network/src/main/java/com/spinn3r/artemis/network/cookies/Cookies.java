@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network;
+package com.spinn3r.artemis.network.cookies;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;

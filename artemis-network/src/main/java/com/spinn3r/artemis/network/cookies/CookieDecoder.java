@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network;
+package com.spinn3r.artemis.network.cookies;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

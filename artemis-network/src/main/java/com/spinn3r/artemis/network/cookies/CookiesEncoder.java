@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network;
+package com.spinn3r.artemis.network.cookies;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;

@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network;
+package com.spinn3r.artemis.network.cookies;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
