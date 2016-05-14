@@ -135,9 +135,13 @@ public class Cookie {
         return "Cookie{" +
                  "name='" + name + '\'' +
                  ", value='" + value + '\'' +
-                 ", path='" + path + '\'' +
-                 ", domain='" + domain + '\'' +
+                 ", path=" + path +
+                 ", domain=" + domain +
                  ", httpOnly=" + httpOnly +
+                 ", secure=" + secure +
+                 ", sameSite=" + sameSite +
+                 ", expires=" + expires +
+                 ", maxAge=" + maxAge +
                  '}';
     }
 
