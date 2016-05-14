@@ -15,16 +15,19 @@ public class CookieDecoderTest {
         Cookie cookie = CookieDecoder.decode("YSC=fNc9hMYIAEo; path=/; domain=.youtube.com; httponly" );
 
         assertNotNull( cookie );
-        assertEquals( "Cookie{name='YSC', value='fNc9hMYIAEo', path='/', domain='.youtube.com', httpOnly=true}", cookie.toString() );
+        assertEquals( "Cookie{name='YSC', value='fNc9hMYIAEo', path=Optional[/], domain=Optional[.youtube.com], httpOnly=true, secure=false, sameSite=false, expires=null, maxAge=null}",
+                      cookie.toString() );
 
     }
 
     @Test
     public void testDecode1() throws Exception {
 
-        Cookie cookie = CookieDecoder.decode("NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN_NAME; secure" );
+        Cookie cookie = CookieDecoder.decode("foo=bar; expires=DATE; path=.; domain=example.com; secure" );
         assertNotNull( cookie );
-        assertEquals( "Cookie{name='NAME', value='VALUE', path='PATH', domain='DOMAIN_NAME', httpOnly=false}", cookie.toString() );
+
+        assertEquals( "Cookie{name='foo', value='bar', path=Optional[.], domain=Optional[example.com], httpOnly=false, secure=true, sameSite=false, expires=null, maxAge=null}",
+                      cookie.toString() );
 
     }
 

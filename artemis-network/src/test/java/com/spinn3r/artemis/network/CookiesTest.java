@@ -27,10 +27,17 @@ public class CookiesTest {
 
         ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList(setCookies );
 
-        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "csrftoken" ).toString() );
-        assertEquals( "Cookie{name='target_sig', value='', path='/', domain='null', httpOnly=false}", cookies.get( "target_sig" ).toString() );
-        assertEquals( "Cookie{name='target', value='', path='/', domain='null', httpOnly=false}", cookies.get( "target" ).toString() );
-        assertEquals( "Cookie{name='mid', value='VnBmeQAEAAHoKkHWDef1Ex8tvA2w', path='/', domain='null', httpOnly=false}", cookies.get( "mid" ).toString() );
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, sameSite=false, expires=null, maxAge=null}",
+                      cookies.get( "csrftoken" ).toString() );
+
+        assertEquals( "Cookie{name='target_sig', value='', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, sameSite=false, expires=null, maxAge=null}",
+                      cookies.get( "target_sig" ).toString() );
+
+        assertEquals( "Cookie{name='target', value='', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, sameSite=false, expires=null, maxAge=null}",
+                      cookies.get( "target" ).toString() );
+
+        assertEquals( "Cookie{name='mid', value='VnBmeQAEAAHoKkHWDef1Ex8tvA2w', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, sameSite=false, expires=null, maxAge=null}",
+                      cookies.get( "mid" ).toString() );
 
     }
 
