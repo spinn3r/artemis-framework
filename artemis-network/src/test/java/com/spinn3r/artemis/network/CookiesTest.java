@@ -2,6 +2,8 @@ package com.spinn3r.artemis.network;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookies;
 import org.junit.Test;
 
 import java.util.List;
@@ -23,7 +25,7 @@ public class CookiesTest {
             "target=; expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
             "mid=VnBmeQAEAAHoKkHWDef1Ex8tvA2w; expires=Mon, 10-Dec-2035 19:14:01 GMT; Max-Age=630720000; Path=/" );
 
-        ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList( setCookies );
+        ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList(setCookies );
 
         assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', path='/', domain='null', httpOnly=false}", cookies.get( "csrftoken" ).toString() );
         assertEquals( "Cookie{name='target_sig', value='', path='/', domain='null', httpOnly=false}", cookies.get( "target_sig" ).toString() );

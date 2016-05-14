@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network;
 
+import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -16,8 +17,8 @@ public class CookiesEncoderTest {
 
         Map<String,String> cookies = new TreeMap<>();
 
-        assertEquals( "",
-                      CookiesEncoder.encode( cookies ) );
+        assertEquals("",
+                     CookiesEncoder.encode(cookies ) );
 
     }
 

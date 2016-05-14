@@ -74,7 +74,7 @@ public class CookieDecoder {
 
     }
 
-    protected static NVP nameValuePair( String value ) {
+    public static NVP nameValuePair( String value ) {
 
         Matcher matcher = NAME_VALUE_PATTERN.matcher( value );
 
@@ -86,7 +86,7 @@ public class CookieDecoder {
 
     }
 
-    static class NVP {
+    public static class NVP {
 
         private final String name;
 
