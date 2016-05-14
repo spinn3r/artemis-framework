@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.cookies;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -44,6 +46,18 @@ public class Cookie {
         this.sameSite = sameSite;
         this.expires = expires;
         this.maxAge = maxAge;
+    }
+
+    public Cookie( @JsonProperty("name") String name,
+                   @JsonProperty("value") String value,
+                   @JsonProperty("path") String path,
+                   @JsonProperty("domain") String domain,
+                   @JsonProperty("httpOnly") boolean httpOnly) {
+        this.name = name;
+        this.value = value;
+        this.path = Optional.ofNullable(path);
+        this.domain = Optional.ofNullable(domain);
+        this.httpOnly = httpOnly;
     }
 
     public String getName() {
