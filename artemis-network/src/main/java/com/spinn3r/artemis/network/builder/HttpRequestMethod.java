@@ -1,9 +1,9 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.google.common.annotations.VisibleForTesting;
-import com.spinn3r.artemis.network.Cookie;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.net.Proxy;
 import java.util.Map;

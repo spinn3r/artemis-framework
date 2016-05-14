@@ -3,11 +3,11 @@ package com.spinn3r.artemis.network.builder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.spinn3r.artemis.network.Cookies;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListener;
+import com.spinn3r.artemis.network.cookies.Cookies;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -218,7 +218,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         connect();
 
-        return new DefaultHttpResponseMeta( getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.fromHttpRequest(this) );
+        return new DefaultHttpResponseMeta(getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.fromHttpRequest(this) );
 
     }
 

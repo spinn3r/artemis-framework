@@ -3,7 +3,7 @@ package com.spinn3r.artemis.network.builder;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.spinn3r.artemis.network.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 /**
  *

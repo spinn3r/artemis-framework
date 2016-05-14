@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network;
 
 
 import com.google.common.base.Charsets;
+import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 import java.net.HttpURLConnection;
 import java.io.*;
@@ -355,7 +356,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             //perform cookie setting...
 
             if ( getCookies() != null && getCookies().size() > 0 ) {
-                _urlConnection.setRequestProperty( COOKIE_HEADER_NAME, CookiesEncoder.encode( getCookies() ) );
+                _urlConnection.setRequestProperty(COOKIE_HEADER_NAME, CookiesEncoder.encode(getCookies() ) );
             }
 
             if ( _urlConnection instanceof HttpURLConnection ) {

@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.spinn3r.artemis.network.Cookie;
-import com.spinn3r.artemis.network.Cookies;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 /**
  * Metadata about an HTTP response including the HTTP status code, etc.  This does

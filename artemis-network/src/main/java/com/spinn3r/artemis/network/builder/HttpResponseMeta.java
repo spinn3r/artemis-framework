@@ -2,10 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.spinn3r.artemis.network.Cookie;
-
-import java.util.List;
-import java.util.Map;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 /**
  *
