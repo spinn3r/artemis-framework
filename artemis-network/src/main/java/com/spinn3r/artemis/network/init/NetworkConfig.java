@@ -36,6 +36,8 @@ public class NetworkConfig {
 
     private ExecutorConfig executor = new ExecutorConfig();
 
+    private List<CookieJarReference> cookieJarReferences = Lists.newArrayList();
+
     public String getUserAgent() {
         return userAgent;
     }
@@ -104,6 +106,10 @@ public class NetworkConfig {
         return executor;
     }
 
+    public List<CookieJarReference> getCookieJarReferences() {
+        return cookieJarReferences;
+    }
+
     @Override
     public String toString() {
         return "NetworkConfig{" +
@@ -116,6 +122,8 @@ public class NetworkConfig {
                  ", defaultConnectTimeout=" + defaultConnectTimeout +
                  ", requireProxy=" + requireProxy +
                  ", requests=" + requests +
+                 ", executor=" + executor +
+                 ", cookieJarReferences=" + cookieJarReferences +
                  '}';
     }
 
