@@ -16,13 +16,6 @@ public class CookieJarReference {
 
     private CookieValueStore store = null;
 
-    public CookieJarReference(@JsonProperty("regex") String regex,
-                              @JsonProperty("path") String path,
-                              @JsonProperty("store") CookieValueStore store) {
-        this.regex = regex;
-        this.path = path;
-    }
-
     public String getPath() {
         return path;
     }

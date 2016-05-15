@@ -128,8 +128,7 @@ public class NetworkService extends BaseService {
             testProxyReference( proxyReference );
         }
 
-        CookieJarManager cookieJarManager = new CookieJarManager(networkConfig.getCookieJarReferences());
-        cookieJarManagerProvider.set(cookieJarManager);
+        cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
 
     }
 
