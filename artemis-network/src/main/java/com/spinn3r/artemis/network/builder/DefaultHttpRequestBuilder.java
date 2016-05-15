@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
@@ -36,7 +37,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
-    protected DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+    @Inject
+    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
         this.httpResponseValidators = httpResponseValidators;
         this.cookieJarManagerProvider = cookieJarManagerProvider;
     }
