@@ -37,11 +37,25 @@ public class CookieJarManager {
     }
 
     private CookieJarHolder createCookieJarHolder(CookieJarReference cookieJarReference) throws IOException {
-        File file = new File(cookieJarReference.getPath());
-        CookieJar cookieJar = new FileBackedCookieJar(file);
+
         Pattern pattern = Pattern.compile(cookieJarReference.getRegex());
 
-        return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
+        if (cookieJarReference.getPath() != null) {
+
+            File file = new File(cookieJarReference.getPath());
+            CookieJar cookieJar = new FileBackedCookieJar(file);
+
+            return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
+
+        } else if ( cookieJarReference.getStore() != null ) {
+
+            CookieJar cookieJar = new BackedCookieJar(cookieJarReference.getStore());
+            return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
+
+        } else {
+            throw new RuntimeException("Neither path nor store provided");
+        }
+
     }
 
 }

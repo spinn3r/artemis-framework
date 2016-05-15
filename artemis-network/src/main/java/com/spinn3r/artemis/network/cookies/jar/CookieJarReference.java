@@ -1,20 +1,26 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.spinn3r.artemis.network.cookies.CookieValueStore;
 
 /**
- * Reference to a cookie jar backing cookies.
+ * Reference to a cookie jar backing cookies.  If this is backed by a path
+ * we load cookies off disk.  We can also store cookies inline as a direct 'store'
+ * within the original JSON for testing, etc.
  */
 public class CookieJarReference {
 
-    private String path = "";
+    private String regex = null;
 
-    private String regex = "";
+    private String path = null;
 
-    public CookieJarReference(@JsonProperty("path") String path,
-                              @JsonProperty("regex") String regex) {
-        this.path = path;
+    private CookieValueStore store = null;
+
+    public CookieJarReference(@JsonProperty("regex") String regex,
+                              @JsonProperty("path") String path,
+                              @JsonProperty("store") CookieValueStore store) {
         this.regex = regex;
+        this.path = path;
     }
 
     public String getPath() {
@@ -25,11 +31,16 @@ public class CookieJarReference {
         return regex;
     }
 
+    public CookieValueStore getStore() {
+        return store;
+    }
+
     @Override
     public String toString() {
         return "CookieJarReference{" +
-                 "path='" + path + '\'' +
-                 ", regex='" + regex + '\'' +
+                 "regex='" + regex + '\'' +
+                 ", path='" + path + '\'' +
+                 ", store=" + store +
                  '}';
     }
 
