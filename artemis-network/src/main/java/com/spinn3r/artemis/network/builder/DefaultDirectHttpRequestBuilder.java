@@ -12,7 +12,7 @@ public class DefaultDirectHttpRequestBuilder extends DefaultHttpRequestBuilder i
 
     @Inject
     DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators) {
-        super( httpResponseValidators );
+        super(httpResponseValidators, cookieJarManager);
 
         RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
         withRequestSettingsRegistry( requestSettingsRegistry );
