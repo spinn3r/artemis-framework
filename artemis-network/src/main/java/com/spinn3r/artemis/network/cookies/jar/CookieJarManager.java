@@ -13,12 +13,9 @@ import java.util.regex.Pattern;
  */
 public class CookieJarManager {
 
-    private final List<CookieJarReference> cookieJarReferences;
-
     private final List<CookieJarHolder> cookieJarHolders = Lists.newArrayList();
 
     public CookieJarManager(List<CookieJarReference> cookieJarReferences) throws IOException {
-        this.cookieJarReferences = cookieJarReferences;
 
         for (CookieJarReference cookieJarReference : cookieJarReferences) {
             cookieJarHolders.add(createCookieJarHolder(cookieJarReference));
