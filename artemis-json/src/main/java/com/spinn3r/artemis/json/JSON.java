@@ -9,11 +9,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.google.common.base.Preconditions;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Writer;
+import java.io.*;
 import java.util.Map;
 
 /**
@@ -73,6 +71,16 @@ public class JSON {
 
         } catch (IOException e) {
             throw new RuntimeException( e );
+        }
+
+    }
+
+    public static <T> T fromJSON( Class<T> clazz, File file ) throws IOException {
+
+        Preconditions.checkNotNull(file);
+
+        try(FileInputStream fileInputStream = new FileInputStream(file)) {
+            return JSON.fromJSON(clazz, fileInputStream);
         }
 
     }

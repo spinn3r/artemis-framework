@@ -1,11 +1,14 @@
 package com.spinn3r.artemis.network.init;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarReference;
 
 /**
  *
