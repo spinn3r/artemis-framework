@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.CookieMap;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -79,19 +80,19 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     }
 
     @Override
-    public HttpRequestMethod withCookies( Map<String,String> cookies ) {
+    public HttpRequestMethod withCookies(Map<String,String> cookies) {
         checkNotNull( cookies );
         this.cookies.putAll( cookies );
         return this;
     }
 
     @Override
-    public HttpRequestMethod withCookieIndex( Map<String,Cookie> cookies ) {
+    public HttpRequestMethod withCookies(CookieMap cookieMap) {
         checkNotNull( cookies );
 
         Map<String,String> newCookies = Maps.newHashMap();
 
-        for (Map.Entry<String, Cookie> entry : cookies.entrySet()) {
+        for (Map.Entry<String, Cookie> entry : cookieMap.entrySet()) {
             newCookies.put( entry.getKey(), entry.getValue().getValue() );
         }
 

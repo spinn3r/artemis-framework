@@ -21,7 +21,6 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String DELETE_METHOD = "DELETE";
     private static final String TRACE_METHOD = "TRACE";
 
-
     protected NetworkEventListener listener = null;
 
     protected RequestListeners requestListeners;
@@ -103,7 +102,10 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         defaultHttpRequestMethod.withMaxContentLength( defaultMaxContentLength );
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
+
+        // FIXME: do cookies need to go here?
         return defaultHttpRequestMethod;
+
     }
 
 }
