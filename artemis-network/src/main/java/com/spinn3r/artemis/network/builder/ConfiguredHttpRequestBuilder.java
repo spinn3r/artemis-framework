@@ -6,11 +6,9 @@ import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.init.NetworkConfig;
-import com.spinn3r.artemis.network.validators.HttpResponseValidator;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
-
-import java.net.Proxy;
 
 /**
  *
@@ -23,9 +21,10 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
                                  Provider<ProxyRegistry> proxyRegistryProvider,
                                  Provider<RequestSettingsRegistry> requestSettingsRegistryProvider,
                                  RequestListeners requestListeners,
-                                 HttpResponseValidators httpResponseValidators ) {
+                                 HttpResponseValidators httpResponseValidators,
+                                 Provider<CookieJarManager> cookieJarManagerProvider ) {
 
-        super( httpResponseValidators );
+        super(httpResponseValidators, cookieJarManagerProvider);
         if ( networkConfig.getUserAgent() == null ) {
             throw new RuntimeException( "No user agent: " + networkConfig );
         }

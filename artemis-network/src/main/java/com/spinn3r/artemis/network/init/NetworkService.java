@@ -10,6 +10,7 @@ import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
@@ -47,6 +48,8 @@ public class NetworkService extends BaseService {
 
     private final AtomicReferenceProvider<RequestSettingsRegistry> requestSettingsRegistryProvider = new AtomicReferenceProvider<>( null );
 
+    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
+
     @Inject
     public NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort) {
         this.networkConfig = networkConfig;
@@ -66,6 +69,7 @@ public class NetworkService extends BaseService {
         provider( ProxyReference.class, proxyReferenceProvider );
         provider( ProxyRegistry.class, proxyRegistryProvider );
         provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
+        provider( CookieJarManager.class, cookieJarManagerProvider );
 
         // *** create the default proxy
 
@@ -123,6 +127,8 @@ public class NetworkService extends BaseService {
         for (ProxyReference proxyReference : proxyRegistryProvider.get().getPrioritizedProxyReferences()) {
             testProxyReference( proxyReference );
         }
+
+        cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
 
     }
 

@@ -1,10 +1,12 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 
@@ -21,11 +23,13 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String DELETE_METHOD = "DELETE";
     private static final String TRACE_METHOD = "TRACE";
 
+    protected final HttpResponseValidators httpResponseValidators;
+
+    protected final Provider<CookieJarManager> cookieJarManagerProvider;
+
     protected NetworkEventListener listener = null;
 
     protected RequestListeners requestListeners;
-
-    protected final HttpResponseValidators httpResponseValidators;
 
     private int defaultMaxContentLength = URLResourceRequest.MAX_CONTENT_LENGTH;
 
@@ -34,8 +38,9 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators) {
+    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
         this.httpResponseValidators = httpResponseValidators;
+        this.cookieJarManagerProvider = cookieJarManagerProvider;
     }
 
     public HttpRequestBuilder withRequestListeners( RequestListeners requestListeners ) {
@@ -60,50 +65,52 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     @Override
     public HttpRequestMethod get(String resource) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, GET_METHOD ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, GET_METHOD ) );
     }
 
     @Override
     public HttpRequestMethod get(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, GET_METHOD, outputContent, outputContentEncoding, outputContentType ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, GET_METHOD, outputContent, outputContentEncoding, outputContentType ) );
     }
 
     @Override
     public HttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, POST_METHOD, outputContent, outputContentEncoding, outputContentType ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, POST_METHOD, outputContent, outputContentEncoding, outputContentType ) );
     }
 
     @Override
     public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType ) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, PUT_METHOD, outputContent, outputContentEncoding, outputContentType ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, PUT_METHOD, outputContent, outputContentEncoding, outputContentType ) );
     }
 
     @Override
     public HttpRequestMethod options(String resource) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, OPTIONS_METHOD ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, OPTIONS_METHOD ) );
     }
 
     @Override
     public HttpRequestMethod head(String resource) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, HEAD_METHOD ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, HEAD_METHOD ) );
     }
 
     @Override
     public HttpRequestMethod delete(String resource) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, DELETE_METHOD ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, DELETE_METHOD ) );
     }
 
     @Override
     public HttpRequestMethod trace(String resource) throws NetworkException {
-        return configure( new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
+        return configure( resource, new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
     }
 
-    private DefaultHttpRequestMethod configure( DefaultHttpRequestMethod defaultHttpRequestMethod ) {
+    private DefaultHttpRequestMethod configure( String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
         defaultHttpRequestMethod.withMaxContentLength( defaultMaxContentLength );
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
-        // FIXME: do cookies need to go here?
+        // now get the default cookies from the cookie jar.
+        defaultHttpRequestMethod.withCookies(cookieJarManagerProvider.get().getCookieJar(resource).getCookies());
+
         return defaultHttpRequestMethod;
 
     }

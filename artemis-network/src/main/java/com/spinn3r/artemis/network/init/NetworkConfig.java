@@ -1,11 +1,14 @@
 package com.spinn3r.artemis.network.init;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarReference;
 
 /**
  *
@@ -32,6 +35,8 @@ public class NetworkConfig {
     private Map<String,RequestSettings> requests = new HashMap<>();
 
     private ExecutorConfig executor = new ExecutorConfig();
+
+    private List<CookieJarReference> cookieJarReferences = Lists.newArrayList();
 
     public String getUserAgent() {
         return userAgent;
@@ -101,6 +106,10 @@ public class NetworkConfig {
         return executor;
     }
 
+    public List<CookieJarReference> getCookieJarReferences() {
+        return cookieJarReferences;
+    }
+
     @Override
     public String toString() {
         return "NetworkConfig{" +
@@ -113,6 +122,8 @@ public class NetworkConfig {
                  ", defaultConnectTimeout=" + defaultConnectTimeout +
                  ", requireProxy=" + requireProxy +
                  ", requests=" + requests +
+                 ", executor=" + executor +
+                 ", cookieJarReferences=" + cookieJarReferences +
                  '}';
     }
 
