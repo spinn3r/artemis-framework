@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.log5j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.util.regex.Pattern;
  * Allows us to map URLs to cookie jars that support cookies for this URL.
  */
 public class CookieJarManager {
+
+    private static final Logger log = Logger.getLogger();
 
     private final List<CookieJarHolder> cookieJarHolders = Lists.newArrayList();
 
@@ -41,6 +44,8 @@ public class CookieJarManager {
         Pattern pattern = Pattern.compile(cookieJarReference.getRegex());
 
         if (cookieJarReference.getPath() != null) {
+
+            log.info( "Loading cookie jar from file: %s", cookieJarReference.getPath());
 
             File file = new File(cookieJarReference.getPath());
             CookieJar cookieJar = new FileBackedCookieJar(file);
