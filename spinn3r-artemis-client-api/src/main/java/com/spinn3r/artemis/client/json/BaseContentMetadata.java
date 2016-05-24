@@ -1380,6 +1380,54 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasReplied = 0;
+
+    public int hasModifiedReplied = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedReplied = false;
+
+    protected boolean replied;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasRepliedProfileLink = 0;
+
+    public int hasModifiedRepliedProfileLink = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedRepliedProfileLink = false;
+
+    protected String repliedProfileLink;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasRepliedProfileTitle = 0;
+
+    public int hasModifiedRepliedProfileTitle = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedRepliedProfileTitle = false;
+
+    protected String repliedProfileTitle;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasCard = 0;
 
     public int hasModifiedCard = 0;
@@ -7674,6 +7722,318 @@ public abstract class BaseContentMetadata
         return this.hasDefinedSharedProfileTitle;
     }
 
+    public BaseContentMetadata setReplied ( boolean replied ) {
+
+        ++this.hasReplied;
+        ++this.hasModifiedReplied;
+
+        this.replied = replied;
+
+        hasDefinedReplied = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * True when this source was a reply, false otherwhise
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: replied
+     * </p>
+     */
+    public boolean getReplied() {
+
+        if ( this.constructed == false && this.hasReplied == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.replied" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.replied;
+    }
+
+    /**
+     * <p>
+     * True when this source was a reply, false otherwhise
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: replied
+     * </p>
+     */
+    public Optional<Boolean> getRepliedAsOptional() {
+
+        if ( this.constructed == false && this.hasReplied == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.replied );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * True when this source was a reply, false otherwhise
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: replied
+     * </p>
+     */
+    public boolean getReplied ( boolean _default ) {
+
+        if ( ! hasReplied() ) {
+            return _default;
+        }
+
+        return getReplied();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasReplied () {
+        return this.hasReplied > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearReplied () {
+        this.hasReplied = 0;
+        this.hasModifiedReplied = 0;
+        this.hasDefinedReplied = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedReplied () {
+        return this.hasModifiedReplied > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedReplied () {
+        return this.hasDefinedReplied;
+    }
+
+    public BaseContentMetadata setRepliedProfileLink ( String repliedProfileLink ) {
+
+        ++this.hasRepliedProfileLink;
+        ++this.hasModifiedRepliedProfileLink;
+
+        this.repliedProfileLink = repliedProfileLink;
+
+        hasDefinedRepliedProfileLink = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The link to the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_link
+     * </p>
+     */
+    public String getRepliedProfileLink() {
+
+        if ( this.constructed == false && this.hasRepliedProfileLink == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.repliedProfileLink" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.repliedProfileLink;
+    }
+
+    /**
+     * <p>
+     * The link to the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_link
+     * </p>
+     */
+    public Optional<String> getRepliedProfileLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasRepliedProfileLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.repliedProfileLink );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The link to the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_link
+     * </p>
+     */
+    public String getRepliedProfileLink ( String _default ) {
+
+        if ( ! hasRepliedProfileLink() ) {
+            return _default;
+        }
+
+        return getRepliedProfileLink();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasRepliedProfileLink () {
+        return this.hasRepliedProfileLink > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearRepliedProfileLink () {
+        this.hasRepliedProfileLink = 0;
+        this.hasModifiedRepliedProfileLink = 0;
+        this.hasDefinedRepliedProfileLink = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedRepliedProfileLink () {
+        return this.hasModifiedRepliedProfileLink > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedRepliedProfileLink () {
+        return this.hasDefinedRepliedProfileLink;
+    }
+
+    public BaseContentMetadata setRepliedProfileTitle ( String repliedProfileTitle ) {
+
+        ++this.hasRepliedProfileTitle;
+        ++this.hasModifiedRepliedProfileTitle;
+
+        this.repliedProfileTitle = repliedProfileTitle;
+
+        hasDefinedRepliedProfileTitle = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The title of the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_title
+     * </p>
+     */
+    public String getRepliedProfileTitle() {
+
+        if ( this.constructed == false && this.hasRepliedProfileTitle == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.repliedProfileTitle" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.repliedProfileTitle;
+    }
+
+    /**
+     * <p>
+     * The title of the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_title
+     * </p>
+     */
+    public Optional<String> getRepliedProfileTitleAsOptional() {
+
+        if ( this.constructed == false && this.hasRepliedProfileTitle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.repliedProfileTitle );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The title of the profile of the person being replied to.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_profile_title
+     * </p>
+     */
+    public String getRepliedProfileTitle ( String _default ) {
+
+        if ( ! hasRepliedProfileTitle() ) {
+            return _default;
+        }
+
+        return getRepliedProfileTitle();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasRepliedProfileTitle () {
+        return this.hasRepliedProfileTitle > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearRepliedProfileTitle () {
+        this.hasRepliedProfileTitle = 0;
+        this.hasModifiedRepliedProfileTitle = 0;
+        this.hasDefinedRepliedProfileTitle = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedRepliedProfileTitle () {
+        return this.hasModifiedRepliedProfileTitle > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedRepliedProfileTitle () {
+        return this.hasDefinedRepliedProfileTitle;
+    }
+
     public BaseContentMetadata setCard ( Card card ) {
 
         ++this.hasCard;
@@ -10085,6 +10445,18 @@ public abstract class BaseContentMetadata
             setSharedProfileTitle( obj.getSharedProfileTitle() );
         }
 
+        if ( obj.hasReplied() ) {
+            setReplied( obj.getReplied() );
+        }
+
+        if ( obj.hasRepliedProfileLink() ) {
+            setRepliedProfileLink( obj.getRepliedProfileLink() );
+        }
+
+        if ( obj.hasRepliedProfileTitle() ) {
+            setRepliedProfileTitle( obj.getRepliedProfileTitle() );
+        }
+
         if ( obj.hasCard() ) {
             setCard( obj.getCard() );
         }
@@ -10603,6 +10975,28 @@ public abstract class BaseContentMetadata
             setSharedProfileTitle( obj.getSharedProfileTitle() );
         }
 
+        if ( ! hasReplied() && obj.hasReplied() ) {
+            setReplied( obj.getReplied() );
+        }
+
+        if ( ! hasRepliedProfileLink() && obj.hasRepliedProfileLink() ) {
+            setRepliedProfileLink( obj.getRepliedProfileLink() );
+        }
+
+        if ( hasRepliedProfileLink() && getRepliedProfileLink() == null &&
+            obj.hasRepliedProfileLink() && obj.getRepliedProfileLink() != null ) {
+            setRepliedProfileLink( obj.getRepliedProfileLink() );
+        }
+
+        if ( ! hasRepliedProfileTitle() && obj.hasRepliedProfileTitle() ) {
+            setRepliedProfileTitle( obj.getRepliedProfileTitle() );
+        }
+
+        if ( hasRepliedProfileTitle() && getRepliedProfileTitle() == null &&
+            obj.hasRepliedProfileTitle() && obj.getRepliedProfileTitle() != null ) {
+            setRepliedProfileTitle( obj.getRepliedProfileTitle() );
+        }
+
         if ( card == null && obj.hasCard() && obj.getCard() != null ) {
             setCard( obj.getCard() );
         }
@@ -10846,6 +11240,12 @@ public abstract class BaseContentMetadata
         this.hasModifiedSharedProfileLink = 0;
 
         this.hasModifiedSharedProfileTitle = 0;
+
+        this.hasModifiedReplied = 0;
+
+        this.hasModifiedRepliedProfileLink = 0;
+
+        this.hasModifiedRepliedProfileTitle = 0;
 
         this.hasModifiedCard = 0;
 
@@ -11127,6 +11527,18 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedSharedProfileTitle() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedReplied() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedRepliedProfileLink() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedRepliedProfileTitle() ) {
             return true;
         }
 
@@ -11712,6 +12124,30 @@ public abstract class BaseContentMetadata
 
             buff.append( "sharedProfileTitle=" );
             buff.append( sharedProfileTitle );
+            buff.append( " " );
+
+        }
+
+        if ( hasReplied > 0 ) {
+
+            buff.append( "replied=" );
+            buff.append( replied );
+            buff.append( " " );
+
+        }
+
+        if ( hasRepliedProfileLink > 0 ) {
+
+            buff.append( "repliedProfileLink=" );
+            buff.append( repliedProfileLink );
+            buff.append( " " );
+
+        }
+
+        if ( hasRepliedProfileTitle > 0 ) {
+
+            buff.append( "repliedProfileTitle=" );
+            buff.append( repliedProfileTitle );
             buff.append( " " );
 
         }
@@ -12424,6 +12860,33 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( sharedProfileTitle, cmp.sharedProfileTitle ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasReplied() != cmp.hasReplied() ) {
+            return false;
+        }
+
+        if ( replied != cmp.replied ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasRepliedProfileLink() != cmp.hasRepliedProfileLink() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( repliedProfileLink, cmp.repliedProfileLink ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasRepliedProfileTitle() != cmp.hasRepliedProfileTitle() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( repliedProfileTitle, cmp.repliedProfileTitle ) ) {
             return false;
         }
 
@@ -13724,6 +14187,53 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member replied from boolean
+
+            __name = "replied";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "replied";
+            }
+
+            if ( this.hasReplied > 0 ) {
+
+                if ( hasDefinedReplied )
+                    generator.writeBooleanField( __name, replied );
+
+            }
+
+            // ***** json encode member replied_profile_link from String
+
+            __name = "repliedProfileLink";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "replied_profile_link";
+            }
+
+            if ( this.hasRepliedProfileLink > 0 ) {
+
+                if ( repliedProfileLink != null ) {
+                    generator.writeStringField( __name, repliedProfileLink );
+                }
+
+            }
+
+            // ***** json encode member replied_profile_title from String
+
+            __name = "repliedProfileTitle";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "replied_profile_title";
+            }
+
+            if ( this.hasRepliedProfileTitle > 0 ) {
+
+                if ( repliedProfileTitle != null ) {
+                    generator.writeStringField( __name, repliedProfileTitle );
+                }
+
+            }
+
             // ***** json encode member card from int
 
             __name = "card";
@@ -14697,6 +15207,36 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setSharedProfileTitle( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member replied from boolean
+
+                case "replied":
+
+                    jParser.nextToken();
+                    setReplied( jParser.getBooleanValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member replied_profile_link from String
+
+                case "replied_profile_link":
+
+                    jParser.nextToken();
+                    setRepliedProfileLink( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member replied_profile_title from String
+
+                case "replied_profile_title":
+
+                    jParser.nextToken();
+                    setRepliedProfileTitle( jParser.getValueAsString() );
 
                     break;
 
