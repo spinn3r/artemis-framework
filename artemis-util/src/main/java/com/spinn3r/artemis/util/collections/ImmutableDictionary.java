@@ -1,8 +1,12 @@
 package com.spinn3r.artemis.util.collections;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.BiConsumer;
 
 /**
@@ -13,16 +17,22 @@ import java.util.function.BiConsumer;
  */
 public class ImmutableDictionary<K,V> {
 
-    private final HashMap<K,V> backing;
+    protected final HashMap<K,V> backing;
 
     public ImmutableDictionary() {
         this.backing = new HashMap<>(0);
     }
 
-    public ImmutableDictionary(Map<K,V> map) {
-        Objects.requireNonNull(map);
-        this.backing = new HashMap<>(map.size());
-        this.backing.putAll(map);
+    public ImmutableDictionary(Map<K,V> parent) {
+        Objects.requireNonNull(parent);
+        this.backing = new HashMap<>(parent.size());
+        this.backing.putAll(parent);
+    }
+
+    public ImmutableDictionary(ImmutableDictionary<K,V> parent) {
+        Objects.requireNonNull(parent);
+        this.backing = new HashMap<>(parent.size());
+        this.backing.putAll(parent.backing);
     }
 
     public int size() {
@@ -53,6 +63,14 @@ public class ImmutableDictionary<K,V> {
         backing.forEach(action);
     }
 
+    public ImmutableSet<K> keySet() {
+        return ImmutableSet.copyOf( backing.keySet() );
+    }
+
+    public ImmutableMap<K,V> toMap() {
+        return ImmutableMap.copyOf(backing);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +89,26 @@ public class ImmutableDictionary<K,V> {
 
     public String toString() {
         return backing.toString();
+    }
+
+    public static class Builder<K,V> {
+
+        private ImmutableDictionary<K,V> result = new ImmutableDictionary<>();
+
+        public Builder putAll( Map<K,V> map ) {
+            result.backing.putAll(map);
+            return this;
+        }
+
+        public Builder putAll( ImmutableDictionary<K,V> map ) {
+            result.backing.putAll(map.backing);
+            return this;
+        }
+
+        public ImmutableDictionary<K,V> build() {
+            return result;
+        }
+
     }
 
 }
