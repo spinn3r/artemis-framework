@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.google.common.base.Preconditions;
 
 import java.io.*;
@@ -125,13 +126,17 @@ public class JSON {
     }
 
     private static ObjectMapper createObjectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new GuavaModule());
-        return mapper;
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new GuavaModule());
+        objectMapper.registerModule(new Jdk8Module());
+
+        return objectMapper;
     }
 
     private static ObjectMapper createStaticObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper( new Factory() );
+        objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new GuavaModule());
 
         objectMapper.configure( SerializationFeature.INDENT_OUTPUT, true );
         objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
