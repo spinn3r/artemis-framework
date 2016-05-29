@@ -19,6 +19,14 @@ public class UTF8Data {
         return byteBuffer;
     }
 
+    /**
+     * The usage, in bytes, that this UTF8Data requires to be represented
+     * on the wire.
+     */
+    public int byteUsage() {
+        return byteBuffer.limit() - byteBuffer.position();
+    }
+
     @Override
     public String toString() {
         return ByteBuffers.toUTF8( byteBuffer );

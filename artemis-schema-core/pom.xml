@@ -32,6 +32,12 @@
 
         <dependency>
             <groupId>com.spinn3r.artemis.json</groupId>
+            <artifactId>artemis-json</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.json</groupId>
             <artifactId>artemis-json-framework</artifactId>
             <version>${project.version}</version>
         </dependency>

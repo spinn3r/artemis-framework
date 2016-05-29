@@ -13,6 +13,7 @@ import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.google.common.base.Preconditions;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.Map;
 
 /**
@@ -30,13 +31,25 @@ public class JSON {
     public static String toJSON( Object obj ) {
 
         try {
-
             return OBJECT_MAPPER.writeValueAsString( obj );
-
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
         }
 
+    }
+
+    public static byte[] toByteArray( Object obj ) {
+
+        try {
+            return OBJECT_MAPPER.writeValueAsBytes( obj );
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException( e );
+        }
+
+    }
+
+    public static ByteBuffer toByteBuffer(Object obj ) {
+        return ByteBuffer.wrap(toByteArray(obj));
     }
 
     public static void toJSON( Object obj, OutputStream outputStream  ) throws IOException {
@@ -50,8 +63,6 @@ public class JSON {
         }
 
     }
-
-
 
     public static <T> T fromJSON( Class<T> clazz, String content ) {
 
