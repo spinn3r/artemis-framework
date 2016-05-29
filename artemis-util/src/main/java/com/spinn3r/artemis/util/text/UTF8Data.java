@@ -23,7 +23,7 @@ public class UTF8Data {
      * The usage, in bytes, that this UTF8Data requires to be represented
      * on the wire.
      */
-    public int byteUsage() {
+    public int usageInBytes() {
         return byteBuffer.limit() - byteBuffer.position();
     }
 
