@@ -6697,7 +6697,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>
@@ -6716,7 +6716,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>
@@ -6738,7 +6738,7 @@ public abstract class BaseContentMetadata
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>

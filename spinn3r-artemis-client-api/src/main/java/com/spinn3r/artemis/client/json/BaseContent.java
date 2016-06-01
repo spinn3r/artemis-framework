@@ -15297,7 +15297,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>
@@ -15316,7 +15316,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>
@@ -15338,7 +15338,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The rating for this item provided by the user.  
+     * The rating for this item provided by the user. 
      * </p>
      *
      * <p>
