@@ -1220,6 +1220,54 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasGeoCountry = 0;
+
+    public int hasModifiedGeoCountry = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoCountry = false;
+
+    protected String geoCountry;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasGeoState = 0;
+
+    public int hasModifiedGeoState = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoState = false;
+
+    protected String geoState;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasGeoCity = 0;
+
+    public int hasModifiedGeoCity = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoCity = false;
+
+    protected String geoCity;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasRatingValue = 0;
 
     public int hasModifiedRatingValue = 0;
@@ -6682,6 +6730,318 @@ public abstract class BaseContentMetadata
         return this.hasDefinedGeoBox;
     }
 
+    public BaseContentMetadata setGeoCountry ( String geoCountry ) {
+
+        ++this.hasGeoCountry;
+        ++this.hasModifiedGeoCountry;
+
+        this.geoCountry = geoCountry;
+
+        hasDefinedGeoCountry = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The human readable country derived from geo_location.  These are represented as ISO 3166-1 alpha-2: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_country
+     * </p>
+     */
+    public String getGeoCountry() {
+
+        if ( this.constructed == false && this.hasGeoCountry == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoCountry" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoCountry;
+    }
+
+    /**
+     * <p>
+     * The human readable country derived from geo_location.  These are represented as ISO 3166-1 alpha-2: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_country
+     * </p>
+     */
+    public Optional<String> getGeoCountryAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoCountry == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoCountry );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The human readable country derived from geo_location.  These are represented as ISO 3166-1 alpha-2: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_country
+     * </p>
+     */
+    public String getGeoCountry ( String _default ) {
+
+        if ( ! hasGeoCountry() ) {
+            return _default;
+        }
+
+        return getGeoCountry();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoCountry () {
+        return this.hasGeoCountry > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoCountry () {
+        this.hasGeoCountry = 0;
+        this.hasModifiedGeoCountry = 0;
+        this.hasDefinedGeoCountry = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoCountry () {
+        return this.hasModifiedGeoCountry > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoCountry () {
+        return this.hasDefinedGeoCountry;
+    }
+
+    public BaseContentMetadata setGeoState ( String geoState ) {
+
+        ++this.hasGeoState;
+        ++this.hasModifiedGeoState;
+
+        this.geoState = geoState;
+
+        hasDefinedGeoState = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The human readable state derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_state
+     * </p>
+     */
+    public String getGeoState() {
+
+        if ( this.constructed == false && this.hasGeoState == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoState" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoState;
+    }
+
+    /**
+     * <p>
+     * The human readable state derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_state
+     * </p>
+     */
+    public Optional<String> getGeoStateAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoState == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoState );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The human readable state derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_state
+     * </p>
+     */
+    public String getGeoState ( String _default ) {
+
+        if ( ! hasGeoState() ) {
+            return _default;
+        }
+
+        return getGeoState();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoState () {
+        return this.hasGeoState > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoState () {
+        this.hasGeoState = 0;
+        this.hasModifiedGeoState = 0;
+        this.hasDefinedGeoState = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoState () {
+        return this.hasModifiedGeoState > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoState () {
+        return this.hasDefinedGeoState;
+    }
+
+    public BaseContentMetadata setGeoCity ( String geoCity ) {
+
+        ++this.hasGeoCity;
+        ++this.hasModifiedGeoCity;
+
+        this.geoCity = geoCity;
+
+        hasDefinedGeoCity = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The human readable city derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_city
+     * </p>
+     */
+    public String getGeoCity() {
+
+        if ( this.constructed == false && this.hasGeoCity == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoCity" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoCity;
+    }
+
+    /**
+     * <p>
+     * The human readable city derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_city
+     * </p>
+     */
+    public Optional<String> getGeoCityAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoCity == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoCity );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The human readable city derived from geo_location.  
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_city
+     * </p>
+     */
+    public String getGeoCity ( String _default ) {
+
+        if ( ! hasGeoCity() ) {
+            return _default;
+        }
+
+        return getGeoCity();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoCity () {
+        return this.hasGeoCity > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoCity () {
+        this.hasGeoCity = 0;
+        this.hasModifiedGeoCity = 0;
+        this.hasDefinedGeoCity = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoCity () {
+        return this.hasModifiedGeoCity > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoCity () {
+        return this.hasDefinedGeoCity;
+    }
+
     public BaseContentMetadata setRatingValue ( String ratingValue ) {
 
         ++this.hasRatingValue;
@@ -10405,6 +10765,18 @@ public abstract class BaseContentMetadata
             setGeoBox( obj.getGeoBox() );
         }
 
+        if ( obj.hasGeoCountry() ) {
+            setGeoCountry( obj.getGeoCountry() );
+        }
+
+        if ( obj.hasGeoState() ) {
+            setGeoState( obj.getGeoState() );
+        }
+
+        if ( obj.hasGeoCity() ) {
+            setGeoCity( obj.getGeoCity() );
+        }
+
         if ( obj.hasRatingValue() ) {
             setRatingValue( obj.getRatingValue() );
         }
@@ -10910,6 +11282,33 @@ public abstract class BaseContentMetadata
             setGeoBox( obj.getGeoBox() );
         }
 
+        if ( ! hasGeoCountry() && obj.hasGeoCountry() ) {
+            setGeoCountry( obj.getGeoCountry() );
+        }
+
+        if ( hasGeoCountry() && getGeoCountry() == null &&
+            obj.hasGeoCountry() && obj.getGeoCountry() != null ) {
+            setGeoCountry( obj.getGeoCountry() );
+        }
+
+        if ( ! hasGeoState() && obj.hasGeoState() ) {
+            setGeoState( obj.getGeoState() );
+        }
+
+        if ( hasGeoState() && getGeoState() == null &&
+            obj.hasGeoState() && obj.getGeoState() != null ) {
+            setGeoState( obj.getGeoState() );
+        }
+
+        if ( ! hasGeoCity() && obj.hasGeoCity() ) {
+            setGeoCity( obj.getGeoCity() );
+        }
+
+        if ( hasGeoCity() && getGeoCity() == null &&
+            obj.hasGeoCity() && obj.getGeoCity() != null ) {
+            setGeoCity( obj.getGeoCity() );
+        }
+
         if ( ! hasRatingValue() && obj.hasRatingValue() ) {
             setRatingValue( obj.getRatingValue() );
         }
@@ -11221,6 +11620,12 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedGeoBox = 0;
 
+        this.hasModifiedGeoCountry = 0;
+
+        this.hasModifiedGeoState = 0;
+
+        this.hasModifiedGeoCity = 0;
+
         this.hasModifiedRatingValue = 0;
 
         this.hasModifiedFaviconSrc = 0;
@@ -11487,6 +11892,18 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedGeoBox() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoCountry() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoState() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoCity() ) {
             return true;
         }
 
@@ -12044,6 +12461,30 @@ public abstract class BaseContentMetadata
 
             buff.append( "geoBox=" );
             buff.append( geoBox );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoCountry > 0 ) {
+
+            buff.append( "geoCountry=" );
+            buff.append( geoCountry );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoState > 0 ) {
+
+            buff.append( "geoState=" );
+            buff.append( geoState );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoCity > 0 ) {
+
+            buff.append( "geoCity=" );
+            buff.append( geoCity );
             buff.append( " " );
 
         }
@@ -12770,6 +13211,33 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( geoBox, cmp.geoBox ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoCountry() != cmp.hasGeoCountry() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoCountry, cmp.geoCountry ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoState() != cmp.hasGeoState() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoState, cmp.geoState ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoCity() != cmp.hasGeoCity() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoCity, cmp.geoCity ) ) {
             return false;
         }
 
@@ -14032,6 +14500,54 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member geo_country from String
+
+            __name = "geoCountry";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_country";
+            }
+
+            if ( this.hasGeoCountry > 0 ) {
+
+                if ( geoCountry != null ) {
+                    generator.writeStringField( __name, geoCountry );
+                }
+
+            }
+
+            // ***** json encode member geo_state from String
+
+            __name = "geoState";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_state";
+            }
+
+            if ( this.hasGeoState > 0 ) {
+
+                if ( geoState != null ) {
+                    generator.writeStringField( __name, geoState );
+                }
+
+            }
+
+            // ***** json encode member geo_city from String
+
+            __name = "geoCity";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_city";
+            }
+
+            if ( this.hasGeoCity > 0 ) {
+
+                if ( geoCity != null ) {
+                    generator.writeStringField( __name, geoCity );
+                }
+
+            }
+
             // ***** json encode member rating_value from String
 
             __name = "ratingValue";
@@ -15107,6 +15623,36 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setGeoBox( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_country from String
+
+                case "geo_country":
+
+                    jParser.nextToken();
+                    setGeoCountry( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_state from String
+
+                case "geo_state":
+
+                    jParser.nextToken();
+                    setGeoState( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_city from String
+
+                case "geo_city":
+
+                    jParser.nextToken();
+                    setGeoCity( jParser.getValueAsString() );
 
                     break;
 
