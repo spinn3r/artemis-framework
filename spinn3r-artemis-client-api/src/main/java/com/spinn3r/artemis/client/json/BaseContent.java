@@ -14428,7 +14428,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The twitter handle of the author of this post.  This is not just specific to twitter data as regular blog data can also specify the users twitter handle.
+     * Deprecated.  Use author_handle instead
      * </p>
      *
      * <p>
@@ -14447,7 +14447,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The twitter handle of the author of this post.  This is not just specific to twitter data as regular blog data can also specify the users twitter handle.
+     * Deprecated.  Use author_handle instead
      * </p>
      *
      * <p>
@@ -14469,7 +14469,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The twitter handle of the author of this post.  This is not just specific to twitter data as regular blog data can also specify the users twitter handle.
+     * Deprecated.  Use author_handle instead
      * </p>
      *
      * <p>
@@ -14532,7 +14532,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The twitter user ID of this account (when available).  The user ID is a string in case the user ID has some type of external representation like BAse64 or Hex encoding.
+     * Deprecated.  Use author_user_id instead.
      * </p>
      *
      * <p>
@@ -14551,7 +14551,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The twitter user ID of this account (when available).  The user ID is a string in case the user ID has some type of external representation like BAse64 or Hex encoding.
+     * Deprecated.  Use author_user_id instead.
      * </p>
      *
      * <p>
@@ -14573,7 +14573,7 @@ public abstract class BaseContent
      * Get the value of a member and provide a default if it's not defined.
      *
      * <p>
-     * The twitter user ID of this account (when available).  The user ID is a string in case the user ID has some type of external representation like BAse64 or Hex encoding.
+     * Deprecated.  Use author_user_id instead.
      * </p>
      *
      * <p>
