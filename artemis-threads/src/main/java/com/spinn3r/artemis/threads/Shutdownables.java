@@ -22,14 +22,14 @@ public class Shutdownables {
 
         for (ShutdownableIndex shutdownableIndex : shutdownableIndexes) {
 
-            log.info( "Shutting down %,d services: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
+            log.info( "Shutting down %,d shutdownable: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
 
             for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.entrySet()) {
 
                 String identifier = entry.getKey();
                 Shutdownable shutdownable = entry.getValue();
 
-                log.info("Shutting down service: %s...", identifier);
+                log.info("Shutting down shutdownable: %s...", identifier);
 
                 try {
                     shutdownable.shutdown();
@@ -38,11 +38,11 @@ public class Shutdownables {
                     exceptions.add( e );
                 }
 
-                log.info("Shutting down service: %s...done", identifier);
+                log.info("Shutting down shutdownable: %s...done", identifier);
 
             }
 
-            log.info( "Shutting down %,d services: %s...done", shutdownableIndex.size(), shutdownableIndex.getName() );
+            log.info( "Shutting down %,d shutdownables: %s...done", shutdownableIndex.size(), shutdownableIndex.getName() );
 
 
         }
