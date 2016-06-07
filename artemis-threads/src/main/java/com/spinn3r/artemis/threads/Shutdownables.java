@@ -16,30 +16,36 @@ public class Shutdownables {
 
     private static final Logger log = Logger.getLogger();
 
-    public static void shutdown(ShutdownableIndex shutdownableIndex) throws Exception {
+    public static void shutdown(ShutdownableIndex... shutdownableIndexes) throws Exception {
 
         List<Exception> exceptions = Lists.newArrayList();
 
-        log.info( "Shutting down %,d services: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
+        for (ShutdownableIndex shutdownableIndex : shutdownableIndexes) {
 
-        for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.entrySet()) {
+            log.info( "Shutting down %,d services: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
 
-            String identifier = entry.getKey();
-            Shutdownable shutdownable = entry.getValue();
+            for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.entrySet()) {
 
-            log.info("Shutting down service: %s...", identifier);
+                String identifier = entry.getKey();
+                Shutdownable shutdownable = entry.getValue();
 
-            try {
-                shutdownable.shutdown();
-            } catch (Exception e) {
-                exceptions.add( e );
+                log.info("Shutting down service: %s...", identifier);
+
+                try {
+                    shutdownable.shutdown();
+                } catch (Exception e) {
+                    // we're not logging this becuase the handler should log it
+                    exceptions.add( e );
+                }
+
+                log.info("Shutting down service: %s...done", identifier);
+
             }
 
-            log.info("Shutting down service: %s...done", identifier);
+            log.info( "Shutting down %,d services: %s...done", shutdownableIndex.size(), shutdownableIndex.getName() );
+
 
         }
-
-        log.info( "Shutting down %,d services: %s...done", shutdownableIndex.size(), shutdownableIndex.getName() );
 
         if ( exceptions.size() > 0 )
             throw Throwables.createMultiException(exceptions );
@@ -64,6 +70,5 @@ public class Shutdownables {
             throw Throwables.createMultiException(exceptions );
 
     }
-
 
 }
