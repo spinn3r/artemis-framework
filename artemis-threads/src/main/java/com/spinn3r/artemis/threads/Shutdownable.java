@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.util.misc;
+package com.spinn3r.artemis.threads;
 
 /**
  *

@@ -68,6 +68,7 @@
         <module>artemis-streams</module>
         <module>artemis-jest</module>
         <module>artemis-velocity</module>
+        <module>artemis-threads</module>
     </modules>
 
     <description>
