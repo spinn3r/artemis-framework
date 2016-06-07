@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.util.io;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.util.misc.Throwables;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -30,24 +31,8 @@ public class Closeables {
 
         }
 
-        rethrowWhenNecessary( exceptions );
-
-    }
-
-    public static <T extends Exception> void rethrowWhenNecessary( List<T> exceptions ) throws T {
-
-        if ( exceptions.size() == 0 ) {
-            // we're done...
-            return;
-        }
-
-        T root = exceptions.remove( 0 );
-
-        for (T exception : exceptions) {
-            root.addSuppressed( exception );
-        }
-
-        throw root;
+        if ( exceptions.size() > 0 )
+            throw Throwables.createMultiException(exceptions );
 
     }
 
