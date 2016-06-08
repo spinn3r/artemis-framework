@@ -29,6 +29,9 @@ public class Shutdownables {
                 String identifier = entry.getKey();
                 Shutdownable shutdownable = entry.getValue();
 
+                if ( shutdownable == null )
+                    continue;
+
                 log.info("Shutting down shutdownable: %s...", identifier);
 
                 try {
@@ -59,6 +62,10 @@ public class Shutdownables {
         for (Shutdownable shutdownable : shutdownableList) {
 
             try {
+
+                if ( shutdownable == null )
+                    continue;
+
                 shutdownable.shutdown();
             } catch (Exception e) {
                 exceptions.add( e );
