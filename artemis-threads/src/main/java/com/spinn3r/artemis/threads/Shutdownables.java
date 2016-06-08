@@ -22,6 +22,9 @@ public class Shutdownables {
 
         for (ShutdownableIndex shutdownableIndex : shutdownableIndexes) {
 
+            if ( shutdownableIndex.size() == 0 )
+                continue;
+
             log.info( "Shutting down %,d shutdownable: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
 
             for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.entrySet()) {
@@ -37,7 +40,7 @@ public class Shutdownables {
                 try {
                     shutdownable.shutdown();
                 } catch (Exception e) {
-                    // we're not logging this becuase the handler should log it
+                    // we're not logging this because the handler should log it
                     exceptions.add( e );
                 }
 
