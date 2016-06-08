@@ -16,10 +16,13 @@ public class ExecutorServices {
      *
      */
     public static ShutdownAwaiter shutdownAndAwaitTermination( ExecutorService executorService ) {
-
-        return new ShutdownAwaiter( executorService );
-
+        return new ShutdownAwaiter( executorService, false );
     }
+
+    public static ShutdownAwaiter shutdownNowAndAwaitTermination( ExecutorService executorService ) {
+        return new ShutdownAwaiter( executorService, true );
+    }
+
 
     public static class ShutdownAwaiter {
 
@@ -33,8 +36,11 @@ public class ExecutorServices {
 
         private final ExecutorService executorService;
 
-        public ShutdownAwaiter(ExecutorService executorService) {
+        private final boolean now;
+
+        public ShutdownAwaiter(ExecutorService executorService, boolean now) {
             this.executorService = executorService;
+            this.now = now;
         }
 
         public ShutdownAwaiter setSoftTimeout( long timeout, TimeUnit timeUnit ) {
@@ -56,8 +62,13 @@ public class ExecutorServices {
                 return;
             }
 
-            // disable new tasks from being submitted
-            executorService.shutdown();
+            if (now) {
+                // disable new tasks from being submitted and interrupt existing tasks.
+                executorService.shutdownNow();
+            } else {
+                // disable new tasks from being submitted
+                executorService.shutdown();
+            }
 
             try {
 
