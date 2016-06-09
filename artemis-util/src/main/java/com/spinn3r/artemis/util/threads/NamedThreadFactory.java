@@ -26,6 +26,7 @@ public class NamedThreadFactory implements ThreadFactory {
     public NamedThreadFactory(String name) {
         this( name, Thread.NORM_PRIORITY );
     }
+
     public NamedThreadFactory(String name, int priority ) {
         final SecurityManager s = System.getSecurityManager();
         this.group = (s != null) ? s.getThreadGroup() : Thread.currentThread().getThreadGroup();
