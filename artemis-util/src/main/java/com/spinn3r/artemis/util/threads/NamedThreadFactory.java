@@ -23,6 +23,10 @@ public class NamedThreadFactory implements ThreadFactory {
         this( clazz.getName() );
     }
 
+    public NamedThreadFactory(Class<?> clazz, int priority) {
+        this( clazz.getName(), priority );
+    }
+
     public NamedThreadFactory(String name) {
         this( name, Thread.NORM_PRIORITY );
     }

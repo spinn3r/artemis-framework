@@ -5,7 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Contains an index of shutdownables and a name that represents them.
  */
-public class ShutdownableIndex extends ConcurrentHashMap<String,Shutdownable> {
+public class ShutdownableIndex extends ConcurrentHashMap<String,Shutdownable> implements Shutdownable {
+
+    // TODO: consider making this immutable...
 
     private final String name;
 
@@ -21,8 +23,12 @@ public class ShutdownableIndex extends ConcurrentHashMap<String,Shutdownable> {
         return name;
     }
 
-    public
-    static class Builder {
+    @Override
+    public void shutdown() throws Exception {
+        Shutdownables.shutdown(this);
+    }
+
+    public static class Builder {
 
         private final ShutdownableIndex result;
 

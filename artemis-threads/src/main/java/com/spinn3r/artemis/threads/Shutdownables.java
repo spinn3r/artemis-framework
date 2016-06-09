@@ -58,11 +58,11 @@ public class Shutdownables {
 
     }
 
-    public static void shutdown(Collection<? extends Shutdownable> shutdownableList) throws Exception {
+    public static void shutdown(Shutdownable... shutdownables) throws Exception {
 
         List<Exception> exceptions = Lists.newArrayList();
 
-        for (Shutdownable shutdownable : shutdownableList) {
+        for (Shutdownable shutdownable : shutdownables) {
 
             try {
 
