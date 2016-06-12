@@ -7,16 +7,20 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Role;
-import com.spinn3r.artemis.metrics.init.MetricsConfig;
-import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.sequence.GlobalMutex;
 import com.spinn3r.artemis.sequence.GlobalMutexExpiredException;
+import com.spinn3r.artemis.threads.Shutdownable;
+import com.spinn3r.artemis.threads.ShutdownableIndex;
+import com.spinn3r.artemis.util.misc.ExecutorServices;
+import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 import com.spinn3r.metrics.kairosdb.KairosDb;
 import com.spinn3r.metrics.kairosdb.KairosDbReporter;
 import com.spinn3r.metrics.kairosdb.ReportWaiter;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -42,6 +46,8 @@ public class GlobalMetricsService extends MetricsService {
     private final Role role;
 
     private final Provider<GlobalMutex> globalMutexProvider;
+
+    private final ShutdownableIndex shutdownableIndex = new ShutdownableIndex(GlobalMetricsService.class);
 
     @Inject
     GlobalMetricsService(MetricsConfig metricConfig, Provider<Hostname> hostnameProvider, Role role, Provider<GlobalMutex> globalMutexProvider) {
@@ -83,8 +89,16 @@ public class GlobalMetricsService extends MetricsService {
 
         KairosDb kairosDb = new KairosDb( addr );
 
+        ScheduledExecutorService scheduledExecutorService
+          = Executors.newSingleThreadScheduledExecutor(new NamedThreadFactory(KairosDbReporter.class, Thread.MAX_PRIORITY));
+
+        shutdownableIndex.put(ScheduledExecutorService.class, () -> {
+            ExecutorServices.shutdownNowAndAwaitTermination(scheduledExecutorService);
+        });
+
         KairosDbReporter.Builder builder =
           KairosDbReporter.forRegistry( metricRegistry )
+            .withScheduledExecutorService(scheduledExecutorService)
             .withTag( HOSTNAME, hostnameProvider.get().getValue() )
             .withTag( ROLE, role.getValue() )
             .garbageCollectAndDeriveCounters( true );
@@ -103,6 +117,10 @@ public class GlobalMetricsService extends MetricsService {
 
         kairosDbReporter.start( reporter.getInterval(), TimeUnit.MILLISECONDS );
 
+        shutdownableIndex.put(KairosDbReporter.class, () -> {
+            kairosDbReporter.stop();
+        });
+
         advertise(ReportWaiter.class, kairosDbReporter.getReportWaiter());
 
     }
@@ -110,21 +128,18 @@ public class GlobalMetricsService extends MetricsService {
     private void startJMXReporter( MetricRegistry metricRegistry ) {
 
         jmxReporter = JmxReporter.forRegistry( metricRegistry ).build();
-
         jmxReporter.start();
+
+        shutdownableIndex.put(JmxReporter.class, () -> {
+            jmxReporter.stop();
+        });
 
     }
 
     @Override
     public void stop() throws Exception {
 
-        if ( kairosDbReporter != null ) {
-            kairosDbReporter.stop();
-        }
-
-        if ( jmxReporter != null ) {
-            jmxReporter.stop();
-        }
+        shutdownableIndex.shutdown();
 
     }
 
