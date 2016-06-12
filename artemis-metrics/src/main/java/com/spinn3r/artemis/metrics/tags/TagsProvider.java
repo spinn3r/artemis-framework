@@ -14,7 +14,7 @@ public interface TagsProvider<T> {
      *
      * @return
      */
-    public List<Tag> getTags( T value );
+    List<Tag> getTags( T value );
 
     /**
      * Given a set of tags, determine which ones to denormalize.
@@ -23,7 +23,7 @@ public interface TagsProvider<T> {
      * @param tags
      * @return
      */
-    public List<TagMap> denormalize( T value, List<Tag> tags );
+    List<TagMap> denormalize( T value, List<Tag> tags );
 
     /**
      * Only write the denormalized form of the metric as the metric is too
@@ -31,6 +31,6 @@ public interface TagsProvider<T> {
      * moving forward.
      * @return
      */
-    public boolean getDenormalizedOnly();
+    boolean getDenormalizedOnly();
 
 }
