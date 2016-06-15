@@ -15,10 +15,8 @@
  */
 package com.spinn3r.tracepoint;
 
-import java.util.*;
-import java.util.regex.*;
-
-import com.spinn3r.util.*;
+import com.spinn3r.util.Hex;
+import com.spinn3r.util.MD5;
 
 /**
  * <p>

@@ -69,6 +69,7 @@
         <module>artemis-jest</module>
         <module>artemis-velocity</module>
         <module>artemis-threads</module>
+        <module>artemis-tracepoints</module>
     </modules>
 
     <description>
