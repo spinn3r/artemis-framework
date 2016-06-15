@@ -10,10 +10,8 @@ public class MultiConfigLoaders {
     /**
      * Get an instance of a multi config loader from the given config loaders.
      *
-     * @param configLoaders
-     * @return
      */
-    public static ConfigLoader getInstance( ConfigLoader... configLoaders ) {
+    public static ConfigLoader createMultiConfigLoader(ConfigLoader... configLoaders ) {
         return new MultiConfigLoader( Lists.newArrayList( configLoaders ) );
     }
 
