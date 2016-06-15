@@ -502,12 +502,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 if (ENABLE_FOLLOW_CONTENT_REDIRECTS && getFollowContentRedirects()) {
 
-                    if (followRedirect( parseRedirectFromFrameContent( data ) )) {
+                    if (followRedirect(parseRedirectFromFrameContent( data ))) {
                         log.info( "Following redirect from frame content..." );
                         return;
                     }
 
-                    if (followRedirect( parseRedirectFromMetaRefreshEquiv( data ) )) {
+                    if (followRedirect(parseRedirectFromMetaRefreshEquiv(data))) {
                         log.info( "Following HTTP meta redirect..." );
                         return;
                     }
@@ -638,7 +638,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     }
 
     /**
-     * Follow the given redirect.
+     * Follow the given redirect and return true if we successfully followed it
+     * and the content/state has been updated.
      *
      */
     private boolean followRedirect( String resource ) throws NetworkException {
