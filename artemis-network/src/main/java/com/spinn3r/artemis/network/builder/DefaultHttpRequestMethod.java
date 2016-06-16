@@ -56,11 +56,6 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
     }
 
-    // set the
-    private void setup() {
-
-    }
-
     @Override
     public HttpRequest execute() throws NetworkException {
 
@@ -97,6 +92,11 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
                 if ( requestSettings.getFollowContentRedirects() != null ) {
                     withFollowContentRedirects( requestSettings.getFollowContentRedirects() );
                 }
+
+                withRequestHeaders(requestSettings.getRequestHeaders());
+                withCookies(requestSettings.getCookies());
+
+                // TODO: user agent, etc.
 
             }
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Maps;
 
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Configurations for HTTP requests defined by regex.
@@ -15,7 +16,7 @@ public class RequestSettings {
 
     private int priority;
 
-    private String userAgent = null;
+    private Optional<String> userAgent = Optional.empty();
 
     private Map<String,String> cookies = Maps.newHashMap();
 
@@ -37,7 +38,7 @@ public class RequestSettings {
         return priority;
     }
 
-    public String getUserAgent() {
+    public Optional<String> getUserAgent() {
         return userAgent;
     }
 
