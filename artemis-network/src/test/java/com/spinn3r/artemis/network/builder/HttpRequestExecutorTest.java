@@ -9,6 +9,9 @@ import com.spinn3r.artemis.time.init.SyntheticClockService;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
 
@@ -83,19 +86,17 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Test
     public void test302() throws Exception {
 
+        String redirection = "http://httpbin.org/redirect-to?url=http://httpbin.org/cookies/set?name=test";
+        String encode = URLEncoder.encode(redirection, "UTF-8");
+        String resource = "https://httpbin.org/redirect-to?url=" + encode;
+
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
-//        NetworkException cause = null;
-        HttpRequest httpRequest = null;
+        HttpRequest httpRequest = httpRequestExecutor.execute(() -> httpRequestBuilder.get(resource).execute().connect());
 
-//        try {
-            httpRequest = httpRequestExecutor.execute( () -> httpRequestBuilder.get( "https://httpbin.org/status/302" ).execute().connect() );
-//        } catch ( NetworkException ne ) {
-//            cause = ne;
-//        }
-
-        assertEquals( 200, httpRequest.getResponseCode() );
-        assertEquals( 0, httpRequestExecutor.getRetries() );
+        assertEquals(200, httpRequest.getResponseCode());
+        assertEquals(0, httpRequestExecutor.getRetries());
+        assertEquals("test", httpRequest.getCookies().get("name"));
 
     }
 
