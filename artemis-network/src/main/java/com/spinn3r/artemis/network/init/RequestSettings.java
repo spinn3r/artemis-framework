@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.init;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.collect.Maps;
 
 import java.util.Map;
 
@@ -16,9 +17,9 @@ public class RequestSettings {
 
     private String userAgent = null;
 
-    private Map<String,String> cookies = null;
+    private Map<String,String> cookies = Maps.newHashMap();
 
-    private Map<String,String> requestHeaders = null;
+    private Map<String,String> requestHeaders = Maps.newHashMap();
 
     private Long connectTimeout = null;
 
