@@ -80,4 +80,23 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
 
     }
 
+    @Test
+    public void test302() throws Exception {
+
+        HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
+
+//        NetworkException cause = null;
+        HttpRequest httpRequest = null;
+
+//        try {
+            httpRequest = httpRequestExecutor.execute( () -> httpRequestBuilder.get( "https://httpbin.org/status/302" ).execute().connect() );
+//        } catch ( NetworkException ne ) {
+//            cause = ne;
+//        }
+
+        assertEquals( 200, httpRequest.getResponseCode() );
+        assertEquals( 0, httpRequestExecutor.getRetries() );
+
+    }
+
 }

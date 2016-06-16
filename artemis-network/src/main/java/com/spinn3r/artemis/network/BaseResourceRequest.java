@@ -29,7 +29,9 @@ public abstract class BaseResourceRequest implements ResourceRequest {
 
     public static final byte[] DEFAULT_BYTES = new byte[0];
 
-    public static boolean FOLLOW_REDIRECTS = true;
+    public static boolean FOLLOW_REDIRECTS = false;
+
+    public static boolean FOLLOW_REDIRECTS_MANUALLY = true;
 
     public static boolean USE_EXCLUSION = true;
 

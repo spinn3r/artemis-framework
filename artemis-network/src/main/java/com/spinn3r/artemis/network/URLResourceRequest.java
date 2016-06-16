@@ -65,12 +65,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
 
     /**
-     * Global feature toggle to enable cookies on redirects.
-     *
-     */
-    public static boolean ENABLE_COOKIES_FOLLOWING_REDIRECTS = true;
-
-    /**
      * Instead of using -1 as a status code for connect timeouts we use negative
      * values.  This represents a read timeout.
      */
@@ -534,6 +528,18 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                     return;
                 }
 
+            }else if ( FOLLOW_REDIRECTS_MANUALLY ){
+
+                String redirectResource = parseManualRedirect();
+
+                Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
+                Map<String, String> currentCookies = getCookies();
+                CookiesEncoder.updateCookies(currentCookies, responseHeadersMap);
+
+                if (followRedirect(redirectResource)) {
+                    log.info( "Following redirect manually to " + redirectResource + "..." );
+                    return;
+                }
             }
 
         } catch ( NetworkException ne ) {
@@ -684,12 +690,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
         }
 
         log.debug( "Following redirect: " + resource );
-
-        if (ENABLE_COOKIES_FOLLOWING_REDIRECTS) {
-            Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
-            Map<String, String> currentCookies = getCookies();
-            CookiesEncoder.updateCookies(currentCookies, responseHeadersMap);
-        }
 
         initConnection = false;
 
@@ -1065,9 +1065,21 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     }
 
     private String parseSSLRedirect() {
-
         if ( getResponseCode() == 301 || getResponseCode() == 302 ) {
             return getResponseHeader( "Location" );
+        }
+
+        return null;
+
+    }
+
+    private String parseManualRedirect() {
+
+        if ( getResponseCode() == 301 || getResponseCode() == 302 ) {
+
+            String location = getResponseHeader("Location");
+            String expandedLocation = ResourceExpander.expand(getResource(), location);
+            return expandedLocation;
         }
 
         return null;

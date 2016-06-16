@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import com.spinn3r.artemis.network.BaseResourceRequest;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.cookies.Cookie;
@@ -36,7 +37,7 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     protected Class<?> executor = null;
 
-    protected boolean followRedirects = true;
+    protected boolean followRedirects = BaseResourceRequest.FOLLOW_REDIRECTS;
 
     protected boolean followContentRedirects = true;
 
