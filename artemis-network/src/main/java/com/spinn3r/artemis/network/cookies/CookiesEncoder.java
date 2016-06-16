@@ -1,13 +1,11 @@
 package com.spinn3r.artemis.network.cookies;
 
 import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.util.misc.Strings;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  *
@@ -30,21 +28,4 @@ public class CookiesEncoder {
 
     }
 
-    public static void updateCookies(Map<String, String> currentCookies, Map<String, List<String>> responseHeadersMap) {
-
-        if (responseHeadersMap != null && responseHeadersMap.containsKey(Cookies.SET_COOKIE_HEADER_NAME)) {
-
-            ImmutableMap<String, Cookie> setCookie = Cookies.fromResponseHeadersMap(responseHeadersMap);
-
-            setCookie.entrySet().stream().forEach(stringCookieEntry -> {
-
-                Cookie cookie = stringCookieEntry.getValue();
-                String cookieName = stringCookieEntry.getKey();
-
-                currentCookies.put(cookieName, cookie.getValue());
-
-            });
-
-        }
-    }
 }

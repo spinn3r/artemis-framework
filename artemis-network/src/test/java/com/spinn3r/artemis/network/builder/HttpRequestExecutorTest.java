@@ -4,16 +4,14 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
-import com.spinn3r.artemis.time.SyntheticClock;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class HttpRequestExecutorTest extends BaseLauncherTest {
 
@@ -86,6 +84,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Test
     public void test302() throws Exception {
 
+        //TODO: This test should set the cookies in one of the redirects instead of the final resource
         String redirection = "http://httpbin.org/redirect-to?url=http://httpbin.org/cookies/set?name=test";
         String encode = URLEncoder.encode(redirection, "UTF-8");
         String resource = "https://httpbin.org/redirect-to?url=" + encode;

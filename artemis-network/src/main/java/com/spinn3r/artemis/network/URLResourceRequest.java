@@ -13,7 +13,6 @@ import java.net.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -430,11 +429,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     this.setResponseCode( _responseCode );
 
-//                    Map<String, List<String>> responseHeaders = httpURLConn.getHeaderFields();
-//
-//                    this.setResponseHeaders( responseHeaders );
-//
-//
                 } catch ( IOException e ) {
 
                     NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
@@ -533,8 +527,25 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                 String redirectResource = parseManualRedirect();
 
                 Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
-                Map<String, String> currentCookies = getCookies();
-                CookiesEncoder.updateCookies(currentCookies, responseHeadersMap);
+
+                if (responseHeadersMap != null && responseHeadersMap.containsKey("set-cookie")) {
+
+                    List<String> setCookies = responseHeadersMap.get("set-cookie");
+
+                    ImmutableMap<String, Cookie> setCookie = Cookies.fromSetCookiesList(setCookies);
+
+                    Map<String, String> currentCookies = getCookies();
+
+                    setCookie.entrySet().stream().forEach(stringCookieEntry -> {
+
+                        Cookie cookie = stringCookieEntry.getValue();
+                        String cookieName = stringCookieEntry.getKey();
+
+                        currentCookies.put(cookieName, cookie.getValue());
+
+                    });
+
+                }
 
                 if (followRedirect(redirectResource)) {
                     log.info( "Following redirect manually to " + redirectResource + "..." );
@@ -1065,6 +1076,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     }
 
     private String parseSSLRedirect() {
+
         if ( getResponseCode() == 301 || getResponseCode() == 302 ) {
             return getResponseHeader( "Location" );
         }
