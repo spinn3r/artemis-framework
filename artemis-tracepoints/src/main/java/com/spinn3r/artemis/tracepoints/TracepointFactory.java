@@ -6,7 +6,7 @@ import com.spinn3r.artemis.time.Clock;
 /**
  *
  */
-public class TracepointFactory {
+class TracepointFactory {
 
     private final Clock clock;
 
@@ -15,7 +15,7 @@ public class TracepointFactory {
         this.clock = clock;
     }
 
-    public Tracepoint create(Tracepoints tracepoints, TraceKey traceKey, ThreadInfo threadInfo, long acquired) {
+    Tracepoint create(Tracepoints tracepoints, TraceKey traceKey, ThreadInfo threadInfo, long acquired) {
         return new Tracepoint(clock, tracepoints, traceKey, threadInfo, acquired);
     }
 

@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.tracepoints;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.spinn3r.artemis.time.Clock;
 
@@ -18,7 +17,6 @@ public class Tracepoints {
 
     private final TracepointFactory tracepointFactory;
 
-    @Inject
     Tracepoints(Clock clock, TracepointFactory tracepointFactory) {
         this.clock = clock;
         this.tracepointFactory = tracepointFactory;
