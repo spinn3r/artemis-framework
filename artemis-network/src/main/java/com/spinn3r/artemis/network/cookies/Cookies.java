@@ -13,12 +13,18 @@ import java.util.Map;
  */
 public class Cookies {
 
+    public static final String SET_COOKIE_HEADER_NAME = "Set-Cookie";
+
     public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
 
     public static ImmutableMap<String,Cookie> fromResponseHeadersMap( ImmutableMap<String,ImmutableList<String>> responseHeadersMap ) {
-        return fromSetCookiesList( responseHeadersMap.get( "Set-Cookie" ) );
+        return fromSetCookiesList( responseHeadersMap.get( SET_COOKIE_HEADER_NAME ) );
+    }
+
+    public static ImmutableMap<String,Cookie> fromResponseHeadersMap( Map<String, List<String>> responseHeadersMap ) {
+        return fromSetCookiesList( responseHeadersMap.get( SET_COOKIE_HEADER_NAME ) );
     }
 
     public static ImmutableMap<String,Cookie> fromSetCookiesList( List<String> setCookies ) {

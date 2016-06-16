@@ -6,6 +6,7 @@ import com.spinn3r.log5j.Logger;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -91,6 +92,7 @@ public abstract class BaseResourceRequest implements ResourceRequest {
     private Map<String,String> cookies = new HashMap<>();
 
     private boolean followContentRedirects = true;
+//    private Map<String, List<String>> responseHeaders;
 
     public void setReadTimeout( long v ) {
         this.readTimeout = v;
@@ -425,6 +427,10 @@ public abstract class BaseResourceRequest implements ResourceRequest {
     public void setResponseCode( int responseCode ) {
         this._responseCode = responseCode;
     }
+//
+//    public void setResponseHeaders(Map<String, List<String>> responseHeaders) {
+//        this.responseHeaders = responseHeaders;
+//    }
 
     public int getContentLength() {
         return -1;

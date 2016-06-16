@@ -2,6 +2,9 @@ package com.spinn3r.artemis.network;
 
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableMap;
+import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookies;
 import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 import java.net.HttpURLConnection;
@@ -10,6 +13,7 @@ import java.net.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -59,6 +63,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      *
      */
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
+
+    /**
+     * Global feature toggle to enable cookies on redirects.
+     *
+     */
+    public static boolean ENABLE_COOKIES_FOLLOWING_REDIRECTS = true;
 
     /**
      * Instead of using -1 as a status code for connect timeouts we use negative
@@ -426,6 +436,11 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     this.setResponseCode( _responseCode );
 
+//                    Map<String, List<String>> responseHeaders = httpURLConn.getHeaderFields();
+//
+//                    this.setResponseHeaders( responseHeaders );
+//
+//
                 } catch ( IOException e ) {
 
                     NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
@@ -669,6 +684,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
         }
 
         log.debug( "Following redirect: " + resource );
+
+        if (ENABLE_COOKIES_FOLLOWING_REDIRECTS) {
+            Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
+            Map<String, String> currentCookies = getCookies();
+            CookiesEncoder.updateCookies(currentCookies, responseHeadersMap);
+        }
 
         initConnection = false;
 
