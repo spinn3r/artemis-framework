@@ -524,31 +524,10 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             }else if ( FOLLOW_REDIRECTS_MANUALLY ){
 
-                String redirectResource = parseManualRedirect();
+                updateCookiesFromRequestSetCookieHeader();
 
-                Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
-
-                if (responseHeadersMap != null && responseHeadersMap.containsKey("set-cookie")) {
-
-                    List<String> setCookies = responseHeadersMap.get("set-cookie");
-
-                    ImmutableMap<String, Cookie> setCookie = Cookies.fromSetCookiesList(setCookies);
-
-                    Map<String, String> currentCookies = getCookies();
-
-                    setCookie.entrySet().stream().forEach(stringCookieEntry -> {
-
-                        Cookie cookie = stringCookieEntry.getValue();
-                        String cookieName = stringCookieEntry.getKey();
-
-                        currentCookies.put(cookieName, cookie.getValue());
-
-                    });
-
-                }
-
-                if (followRedirect(redirectResource)) {
-                    log.info( "Following redirect manually to " + redirectResource + "..." );
+                if (followRedirect( parseManualRedirect() )) {
+                    log.info( "Following redirect manually ..." );
                     return;
                 }
             }
@@ -559,6 +538,30 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             throw newNetworkException( e );
         }
 
+    }
+
+    private void updateCookiesFromRequestSetCookieHeader() {
+
+        Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
+
+        if (responseHeadersMap != null && responseHeadersMap.containsKey("set-cookie")) {
+
+            List<String> setCookies = responseHeadersMap.get("set-cookie");
+
+            ImmutableMap<String, Cookie> setCookie = Cookies.fromSetCookiesList(setCookies);
+
+            Map<String, String> currentCookies = getCookies();
+
+            setCookie.entrySet().stream().forEach(stringCookieEntry -> {
+
+                Cookie cookie = stringCookieEntry.getValue();
+                String cookieName = stringCookieEntry.getKey();
+
+                currentCookies.put(cookieName, cookie.getValue());
+
+            });
+
+        }
     }
 
     private boolean isGetRequestWithData() {
