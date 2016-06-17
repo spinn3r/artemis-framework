@@ -10,6 +10,15 @@ import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 
+import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 /**
  * Builder interface preferred over using the ResourceRequestFactory.
  */
@@ -103,13 +112,30 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         return configure( resource, new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
     }
 
+    public static CookieManager C_HANDLER = new CookieManager(new ThreadLocalCookieStore(), null);
+
+    {
+        CookieHandler.setDefault(C_HANDLER);
+    }
+
     private DefaultHttpRequestMethod configure( String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
         defaultHttpRequestMethod.withMaxContentLength( defaultMaxContentLength );
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
         // now get the default cookies from the cookie jar.
-        defaultHttpRequestMethod.withCookies(cookieJarManagerProvider.get().getCookieJar(resource).getCookies());
+        try {
+            Map<String, List<String>> stringListMap = C_HANDLER.get(URI.create(resource), new HashMap<>());
+            defaultHttpRequestMethod.withCookies(stringListMap.entrySet().stream()
+                    .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
+                    .collect(Collectors.toMap(Map.Entry::getKey,
+
+                    entry -> entry.getValue().iterator().next()
+
+            )));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         return defaultHttpRequestMethod;
 
