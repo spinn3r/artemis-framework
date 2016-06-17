@@ -85,7 +85,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     public void test302() throws Exception {
 
         //TODO: This test should set the cookies in one of the redirects instead of the final resource
-        String redirection = "http://httpbin.org/redirect-to?url=http://httpbin.org/cookies/set?name=test";
+        String redirection = "http://httpbin.org/cookies/set?name=test";
         String encode = URLEncoder.encode(redirection, "UTF-8");
         String resource = "https://httpbin.org/redirect-to?url=" + encode;
 

@@ -2,12 +2,10 @@ package com.spinn3r.artemis.network;
 
 
 import com.google.common.base.Charsets;
-import com.google.common.collect.ImmutableMap;
-import com.spinn3r.artemis.network.cookies.Cookie;
-import com.spinn3r.artemis.network.cookies.Cookies;
+import com.google.common.base.Strings;
 import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
-import java.net.HttpURLConnection;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -544,22 +542,26 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
         Map<String, List<String>> responseHeadersMap = this.getResponseHeadersMap();
 
-        if (responseHeadersMap != null && responseHeadersMap.containsKey("set-cookie")) {
 
-            List<String> setCookies = responseHeadersMap.get("set-cookie");
+        if (responseHeadersMap != null) {
 
-            ImmutableMap<String, Cookie> setCookie = Cookies.fromSetCookiesList(setCookies);
-
-            Map<String, String> currentCookies = getCookies();
-
-            setCookie.entrySet().stream().forEach(stringCookieEntry -> {
-
-                Cookie cookie = stringCookieEntry.getValue();
-                String cookieName = stringCookieEntry.getKey();
-
-                currentCookies.put(cookieName, cookie.getValue());
-
-            });
+            responseHeadersMap.entrySet().stream()
+                    //Take only set-cookie headers
+                    .filter(stringListEntry -> "set-cookie".equalsIgnoreCase(stringListEntry.getKey()))
+                    //Get all the values for the header
+                    .map(Map.Entry::getValue)
+                    //Stream all the values for the header into the main stream
+                    .flatMap(Collection::stream)
+                    //Parse set-cookie string using Java spec
+                    .map(HttpCookie::parse)
+                    //Stream all the cookies parsed from the header into the main stream
+                    .flatMap(Collection::stream)
+                    //Serialize to name-value array
+                    .map((httpCookie) -> httpCookie.toString().split("="))
+                    //validate name and value
+                    .filter(cookieNameValue -> cookieNameValue.length > 1 && !Strings.isNullOrEmpty(cookieNameValue[0]) && !Strings.isNullOrEmpty(cookieNameValue[1]))
+                    //put it into the cookies
+                    .forEach(cookieNameValue -> getCookies().put(cookieNameValue[0], cookieNameValue[1]));
 
         }
     }
