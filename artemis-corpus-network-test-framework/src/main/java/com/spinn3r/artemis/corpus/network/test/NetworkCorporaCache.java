@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.corpus.network.test;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -9,17 +8,15 @@ import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.json.JSON;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
+import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
-import com.spinn3r.artemis.util.misc.Stack;
-import org.apache.http.HttpResponse;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
@@ -34,6 +31,8 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     private static String ROOT = System.getProperty( "network-corpora-cache.root", "/network-corpora" );
 
+    private final NetworkConfig networkConfig;
+
     private final DirectHttpRequestBuilder directHttpRequestBuilder;
 
     private CorporaCache cache;
@@ -41,11 +40,12 @@ public class NetworkCorporaCache implements ContentFetcher {
     private boolean updateMode = DEFAULT_UPDATE_MODE;
 
     @Inject
-    NetworkCorporaCache(DefaultDirectHttpRequestBuilder directHttpRequestBuilder, Caller caller) {
-        this( directHttpRequestBuilder, classForCaller( caller ) );
+    NetworkCorporaCache(NetworkConfig networkConfig, DefaultDirectHttpRequestBuilder directHttpRequestBuilder, Caller caller) {
+        this( networkConfig, directHttpRequestBuilder, classForCaller( caller ) );
     }
 
-    NetworkCorporaCache(DirectHttpRequestBuilder directHttpRequestBuilder, Class<?> callerClazz) {
+    NetworkCorporaCache(NetworkConfig networkConfig, DirectHttpRequestBuilder directHttpRequestBuilder, Class<?> callerClazz) {
+        this.networkConfig = networkConfig;
         this.directHttpRequestBuilder = directHttpRequestBuilder;
         this.cache = new CorporaCache( callerClazz, ROOT );
     }
@@ -88,12 +88,15 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     HttpRequest httpRequest;
 
+                    RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry(networkConfig.getRequests() );
+
                     switch (httpMethod) {
 
                         case GET:
 
                             httpRequest =
                               directHttpRequestBuilder
+                                .withRequestSettingsRegistry( requestSettingsRegistry )
                                 .get( link )
                                 .withRequestHeaders( requestHeaders )
                                 .withCookies( cookies )
@@ -104,6 +107,7 @@ public class NetworkCorporaCache implements ContentFetcher {
                         case POST:
                             httpRequest =
                               directHttpRequestBuilder
+                                .withRequestSettingsRegistry( requestSettingsRegistry )
                                 .post( link, outputContent, outputContentEncoding, outputContentType )
                                 .withRequestHeaders( requestHeaders )
                                 .withCookies( cookies )
