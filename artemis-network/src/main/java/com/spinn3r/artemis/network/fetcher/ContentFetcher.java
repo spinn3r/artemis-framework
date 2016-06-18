@@ -16,6 +16,6 @@ public interface ContentFetcher {
 
     String fetch( String link, ImmutableMap<String,String> requestHeaders ) throws NetworkException;
 
-    String fetch( String link, ImmutableMap<String,String> requestHeaders, ImmutableMap<String,String> cookies ) throws NetworkException;
+//    String fetch( String link, ImmutableMap<String,String> requestHeaders, ImmutableMap<String,String> cookies ) throws NetworkException;
 
 }

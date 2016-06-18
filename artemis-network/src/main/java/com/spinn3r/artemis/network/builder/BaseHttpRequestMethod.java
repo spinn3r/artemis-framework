@@ -28,7 +28,7 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     protected long connectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
-    protected Map<String,String> cookies = new LinkedHashMap<>();
+//    protected Map<String,String> cookies = new LinkedHashMap<>();
 
     protected Map<String,String> properties = new LinkedHashMap<>( 2 );
 
@@ -70,36 +70,36 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
         this.maxContentLength = maxContentLength;
         return this;
     }
-
-    @Override
-    public HttpRequestMethod withCookie(String name, String value) {
-        checkNotNull( name, "name" );
-        checkNotNull( value, "value" );
-        this.cookies.put( name, value );
-        return this;
-    }
-
-    @Override
-    public HttpRequestMethod withCookies(Map<String,String> cookies) {
-        checkNotNull( cookies );
-        this.cookies.putAll( cookies );
-        return this;
-    }
-
-    @Override
-    public HttpRequestMethod withCookies(CookieMap cookieMap) {
-        checkNotNull( cookies );
-
-        Map<String,String> newCookies = Maps.newHashMap();
-
-        for (Map.Entry<String, Cookie> entry : cookieMap.entrySet()) {
-            newCookies.put( entry.getKey(), entry.getValue().getValue() );
-        }
-
-        this.cookies.putAll( newCookies );
-        return this;
-
-    }
+//
+//    @Override
+//    public HttpRequestMethod withCookie(String name, String value) {
+//        checkNotNull( name, "name" );
+//        checkNotNull( value, "value" );
+//        this.cookies.put( name, value );
+//        return this;
+//    }
+//
+//    @Override
+//    public HttpRequestMethod withCookies(Map<String,String> cookies) {
+//        checkNotNull( cookies );
+//        this.cookies.putAll( cookies );
+//        return this;
+//    }
+//
+//    @Override
+//    public HttpRequestMethod withCookies(CookieMap cookieMap) {
+//        checkNotNull( cookies );
+//
+//        Map<String,String> newCookies = Maps.newHashMap();
+//
+//        for (Map.Entry<String, Cookie> entry : cookieMap.entrySet()) {
+//            newCookies.put( entry.getKey(), entry.getValue().getValue() );
+//        }
+//
+//        this.cookies.putAll( newCookies );
+//        return this;
+//
+//    }
 
     @Override
     public HttpRequestMethod withRequestHeader(String name, String value) {

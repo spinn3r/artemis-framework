@@ -4,10 +4,9 @@ import com.google.common.base.Charsets;
 import com.spinn3r.log5j.Logger;
 
 import java.io.*;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -86,10 +85,6 @@ public abstract class BaseResourceRequest implements ResourceRequest {
 
     protected NetworkException cause;
 
-    /**
-     */
-    private Map<String,String> cookies = new HashMap<>();
-
     private boolean followContentRedirects = true;
 
     public void setReadTimeout( long v ) {
@@ -147,16 +142,6 @@ public abstract class BaseResourceRequest implements ResourceRequest {
     @Override
     public void setResource( String resource ) {
         this.resource = resource;
-    }
-
-    @Override
-    public Map<String, String> getCookies() {
-        return cookies;
-    }
-
-    @Override
-    public void setCookies(Map<String, String> cookies) {
-        this.cookies = cookies;
     }
 
     @Override

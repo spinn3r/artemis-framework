@@ -94,7 +94,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
                 }
 
                 withRequestHeaders(requestSettings.getRequestHeaders());
-                withCookies(requestSettings.getCookies());
+//                withCookies(requestSettings.getCookies());
 
                 // TODO: user agent, etc.
 
@@ -107,7 +107,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         resourceRequest.setRequestMethod( method );
         resourceRequest.setUserAgent( defaultHttpRequestBuilder.userAgent );
         resourceRequest.setMaxContentLength( maxContentLength );
-        resourceRequest.setCookies( cookies );
+//        resourceRequest.setCookies( cookies );
         resourceRequest.setReadTimeout( readTimeout );
         resourceRequest.setConnectTimeout( connectTimeout );
         resourceRequest.setFollowRedirects( followRedirects );

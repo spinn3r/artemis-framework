@@ -240,10 +240,6 @@ public interface ResourceRequest {
 
     void setCause(NetworkException cause);
 
-    Map<String, String> getCookies();
-
-    void setCookies(Map<String, String> cookies);
-
     boolean getFollowContentRedirects();
 
     void setFollowContentRedirects(boolean followContentRedirects);

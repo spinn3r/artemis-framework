@@ -33,7 +33,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
         HttpRequest httpRequest
-                = httpRequestExecutor.execute( () -> httpRequestBuilder.get( "https://httpbin.org/status/200" ).execute().connect() );
+          = httpRequestExecutor.execute( () -> httpRequestBuilder.get( "https://httpbin.org/status/200" ).execute().connect() );
 
         assertEquals( 200, httpRequest.getResponseCode() );
         assertEquals( 0, httpRequestExecutor.getRetries() );

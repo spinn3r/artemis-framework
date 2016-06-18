@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.CookieManager;
 import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -123,22 +121,61 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
-        // now get the default cookies from the cookie jar.
-        try {
-            Map<String, List<String>> stringListMap = C_HANDLER.get(URI.create(resource), new HashMap<>());
-            defaultHttpRequestMethod.withCookies(stringListMap.entrySet().stream()
-                    .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
-                    .collect(Collectors.toMap(Map.Entry::getKey,
-
-                    entry -> entry.getValue().iterator().next()
-
-            )));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Map<String, String> latestCookies = getCookies(resource);
+//
+//            //TODO: Let cookies get serialized by Java
+//            defaultHttpRequestMethod.withCookies(latestCookies);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         return defaultHttpRequestMethod;
 
     }
+
+    public static Map<String, String> getCookies(String resource) throws IOException {
+
+        Map<String, List<String>> allCookies = C_HANDLER.get(URI.create(resource), new HashMap<>());
+
+        return allCookies
+                .entrySet()
+                .stream()
+                .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> {
+                            List<String> list = entry.getValue();
+                            return list.get(list.size() - 1);
+                        }
+                ));
+    }
+
+//    public static void putCookies1(String resource, Map<String, String> cookies) {
+//
+//        putCookies(resource, cookies.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> Collections.singletonList(entry.getValue()))));
+//
+//    }
+//
+//    public static void putCookies(String resource, Map<String, List<String>> cookies) {
+//
+//
+//
+//        cookies
+//                .entrySet()
+//                .stream()
+//                .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
+//
+//                .forEach(stringListEntry -> {
+//                    C_HANDLER.getCookieStore().add()
+//                });
+////                .collect(Collectors.toMap(
+////                        Map.Entry::getKey,
+////                        entry -> {
+////                            List<String> list = entry.getValue();
+////                            return list.get(list.size() - 1);
+////                        }
+////                ));
+//    }
 
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Taken from :
- * 
+ *
  * https://raw.githubusercontent.com/kristian/cookie-filter/master/src/main/java/lc/kra/servlet/filter/helper/ThreadLocalCookieStore.java
  *
  */
