@@ -47,7 +47,9 @@ public class NetworkService extends BaseService {
 
     private final AtomicReferenceProvider<RequestSettingsRegistry> requestSettingsRegistryProvider = new AtomicReferenceProvider<>( null );
 
-    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
+    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null);
+
+    private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
 
     @Inject
     public NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort) {
@@ -69,6 +71,7 @@ public class NetworkService extends BaseService {
         provider( ProxyRegistry.class, proxyRegistryProvider );
         provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
         provider( CookieJarManager.class, cookieJarManagerProvider );
+        provider( ThreadLocalCookieStore.class, threadLocalCookieStoreProvider );
 
         // *** create the default proxy
 
@@ -127,12 +130,13 @@ public class NetworkService extends BaseService {
             testProxyReference( proxyReference );
         }
 
-
         if ( networkConfig.isCookieManagerEnabled() ) {
 
             List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
-            CookieManager cookieManager = new CookieManager(new ThreadLocalCookieStore(setCookieDescriptions), null);
+            ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
+            threadLocalCookieStoreProvider.set(threadLocalCookieStore);
+            CookieManager cookieManager = new CookieManager(threadLocalCookieStore, null);
 
             CookieHandler.setDefault(cookieManager);
 

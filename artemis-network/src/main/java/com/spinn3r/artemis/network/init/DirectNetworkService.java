@@ -30,6 +30,8 @@ public class DirectNetworkService extends BaseService {
 
     private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
 
+    private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
+
     private final NetworkConfig networkConfig;
 
     @Inject
@@ -45,7 +47,8 @@ public class DirectNetworkService extends BaseService {
         advertise( DirectHttpRequestBuilder.class, DefaultDirectHttpRequestBuilder.class );
         advertise( ContentFetcher.class, DefaultContentFetcher.class );
         advertise( HttpResponseValidators.class, new DefaultHttpResponseValidators() );
-        provider(CookieJarManager.class, cookieJarManagerProvider );
+        provider( CookieJarManager.class, cookieJarManagerProvider );
+        provider( ThreadLocalCookieStore.class, threadLocalCookieStoreProvider );
 
     }
 
@@ -56,7 +59,9 @@ public class DirectNetworkService extends BaseService {
 
             List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
-            CookieManager cookieManager = new CookieManager(new ThreadLocalCookieStore(setCookieDescriptions), null);
+            ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
+            threadLocalCookieStoreProvider.set(threadLocalCookieStore);
+            CookieManager cookieManager = new CookieManager(threadLocalCookieStore, null);
 
             CookieHandler.setDefault(cookieManager);
 

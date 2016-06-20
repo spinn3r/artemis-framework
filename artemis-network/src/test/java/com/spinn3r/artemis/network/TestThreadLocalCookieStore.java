@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
@@ -15,6 +16,8 @@ import java.net.*;
 import java.util.HashMap;
 import java.util.List;
 
+import static org.junit.Assert.*;
+
 public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
     @Inject
@@ -23,21 +26,31 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Inject
     HttpRequestBuilder httpRequestBuilder;
 
-
     @Inject
     DirectNetworkService directNetworkService;
 
     @Inject
     NetworkConfig networkConfig;
+
+    @Inject
+    Provider<ThreadLocalCookieStore> threadLocalCookieStoreProvider;
+
     @Override
     @Before
     public void setUp() throws Exception {
-        super.setUp(
-                SyntheticClockService.class,
-                DirectNetworkService.class);
+
+        super.setUp( SyntheticClockService.class,
+                     DirectNetworkService.class);
 
         networkConfig.setCookieManagerEnabled(true);
         directNetworkService.start();
+    }
+
+    @Test
+    public void testCookieManagerEnabled() throws Exception {
+
+        assertTrue(networkConfig.isCookieManagerEnabled());
+
     }
 
     @Test
@@ -48,10 +61,25 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         String cookie = "name=test1";
         String resource = "http://httpbin.org/cookies/set?" + cookie;
 
-
         httpRequestExecutor.execute(() -> httpRequestBuilder.get(resource).execute().connect());
 
-        Assert.assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+
+    }
+
+    @Test
+    public void testNoCookiesInSameThreadBetweenRequests() throws Exception {
+
+        String cookie = "name=test1";
+        String resource = "http://httpbin.org/cookies/set?" + cookie;
+
+        httpRequestBuilder.get(resource).execute().connect();
+
+        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+
+        assertNotNull(threadLocalCookieStoreProvider.get());
+        assertEquals(0, threadLocalCookieStoreProvider.get().getCookies().size());
+
     }
 
     @Test
@@ -65,7 +93,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         httpRequestExecutor.execute(() -> httpRequestBuilder.get(firstRedirectUrl).execute().connect());
 
-        Assert.assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
     }
 
     private static List<String> getCookies(String domain) throws IOException, URISyntaxException {
