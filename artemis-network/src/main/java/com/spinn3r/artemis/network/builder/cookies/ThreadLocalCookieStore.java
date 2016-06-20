@@ -21,7 +21,8 @@ public class ThreadLocalCookieStore extends ThreadLocal<CookieStore> {
     @Override
     protected CookieStore initialValue() {
 
-        CookieStore cookieStore = new CookieManager().getCookieStore(); // new InMemoryCookieStore();
+        // Create a new InMemoryCookieStore
+        CookieStore cookieStore = new CookieManager().getCookieStore();
 
         setCookieDescriptions.stream().forEach(setCookieDescription -> {
 
