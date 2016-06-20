@@ -12,7 +12,7 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final ImmutableMap<String,String> requestHeadersMap;
 
-//    private final ImmutableMap<String,String> cookies;
+    private final ImmutableMap<String,String> cookies;
 
     private final String outputContent;
 
@@ -20,12 +20,10 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final String outputContentType;
 
-    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap
-//            , ImmutableMap<String, String> cookies
-    ) {
+    public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap, ImmutableMap<String, String> cookies) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
-//        this.cookies = cookies;
+        this.cookies = cookies;
         this.outputContent = null;
         this.outputContentEncoding = null;
         this.outputContentType = null;
@@ -33,13 +31,13 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     public DefaultHttpRequestMeta( @JsonProperty("resource") String resource,
                                    @JsonProperty("requestHeadersMap") ImmutableMap<String, String> requestHeadersMap,
-//                                   @JsonProperty("cookies") ImmutableMap<String, String> cookies,
+                                   @JsonProperty("cookies") ImmutableMap<String, String> cookies,
                                    @JsonProperty("outputContent") String outputContent,
                                    @JsonProperty("outputContentEncoding") String outputContentEncoding,
                                    @JsonProperty("outputContentType") String outputContentType) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
-//        this.cookies = cookies;
+        this.cookies = cookies;
         this.outputContent = outputContent;
         this.outputContentEncoding = outputContentEncoding;
         this.outputContentType = outputContentType;
@@ -55,11 +53,11 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
         return requestHeadersMap;
     }
 
-//    @Override
-//    public ImmutableMap<String, String> getCookies() {
-//        return cookies;
-//    }
-//
+    @Override
+    public ImmutableMap<String, String> getCookies() {
+        return cookies;
+    }
+
     @Override
     public String getOutputContent() {
         return outputContent;
@@ -80,7 +78,7 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
         return "DefaultHttpRequestMeta{" +
                  "resource='" + resource + '\'' +
                  ", requestHeadersMap=" + requestHeadersMap +
-//                 ", cookies=" + cookies +
+                 ", cookies=" + cookies +
                  ", outputContent='" + outputContent + '\'' +
                  ", outputContentEncoding='" + outputContentEncoding + '\'' +
                  ", outputContentType='" + outputContentType + '\'' +

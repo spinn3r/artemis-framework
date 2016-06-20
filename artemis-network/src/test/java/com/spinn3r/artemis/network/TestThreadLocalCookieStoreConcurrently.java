@@ -49,22 +49,6 @@ public class TestThreadLocalCookieStoreConcurrently extends BaseLauncherTest {
         assertTrue(testResult2.get());
     }
 
-    @Test
-    @Ignore // Make the test simpler with executors just one thread sets the cookie and the other thread asserts the cookie is not there
-    public void testSharedInMemoryCookieStore() throws Exception {
-
-        DefaultHttpRequestBuilder.C_HANDLER = new CookieManager(); // InMemoryCookieStore
-        CookieHandler.setDefault(DefaultHttpRequestBuilder.C_HANDLER);
-
-        final AtomicBoolean testResult1 = new AtomicBoolean(Boolean.TRUE);
-        final AtomicBoolean testResult2 = new AtomicBoolean(Boolean.TRUE);
-
-        testCookieStore(testResult1, testResult2);
-
-        assertTrue(testResult1.get());
-        assertFalse(testResult2.get());
-    }
-
 
     private void testCookieStore(AtomicBoolean testResult1, AtomicBoolean testResult2) throws InterruptedException {
 
@@ -132,5 +116,10 @@ public class TestThreadLocalCookieStoreConcurrently extends BaseLauncherTest {
                 countDownLatch.countDown();
             }
         }
+    }
+
+    private static List<String> getCookies(String domain) throws IOException, URISyntaxException {
+
+        return CookieHandler.getDefault().get(new URI(domain), new HashMap<>()).get("Cookie");
     }
 }

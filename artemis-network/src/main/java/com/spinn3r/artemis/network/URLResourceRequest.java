@@ -2,7 +2,6 @@ package com.spinn3r.artemis.network;
 
 
 import com.google.common.base.Charsets;
-import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 import java.net.HttpURLConnection;
@@ -356,13 +355,9 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             //perform cookie setting...
 
-//            if ( getCookies() != null && getCookies().size() > 0 ) {
-//                //Manually added cookies
-//                Map<String, String> cookies = getCookies();
-//                DefaultHttpRequestBuilder.putCookies1(resource, cookies);
-//            }
-//                _urlConnection.setRequestProperty(COOKIE_HEADER_NAME, CookiesEncoder.encode(getCookies() ) );
-
+            if ( getCookies() != null && getCookies().size() > 0 ) {
+                _urlConnection.setRequestProperty(COOKIE_HEADER_NAME, CookiesEncoder.encode(getCookies() ) );
+            }
 
             if ( _urlConnection instanceof HttpURLConnection ) {
 
@@ -428,7 +423,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     // save and store the response code.
                     int _responseCode = httpURLConn.getResponseCode();
-//                    this.setCookies(DefaultHttpRequestBuilder.getCookies(resource));
 
                     this.setResponseCode( _responseCode );
 
@@ -492,13 +486,9 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             long after = System.currentTimeMillis();
 
             this.duration = (int)(after - before);
-//TODO: make cookies easier to get
-            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s," +
-//                    " cookies=%s," +
-                    " contentEncoding=%s proxy=%s",
-                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ),
-                    //DefaultHttpRequestBuilder.C_HANDLER.get(new URI(resource)),
-                    _urlConnection.getContentEncoding(), proxy );
+
+            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s proxy=%s",
+                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );
 
         }
 

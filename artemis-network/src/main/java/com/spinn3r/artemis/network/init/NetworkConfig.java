@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarReference;
 
 /**
@@ -37,6 +38,10 @@ public class NetworkConfig {
     private ExecutorConfig executor = new ExecutorConfig();
 
     private List<CookieJarReference> cookieJarReferences = Lists.newArrayList();
+
+    private List<SetCookieDescription> cookies = Lists.newArrayList();
+
+    private boolean cookieManagerEnabled;
 
     public String getUserAgent() {
         return userAgent;
@@ -110,6 +115,17 @@ public class NetworkConfig {
         return cookieJarReferences;
     }
 
+    public List<SetCookieDescription> getCookies() {
+        return cookies;
+    }
+
+    public boolean isCookieManagerEnabled() {
+        return cookieManagerEnabled;
+    }
+
+    public void setCookieManagerEnabled(boolean cookieManagerEnabled) {
+        this.cookieManagerEnabled = cookieManagerEnabled;
+    }
     @Override
     public String toString() {
         return "NetworkConfig{" +
@@ -124,6 +140,8 @@ public class NetworkConfig {
                  ", requests=" + requests +
                  ", executor=" + executor +
                  ", cookieJarReferences=" + cookieJarReferences +
+                 ", cookies=" + cookies +
+                 ", cookieManagerEnabled=" + cookieManagerEnabled +
                  '}';
     }
 

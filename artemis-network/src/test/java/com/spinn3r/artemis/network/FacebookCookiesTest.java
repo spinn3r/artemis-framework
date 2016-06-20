@@ -41,7 +41,7 @@ public class FacebookCookiesTest extends BaseLauncherTest {
               .withFollowContentRedirects(false)
               .execute();
 
-        assertEquals("{datr=bd04V9F4B64dMqvqlehNmNe6}", httpRequest.getResponseHeader("Cookie") );
+        assertEquals("{datr=bd04V9F4B64dMqvqlehNmNe6}", httpRequest.getCookies().toString() );
 
     }
 

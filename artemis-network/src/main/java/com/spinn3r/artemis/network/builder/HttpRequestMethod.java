@@ -42,19 +42,19 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withMaxContentLength(int maxContentLength );
 
-//    HttpRequestMethod withCookie( String name, String value );
-//
-//    /**
-//     * Add the given cookies to the cookies we should use with the site.  By
-//     * default we start with an empty map of cookies.  This adds to the map.
-//     */
-//    HttpRequestMethod withCookies( Map<String,String> cookies );
-//
-//    /**
-//     * Add the given cookies to the cookies we should use with the site.  By
-//     * default we start with an empty map of cookies.  This adds to the map.
-//     */
-//    HttpRequestMethod withCookies( CookieMap cookieMap );
+    HttpRequestMethod withCookie( String name, String value );
+
+    /**
+     * Add the given cookies to the cookies we should use with the site.  By
+     * default we start with an empty map of cookies.  This adds to the map.
+     */
+    HttpRequestMethod withCookies( Map<String,String> cookies );
+
+    /**
+     * Add the given cookies to the cookies we should use with the site.  By
+     * default we start with an empty map of cookies.  This adds to the map.
+     */
+    HttpRequestMethod withCookies( CookieMap cookieMap );
 
     HttpRequestMethod withConnectTimeout( long timeout );
 

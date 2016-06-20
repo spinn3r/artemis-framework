@@ -32,13 +32,13 @@ public class DefaultContentFetcher implements ContentFetcher {
                  .getContentWithEncoding();
     }
 
-//    @Override
-//    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
-//        return httpRequestBuilder.get( link )
-//                 .withRequestHeaders( requestHeaders )
-//                 .withCookies( cookies )
-//                 .execute()
-//                 .getContentWithEncoding();
-//    }
+    @Override
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
+        return httpRequestBuilder.get( link )
+                 .withRequestHeaders( requestHeaders )
+                 .withCookies( cookies )
+                 .execute()
+                 .getContentWithEncoding();
+    }
 
 }

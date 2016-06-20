@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.spinn3r.artemis.network.cookies.SetCookieDescription;
+
 import java.net.CookieManager;
 import java.net.CookieStore;
 import java.net.HttpCookie;
@@ -12,13 +14,38 @@ import java.util.List;
  * https://raw.githubusercontent.com/kristian/cookie-filter/master/src/main/java/lc/kra/servlet/filter/helper/ThreadLocalCookieStore.java
  *
  */
-class ThreadLocalCookieStore implements CookieStore {
-    private final static ThreadLocal<CookieStore> stores = new ThreadLocal<CookieStore>() {
-        @Override
-        protected synchronized CookieStore initialValue() {
-            return (new CookieManager()).getCookieStore(); //InMemoryCookieStore
-        }
-    };
+public class ThreadLocalCookieStore implements CookieStore {
+
+    private final ThreadLocal<CookieStore> stores;
+
+    public ThreadLocalCookieStore(List<SetCookieDescription> setCookieDescriptions) {
+
+        CookieStore cookieStore = new CookieManager().getCookieStore(); // new InMemoryCookieStore();
+
+        setCookieDescriptions.stream().forEach(setCookieDescription -> {
+
+            List<HttpCookie> httpCookies = HttpCookie.parse(setCookieDescription.getSetCookie());
+
+            httpCookies.stream().forEach(httpCookie ->{
+
+                httpCookie.setDomain(setCookieDescription.getDomain());
+                String path = httpCookie.getPath();
+                if (path == null || path.isEmpty()) {
+                    httpCookie.setPath("/");
+                }
+
+                cookieStore.add(null, httpCookie);
+
+            });
+        });
+
+        stores = new ThreadLocal<CookieStore>() {
+            @Override
+            protected synchronized CookieStore initialValue() {
+                return cookieStore;
+            }
+        };
+    }
 
     @Override
     public void add(URI uri, HttpCookie cookie) {
@@ -27,7 +54,8 @@ class ThreadLocalCookieStore implements CookieStore {
 
     @Override
     public List<HttpCookie> get(URI uri) {
-        return getStore().get(uri);
+        CookieStore store = getStore();
+        return store.get(uri);
     }
 
     @Override

@@ -6,16 +6,11 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
+import com.spinn3r.artemis.network.cookies.jar.CookieJar;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
+import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
-
-import java.io.IOException;
-import java.net.CookieHandler;
-import java.net.CookieManager;
-import java.net.URI;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Builder interface preferred over using the ResourceRequestFactory.
@@ -29,6 +24,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String HEAD_METHOD = "HEAD";
     private static final String DELETE_METHOD = "DELETE";
     private static final String TRACE_METHOD = "TRACE";
+
+    private final NetworkConfig networkConfig;
 
     protected final HttpResponseValidators httpResponseValidators;
 
@@ -45,7 +42,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+    DefaultHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+        this.networkConfig = networkConfig;
         this.httpResponseValidators = httpResponseValidators;
         this.cookieJarManagerProvider = cookieJarManagerProvider;
     }
@@ -110,72 +108,19 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         return configure( resource, new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
     }
 
-    public static CookieManager C_HANDLER = new CookieManager(new ThreadLocalCookieStore(), null);
-
-    {
-        CookieHandler.setDefault(C_HANDLER);
-    }
-
     private DefaultHttpRequestMethod configure( String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
         defaultHttpRequestMethod.withMaxContentLength( defaultMaxContentLength );
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
-//        try {
-//            Map<String, String> latestCookies = getCookies(resource);
-//
-//            //TODO: Let cookies get serialized by Java
-//            defaultHttpRequestMethod.withCookies(latestCookies);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
+        if( ! networkConfig.isCookieManagerEnabled() ) {
+            // now get the default cookies from the cookie jar.
+            CookieJarManager cookieJarManager = cookieJarManagerProvider.get();
+            CookieJar cookieJar = cookieJarManager.getCookieJar(resource);
+            defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
+        }
         return defaultHttpRequestMethod;
 
     }
-
-    public static Map<String, String> getCookies(String resource) throws IOException {
-
-        Map<String, List<String>> allCookies = C_HANDLER.get(URI.create(resource), new HashMap<>());
-
-        return allCookies
-                .entrySet()
-                .stream()
-                .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> {
-                            List<String> list = entry.getValue();
-                            return list.get(list.size() - 1);
-                        }
-                ));
-    }
-
-//    public static void putCookies1(String resource, Map<String, String> cookies) {
-//
-//        putCookies(resource, cookies.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, entry -> Collections.singletonList(entry.getValue()))));
-//
-//    }
-//
-//    public static void putCookies(String resource, Map<String, List<String>> cookies) {
-//
-//
-//
-//        cookies
-//                .entrySet()
-//                .stream()
-//                .filter(stringListEntry -> !stringListEntry.getValue().isEmpty())
-//
-//                .forEach(stringListEntry -> {
-//                    C_HANDLER.getCookieStore().add()
-//                });
-////                .collect(Collectors.toMap(
-////                        Map.Entry::getKey,
-////                        entry -> {
-////                            List<String> list = entry.getValue();
-////                            return list.get(list.size() - 1);
-////                        }
-////                ));
-//    }
 
 }

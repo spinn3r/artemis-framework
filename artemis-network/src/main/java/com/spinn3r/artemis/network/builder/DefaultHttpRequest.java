@@ -117,10 +117,10 @@ public class DefaultHttpRequest implements HttpRequest {
         return ImmutableMap.copyOf( resourceRequest.getRequestHeadersMap() );
     }
 
-//    @Override
-//    public ImmutableMap<String, String> getCookies() {
-//        return ImmutableMap.copyOf( defaultHttpRequestMethod.cookies );
-//    }
+    @Override
+    public ImmutableMap<String, String> getCookies() {
+        return ImmutableMap.copyOf( defaultHttpRequestMethod.cookies );
+    }
 
     @Override
     public String getResponseHeader(String name) {
@@ -206,7 +206,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         return new DefaultHttpRequestMeta( getResource(),
                                            getRequestHeadersMap(),
-//                                           ImmutableMap.copyOf( defaultHttpRequestMethod.cookies ),
+                                           ImmutableMap.copyOf( defaultHttpRequestMethod.cookies ),
                                            defaultHttpRequestMethod.outputContent,
                                            defaultHttpRequestMethod.outputContentEncoding,
                                            defaultHttpRequestMethod.outputContentType );

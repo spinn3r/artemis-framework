@@ -4,15 +4,17 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
-import com.spinn3r.artemis.network.builder.CrawlingHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.DefaultDirectHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
+
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.util.List;
 
 /**
  * Provides network bindings but without proxy support and forces the
@@ -49,6 +51,19 @@ public class DirectNetworkService extends BaseService {
 
     @Override
     public void start() throws Exception {
-        cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+
+        if ( networkConfig.isCookieManagerEnabled() ) {
+
+            List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
+
+            CookieManager cookieManager = new CookieManager(new ThreadLocalCookieStore(setCookieDescriptions), null);
+
+            CookieHandler.setDefault(cookieManager);
+
+        } else {
+
+            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+
+        }
     }
 }
