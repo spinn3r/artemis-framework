@@ -5,6 +5,7 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
@@ -28,10 +29,10 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     HttpRequestBuilder httpRequestBuilder;
 
     @Inject
-    DirectNetworkService directNetworkService;
+    NetworkConfig networkConfig;
 
     @Inject
-    NetworkConfig networkConfig;
+    ThreadLocalCookies threadLocalCookies;
 
     @Inject
     Provider<ThreadLocalCookieStore> threadLocalCookieStoreProvider;
@@ -44,7 +45,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
                      DirectNetworkService.class);
 
         networkConfig.setCookieManagerEnabled(true);
-        directNetworkService.start();
+
     }
 
     @Test
@@ -74,9 +75,10 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         String cookie = "name=test1";
         String resource = "http://httpbin.org/cookies/set?" + cookie;
 
-        httpRequestBuilder.get(resource).execute().connect();
+        HttpRequest httpRequest = httpRequestBuilder.get(resource).execute().connect();
 
-        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]", httpRequest.getEffectiveCookies().toString());
+        assertEquals("[]", threadLocalCookies.getCookies().toString());
 
         assertNotNull(threadLocalCookieStoreProvider.get());
         assertEquals(0, threadLocalCookieStoreProvider.get().get().getCookies().size());

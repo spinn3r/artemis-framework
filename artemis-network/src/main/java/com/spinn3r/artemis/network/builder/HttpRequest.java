@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network.builder;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -12,7 +13,6 @@ import java.util.Set;
  * Fluent interface for a HttpRequest.
  */
 public interface HttpRequest {
-
 
     /**
      * Unknown status code.
@@ -123,6 +123,6 @@ public interface HttpRequest {
      * Get the actual cookies used with this request including the cookies
      * defined but he server as well as custom cookies set with withCookies()
      */
-    //ImmutableList<Cookie> getEffectiveCookies();
+    ImmutableList<Cookie> getEffectiveCookies();
 
 }

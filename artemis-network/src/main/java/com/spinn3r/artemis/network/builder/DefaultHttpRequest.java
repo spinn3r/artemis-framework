@@ -7,6 +7,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListener;
+import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.Cookies;
 
 import java.io.IOException;
@@ -28,6 +29,8 @@ public class DefaultHttpRequest implements HttpRequest {
     private final ResourceRequest resourceRequest;
 
     private String contentWithEncoding = null;
+
+    private ImmutableList<Cookie> effectiveCookies = ImmutableList.of();
 
     public DefaultHttpRequest( DefaultHttpRequestBuilder defaultHttpRequestBuilder,
                                DefaultHttpRequestMethod defaultHttpRequestMethod,
@@ -63,6 +66,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
         }
 
+        onExecuted();
+
         return contentWithEncoding;
 
     }
@@ -70,7 +75,15 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public HttpRequest connect() throws NetworkException {
         resourceRequest.connect();
+        onExecuted();
+
         return this;
+    }
+
+    // called internally once this request has been executed.
+    private void onExecuted() {
+        this.effectiveCookies = ImmutableList.copyOf(defaultHttpRequestBuilder.threadLocalCookies.getCookies());
+        defaultHttpRequestBuilder.threadLocalCookies.flush();
     }
 
     @Override
@@ -231,4 +244,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
     }
 
+    @Override
+    public ImmutableList<Cookie> getEffectiveCookies() {
+        return effectiveCookies;
+    }
 }

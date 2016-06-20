@@ -35,7 +35,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     protected final Provider<CookieJarManager> cookieJarManagerProvider;
 
-    private final ThreadLocalCookies threadLocalCookies;
+    protected final ThreadLocalCookies threadLocalCookies;
 
     protected NetworkEventListener listener = null;
 

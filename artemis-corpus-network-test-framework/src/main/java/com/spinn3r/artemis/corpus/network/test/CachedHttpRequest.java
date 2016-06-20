@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -171,4 +172,8 @@ public class CachedHttpRequest implements HttpRequest {
         return new DefaultHttpContentResponseMeta( getResource(), httpResponseMeta, getContentWithEncoding() );
     }
 
+    @Override
+    public ImmutableList<Cookie> getEffectiveCookies() {
+        return ImmutableList.of();
+    }
 }
