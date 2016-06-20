@@ -58,14 +58,12 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Test
     public void testThreadLocalCookieStore() throws Exception {
 
-        HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
-
         String cookie = "name=test1";
         String resource = "http://httpbin.org/cookies/set?" + cookie;
 
-        httpRequestExecutor.execute(() -> httpRequestBuilder.get(resource).execute().connect());
+        HttpRequest httpRequest = httpRequestBuilder.get(resource).execute().connect();
 
-        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
+        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]", httpRequest.getEffectiveCookies().toString());
 
     }
 
@@ -88,20 +86,18 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Test
     public void testThreadLocalCookieStoreInRedirectionChain() throws Exception {
 
-        HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
+        // FIXME: this doesn't test with the redirect IN THE MIDDLE of the chain
+        // which is the biggest thing we need to verify
 
         String cookie = "name=test2";
         String cookieSetUrl = "http://httpbin.org/cookies/set?" + cookie;
         String firstRedirectUrl = "https://httpbin.org/redirect-to?url=" + URLEncoder.encode(cookieSetUrl, "UTF-8");
 
-        httpRequestExecutor.execute(() -> httpRequestBuilder.get(firstRedirectUrl).execute().connect());
+        HttpRequest httpRequest = httpRequestBuilder.get(firstRedirectUrl).execute().connect();
 
-        assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
-    }
+        assertEquals("[Cookie{name='name', value='test2', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
 
-    private static List<String> getCookies(String domain) throws IOException, URISyntaxException {
-
-        return CookieHandler.getDefault().get(new URI(domain), new HashMap<>()).get("Cookie");
     }
 
 }
