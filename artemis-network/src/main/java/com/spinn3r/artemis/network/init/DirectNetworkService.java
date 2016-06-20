@@ -5,6 +5,8 @@ import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.cookies.StandardCookieStore;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
@@ -61,7 +63,7 @@ public class DirectNetworkService extends BaseService {
 
             ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
             threadLocalCookieStoreProvider.set(threadLocalCookieStore);
-            CookieManager cookieManager = new CookieManager(threadLocalCookieStore, null);
+            CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
 
             CookieHandler.setDefault(cookieManager);
 

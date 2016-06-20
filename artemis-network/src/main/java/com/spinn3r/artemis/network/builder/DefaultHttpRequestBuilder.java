@@ -5,12 +5,16 @@ import com.google.inject.Provider;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.cookies.jar.CookieJar;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
+
+import java.net.CookieStore;
 
 /**
  * Builder interface preferred over using the ResourceRequestFactory.
@@ -31,6 +35,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     protected final Provider<CookieJarManager> cookieJarManagerProvider;
 
+    private final ThreadLocalCookies threadLocalCookies;
+
     protected NetworkEventListener listener = null;
 
     protected RequestListeners requestListeners;
@@ -42,10 +48,11 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    DefaultHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+    DefaultHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
         this.networkConfig = networkConfig;
         this.httpResponseValidators = httpResponseValidators;
         this.cookieJarManagerProvider = cookieJarManagerProvider;
+        this.threadLocalCookies = threadLocalCookies;
     }
 
     public HttpRequestBuilder withRequestListeners( RequestListeners requestListeners ) {
@@ -109,6 +116,9 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     }
 
     private DefaultHttpRequestMethod configure( String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
+
+        threadLocalCookies.flush();
+
         defaultHttpRequestMethod.withMaxContentLength( defaultMaxContentLength );
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
@@ -119,6 +129,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
             CookieJar cookieJar = cookieJarManager.getCookieJar(resource);
             defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
         }
+
         return defaultHttpRequestMethod;
 
     }

@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.cookies.StandardCookieStore;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
@@ -136,7 +138,7 @@ public class NetworkService extends BaseService {
 
             ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
             threadLocalCookieStoreProvider.set(threadLocalCookieStore);
-            CookieManager cookieManager = new CookieManager(threadLocalCookieStore, null);
+            CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
 
             CookieHandler.setDefault(cookieManager);
 

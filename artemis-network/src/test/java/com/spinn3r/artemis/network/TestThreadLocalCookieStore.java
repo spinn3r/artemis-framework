@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
@@ -78,7 +79,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         assertEquals(cookie, getCookies("http://httpbin.org").iterator().next());
 
         assertNotNull(threadLocalCookieStoreProvider.get());
-        assertEquals(0, threadLocalCookieStoreProvider.get().getCookies().size());
+        assertEquals(0, threadLocalCookieStoreProvider.get().get().getCookies().size());
 
     }
 
