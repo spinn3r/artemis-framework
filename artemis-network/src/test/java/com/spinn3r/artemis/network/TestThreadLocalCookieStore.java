@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.*;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
+import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,12 +23,21 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Inject
     HttpRequestBuilder httpRequestBuilder;
 
+
+    @Inject
+    DirectNetworkService directNetworkService;
+
+    @Inject
+    NetworkConfig networkConfig;
     @Override
     @Before
     public void setUp() throws Exception {
         super.setUp(
                 SyntheticClockService.class,
                 DirectNetworkService.class);
+
+        networkConfig.setCookieManagerEnabled(true);
+        directNetworkService.start();
     }
 
     @Test
