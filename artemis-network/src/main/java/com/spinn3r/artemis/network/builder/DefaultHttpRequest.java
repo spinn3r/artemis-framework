@@ -68,6 +68,12 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
+    public HttpRequest connect() throws NetworkException {
+        resourceRequest.connect();
+        return this;
+    }
+
+    @Override
     public void disconnect() throws NetworkException {
         resourceRequest.disconnect();
     }
@@ -88,12 +94,6 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public InputStream getDirectInputStream() throws NetworkException {
         return ((URLResourceRequest)resourceRequest).getBackendInputStream();
-    }
-
-    @Override
-    public HttpRequest connect() throws NetworkException {
-        resourceRequest.connect();
-        return this;
     }
 
     @Override

@@ -102,6 +102,8 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         }
 
+        // FIXME: add the cookies to the current thread local cookie store...
+
         ResourceRequest resourceRequest = ResourceRequestFactory.getResourceRequest( resource, modifiedSince, etag, proxy, true );
 
         resourceRequest.setRequestMethod( method );

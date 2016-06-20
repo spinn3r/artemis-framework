@@ -1,17 +1,15 @@
 package com.spinn3r.artemis.network.builder;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.CookieMap;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
