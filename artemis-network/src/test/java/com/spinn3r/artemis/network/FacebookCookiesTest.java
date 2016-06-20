@@ -1,18 +1,15 @@
 package com.spinn3r.artemis.network;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  *
