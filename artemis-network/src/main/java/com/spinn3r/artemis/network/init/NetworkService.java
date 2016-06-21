@@ -132,16 +132,14 @@ public class NetworkService extends BaseService {
             testProxyReference( proxyReference );
         }
 
+        List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
+
+        ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
+        threadLocalCookieStoreProvider.set(threadLocalCookieStore);
+
         if ( networkConfig.isCookieManagerEnabled() ) {
-
-            List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
-
-            ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
-            threadLocalCookieStoreProvider.set(threadLocalCookieStore);
             CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
-
             CookieHandler.setDefault(cookieManager);
-
         } else {
 
             cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));

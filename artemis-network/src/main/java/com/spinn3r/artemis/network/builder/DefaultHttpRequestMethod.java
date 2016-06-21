@@ -148,7 +148,10 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
             URI uri = new URI(resource);
 
             for (Map.Entry<String, String> entry : cookies.entrySet()) {
-                threadLocalCookies.add(uri, new HttpCookie(entry.getKey(), entry.getValue()));
+                HttpCookie httpCookie = new HttpCookie(entry.getKey(), entry.getValue());
+                httpCookie.setPath("/");
+
+                threadLocalCookies.add(uri, httpCookie);
             }
 
         } catch (URISyntaxException e) {
@@ -197,6 +200,5 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
     public Proxy getProxy() {
         return proxy;
     }
-
 
 }

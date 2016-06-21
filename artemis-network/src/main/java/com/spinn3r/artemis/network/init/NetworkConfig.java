@@ -41,7 +41,7 @@ public class NetworkConfig {
 
     private List<SetCookieDescription> cookies = Lists.newArrayList();
 
-    private boolean cookieManagerEnabled = false;
+    private boolean cookieManagerEnabled = true;
 
     public String getUserAgent() {
         return userAgent;

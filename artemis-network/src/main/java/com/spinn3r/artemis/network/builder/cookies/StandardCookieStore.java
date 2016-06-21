@@ -27,7 +27,8 @@ public class StandardCookieStore implements CookieStore {
     @Override
     public List<HttpCookie> get(URI uri) {
         CookieStore store = getStore();
-        return store.get(uri);
+        List<HttpCookie> result = store.get(uri);
+        return result;
     }
 
     @Override
