@@ -6,7 +6,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.io.IOContext;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
@@ -21,17 +20,30 @@ import java.util.Map;
  */
 public class JSON {
 
-    private static final ObjectMapper OBJECT_MAPPER = createStaticObjectMapper();
+    private static final ObjectMapper INDENTED_OBJECT_MAPPER = createStaticObjectMapper(true, true);
+    private static final ObjectMapper NON_INDENTED_OBJECT_MAPPER = createStaticObjectMapper(false, false);
 
     /**
      * Convert the object to JSON but also make it so that each arrays are pretty
      * printed one entry per line.
-     *
      */
     public static String toJSON( Object obj ) {
 
         try {
-            return OBJECT_MAPPER.writeValueAsString( obj );
+            return INDENTED_OBJECT_MAPPER.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException( e );
+        }
+
+    }
+
+    /**
+     * Same as toJSON but makes the record on one line.
+     */
+    public static String toJSONRecord( Object obj ) {
+
+        try {
+            return NON_INDENTED_OBJECT_MAPPER.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
         }
@@ -41,7 +53,7 @@ public class JSON {
     public static byte[] toByteArray( Object obj ) {
 
         try {
-            return OBJECT_MAPPER.writeValueAsBytes( obj );
+            return INDENTED_OBJECT_MAPPER.writeValueAsBytes(obj );
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
         }
@@ -56,7 +68,7 @@ public class JSON {
 
         try {
 
-            OBJECT_MAPPER.writeValue( outputStream, obj );
+            INDENTED_OBJECT_MAPPER.writeValue(outputStream, obj );
 
         } catch (JsonProcessingException e) {
             throw new RuntimeException( e );
@@ -144,12 +156,12 @@ public class JSON {
         return objectMapper;
     }
 
-    private static ObjectMapper createStaticObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper( new Factory() );
+    private static ObjectMapper createStaticObjectMapper(boolean pretty, boolean indentOutput) {
+        ObjectMapper objectMapper = new ObjectMapper( new CustomJSONFactory(pretty) );
         objectMapper.registerModule(new Jdk8Module());
         objectMapper.registerModule(new GuavaModule());
 
-        objectMapper.configure( SerializationFeature.INDENT_OUTPUT, true );
+        objectMapper.configure( SerializationFeature.INDENT_OUTPUT, indentOutput );
         objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
 
         return objectMapper;
@@ -166,11 +178,28 @@ public class JSON {
 
 
     @SuppressWarnings( "serial" )
-    private static class Factory extends JsonFactory {
+    private static class CustomJSONFactory extends JsonFactory {
+
+        private final boolean pretty;
+
+        public CustomJSONFactory(boolean pretty) {
+            super();
+            this.pretty = pretty;
+        }
+
         @Override
         protected JsonGenerator _createGenerator(Writer out, IOContext ctxt) throws IOException {
-            return super._createGenerator(out, ctxt).setPrettyPrinter(PrettyPrinter.instance);
+
+            JsonGenerator jsonGenerator = super._createGenerator(out, ctxt);
+
+            if( pretty ) {
+                return jsonGenerator.setPrettyPrinter(PrettyPrinter.instance);
+            }
+
+            return jsonGenerator;
+
         }
+
     }
 
 }
