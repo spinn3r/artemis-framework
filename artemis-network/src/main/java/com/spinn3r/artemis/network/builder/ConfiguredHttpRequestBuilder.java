@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
@@ -22,9 +23,10 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
                                  Provider<RequestSettingsRegistry> requestSettingsRegistryProvider,
                                  RequestListeners requestListeners,
                                  HttpResponseValidators httpResponseValidators,
-                                 Provider<CookieJarManager> cookieJarManagerProvider ) {
+                                 Provider<CookieJarManager> cookieJarManagerProvider,
+                                 ThreadLocalCookies threadLocalCookies) {
 
-        super(httpResponseValidators, cookieJarManagerProvider);
+        super(networkConfig, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
         if ( networkConfig.getUserAgent() == null ) {
             throw new RuntimeException( "No user agent: " + networkConfig );
         }

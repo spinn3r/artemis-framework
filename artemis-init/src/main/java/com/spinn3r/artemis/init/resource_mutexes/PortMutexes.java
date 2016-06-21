@@ -1,17 +1,21 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
 import com.google.common.collect.Lists;
-import com.google.common.net.InetAddresses;
 import com.spinn3r.artemis.util.io.Sockets;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Acquire a mutex based on TCP port numbers.
@@ -19,13 +23,7 @@ import java.util.List;
 public class PortMutexes {
 
     public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
-
-        try {
-            return acquire( InetAddress.getLocalHost(), startPort, endPort );
-        } catch (UnknownHostException e) {
-            throw new ResourceMutexException.FailureException( e );
-        }
-
+        return acquire(Optional.empty(), startPort, endPort);
     }
 
     /**
@@ -34,7 +32,7 @@ public class PortMutexes {
      * @param startPort The starting port (inclusive)
      * @param endPort The ending port (inclusive)
      */
-    public PortMutex acquire( InetAddress inetAddress, int startPort, int endPort ) throws ResourceMutexException {
+    public PortMutex acquire( Optional<InetAddress> inetAddress, int startPort, int endPort ) throws ResourceMutexException {
 
         try {
 
@@ -58,11 +56,13 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( Sockets.isClosed( inetAddress, port ) &&
-                     ! portFile.exists() &&
-                     portFile.createNewFile() ) {
+                if ( isClosed(inetAddress, port) && ! portFile.exists() ) {
 
-                    return new PortMutex( portFile, port );
+                    Optional<FileLock> fileLock = acquireFileLock(portFile);
+
+                    if ( fileLock.isPresent() ) {
+                        return new PortMutex(portFile, fileLock.get(), port);
+                    }
 
                 }
 
@@ -75,6 +75,54 @@ public class PortMutexes {
 
         } catch (IOException e) {
             throw new ResourceMutexException.FailureException( e );
+        }
+
+    }
+
+    private boolean isClosed( Optional<InetAddress> inetAddress, int port ) throws UnknownHostException {
+
+        if (inetAddress.isPresent()) {
+
+            if (Sockets.isOpen(inetAddress.get(), port)) {
+                return false;
+            }
+
+        } else {
+
+            // must test "localhost" and 127.0.0.1
+
+            if (Sockets.isOpen(InetAddress.getLocalHost(), port)) {
+                return false;
+            }
+
+            if (Sockets.isOpen(InetAddress.getByName("127.0.0.1"), port)) {
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+    private Optional<FileLock> acquireFileLock(File file) {
+
+        try {
+
+            //Path path = file.toPath();
+            //FileChannel fileChannel = FileChannel.open(path, CREATE_NEW, DELETE_ON_CLOSE, WRITE, APPEND);
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FileChannel fileChannel = fileOutputStream.getChannel();
+
+            fileChannel.force(true);
+
+            FileLock fileLock = fileChannel.lock();
+
+            return Optional.of(fileLock);
+
+        } catch (IOException e) {
+            return Optional.empty();
         }
 
     }

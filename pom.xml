@@ -70,6 +70,8 @@
         <module>artemis-velocity</module>
         <module>artemis-threads</module>
         <module>artemis-tracepoints</module>
+        <module>artemis-network-integration-test0</module>
+        <module>artemis-http-test-framework</module>
         <module>artemis-network-test</module>
         <module>artemis-network-test-framework</module>
     </modules>

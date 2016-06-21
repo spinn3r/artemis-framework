@@ -7,6 +7,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListener;
+import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.Cookies;
 
 import java.io.IOException;
@@ -28,6 +29,10 @@ public class DefaultHttpRequest implements HttpRequest {
     private final ResourceRequest resourceRequest;
 
     private String contentWithEncoding = null;
+
+    private ImmutableList<Cookie> effectiveCookies = ImmutableList.of();
+
+    private boolean executed = false;
 
     public DefaultHttpRequest( DefaultHttpRequestBuilder defaultHttpRequestBuilder,
                                DefaultHttpRequestMethod defaultHttpRequestMethod,
@@ -63,8 +68,32 @@ public class DefaultHttpRequest implements HttpRequest {
 
         }
 
+        onExecuted();
+
         return contentWithEncoding;
 
+    }
+
+    @Override
+    public HttpRequest connect() throws NetworkException {
+        resourceRequest.connect();
+        onExecuted();
+
+        return this;
+    }
+
+    // called internally once this request has been executed.
+    private void onExecuted() {
+
+        if ( executed ) {
+            // only allow this to be called once... otherwise we could
+            // call getContentWithEncoding twice and overwrite cookies.
+            return;
+        }
+
+        this.effectiveCookies = ImmutableList.copyOf(defaultHttpRequestBuilder.threadLocalCookies.getCookies());
+        defaultHttpRequestBuilder.threadLocalCookies.flush();
+        executed = true;
     }
 
     @Override
@@ -91,12 +120,6 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public HttpRequest connect() throws NetworkException {
-        resourceRequest.connect();
-        return this;
-    }
-
-    @Override
     public int getResponseCode() {
         return resourceRequest.getResponseCode();
     }
@@ -118,8 +141,8 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public ImmutableMap<String, String> getCookies() {
-        return ImmutableMap.copyOf( defaultHttpRequestMethod.cookies );
+    public ImmutableList<Cookie> getCookies() {
+        return ImmutableList.copyOf( defaultHttpRequestMethod.cookies );
     }
 
     @Override
@@ -206,7 +229,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         return new DefaultHttpRequestMeta( getResource(),
                                            getRequestHeadersMap(),
-                                           ImmutableMap.copyOf( defaultHttpRequestMethod.cookies ),
+                                           Cookies.toMap( defaultHttpRequestMethod.cookies ),
                                            defaultHttpRequestMethod.outputContent,
                                            defaultHttpRequestMethod.outputContentEncoding,
                                            defaultHttpRequestMethod.outputContentType );
@@ -231,4 +254,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
     }
 
+    @Override
+    public ImmutableList<Cookie> getEffectiveCookies() {
+        return effectiveCookies;
+    }
 }

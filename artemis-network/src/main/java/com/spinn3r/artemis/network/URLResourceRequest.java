@@ -27,7 +27,6 @@ import java.util.zip.GZIPInputStream;
 // http://www.rgagnon.com/javadetails/java-debug-HttpURLConnection-problem.html
 public class URLResourceRequest extends BaseResourceRequest implements ResourceRequest {
 
-    private static final String COOKIE_HEADER_NAME = "Cookie";
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String CONTENT_LENGTH = "Content-Length";
 
@@ -355,10 +354,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             //perform cookie setting...
 
-            if ( getCookies() != null && getCookies().size() > 0 ) {
-                _urlConnection.setRequestProperty(COOKIE_HEADER_NAME, CookiesEncoder.encode(getCookies() ) );
-            }
-
             if ( _urlConnection instanceof HttpURLConnection ) {
 
                 HttpURLConnection httpURLConn = (HttpURLConnection)_urlConnection;
@@ -486,6 +481,9 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             long after = System.currentTimeMillis();
 
             this.duration = (int)(after - before);
+
+            // TODO: we might also want to log the effective cookies used in the content
+            // store but this requires additional work.
 
             log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s proxy=%s",
                       logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );

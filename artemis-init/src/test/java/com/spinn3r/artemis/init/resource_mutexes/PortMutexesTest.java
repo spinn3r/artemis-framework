@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

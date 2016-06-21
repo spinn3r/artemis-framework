@@ -1,7 +1,7 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
 import java.io.File;
-import java.io.IOException;
+import java.nio.channels.FileLock;
 
 /**
  *
@@ -10,8 +10,8 @@ public class PortMutex extends ResourceMutex {
 
     private final int port;
 
-    public PortMutex(File backing, int port) {
-        super( backing );
+    public PortMutex(File backing, FileLock fileLock, int port) {
+        super(backing, fileLock);
         this.port = port;
     }
 
@@ -24,11 +24,6 @@ public class PortMutex extends ResourceMutex {
         return "PortMutex{" +
                  "port=" + port +
                  "} " + super.toString();
-    }
-
-    @Override
-    public void close() throws IOException {
-        // port mutex closing/releasing disabled for now
     }
 
 }

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -44,8 +45,8 @@ public class MockHttpRequest implements HttpRequest {
     }
 
     @Override
-    public ImmutableMap<String, String> getCookies() {
-        return null;
+    public ImmutableList<Cookie> getCookies() {
+        return ImmutableList.of();
     }
 
     @Override
@@ -144,6 +145,11 @@ public class MockHttpRequest implements HttpRequest {
     @Override
     public HttpContentResponseMeta getHttpContentResponseMeta() throws NetworkException {
         return null;
+    }
+
+    @Override
+    public ImmutableList<Cookie> getEffectiveCookies() {
+        return ImmutableList.of();
     }
 
 }

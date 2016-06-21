@@ -1,13 +1,17 @@
 package com.spinn3r.artemis.network.cookies;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.ZonedDateTime;
+import java.net.HttpCookie;
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cookie {
 
     private String name;
@@ -22,11 +26,11 @@ public class Cookie {
 
     private boolean secure;
 
-    private boolean sameSite;
+    private Optional<Long> maxAge;
 
-    private Optional<ZonedDateTime> expires;
-
-    private Optional<Integer> maxAge;
+    public Cookie(String name, String value) {
+        this(name, value, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+    }
 
     public Cookie(String name,
                   String value,
@@ -34,17 +38,20 @@ public class Cookie {
                   Optional<String> domain,
                   boolean httpOnly,
                   boolean secure,
-                  boolean sameSite,
-                  Optional<ZonedDateTime> expires,
-                  Optional<Integer> maxAge) {
+                  Optional<Long> maxAge) {
+
+        checkNotNull(name);
+        checkNotNull(value);
+        checkNotNull(path);
+        checkNotNull(domain);
+        checkNotNull(maxAge);
+
         this.name = name;
         this.value = value;
         this.path = path;
         this.domain = domain;
         this.httpOnly = httpOnly;
         this.secure = secure;
-        this.sameSite = sameSite;
-        this.expires = expires;
         this.maxAge = maxAge;
     }
 
@@ -122,10 +129,6 @@ public class Cookie {
         return secure;
     }
 
-    public boolean isSameSite() {
-        return sameSite;
-    }
-
     /**
      * The Expires attribute defines a specific date and time for when the
      * browser should delete the cookie. The date/time is specified in the form
@@ -140,8 +143,22 @@ public class Cookie {
      * Set-Cookie: made_write_conn=1295214458; Path=/; Domain=.example.com
      * Set-Cookie: reg_fb_gate=deleted; Expires=Thu, 01 Jan 1970 00:00:01 GMT; Path=/; Domain=.example.com; HttpOnly
      */
-    public Optional<ZonedDateTime> getExpires() {
-        return expires;
+    public Optional<Long> getMaxAge() {
+        return maxAge;
+    }
+
+    public HttpCookie toHttpCookie() {
+
+        HttpCookie httpCookie = new HttpCookie(getName(), getValue());
+
+        path.ifPresent(httpCookie::setPath);
+        domain.ifPresent(httpCookie::setDomain);
+        maxAge.ifPresent(httpCookie::setMaxAge);
+        httpCookie.setHttpOnly(httpOnly);
+        httpCookie.setSecure(secure);
+
+        return httpCookie;
+
     }
 
     @Override
@@ -153,8 +170,6 @@ public class Cookie {
                  ", domain=" + domain +
                  ", httpOnly=" + httpOnly +
                  ", secure=" + secure +
-                 ", sameSite=" + sameSite +
-                 ", expires=" + expires +
                  ", maxAge=" + maxAge +
                  '}';
     }
@@ -165,19 +180,15 @@ public class Cookie {
 
         private String value;
 
-        private Optional<String> path;
+        private Optional<String> path = Optional.of("/");
 
-        private Optional<String> domain;
+        private Optional<String> domain = Optional.empty();
 
         private boolean httpOnly = false;
 
         private boolean secure = false;
 
-        private boolean sameSite = false;
-
-        private Optional<ZonedDateTime> expires;
-
-        private Optional<Integer> maxAge;
+        private Optional<Long> maxAge = Optional.empty();
 
         public Builder(String name, String value) {
             this.name = name;
@@ -199,8 +210,18 @@ public class Cookie {
             return this;
         }
 
+        public Builder setPath( String path ) {
+            this.path = Optional.ofNullable(path);
+            return this;
+        }
+
         public Builder setDomain(Optional<String> domain) {
             this.domain = domain;
+            return this;
+        }
+
+        public Builder setDomain( String domain ) {
+            this.domain = Optional.ofNullable(domain);
             return this;
         }
 
@@ -214,23 +235,13 @@ public class Cookie {
             return this;
         }
 
-        public Builder setSameSite(boolean sameSite) {
-            this.sameSite = sameSite;
-            return this;
-        }
-
-        public Builder setExpires(Optional<ZonedDateTime> expires) {
-            this.expires = expires;
-            return this;
-        }
-
-        public Builder setMaxAge(Optional<Integer> maxAge) {
+        public Builder setMaxAge(Optional<Long> maxAge) {
             this.maxAge = maxAge;
             return this;
         }
 
         public Cookie build() {
-            return new Cookie(name, value, path, domain, httpOnly, secure, sameSite, expires, maxAge);
+            return new Cookie(name, value, path, domain, httpOnly, secure, maxAge);
         }
 
     }

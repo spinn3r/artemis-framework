@@ -44,12 +44,13 @@ public class Sockets {
 
             try( Socket socket = new Socket( inetAddress, port ) ) {
                 socket.getInputStream();
-                return true;
             }
 
         } catch (IOException e) {
             return false;
         }
+
+        return true;
 
     }
 

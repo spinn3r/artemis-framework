@@ -13,6 +13,18 @@ import java.util.Map;
  */
 public class Cookies {
 
+    public static ImmutableMap<String,String> toMap(List<Cookie> cookies) {
+
+        Map<String,String> result = Maps.newLinkedHashMap();
+
+        for (Cookie cookie : cookies) {
+            result.put(cookie.getName(), cookie.getValue());
+        }
+
+        return ImmutableMap.copyOf(result);
+
+    }
+
     public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
