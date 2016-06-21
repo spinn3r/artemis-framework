@@ -20,6 +20,7 @@ public class SocketsTest {
     }
 
     @Test
+    @Ignore
     public void testLocalhost() throws Exception {
 
         InetAddress localHost = InetAddress.getLocalHost();
