@@ -4,14 +4,18 @@ import com.google.common.collect.Lists;
 import com.google.common.net.InetAddresses;
 import com.spinn3r.artemis.util.io.Sockets;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
+import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Acquire a mutex based on TCP port numbers.
@@ -58,11 +62,13 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( Sockets.isClosed( inetAddress, port ) &&
-                     ! portFile.exists() &&
-                     portFile.createNewFile() ) {
+                if ( Sockets.isClosed( inetAddress, port ) && ! portFile.exists() ) {
 
-                    return new PortMutex( portFile, port );
+                    Optional<FileLock> fileLock = acquireFileLock(portFile);
+
+                    if ( fileLock.isPresent() ) {
+                        return new PortMutex(portFile, fileLock.get(), port);
+                    }
 
                 }
 
@@ -75,6 +81,23 @@ public class PortMutexes {
 
         } catch (IOException e) {
             throw new ResourceMutexException.FailureException( e );
+        }
+
+    }
+
+    private Optional<FileLock> acquireFileLock(File file) {
+
+        try {
+
+
+            FileChannel fileChannel = FileChannel.open(file.toPath(), StandardOpenOption.CREATE_NEW, StandardOpenOption.DELETE_ON_CLOSE);
+
+            FileLock fileLock = fileChannel.lock();
+
+            return Optional.of(fileLock);
+
+        } catch (IOException e) {
+            return Optional.empty();
         }
 
     }
