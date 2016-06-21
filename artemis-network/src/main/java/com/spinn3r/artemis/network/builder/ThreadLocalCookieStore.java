@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 
 import java.net.CookieManager;
@@ -20,28 +21,31 @@ public class ThreadLocalCookieStore implements CookieStore {
 
     public ThreadLocalCookieStore(List<SetCookieDescription> setCookieDescriptions) {
 
-        CookieStore cookieStore = new CookieManager().getCookieStore(); // new InMemoryCookieStore();
-
-        setCookieDescriptions.stream().forEach(setCookieDescription -> {
-
-            List<HttpCookie> httpCookies = HttpCookie.parse(setCookieDescription.getSetCookie());
-
-            httpCookies.stream().forEach(httpCookie ->{
-
-                httpCookie.setDomain(setCookieDescription.getDomain());
-                String path = httpCookie.getPath();
-                if (path == null || path.isEmpty()) {
-                    httpCookie.setPath("/");
-                }
-
-                cookieStore.add(null, httpCookie);
-
-            });
-        });
+        List<SetCookieDescription> cookies = ImmutableList.copyOf(setCookieDescriptions);
 
         stores = new ThreadLocal<CookieStore>() {
             @Override
             protected synchronized CookieStore initialValue() {
+
+                CookieStore cookieStore = new CookieManager().getCookieStore(); // new InMemoryCookieStore();
+
+                cookies.stream().forEach(setCookieDescription -> {
+
+                    List<HttpCookie> httpCookies = HttpCookie.parse(setCookieDescription.getSetCookie());
+
+                    httpCookies.stream().forEach(httpCookie ->{
+
+                        httpCookie.setDomain(setCookieDescription.getDomain());
+                        String path = httpCookie.getPath();
+                        if (path == null || path.isEmpty()) {
+                            httpCookie.setPath("/");
+                        }
+
+                        cookieStore.add(null, httpCookie);
+
+                    });
+                });
+
                 return cookieStore;
             }
         };
@@ -84,8 +88,7 @@ public class ThreadLocalCookieStore implements CookieStore {
     }
 
     protected CookieStore getStore() {
-        CookieStore cookieStore = stores.get();
-        return cookieStore;
+        return stores.get();
     }
 
     public void purgeStore() {
