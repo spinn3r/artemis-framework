@@ -10,6 +10,7 @@ import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
@@ -19,9 +20,7 @@ import com.spinn3r.artemis.util.daemon.WaitForPort;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.SocketAddress;
+import java.net.*;
 import java.util.List;
 import java.util.Map;
 
@@ -128,8 +127,20 @@ public class NetworkService extends BaseService {
             testProxyReference( proxyReference );
         }
 
-        cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
 
+        if ( networkConfig.isCookieManagerEnabled() ) {
+
+            List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
+
+            CookieManager cookieManager = new CookieManager(new ThreadLocalCookieStore(setCookieDescriptions), null);
+
+            CookieHandler.setDefault(cookieManager);
+
+        } else {
+
+            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+
+        }
     }
 
     private PrioritizedProxyReference createPrioritizedProxyReference(String name, ProxySettings proxySettings ) {

@@ -6,8 +6,10 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
+import com.spinn3r.artemis.network.cookies.jar.CookieJar;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.events.NetworkEventListener;
+import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 
 /**
@@ -22,6 +24,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private static final String HEAD_METHOD = "HEAD";
     private static final String DELETE_METHOD = "DELETE";
     private static final String TRACE_METHOD = "TRACE";
+
+    private final NetworkConfig networkConfig;
 
     protected final HttpResponseValidators httpResponseValidators;
 
@@ -38,7 +42,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    DefaultHttpRequestBuilder(HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+    DefaultHttpRequestBuilder(NetworkConfig networkConfig, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider) {
+        this.networkConfig = networkConfig;
         this.httpResponseValidators = httpResponseValidators;
         this.cookieJarManagerProvider = cookieJarManagerProvider;
     }
@@ -108,9 +113,12 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
-        // now get the default cookies from the cookie jar.
-        defaultHttpRequestMethod.withCookies(cookieJarManagerProvider.get().getCookieJar(resource).getCookies());
-
+        if( ! networkConfig.isCookieManagerEnabled() ) {
+            // now get the default cookies from the cookie jar.
+            CookieJarManager cookieJarManager = cookieJarManagerProvider.get();
+            CookieJar cookieJar = cookieJarManager.getCookieJar(resource);
+            defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
+        }
         return defaultHttpRequestMethod;
 
     }
