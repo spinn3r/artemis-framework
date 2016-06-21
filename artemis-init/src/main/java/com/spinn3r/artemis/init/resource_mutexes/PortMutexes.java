@@ -22,13 +22,17 @@ import java.util.Optional;
  */
 public class PortMutexes {
 
+    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
+        return acquire(Optional.empty(), startPort, endPort);
+    }
+
     /**
      * Acquire a mutex for a port in the given range.
      *
      * @param startPort The starting port (inclusive)
      * @param endPort The ending port (inclusive)
      */
-    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
+    public PortMutex acquire( Optional<InetAddress> inetAddress, int startPort, int endPort ) throws ResourceMutexException {
 
         try {
 
@@ -52,7 +56,7 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( isClosed(port) && ! portFile.exists() ) {
+                if ( isClosed(inetAddress, port) && ! portFile.exists() ) {
 
                     Optional<FileLock> fileLock = acquireFileLock(portFile);
 
@@ -75,14 +79,26 @@ public class PortMutexes {
 
     }
 
-    private boolean isClosed( int port ) throws UnknownHostException {
+    private boolean isClosed( Optional<InetAddress> inetAddress, int port ) throws UnknownHostException {
 
-        if( Sockets.isOpen( InetAddress.getLocalHost(), port ) ) {
-            return false;
-        }
+        if (inetAddress.isPresent()) {
 
-        if ( Sockets.isOpen( InetAddress.getByName("127.0.0.1"), port) ) {
-            return false;
+            if (Sockets.isOpen(inetAddress.get(), port)) {
+                return false;
+            }
+
+        } else {
+
+            // must test "localhost" and 127.0.0.1
+
+            if (Sockets.isOpen(InetAddress.getLocalHost(), port)) {
+                return false;
+            }
+
+            if (Sockets.isOpen(InetAddress.getByName("127.0.0.1"), port)) {
+                return false;
+            }
+
         }
 
         return true;
