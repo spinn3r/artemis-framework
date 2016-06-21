@@ -147,11 +147,19 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
             ThreadLocalCookies threadLocalCookies = defaultHttpRequestBuilder.threadLocalCookies;
 
-            URI uri = new URI(resource);
+            URI requestURI = new URI(resource);
 
             for (Cookie cookie : cookies) {
+
+                URI cookieURI = requestURI;
+
+                if ( cookie.getDomain().isPresent() ) {
+                    // we have to JUST use the domain of the cookie.
+                    cookieURI = null;
+                }
+
                 HttpCookie httpCookie = cookie.toHttpCookie();
-                threadLocalCookies.add(uri, httpCookie);
+                threadLocalCookies.add(cookieURI, httpCookie);
             }
 
         } catch (URISyntaxException e) {

@@ -19,7 +19,6 @@ import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -171,6 +170,35 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
     }
 
+    @Test
+    public void testCookiesWithoutRedirect() throws Exception {
+
+        ResponseDescriptor responseDescriptor
+          = new ResponseDescriptor.Builder()
+              .withCookie( new ResponseDescriptor.Cookie.Builder("foo", "bar")
+                             .withDomain("localhost.localdomain")
+                             .withPath("/")
+                             .withMaxAge(Integer.MAX_VALUE)
+                             .build() )
+              .build();
+
+        String url = String.format( "http://localhost.localdomain:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
+
+        HttpRequest httpRequest
+          = httpRequestBuilder
+              //.withProxy("http://localhost:8080")
+              .get(url)
+              .execute()
+              .connect();
+
+        String content = httpRequest.getContentWithEncoding();
+
+        System.out.printf("%s\n", content);
+
+        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[2147483646]}]",
+                     httpRequest.getEffectiveCookies().toString());
+
+    }
 
     @Test
     public void testRedirectToSeparateSite() throws Exception {
@@ -181,22 +209,28 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         ResponseDescriptor responseDescriptor
           = new ResponseDescriptor.Builder()
               .withStatus(301)
-              .withHeader("Location", String.format( "http://127.0.01:%s/request-meta", webserverPort.getPort() ))
-              .withCookie("foo", "bar")
+              .withHeader("Location", "http://httpbin.org/cookies/set?cat=dog")
+              .withCookie( new ResponseDescriptor.Cookie.Builder("foo", "bar")
+                             .build() )
               .build();
 
-        String url = String.format( "http://localhost:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
+        String url = String.format( "http://localhost.localdomain:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
 
         HttpRequest httpRequest
           = httpRequestBuilder
-              //.withProxy("http://localhost:8080")
-              .get(url).execute().connect();
+              .get(url)
+              .execute()
+              .connect();
 
-        String content = httpRequest.getContentWithEncoding();
+        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}, Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
 
-        System.out.printf("%s\n", content);
-
-        assertThat(content, Matchers.containsString("Cookie"));
+        assertEquals("{\n" +
+                       "  \"cookies\": {\n" +
+                       "    \"cat\": \"dog\"\n" +
+                       "  }\n" +
+                       "}\n",
+                     httpRequest.getContentWithEncoding());
 
     }
 
@@ -236,8 +270,5 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
 
     }
-
-    // FIXME: test redirecting to a completely separate site.. for example..
-    // from httpbin then localhost and make sure cookies are still set on the new site.
 
 }

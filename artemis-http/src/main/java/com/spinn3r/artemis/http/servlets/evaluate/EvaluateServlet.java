@@ -38,7 +38,6 @@ public class EvaluateServlet extends DefaultServlet {
 
             response.addCookie(cookie);
 
-
         }
 
         response.setContentType(responseDescriptor.getContentType());

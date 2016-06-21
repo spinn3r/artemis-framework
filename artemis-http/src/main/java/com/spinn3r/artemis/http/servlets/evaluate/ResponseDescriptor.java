@@ -54,21 +54,21 @@ public class ResponseDescriptor {
 
     public static class Cookie {
 
-        private String name;
+        protected String name;
 
-        private String value;
+        protected String value;
 
-        private Optional<String> path;
+        protected Optional<String> path;
 
-        private Optional<String> domain;
+        protected Optional<String> domain;
 
-        private Optional<Boolean> httpOnly;
+        protected Optional<Boolean> httpOnly;
 
-        private Optional<Boolean> secure;
+        protected Optional<Boolean> secure;
 
-        private Optional<Integer> maxAge;
+        protected Optional<Integer> maxAge;
 
-        private Optional<String> expires;
+        protected Optional<String> expires;
 
         public Cookie(@JsonProperty("name") String name,
                       @JsonProperty("value") String value) {
@@ -120,6 +120,36 @@ public class ResponseDescriptor {
                      ", maxAge=" + maxAge +
                      ", expires=" + expires +
                      '}';
+        }
+
+        public static class Builder {
+
+            private final Cookie cookie;
+
+            public Builder(String name, String value) {
+                cookie = new Cookie(name, value);
+            }
+
+            public Builder withPath( String path ) {
+                cookie.path = Optional.of(path);
+                return this;
+            }
+
+            public Builder withDomain( String domain ) {
+                cookie.domain = Optional.ofNullable(domain);
+                return this;
+            }
+
+            public Builder withMaxAge( int maxAge ) {
+                cookie.maxAge = Optional.of(maxAge);
+                return this;
+            }
+
+            public Cookie build() {
+                return cookie;
+
+            }
+
         }
 
     }

@@ -32,6 +32,8 @@ public class DefaultHttpRequest implements HttpRequest {
 
     private ImmutableList<Cookie> effectiveCookies = ImmutableList.of();
 
+    private boolean executed = false;
+
     public DefaultHttpRequest( DefaultHttpRequestBuilder defaultHttpRequestBuilder,
                                DefaultHttpRequestMethod defaultHttpRequestMethod,
                                ResourceRequest resourceRequest) {
@@ -82,8 +84,16 @@ public class DefaultHttpRequest implements HttpRequest {
 
     // called internally once this request has been executed.
     private void onExecuted() {
+
+        if ( executed ) {
+            // only allow this to be called once... otherwise we could
+            // call getContentWithEncoding twice and overwrite cookies.
+            return;
+        }
+
         this.effectiveCookies = ImmutableList.copyOf(defaultHttpRequestBuilder.threadLocalCookies.getCookies());
         defaultHttpRequestBuilder.threadLocalCookies.flush();
+        executed = true;
     }
 
     @Override

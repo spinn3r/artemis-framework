@@ -21,7 +21,8 @@ public class StandardCookieStore implements CookieStore {
 
     @Override
     public void add(URI uri, HttpCookie cookie) {
-        getStore().add(uri, cookie);
+        CookieStore store = getStore();
+        store.add(uri, cookie);
     }
 
     @Override
