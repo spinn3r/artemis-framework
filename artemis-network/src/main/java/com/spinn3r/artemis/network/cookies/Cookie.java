@@ -3,8 +3,9 @@ package com.spinn3r.artemis.network.cookies;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.net.HttpCookie;
-import java.time.ZonedDateTime;
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
@@ -36,6 +37,13 @@ public class Cookie {
                   boolean httpOnly,
                   boolean secure,
                   Optional<Long> maxAge) {
+
+        checkNotNull(name);
+        checkNotNull(value);
+        checkNotNull(path);
+        checkNotNull(domain);
+        checkNotNull(maxAge);
+
         this.name = name;
         this.value = value;
         this.path = path;
@@ -170,15 +178,15 @@ public class Cookie {
 
         private String value;
 
-        private Optional<String> path;
+        private Optional<String> path = Optional.of("/");
 
-        private Optional<String> domain;
+        private Optional<String> domain = Optional.empty();
 
         private boolean httpOnly = false;
 
         private boolean secure = false;
 
-        private Optional<Long> maxAge;
+        private Optional<Long> maxAge = Optional.empty();
 
         public Builder(String name, String value) {
             this.name = name;
@@ -200,8 +208,18 @@ public class Cookie {
             return this;
         }
 
+        public Builder setPath( String path ) {
+            this.path = Optional.ofNullable(path);
+            return this;
+        }
+
         public Builder setDomain(Optional<String> domain) {
             this.domain = domain;
+            return this;
+        }
+
+        public Builder setDomain( String domain ) {
+            this.domain = Optional.ofNullable(domain);
             return this;
         }
 

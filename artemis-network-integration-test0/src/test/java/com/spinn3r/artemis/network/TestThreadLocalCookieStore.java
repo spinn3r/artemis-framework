@@ -15,6 +15,7 @@ import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestExecutorFactory;
 import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
+import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
@@ -270,5 +271,44 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
 
     }
+
+    @Test
+    public void testTwoCookiesOnTwoDomainsInOriginalRequest() throws Exception {
+
+        // test with the redirect at the beginning of the chain
+        // which is the biggest thing we need to verify
+
+        ResponseDescriptor responseDescriptor
+          = new ResponseDescriptor.Builder()
+              .withStatus(301)
+              .withHeader("Location", "http://httpbin.org/cookies/set?cat=dog")
+              .build();
+
+        String url = String.format( "http://localhost.localdomain:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
+
+        HttpRequest httpRequest
+          = httpRequestBuilder
+              .get(url)
+              .withCookie(new Cookie.Builder("foo", "bar")
+                            .setDomain("localhost.localdomain")
+                            .build())
+              .withCookie(new Cookie.Builder("cat", "dog")
+                            .setDomain("httpbin.org")
+                            .build())
+              .execute()
+              .connect();
+
+        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}, Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
+
+        assertEquals("{\n" +
+                       "  \"cookies\": {\n" +
+                       "    \"cat\": \"dog\"\n" +
+                       "  }\n" +
+                       "}\n",
+                     httpRequest.getContentWithEncoding());
+
+    }
+
 
 }
