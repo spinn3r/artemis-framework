@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.cookies;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.net.HttpCookie;
@@ -10,6 +11,7 @@ import static com.google.common.base.Preconditions.*;
 /**
  *
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cookie {
 
     private String name;
