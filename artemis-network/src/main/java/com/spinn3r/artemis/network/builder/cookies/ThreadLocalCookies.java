@@ -8,6 +8,7 @@ import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.net.CookieStore;
 import java.net.HttpCookie;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,10 @@ public class ThreadLocalCookies {
 
         return ImmutableList.copyOf(result);
 
+    }
+
+    public void add(URI uri, HttpCookie cookie) {
+        threadLocalCookieStoreProvider.get().get().add(uri, cookie);
     }
 
 }

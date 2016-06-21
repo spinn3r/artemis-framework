@@ -7,6 +7,7 @@ import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -29,6 +30,7 @@ public class FacebookCookiesTest extends BaseLauncherTest {
     }
 
     @Test
+    @Ignore
     public void testCookieJarUsage() throws Exception {
 
         HttpRequest httpRequest
