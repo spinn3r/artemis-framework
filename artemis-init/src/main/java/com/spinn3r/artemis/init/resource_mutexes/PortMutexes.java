@@ -1,38 +1,26 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.net.InetAddresses;
 import com.spinn3r.artemis.util.io.Sockets;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.nio.file.*;
-import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-
-import static java.nio.file.StandardOpenOption.*;
 
 /**
  * Acquire a mutex based on TCP port numbers.
  */
 public class PortMutexes {
-
-    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
-
-        try {
-            return acquire( InetAddress.getLocalHost(), startPort, endPort );
-        } catch (UnknownHostException e) {
-            throw new ResourceMutexException.FailureException( e );
-        }
-
-    }
 
     /**
      * Acquire a mutex for a port in the given range.
@@ -40,7 +28,7 @@ public class PortMutexes {
      * @param startPort The starting port (inclusive)
      * @param endPort The ending port (inclusive)
      */
-    public PortMutex acquire( InetAddress inetAddress, int startPort, int endPort ) throws ResourceMutexException {
+    public PortMutex acquire( int startPort, int endPort ) throws ResourceMutexException {
 
         try {
 
@@ -64,7 +52,7 @@ public class PortMutexes {
 
                 File portFile = new File( parent, Integer.toString( port ) );
 
-                if ( Sockets.isClosed( inetAddress, port ) && ! portFile.exists() ) {
+                if ( isClosed(port) && ! portFile.exists() ) {
 
                     Optional<FileLock> fileLock = acquireFileLock(portFile);
 
@@ -84,6 +72,20 @@ public class PortMutexes {
         } catch (IOException e) {
             throw new ResourceMutexException.FailureException( e );
         }
+
+    }
+
+    private boolean isClosed( int port ) throws UnknownHostException {
+
+        if( Sockets.isOpen( InetAddress.getLocalHost(), port ) ) {
+            return false;
+        }
+
+        if ( Sockets.isOpen( InetAddress.getByName("127.0.0.1"), port) ) {
+            return false;
+        }
+
+        return true;
 
     }
 
