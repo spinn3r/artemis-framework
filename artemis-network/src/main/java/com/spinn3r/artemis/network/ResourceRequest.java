@@ -240,6 +240,12 @@ public interface ResourceRequest {
 
     void setCause(NetworkException cause);
 
+    /**
+     * The custom cookies being used with this request. This is only used
+     * for logging purposes and you should be using a CookieStore for the JVM
+     * but if you're using artemis-network you almost certainly are doing this
+     * correctly.
+     */
     Map<String, String> getCookies();
 
     void setCookies(Map<String, String> cookies);

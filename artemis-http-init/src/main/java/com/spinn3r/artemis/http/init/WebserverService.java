@@ -102,7 +102,8 @@ public class WebserverService extends BaseService {
         try {
             server.start();
         } catch ( Exception e ) {
-            throw new Exception( "Unable to start webserver on port: " + port, e );
+            String msg = String.format( "Unable to start webserver on port: %s (configured for port=%s)", port, webserverConfig.getPort() );
+            throw new Exception( msg, e );
         }
 
     }

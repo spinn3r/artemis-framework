@@ -5,11 +5,14 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.cookies.StandardCookieStore;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.builder.listener.RequestListeners;
 import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
@@ -19,9 +22,7 @@ import com.spinn3r.artemis.util.daemon.WaitForPort;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.SocketAddress;
+import java.net.*;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,9 @@ public class NetworkService extends BaseService {
 
     private final AtomicReferenceProvider<RequestSettingsRegistry> requestSettingsRegistryProvider = new AtomicReferenceProvider<>( null );
 
-    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
+    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null);
+
+    private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
 
     @Inject
     public NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort) {
@@ -70,6 +73,7 @@ public class NetworkService extends BaseService {
         provider( ProxyRegistry.class, proxyRegistryProvider );
         provider( RequestSettingsRegistry.class, requestSettingsRegistryProvider );
         provider( CookieJarManager.class, cookieJarManagerProvider );
+        provider( ThreadLocalCookieStore.class, threadLocalCookieStoreProvider );
 
         // *** create the default proxy
 
@@ -128,8 +132,19 @@ public class NetworkService extends BaseService {
             testProxyReference( proxyReference );
         }
 
-        cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+        List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
+        ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
+        threadLocalCookieStoreProvider.set(threadLocalCookieStore);
+
+        if ( networkConfig.isCookieManagerEnabled() ) {
+            CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
+            CookieHandler.setDefault(cookieManager);
+        } else {
+
+            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+
+        }
     }
 
     private PrioritizedProxyReference createPrioritizedProxyReference(String name, ProxySettings proxySettings ) {

@@ -12,6 +12,7 @@ import com.spinn3r.artemis.http.servlets.EchoServlet;
 import com.spinn3r.artemis.http.servlets.IndexServlet;
 import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.http.servlets.SpeedTestServlet;
+import com.spinn3r.artemis.http.servlets.evaluate.EvaluateServlet;
 import com.spinn3r.artemis.http.servlets.hostmeta.HostMeta;
 import com.spinn3r.artemis.http.servlets.hostmeta.HostMetaServlet;
 import com.spinn3r.artemis.init.BaseService;
@@ -82,6 +83,7 @@ public class DefaultWebserverReferencesService extends BaseService {
         servletReferences.add( "/host-meta", new HostMetaServlet( hostMeta ) );
         servletReferences.add( "/", new IndexServlet( servletReferences, hostnameProvider.get().getValue(), role.getValue() ) );
         servletReferences.add( "/request-meta", new RequestMetaServlet() );
+        servletReferences.add( "/evaluate", new EvaluateServlet() );
         servletReferences.add( "/echo", new EchoServlet() );
 
     }

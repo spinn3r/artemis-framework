@@ -323,6 +323,8 @@ public class DefaultHttpRequestBuilderTest {
 
         assertEquals( "{\n" +
                         "  \"cookies\": {\n" +
+                        "    \"$Path\": \"/\", \n" +
+                        "    \"$Version\": \"1\", \n" +
                         "    \"hello\": \"world\"\n" +
                         "  }\n" +
                         "}\n",
@@ -339,7 +341,9 @@ public class DefaultHttpRequestBuilderTest {
         cookies.put( "cat", "dog" );
 
         HttpRequest request =
-          httpRequestBuilder.get( "http://httpbin.org/cookies" )
+          httpRequestBuilder
+            //.withProxy("http://localhost:8080")
+            .get( "http://httpbin.org/cookies" )
             .withCookies( cookies )
             .execute();
 
@@ -347,6 +351,8 @@ public class DefaultHttpRequestBuilderTest {
 
         assertEquals( "{\n" +
                         "  \"cookies\": {\n" +
+                        "    \"$Path\": \"/\", \n" +
+                        "    \"$Version\": \"1\", \n" +
                         "    \"cat\": \"dog\", \n" +
                         "    \"hello\": \"world\"\n" +
                         "  }\n" +

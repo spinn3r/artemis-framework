@@ -15,6 +15,8 @@ import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.TreeMap;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -180,7 +182,7 @@ public class NetworkCorporaCache implements ContentFetcher {
         }
 
         if ( cookies != null && cookies.size() > 0 ) {
-            data.append( cookies.toString() );
+            data.append( canonicalize(cookies).toString() );
         }
 
         if ( outputContent != null ) {
@@ -191,6 +193,12 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         return Base64.encode( SHA1.encode( data.toString() ) );
 
+    }
+
+    private Map<String,String> canonicalize(ImmutableMap<String, String> cookies ) {
+        Map<String,String> result = Maps.newTreeMap();
+        result.putAll(cookies);
+        return result;
     }
 
     private HttpResponseMeta responseMeta( String key ) throws NetworkException {

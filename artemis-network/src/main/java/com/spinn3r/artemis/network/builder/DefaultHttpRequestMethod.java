@@ -7,13 +7,19 @@ import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.ResourceRequest;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
+import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookies;
 import com.spinn3r.artemis.network.init.RequestSettings;
 import com.spinn3r.artemis.network.validators.HttpResponseValidator;
 
+import java.net.HttpCookie;
 import java.net.Proxy;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
@@ -104,10 +110,12 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         ResourceRequest resourceRequest = ResourceRequestFactory.getResourceRequest( resource, modifiedSince, etag, proxy, true );
 
+        registerCookies();
+
+        resourceRequest.setCookies(Cookies.toMap(cookies));
         resourceRequest.setRequestMethod( method );
         resourceRequest.setUserAgent( defaultHttpRequestBuilder.userAgent );
         resourceRequest.setMaxContentLength( maxContentLength );
-        resourceRequest.setCookies( cookies );
         resourceRequest.setReadTimeout( readTimeout );
         resourceRequest.setConnectTimeout( connectTimeout );
         resourceRequest.setFollowRedirects( followRedirects );
@@ -128,6 +136,35 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         validate( httpRequest );
 
         return httpRequest;
+
+    }
+
+    // Define cookies in used for the current request/thread.
+    // Do not call setCookies
+    private void registerCookies() throws NetworkException {
+
+        try {
+
+            ThreadLocalCookies threadLocalCookies = defaultHttpRequestBuilder.threadLocalCookies;
+
+            URI requestURI = new URI(resource);
+
+            for (Cookie cookie : cookies) {
+
+                URI cookieURI = requestURI;
+
+                if ( cookie.getDomain().isPresent() ) {
+                    // we have to JUST use the domain of the cookie.
+                    cookieURI = null;
+                }
+
+                HttpCookie httpCookie = cookie.toHttpCookie();
+                threadLocalCookies.add(cookieURI, httpCookie);
+            }
+
+        } catch (URISyntaxException e) {
+            throw new NetworkException("Unable to register cookies: ", e);
+        }
 
     }
 
@@ -171,6 +208,5 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
     public Proxy getProxy() {
         return proxy;
     }
-
 
 }

@@ -6,6 +6,7 @@ import com.spinn3r.artemis.network.builder.BaseHttpRequestMethod;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
+import com.spinn3r.artemis.network.cookies.Cookies;
 
 import java.net.Proxy;
 
@@ -51,7 +52,7 @@ public class CachedHttpRequestMethod extends BaseHttpRequestMethod implements Ht
             .fetchCachedContent( httpMethod,
                                  resource,
                                  ImmutableMap.copyOf( requestHeaders ),
-                                 ImmutableMap.copyOf( cookies ),
+                                 Cookies.toMap(cookies),
                                  outputContent,
                                  outputContentEncoding,
                                  outputContentType);
@@ -61,7 +62,7 @@ public class CachedHttpRequestMethod extends BaseHttpRequestMethod implements Ht
         return new CachedHttpRequest( this,
                                       cachedContent.getHttpRequestMeta(),
                                       cachedContent.getHttpResponseMeta(),
-                                      ImmutableMap.copyOf( cookies ),
+                                      Cookies.toMap( cookies ),
                                       executor );
 
     }
