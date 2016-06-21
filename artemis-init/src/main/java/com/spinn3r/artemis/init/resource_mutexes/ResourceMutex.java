@@ -32,7 +32,11 @@ public class ResourceMutex implements Closeable {
         fileLock.release();
         fileLock.channel().close();
 
-        Files.delete( backing.toPath() );
+        if ( backing.exists() ) {
+            // should not exist though because we told it to delete on close.
+            Files.delete(backing.toPath());
+        }
+
         this.closed.set( true );
 
     }

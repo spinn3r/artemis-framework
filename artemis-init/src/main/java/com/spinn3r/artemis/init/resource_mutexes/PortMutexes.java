@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.init.resource_mutexes;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.net.InetAddresses;
 import com.spinn3r.artemis.util.io.Sockets;
 
@@ -9,13 +10,14 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.OpenOption;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
+import java.nio.file.attribute.PosixFileAttributes;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+
+import static java.nio.file.StandardOpenOption.*;
 
 /**
  * Acquire a mutex based on TCP port numbers.
@@ -89,8 +91,13 @@ public class PortMutexes {
 
         try {
 
+            //Path path = file.toPath();
+            //FileChannel fileChannel = FileChannel.open(path, CREATE_NEW, DELETE_ON_CLOSE, WRITE, APPEND);
 
-            FileChannel fileChannel = FileChannel.open(file.toPath(), StandardOpenOption.CREATE_NEW, StandardOpenOption.DELETE_ON_CLOSE);
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            FileChannel fileChannel = fileOutputStream.getChannel();
+
+            fileChannel.force(true);
 
             FileLock fileLock = fileChannel.lock();
 
