@@ -131,8 +131,8 @@ public class DefaultHttpRequest implements HttpRequest {
     }
 
     @Override
-    public ImmutableMap<String, String> getCookies() {
-        return ImmutableMap.copyOf( defaultHttpRequestMethod.cookies );
+    public ImmutableList<Cookie> getCookies() {
+        return ImmutableList.copyOf( defaultHttpRequestMethod.cookies );
     }
 
     @Override
@@ -219,7 +219,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         return new DefaultHttpRequestMeta( getResource(),
                                            getRequestHeadersMap(),
-                                           ImmutableMap.copyOf( defaultHttpRequestMethod.cookies ),
+                                           Cookies.toMap( defaultHttpRequestMethod.cookies ),
                                            defaultHttpRequestMethod.outputContent,
                                            defaultHttpRequestMethod.outputContentEncoding,
                                            defaultHttpRequestMethod.outputContentType );

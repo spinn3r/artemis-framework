@@ -11,6 +11,8 @@ import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsReference;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookies;
 import com.spinn3r.artemis.network.init.RequestSettings;
 import com.spinn3r.artemis.network.validators.HttpResponseValidator;
 
@@ -110,7 +112,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         registerCookies();
 
-        resourceRequest.setCookies(cookies);
+        resourceRequest.setCookies(Cookies.toMap(cookies));
         resourceRequest.setRequestMethod( method );
         resourceRequest.setUserAgent( defaultHttpRequestBuilder.userAgent );
         resourceRequest.setMaxContentLength( maxContentLength );
@@ -147,10 +149,8 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
             URI uri = new URI(resource);
 
-            for (Map.Entry<String, String> entry : cookies.entrySet()) {
-                HttpCookie httpCookie = new HttpCookie(entry.getKey(), entry.getValue());
-                httpCookie.setPath("/");
-
+            for (Cookie cookie : cookies) {
+                HttpCookie httpCookie = cookie.toHttpCookie();
                 threadLocalCookies.add(uri, httpCookie);
             }
 

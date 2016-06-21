@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.cookies;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.net.HttpCookie;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -23,6 +24,10 @@ public class Cookie {
     private boolean secure;
 
     private Optional<Long> maxAge;
+
+    public Cookie(String name, String value) {
+        this(name, value, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+    }
 
     public Cookie(String name,
                   String value,
@@ -130,6 +135,20 @@ public class Cookie {
      */
     public Optional<Long> getMaxAge() {
         return maxAge;
+    }
+
+    public HttpCookie toHttpCookie() {
+
+        HttpCookie httpCookie = new HttpCookie(getName(), getValue());
+
+        path.ifPresent(httpCookie::setPath);
+        domain.ifPresent(httpCookie::setDomain);
+        maxAge.ifPresent(httpCookie::setMaxAge);
+        httpCookie.setHttpOnly(httpOnly);
+        httpCookie.setSecure(secure);
+
+        return httpCookie;
+
     }
 
     @Override

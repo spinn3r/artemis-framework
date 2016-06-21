@@ -162,7 +162,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest
           = httpRequestBuilder
-              .withProxy("http://localhost:8080")
+              //.withProxy("http://localhost:8080")
               .get(url).execute().connect();
 
         assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
@@ -189,7 +189,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest
           = httpRequestBuilder
-              .withProxy("http://localhost:8080")
+              //.withProxy("http://localhost:8080")
               .get(url).execute().connect();
 
         String content = httpRequest.getContentWithEncoding();
@@ -237,8 +237,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
     }
 
-    // FIXME: test redirecting to a completely separate site.. for example.. from httpbin then localhost and make sure cookies are still set on the new site.
-
-    // FIXME:
+    // FIXME: test redirecting to a completely separate site.. for example..
+    // from httpbin then localhost and make sure cookies are still set on the new site.
 
 }

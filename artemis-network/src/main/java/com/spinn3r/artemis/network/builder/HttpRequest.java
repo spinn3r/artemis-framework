@@ -82,7 +82,7 @@ public interface HttpRequest {
 
     ImmutableMap<String,String> getRequestHeadersMap();
 
-    ImmutableMap<String,String> getCookies();
+    ImmutableList<Cookie> getCookies();
 
     String getResponseHeader(String name);
 

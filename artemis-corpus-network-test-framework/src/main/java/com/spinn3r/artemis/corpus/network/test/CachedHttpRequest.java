@@ -82,8 +82,8 @@ public class CachedHttpRequest implements HttpRequest {
     }
 
     @Override
-    public ImmutableMap<String, String> getCookies() {
-        return cookies;
+    public ImmutableList<Cookie> getCookies() {
+        return ImmutableList.of();
     }
 
     @Override

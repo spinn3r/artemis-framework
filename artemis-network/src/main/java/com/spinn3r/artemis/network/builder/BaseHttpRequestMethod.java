@@ -1,12 +1,15 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.CookieMap;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.*;
@@ -26,7 +29,7 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     protected long connectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
-    protected Map<String,String> cookies = new LinkedHashMap<>();
+    protected List<Cookie> cookies = Lists.newArrayList();
 
     protected Map<String,String> properties = new LinkedHashMap<>( 2 );
 
@@ -73,14 +76,26 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     public HttpRequestMethod withCookie(String name, String value) {
         checkNotNull( name, "name" );
         checkNotNull( value, "value" );
-        this.cookies.put( name, value );
+        this.cookies.add( new Cookie(name, value) );
+        return this;
+    }
+
+    @Override
+    public HttpRequestMethod withCookie(Cookie cookie) {
+        checkNotNull( cookie );
+        this.cookies.add(cookie);
         return this;
     }
 
     @Override
     public HttpRequestMethod withCookies(Map<String,String> cookies) {
+
         checkNotNull( cookies );
-        this.cookies.putAll( cookies );
+
+        for (Map.Entry<String, String> entry : cookies.entrySet()) {
+            withCookie(entry.getKey(), entry.getValue());
+        }
+
         return this;
     }
 
@@ -88,13 +103,22 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     public HttpRequestMethod withCookies(CookieMap cookieMap) {
         checkNotNull( cookies );
 
-        Map<String,String> newCookies = Maps.newHashMap();
-
-        for (Map.Entry<String, Cookie> entry : cookieMap.entrySet()) {
-            newCookies.put( entry.getKey(), entry.getValue().getValue() );
+        for (Cookie cookie : cookieMap.values()) {
+            withCookie( cookie );
         }
 
-        this.cookies.putAll( newCookies );
+        return this;
+
+    }
+
+    @Override
+    public HttpRequestMethod withCookies(Collection<Cookie> cookies) {
+        checkNotNull( cookies );
+
+        for (Cookie cookie : cookies) {
+            withCookie( cookie );
+        }
+
         return this;
 
     }

@@ -3,9 +3,11 @@ package com.spinn3r.artemis.network.builder;
 import com.google.common.annotations.VisibleForTesting;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
+import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.CookieMap;
 
 import java.net.Proxy;
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -43,6 +45,8 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withCookie( String name, String value );
 
+    HttpRequestMethod withCookie(Cookie cookie);
+
     /**
      * Add the given cookies to the cookies we should use with the site.  By
      * default we start with an empty map of cookies.  This adds to the map.
@@ -54,6 +58,8 @@ public interface HttpRequestMethod {
      * default we start with an empty map of cookies.  This adds to the map.
      */
     HttpRequestMethod withCookies( CookieMap cookieMap );
+
+    HttpRequestMethod withCookies(Collection<Cookie> cookies);
 
     HttpRequestMethod withConnectTimeout( long timeout );
 
