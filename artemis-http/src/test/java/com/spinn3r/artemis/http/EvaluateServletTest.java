@@ -44,8 +44,7 @@ public class EvaluateServletTest extends BaseLauncherTest {
     }
 
     @Test
-    @Ignore
-    public void testRequestMeta() throws Exception {
+    public void testEvaluate() throws Exception {
 
         this.server = new ServerBuilder()
                         .setPort( PORT )

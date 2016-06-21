@@ -1,13 +1,19 @@
 package com.spinn3r.artemis.http.servlets.evaluate;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.spinn3r.artemis.json.JSON;
 
+import javax.xml.ws.Response;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -63,6 +69,12 @@ public class ResponseDescriptor {
         private Optional<Integer> maxAge;
 
         private Optional<String> expires;
+
+        public Cookie(@JsonProperty("name") String name,
+                      @JsonProperty("value") String value) {
+            this.name = name;
+            this.value = value;
+        }
 
         public String getName() {
             return name;
@@ -132,8 +144,35 @@ public class ResponseDescriptor {
 
         ResponseDescriptor responseDescriptor = new ResponseDescriptor();
 
+        private Map<String,String> headers = Maps.newHashMap();
+
+        private List<Cookie> cookies = Lists.newArrayList();
+
+        public Builder withStatus(int status) {
+            responseDescriptor.status = status;
+            return this;
+        }
+
+        public Builder withHeader(String name, String value) {
+            this.headers.put(name, value);
+            return this;
+        }
+
+        public Builder withCookie(String name, String value) {
+            this.cookies.add(new Cookie(name, value));
+            return this;
+        }
+
+        public Builder withCookie(ResponseDescriptor.Cookie cookie) {
+            this.cookies.add(cookie);
+            return this;
+        }
+
         public ResponseDescriptor build() {
+            responseDescriptor.headers = ImmutableMap.copyOf(headers);
+            responseDescriptor.cookies = ImmutableList.copyOf(cookies);
             return responseDescriptor;
+
         }
 
     }
