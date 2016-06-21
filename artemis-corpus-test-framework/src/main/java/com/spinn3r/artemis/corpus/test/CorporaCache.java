@@ -29,8 +29,6 @@ import java.nio.file.Paths;
  */
 public class CorporaCache {
 
-    private static final boolean USE_CLASSLOADER = false;
-
     private static String ROOT = System.getProperty( "corpora-cache.root", "src/test/resources/" );
 
     private String extension = "dat";
@@ -51,7 +49,8 @@ public class CorporaCache {
     public boolean contains( String key ) {
         String path = computePath( key );
         File file = new File( ROOT, path );
-        return file.exists();
+        boolean result = file.exists();
+        return result;
     }
 
     public void write( String key, String data ) throws IOException {
@@ -78,29 +77,16 @@ public class CorporaCache {
 
         String path = computePath( key );
 
-        System.out.printf( "CorporaCache reading from: %s\n", path );
+        File file = new File( ROOT, path );
 
-        try ( InputStream is = createInputStreamFromPath( path ) ) {
+        System.out.printf( "CorporaCache reading from: %s\n", file.getAbsolutePath() );
 
-            if ( is == null ) {
-                throw new IOException( String.format( "Key %s not in cache at %s", key, path ) );
-            }
+        try ( InputStream is = new FileInputStream(file) ) {
 
             byte[] data = ByteStreams.toByteArray( is );
 
             return new String( data, Charsets.UTF_8 );
 
-        }
-
-    }
-
-    private InputStream createInputStreamFromPath( String path ) throws IOException {
-
-        if (USE_CLASSLOADER) {
-            return parent.getResourceAsStream( path );
-        } else {
-            File file = new File( ROOT, path );
-            return new FileInputStream( file );
         }
 
     }
