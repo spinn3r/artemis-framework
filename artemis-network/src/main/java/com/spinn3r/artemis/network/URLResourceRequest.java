@@ -2,6 +2,9 @@ package com.spinn3r.artemis.network;
 
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 import java.net.HttpURLConnection;
@@ -26,6 +29,9 @@ import java.util.zip.GZIPInputStream;
  */
 // http://www.rgagnon.com/javadetails/java-debug-HttpURLConnection-problem.html
 public class URLResourceRequest extends BaseResourceRequest implements ResourceRequest {
+
+    private final static String SET_COOKIE = "set-cookie";
+    private final static String SET_COOKIE2 = "set-cookie2";
 
     private static final String CONTENT_TYPE = "Content-Type";
     private static final String CONTENT_LENGTH = "Content-Length";
@@ -896,8 +902,37 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     }
 
     @Override
-    public Map<String,List<String>> getResponseHeadersMap() {
-        return _urlConnection.getHeaderFields();
+    public Map<String,Collection<String>> getResponseHeadersMap() {
+
+        Multimap<String,String> multimap = ArrayListMultimap.create();
+
+        // workaround for a Java 8 bug around handling invalid cookies;
+
+        for (int idx = 1;; idx++) {
+
+            String key = _urlConnection.getHeaderFieldKey(idx);
+
+            if ( key == null ) {
+                // there are no more keys.
+                break;
+            }
+
+            if ( key.equalsIgnoreCase(SET_COOKIE) || key.equalsIgnoreCase(SET_COOKIE2)) {
+                // we have to avoid the set cookie headers as we don't really
+                // need them but also the HTTP layer completely breaks with
+                // them.
+                continue;
+            }
+
+            String value = _urlConnection.getHeaderField(idx);
+            multimap.put(key, value);
+
+        }
+
+        //return _urlConnection.getHeaderFields();
+
+        return multimap.asMap();
+
     }
 
     @Override

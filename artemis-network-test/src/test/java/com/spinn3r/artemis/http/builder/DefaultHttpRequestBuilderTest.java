@@ -61,6 +61,19 @@ public class DefaultHttpRequestBuilderTest {
     }
 
     @Test
+    public void testBrokenCookies() throws Exception {
+
+        String link = "http://www.elitesecurity.org/p3681726";
+
+        HttpRequest httpRequest = httpRequestBuilder.get(link).execute();
+
+        httpRequest.getContentWithEncoding();
+
+        httpRequest.getHttpContentResponseMeta();
+
+    }
+
+    @Test
     public void testCorrectInstanceForRequestBuilder() throws Exception {
 
         // make sure the methods return the right 'this' instance

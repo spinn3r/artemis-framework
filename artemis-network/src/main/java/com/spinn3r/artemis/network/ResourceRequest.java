@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Proxy;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -134,7 +135,7 @@ public interface ResourceRequest {
 
     Set<String> getResponseHeaders();
 
-    Map<String,List<String>> getResponseHeadersMap();
+    Map<String,Collection<String>> getResponseHeadersMap();
 
     /**
      * Set a given request header such as UserAgent, ETag, etc.

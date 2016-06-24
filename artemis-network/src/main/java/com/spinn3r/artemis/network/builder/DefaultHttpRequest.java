@@ -13,6 +13,7 @@ import com.spinn3r.artemis.network.cookies.Cookies;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -158,12 +159,13 @@ public class DefaultHttpRequest implements HttpRequest {
     @Override
     public ImmutableMap<String,ImmutableList<String>> getResponseHeadersMap() {
 
-        Map<String, List<String>> responseHeadersMap = resourceRequest.getResponseHeadersMap();
+        Map<String, Collection<String>> responseHeadersMap = resourceRequest.getResponseHeadersMap();
 
         // TODO: move to use Immutables.copyMultiMap
 
         Map<String,ImmutableList<String>> tmp = Maps.newHashMap();
-        for (Map.Entry<String, List<String>> entry : responseHeadersMap.entrySet()) {
+
+        for (Map.Entry<String, Collection<String>> entry : responseHeadersMap.entrySet()) {
 
             if ( entry.getKey() == null ) {
                 // the HTTP status line is included here as a null key which is
