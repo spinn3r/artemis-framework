@@ -908,7 +908,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
         // workaround for a Java 8 bug around handling invalid cookies;
 
-        for (int idx = 0;; idx++) {
+        for (int idx = 1;; idx++) {
 
             String key = _urlConnection.getHeaderFieldKey(idx);
 
