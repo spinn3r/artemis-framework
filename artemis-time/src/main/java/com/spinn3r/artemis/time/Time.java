@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.time;
 
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  * Represents a specific time, since unix epoch.
  */
 public class Time extends TimeRange {
+
+    private static final ZoneId UTC = ZoneId.of("UTC");
 
     public Time( long unixtime ) {
         this( unixtime, TimeUnit.MILLISECONDS );
@@ -28,6 +33,10 @@ public class Time extends TimeRange {
      */
     public Time withRoundedMillis() {
         return new Time( (getTimeMillis() / 1000) * 1000, TimeUnit.MILLISECONDS );
+    }
+
+    public ZonedDateTime toZonedDateTime() {
+        return ZonedDateTime.ofInstant(toDate().toInstant(), UTC);
     }
 
     /**
