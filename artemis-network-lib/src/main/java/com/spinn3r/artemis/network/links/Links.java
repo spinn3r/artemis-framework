@@ -21,6 +21,9 @@ public class Links {
 
         try {
 
+            if ( link == null )
+                return false;
+
             URI uri = new URI( link );
 
             return uri.getScheme().equals( "http" ) || uri.getScheme().equals( "https" );
