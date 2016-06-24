@@ -917,7 +917,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                 break;
             }
 
-            if ( key.equals(SET_COOKIE) || key.equals(SET_COOKIE2)) {
+            if ( key.equalsIgnoreCase(SET_COOKIE) || key.equalsIgnoreCase(SET_COOKIE2)) {
                 // we have to avoid the set cookie headers as we don't really
                 // need them but also the HTTP layer completely breaks with
                 // them.
