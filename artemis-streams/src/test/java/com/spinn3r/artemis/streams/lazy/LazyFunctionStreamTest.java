@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.streams.lazy;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Objects;
@@ -72,6 +71,26 @@ public class LazyFunctionStreamTest {
         assertTrue( f1.called );
 
     }
+
+    @Test
+    public void testWithNullInput() throws Exception {
+
+        TestFunction<String,String> f0 = new TestFunction<>( "0" );
+        TestFunction<String,String> f1 = new TestFunction<>( "1" );
+
+        String input = null;
+        LazyFunctionStream<String,String> lazyFunctionStream = new LazyFunctionStream<>(input);
+
+        Stream<Supplier<String>> of = lazyFunctionStream.of( f0, f1 );
+
+        Optional<String> result = of.map( Supplier::get )
+                                    .filter( Objects::nonNull )
+                                    .findFirst();
+
+        assertTrue( ! result.isPresent() );
+
+    }
+
 
     class TestFunction<T,R> implements Function<T,R> {
 

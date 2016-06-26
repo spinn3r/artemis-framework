@@ -32,6 +32,15 @@ public class HitIndex<T extends Comparable<T>> {
         this.name = name;
     }
 
+
+    public void registerHits( Collection<T> hits ) {
+
+        for (T hit : hits) {
+            registerHit( hit, 1 );
+        }
+
+    }
+
     public void registerHit( T v ) {
         registerHit( v, 1 );
     }
@@ -234,11 +243,11 @@ public class HitIndex<T extends Comparable<T>> {
 
     }
 
-    public String report() {
-        return report( 50 );
+    public String createFormattedReport() {
+        return createFormattedReport(50 );
     }
 
-    public String report( int limit ) {
+    public String createFormattedReport(int limit ) {
 
         StringBuilder buff = new StringBuilder();
 
