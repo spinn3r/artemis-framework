@@ -26,6 +26,9 @@ public class Links {
 
             URI uri = new URI( link );
 
+            if ( uri.getScheme() == null )
+                return false;
+
             return uri.getScheme().equals( "http" ) || uri.getScheme().equals( "https" );
 
         } catch (URISyntaxException e) {
