@@ -2987,6 +2987,38 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasGeoNameId = 0;
+
+    public int hasModifiedGeoNameId = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoNameId = false;
+
+    protected String geoNameId;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasGeoName = 0;
+
+    public int hasModifiedGeoName = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoName = false;
+
+    protected String geoName;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasGeoCountry = 0;
 
     public int hasModifiedGeoCountry = 0;
@@ -15330,6 +15362,214 @@ public abstract class BaseContent
         return this.hasDefinedGeoBox;
     }
 
+    public BaseContent setGeoNameId ( String geoNameId ) {
+
+        ++this.hasGeoNameId;
+        ++this.hasModifiedGeoNameId;
+
+        this.geoNameId = geoNameId;
+
+        hasDefinedGeoNameId = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Id in geonames database.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name_id
+     * </p>
+     */
+    public String getGeoNameId() {
+
+        if ( this.constructed == false && this.hasGeoNameId == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoNameId" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoNameId;
+    }
+
+    /**
+     * <p>
+     * Id in geonames database.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name_id
+     * </p>
+     */
+    public Optional<String> getGeoNameIdAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoNameId == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoNameId );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * Id in geonames database.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name_id
+     * </p>
+     */
+    public String getGeoNameId ( String _default ) {
+
+        if ( ! hasGeoNameId() ) {
+            return _default;
+        }
+
+        return getGeoNameId();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoNameId () {
+        return this.hasGeoNameId > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoNameId () {
+        this.hasGeoNameId = 0;
+        this.hasModifiedGeoNameId = 0;
+        this.hasDefinedGeoNameId = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoNameId () {
+        return this.hasModifiedGeoNameId > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoNameId () {
+        return this.hasDefinedGeoNameId;
+    }
+
+    public BaseContent setGeoName ( String geoName ) {
+
+        ++this.hasGeoName;
+        ++this.hasModifiedGeoName;
+
+        this.geoName = geoName;
+
+        hasDefinedGeoName = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The human readable location including its parent locations
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name
+     * </p>
+     */
+    public String getGeoName() {
+
+        if ( this.constructed == false && this.hasGeoName == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoName" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoName;
+    }
+
+    /**
+     * <p>
+     * The human readable location including its parent locations
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name
+     * </p>
+     */
+    public Optional<String> getGeoNameAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoName == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoName );
+
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * The human readable location including its parent locations
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: geo_name
+     * </p>
+     */
+    public String getGeoName ( String _default ) {
+
+        if ( ! hasGeoName() ) {
+            return _default;
+        }
+
+        return getGeoName();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoName () {
+        return this.hasGeoName > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoName () {
+        this.hasGeoName = 0;
+        this.hasModifiedGeoName = 0;
+        this.hasDefinedGeoName = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoName () {
+        return this.hasModifiedGeoName > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoName () {
+        return this.hasDefinedGeoName;
+    }
+
     public BaseContent setGeoCountry ( String geoCountry ) {
 
         ++this.hasGeoCountry;
@@ -19637,6 +19877,14 @@ public abstract class BaseContent
             setGeoBox( obj.getGeoBox() );
         }
 
+        if ( obj.hasGeoNameId() ) {
+            setGeoNameId( obj.getGeoNameId() );
+        }
+
+        if ( obj.hasGeoName() ) {
+            setGeoName( obj.getGeoName() );
+        }
+
         if ( obj.hasGeoCountry() ) {
             setGeoCountry( obj.getGeoCountry() );
         }
@@ -20541,6 +20789,24 @@ public abstract class BaseContent
             setGeoBox( obj.getGeoBox() );
         }
 
+        if ( ! hasGeoNameId() && obj.hasGeoNameId() ) {
+            setGeoNameId( obj.getGeoNameId() );
+        }
+
+        if ( hasGeoNameId() && getGeoNameId() == null &&
+            obj.hasGeoNameId() && obj.getGeoNameId() != null ) {
+            setGeoNameId( obj.getGeoNameId() );
+        }
+
+        if ( ! hasGeoName() && obj.hasGeoName() ) {
+            setGeoName( obj.getGeoName() );
+        }
+
+        if ( hasGeoName() && getGeoName() == null &&
+            obj.hasGeoName() && obj.getGeoName() != null ) {
+            setGeoName( obj.getGeoName() );
+        }
+
         if ( ! hasGeoCountry() && obj.hasGeoCountry() ) {
             setGeoCountry( obj.getGeoCountry() );
         }
@@ -21014,6 +21280,10 @@ public abstract class BaseContent
         this.hasModifiedGeoPoint = 0;
 
         this.hasModifiedGeoBox = 0;
+
+        this.hasModifiedGeoNameId = 0;
+
+        this.hasModifiedGeoName = 0;
 
         this.hasModifiedGeoCountry = 0;
 
@@ -21559,6 +21829,14 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedGeoBox() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoNameId() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoName() ) {
             return true;
         }
 
@@ -22712,6 +22990,22 @@ public abstract class BaseContent
 
             buff.append( "geoBox=" );
             buff.append( geoBox );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoNameId > 0 ) {
+
+            buff.append( "geoNameId=" );
+            buff.append( geoNameId );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoName > 0 ) {
+
+            buff.append( "geoName=" );
+            buff.append( geoName );
             buff.append( " " );
 
         }
@@ -24074,6 +24368,24 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( geoBox, cmp.geoBox ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoNameId() != cmp.hasGeoNameId() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoNameId, cmp.geoNameId ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoName() != cmp.hasGeoName() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( geoName, cmp.geoName ) ) {
             return false;
         }
 
@@ -26420,6 +26732,38 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member geo_name_id from String
+
+            __name = "geoNameId";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_name_id";
+            }
+
+            if ( this.hasGeoNameId > 0 ) {
+
+                if ( geoNameId != null ) {
+                    generator.writeStringField( __name, geoNameId );
+                }
+
+            }
+
+            // ***** json encode member geo_name from String
+
+            __name = "geoName";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_name";
+            }
+
+            if ( this.hasGeoName > 0 ) {
+
+                if ( geoName != null ) {
+                    generator.writeStringField( __name, geoName );
+                }
+
+            }
+
             // ***** json encode member geo_country from String
 
             __name = "geoCountry";
@@ -28252,6 +28596,26 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setGeoBox( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_name_id from String
+
+                case "geo_name_id":
+
+                    jParser.nextToken();
+                    setGeoNameId( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_name from String
+
+                case "geo_name":
+
+                    jParser.nextToken();
+                    setGeoName( jParser.getValueAsString() );
 
                     break;
 
