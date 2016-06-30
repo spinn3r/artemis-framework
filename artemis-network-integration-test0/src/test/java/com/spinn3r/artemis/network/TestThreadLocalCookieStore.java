@@ -20,6 +20,7 @@ import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
+import com.spinn3r.artemis.util.text.CollectionFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -74,36 +75,52 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Test
     public void testThreadLocalCookieStore() throws Exception {
 
-        String cookie = "name=test1";
-        String resource = "http://httpbin.org/cookies/set?" + cookie;
+        ResponseDescriptor responseDescriptor
+          = new ResponseDescriptor.Builder()
+              .withCookie("name", "test1")
+              .build();
 
-        HttpRequest httpRequest = httpRequestBuilder.get(resource).execute().connect();
+        String url = String.format( "http://localhost:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]", httpRequest.getEffectiveCookies().toString());
+        HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
+
+        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
 
     }
 
     @Test
     public void testSecureThreadLocalCookieStore() throws Exception {
 
-        String cookie = "name=test1";
-        String resource = "https://httpbin.org/cookies/set?" + cookie;
+        ResponseDescriptor responseDescriptor
+          = new ResponseDescriptor.Builder()
+              .withCookie("name", "test1")
+              .build();
 
-        HttpRequest httpRequest = httpRequestBuilder.get(resource).execute().connect();
+        String url = String.format( "http://localhost:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]", httpRequest.getEffectiveCookies().toString());
+        HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
+
+        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
 
     }
 
     @Test
     public void testNoCookiesInSameThreadBetweenRequests() throws Exception {
 
-        String cookie = "name=test1";
-        String resource = "http://httpbin.org/cookies/set?" + cookie;
+        ResponseDescriptor responseDescriptor
+          = new ResponseDescriptor.Builder()
+              .withCookie("name", "test1")
+              .build();
 
-        HttpRequest httpRequest = httpRequestBuilder.get(resource).execute().connect();
+        String url = String.format( "http://localhost:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]", httpRequest.getEffectiveCookies().toString());
+        HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
+
+        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+                     httpRequest.getEffectiveCookies().toString());
+
         assertEquals("[]", threadLocalCookies.getCookies().toString());
 
         assertNotNull(threadLocalCookieStoreProvider.get());
@@ -114,19 +131,32 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
     @Test
     public void testThreadLocalCookieStoreInRedirectionChain() throws Exception {
 
-        String cookie = "name=test2";
-        String cookieSetUrl = "http://httpbin.org/cookies/set?" + cookie;
-        String firstRedirectUrl = "https://httpbin.org/redirect-to?url=" + URLEncoder.encode(cookieSetUrl, "UTF-8");
+        String landingUrl =
+          new ResponseDescriptor.Builder()
+            .withCookie("cat", "dog")
+            .build().toURL( "localhost", webserverPort.getPort() );
 
-        HttpRequest httpRequest = httpRequestBuilder.get(firstRedirectUrl).execute().connect();
+        String url =
+          new ResponseDescriptor.Builder()
+            .withStatus(301)
+            .withHeader("Location", landingUrl)
+            .withCookie( new ResponseDescriptor.Cookie.Builder("foo", "bar")
+                           .build() )
+            .build()
+            .toURL( "localhost.localdomain", webserverPort.getPort() );
+        HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
 
-        assertEquals("[Cookie{name='name', value='test2', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
-                     httpRequest.getEffectiveCookies().toString());
+
+        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+                     CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
 
     @Test
     public void testNonSecureToSecureRedirect() throws Exception {
+
+        // TODO: I think this is the only site we can use for this unfortunately
 
         // this is working but I think because the URI isn't using the scheme.
 
@@ -151,10 +181,12 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         // test with the redirect at the beginning of the chain
         // which is the biggest thing we need to verify
 
+        String landingUrl = "http://localhost:" + webserverPort.getPort();
+
         ResponseDescriptor responseDescriptor
           = new ResponseDescriptor.Builder()
               .withStatus(301)
-              .withHeader("Location", "http://httpbin.org")
+              .withHeader("Location", landingUrl)
               .withCookie("foo", "bar")
               .build();
 
@@ -187,7 +219,6 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest
           = httpRequestBuilder
-              //.withProxy("http://localhost:8080")
               .get(url)
               .execute()
               .connect();
@@ -207,15 +238,19 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         // test with the redirect at the beginning of the chain
         // which is the biggest thing we need to verify
 
-        ResponseDescriptor responseDescriptor
-          = new ResponseDescriptor.Builder()
+        String landingUrl =
+          new ResponseDescriptor.Builder()
+            .withCookie("cat", "dog")
+            .build().toURL( "localhost", webserverPort.getPort() );
+
+        String url =
+          new ResponseDescriptor.Builder()
               .withStatus(301)
-              .withHeader("Location", "http://httpbin.org/cookies/set?cat=dog")
+              .withHeader("Location", landingUrl)
               .withCookie( new ResponseDescriptor.Cookie.Builder("foo", "bar")
                              .build() )
-              .build();
-
-        String url = String.format( "http://localhost.localdomain:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
+              .build()
+              .toURL( "localhost.localdomain", webserverPort.getPort() );
 
         HttpRequest httpRequest
           = httpRequestBuilder
@@ -223,15 +258,9 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
               .execute()
               .connect();
 
-        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}, Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
-                     httpRequest.getEffectiveCookies().toString());
-
-        assertEquals("{\n" +
-                       "  \"cookies\": {\n" +
-                       "    \"cat\": \"dog\"\n" +
-                       "  }\n" +
-                       "}\n",
-                     httpRequest.getContentWithEncoding());
+        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+                     CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
 
@@ -278,13 +307,17 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         // test with the redirect at the beginning of the chain
         // which is the biggest thing we need to verify
 
-        ResponseDescriptor responseDescriptor
-          = new ResponseDescriptor.Builder()
-              .withStatus(301)
-              .withHeader("Location", "http://httpbin.org/cookies/set?cat=dog")
-              .build();
+        String landingUrl =
+          new ResponseDescriptor.Builder()
+            .withCookie("cat", "dog")
+            .build().toURL( "localhost", webserverPort.getPort() );
 
-        String url = String.format( "http://localhost.localdomain:%s/evaluate?response=%s", webserverPort.getPort(), responseDescriptor.toParam() );
+        String url =
+          new ResponseDescriptor.Builder()
+              .withStatus(301)
+              .withHeader("Location", landingUrl)
+              .build()
+              .toURL("localhost.localdomain", webserverPort.getPort());
 
         HttpRequest httpRequest
           = httpRequestBuilder
@@ -293,20 +326,15 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
                             .setDomain("localhost.localdomain")
                             .build())
               .withCookie(new Cookie.Builder("cat", "dog")
-                            .setDomain("httpbin.org")
+                            .setDomain("example.org")
                             .build())
               .execute()
               .connect();
 
-        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}, Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
-                     httpRequest.getEffectiveCookies().toString());
-
-        assertEquals("{\n" +
-                       "  \"cookies\": {\n" +
-                       "    \"cat\": \"dog\"\n" +
-                       "  }\n" +
-                       "}\n",
-                     httpRequest.getContentWithEncoding());
+        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[example.org], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+                     CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
 

@@ -52,6 +52,10 @@ public class ResponseDescriptor {
         return cookies;
     }
 
+    public String toURL( String host, int port ) {
+        return String.format( "http://%s:%s/evaluate?response=%s", host, port, toParam() );
+    }
+
     public static class Cookie {
 
         protected String name;

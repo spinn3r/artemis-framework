@@ -7,7 +7,6 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
-import com.spinn3r.artemis.init.resource_mutexes.ResourceMutex;
 import com.spinn3r.artemis.util.io.Sockets;
 import org.eclipse.jetty.server.Server;
 
