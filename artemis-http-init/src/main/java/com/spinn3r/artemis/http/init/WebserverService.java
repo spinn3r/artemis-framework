@@ -96,6 +96,8 @@ public class WebserverService extends BaseService {
         serverBuilder.setRequestHeaderSize( webserverConfig.getRequestHeaderSize() );
         serverBuilder.setResponseHeaderSize( webserverConfig.getResponseHeaderSize() );
 
+        serverBuilder.setEnableCompression(webserverConfig.getEnableCompression());
+
         server = serverBuilder.build();
 
         try {

@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http;
 
 import com.google.common.collect.Lists;
+import org.eclipse.jetty.http.HttpMethod;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.*;
 import org.eclipse.jetty.server.handler.HandlerCollection;
@@ -13,6 +14,7 @@ import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import javax.servlet.Servlet;
 import java.lang.management.ManagementFactory;
 import java.util.List;
+import org.eclipse.jetty.server.handler.gzip.GzipHandler;
 
 /**
  * http://wiki.eclipse.org/Jetty/Tutorial/Embedding_Jetty
@@ -31,6 +33,8 @@ public class ServerBuilder {
     private int requestHeaderSize = 64 * 1024;
 
     private int responseHeaderSize = 64 * 1024;
+
+    private boolean enableCompression = true;
 
     private ServletReferences servletReferences = new ServletReferences();
 
@@ -95,6 +99,11 @@ public class ServerBuilder {
 
     public ServerBuilder setResponseHeaderSize(int responseHeaderSize) {
         this.responseHeaderSize = responseHeaderSize;
+        return this;
+    }
+
+    public ServerBuilder setEnableCompression(boolean enableCompression) {
+        this.enableCompression = enableCompression;
         return this;
     }
 
@@ -173,6 +182,18 @@ public class ServerBuilder {
             context.addFilter( filterReference.getFilterHolder(),
                                filterReference.getPathSpec(),
                                filterReference.getDispatches() );
+
+        }
+
+        if ( enableCompression ) {
+
+            GzipHandler gzipHandler = new GzipHandler();
+
+            gzipHandler.addIncludedMethods(HttpMethod.POST.asString());
+            gzipHandler.addIncludedPaths("/*");
+
+            gzipHandler.setHandler(server.getHandler());
+            server.setHandler(gzipHandler);
 
         }
 

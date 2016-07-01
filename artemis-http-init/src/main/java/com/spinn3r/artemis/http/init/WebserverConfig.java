@@ -18,6 +18,8 @@ public class WebserverConfig {
 
     private int responseHeaderSize = 128 * 1024;
 
+    private boolean enableCompression = false;
+
     public WebserverConfig() {}
 
     public WebserverConfig(int port) {
@@ -44,6 +46,10 @@ public class WebserverConfig {
         return responseHeaderSize;
     }
 
+    public boolean getEnableCompression() {
+        return enableCompression;
+    }
+
     @Override
     public String toString() {
         return "WebserverConfig{" +
@@ -52,6 +58,7 @@ public class WebserverConfig {
                  ", useLocalHost=" + useLocalHost +
                  ", requestHeaderSize=" + requestHeaderSize +
                  ", responseHeaderSize=" + responseHeaderSize +
+                 ", enableCompression=" + enableCompression +
                  '}';
     }
 
