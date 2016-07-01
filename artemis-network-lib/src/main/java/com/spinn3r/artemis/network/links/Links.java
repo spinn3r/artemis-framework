@@ -16,7 +16,8 @@ import java.util.List;
  */
 public class Links {
 
-    private static final UrlValidator URL_VALIDATOR = new UrlValidator(Strings.toArray(Lists.newArrayList("http", "https")));
+    private static final UrlValidator URL_VALIDATOR = new UrlValidator(Strings.toArray(Lists.newArrayList("http", "https")),
+                                                                       UrlValidator.ALLOW_LOCAL_URLS | UrlValidator.ALLOW_2_SLASHES);
 
     /**
      * Return true if this is a valid HTTP URL which we can parse.  It still might
