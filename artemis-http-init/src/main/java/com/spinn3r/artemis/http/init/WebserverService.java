@@ -66,8 +66,8 @@ public class WebserverService extends BaseService {
             port = this.portMutex.getPort();
         }
 
-        info( "Starting HTTP server on port %s with maxThreads=%s requestHeaderSize=%s, responseHeaderSize=%s...",
-              port, webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize() );
+        info( "Starting HTTP server on port %s with maxThreads=%s requestHeaderSize=%s, responseHeaderSize=%s, enableCompression=%s...",
+              port, webserverConfig.getMaxThreads(), webserverConfig.getRequestHeaderSize(), webserverConfig.getResponseHeaderSize(), webserverConfig.getEnableCompression());
 
         webserverPortProvider.set( new WebserverPort( port ) );
 
@@ -95,7 +95,6 @@ public class WebserverService extends BaseService {
         serverBuilder.setUseLocalhost( webserverConfig.getUseLocalHost() );
         serverBuilder.setRequestHeaderSize( webserverConfig.getRequestHeaderSize() );
         serverBuilder.setResponseHeaderSize( webserverConfig.getResponseHeaderSize() );
-
         serverBuilder.setEnableCompression(webserverConfig.getEnableCompression());
 
         server = serverBuilder.build();

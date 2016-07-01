@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.log5j.Logger;
 import org.eclipse.jetty.http.HttpMethod;
 import org.eclipse.jetty.jmx.MBeanContainer;
 import org.eclipse.jetty.server.*;
@@ -21,7 +22,10 @@ import org.eclipse.jetty.server.handler.gzip.GzipHandler;
  */
 public class ServerBuilder {
 
+    private static final Logger log = Logger.getLogger();
+
     private static final String LOCAL = "127.0.0.1";
+
     private int port = 8080;
 
     private String contextPath = "/";
@@ -186,6 +190,8 @@ public class ServerBuilder {
         }
 
         if ( enableCompression ) {
+
+            log.info( "Enabling HTTP compression...");
 
             GzipHandler gzipHandler = new GzipHandler();
 
