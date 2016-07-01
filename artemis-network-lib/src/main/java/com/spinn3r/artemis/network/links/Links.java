@@ -17,7 +17,7 @@ import java.util.List;
 public class Links {
 
     private static final UrlValidator URL_VALIDATOR = new UrlValidator(Strings.toArray(Lists.newArrayList("http", "https")),
-                                                                       UrlValidator.ALLOW_LOCAL_URLS | UrlValidator.ALLOW_2_SLASHES);
+                                                                       UrlValidator.ALLOW_LOCAL_URLS + UrlValidator.ALLOW_2_SLASHES);
 
     /**
      * Return true if this is a valid HTTP URL which we can parse.  It still might
@@ -28,7 +28,31 @@ public class Links {
         if ( link == null )
             return false;
 
+        // try to fail fast
+        if (! link.startsWith("http:") && ! link.startsWith("https:")) {
+            return false;
+        }
+
+        // try to be as liberal as possible.
+        return isValidWithValidator(link) || isValidAsURI(link);
+
+    }
+
+    // parse via the Apache commons URL validator
+
+    private static boolean isValidWithValidator(String link) {
         return URL_VALIDATOR.isValid(link);
+    }
+
+    // parse using the JDK URI component which accepts unicode path names
+    private static boolean isValidAsURI(String link) {
+
+        try {
+            new URI(link);
+            return true;
+        } catch (URISyntaxException e) {
+            return false;
+        }
 
     }
 
