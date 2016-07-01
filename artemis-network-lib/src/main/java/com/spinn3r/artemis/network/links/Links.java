@@ -1,5 +1,8 @@
 package com.spinn3r.artemis.network.links;
 
+import com.google.common.collect.Lists;
+import com.spinn3r.artemis.util.misc.Strings;
+import org.apache.commons.validator.routines.UrlValidator;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;
 
@@ -13,27 +16,18 @@ import java.util.List;
  */
 public class Links {
 
+    private static final UrlValidator URL_VALIDATOR = new UrlValidator(Strings.toArray(Lists.newArrayList("http", "https")));
+
     /**
      * Return true if this is a valid HTTP URL which we can parse.  It still might
      * not be fetchable (perhaps because the URL is down) but at least its valid.
      */
     public static boolean isValid(String link) {
 
-        try {
-
-            if ( link == null )
-                return false;
-
-            URI uri = new URI( link );
-
-            if ( uri.getScheme() == null )
-                return false;
-
-            return uri.getScheme().equals( "http" ) || uri.getScheme().equals( "https" );
-
-        } catch (URISyntaxException e) {
+        if ( link == null )
             return false;
-        }
+
+        return URL_VALIDATOR.isValid(link);
 
     }
 
