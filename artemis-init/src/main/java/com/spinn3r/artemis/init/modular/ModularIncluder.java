@@ -14,8 +14,8 @@ public class ModularIncluder {
         this.serviceTypeClazz = serviceTypeClazz;
     }
 
-    public void include( ModularServiceReferences modularServiceReferences ) {
-        modularLauncher.include( serviceTypeClazz, modularServiceReferences );
+    public void include( ServiceTypeReferences serviceTypeReferences) {
+        modularLauncher.include(serviceTypeClazz, serviceTypeReferences);
     }
 
 }

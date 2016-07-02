@@ -5,35 +5,33 @@ import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
-import com.spinn3r.artemis.init.modular.ModularServiceReferences;
 import com.spinn3r.artemis.init.services.HostnameService;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class LauncherTest {
 
     @Test
     public void testWithServiceTypes() throws Exception {
 
-        ModularServiceReferences modularServiceReferences
-          = new ModularServiceReferences()
+        ServiceTypeReferences serviceTypeReferences
+          = new ServiceTypeReferences()
                 .put(HostnameService.class);
 
-        assertEquals(1, modularServiceReferences.size());
+        assertEquals(1, serviceTypeReferences.size());
 
-        modularServiceReferences.put(MockHostnameService.class);
+        serviceTypeReferences.put(MockHostnameService.class);
 
-        assertEquals(1, modularServiceReferences.size());
+        assertEquals(1, serviceTypeReferences.size());
 
         Launcher launcher = Launcher.forResourceConfigLoader().build();
-        launcher.launch(modularServiceReferences.toServiceReferences());
+        launcher.launch(serviceTypeReferences.toServiceReferences());
 
         Injector injector = launcher.getInjector();
 
-        ServiceMapping serviceMapping = modularServiceReferences.get(HostnameServiceType.class);
-        assertEquals(MockHostnameService.class, serviceMapping.getTarget());
+        ServiceTypeReference serviceTypeReference = serviceTypeReferences.get(HostnameServiceType.class);
+        assertEquals(MockHostnameService.class, serviceTypeReference.getTarget());
 
         Hostname hostname = injector.getInstance(Hostname.class);
 

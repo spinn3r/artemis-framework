@@ -11,20 +11,19 @@ import com.spinn3r.artemis.init.services.VersionService;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
-public class ModularServiceReferencesTest {
+public class ServiceTypeReferencesTest {
 
     @Test
     public void testInclude() throws Exception {
 
-        ModularServiceReferences m0
-          = new ModularServiceReferences()
+        ServiceTypeReferences m0
+          = new ServiceTypeReferences()
             .put( HostnameServiceType.class, MockHostnameService.class )
             .put( VersionServiceType.class, MockVersionService.class );
 
-        ModularServiceReferences m1
-          = new ModularServiceReferences()
+        ServiceTypeReferences m1
+          = new ServiceTypeReferences()
             .put( CallerServiceType.class, MockCallerService.class );
 
         m0.include( HostnameServiceType.class, m1 );
@@ -39,13 +38,13 @@ public class ModularServiceReferencesTest {
     @Test
     public void testReplace() throws Exception {
 
-        ModularServiceReferences m0
-          = new ModularServiceReferences()
+        ServiceTypeReferences m0
+          = new ServiceTypeReferences()
               .put( HostnameServiceType.class, HostnameService.class )
               .put( VersionServiceType.class, VersionService.class );
 
-        ModularServiceReferences m1
-          = new ModularServiceReferences()
+        ServiceTypeReferences m1
+          = new ServiceTypeReferences()
               .put( HostnameServiceType.class, MockHostnameService.class )
               .put( VersionServiceType.class, MockVersionService.class );
 

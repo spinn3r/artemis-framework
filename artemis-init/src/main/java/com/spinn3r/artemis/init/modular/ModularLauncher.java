@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import com.google.inject.*;
-import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
@@ -47,22 +46,22 @@ public class ModularLauncher {
     // shutdown services which have leaky threads
     private ThreadSnapshot threadSnapshot = new ThreadSnapshot();
 
-    private ModularServiceReferences started = new ModularServiceReferences();
+    private ServiceTypeReferences started = new ServiceTypeReferences();
 
     /**
      * The main injector to use after launch is called.
      */
     private Injector injector = null;
 
-    private final ModularServiceReferences modularServiceReferences;
+    private final ServiceTypeReferences serviceTypeReferences;
 
     private final List<Module> modules = Lists.newArrayList();
 
-    ModularLauncher(ConfigLoader configLoader, Role role, Advertised advertised, ModularServiceReferences modularServiceReferences) {
+    ModularLauncher(ConfigLoader configLoader, Role role, Advertised advertised, ServiceTypeReferences serviceTypeReferences) {
         this.configLoader = configLoader;
         this.role = role;
         this.advertised = advertised;
-        this.modularServiceReferences = modularServiceReferences;
+        this.serviceTypeReferences = serviceTypeReferences;
 
         this.modules.add( new StandardDependenciesModule() );
 
@@ -156,17 +155,17 @@ public class ModularLauncher {
      */
     protected ModularLauncher launch( StageRunner stageRunner ) throws Exception {
 
-        info( "Launching services: \n%s", modularServiceReferences.format() );
+        info("Launching services: \n%s", serviceTypeReferences.format() );
 
-        for ( ServiceMapping serviceMapping : modularServiceReferences.backing.values() ) {
+        for ( ServiceTypeReference serviceTypeReference : serviceTypeReferences.backing.values() ) {
 
-            Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
-            Class<? extends Service> modularServiceClazz = serviceMapping.getTarget();
+            Class<? extends ServiceType> modularServiceType = serviceTypeReference.getSource();
+            Class<? extends Service> modularServiceClazz = serviceTypeReference.getTarget();
 
             ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
 
-            ModularServiceReference modularServiceReference = new ModularServiceReference( modularServiceClazz );
-            Module configModule = modularConfigLoader.load( modularServiceReference );
+            ServiceReference serviceReference = new ServiceReference( modularServiceClazz );
+            Module configModule = modularConfigLoader.load( serviceReference );
 
             if ( configModule != null ) {
                 modules.add( configModule );
@@ -190,7 +189,7 @@ public class ModularLauncher {
                 modules.add( service );
                 services.add( service );
 
-                started.put( serviceMapping.getSource(), serviceMapping );
+                started.put(serviceTypeReference.getSource(), serviceTypeReference);
 
             } catch ( ConfigurationException|CreationException e ) {
 
@@ -224,13 +223,13 @@ public class ModularLauncher {
         return advertised;
     }
 
-    public ModularServiceReferences getModularServiceReferences() {
-        return modularServiceReferences;
+    public ServiceTypeReferences getServiceTypeReferences() {
+        return serviceTypeReferences;
     }
 
-    public void include( Class<? extends ServiceType> serviceTypePointer, ModularServiceReferences additionalModularServiceReferences ) {
+    public void include( Class<? extends ServiceType> serviceTypePointer, ServiceTypeReferences additionalServiceTypeReferences) {
 
-        modularServiceReferences.include( serviceTypePointer, additionalModularServiceReferences );
+        serviceTypeReferences.include(serviceTypePointer, additionalServiceTypeReferences);
 
     }
 
@@ -288,12 +287,12 @@ public class ModularLauncher {
         getTracer().error( format, args );
     }
 
-    public static ModularLauncherBuilder create(ModularServiceReferences modularServiceReferences ) {
-        return new ModularLauncherBuilder( new ResourceConfigLoader(), modularServiceReferences );
+    public static ModularLauncherBuilder create(ServiceTypeReferences serviceTypeReferences) {
+        return new ModularLauncherBuilder(new ResourceConfigLoader(), serviceTypeReferences);
     }
 
-    public static ModularLauncherBuilder create(ConfigLoader configLoader, ModularServiceReferences modularServiceReferences ) {
-        return new ModularLauncherBuilder( configLoader, modularServiceReferences );
+    public static ModularLauncherBuilder create(ConfigLoader configLoader, ServiceTypeReferences serviceTypeReferences) {
+        return new ModularLauncherBuilder(configLoader, serviceTypeReferences);
     }
 
     /**
@@ -336,15 +335,15 @@ public class ModularLauncher {
 
         private final ConfigLoader configLoader;
 
-        private final ModularServiceReferences modularServiceReferences;
+        private final ServiceTypeReferences serviceTypeReferences;
 
         private Role role = new Role( "default" );
 
         private Advertised advertised = new Advertised();
 
-        ModularLauncherBuilder(ConfigLoader configLoader, ModularServiceReferences modularServiceReferences) {
+        ModularLauncherBuilder(ConfigLoader configLoader, ServiceTypeReferences serviceTypeReferences) {
             this.configLoader = configLoader;
-            this.modularServiceReferences = modularServiceReferences;
+            this.serviceTypeReferences = serviceTypeReferences;
         }
 
         @Deprecated
@@ -364,7 +363,7 @@ public class ModularLauncher {
 
         public ModularLauncher build() {
 
-            return new ModularLauncher( configLoader, role, advertised, modularServiceReferences );
+            return new ModularLauncher(configLoader, role, advertised, serviceTypeReferences);
 
         }
 

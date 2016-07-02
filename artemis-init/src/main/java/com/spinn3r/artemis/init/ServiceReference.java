@@ -42,4 +42,5 @@ public class ServiceReference implements Comparable<ServiceReference> {
     public int hashCode() {
         return backing.hashCode();
     }
+
 }
