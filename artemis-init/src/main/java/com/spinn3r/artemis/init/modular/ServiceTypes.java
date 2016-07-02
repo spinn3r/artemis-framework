@@ -1,7 +1,6 @@
 package com.spinn3r.artemis.init.modular;
 
 import com.google.common.collect.Lists;
-import com.spinn3r.artemis.init.Service;
 
 import java.util.List;
 
