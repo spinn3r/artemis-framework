@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.init.modular;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.init.Service;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public class ServiceTypes {
 
-    public static Class<? extends ServiceType> determineServiceType(Class<?> service ) {
+    public static Class<? extends ServiceType> determineServiceType(Class<? extends Service> service) {
 
         List<Class<? extends ServiceType>> serviceTypes = Lists.newArrayList();
 

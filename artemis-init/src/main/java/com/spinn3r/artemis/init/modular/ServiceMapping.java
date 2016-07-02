@@ -9,7 +9,7 @@ public class ServiceMapping {
 
     private final Class<? extends ServiceType> target;
 
-    public <T extends ServiceType> ServiceMapping(Class<T> source, Class<? extends T> target ) {
+    protected ServiceMapping(Class<? extends ServiceType> source, Class<? extends ServiceType> target) {
         this.source = source;
         this.target = target;
     }

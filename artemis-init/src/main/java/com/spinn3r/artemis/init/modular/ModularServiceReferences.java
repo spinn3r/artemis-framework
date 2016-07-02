@@ -1,6 +1,9 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.spinn3r.artemis.init.ServiceReferences;
+
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -22,6 +25,20 @@ public class ModularServiceReferences {
         backing.put( serviceType, serviceMapping );
         return this;
 
+    }
+
+    /**
+     * Add a service, automatically determine it's ServiceType, and update the
+     * mapping.
+     *
+     * If an existing service with the same key is present, it's replace,
+     * preserving the original ServiceType order.
+     */
+    public ModularServiceReferences put(Class<? extends ServiceType> service) {
+        Class<? extends ServiceType> serviceType = ServiceTypes.determineServiceType(service);
+        ServiceMapping serviceMapping = new ServiceMapping( serviceType, serviceType.asSubclass(service) );
+        put(serviceType, serviceMapping);
+        return this;
     }
 
     public ModularServiceReferences put( Class<? extends ServiceType> serviceType, ServiceMapping serviceMapping ) {
@@ -61,6 +78,22 @@ public class ModularServiceReferences {
 
         backing = newBacking;
         return this;
+
+    }
+
+    /**
+     * Convert this to a list of services to initialize the older/legacy
+     * Launcher which just uses service references.
+     */
+    public ServiceReferences toServiceReferences() {
+
+        ServiceReferences result = new ServiceReferences();
+
+        for (Map.Entry<Class<? extends ServiceType>, ServiceMapping> entry : backing.entrySet()) {
+            result.add(entry.getValue().getTarget());
+        }
+
+        return result;
 
     }
 
