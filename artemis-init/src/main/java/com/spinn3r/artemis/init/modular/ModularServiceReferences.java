@@ -1,11 +1,8 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.google.common.base.Preconditions;
-
 import java.util.LinkedHashMap;
-import java.util.Map;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 /**
  * Contains a map of ServiceType to ModularService.  This way we can combine
