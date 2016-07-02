@@ -3,6 +3,8 @@ package com.spinn3r.artemis.init.modular;
 import com.google.inject.Injector;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockHostnameService;
+import com.spinn3r.artemis.init.ServiceTypeReference;
+import com.spinn3r.artemis.init.ServiceTypeReferences;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.services.HostnameService;

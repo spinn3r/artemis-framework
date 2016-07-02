@@ -3,6 +3,7 @@ package com.spinn3r.artemis.init.modular;
 import com.spinn3r.artemis.init.MockCallerService;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
+import com.spinn3r.artemis.init.ServiceTypeReferences;
 import com.spinn3r.artemis.init.advertisements.CallerServiceType;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.advertisements.VersionServiceType;

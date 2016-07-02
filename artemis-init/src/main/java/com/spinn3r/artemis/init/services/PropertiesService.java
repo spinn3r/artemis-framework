@@ -1,10 +1,8 @@
 package com.spinn3r.artemis.init.services;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Config;
-import com.spinn3r.artemis.init.advertisements.Version;
 
 /**
  * Load properties into the system from a config file...

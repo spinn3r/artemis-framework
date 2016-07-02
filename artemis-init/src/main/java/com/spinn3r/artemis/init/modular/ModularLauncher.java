@@ -157,7 +157,7 @@ public class ModularLauncher {
 
         info("Launching services: \n%s", serviceTypeReferences.format() );
 
-        for ( ServiceTypeReference serviceTypeReference : serviceTypeReferences.backing.values() ) {
+        for ( ServiceTypeReference serviceTypeReference : serviceTypeReferences.entries() ) {
 
             Class<? extends ServiceType> modularServiceType = serviceTypeReference.getSource();
             Class<? extends Service> modularServiceClazz = serviceTypeReference.getTarget();

@@ -1,10 +1,9 @@
 package com.spinn3r.artemis.init;
 
-import com.spinn3r.artemis.init.Service;
-import com.spinn3r.artemis.init.ServiceReferences;
-import com.spinn3r.artemis.init.modular.ServiceType;
-import com.spinn3r.artemis.init.modular.ServiceTypes;
+import com.google.common.collect.ImmutableCollection;
+import com.google.common.collect.ImmutableList;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -118,6 +117,10 @@ public class ServiceTypeReferences {
      */
     public int size() {
         return backing.size();
+    }
+
+    public ImmutableCollection<ServiceTypeReference> entries() {
+        return ImmutableList.copyOf(backing.values());
     }
 
     /**

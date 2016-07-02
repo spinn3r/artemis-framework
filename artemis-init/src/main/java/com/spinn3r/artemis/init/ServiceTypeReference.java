@@ -1,8 +1,5 @@
 package com.spinn3r.artemis.init;
 
-import com.spinn3r.artemis.init.Service;
-import com.spinn3r.artemis.init.modular.ServiceType;
-
 /**
  *
  */
