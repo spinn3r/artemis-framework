@@ -12,7 +12,7 @@ import com.spinn3r.artemis.init.advertisements.Version;
 @Config( path = "properties.conf",
          required = true,
          implementation = PropertiesConfig.class )
-public class PropertiesService extends BaseService {
+public class PropertiesService extends BaseService implements PropertiesServiceType {
 
     private PropertiesConfig config;
 

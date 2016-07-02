@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ServiceTypes {
 
-    public static Class<? extends ServiceType> determineServiceType(Class<? extends Service> service) {
+    public static Class<? extends ServiceType> determineServiceType(Class<? extends ServiceType> service) {
 
         List<Class<? extends ServiceType>> serviceTypes = Lists.newArrayList();
 
@@ -27,7 +27,7 @@ public class ServiceTypes {
 
         if ( serviceTypes.size() == 0 ) {
 
-            throw new IllegalArgumentException("Class does not implement ServiceType: " + service.getClass().getName());
+            throw new IllegalArgumentException("No interfaces found for: " + service.getClass().getName());
 
         } else if ( serviceTypes.size() == 1 ) {
 

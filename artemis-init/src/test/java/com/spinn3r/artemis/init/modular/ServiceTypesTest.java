@@ -16,11 +16,4 @@ public class ServiceTypesTest {
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testFailedServiceType() throws Exception {
-
-        ServiceTypes.determineServiceType(String.class);
-
-    }
-
 }
