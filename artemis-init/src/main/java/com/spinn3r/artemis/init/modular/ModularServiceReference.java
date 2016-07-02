@@ -9,14 +9,14 @@ import com.spinn3r.artemis.init.ServiceReference;
  */
 public class ModularServiceReference implements Comparable<ModularServiceReference> {
 
-    private final Class<? extends ModularService> backing;
+    private final Class<? extends Service> backing;
 
-    public ModularServiceReference(Class<? extends ModularService> backing) {
+    public ModularServiceReference(Class<? extends Service> backing) {
         Preconditions.checkNotNull( backing );
         this.backing = backing;
     }
 
-    public Class<? extends ModularService> getBacking() {
+    public Class<? extends Service> getBacking() {
         return backing;
     }
 

@@ -161,7 +161,7 @@ public class ModularLauncher {
         for ( ServiceMapping serviceMapping : modularServiceReferences.backing.values() ) {
 
             Class<? extends ServiceType> modularServiceType = serviceMapping.getSource();
-            Class<? extends ModularService> modularServiceClazz = serviceMapping.getTarget();
+            Class<? extends Service> modularServiceClazz = serviceMapping.getTarget();
 
             ModularConfigLoader modularConfigLoader = new ModularConfigLoader( this, getTracer() );
 
@@ -183,7 +183,7 @@ public class ModularLauncher {
                 //injector = Guice.createInjector( Modules.override( Lists.newArrayList() ).with( modules ) );
                 injector = Guice.createInjector( modules );
 
-                ModularService service = injector.getInstance( modularServiceClazz );
+                Service service = injector.getInstance( modularServiceClazz );
 
                 stageRunner.run( injector, service );
 

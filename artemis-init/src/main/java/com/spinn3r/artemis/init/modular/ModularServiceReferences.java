@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.spinn3r.artemis.init.Service;
 import com.spinn3r.artemis.init.ServiceReferences;
 
 import java.util.LinkedHashMap;
@@ -17,7 +18,7 @@ public class ModularServiceReferences {
 
     protected LinkedHashMap<Class<? extends ServiceType>,ServiceMapping> backing = new LinkedHashMap<>();
 
-    public <T extends ServiceType> ModularServiceReferences put( Class<T> serviceType, Class<? extends T> service ) {
+    public <T extends ServiceType> ModularServiceReferences put( Class<T> serviceType, Class<? extends Service> service ) {
         checkNotNull( serviceType );
         checkNotNull( service );
 
@@ -34,9 +35,9 @@ public class ModularServiceReferences {
      * If an existing service with the same key is present, it's replace,
      * preserving the original ServiceType order.
      */
-    public ModularServiceReferences put(Class<? extends ServiceType> service) {
+    public <T extends ServiceType & Service> ModularServiceReferences put(Class<T> service) {
         Class<? extends ServiceType> serviceType = ServiceTypes.determineServiceType(service);
-        ServiceMapping serviceMapping = new ServiceMapping( serviceType, serviceType.asSubclass(service) );
+        ServiceMapping serviceMapping = new ServiceMapping( serviceType, service );
         put(serviceType, serviceMapping);
         return this;
     }
