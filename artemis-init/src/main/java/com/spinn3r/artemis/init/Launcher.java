@@ -185,7 +185,8 @@ public class Launcher {
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
 
-        threadDiff.report( advertised.require( TracerFactory.class ).create( this ) );
+        TracerFactory tracerFactory = advertised.tracerFactoryProvider.get();
+        threadDiff.report( tracerFactory.create( this ) );
 
         threadSnapshot = new ThreadSnapshot();
 
