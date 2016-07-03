@@ -288,27 +288,6 @@ public class Advertised {
 
     }
 
-    /**
-     * Find all objects that have been advertised with the given interface.
-     *
-     * @param inter The interface to search for.
-     */
-    public <T> List<T> interfaces( Class<T> inter ) {
-
-        List<T> result = Lists.newArrayList();
-
-        for (Object object : advertisements.values()) {
-
-            if ( inter.isAssignableFrom( object.getClass() ) ) {
-                result.add( (T)object );
-            }
-
-        }
-
-        return result;
-
-    }
-
     public int size() {
         return advertisements.size();
     }

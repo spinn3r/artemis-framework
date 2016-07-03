@@ -30,17 +30,6 @@ public class AdvertisedTest {
     }
 
     @Test
-    public void testInterfaces() throws Exception {
-
-        Advertised advertised = new Advertised();
-
-        advertised.advertise( this, String.class, "hello world" );
-
-        assertEquals( "[hello world]", advertised.interfaces( CharSequence.class ).toString() );
-
-    }
-
-    @Test
     @SuppressWarnings( "deprecation" )
     public void testAdvertiseWithDelegation() throws Exception {
 
