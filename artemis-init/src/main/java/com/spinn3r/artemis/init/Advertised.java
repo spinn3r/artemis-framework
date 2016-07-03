@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
-import com.spinn3r.artemis.init.tracer.TracerFactoryProvider;
+import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
 
 import java.util.Collections;
 import java.util.List;
@@ -27,16 +27,16 @@ public class Advertised {
 
     protected Module module = null;
 
-    public TracerFactoryProvider tracerFactoryProvider;
+    public TracerFactorySupplier tracerFactorySupplier;
 
     public Advertised() {
 
         // advertise the TracerFactoryProvider so that we can change providers
         // at runtime without using replace.
 
-        tracerFactoryProvider = TracerFactoryProvider.of(new StandardTracerFactory());
+        tracerFactorySupplier = TracerFactorySupplier.of(new StandardTracerFactory());
 
-        provider(this.getClass(), TracerFactory.class, tracerFactoryProvider);
+        advertise(this.getClass(), TracerFactorySupplier.class, tracerFactorySupplier);
 
         // by default, advertise ourselves so that we can inject advertised
         // if necessary.

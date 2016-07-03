@@ -8,7 +8,7 @@ import com.spinn3r.artemis.init.advertisements.Version;
 import com.spinn3r.artemis.init.modular.ModularService;
 import com.spinn3r.artemis.init.tracer.Log4jTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
-import com.spinn3r.artemis.init.tracer.TracerFactoryProvider;
+import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import java.net.URL;
@@ -22,13 +22,13 @@ public class ConsoleLoggingService extends BaseService implements ModularService
 
     private final Provider<Hostname> hostnameProvider;
 
-    private final TracerFactoryProvider tracerFactoryProvider;
+    private final TracerFactorySupplier tracerFactorySupplier;
 
     @Inject
-    ConsoleLoggingService(Provider<Version> versionProvider, Provider<Hostname> hostnameProvider, TracerFactoryProvider tracerFactoryProvider) {
+    ConsoleLoggingService(Provider<Version> versionProvider, Provider<Hostname> hostnameProvider, TracerFactorySupplier tracerFactorySupplier) {
         this.versionProvider = versionProvider;
         this.hostnameProvider = hostnameProvider;
-        this.tracerFactoryProvider = tracerFactoryProvider;
+        this.tracerFactorySupplier = tracerFactorySupplier;
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ConsoleLoggingService extends BaseService implements ModularService
         // now start using the new log4j tracer so that we can switch to having
         // services write via log4j.
 
-        tracerFactoryProvider.set(new Log4jTracerFactory());
+        tracerFactorySupplier.set(new Log4jTracerFactory());
 
     }
 
