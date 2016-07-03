@@ -20,18 +20,11 @@ public abstract class BaseService extends AbstractModule implements Service {
 
     protected Includer includer;
 
-    /**
-     */
     protected ConfigLoader configLoader = null;
 
     @Override
     public void setAdvertised(Advertised advertised) {
         this.advertised = advertised;
-    }
-
-    @Override
-    public Tracer getTracer() {
-        return tracer;
     }
 
     @Override
@@ -60,7 +53,6 @@ public abstract class BaseService extends AbstractModule implements Service {
 
     /**
      * Include any services that should be included dynamically after this one.
-     * @param additionalServiceReferences
      */
     protected void include( List<ServiceReference> additionalServiceReferences ) {
         includer.include( additionalServiceReferences );
@@ -130,22 +122,22 @@ public abstract class BaseService extends AbstractModule implements Service {
 
     @Override
     public void info(String format, Object... args) {
-        getTracer().info( format, args );
+        tracer.info( format, args );
     }
 
     @Override
     public void warn(String format, Object... args) {
-        getTracer().warn( format, args );
+        tracer.warn( format, args );
     }
 
     @Override
     public void error(String format, Object... args) {
-        getTracer().error( format, args );
+        tracer.error( format, args );
     }
 
     @Override
     public void error(String format, Throwable throwable, Object... args) {
-        getTracer().error( format, throwable, args );
+        tracer.error( format, throwable, args );
     }
 
 }
