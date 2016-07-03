@@ -85,6 +85,7 @@ public class Initializer {
         launcher.advertise( clazz, object );
     }
 
+    @Deprecated
     public <T, V extends T> void replace(Class<T> clazz, V object) {
         launcher.replace( clazz, object );
     }

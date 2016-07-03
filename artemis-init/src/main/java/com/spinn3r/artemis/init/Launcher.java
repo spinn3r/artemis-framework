@@ -228,6 +228,7 @@ public class Launcher {
         getAdvertised().advertise( this, clazz, object );
     }
 
+    @Deprecated
     public <T, V extends T> void replace( Class<T> clazz, V object ) {
         getAdvertised().replace( this, clazz, object );
     }
