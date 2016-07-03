@@ -25,6 +25,7 @@ public abstract class BaseService extends AbstractModule implements Service {
     protected ConfigLoader configLoader = null;
 
     @Override
+    @Deprecated
     public Advertised getAdvertised() {
         return advertised;
     }
