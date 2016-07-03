@@ -27,7 +27,7 @@ public class Advertised {
 
     protected Module module = null;
 
-    protected TracerFactoryProvider tracerFactoryProvider;
+    public TracerFactoryProvider tracerFactoryProvider;
 
     public Advertised() {
 
