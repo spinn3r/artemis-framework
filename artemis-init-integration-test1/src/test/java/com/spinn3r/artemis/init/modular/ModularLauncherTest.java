@@ -1,18 +1,15 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
+import com.spinn3r.artemis.init.ServiceTypeReferences;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.advertisements.VersionServiceType;
-import com.spinn3r.artemis.init.services.HostnameService;
-import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 import com.spinn3r.artemis.logging.init.ConsoleLoggingService;
 import com.spinn3r.artemis.logging.init.LoggingServiceType;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -26,8 +23,8 @@ public class ModularLauncherTest {
     @Test
     public void testBasic() throws Exception {
 
-        ModularServiceReferences serviceReferences
-          = new ModularServiceReferences()
+        ServiceTypeReferences serviceReferences
+          = new ServiceTypeReferences()
             .put( HostnameServiceType.class, MockHostnameService.class );
 
         ModularLauncher modularLauncher =
@@ -46,8 +43,8 @@ public class ModularLauncherTest {
     @Test
     public void testBasicWithTwoServices() throws Exception {
 
-        ModularServiceReferences serviceReferences
-          = new ModularServiceReferences()
+        ServiceTypeReferences serviceReferences
+          = new ServiceTypeReferences()
               .put( HostnameServiceType.class, MockHostnameService.class )
               .put( VersionServiceType.class, MockVersionService.class );
 
@@ -79,8 +76,8 @@ public class ModularLauncherTest {
         // inject and then just call set() on it to replace it with a new
         // one...
 
-        ModularServiceReferences serviceReferences
-          = new ModularServiceReferences()
+        ServiceTypeReferences serviceReferences
+          = new ServiceTypeReferences()
               .put( HostnameServiceType.class, MockHostnameService.class )
               .put( VersionServiceType.class, MockVersionService.class )
               .put( LoggingServiceType.class, ConsoleLoggingService.class )

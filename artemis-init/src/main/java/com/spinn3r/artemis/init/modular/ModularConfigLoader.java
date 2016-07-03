@@ -29,9 +29,9 @@ public class ModularConfigLoader {
     }
 
     @SuppressWarnings( "unchecked" )
-    public Module load( ModularServiceReference modularServiceReference ) {
+    public Module load( ServiceReference serviceReference ) {
 
-        Config config = Configs.readConfigAnnotation( modularServiceReference.getBacking() );
+        Config config = Configs.readConfigAnnotation( serviceReference.getBacking() );
 
         // we are done if we've already advertised the config
 
@@ -57,7 +57,7 @@ public class ModularConfigLoader {
         URL resource = null;
 
         if ( ! "".equals( config.path() ) ) {
-            resource = configLoader.getResource( modularServiceReference.getBacking(), config.path() );
+            resource = configLoader.getResource( serviceReference.getBacking(), config.path() );
         }
 
         Class<?> configClazz = config.implementation();
@@ -66,7 +66,7 @@ public class ModularConfigLoader {
 
             if ( resource == null ) {
                 throw new IOException( String.format( "Config file not found: %s (loaded from %s)",
-                  config.path(), modularServiceReference.getBacking() ) );
+                  config.path(), serviceReference.getBacking() ) );
             }
 
             try( InputStream inputStream = resource.openStream(); ) {
@@ -80,7 +80,7 @@ public class ModularConfigLoader {
 
                     ConfigModule<?> result = loader.load();
 
-                    tracer.info( "Using %s for config %s for service %s", resource, configClazz, modularServiceReference );
+                    tracer.info( "Using %s for config %s for service %s", resource, configClazz, serviceReference );
 
                     return result;
 

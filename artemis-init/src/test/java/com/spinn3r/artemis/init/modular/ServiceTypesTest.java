@@ -1,18 +1,17 @@
 package com.spinn3r.artemis.init.modular;
 
+import com.spinn3r.artemis.init.ServiceTypes;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.services.HostnameService;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class ServiceTypesTest {
 
     @Test
     public void testDetermineServiceType() throws Exception {
 
-        assertEquals(HostnameServiceType.class, ServiceTypes.determineServiceType(HostnameService.class));
+        Assert.assertEquals(HostnameServiceType.class, ServiceTypes.determineServiceType(HostnameService.class));
 
     }
 
