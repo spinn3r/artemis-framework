@@ -53,10 +53,10 @@ public class ServiceTypeReferencesTest {
         m0.replace( m1 );
 
         assertEquals( 2, m0.size() );
-        assertEquals( "ClassMapping{source=interface com.spinn3r.artemis.init.advertisements.HostnameServiceType, target=class com.spinn3r.artemis.init.MockHostnameService}",
+        assertEquals( "ServiceTypeReference{source=interface com.spinn3r.artemis.init.advertisements.HostnameServiceType, target=class com.spinn3r.artemis.init.MockHostnameService}",
                       m0.get( HostnameServiceType.class ).toString() );
 
-        assertEquals( "ClassMapping{source=interface com.spinn3r.artemis.init.advertisements.VersionServiceType, target=class com.spinn3r.artemis.init.MockVersionService}",
+        assertEquals( "ServiceTypeReference{source=interface com.spinn3r.artemis.init.advertisements.VersionServiceType, target=class com.spinn3r.artemis.init.MockVersionService}",
                       m0.get( VersionServiceType.class ).toString() );
 
     }
