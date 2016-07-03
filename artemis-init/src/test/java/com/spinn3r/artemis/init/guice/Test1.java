@@ -27,7 +27,7 @@ public class Test1 {
         protected void configure() {
 
             bind(TransactionLog.class ).toInstance( new DefaultTransactionLog() );
-            bind( CreditCardProcessor.class ).toInstance( new PaypalCreditCardProcessor() );
+            bind(CreditCardProcessor.class ).to( PaypalCreditCardProcessor.class );
 
         }
 
