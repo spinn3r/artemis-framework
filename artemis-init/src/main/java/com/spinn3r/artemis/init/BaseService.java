@@ -25,12 +25,6 @@ public abstract class BaseService extends AbstractModule implements Service {
     protected ConfigLoader configLoader = null;
 
     @Override
-    @Deprecated
-    public Advertised getAdvertised() {
-        return advertised;
-    }
-
-    @Override
     public void setAdvertised(Advertised advertised) {
         this.advertised = advertised;
     }
@@ -104,10 +98,12 @@ public abstract class BaseService extends AbstractModule implements Service {
         advertised.replace( this.getClass(), clazz, impl );
     }
 
+    @Deprecated
     protected Injector createInjector() {
-        return getAdvertised().createInjector();
+        return advertised.createInjector();
     }
 
+    @Deprecated
     protected <T> T getInstance( Class<T> clazz ) {
         return createInjector().getInstance( clazz );
     }
