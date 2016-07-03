@@ -187,81 +187,18 @@ public class Advertised {
         return last;
 
     }
-
-    @Deprecated
-    protected <T> T delegate( Class source,
-                              Class<T> clazz,
-                              Class<? extends T> c0,
-                              Class<? extends T> c1,
-                              Class<? extends T> c2,
-                              Class<? extends T> c3,
-                              Class<? extends T> c4,
-                              Class<? extends T> c5 ) {
-
-        List<Class<? extends T>> list = Lists.newArrayList();
-
-        list.add( c0 );
-        list.add( c1 );
-        list.add( c2 );
-        list.add( c3 );
-        list.add( c4 );
-        list.add( c5 );
-
-        return delegate( source, clazz, list );
-
-    }
-
-    @Deprecated
-    protected <T> T delegate( Class source,
-                              Class<T> clazz,
-                              Class<? extends T> c0,
-                              Class<? extends T> c1,
-                              Class<? extends T> c2,
-                              Class<? extends T> c3,
-                              Class<? extends T> c4 ) {
-
-        List<Class<? extends T>> list = Lists.newArrayList();
-
-        list.add( c0 );
-        list.add( c1 );
-        list.add( c2 );
-        list.add( c3 );
-        list.add( c4 );
-
-        return delegate( source, clazz, list );
-
-    }
-
-    @Deprecated
-    protected <T> T delegate( Class source,
-                              Class<T> clazz,
-                              Class<? extends T> c0,
-                              Class<? extends T> c1,
-                              Class<? extends T> c2,
-                              Class<? extends T> c3 ) {
-
-        return delegate( source, clazz, c0, c1, c2, c3, null );
-
-    }
-
-    @Deprecated
-    protected <T> T delegate( Class source,
-                              Class<T> clazz,
-                              Class<? extends T> c0,
-                              Class<? extends T> c1,
-                              Class<? extends T> c2 ) {
-
-        return delegate( source, clazz, c0, c1, c2, null, null );
-
-    }
-
     @Deprecated
     protected  <T> T delegate( Class source,
                                Class<T> clazz,
                                Class<? extends T> c0,
                                Class<? extends T> c1 ) {
 
-        return delegate( source, clazz, c0, c1, null, null, null );
+        List<Class<? extends T>> list = Lists.newArrayList();
+
+        list.add( c0 );
+        list.add( c1 );
+
+        return delegate( source, clazz, list );
 
     }
 
