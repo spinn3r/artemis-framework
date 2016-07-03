@@ -34,7 +34,7 @@ public class Advertised {
         // advertise the TracerFactoryProvider so that we can change providers
         // at runtime without using replace.
 
-        tracerFactoryProvider = new TracerFactoryProvider(new StandardTracerFactory());
+        tracerFactoryProvider = TracerFactoryProvider.of(new StandardTracerFactory());
 
         provider(this.getClass(), TracerFactory.class, tracerFactoryProvider);
 

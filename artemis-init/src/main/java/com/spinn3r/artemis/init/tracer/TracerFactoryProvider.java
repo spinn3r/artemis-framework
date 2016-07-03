@@ -7,11 +7,12 @@ import com.spinn3r.artemis.init.AtomicReferenceProvider;
  */
 public class TracerFactoryProvider extends AtomicReferenceProvider<TracerFactory> {
 
-    public TracerFactoryProvider() {
+    private TracerFactoryProvider(TracerFactory value) {
+        super(value);
     }
 
-    public TracerFactoryProvider(TracerFactory value) {
-        super(value);
+    public static final TracerFactoryProvider of(TracerFactory tracerFactory) {
+        return new TracerFactoryProvider(tracerFactory);
     }
 
 }
