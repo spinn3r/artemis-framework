@@ -23,7 +23,7 @@ public class Launcher {
 
     private final Services services = new Services();
 
-    private final Advertised advertised;
+    protected final Advertised advertised;
 
     private final AtomicReferenceProvider<Lifecycle> lifecycleProvider
       = new AtomicReferenceProvider<>( Lifecycle.STOPPED );
@@ -117,7 +117,7 @@ public class Launcher {
 
                 serviceInitializer.init( serviceReference );
 
-                Injector injector = getAdvertised().createInjector();
+                Injector injector = advertised.createInjector();
                 Service current = injector.getInstance( serviceReference.getBacking() );
                 launch0( launchHandler, current );
 
@@ -200,6 +200,7 @@ public class Launcher {
         return services;
     }
 
+    @Deprecated
     public Advertised getAdvertised() {
         return advertised;
     }
@@ -213,32 +214,32 @@ public class Launcher {
     }
 
     public <T> void provider( Class<T> clazz, T impl ) {
-        getAdvertised().provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
+        advertised.provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
     }
 
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {
-        getAdvertised().provider( this.getClass(), clazz, provider );
+        advertised.provider( this.getClass(), clazz, provider );
     }
 
     public <T,V extends T> void advertise( Class<T> clazz, Class<V> impl ) {
-        getAdvertised().advertise( this, clazz, impl );
+        advertised.advertise( this, clazz, impl );
     }
 
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
-        getAdvertised().advertise( this, clazz, object );
+        advertised.advertise( this, clazz, object );
     }
 
     @Deprecated
     public <T, V extends T> void replace( Class<T> clazz, V object ) {
-        getAdvertised().replace( this, clazz, object );
+        advertised.replace( this, clazz, object );
     }
 
     public void verify() {
-        getAdvertised().verify();;
+        advertised.verify();;
     }
 
     protected Injector createInjector() {
-        return getAdvertised().createInjector();
+        return advertised.createInjector();
     }
 
     public Injector getInjector() {
@@ -254,7 +255,7 @@ public class Launcher {
     }
 
     private Tracer getTracer() {
-        TracerFactory tracerFactory = advertised.require( TracerFactory.class );
+        TracerFactory tracerFactory = advertised.tracerFactoryProvider.get();
         return tracerFactory.create( this );
     }
 
@@ -304,7 +305,7 @@ public class Launcher {
 
             Launcher result = new Launcher( configLoader, advertised );
 
-            result.getAdvertised().advertise( this, Role.class, role );
+            result.advertised.advertise( this, Role.class, role );
 
             return result;
 

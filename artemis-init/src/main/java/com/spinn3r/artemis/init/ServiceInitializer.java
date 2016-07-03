@@ -39,7 +39,7 @@ public class ServiceInitializer {
             throw new NullPointerException( "config" );
         }
 
-        if ( launcher.getAdvertised().find( config.implementation() ) != null ) {
+        if ( launcher.advertised.find( config.implementation() ) != null ) {
             return;
         }
 
@@ -69,7 +69,7 @@ public class ServiceInitializer {
                 byte[] data = ByteStreams.toByteArray( inputStream );
                 String content = new String( data, Charsets.UTF_8 );
 
-                Loader<?> loader = new Loader( content, configClazz, launcher.getAdvertised() );
+                Loader<?> loader = new Loader( content, configClazz, launcher.advertised );
 
                 try {
                     loader.load();
@@ -91,7 +91,7 @@ public class ServiceInitializer {
 
                 try {
 
-                    Loader<?> loader = new Loader( "{}", configClazz, launcher.getAdvertised() );
+                    Loader<?> loader = new Loader( "{}", configClazz, launcher.advertised );
 
                     loader.load();
 

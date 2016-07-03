@@ -6,14 +6,12 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Version;
 import com.spinn3r.artemis.init.modular.ModularService;
-import com.spinn3r.artemis.init.tracer.Log4jTracer;
 import com.spinn3r.artemis.init.tracer.Log4jTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
+import com.spinn3r.artemis.init.tracer.TracerFactoryProvider;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  * Setup logging to stdout for console applications.
@@ -24,10 +22,13 @@ public class ConsoleLoggingService extends BaseService implements ModularService
 
     private final Provider<Hostname> hostnameProvider;
 
+    private final TracerFactoryProvider tracerFactoryProvider;
+
     @Inject
-    ConsoleLoggingService(Provider<Version> versionProvider, Provider<Hostname> hostnameProvider ) {
+    ConsoleLoggingService(Provider<Version> versionProvider, Provider<Hostname> hostnameProvider, TracerFactoryProvider tracerFactoryProvider) {
         this.versionProvider = versionProvider;
         this.hostnameProvider = hostnameProvider;
+        this.tracerFactoryProvider = tracerFactoryProvider;
     }
 
     @Override
@@ -61,8 +62,7 @@ public class ConsoleLoggingService extends BaseService implements ModularService
         // now start using the new log4j tracer so that we can switch to having
         // services write via log4j.
 
-        // TODO: special case this one and don't use replace..
-        replace( TracerFactory.class, new Log4jTracerFactory() );
+        tracerFactoryProvider.set(new Log4jTracerFactory());
 
     }
 

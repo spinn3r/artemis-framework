@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
+import com.spinn3r.artemis.init.tracer.TracerFactoryProvider;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Contains objects that are advertised by class name.
  */
 @SuppressWarnings( { "unchecked", "rawtypes" } )
+@Deprecated
 public class Advertised {
 
     // TODO: this could/should be refactored into a set of reference objects so
@@ -25,13 +27,20 @@ public class Advertised {
 
     protected Module module = null;
 
+    protected TracerFactoryProvider tracerFactoryProvider;
+
     public Advertised() {
 
-        replace( Advertised.class, TracerFactory.class, new StandardTracerFactory() );
+        // advertise the TracerFactoryProvider so that we can change providers
+        // at runtime without using replace.
+
+        tracerFactoryProvider = new TracerFactoryProvider(new StandardTracerFactory());
+
+        provider(this.getClass(), TracerFactory.class, tracerFactoryProvider);
 
         // by default, advertise ourselves so that we can inject advertised
         // if necessary.
-        advertise( this, Advertised.class, this );
+        advertise(this.getClass(), Advertised.class, this);
 
         // create one injector that we can use everywhere
         //advertise( Injector.class, new Injector( this ) );

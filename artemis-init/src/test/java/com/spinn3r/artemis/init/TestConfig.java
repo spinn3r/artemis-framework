@@ -73,7 +73,7 @@ public class TestConfig {
 
         assertEquals( "bar", config.getMember() );
 
-        ConfigReader configReader = new ConfigReader( launcher.getAdvertised() );
+        ConfigReader configReader = new ConfigReader( launcher.advertised );
 
         assertEquals( "{\n" +
                         "  \"member\" : \"bar\"\n" +
