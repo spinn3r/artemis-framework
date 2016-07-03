@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.init;
 
-import com.spinn3r.artemis.init.AtomicReferenceProvider;
-import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
 import com.spinn3r.artemis.init.modular.ModularService;
