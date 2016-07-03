@@ -14,7 +14,7 @@ public class TestServletReferencesServices extends BaseService {
     @Override
     public void start() throws Exception {
 
-        ServletReferences servletReferences = new ServletReferences();
+        ServletReferences servletReferences = ServletReferences.of();
         servletReferences.add( "/params", paramServlet );
         servletReferences.add( "/post", new EchoServlet() );
         servletReferences.add( "/put", new EchoServlet() );

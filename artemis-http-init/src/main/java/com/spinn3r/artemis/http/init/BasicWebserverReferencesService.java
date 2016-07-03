@@ -11,7 +11,7 @@ import com.spinn3r.artemis.init.BaseService;
  */
 public class BasicWebserverReferencesService extends BaseService {
 
-    private ServletReferences servletReferences = new ServletReferences();
+    private ServletReferences servletReferences = ServletReferences.of();
     private FilterReferences filterReferences = new FilterReferences();
     private RequestLogReferences requestLogReferences = new RequestLogReferences();
 
