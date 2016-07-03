@@ -249,11 +249,6 @@ public class ModularLauncher {
     }
 
     @Deprecated
-    public <T, V extends T> void replace( Class<T> clazz, V object ) {
-        getAdvertised().replace( this, clazz, object );
-    }
-
-    @Deprecated
     public void verify() {
         getAdvertised().verify();;
     }
