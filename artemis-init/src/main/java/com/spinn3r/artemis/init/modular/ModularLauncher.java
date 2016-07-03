@@ -320,7 +320,7 @@ public class ModularLauncher {
 
         @Override
         protected void configure() {
-            // FIXME
+            // FIXME: this is needed so that we can inject an Includer...
             //bind( ModularIncluder.class ).toInstance( modularIncluder );
         }
 
