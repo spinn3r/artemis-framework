@@ -1,16 +1,7 @@
 package com.spinn3r.artemis.init.modular;
 
-import com.spinn3r.artemis.init.MockHostnameService;
-import com.spinn3r.artemis.init.MockVersionService;
-import com.spinn3r.artemis.init.advertisements.HostnameServiceType;
-import com.spinn3r.artemis.init.services.HostnameService;
+import com.spinn3r.artemis.init.ServiceType;
 import org.junit.Test;
-
-import java.util.Map;
-import java.util.Set;
-
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
 public class BackingMapFacadeTest {
 

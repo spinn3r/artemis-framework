@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.init.modular;
+package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
 

@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init.modular.stages.impl;
 
 import com.google.inject.Injector;
 import com.spinn3r.artemis.init.Advertised;
+import com.spinn3r.artemis.init.Service;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.modular.ModularService;
 import com.spinn3r.artemis.init.modular.stages.StageRunner;
@@ -22,15 +23,15 @@ public class InitStageRunner implements StageRunner {
     }
 
     @Override
-    public void run(Injector injector, ModularService modularService ) {
+    public void run(Injector injector, Service service ) {
 
         TracerFactory tracerFactory = injector.getInstance( TracerFactory.class );
 
-        modularService.setAdvertised( advertised );
-        modularService.setTracer( tracerFactory.create( modularService ) );
-        modularService.setConfigLoader( configLoader );
+        service.setAdvertised( advertised );
+        service.setTracer( tracerFactory.create( service ) );
+        service.setConfigLoader( configLoader );
 
-        modularService.init();
+        service.init();
 
     }
 

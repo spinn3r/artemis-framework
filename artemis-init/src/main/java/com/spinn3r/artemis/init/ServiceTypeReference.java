@@ -1,15 +1,15 @@
-package com.spinn3r.artemis.init.modular;
+package com.spinn3r.artemis.init;
 
 /**
  *
  */
-public class ServiceMapping {
+public class ServiceTypeReference {
 
     private final Class<? extends ServiceType> source;
 
-    private final Class<? extends ServiceType> target;
+    private final Class<? extends Service> target;
 
-    protected ServiceMapping(Class<? extends ServiceType> source, Class<? extends ServiceType> target) {
+    protected ServiceTypeReference(Class<? extends ServiceType> source, Class<? extends Service> target) {
         this.source = source;
         this.target = target;
     }
@@ -18,13 +18,13 @@ public class ServiceMapping {
         return source;
     }
 
-    public Class<? extends ServiceType> getTarget() {
+    public Class<? extends Service> getTarget() {
         return target;
     }
 
     @Override
     public String toString() {
-        return "ClassMapping{" +
+        return "ServiceTypeReference{" +
                  "source=" + source +
                  ", target=" + target +
                  '}';
