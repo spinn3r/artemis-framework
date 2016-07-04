@@ -30,34 +30,38 @@ public class Initializer {
     private Launcher launcher;
 
     public Initializer( String role ) {
-        this( "artemis", role, UNKNOWN, Optional.empty());
+        init( new Product("artemis"), new Role(role), new Caller(UNKNOWN), Optional.empty());
     }
 
     public Initializer( String role, ConfigLoader configLoader ) {
-        this( "artemis", role, UNKNOWN, Optional.of(configLoader));
+        init( new Product("artemis"), new Role(role), new Caller(UNKNOWN), Optional.of(configLoader));
     }
 
     public Initializer( String role, Class<?> caller ) {
-        this( role, caller.getName());
+        init( new Product("artemis"), new Role(role), new Caller(caller), Optional.empty());
     }
 
     public Initializer( String role, String caller ) {
-        this( "artemis", role, caller, Optional.empty());
+        init( new Product("artemis"), new Role(role), new Caller(caller), Optional.empty());
     }
 
     public Initializer( String role, Class<?> caller, Optional<ConfigLoader> configLoader) {
-        this( role, caller.getName(), configLoader);
+        init( new Product("artemis"), new Role(role), new Caller(caller.getName()), configLoader);
     }
 
     public Initializer( String role, String caller, Optional<ConfigLoader> configLoader) {
-        this( "artemis", role, caller, configLoader);
+        init( new Product("artemis"), new Role(role), new Caller(caller), configLoader);
     }
 
     public Initializer( String product, String role, String caller, Optional<ConfigLoader> configLoader) {
-        this( new Product(product), new Role(role), new Caller(caller), configLoader);
+        init( new Product(product), new Role(role), new Caller(caller), configLoader);
     }
 
     public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
+        init( product, role, caller, configLoader);
+    }
+
+    protected void init( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
 
         checkNotNull(product);
         checkNotNull(role);
