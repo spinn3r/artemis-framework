@@ -130,7 +130,7 @@ public class Initializer {
 
         private ConfigLoader configLoader;
 
-        private Role role = new Role( "default" );
+        private Optional<Role> role = Optional.empty();
 
         private Optional<Caller> caller = Optional.empty();
 
@@ -140,17 +140,16 @@ public class Initializer {
             this.configLoader = configLoader;
         }
 
-        public Builder withAdvertised(Advertised advertised ) {
-            this.advertised = advertised;
-            return this;
+        public Builder withRole(Class<?> role) {
+            return withRole(new Role(role.getName()));
         }
 
-        public Builder withRole(String role ) {
+        public Builder withRole(String role) {
             return withRole( new Role( role ) );
         }
 
-        public Builder withRole(Role role ) {
-            this.role = role;
+        public Builder withRole(Role role) {
+            this.role = Optional.of(role);
             return this;
         }
 
@@ -167,7 +166,8 @@ public class Initializer {
 
             Launcher result = new Launcher( configLoader, advertised );
 
-            result.advertised.advertise( this, Role.class, role );
+            if (role.isPresent())
+                result.advertised.advertise( this, Role.class, role.get() );
 
             if (caller.isPresent())
                 result.advertised.advertise( this, Caller.class, caller.get() );
@@ -177,7 +177,6 @@ public class Initializer {
         }
 
     }
-
 
 }
 
