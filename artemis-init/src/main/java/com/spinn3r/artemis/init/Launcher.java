@@ -297,16 +297,11 @@ public class Launcher {
             this.configLoader = configLoader;
         }
 
-        public Builder withAdvertised(Advertised advertised ) {
-            this.advertised = advertised;
-            return this;
-        }
-
-        public Builder withRole(String role ) {
+        public Builder withRole(String role) {
             return withRole( new Role( role ) );
         }
 
-        public Builder withRole(Role role ) {
+        public Builder withRole(Role role) {
             this.role = role;
             return this;
         }

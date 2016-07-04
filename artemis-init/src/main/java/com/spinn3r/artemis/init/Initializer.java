@@ -5,8 +5,10 @@ import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
+import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 
 import java.io.File;
+import java.util.Optional;
 
 /**
  * An initializer which uses a launcher and provides additional bindings we
@@ -113,10 +115,68 @@ public class Initializer {
         return configLoader;
     }
 
-    public void setConfigLoader(ConfigLoader configLoader) {
-        this.configLoader = configLoader;
+    /**
+     * Create a new builder using the {@link ResourceConfigLoader}
+     */
+    public static Builder newBuilder() {
+        return new Builder(new ResourceConfigLoader() );
     }
 
+    public static Builder newBuilder(ConfigLoader configLoader ) {
+        return new Builder(configLoader );
+    }
+
+    public static class Builder {
+
+        private ConfigLoader configLoader;
+
+        private Role role = new Role( "default" );
+
+        private Optional<Caller> caller = Optional.empty();
+
+        private Advertised advertised = new Advertised();
+
+        Builder(ConfigLoader configLoader) {
+            this.configLoader = configLoader;
+        }
+
+        public Builder withAdvertised(Advertised advertised ) {
+            this.advertised = advertised;
+            return this;
+        }
+
+        public Builder withRole(String role ) {
+            return withRole( new Role( role ) );
+        }
+
+        public Builder withRole(Role role ) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder withCaller(Class<?> clazz) {
+            return withCaller(new Caller(clazz));
+        }
+
+        public Builder withCaller(Caller caller) {
+            this.caller = Optional.of(caller);
+            return this;
+        }
+
+        public Launcher build() {
+
+            Launcher result = new Launcher( configLoader, advertised );
+
+            result.advertised.advertise( this, Role.class, role );
+
+            if (caller.isPresent())
+                result.advertised.advertise( this, Caller.class, caller.get() );
+
+            return result;
+
+        }
+
+    }
 
 
 }
