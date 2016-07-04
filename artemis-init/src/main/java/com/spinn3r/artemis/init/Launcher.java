@@ -1,13 +1,11 @@
 package com.spinn3r.artemis.init;
 
-import com.google.inject.ConfigurationException;
-import com.google.inject.CreationException;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
+import com.google.inject.*;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.init.guice.NullModule;
 import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
@@ -45,6 +43,8 @@ public class Launcher {
     private Injector injector = null;
 
     private ServiceReferences serviceReferences;
+
+    private Module module = new NullModule();
 
     public Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
@@ -122,7 +122,7 @@ public class Launcher {
 
                 serviceInitializer.init( serviceReference );
 
-                Injector injector = advertised.createInjector();
+                Injector injector = createInjector();
                 Service current = injector.getInstance( serviceReference.getBacking() );
                 launch0( launchHandler, current );
 
@@ -244,7 +244,7 @@ public class Launcher {
     }
 
     protected Injector createInjector() {
-        return advertised.createInjector();
+        return advertised.createInjector(module);
     }
 
     public Injector getInjector() {
@@ -276,11 +276,11 @@ public class Launcher {
      * Create a new builder using the {@link ResourceConfigLoader}
      */
     public static Builder newBuilder() {
-        return new Builder(new ResourceConfigLoader() );
+        return new Builder(new ResourceConfigLoader());
     }
 
     public static Builder newBuilder(ConfigLoader configLoader) {
-        return new Builder(configLoader );
+        return new Builder(configLoader);
     }
 
     public static class Builder {
@@ -292,6 +292,8 @@ public class Launcher {
         private Optional<Caller> caller = Optional.empty();
 
         private Advertised advertised = new Advertised();
+
+        private Module module = new NullModule();
 
         Builder(ConfigLoader configLoader) {
             this.configLoader = configLoader;
@@ -319,10 +321,21 @@ public class Launcher {
             return this;
         }
 
+        /**
+         * Used so that we can add a custom module for instance variables or
+         * other custom/simple bindings that aren't really services. Primarily
+         * for testing purposes.
+         */
+        public Builder withModule(Module module) {
+            this.module = module;
+            return this;
+        }
+
         public Launcher build() {
 
             Launcher result = new Launcher( configLoader, advertised );
 
+            result.module = module;
             result.advertised.advertise( this, Role.class, role );
 
             if (caller.isPresent())

@@ -1,12 +1,14 @@
 package com.spinn3r.artemis.init;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Product;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.init.guice.NullModule;
 
 import java.io.File;
 import java.util.Optional;
@@ -21,24 +23,24 @@ public class Initializer {
 
     private static final String UNKNOWN = "unknown";
 
-    private ConfigLoader configLoader;
+    private final ConfigLoader configLoader;
+
+    private final Module module;
+
+    private final Advertised advertised;
+
+    private final Launcher launcher;
 
     private Services services = new Services();
 
-    private final Advertised advertised = new Advertised();
-
-    private Launcher launcher;
-
-    public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
-        init( product, role, caller, configLoader);
-    }
-
-    protected void init( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
-
+    public Initializer(Product product, Role role, Caller caller, Module module, Optional<ConfigLoader> configLoader) {
         checkNotNull(product);
         checkNotNull(role);
         checkNotNull(caller);
+        checkNotNull(module);
         checkNotNull(configLoader);
+
+        this.module = module;
 
         if ( ! configLoader.isPresent() ) {
             String path = String.format("/etc/%s-%s", product, role);
@@ -48,7 +50,12 @@ public class Initializer {
             this.configLoader = configLoader.get();
         }
 
-        this.launcher = new Launcher( this.configLoader, advertised );
+        this.launcher = Launcher
+                          .newBuilder(this.configLoader)
+                          .withModule(this.module)
+                          .build();
+
+        this.advertised = launcher.advertised;
 
         if ( advertised.find( Product.class ) == null ) {
             advertised.advertise( this, Product.class, product );
@@ -88,10 +95,6 @@ public class Initializer {
     public Initializer launch( ServiceReferences serviceReferences ) throws Exception {
         launcher.launch( serviceReferences );
         return this;
-    }
-
-    public <T, V extends T> void advertise(Class<T> clazz, Class<V> impl) {
-        launcher.advertise( clazz, impl );
     }
 
     @Deprecated
@@ -141,6 +144,8 @@ public class Initializer {
 
         private Caller caller = new Caller(UNKNOWN);
 
+        private Module module = new NullModule();
+
         public Builder setConfigLoader(ConfigLoader configLoader) {
             this.configLoader = Optional.of(configLoader);
             return this;
@@ -186,8 +191,18 @@ public class Initializer {
             return this;
         }
 
+        /**
+         * Used so that we can add a custom module for instance variables or
+         * other custom/simple bindings that aren't really services. Primarily
+         * for testing purposes.
+         */
+        public Builder withModule(Module module) {
+            this.module = module;
+            return this;
+        }
+
         public Initializer build() {
-            return new Initializer( product, role, caller, configLoader);
+            return new Initializer( product, role, caller, module, configLoader);
         }
 
     }

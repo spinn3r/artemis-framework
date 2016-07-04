@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
 import com.google.inject.*;
+import com.spinn3r.artemis.init.guice.NullModule;
 import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
@@ -240,7 +241,11 @@ public class Advertised {
     }
 
     public Injector createInjector() {
-        return Guice.createInjector( toModule() );
+        return createInjector(new NullModule());
+    }
+
+    public Injector createInjector(Module module) {
+        return Guice.createInjector( module, toModule() );
     }
 
     /**
@@ -250,6 +255,7 @@ public class Advertised {
         Guice.createInjector( Stage.TOOL, toModule() );
     }
 
+    @Deprecated
     public <T> T getInstance( Class<T> clazz ) {
         return createInjector().getInstance( clazz );
     }
