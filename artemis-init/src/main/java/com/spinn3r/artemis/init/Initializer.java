@@ -29,34 +29,6 @@ public class Initializer {
 
     private Launcher launcher;
 
-    public Initializer( String role ) {
-        this( "artemis", role, UNKNOWN, Optional.empty());
-    }
-
-    public Initializer( String role, ConfigLoader configLoader ) {
-        this( "artemis", role, UNKNOWN, Optional.of(configLoader));
-    }
-
-    public Initializer( String role, Class<?> caller ) {
-        this( role, caller.getName());
-    }
-
-    public Initializer( String role, String caller ) {
-        this( "artemis", role, caller, Optional.empty());
-    }
-
-    public Initializer( String role, Class<?> caller, Optional<ConfigLoader> configLoader) {
-        this( role, caller.getName(), configLoader);
-    }
-
-    public Initializer( String role, String caller, Optional<ConfigLoader> configLoader) {
-        this( "artemis", role, caller, configLoader);
-    }
-
-    public Initializer( String product, String role, String caller, Optional<ConfigLoader> configLoader) {
-        this( new Product(product), new Role(role), new Caller(caller), configLoader);
-    }
-
     public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
 
         checkNotNull(product);
@@ -154,11 +126,11 @@ public class Initializer {
      * Create a new builder using the {@link ResourceConfigLoader}
      */
     public static Builder newBuilder() {
-        return new Builder(new ResourceConfigLoader() );
+        return new Builder().setConfigLoader(new ResourceConfigLoader());
     }
 
-    public static Builder newBuilder(ConfigLoader configLoader ) {
-        return new Builder(configLoader );
+    public static Builder newBuilder(ConfigLoader configLoader) {
+        return new Builder().setConfigLoader(configLoader);
     }
 
     public static class Builder {
@@ -171,63 +143,53 @@ public class Initializer {
 
         private Caller caller = new Caller(UNKNOWN);
 
-        public Builder() {
-        }
-
-        Builder(ConfigLoader configLoader) {
-            checkNotNull(configLoader);
-            this.configLoader = Optional.of(configLoader);
-        }
-
-        public Builder withConfigLoader(ConfigLoader configLoader) {
+        public Builder setConfigLoader(ConfigLoader configLoader) {
             this.configLoader = Optional.of(configLoader);
             return this;
         }
 
-        public Builder withConfigLoader(Optional<ConfigLoader> configLoader) {
+        public Builder setConfigLoader(Optional<ConfigLoader> configLoader) {
             this.configLoader = configLoader;
             return this;
         }
 
-        public Builder withRole(String role) {
-            return withRole( new Role( role ) );
+        public Builder setRole(String role) {
+            return setRole(new Role(role ) );
         }
 
-        public Builder withRole(Class<?> role) {
-            return withRole(new Role(role.getName()));
+        public Builder setRole(Class<?> role) {
+            return setRole(new Role(role.getName()));
         }
 
-        public Builder withRole(Role role) {
+        public Builder setRole(Role role) {
             this.role = role;
             return this;
         }
 
-        public Builder withCaller(String caller) {
-            return withCaller(new Caller(caller));
+        public Builder setCaller(String caller) {
+            return setCaller(new Caller(caller));
         }
 
-        public Builder withCaller(Class<?> clazz) {
-            return withCaller(new Caller(clazz));
+        public Builder setCaller(Class<?> clazz) {
+            return setCaller(new Caller(clazz));
         }
 
-        public Builder withCaller(Caller caller) {
+        public Builder setCaller(Caller caller) {
             this.caller = caller;
             return this;
         }
 
-        public Builder withProduct(String product) {
-            return withProduct(new Product(product));
+        public Builder setProduct(String product) {
+            return setProduct(new Product(product));
         }
 
-        public Builder withProduct(Product product) {
+        public Builder setProduct(Product product) {
             this.product = product;
             return this;
         }
 
         public Initializer build() {
-
             return new Initializer( product, role, caller, configLoader);
-
         }
 
     }
