@@ -40,7 +40,7 @@ public class Initializer {
 
         this.configLoader = configLoader;
 
-        this.launcher = new Launcher( getConfigLoader(), advertised );
+        this.launcher = new Launcher( configLoader, advertised );
 
         if ( advertised.find( Caller.class ) == null ) {
             advertised.advertise( this, Caller.class, new Caller( UNKNOWN ) );

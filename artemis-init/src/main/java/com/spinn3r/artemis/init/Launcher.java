@@ -1,7 +1,9 @@
 package com.spinn3r.artemis.init;
 
-import com.google.common.base.Preconditions;
-import com.google.inject.*;
+import com.google.inject.ConfigurationException;
+import com.google.inject.CreationException;
+import com.google.inject.Injector;
+import com.google.inject.Provider;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
