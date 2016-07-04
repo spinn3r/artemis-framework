@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init;
 
 import com.google.inject.Injector;
 import com.spinn3r.artemis.init.advertisements.Caller;
+import com.spinn3r.artemis.init.advertisements.Product;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
@@ -9,6 +10,8 @@ import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 
 import java.io.File;
 import java.util.Optional;
+
+import static com.google.common.base.Preconditions.*;
 
 /**
  * An initializer which uses a launcher and provides additional bindings we
@@ -27,29 +30,61 @@ public class Initializer {
     private Launcher launcher;
 
     public Initializer( String role ) {
-        this( "artemis", role);
+        this( "artemis", role, UNKNOWN, Optional.empty());
     }
 
-    protected Initializer(String product, String role) {
-        this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, role ) ) ) );
+    public Initializer( String role, Class<?> caller ) {
+        this( role, caller.getName());
     }
 
-    public Initializer(String role, ConfigLoader configLoader) {
+    public Initializer( String role, String caller ) {
+        this( "artemis", role, caller, Optional.empty());
+    }
 
-        this.configLoader = configLoader;
+    public Initializer( String role, Class<?> caller, Optional<ConfigLoader> configLoader) {
+        this( role, caller.getName(), configLoader);
+    }
 
-        this.launcher = new Launcher( configLoader, advertised );
+    public Initializer( String role, String caller, Optional<ConfigLoader> configLoader) {
+        this( "artemis", role, caller, configLoader);
+    }
+
+    public Initializer( String product, String role, String caller, Optional<ConfigLoader> configLoader) {
+        this( new Product(product), new Role(role), new Caller(caller), configLoader);
+    }
+
+    public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
+
+        checkNotNull(product);
+        checkNotNull(role);
+        checkNotNull(caller);
+        checkNotNull(configLoader);
+
+        if ( ! configLoader.isPresent() ) {
+            String path = String.format("/etc/%s-%s", product, role);
+            System.out.printf("Loading config data from filesystem: %s\n", path);
+            this.configLoader = new FileConfigLoader(new File(path));
+        } else {
+            this.configLoader = configLoader.get();
+        }
+
+        this.launcher = new Launcher( this.configLoader, advertised );
+
+        if ( advertised.find( Product.class ) == null ) {
+            advertised.advertise( this, Product.class, product );
+        }
 
         if ( advertised.find( Caller.class ) == null ) {
-            advertised.advertise( this, Caller.class, new Caller( UNKNOWN ) );
+            advertised.advertise( this, Caller.class, caller );
         }
 
         if ( advertised.find( Role.class ) == null ) {
-            advertised.advertise( this, Role.class, new Role( role ) );
+            advertised.advertise( this, Role.class, role );
         }
 
-        if ( advertised.find( ConfigLoader.class ) == null )
-            advertised.advertise( this, ConfigLoader.class, getConfigLoader() );
+        if ( advertised.find( ConfigLoader.class ) == null ) {
+            advertised.advertise(this, ConfigLoader.class, getConfigLoader());
+        }
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being initialized.
@@ -126,13 +161,14 @@ public class Initializer {
 
         private ConfigLoader configLoader;
 
-        private Optional<Role> role = Optional.empty();
+        private Product product = new Product("artemis");
 
-        private Optional<Caller> caller = Optional.empty();
+        private Role role = new Role(UNKNOWN);
 
-        private Advertised advertised = new Advertised();
+        private Caller caller = new Caller(UNKNOWN);
 
         Builder(ConfigLoader configLoader) {
+            checkNotNull(configLoader);
             this.configLoader = configLoader;
         }
 
@@ -145,7 +181,7 @@ public class Initializer {
         }
 
         public Builder withRole(Role role) {
-            this.role = Optional.of(role);
+            this.role = role;
             return this;
         }
 
@@ -154,21 +190,13 @@ public class Initializer {
         }
 
         public Builder withCaller(Caller caller) {
-            this.caller = Optional.of(caller);
+            this.caller = caller;
             return this;
         }
 
         public Initializer build() {
 
-            Initializer result = new Initializer( role.get().getValue(), configLoader);
-
-            if (role.isPresent())
-                result.advertised.advertise( this, Role.class, role.get() );
-
-            if (caller.isPresent())
-                result.advertised.advertise( this, Caller.class, caller.get() );
-
-            return result;
+            return new Initializer( product, role, caller, Optional.of(configLoader));
 
         }
 
