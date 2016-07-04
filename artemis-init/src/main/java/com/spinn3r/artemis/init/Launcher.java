@@ -275,15 +275,15 @@ public class Launcher {
     /**
      * Create a new builder using the {@link ResourceConfigLoader}
      */
-    public static LauncherBuilder newBuilder() {
-        return new LauncherBuilder( new ResourceConfigLoader() );
+    public static Builder newBuilder() {
+        return new Builder(new ResourceConfigLoader() );
     }
 
-    public static LauncherBuilder newBuilder(ConfigLoader configLoader ) {
-        return new LauncherBuilder( configLoader );
+    public static Builder newBuilder(ConfigLoader configLoader ) {
+        return new Builder(configLoader );
     }
 
-    public static class LauncherBuilder {
+    public static class Builder {
 
         private ConfigLoader configLoader;
 
@@ -293,29 +293,29 @@ public class Launcher {
 
         private Advertised advertised = new Advertised();
 
-        LauncherBuilder(ConfigLoader configLoader) {
+        Builder(ConfigLoader configLoader) {
             this.configLoader = configLoader;
         }
 
-        public LauncherBuilder withAdvertised( Advertised advertised ) {
+        public Builder withAdvertised(Advertised advertised ) {
             this.advertised = advertised;
             return this;
         }
 
-        public LauncherBuilder withRole( String role ) {
+        public Builder withRole(String role ) {
             return withRole( new Role( role ) );
         }
 
-        public LauncherBuilder withRole( Role role ) {
+        public Builder withRole(Role role ) {
             this.role = role;
             return this;
         }
 
-        public LauncherBuilder withCaller(Class<?> clazz) {
+        public Builder withCaller(Class<?> clazz) {
             return withCaller(new Caller(clazz));
         }
 
-        public LauncherBuilder withCaller(Caller caller) {
+        public Builder withCaller(Caller caller) {
             this.caller = Optional.of(caller);
             return this;
         }
