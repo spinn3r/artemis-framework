@@ -220,7 +220,8 @@ public class Initializer {
             return this;
         }
 
-        public Initializer build() {
+        // FIXME: refactor this to build() as IntelliJ tries to force the usage of createInitializer not build()
+        public Initializer createInitializer() {
             return new Initializer( product, role, caller, configLoader);
         }
 
