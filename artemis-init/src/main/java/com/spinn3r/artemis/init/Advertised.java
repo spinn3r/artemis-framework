@@ -62,6 +62,7 @@ public class Advertised {
     /**
      * Advertise the given object for the given class.
      */
+    @Deprecated
     public <T, V extends T> void advertise( Object source, Class<T> clazz, V object ) {
 
         if ( object == null )
@@ -71,6 +72,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> void provider( Class source, Class<T> clazz, Provider<? extends T> provider ) {
         assertAbsent( clazz, null );
         advertisements.put( clazz, provider );
@@ -78,6 +80,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T, V extends T> void advertise( Class source, Class<T> clazz, V object ) {
 
         assertAbsent( clazz, null );
@@ -85,10 +88,12 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Object source, Class<T> clazz, Class<V> impl ) {
         advertise( source.getClass(), clazz, impl );
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Class source, Class<T> clazz, Class<V> impl ) {
         assertAbsent( clazz, impl );
         advertisements.put( clazz, impl );
@@ -214,6 +219,7 @@ public class Advertised {
     /**
      * Find the given service, or return null if it hasn't yet been advertised.
      */
+    @Deprecated
     public <T> T find(Class<T> clazz) {
 
         return (T)advertisements.get( clazz );

@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.init;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.*;
+import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
@@ -11,6 +13,7 @@ import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -209,18 +212,22 @@ public class Launcher {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 
+    @Deprecated
     public <T> void provider( Class<T> clazz, T impl ) {
         advertised.provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
     }
 
+    @Deprecated
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {
         advertised.provider( this.getClass(), clazz, provider );
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Class<T> clazz, Class<V> impl ) {
         advertised.advertise( this, clazz, impl );
     }
 
+    @Deprecated
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
         advertised.advertise( this, clazz, object );
     }
@@ -277,6 +284,8 @@ public class Launcher {
 
         private Role role = new Role( "default" );
 
+        private Optional<Caller> caller = Optional.empty();
+
         private Advertised advertised = new Advertised();
 
         LauncherBuilder(ConfigLoader configLoader) {
@@ -297,11 +306,19 @@ public class Launcher {
             return this;
         }
 
+        public LauncherBuilder withCaller(Caller caller) {
+            this.caller = Optional.of(caller);
+            return this;
+        }
+
         public Launcher build() {
 
             Launcher result = new Launcher( configLoader, advertised );
 
             result.advertised.advertise( this, Role.class, role );
+
+            if (caller.isPresent())
+                result.advertised.advertise( this, Caller.class, caller.get() );
 
             return result;
 
