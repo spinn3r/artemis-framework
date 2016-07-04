@@ -225,21 +225,6 @@ public class Advertised {
         return (T)advertisements.get( clazz );
     }
 
-    /**
-     * Find the given service, if it's not present, fail.
-     */
-    public <T> T require( Class<T> clazz ) {
-
-        T result = find( clazz );
-
-        if ( result == null ) {
-            throw new RuntimeException( "Unable to find instance of: " + clazz.getName() );
-        }
-
-        return result;
-
-    }
-
     public int size() {
         return advertisements.size();
     }
