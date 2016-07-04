@@ -162,9 +162,9 @@ public class Initializer {
             return this;
         }
 
-        public Launcher build() {
+        public Initializer build() {
 
-            Launcher result = new Launcher( configLoader, advertised );
+            Initializer result = new Initializer( role.get().getValue(), configLoader);
 
             if (role.isPresent())
                 result.advertised.advertise( this, Role.class, role.get() );

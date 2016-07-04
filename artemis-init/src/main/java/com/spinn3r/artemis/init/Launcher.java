@@ -287,7 +287,7 @@ public class Launcher {
 
         private ConfigLoader configLoader;
 
-        private Optional<Role> role = Optional.empty();
+        private Role role = new Role( "default" );
 
         private Optional<Caller> caller = Optional.empty();
 
@@ -306,7 +306,7 @@ public class Launcher {
         }
 
         public Builder withRole(Role role) {
-            this.role = Optional.of(role);
+            this.role = role;
             return this;
         }
 
@@ -323,8 +323,7 @@ public class Launcher {
 
             Launcher result = new Launcher( configLoader, advertised );
 
-            if (role.isPresent())
-                result.advertised.advertise( this, Role.class, role.get() );
+            result.advertised.advertise( this, Role.class, role );
 
             if (caller.isPresent())
                 result.advertised.advertise( this, Caller.class, caller.get() );
