@@ -201,11 +201,6 @@ public class Launcher {
         return services;
     }
 
-    @Deprecated
-    public Advertised getAdvertised() {
-        return advertised;
-    }
-
     public ServiceReferences getServiceReferences() {
         return serviceReferences;
     }
@@ -248,7 +243,7 @@ public class Launcher {
     }
 
     public <T> T getInstance( Class<T> clazz ) {
-        return createInjector().getInstance( clazz );
+        return getInjector().getInstance( clazz );
     }
 
     public ConfigLoader getConfigLoader() {

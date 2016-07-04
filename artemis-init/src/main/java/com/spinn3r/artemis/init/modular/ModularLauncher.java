@@ -26,8 +26,6 @@ import java.util.List;
  */
 public class ModularLauncher {
 
-    // FIXME: verify that thread snapshots work as before...
-
     private final ConfigLoader configLoader;
 
     private final Role role;
@@ -42,15 +40,15 @@ public class ModularLauncher {
     private final AtomicReferenceProvider<ModularIncluder> modularIncluderProvider
       = new AtomicReferenceProvider<>( null );
 
-    // ** taken before launch and after stop to help detect improperly
+    // taken before launch and after stop to help detect improperly
     // shutdown services which have leaky threads
+
+    // FIXME: verify that thread snapshots work as before...
     private ThreadSnapshot threadSnapshot = new ThreadSnapshot();
 
     private ServiceTypeReferences started = new ServiceTypeReferences();
 
-    /**
-     * The main injector to use after launch is called.
-     */
+    // The main injector to use after launch is called.
     private Injector injector = null;
 
     private final ServiceTypeReferences serviceTypeReferences;
@@ -348,11 +346,11 @@ public class ModularLauncher {
             return this;
         }
 
-        public ModularLauncherBuilder withRole(String role ) {
+        public ModularLauncherBuilder withRole(String role) {
             return withRole( new Role( role ) );
         }
 
-        public ModularLauncherBuilder withRole(Role role ) {
+        public ModularLauncherBuilder withRole(Role role) {
             this.role = role;
             return this;
         }

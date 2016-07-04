@@ -42,7 +42,7 @@ public class TestConfig {
 
         launcher.launch( ref( Service3.class ) );
 
-        launcher.getAdvertised().require( ServiceConfig.class );
+        launcher.getInstance( ServiceConfig.class );
 
     }
 
@@ -69,7 +69,7 @@ public class TestConfig {
         //assertEquals( "bar",
         //              launcher.getServices().find( Service5.class ).getServiceConfig().getMember() );
 
-        ServiceConfig config = launcher.getAdvertised().require( ServiceConfig.class );
+        ServiceConfig config = launcher.getInstance( ServiceConfig.class );
 
         assertEquals( "bar", config.getMember() );
 
