@@ -29,34 +29,6 @@ public class Initializer {
 
     private Launcher launcher;
 
-    public Initializer( String role ) {
-        init( new Product("artemis"), new Role(role), new Caller(UNKNOWN), Optional.empty());
-    }
-
-    public Initializer( String role, ConfigLoader configLoader ) {
-        init( new Product("artemis"), new Role(role), new Caller(UNKNOWN), Optional.of(configLoader));
-    }
-
-    public Initializer( String role, Class<?> caller ) {
-        init( new Product("artemis"), new Role(role), new Caller(caller), Optional.empty());
-    }
-
-    public Initializer( String role, String caller ) {
-        init( new Product("artemis"), new Role(role), new Caller(caller), Optional.empty());
-    }
-
-    public Initializer( String role, Class<?> caller, Optional<ConfigLoader> configLoader) {
-        init( new Product("artemis"), new Role(role), new Caller(caller.getName()), configLoader);
-    }
-
-    public Initializer( String role, String caller, Optional<ConfigLoader> configLoader) {
-        init( new Product("artemis"), new Role(role), new Caller(caller), configLoader);
-    }
-
-    public Initializer( String product, String role, String caller, Optional<ConfigLoader> configLoader) {
-        init( new Product(product), new Role(role), new Caller(caller), configLoader);
-    }
-
     public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
         init( product, role, caller, configLoader);
     }
@@ -220,8 +192,7 @@ public class Initializer {
             return this;
         }
 
-        // FIXME: refactor this to build() as IntelliJ tries to force the usage of createInitializer not build()
-        public Initializer createInitializer() {
+        public Initializer build() {
             return new Initializer( product, role, caller, configLoader);
         }
 
