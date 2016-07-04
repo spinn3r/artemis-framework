@@ -15,7 +15,7 @@ public class TestConfig {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
 
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                     .build();
 
         launcher.launch( ref( Service1.class ) );
@@ -26,7 +26,7 @@ public class TestConfig {
     public void test2() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service2.class ) );
@@ -37,7 +37,7 @@ public class TestConfig {
     public void test3() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service3.class ) );
@@ -50,7 +50,7 @@ public class TestConfig {
     public void test4() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service4.class ) );
@@ -61,7 +61,7 @@ public class TestConfig {
     public void test5() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service5.class ) );

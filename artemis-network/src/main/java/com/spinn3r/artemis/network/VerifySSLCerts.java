@@ -28,7 +28,7 @@ public class VerifySSLCerts {
 
     public static void main(String[] args) throws Exception {
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        Launcher launcher = Launcher.newBuilder().build();
         launcher.launch( new ServiceReferences().add( DirectNetworkService.class ) );
         VerifySSLCerts verifySSLCerts = launcher.getInjector().getInstance( VerifySSLCerts.class );
         verifySSLCerts.testLetsEncryptWithCommunityRun();

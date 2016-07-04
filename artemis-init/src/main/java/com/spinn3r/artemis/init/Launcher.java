@@ -272,12 +272,15 @@ public class Launcher {
         getTracer().error( format, args );
     }
 
-    public static LauncherBuilder forConfigLoader( ConfigLoader configLoader ) {
-        return new LauncherBuilder( configLoader );
+    /**
+     * Create a new builder using the {@link ResourceConfigLoader}
+     */
+    public static LauncherBuilder newBuilder() {
+        return new LauncherBuilder( new ResourceConfigLoader() );
     }
 
-    public static LauncherBuilder forResourceConfigLoader() {
-        return new LauncherBuilder( new ResourceConfigLoader() );
+    public static LauncherBuilder newBuilder(ConfigLoader configLoader ) {
+        return new LauncherBuilder( configLoader );
     }
 
     public static class LauncherBuilder {
@@ -306,6 +309,10 @@ public class Launcher {
         public LauncherBuilder withRole( Role role ) {
             this.role = role;
             return this;
+        }
+
+        public LauncherBuilder withCaller(Class<?> clazz) {
+            return withCaller(new Caller(clazz));
         }
 
         public LauncherBuilder withCaller(Caller caller) {

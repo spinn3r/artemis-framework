@@ -1,8 +1,6 @@
 package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-import com.spinn3r.artemis.init.advertisements.Hostname;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public class TestIncludeMultipleServicesOrder {
     @Test
     public void testLauncherAddingService() throws Exception {
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        Launcher launcher = Launcher.newBuilder().build();
         launcher.launch( new TestServiceReferences() );
 
         launcher.getInjector().injectMembers( this );

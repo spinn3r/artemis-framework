@@ -36,7 +36,7 @@ public class Initializer {
         this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, config ) ) ) );
     }
 
-    public Initializer( String role, ConfigLoader configLoader) {
+    public Initializer(String role, ConfigLoader configLoader) {
 
         this.configLoader = configLoader;
 
@@ -88,6 +88,7 @@ public class Initializer {
 
     @Deprecated
     public <T, V extends T> void replace(Class<T> clazz, V object) {
+        // FIXME: this is only used for specifying the Caller...
         launcher.replace( clazz, object );
     }
 
@@ -115,6 +116,8 @@ public class Initializer {
     public void setConfigLoader(ConfigLoader configLoader) {
         this.configLoader = configLoader;
     }
+
+
 
 }
 

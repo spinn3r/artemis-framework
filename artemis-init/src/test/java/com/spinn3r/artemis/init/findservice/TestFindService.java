@@ -19,7 +19,7 @@ public class TestFindService {
 
         ConfigLoader configLoader = new FileConfigLoader( "/tmp" );
 
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                     .build();
 
         launcher.launch( ref( MockFirstProviderService.class ) );

@@ -4,7 +4,6 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.ServiceReferences;
 import com.spinn3r.artemis.time.Clock;
-import com.spinn3r.artemis.time.SyntheticClock;
 import com.spinn3r.artemis.time.SystemClock;
 import org.junit.Before;
 
@@ -18,7 +17,7 @@ public class TestAssistedInjection {
     @Before
     public void setUp() throws Exception {
 
-        launcer = Launcher.forResourceConfigLoader().build();
+        launcer = Launcher.newBuilder().build();
 
     }
 

@@ -8,9 +8,6 @@ import com.spinn3r.artemis.init.example.DefaultSecondService;
 import com.spinn3r.artemis.init.example.Second;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
-
 import static com.spinn3r.artemis.init.Services.ref;
 
 public class LauncherCreateInjectorTest {
@@ -21,7 +18,7 @@ public class LauncherCreateInjectorTest {
         ResourceConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher =
-          Launcher.forConfigLoader( configLoader )
+          Launcher.newBuilder(configLoader )
                   .build();
 
         launcher.launch( ref( DefaultFirstService.class ) );
@@ -36,7 +33,7 @@ public class LauncherCreateInjectorTest {
         ResourceConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher =
-          Launcher.forConfigLoader( configLoader )
+          Launcher.newBuilder(configLoader )
             .build();
 
         launcher.launch( ref( DefaultSecondService.class ) );
@@ -53,7 +50,7 @@ public class LauncherCreateInjectorTest {
         ResourceConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher =
-          Launcher.forConfigLoader( configLoader )
+          Launcher.newBuilder(configLoader )
             .build();
 
         launcher.advertise( Second.class, DefaultSecond.class );

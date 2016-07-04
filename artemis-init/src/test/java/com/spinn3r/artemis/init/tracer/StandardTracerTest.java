@@ -5,8 +5,6 @@ import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 import static com.spinn3r.artemis.init.Services.ref;
 
 public class StandardTracerTest {
@@ -16,7 +14,7 @@ public class StandardTracerTest {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
 
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                     .withRole( "test" )
                                     .build();
 

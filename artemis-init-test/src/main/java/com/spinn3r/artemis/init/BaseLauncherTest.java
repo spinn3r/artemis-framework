@@ -52,7 +52,7 @@ public class BaseLauncherTest {
 
     protected void setUp( ConfigLoader configLoader, ServiceReferences serviceReferences ) throws Exception {
 
-        launcher = Launcher.forConfigLoader( configLoader ).build();
+        launcher = Launcher.newBuilder(configLoader ).build();
 
         launcher.advertise( Caller.class, new Caller( Stack.caller().getClassName() ) );
         launcher.launch( serviceReferences );

@@ -27,7 +27,7 @@ public class LauncherTest {
 
         assertEquals(1, serviceTypeReferences.size());
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        Launcher launcher = Launcher.newBuilder().build();
         launcher.launch(serviceTypeReferences.toServiceReferences());
 
         Injector injector = launcher.getInjector();

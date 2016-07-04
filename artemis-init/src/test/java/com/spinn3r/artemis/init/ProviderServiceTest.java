@@ -7,9 +7,6 @@ import com.spinn3r.artemis.init.example.DefaultThirdService;
 import com.spinn3r.artemis.init.example.Third;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static com.spinn3r.artemis.init.Services.ref;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -22,7 +19,7 @@ public class ProviderServiceTest {
         ResourceConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher =
-          Launcher.forConfigLoader( configLoader )
+          Launcher.newBuilder(configLoader )
                   .build();
 
         launcher.launch( ref( DefaultFirstService.class ),

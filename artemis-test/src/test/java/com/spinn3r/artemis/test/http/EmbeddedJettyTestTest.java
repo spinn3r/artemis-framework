@@ -2,7 +2,6 @@ package com.spinn3r.artemis.test.http;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.init.Launcher;
-import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import org.junit.Before;
@@ -27,7 +26,7 @@ public class EmbeddedJettyTestTest extends EmbeddedJettyTest {
     public void setUp() throws Exception {
         super.setUp();
 
-        launcher = Launcher.forResourceConfigLoader().build();
+        launcher = Launcher.newBuilder().build();
         launcher.launch( DirectNetworkService.class );
 
         launcher.getInjector().injectMembers( this );
