@@ -27,15 +27,11 @@ public class Initializer {
     private Launcher launcher;
 
     public Initializer( String role ) {
-        this( "artemis", role, role );
+        this( "artemis", role);
     }
 
-    public Initializer( String role, String config ) {
-        this( "artemis", role, config );
-    }
-
-    protected Initializer( String product, String role, String config ) {
-        this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, config ) ) ) );
+    protected Initializer(String product, String role) {
+        this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, role ) ) ) );
     }
 
     public Initializer(String role, ConfigLoader configLoader) {

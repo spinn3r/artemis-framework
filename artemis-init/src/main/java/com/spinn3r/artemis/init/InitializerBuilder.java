@@ -27,7 +27,7 @@ public class InitializerBuilder {
     }
 
     public Initializer build() {
-        return new Initializer( product, role, config );
+        return new Initializer( product, role);
     }
 
     public static InitializerBuilder forRole( String role ) {
