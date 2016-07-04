@@ -81,6 +81,7 @@ public class Initializer {
         launcher.advertise( clazz, impl );
     }
 
+    @Deprecated
     public <T, V extends T> void advertise(Class<T> clazz, V object) {
         launcher.advertise( clazz, object );
     }
