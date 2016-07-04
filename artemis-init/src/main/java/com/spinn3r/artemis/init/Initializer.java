@@ -29,6 +29,34 @@ public class Initializer {
 
     private Launcher launcher;
 
+    public Initializer( String role ) {
+        this( "artemis", role, UNKNOWN, Optional.empty());
+    }
+
+    public Initializer( String role, ConfigLoader configLoader ) {
+        this( "artemis", role, UNKNOWN, Optional.of(configLoader));
+    }
+
+    public Initializer( String role, Class<?> caller ) {
+        this( role, caller.getName());
+    }
+
+    public Initializer( String role, String caller ) {
+        this( "artemis", role, caller, Optional.empty());
+    }
+
+    public Initializer( String role, Class<?> caller, Optional<ConfigLoader> configLoader) {
+        this( role, caller.getName(), configLoader);
+    }
+
+    public Initializer( String role, String caller, Optional<ConfigLoader> configLoader) {
+        this( "artemis", role, caller, configLoader);
+    }
+
+    public Initializer( String product, String role, String caller, Optional<ConfigLoader> configLoader) {
+        this( new Product(product), new Role(role), new Caller(caller), configLoader);
+    }
+
     public Initializer( Product product, Role role, Caller caller, Optional<ConfigLoader> configLoader) {
 
         checkNotNull(product);
