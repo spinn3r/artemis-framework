@@ -58,8 +58,6 @@ public class MetricsService extends BaseService {
                                               .getMetrics()
                                               .size());
 
-        } else {
-            warn( "Not initializing metrics (disabled)" );
         }
 
     }
