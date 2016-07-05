@@ -21,25 +21,6 @@ public class AdvertisedTest {
 
     }
 
-    @Test(expected = RuntimeException.class)
-    public void test2() throws Exception {
-
-        Advertised advertised = new Advertised();
-        advertised.require( FooInterface.class );
-
-    }
-
-    @Test
-    public void testInterfaces() throws Exception {
-
-        Advertised advertised = new Advertised();
-
-        advertised.advertise( this, String.class, "hello world" );
-
-        assertEquals( "[hello world]", advertised.interfaces( CharSequence.class ).toString() );
-
-    }
-
     @Test
     @SuppressWarnings( "deprecation" )
     public void testAdvertiseWithDelegation() throws Exception {

@@ -21,7 +21,7 @@ public class EmbeddedJettyTest {
 
     private DefaultResponseManager responseManager = new DefaultResponseManager();
 
-    protected ServletReferences servletReferences = new ServletReferences();
+    protected ServletReferences servletReferences = ServletReferences.of();
 
     public EmbeddedJettyTest() { }
 

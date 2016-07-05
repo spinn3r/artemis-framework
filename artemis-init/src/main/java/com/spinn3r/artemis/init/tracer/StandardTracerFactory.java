@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.init.tracer;
 
-import com.spinn3r.artemis.init.Service;
-
 /**
  *
  */

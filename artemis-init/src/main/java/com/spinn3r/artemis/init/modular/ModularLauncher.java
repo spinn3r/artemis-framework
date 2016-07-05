@@ -26,8 +26,6 @@ import java.util.List;
  */
 public class ModularLauncher {
 
-    // FIXME: verify that thread snapshots work as before...
-
     private final ConfigLoader configLoader;
 
     private final Role role;
@@ -42,15 +40,15 @@ public class ModularLauncher {
     private final AtomicReferenceProvider<ModularIncluder> modularIncluderProvider
       = new AtomicReferenceProvider<>( null );
 
-    // ** taken before launch and after stop to help detect improperly
+    // taken before launch and after stop to help detect improperly
     // shutdown services which have leaky threads
+
+    // FIXME: verify that thread snapshots work as before...
     private ThreadSnapshot threadSnapshot = new ThreadSnapshot();
 
     private ServiceTypeReferences started = new ServiceTypeReferences();
 
-    /**
-     * The main injector to use after launch is called.
-     */
+    // The main injector to use after launch is called.
     private Injector injector = null;
 
     private final ServiceTypeReferences serviceTypeReferences;
@@ -141,7 +139,8 @@ public class ModularLauncher {
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
 
-        threadDiff.report( advertised.require( TracerFactory.class ).create( this ) );
+        TracerFactory tracerFactory = advertised.tracerFactorySupplier.get();
+        threadDiff.report( tracerFactory.create( this ) );
 
         threadSnapshot = new ThreadSnapshot();
 
@@ -249,11 +248,6 @@ public class ModularLauncher {
     }
 
     @Deprecated
-    public <T, V extends T> void replace( Class<T> clazz, V object ) {
-        getAdvertised().replace( this, clazz, object );
-    }
-
-    @Deprecated
     public void verify() {
         getAdvertised().verify();;
     }
@@ -275,7 +269,7 @@ public class ModularLauncher {
     }
 
     private Tracer getTracer() {
-        TracerFactory tracerFactory = advertised.require( TracerFactory.class );
+        TracerFactory tracerFactory = advertised.tracerFactorySupplier.get();
         return tracerFactory.create( this );
     }
 
@@ -325,7 +319,7 @@ public class ModularLauncher {
 
         @Override
         protected void configure() {
-            // FIXME
+            // FIXME: this is needed so that we can inject an Includer...
             //bind( ModularIncluder.class ).toInstance( modularIncluder );
         }
 
@@ -352,11 +346,11 @@ public class ModularLauncher {
             return this;
         }
 
-        public ModularLauncherBuilder withRole(String role ) {
+        public ModularLauncherBuilder withRole(String role) {
             return withRole( new Role( role ) );
         }
 
-        public ModularLauncherBuilder withRole(Role role ) {
+        public ModularLauncherBuilder withRole(Role role) {
             this.role = role;
             return this;
         }

@@ -36,7 +36,7 @@ public class TestSSLCerts extends BaseLauncherTest {
 
     public static void main(String[] args) throws Exception {
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        Launcher launcher = Launcher.newBuilder().build();
         launcher.launch( new ServiceReferences().add( DirectNetworkService.class ) );
         TestSSLCerts testSSLCerts = launcher.getInjector().getInstance( TestSSLCerts.class );
         testSSLCerts.testLetsEncryptWithCommunityRun();

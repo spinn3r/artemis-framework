@@ -16,7 +16,7 @@ public class Test2 {
 
         Advertised advertised = new Advertised();
 
-        advertised.advertise( this, CreditCardProcessor.class, new PaypalCreditCardProcessor() );
+        advertised.advertise( this, CreditCardProcessor.class, PaypalCreditCardProcessor.class );
         advertised.advertise( this, TransactionLog.class, new DefaultTransactionLog() );
 
         Injector injector = Guice.createInjector( advertised.toModule() );

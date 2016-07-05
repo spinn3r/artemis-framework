@@ -9,11 +9,7 @@ import com.spinn3r.artemis.init.tracer.Tracer;
  */
 public interface Service extends Module, Tracer {
 
-    Advertised getAdvertised();
-
     void setAdvertised(Advertised advertised);
-
-    Tracer getTracer();
 
     void setTracer( Tracer tracer );
 

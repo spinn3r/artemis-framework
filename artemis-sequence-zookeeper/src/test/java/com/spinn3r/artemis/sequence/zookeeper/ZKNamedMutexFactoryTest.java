@@ -24,7 +24,7 @@ public class ZKNamedMutexFactoryTest {
     @Before
     public void setUp() throws Exception {
 
-        launcher = Launcher.forResourceConfigLoader().build();
+        launcher = Launcher.newBuilder().build();
         launcher.launch( new TestServiceReferences() );
         launcher.getInjector().injectMembers( this );
 

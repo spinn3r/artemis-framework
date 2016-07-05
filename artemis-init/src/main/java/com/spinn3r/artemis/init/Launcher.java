@@ -1,9 +1,11 @@
 package com.spinn3r.artemis.init;
 
 import com.google.inject.*;
+import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.init.guice.NullModule;
 import com.spinn3r.artemis.init.threads.ThreadDiff;
 import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
@@ -11,6 +13,7 @@ import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -23,7 +26,7 @@ public class Launcher {
 
     private final Services services = new Services();
 
-    private final Advertised advertised;
+    protected final Advertised advertised;
 
     private final AtomicReferenceProvider<Lifecycle> lifecycleProvider
       = new AtomicReferenceProvider<>( Lifecycle.STOPPED );
@@ -40,6 +43,8 @@ public class Launcher {
     private Injector injector = null;
 
     private ServiceReferences serviceReferences;
+
+    private Module module = new NullModule();
 
     public Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
@@ -117,7 +122,7 @@ public class Launcher {
 
                 serviceInitializer.init( serviceReference );
 
-                Injector injector = getAdvertised().createInjector();
+                Injector injector = createInjector();
                 Service current = injector.getInstance( serviceReference.getBacking() );
                 launch0( launchHandler, current );
 
@@ -185,7 +190,8 @@ public class Launcher {
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
 
-        threadDiff.report( advertised.require( TracerFactory.class ).create( this ) );
+        TracerFactory tracerFactory = advertised.tracerFactorySupplier.get();
+        threadDiff.report( tracerFactory.create( this ) );
 
         threadSnapshot = new ThreadSnapshot();
 
@@ -200,10 +206,6 @@ public class Launcher {
         return services;
     }
 
-    public Advertised getAdvertised() {
-        return advertised;
-    }
-
     public ServiceReferences getServiceReferences() {
         return serviceReferences;
     }
@@ -212,32 +214,37 @@ public class Launcher {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 
+    @Deprecated
     public <T> void provider( Class<T> clazz, T impl ) {
-        getAdvertised().provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
+        advertised.provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
     }
 
+    @Deprecated
     public <T> void provider( Class<T> clazz, Provider<T> provider ) {
-        getAdvertised().provider( this.getClass(), clazz, provider );
+        advertised.provider( this.getClass(), clazz, provider );
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Class<T> clazz, Class<V> impl ) {
-        getAdvertised().advertise( this, clazz, impl );
+        advertised.advertise( this, clazz, impl );
     }
 
+    @Deprecated
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
-        getAdvertised().advertise( this, clazz, object );
+        advertised.advertise( this, clazz, object );
     }
 
+    @Deprecated
     public <T, V extends T> void replace( Class<T> clazz, V object ) {
-        getAdvertised().replace( this, clazz, object );
+        advertised.replace( this, clazz, object );
     }
 
     public void verify() {
-        getAdvertised().verify();;
+        advertised.verify();;
     }
 
     protected Injector createInjector() {
-        return getAdvertised().createInjector();
+        return advertised.createInjector(module);
     }
 
     public Injector getInjector() {
@@ -245,7 +252,7 @@ public class Launcher {
     }
 
     public <T> T getInstance( Class<T> clazz ) {
-        return createInjector().getInstance( clazz );
+        return getInjector().getInstance( clazz );
     }
 
     public ConfigLoader getConfigLoader() {
@@ -253,7 +260,7 @@ public class Launcher {
     }
 
     private Tracer getTracer() {
-        TracerFactory tracerFactory = advertised.require( TracerFactory.class );
+        TracerFactory tracerFactory = advertised.tracerFactorySupplier.get();
         return tracerFactory.create( this );
     }
 
@@ -265,37 +272,62 @@ public class Launcher {
         getTracer().error( format, args );
     }
 
-    public static LauncherBuilder forConfigLoader( ConfigLoader configLoader ) {
-        return new LauncherBuilder( configLoader );
+    /**
+     * Create a new builder using the {@link ResourceConfigLoader}
+     */
+    public static Builder newBuilder() {
+        return new Builder(new ResourceConfigLoader());
     }
 
-    public static LauncherBuilder forResourceConfigLoader() {
-        return new LauncherBuilder( new ResourceConfigLoader() );
+    public static Builder newBuilder(ConfigLoader configLoader) {
+        return new Builder(configLoader);
     }
 
-    public static class LauncherBuilder {
+    public static class Builder {
 
         private ConfigLoader configLoader;
 
         private Role role = new Role( "default" );
 
+        private Optional<Caller> caller = Optional.empty();
+
         private Advertised advertised = new Advertised();
 
-        LauncherBuilder(ConfigLoader configLoader) {
+        private Module module = new NullModule();
+
+        Builder(ConfigLoader configLoader) {
             this.configLoader = configLoader;
         }
 
-        public LauncherBuilder withAdvertised( Advertised advertised ) {
-            this.advertised = advertised;
-            return this;
+        public Builder withRole(Class<?> role) {
+            return withRole(new Role(role.getName()));
         }
 
-        public LauncherBuilder withRole( String role ) {
+        public Builder withRole(String role) {
             return withRole( new Role( role ) );
         }
 
-        public LauncherBuilder withRole( Role role ) {
+        public Builder withRole(Role role) {
             this.role = role;
+            return this;
+        }
+
+        public Builder withCaller(Class<?> clazz) {
+            return withCaller(new Caller(clazz));
+        }
+
+        public Builder withCaller(Caller caller) {
+            this.caller = Optional.of(caller);
+            return this;
+        }
+
+        /**
+         * Used so that we can add a custom module for instance variables or
+         * other custom/simple bindings that aren't really services. Primarily
+         * for testing purposes.
+         */
+        public Builder withModule(Module module) {
+            this.module = module;
             return this;
         }
 
@@ -303,7 +335,11 @@ public class Launcher {
 
             Launcher result = new Launcher( configLoader, advertised );
 
-            result.getAdvertised().advertise( this, Role.class, role );
+            result.module = module;
+            result.advertised.advertise( this, Role.class, role );
+
+            if (caller.isPresent())
+                result.advertised.advertise( this, Caller.class, caller.get() );
 
             return result;
 

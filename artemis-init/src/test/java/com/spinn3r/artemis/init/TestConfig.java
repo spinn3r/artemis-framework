@@ -15,7 +15,7 @@ public class TestConfig {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
 
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                     .build();
 
         launcher.launch( ref( Service1.class ) );
@@ -26,7 +26,7 @@ public class TestConfig {
     public void test2() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service2.class ) );
@@ -37,12 +37,12 @@ public class TestConfig {
     public void test3() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service3.class ) );
 
-        launcher.getAdvertised().require( ServiceConfig.class );
+        launcher.getInstance( ServiceConfig.class );
 
     }
 
@@ -50,7 +50,7 @@ public class TestConfig {
     public void test4() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service4.class ) );
@@ -61,7 +61,7 @@ public class TestConfig {
     public void test5() throws Exception {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                      .build();
 
         launcher.launch( ref( Service5.class ) );
@@ -69,11 +69,11 @@ public class TestConfig {
         //assertEquals( "bar",
         //              launcher.getServices().find( Service5.class ).getServiceConfig().getMember() );
 
-        ServiceConfig config = launcher.getAdvertised().require( ServiceConfig.class );
+        ServiceConfig config = launcher.getInstance( ServiceConfig.class );
 
         assertEquals( "bar", config.getMember() );
 
-        ConfigReader configReader = new ConfigReader( launcher.getAdvertised() );
+        ConfigReader configReader = launcher.getInstance(ConfigReader.class);
 
         assertEquals( "{\n" +
                         "  \"member\" : \"bar\"\n" +

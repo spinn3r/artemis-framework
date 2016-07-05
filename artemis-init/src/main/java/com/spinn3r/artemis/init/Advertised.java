@@ -2,8 +2,10 @@ package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
 import com.google.inject.*;
+import com.spinn3r.artemis.init.guice.NullModule;
 import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
+import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Contains objects that are advertised by class name.
  */
 @SuppressWarnings( { "unchecked", "rawtypes" } )
+@Deprecated
 public class Advertised {
 
     // TODO: this could/should be refactored into a set of reference objects so
@@ -25,13 +28,20 @@ public class Advertised {
 
     protected Module module = null;
 
+    public TracerFactorySupplier tracerFactorySupplier;
+
     public Advertised() {
 
-        replace( Advertised.class, TracerFactory.class, new StandardTracerFactory() );
+        // advertise the TracerFactoryProvider so that we can change providers
+        // at runtime without using replace.
+
+        tracerFactorySupplier = TracerFactorySupplier.of(new StandardTracerFactory());
+
+        advertise(this.getClass(), TracerFactorySupplier.class, tracerFactorySupplier);
 
         // by default, advertise ourselves so that we can inject advertised
         // if necessary.
-        advertise( this, Advertised.class, this );
+        advertise(this.getClass(), Advertised.class, this);
 
         // create one injector that we can use everywhere
         //advertise( Injector.class, new Injector( this ) );
@@ -53,6 +63,7 @@ public class Advertised {
     /**
      * Advertise the given object for the given class.
      */
+    @Deprecated
     public <T, V extends T> void advertise( Object source, Class<T> clazz, V object ) {
 
         if ( object == null )
@@ -62,6 +73,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T> void provider( Class source, Class<T> clazz, Provider<? extends T> provider ) {
         assertAbsent( clazz, null );
         advertisements.put( clazz, provider );
@@ -69,6 +81,7 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T, V extends T> void advertise( Class source, Class<T> clazz, V object ) {
 
         assertAbsent( clazz, null );
@@ -76,10 +89,12 @@ public class Advertised {
 
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Object source, Class<T> clazz, Class<V> impl ) {
         advertise( source.getClass(), clazz, impl );
     }
 
+    @Deprecated
     public <T,V extends T> void advertise( Class source, Class<T> clazz, Class<V> impl ) {
         assertAbsent( clazz, impl );
         advertisements.put( clazz, impl );
@@ -102,11 +117,11 @@ public class Advertised {
 
     }
 
-    public <T, V extends T> void replace( Object source, Class<T> clazz, V object ) {
+    protected <T, V extends T> void replace( Object source, Class<T> clazz, V object ) {
         replace( source.getClass(), clazz, object );
     }
 
-    public <T,V extends T> void replace( Class source, Class<T> clazz, Class<V> impl ) {
+    protected <T,V extends T> void replace( Class source, Class<T> clazz, Class<V> impl ) {
         advertisements.put( clazz, impl );
         sources.put( clazz, source );
     }
@@ -116,7 +131,7 @@ public class Advertised {
      * we've initialized some other tracing system like log4j.  or if we want to wrap
      * another object with a delegate.
      */
-    public <T, V extends T> void replace( Class source, Class<T> clazz, V object ) {
+    protected <T, V extends T> void replace( Class source, Class<T> clazz, V object ) {
         advertisements.put( clazz, object );
         sources.put( clazz, source );
     }
@@ -151,9 +166,9 @@ public class Advertised {
      *
      */
     @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           List<Class<? extends T>> list ) {
+    protected <T> T delegate( Class source,
+                              Class<T> clazz,
+                              List<Class<? extends T>> list ) {
 
         List<Class<? extends T>> tmp = Lists.newArrayList();
 
@@ -187,126 +202,28 @@ public class Advertised {
         return last;
 
     }
-
     @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           Class<? extends T> c0,
-                           Class<? extends T> c1,
-                           Class<? extends T> c2,
-                           Class<? extends T> c3,
-                           Class<? extends T> c4,
-                           Class<? extends T> c5 ) {
+    protected  <T> T delegate( Class source,
+                               Class<T> clazz,
+                               Class<? extends T> c0,
+                               Class<? extends T> c1 ) {
 
         List<Class<? extends T>> list = Lists.newArrayList();
 
         list.add( c0 );
         list.add( c1 );
-        list.add( c2 );
-        list.add( c3 );
-        list.add( c4 );
-        list.add( c5 );
 
         return delegate( source, clazz, list );
-
-    }
-
-    @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           Class<? extends T> c0,
-                           Class<? extends T> c1,
-                           Class<? extends T> c2,
-                           Class<? extends T> c3,
-                           Class<? extends T> c4 ) {
-
-        List<Class<? extends T>> list = Lists.newArrayList();
-
-        list.add( c0 );
-        list.add( c1 );
-        list.add( c2 );
-        list.add( c3 );
-        list.add( c4 );
-
-        return delegate( source, clazz, list );
-
-    }
-
-    @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           Class<? extends T> c0,
-                           Class<? extends T> c1,
-                           Class<? extends T> c2,
-                           Class<? extends T> c3 ) {
-
-        return delegate( source, clazz, c0, c1, c2, c3, null );
-
-    }
-
-    @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           Class<? extends T> c0,
-                           Class<? extends T> c1,
-                           Class<? extends T> c2 ) {
-
-        return delegate( source, clazz, c0, c1, c2, null, null );
-
-    }
-
-    @Deprecated
-    public <T> T delegate( Class source,
-                           Class<T> clazz,
-                           Class<? extends T> c0,
-                           Class<? extends T> c1 ) {
-
-        return delegate( source, clazz, c0, c1, null, null, null );
 
     }
 
     /**
      * Find the given service, or return null if it hasn't yet been advertised.
      */
+    @Deprecated
     public <T> T find(Class<T> clazz) {
 
         return (T)advertisements.get( clazz );
-    }
-
-    /**
-     * Find the given service, if it's not present, fail.
-     */
-    public <T> T require( Class<T> clazz ) {
-
-        T result = find( clazz );
-
-        if ( result == null ) {
-            throw new RuntimeException( "Unable to find instance of: " + clazz.getName() );
-        }
-
-        return result;
-
-    }
-
-    /**
-     * Find all objects that have been advertised with the given interface.
-     *
-     * @param inter The interface to search for.
-     */
-    public <T> List<T> interfaces( Class<T> inter ) {
-
-        List<T> result = Lists.newArrayList();
-
-        for (Object object : advertisements.values()) {
-
-            if ( inter.isAssignableFrom( object.getClass() ) ) {
-                result.add( (T)object );
-            }
-
-        }
-
-        return result;
-
     }
 
     public int size() {
@@ -324,7 +241,11 @@ public class Advertised {
     }
 
     public Injector createInjector() {
-        return Guice.createInjector( toModule() );
+        return createInjector(new NullModule());
+    }
+
+    public Injector createInjector(Module module) {
+        return Guice.createInjector( module, toModule() );
     }
 
     /**
@@ -334,6 +255,7 @@ public class Advertised {
         Guice.createInjector( Stage.TOOL, toModule() );
     }
 
+    @Deprecated
     public <T> T getInstance( Class<T> clazz ) {
         return createInjector().getInstance( clazz );
     }

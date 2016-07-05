@@ -10,7 +10,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -23,12 +22,12 @@ public class ConfigServlet extends DefaultServlet {
     private static final String APPLICATION_JSON = "application/json";
     private static final String UTF_8 = "UTF-8";
 
-    private final Advertised advertised;
-
     private final Services services;
 
-    public ConfigServlet(Advertised advertised, Services services) {
-        this.advertised = advertised;
+    private final ConfigReader configReader;
+
+    public ConfigServlet(Services services, ConfigReader configReader) {
+        this.configReader = configReader;
         this.services = services;
     }
 
@@ -47,8 +46,6 @@ public class ConfigServlet extends DefaultServlet {
     private Map<String,Object> toMap() {
 
         Map<String, Object> result = new TreeMap<>();
-
-        ConfigReader configReader = new ConfigReader( advertised );
 
         for (Service service : services) {
 

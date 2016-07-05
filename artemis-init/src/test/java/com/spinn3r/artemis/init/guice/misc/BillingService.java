@@ -6,6 +6,7 @@ import com.google.inject.Inject;
  *
  */
 public class BillingService {
+
     private final CreditCardProcessor processor;
 
     private final TransactionLog transactionLog;

@@ -40,7 +40,7 @@ public class ServerBuilder {
 
     private boolean enableCompression = true;
 
-    private ServletReferences servletReferences = new ServletReferences();
+    private ServletReferences servletReferences = ServletReferences.of();
 
     private FilterReferences filterReferences = new FilterReferences();
 

@@ -1,12 +1,19 @@
 package com.spinn3r.artemis.init;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 import com.spinn3r.artemis.init.advertisements.Caller;
+import com.spinn3r.artemis.init.advertisements.Product;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
+import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.init.guice.NullModule;
 
 import java.io.File;
+import java.util.Optional;
+
+import static com.google.common.base.Preconditions.*;
 
 /**
  * An initializer which uses a launcher and provides additional bindings we
@@ -16,42 +23,55 @@ public class Initializer {
 
     private static final String UNKNOWN = "unknown";
 
-    private ConfigLoader configLoader;
+    private final ConfigLoader configLoader;
+
+    private final Module module;
+
+    private final Advertised advertised;
+
+    private final Launcher launcher;
 
     private Services services = new Services();
 
-    private final Advertised advertised = new Advertised();
+    public Initializer(Product product, Role role, Caller caller, Module module, Optional<ConfigLoader> configLoader) {
+        checkNotNull(product);
+        checkNotNull(role);
+        checkNotNull(caller);
+        checkNotNull(module);
+        checkNotNull(configLoader);
 
-    private Launcher launcher;
+        this.module = module;
 
-    public Initializer( String role ) {
-        this( "artemis", role, role );
-    }
+        if ( ! configLoader.isPresent() ) {
+            String path = String.format("/etc/%s-%s", product, role);
+            System.out.printf("Loading config data from filesystem: %s\n", path);
+            this.configLoader = new FileConfigLoader(new File(path));
+        } else {
+            this.configLoader = configLoader.get();
+        }
 
-    public Initializer( String role, String config ) {
-        this( "artemis", role, config );
-    }
+        this.launcher = Launcher
+                          .newBuilder(this.configLoader)
+                          .withModule(this.module)
+                          .build();
 
-    protected Initializer( String product, String role, String config ) {
-        this( role, new FileConfigLoader( new File( String.format( "/etc/%s-%s", product, config ) ) ) );
-    }
+        this.advertised = launcher.advertised;
 
-    public Initializer( String role, ConfigLoader configLoader) {
-
-        this.configLoader = configLoader;
-
-        this.launcher = new Launcher( getConfigLoader(), advertised );
+        if ( advertised.find( Product.class ) == null ) {
+            advertised.advertise( this, Product.class, product );
+        }
 
         if ( advertised.find( Caller.class ) == null ) {
-            advertised.advertise( this, Caller.class, new Caller( UNKNOWN ) );
+            advertised.advertise( this, Caller.class, caller );
         }
 
         if ( advertised.find( Role.class ) == null ) {
-            advertised.advertise( this, Role.class, new Role( role ) );
+            advertised.advertise( this, Role.class, role );
         }
 
-        if ( advertised.find( ConfigLoader.class ) == null )
-            advertised.advertise( this, ConfigLoader.class, getConfigLoader() );
+        if ( advertised.find( ConfigLoader.class ) == null ) {
+            advertised.advertise(this, ConfigLoader.class, getConfigLoader());
+        }
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being initialized.
@@ -77,16 +97,9 @@ public class Initializer {
         return this;
     }
 
-    public <T, V extends T> void advertise(Class<T> clazz, Class<V> impl) {
-        launcher.advertise( clazz, impl );
-    }
-
+    @Deprecated
     public <T, V extends T> void advertise(Class<T> clazz, V object) {
         launcher.advertise( clazz, object );
-    }
-
-    public <T, V extends T> void replace(Class<T> clazz, V object) {
-        launcher.replace( clazz, object );
     }
 
     public void stop() throws Exception {
@@ -101,6 +114,7 @@ public class Initializer {
         return services;
     }
 
+    @Deprecated
     public Advertised getAdvertised() {
         return advertised;
     }
@@ -109,8 +123,88 @@ public class Initializer {
         return configLoader;
     }
 
-    public void setConfigLoader(ConfigLoader configLoader) {
-        this.configLoader = configLoader;
+    /**
+     * Create a new builder using the {@link ResourceConfigLoader}
+     */
+    public static Builder newBuilder() {
+        return new Builder().setConfigLoader(new ResourceConfigLoader());
+    }
+
+    public static Builder newBuilder(ConfigLoader configLoader) {
+        return new Builder().setConfigLoader(configLoader);
+    }
+
+    public static class Builder {
+
+        private Optional<ConfigLoader> configLoader = Optional.empty();
+
+        private Product product = new Product("artemis");
+
+        private Role role = new Role(UNKNOWN);
+
+        private Caller caller = new Caller(UNKNOWN);
+
+        private Module module = new NullModule();
+
+        public Builder setConfigLoader(ConfigLoader configLoader) {
+            this.configLoader = Optional.of(configLoader);
+            return this;
+        }
+
+        public Builder setConfigLoader(Optional<ConfigLoader> configLoader) {
+            this.configLoader = configLoader;
+            return this;
+        }
+
+        public Builder setRole(String role) {
+            return setRole(new Role(role ) );
+        }
+
+        public Builder setRole(Class<?> role) {
+            return setRole(new Role(role.getName()));
+        }
+
+        public Builder setRole(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public Builder setCaller(String caller) {
+            return setCaller(new Caller(caller));
+        }
+
+        public Builder setCaller(Class<?> clazz) {
+            return setCaller(new Caller(clazz));
+        }
+
+        public Builder setCaller(Caller caller) {
+            this.caller = caller;
+            return this;
+        }
+
+        public Builder setProduct(String product) {
+            return setProduct(new Product(product));
+        }
+
+        public Builder setProduct(Product product) {
+            this.product = product;
+            return this;
+        }
+
+        /**
+         * Used so that we can add a custom module for instance variables or
+         * other custom/simple bindings that aren't really services. Primarily
+         * for testing purposes.
+         */
+        public Builder withModule(Module module) {
+            this.module = module;
+            return this;
+        }
+
+        public Initializer build() {
+            return new Initializer( product, role, caller, module, configLoader);
+        }
+
     }
 
 }

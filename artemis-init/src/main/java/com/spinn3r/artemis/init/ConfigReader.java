@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.init;
 
+import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.spinn3r.artemis.json.JSON;
 
 /**
@@ -16,10 +18,11 @@ import com.spinn3r.artemis.json.JSON;
 @SuppressWarnings( "unchecked" )
 public class ConfigReader {
 
-    private final Advertised advertised;
+    private final Injector injector;
 
-    public ConfigReader(Advertised advertised) {
-        this.advertised = advertised;
+    @Inject
+    ConfigReader(Injector injector) {
+        this.injector = injector;
     }
 
     /**
@@ -40,7 +43,7 @@ public class ConfigReader {
             return null;
         }
 
-        return advertised.require( config.implementation() );
+        return injector.getInstance( config.implementation() );
 
     }
 

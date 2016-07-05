@@ -31,7 +31,6 @@ public @interface Config {
     /**
      * The class to use for the config object.
      */
-    // FIXME: this should just be Class<?> I think...
     Class<? extends Object> implementation();
 
 }

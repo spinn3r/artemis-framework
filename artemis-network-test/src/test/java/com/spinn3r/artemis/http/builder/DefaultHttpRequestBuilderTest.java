@@ -4,7 +4,6 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
-import com.spinn3r.artemis.http.init.WebserverConfig;
 import com.spinn3r.artemis.http.init.WebserverPort;
 import com.spinn3r.artemis.http.init.WebserverService;
 import com.spinn3r.artemis.init.Launcher;
@@ -14,7 +13,6 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
-import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
@@ -43,7 +41,7 @@ public class DefaultHttpRequestBuilderTest {
 
         ConfigLoader configLoader = new ResourceConfigLoader();
 
-        launcher = Launcher.forConfigLoader( configLoader ).build();
+        launcher = Launcher.newBuilder(configLoader ).build();
 
         launcher.launch( ref( TestServletReferencesServices.class ),
                          ref( WebserverService.class ),

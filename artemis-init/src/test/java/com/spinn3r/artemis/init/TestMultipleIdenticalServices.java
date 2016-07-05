@@ -17,7 +17,7 @@ public class TestMultipleIdenticalServices {
     @Test
     public void testLauncher() throws Exception {
 
-        Launcher launcher = Launcher.forResourceConfigLoader().build();
+        Launcher launcher = Launcher.newBuilder().build();
         launcher.launch( new TestServiceReferences() );
 
         launcher.getInjector().injectMembers( this );

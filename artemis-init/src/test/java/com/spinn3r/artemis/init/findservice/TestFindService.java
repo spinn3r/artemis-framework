@@ -17,20 +17,16 @@ public class TestFindService {
     @Test
     public void test1() throws Exception {
 
-        State state = new State();
-
         ConfigLoader configLoader = new FileConfigLoader( "/tmp" );
 
-        Launcher launcher = Launcher.forConfigLoader( configLoader )
+        Launcher launcher = Launcher.newBuilder(configLoader )
                                     .build();
 
         launcher.launch( ref( MockFirstProviderService.class ) );
 
-        assertNotNull( launcher.getAdvertised() );
-        assertNotNull( launcher.getAdvertised().find( FirstProvider.class ) );
+        FirstProvider firstProvider = launcher.getInstance(FirstProvider.class);
 
-        assertEquals( "mock",
-                      launcher.getAdvertised().find( FirstProvider.class ).getTest() );
+        assertEquals( "mock", firstProvider.getTest() );
 
     }
 

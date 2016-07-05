@@ -2,7 +2,6 @@ package com.spinn3r.artemis.http;
 
 import com.google.inject.Inject;
 import com.spinn3r.artemis.http.servlets.EchoServlet;
-import com.spinn3r.artemis.http.servlets.HelloServlet;
 import com.spinn3r.artemis.http.servlets.HelloServletFactory;
 import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.init.Launcher;
@@ -44,7 +43,7 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
         super.setUp();
 
-        launcher = Launcher.forResourceConfigLoader().build();
+        launcher = Launcher.newBuilder().build();
 
         launcher.launch( new TestServiceReferences() );
 

@@ -1,8 +1,6 @@
 package com.spinn3r.artemis.http.init;
 
-import com.codahale.metrics.servlets.MetricsServlet;
 import com.codahale.metrics.servlets.PingServlet;
-import com.codahale.metrics.servlets.ThreadDumpServlet;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.http.FilterReferences;
@@ -19,7 +17,6 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.advertisements.Version;
-import com.spinn3r.artemis.init.servlets.ConfigServlet;
 import com.spinn3r.artemis.time.Uptime;
 import com.spinn3r.metrics.kairosdb.TaggedMetrics;
 
@@ -33,7 +30,7 @@ public class DefaultWebserverReferencesService extends BaseService {
     private Provider<Hostname> hostnameProvider;
     private TaggedMetrics taggedMetrics;
 
-    private ServletReferences servletReferences = new ServletReferences();
+    private ServletReferences servletReferences = ServletReferences.of();
     private FilterReferences filterReferences = new FilterReferences();
     private RequestLogReferences requestLogReferences = new RequestLogReferences();
 
