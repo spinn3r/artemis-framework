@@ -9,7 +9,6 @@ import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.sequence.GlobalMutex;
 import com.spinn3r.artemis.sequence.GlobalMutexExpiredException;
-import com.spinn3r.artemis.threads.Shutdownable;
 import com.spinn3r.artemis.threads.ShutdownableIndex;
 import com.spinn3r.artemis.util.misc.ExecutorServices;
 import com.spinn3r.artemis.util.threads.NamedThreadFactory;

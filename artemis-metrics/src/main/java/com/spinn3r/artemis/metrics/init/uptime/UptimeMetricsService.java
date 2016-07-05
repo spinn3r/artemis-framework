@@ -44,7 +44,9 @@ public class UptimeMetricsService extends BaseService {
 
         final Started started = new Started( clock.getTime() );
 
+        info( "Sending started metric..." );
         this.startedStat.incr( started );
+        info( "Sending started metric... done" );
 
         MetricRegistry metricRegistry = taggedMetrics.getMetricRegistry();
 

@@ -13,7 +13,7 @@ public class UptimeService extends BaseService {
     private final Clock clock;
 
     @Inject
-    public UptimeService(Clock clock) {
+    UptimeService(Clock clock) {
         this.clock = clock;
     }
 

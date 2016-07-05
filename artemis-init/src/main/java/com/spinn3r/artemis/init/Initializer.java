@@ -185,7 +185,7 @@ public class Initializer {
          * other custom/simple bindings that aren't really services. Primarily
          * for testing purposes.
          */
-        public Builder withModule(Module module) {
+        public Builder setModule(Module module) {
             this.module = module;
             return this;
         }

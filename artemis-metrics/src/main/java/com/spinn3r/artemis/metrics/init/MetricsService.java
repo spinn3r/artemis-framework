@@ -34,47 +34,44 @@ public class MetricsService extends BaseService {
     protected final MetricsConfig config;
 
     @Inject
-    public MetricsService(MetricsConfig config) {
+    MetricsService(MetricsConfig config) {
         this.config = config;
-    }
-
-    @Override
-    public void init() {
 
         metricRegistry = new MetricRegistry();
 
         taggedMetrics = new TaggedMetrics( metricRegistry,
-                                          InvalidTagPolicy.MANGLE_AND_LOG,
-                                          DuplicateTagPolicy.IGNORE_AND_LOG );
+                                           InvalidTagPolicy.MANGLE_AND_LOG,
+                                           DuplicateTagPolicy.IGNORE_AND_LOG );
 
-        // we need advertise tagged metrics so other systems can use them.
-        advertise( TaggedMetrics.class, taggedMetrics );
+        if ( config.isEnabled() ) {
+
+            MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+
+            taggedMetrics.registerAll("jvm.buffer-pool", new BufferPoolMetricSet(mBeanServer));
+            taggedMetrics.registerAll("jvm.threads", new ThreadStatesGaugeSet());
+            taggedMetrics.registerAll("jvm.memory", new MemoryUsageGaugeSet());
+            taggedMetrics.registerAll("jvm.gc", new GarbageCollectorMetricSet());
+
+            // ***  Add a gauge for the number of metrics so that I can see if we have any leaks.
+            metricRegistry.register( MetricRegistry.name(MetricRegistry.class, "size"),
+                                     (Gauge<Integer>) () -> metricRegistry
+                                              .getMetrics()
+                                              .size());
+
+        } else {
+            warn( "Not initializing metrics (disabled)" );
+        }
 
     }
 
     @Override
-    public void start() throws Exception {
+    public void init() {
+        advertise( TaggedMetrics.class, taggedMetrics );
+    }
 
-        if ( ! config.isEnabled() ) {
-            warn( "Not initializing metrics (disabled)" );
-            return;
-        }
-
-        MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-
-        taggedMetrics.registerAll( "jvm.buffer-pool", new BufferPoolMetricSet( mBeanServer ) );
-        taggedMetrics.registerAll( "jvm.threads", new ThreadStatesGaugeSet() );
-        taggedMetrics.registerAll( "jvm.memory", new MemoryUsageGaugeSet() );
-        taggedMetrics.registerAll( "jvm.gc", new GarbageCollectorMetricSet() );
-
-        // ***  Add a gauge for the number of metrics so that I can see if we have any leaks.
-        metricRegistry.register(metricRegistry.name( MetricRegistry.class, "size" ), new Gauge<Integer>() {
-            @Override
-            public Integer getValue() {
-                return metricRegistry.getMetrics().size();
-            }
-        });
-
+    @Override
+    protected void configure() {
+        bind(TaggedMetrics.class).toInstance(taggedMetrics);
     }
 
 }
