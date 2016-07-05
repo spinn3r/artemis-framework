@@ -123,17 +123,6 @@ public class Initializer {
         return configLoader;
     }
 
-    /**
-     * Create a new builder using the {@link ResourceConfigLoader}
-     */
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
-    public static Builder newBuilder(ConfigLoader configLoader) {
-        return new Builder().setConfigLoader(configLoader);
-    }
-
     public static class Builder {
 
         private Optional<ConfigLoader> configLoader = Optional.empty();
