@@ -127,7 +127,7 @@ public class Initializer {
      * Create a new builder using the {@link ResourceConfigLoader}
      */
     public static Builder newBuilder() {
-        return new Builder().setConfigLoader(new ResourceConfigLoader());
+        return new Builder();
     }
 
     public static Builder newBuilder(ConfigLoader configLoader) {
