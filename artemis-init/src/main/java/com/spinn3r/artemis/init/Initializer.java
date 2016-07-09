@@ -26,8 +26,6 @@ public class Initializer {
 
     private final Module module;
 
-    private final Advertised advertised;
-
     private final Launcher launcher;
 
     private Services services = new Services();
@@ -54,7 +52,7 @@ public class Initializer {
                           .setModule(this.module)
                           .build();
 
-        this.advertised = launcher.advertised;
+        Advertised advertised = launcher.advertised;
 
         if ( advertised.find( Product.class ) == null ) {
             advertised.advertise( this, Product.class, product );
