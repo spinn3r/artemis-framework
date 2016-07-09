@@ -51,7 +51,7 @@ public class Initializer {
 
         this.launcher = Launcher
                           .newBuilder(this.configLoader)
-                          .withModule(this.module)
+                          .setModule(this.module)
                           .build();
 
         this.advertised = launcher.advertised;
@@ -74,7 +74,7 @@ public class Initializer {
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being initialized.
-        advertise( Initializer.class, this );
+        advertised.advertise( this, Initializer.class, this );
     }
 
     /**
@@ -94,11 +94,6 @@ public class Initializer {
     public Initializer launch( ServiceReferences serviceReferences ) throws Exception {
         launcher.launch( serviceReferences );
         return this;
-    }
-
-    @Deprecated
-    public <T, V extends T> void advertise(Class<T> clazz, V object) {
-        launcher.advertise( clazz, object );
     }
 
     public void stop() throws Exception {

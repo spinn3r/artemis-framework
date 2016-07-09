@@ -1,9 +1,8 @@
 package com.spinn3r.artemis.init;
 
-import com.google.common.base.Preconditions;
 import com.google.inject.Injector;
 
-import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.*;
 import static org.mockito.Mockito.*;
 
 /**

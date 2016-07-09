@@ -299,24 +299,29 @@ public class Launcher {
             this.configLoader = configLoader;
         }
 
-        public Builder withRole(Class<?> role) {
-            return withRole(new Role(role.getName()));
+        public Builder setConfigLoader(ConfigLoader configLoader) {
+            this.configLoader = configLoader;
+            return this;
         }
 
-        public Builder withRole(String role) {
-            return withRole( new Role( role ) );
+        public Builder setRole(Class<?> role) {
+            return setRole(new Role(role.getName()));
         }
 
-        public Builder withRole(Role role) {
+        public Builder setRole(String role) {
+            return setRole(new Role(role ) );
+        }
+
+        public Builder setRole(Role role) {
             this.role = role;
             return this;
         }
 
-        public Builder withCaller(Class<?> clazz) {
-            return withCaller(new Caller(clazz));
+        public Builder setCaller(Class<?> clazz) {
+            return setCaller(new Caller(clazz));
         }
 
-        public Builder withCaller(Caller caller) {
+        public Builder setCaller(Caller caller) {
             this.caller = Optional.of(caller);
             return this;
         }
@@ -326,7 +331,7 @@ public class Launcher {
          * other custom/simple bindings that aren't really services. Primarily
          * for testing purposes.
          */
-        public Builder withModule(Module module) {
+        public Builder setModule(Module module) {
             this.module = module;
             return this;
         }
