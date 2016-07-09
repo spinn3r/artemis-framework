@@ -53,7 +53,9 @@ public class Launcher {
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being launched.
         advertise( Launcher.class, this );
-        provider( Lifecycle.class, lifecycleProvider );
+
+        advertised.provider( this.getClass(), Lifecycle.class, lifecycleProvider );
+
     }
 
     /**
@@ -215,21 +217,6 @@ public class Launcher {
     }
 
     @Deprecated
-    public <T> void provider( Class<T> clazz, T impl ) {
-        advertised.provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
-    }
-
-    @Deprecated
-    public <T> void provider( Class<T> clazz, Provider<T> provider ) {
-        advertised.provider( this.getClass(), clazz, provider );
-    }
-
-    @Deprecated
-    public <T,V extends T> void advertise( Class<T> clazz, Class<V> impl ) {
-        advertised.advertise( this, clazz, impl );
-    }
-
-    @Deprecated
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
         advertised.advertise( this, clazz, object );
     }
@@ -240,7 +227,7 @@ public class Launcher {
     }
 
     public void verify() {
-        advertised.verify();;
+        advertised.createInjector(Stage.TOOL, module);
     }
 
     protected Injector createInjector() {
@@ -252,7 +239,7 @@ public class Launcher {
     }
 
     public <T> T getInstance( Class<T> clazz ) {
-        return getInjector().getInstance( clazz );
+        return injector.getInstance( clazz );
     }
 
     public ConfigLoader getConfigLoader() {
@@ -299,24 +286,33 @@ public class Launcher {
             this.configLoader = configLoader;
         }
 
-        public Builder withRole(Class<?> role) {
-            return withRole(new Role(role.getName()));
+        public Builder setConfigLoader(ConfigLoader configLoader) {
+            this.configLoader = configLoader;
+            return this;
         }
 
-        public Builder withRole(String role) {
-            return withRole( new Role( role ) );
+        public Builder setRole(Class<?> role) {
+            return setRole(new Role(role.getName()));
         }
 
-        public Builder withRole(Role role) {
+        public Builder setRole(String role) {
+            return setRole(new Role(role ) );
+        }
+
+        public Builder setRole(Role role) {
             this.role = role;
             return this;
         }
 
-        public Builder withCaller(Class<?> clazz) {
-            return withCaller(new Caller(clazz));
+        public Builder setCaller(String caller) {
+            return setCaller(new Caller(caller));
         }
 
-        public Builder withCaller(Caller caller) {
+        public Builder setCaller(Class<?> clazz) {
+            return setCaller(new Caller(clazz));
+        }
+
+        public Builder setCaller(Caller caller) {
             this.caller = Optional.of(caller);
             return this;
         }
@@ -326,7 +322,7 @@ public class Launcher {
          * other custom/simple bindings that aren't really services. Primarily
          * for testing purposes.
          */
-        public Builder withModule(Module module) {
+        public Builder setModule(Module module) {
             this.module = module;
             return this;
         }

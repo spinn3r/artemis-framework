@@ -15,7 +15,7 @@ public class StandardTracerTest {
         ConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher = Launcher.newBuilder(configLoader )
-                                    .withRole( "test" )
+                                    .setRole("test" )
                                     .build();
 
         launcher.launch( ref( BasicService.class ) );

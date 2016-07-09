@@ -7,7 +7,6 @@ import com.spinn3r.artemis.init.advertisements.Product;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
-import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.guice.NullModule;
 
 import java.io.File;
@@ -26,8 +25,6 @@ public class Initializer {
     private final ConfigLoader configLoader;
 
     private final Module module;
-
-    private final Advertised advertised;
 
     private final Launcher launcher;
 
@@ -52,10 +49,10 @@ public class Initializer {
 
         this.launcher = Launcher
                           .newBuilder(this.configLoader)
-                          .withModule(this.module)
+                          .setModule(this.module)
                           .build();
 
-        this.advertised = launcher.advertised;
+        Advertised advertised = launcher.advertised;
 
         if ( advertised.find( Product.class ) == null ) {
             advertised.advertise( this, Product.class, product );
@@ -75,7 +72,7 @@ public class Initializer {
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being initialized.
-        advertise( Initializer.class, this );
+        advertised.advertise( this, Initializer.class, this );
     }
 
     /**
@@ -97,11 +94,6 @@ public class Initializer {
         return this;
     }
 
-    @Deprecated
-    public <T, V extends T> void advertise(Class<T> clazz, V object) {
-        launcher.advertise( clazz, object );
-    }
-
     public void stop() throws Exception {
         launcher.stop();
     }
@@ -112,11 +104,6 @@ public class Initializer {
 
     public Services getServices() {
         return services;
-    }
-
-    @Deprecated
-    public Advertised getAdvertised() {
-        return advertised;
     }
 
     public ConfigLoader getConfigLoader() {

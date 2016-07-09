@@ -249,7 +249,7 @@ public class ModularLauncher {
 
     @Deprecated
     public void verify() {
-        getAdvertised().verify();;
+        //FIXME: advertised.createInjector(Stage.TOOL, module);
     }
 
     protected Injector createInjector() {

@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.CreationException;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.example.DefaultFirstService;
@@ -50,10 +51,15 @@ public class LauncherCreateInjectorTest {
         ResourceConfigLoader configLoader = new ResourceConfigLoader();
 
         Launcher launcher =
-          Launcher.newBuilder(configLoader )
+          Launcher.newBuilder(configLoader)
+                  .setModule(new AbstractModule() {
+                      @Override
+                      protected void configure() {
+                          bind(Second.class).to(DefaultSecond.class);
+                      }
+                  })
             .build();
 
-        launcher.advertise( Second.class, DefaultSecond.class );
         launcher.verify();
 
     }

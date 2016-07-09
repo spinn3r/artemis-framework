@@ -71,11 +71,6 @@ public abstract class BaseService extends AbstractModule implements Service {
     }
 
     @Deprecated
-    public <T> T delegate( Class<T> clazz, Class<? extends T> c0, Class<? extends T> c1 ) {
-        return advertised.delegate( getClass(), clazz, c0, c1 );
-    }
-
-    @Deprecated
     protected <T,V extends T> void replace( Class<T> clazz, V instance) {
         advertised.replace( this.getClass(), clazz, instance );
     }
