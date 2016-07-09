@@ -26,4 +26,11 @@ public class WebserverPort {
                  '}';
     }
 
+    /**
+     * Format a URL so that %s in the URL is using the pattern.
+     */
+    public String formatURL(String pattern) {
+        return String.format( pattern, port );
+    }
+
 }

@@ -114,11 +114,6 @@ public class Initializer {
         return services;
     }
 
-    @Deprecated
-    public Advertised getAdvertised() {
-        return advertised;
-    }
-
     public ConfigLoader getConfigLoader() {
         return configLoader;
     }

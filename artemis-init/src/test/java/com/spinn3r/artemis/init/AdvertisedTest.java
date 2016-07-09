@@ -22,29 +22,6 @@ public class AdvertisedTest {
     }
 
     @Test
-    @SuppressWarnings( "deprecation" )
-    public void testAdvertiseWithDelegation() throws Exception {
-
-        Advertised advertised = new Advertised();
-
-        FooInterface foo =
-            advertised.delegate( this.getClass(), FooInterface.class, FooIntermediate.class, FooImpl.class );
-
-        foo.hello();
-
-        assertEquals( foo.getClass(), FooIntermediate.class );
-
-        FooIntermediate fooIntermediate = (FooIntermediate)foo;
-
-        assertTrue( fooIntermediate.isCalled() );
-
-        FooImpl fooImpl = (FooImpl)fooIntermediate.delegate;
-
-        assertTrue( fooImpl.isCalled() );
-
-    }
-
-    @Test
     public void testSingleInstance() {
 
         // test that when I advertise an instance, that only one copy is created.

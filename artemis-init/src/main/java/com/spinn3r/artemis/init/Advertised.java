@@ -203,7 +203,7 @@ public class Advertised {
 
     }
     @Deprecated
-    protected  <T> T delegate( Class source,
+    protected <T> T delegate( Class source,
                                Class<T> clazz,
                                Class<? extends T> c0,
                                Class<? extends T> c1 ) {
