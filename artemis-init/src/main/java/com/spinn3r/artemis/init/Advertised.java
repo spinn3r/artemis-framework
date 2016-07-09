@@ -166,11 +166,8 @@ public class Advertised {
         return Guice.createInjector( module, toModule() );
     }
 
-    /**
-     * Verify that all our binding are correct.
-     */
-    public void verify() {
-        Guice.createInjector( Stage.TOOL, toModule() );
+    public Injector createInjector(Stage stage, Module module) {
+        return Guice.createInjector(stage, module, toModule() );
     }
 
     @Deprecated

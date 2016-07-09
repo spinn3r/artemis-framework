@@ -240,7 +240,7 @@ public class Launcher {
     }
 
     public void verify() {
-        advertised.verify();;
+        advertised.createInjector(Stage.TOOL, module);
     }
 
     protected Injector createInjector() {
