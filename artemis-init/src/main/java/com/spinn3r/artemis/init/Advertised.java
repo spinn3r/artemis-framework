@@ -158,12 +158,13 @@ public class Advertised {
         return advertisements.containsKey( clazz );
     }
 
+    @Deprecated
     public Injector createInjector() {
         return createInjector(new NullModule());
     }
 
     public Injector createInjector(Module module) {
-        return Guice.createInjector( module, toModule() );
+        return Guice.createInjector(module, toModule());
     }
 
     public Injector createInjector(Stage stage, Module module) {
