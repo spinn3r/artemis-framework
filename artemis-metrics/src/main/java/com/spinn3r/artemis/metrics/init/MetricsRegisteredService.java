@@ -6,7 +6,6 @@ import com.spinn3r.artemis.init.BaseService;
 import com.spinn3r.metrics.kairosdb.TaggedMetrics;
 
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 /**
