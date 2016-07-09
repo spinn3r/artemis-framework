@@ -128,93 +128,11 @@ public class Advertised {
 
     /**
      * Replace the current TracerFactory with a new TracerFactory. Normally after
-     * we've initialized some other tracing system like log4j.  or if we want to wrap
-     * another object with a delegate.
+     * we've initialized some other tracing system like log4j.
      */
     protected <T, V extends T> void replace( Class source, Class<T> clazz, V object ) {
         advertisements.put( clazz, object );
         sources.put( clazz, source );
-    }
-
-    //public <T> void replace( Class source, Classes<T> classes ) {
-    //    advertisements.put( classes.getBase(), classes );
-    //    sources.put( classes.getBase(), source );
-    //}
-
-    /**
-     * <p>
-     * Perform multiple injections with the same interface.  This allows us to
-     * wrap implementations.
-     *
-     * <p>
-     * The implementations provide have methods entering in the first impl
-     * parameter and ending in the last param.
-     *
-     * <p>
-     * For example,
-     *
-     * <p>
-     * <code>
-     * advertise( ... , Foo.class, FooLogging.class, FooAuth.class, FooImpl.class )
-     * </code>
-     *
-     * <p>
-     * This would mean that we would create a Foo interface and advertise it.
-     *
-     * Methods would enter into FooLogging, be passed to FooAuth, and then finally
-     * arrive at FooImpl which is the final delegate.
-     *
-     */
-    @Deprecated
-    protected <T> T delegate( Class source,
-                              Class<T> clazz,
-                              List<Class<? extends T>> list ) {
-
-        List<Class<? extends T>> tmp = Lists.newArrayList();
-
-        for (Class<? extends T> current : list) {
-            if ( current != null ) {
-                tmp.add( current );
-            }
-        }
-
-        list = tmp;
-
-        Collections.reverse( list );
-
-        Class<? extends T> first = list.remove( 0 );
-
-        advertise( source, clazz, getInstance( first ) );
-
-        T last = null;
-
-        for (Class<? extends T> impl : list) {
-
-            if ( impl == null )
-                continue;
-
-            last = getInstance( impl );
-
-            replace( source, clazz, last );
-
-        }
-
-        return last;
-
-    }
-    @Deprecated
-    protected <T> T delegate( Class source,
-                               Class<T> clazz,
-                               Class<? extends T> c0,
-                               Class<? extends T> c1 ) {
-
-        List<Class<? extends T>> list = Lists.newArrayList();
-
-        list.add( c0 );
-        list.add( c1 );
-
-        return delegate( source, clazz, list );
-
     }
 
     /**

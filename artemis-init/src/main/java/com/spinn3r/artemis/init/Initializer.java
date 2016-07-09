@@ -7,7 +7,6 @@ import com.spinn3r.artemis.init.advertisements.Product;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.FileConfigLoader;
-import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.guice.NullModule;
 
 import java.io.File;
