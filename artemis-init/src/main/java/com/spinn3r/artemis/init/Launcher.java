@@ -53,7 +53,9 @@ public class Launcher {
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being launched.
         advertise( Launcher.class, this );
-        provider( Lifecycle.class, lifecycleProvider );
+
+        advertised.provider( this.getClass(), Lifecycle.class, lifecycleProvider );
+
     }
 
     /**
@@ -215,16 +217,6 @@ public class Launcher {
     }
 
     @Deprecated
-    public <T> void provider( Class<T> clazz, T impl ) {
-        advertised.provider( this.getClass(), clazz, new AtomicReferenceProvider<>(impl) );
-    }
-
-    @Deprecated
-    public <T> void provider( Class<T> clazz, Provider<T> provider ) {
-        advertised.provider( this.getClass(), clazz, provider );
-    }
-
-    @Deprecated
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
         advertised.advertise( this, clazz, object );
     }
@@ -247,7 +239,7 @@ public class Launcher {
     }
 
     public <T> T getInstance( Class<T> clazz ) {
-        return getInjector().getInstance( clazz );
+        return injector.getInstance( clazz );
     }
 
     public ConfigLoader getConfigLoader() {
