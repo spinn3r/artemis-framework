@@ -225,11 +225,6 @@ public class Launcher {
     }
 
     @Deprecated
-    public <T,V extends T> void advertise( Class<T> clazz, Class<V> impl ) {
-        advertised.advertise( this, clazz, impl );
-    }
-
-    @Deprecated
     public <T, V extends T> void advertise( Class<T> clazz, V object ) {
         advertised.advertise( this, clazz, object );
     }
