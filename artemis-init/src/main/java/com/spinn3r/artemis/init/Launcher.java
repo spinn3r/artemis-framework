@@ -317,6 +317,10 @@ public class Launcher {
             return this;
         }
 
+        public Builder setCaller(String caller) {
+            return setCaller(new Caller(caller));
+        }
+
         public Builder setCaller(Class<?> clazz) {
             return setCaller(new Caller(clazz));
         }
