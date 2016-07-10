@@ -19,7 +19,8 @@ public class TestLauncher {
         this.injector = launcher.getInjector();
     }
 
-    public <T> SpyReplacement<T> replaceWithSpy( Class<T> clazz ) {
+    public <T> SpyReplacement<T>
+    replaceWithSpy( Class<T> clazz ) {
         T instance = injector.getInstance( clazz );
         launcher.replace( clazz, spy( instance ) );
         return new SpyReplacement<>( instance );
