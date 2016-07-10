@@ -54,7 +54,7 @@ public class Launcher {
         // to call stop on itself after being launched.
 
         advertised.advertise(this.getClass(), Launcher.class, this);
-        advertised.provider( this.getClass(), Lifecycle.class, lifecycleProvider );
+        advertised.provider(this.getClass(), Lifecycle.class, lifecycleProvider);
 
     }
 
@@ -157,11 +157,11 @@ public class Launcher {
 
     }
 
-    public void launch0( LaunchHandler launchHandler, Service... services  ) throws Exception {
+    private void launch0( LaunchHandler launchHandler, Service... services  ) throws Exception {
         launch0( launchHandler, new Services( services ) );
     }
 
-    public void launch0( LaunchHandler launchHandler, Services newServices ) throws Exception {
+    private void launch0( LaunchHandler launchHandler, Services newServices ) throws Exception {
 
         threadSnapshot.addAll( ThreadSnapshots.create() );
 
@@ -214,11 +214,6 @@ public class Launcher {
 
     public void include( ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
-    }
-
-    @Deprecated
-    public <T, V extends T> void replace( Class<T> clazz, V object ) {
-        advertised.replace( this, clazz, object );
     }
 
     public void verify() {

@@ -47,10 +47,9 @@ public class Initializer {
             this.configLoader = configLoader.get();
         }
 
-        this.launcher = Launcher
-                          .newBuilder(this.configLoader)
-                          .setModule(this.module)
-                          .build();
+        this.launcher = Launcher.newBuilder(this.configLoader)
+                                .setModule(this.module)
+                                .build();
 
         Advertised advertised = launcher.advertised;
 
