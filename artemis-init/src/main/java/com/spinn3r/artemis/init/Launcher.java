@@ -52,8 +52,8 @@ public class Launcher {
 
         // advertise myself so I can inject it if we want a command to be able
         // to call stop on itself after being launched.
-        advertise( Launcher.class, this );
 
+        advertised.advertise(this.getClass(), Launcher.class, this);
         advertised.provider( this.getClass(), Lifecycle.class, lifecycleProvider );
 
     }
@@ -214,11 +214,6 @@ public class Launcher {
 
     public void include( ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
-    }
-
-    @Deprecated
-    public <T, V extends T> void advertise( Class<T> clazz, V object ) {
-        advertised.advertise( this, clazz, object );
     }
 
     @Deprecated
