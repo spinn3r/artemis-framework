@@ -85,11 +85,6 @@ public abstract class BaseService extends AbstractModule implements Service {
         return advertised.createInjector();
     }
 
-    @Deprecated
-    protected <T> T getInstance( Class<T> clazz ) {
-        return createInjector().getInstance( clazz );
-    }
-
     @Override
     public void init() {
 
