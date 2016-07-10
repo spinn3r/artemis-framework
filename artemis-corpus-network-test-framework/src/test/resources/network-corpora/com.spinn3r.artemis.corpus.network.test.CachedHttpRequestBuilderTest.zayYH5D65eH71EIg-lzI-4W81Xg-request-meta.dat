@@ -1,0 +1,10 @@
+{
+  "resource" : "http://localhost:8865/evaluate?response=%7B%22status%22%3A200%2C%22contentType%22%3A%22text%2Fplain%22%2C%22characterEncoding%22%3A%22utf-8%22%2C%22headers%22%3A%7B%7D%2C%22cookies%22%3A%5B%5D%7D",
+  "requestHeadersMap" : {
+    "X-foo" : "bar"
+  },
+  "cookies" : { },
+  "outputContent" : null,
+  "outputContentEncoding" : null,
+  "outputContentType" : null
+}
