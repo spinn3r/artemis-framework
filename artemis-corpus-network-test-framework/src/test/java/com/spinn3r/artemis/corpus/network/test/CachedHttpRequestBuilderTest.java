@@ -21,6 +21,7 @@ import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
 import com.spinn3r.artemis.util.text.MapFormatter;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Map;
@@ -75,6 +76,7 @@ public class CachedHttpRequestBuilderTest extends BaseLauncherTest {
     }
 
     @Test
+    @Ignore
     public void testGetWithCustomHeaders() throws Exception {
 
         String link = new ResponseDescriptor.Builder()
