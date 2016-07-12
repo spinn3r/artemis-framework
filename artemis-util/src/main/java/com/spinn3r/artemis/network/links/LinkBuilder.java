@@ -1,7 +1,9 @@
+
 package com.spinn3r.artemis.network.links;
 
+import com.google.common.net.UrlEscapers;
+
 import java.net.URI;
-import java.net.URLEncoder;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -26,6 +28,13 @@ public class LinkBuilder {
         this.host = uri.getHost();
         this.port = uri.getPort();
         this.path = uri.getPath();
+    }
+
+    public LinkBuilder(String scheme, String host, int port, String path) {
+        this.scheme = scheme;
+        this.host = host;
+        this.port = port;
+        this.path = path;
     }
 
     public LinkBuilder(URI uri, LinkedHashMap<String,String> parameters) {
@@ -107,7 +116,6 @@ public class LinkBuilder {
         return format();
     }
 
-    @SuppressWarnings( "deprecation" )
     protected static String join( Map<String,String> parameters ) {
 
         StringBuilder buff = new StringBuilder();
@@ -122,8 +130,12 @@ public class LinkBuilder {
 
             if ( entry.getValue() != null ) {
 
+                String escapedValue = UrlEscapers
+                                        .urlFormParameterEscaper()
+                                        .escape((entry.getValue()));
+
                 buff.append( "=" );
-                buff.append( URLEncoder.encode( entry.getValue() ) );
+                buff.append(escapedValue);
 
             }
 

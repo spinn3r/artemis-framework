@@ -16,7 +16,6 @@ import com.spinn3r.artemis.util.misc.Base64;
 
 import java.io.IOException;
 import java.util.Map;
-import java.util.TreeMap;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -145,6 +144,8 @@ public class NetworkCorporaCache implements ContentFetcher {
                       link, UPDATE_MODE_PROPERTY_NAME ) );
                 }
 
+            } else {
+                System.out.printf("Reading URL from cache: %s\n", link);
             }
 
             String contentWithEncoding = cache.read( key );
@@ -216,7 +217,7 @@ public class NetworkCorporaCache implements ContentFetcher {
             key = key + keySuffix;
 
             if ( cache.contains( key ) ) {
-                String json = cache.read( key );
+                String json = cache.read(key );
                 return JSON.fromJSON( clazz, json );
             }
 

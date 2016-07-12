@@ -17,9 +17,6 @@
  */
 package com.spinn3r.artemis.corpus.test;
 
-import org.junit.Assert;
-import org.junit.ComparisonFailure;
-
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Objects;

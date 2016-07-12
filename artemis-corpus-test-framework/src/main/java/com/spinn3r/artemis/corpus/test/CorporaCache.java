@@ -73,7 +73,7 @@ public class CorporaCache {
 
     }
 
-    public String read( String key ) throws IOException {
+    public String read(String key) throws IOException {
 
         String path = computePath( key );
 
