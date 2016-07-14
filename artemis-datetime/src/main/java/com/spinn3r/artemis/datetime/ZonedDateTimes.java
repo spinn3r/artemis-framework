@@ -1,7 +1,6 @@
 package com.spinn3r.artemis.datetime;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,8 +12,14 @@ import java.util.Optional;
  */
 public class ZonedDateTimes {
 
-    public static Date toDate( ZonedDateTime zonedDateTime ) {
+    private static final ZoneId UTC = ZoneId.of("UTC");
+
+    public static Date toDate(ZonedDateTime zonedDateTime ) {
         return Date.from( zonedDateTime.toInstant() );
+    }
+
+    public static ZonedDateTime fromDate(Date date) {
+        return ZonedDateTime.ofInstant(date.toInstant(), UTC);
     }
 
     public static Optional<Date> toDate( Optional<ZonedDateTime> zonedDateTime ) {
