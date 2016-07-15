@@ -873,6 +873,64 @@ public abstract class BaseContent
 
     }
 
+    public enum GeoMethod {
+
+        /**
+         * The default strategy was used which is the location specified in the content.
+         */
+        DEFAULT( 0 ) ,
+
+        /**
+         * The location of the source was used to compute the geo data.
+         */
+        SOURCE_LOCATION( 1 ) ,
+
+        ;
+
+        GeoMethod( int value ) {
+            this.value = value;
+        }
+
+        private int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        public static GeoMethod fromValue( int value ) {
+
+            switch( value ) {
+
+                case 0:
+                    return DEFAULT;
+
+                case 1:
+                    return SOURCE_LOCATION;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+        public static GeoMethod fromValue( String value ) {
+
+            switch( value ) {
+
+                case "DEFAULT":
+                    return DEFAULT;
+
+                case "SOURCE_LOCATION":
+                    return SOURCE_LOCATION;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+    }
+
     public enum Card {
 
         /**
@@ -3063,6 +3121,22 @@ public abstract class BaseContent
     public boolean hasDefinedGeoCity = false;
 
     protected String geoCity;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasGeoMethod = 0;
+
+    public int hasModifiedGeoMethod = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedGeoMethod = false;
+
+    protected GeoMethod geoMethod;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -15173,7 +15247,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: geo_point , name: geo_point
+     * Schema type: text , name: geo_point
      * </p>
      */
     public String getGeoPoint() {
@@ -15192,7 +15266,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: geo_point , name: geo_point
+     * Schema type: text , name: geo_point
      * </p>
      */
     public Optional<String> getGeoPointAsOptional() {
@@ -15214,7 +15288,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: geo_point , name: geo_point
+     * Schema type: text , name: geo_point
      * </p>
      */
     public String getGeoPoint ( String _default ) {
@@ -15880,6 +15954,91 @@ public abstract class BaseContent
      */
     public boolean hasDefinedGeoCity () {
         return this.hasDefinedGeoCity;
+    }
+
+    public BaseContent setGeoMethod ( GeoMethod geoMethod ) {
+
+        ++this.hasGeoMethod;
+        ++this.hasModifiedGeoMethod;
+
+        this.geoMethod = geoMethod;
+
+        hasDefinedGeoMethod = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Contains the name of the field used to parse the geo data
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: geo_method
+     * </p>
+     */
+    public GeoMethod getGeoMethod() {
+
+        if ( this.constructed == false && this.hasGeoMethod == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.geoMethod" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.geoMethod;
+    }
+
+    /**
+     *
+     * Get the value of a member and provide a default if it's not defined.
+     *
+     * <p>
+     * Contains the name of the field used to parse the geo data
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: geo_method
+     * </p>
+     */
+    public GeoMethod getGeoMethod ( GeoMethod _default ) {
+
+        if ( ! hasGeoMethod() ) {
+            return _default;
+        }
+
+        return getGeoMethod();
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasGeoMethod () {
+        return this.hasGeoMethod > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearGeoMethod () {
+        this.hasGeoMethod = 0;
+        this.hasModifiedGeoMethod = 0;
+        this.hasDefinedGeoMethod = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedGeoMethod () {
+        return this.hasModifiedGeoMethod > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedGeoMethod () {
+        return this.hasDefinedGeoMethod;
     }
 
     public BaseContent setRatingValue ( String ratingValue ) {
@@ -19897,6 +20056,10 @@ public abstract class BaseContent
             setGeoCity( obj.getGeoCity() );
         }
 
+        if ( obj.hasGeoMethod() ) {
+            setGeoMethod( obj.getGeoMethod() );
+        }
+
         if ( obj.hasRatingValue() ) {
             setRatingValue( obj.getRatingValue() );
         }
@@ -20834,6 +20997,10 @@ public abstract class BaseContent
             setGeoCity( obj.getGeoCity() );
         }
 
+        if ( geoMethod == null && obj.hasGeoMethod() && obj.getGeoMethod() != null ) {
+            setGeoMethod( obj.getGeoMethod() );
+        }
+
         if ( ! hasRatingValue() && obj.hasRatingValue() ) {
             setRatingValue( obj.getRatingValue() );
         }
@@ -21290,6 +21457,8 @@ public abstract class BaseContent
         this.hasModifiedGeoState = 0;
 
         this.hasModifiedGeoCity = 0;
+
+        this.hasModifiedGeoMethod = 0;
 
         this.hasModifiedRatingValue = 0;
 
@@ -21849,6 +22018,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedGeoCity() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedGeoMethod() ) {
             return true;
         }
 
@@ -23030,6 +23203,14 @@ public abstract class BaseContent
 
             buff.append( "geoCity=" );
             buff.append( geoCity );
+            buff.append( " " );
+
+        }
+
+        if ( hasGeoMethod > 0 ) {
+
+            buff.append( "geoMethod=" );
+            buff.append( geoMethod );
             buff.append( " " );
 
         }
@@ -24413,6 +24594,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( geoCity, cmp.geoCity ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasGeoMethod() != cmp.hasGeoMethod() ) {
+            return false;
+        }
+
+        if ( geoMethod != cmp.geoMethod ) {
             return false;
         }
 
@@ -26812,6 +27002,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member geo_method from int
+
+            __name = "geoMethod";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "geo_method";
+            }
+
+            if ( this.hasGeoMethod > 0 ) {
+
+                if ( geoMethod != null )
+                    generator.writeStringField( __name, geoMethod.toString() );
+
+            }
+
             // ***** json encode member rating_value from String
 
             __name = "ratingValue";
@@ -28646,6 +28851,15 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setGeoCity( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member geo_method from int
+
+                case "geo_method":
+
+                    // FIXME not implemented yet.
 
                     break;
 
