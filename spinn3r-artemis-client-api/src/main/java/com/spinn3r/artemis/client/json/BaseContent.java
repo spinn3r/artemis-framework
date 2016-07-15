@@ -15247,7 +15247,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: text , name: geo_point
+     * Schema type: geo_point , name: geo_point
      * </p>
      */
     public String getGeoPoint() {
@@ -15266,7 +15266,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: text , name: geo_point
+     * Schema type: geo_point , name: geo_point
      * </p>
      */
     public Optional<String> getGeoPointAsOptional() {
@@ -15288,7 +15288,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: text , name: geo_point
+     * Schema type: geo_point , name: geo_point
      * </p>
      */
     public String getGeoPoint ( String _default ) {
