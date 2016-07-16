@@ -109,7 +109,8 @@ public class Initializer {
         return configLoader;
     }
 
-    public static class Builder {
+    public static class
+    Builder {
 
         private Optional<ConfigLoader> configLoader = Optional.empty();
 

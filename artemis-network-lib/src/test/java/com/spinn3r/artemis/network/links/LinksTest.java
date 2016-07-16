@@ -15,8 +15,9 @@ public class LinksTest {
         assertTrue(Links.isValid("http://voanews.com/flashembed.aspx?t=vid&id=3399935&w=100%&h=600&skin=embededfullscreen"));
         assertTrue(Links.isValid("http://rferl.org/flashembed.aspx?t=vid&id=27832986&w=100%&h=600&skin=embededfullscreen"));
         assertTrue(Links.isValid("http://example.com:8081/1.html"));
-        assertFalse(Links.isValid("ftp://cnn.com"));
+        assertTrue(Links.isValid("https://www.elitefitness.com/forum/steroid-laws/qsymia--diet-drug-speed-1485449.html"));
 
+        assertFalse(Links.isValid("ftp://cnn.com"));
         assertFalse(Links.isValid(null));
         assertFalse(Links.isValid(""));
         assertFalse(Links.isValid("http://example.com foo.bar"));
