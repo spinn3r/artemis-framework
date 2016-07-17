@@ -74,6 +74,7 @@
         <module>artemis-http-test-framework</module>
         <module>artemis-network-test</module>
         <module>artemis-network-test-framework</module>
+        <module>artemis-objects-formatter</module>
     </modules>
 
     <description>

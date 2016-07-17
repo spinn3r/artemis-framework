@@ -25,9 +25,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.4</version>
+            <groupId>com.spinn3r.artemis.objects.formatter</groupId>
+            <artifactId>artemis-objects-formatter</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>
