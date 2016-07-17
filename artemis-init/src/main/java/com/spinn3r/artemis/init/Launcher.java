@@ -136,7 +136,7 @@ public class Launcher {
                 services.add( current );
                 started.add( serviceReference );
 
-            } catch ( ConfigurationException|CreationException e ) {
+            } catch (ConfigurationException|CreationException e) {
 
                 String message = String.format( "Could not create service %s.  \n\nStarted services are: \n%s\nAdvertised bindings are: \n%s",
                                                 serviceReference.getBacking().getName(), started.format(), advertised.format() );
