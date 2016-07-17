@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init;
 
+import com.google.common.base.Stopwatch;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
@@ -106,6 +107,10 @@ public class Launcher {
      */
     public Launcher launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
 
+        info( "Launching...");
+
+        Stopwatch stopwatch = Stopwatch.createStarted();
+
         this.serviceReferences = serviceReferences;
 
         info( "Launching services: \n%s", serviceReferences.format() );
@@ -150,6 +155,7 @@ public class Launcher {
         }
 
         info( "Now running with the following advertisements: \n%s", advertised.format() );
+        info( "Launching... done (%s)", stopwatch.stop());
 
         lifecycleProvider.set( Lifecycle.STARTED );
 

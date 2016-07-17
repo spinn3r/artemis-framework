@@ -72,23 +72,23 @@ public class ServicesTool {
 
         for (Service service : services) {
 
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
             TracerFactory tracerFactory = launcher.advertised.tracerFactorySupplier.get();
 
             Tracer tracer = tracerFactory.create( launcher );
 
+            tracer.info( "Starting service: %s ...", service.getClass().getName() );
+
             try {
 
-                tracer.info( "Starting service: %s ...", service.getClass().getName() );
-
-                Stopwatch stopwatch = Stopwatch.createStarted();
-
                 service.start();
-
-                tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
 
             } catch ( Exception e ) {
                 throw new Exception( "Failed to start: " + service.getClass().getName(), e );
             }
+
+            tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
 
         }
 
