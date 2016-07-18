@@ -474,7 +474,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             //local documents)
             if ( contentLength > getMaxContentLength() && ! getResource().startsWith( "file:" ) ) {
 
-                //NOTE: make 100% sure this doens't just go ahead and download the
+                //NOTE: make 100% sure this does not just go ahead and download the
                 //file FIRST before doing a HEAD.  I think that's what happens but I
                 //might be wrong.
 
@@ -487,12 +487,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             long after = System.currentTimeMillis();
 
             this.duration = (int)(after - before);
-
-            // TODO: we might also want to log the effective cookies used in the content
-            // store but this requires additional work.
-
-            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s proxy=%s",
-                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );
 
         }
 
@@ -529,6 +523,16 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             throw ne;
         } catch ( IOException e ) {
             throw newNetworkException( e );
+        } finally {
+
+            int contentLength = this.data != null ? this.data.length : -1;
+
+            // TODO: we might also want to log the effective cookies used in the content
+            // store but this requires additional work.
+
+            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s, contentLength=%,d proxy=%s",
+                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), contentLength, proxy );
+
         }
 
     }
