@@ -488,6 +488,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             this.duration = (int)(after - before);
 
+            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s, proxy=%s",
+                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );
         }
 
         try {
@@ -525,6 +527,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             throw newNetworkException( e );
         } finally {
 
+            /*
             int contentLength = this.data != null ? this.data.length : -1;
 
             // TODO: we might also want to log the effective cookies used in the content
@@ -532,7 +535,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s, contentLength=%,d proxy=%s",
                       logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), contentLength, proxy );
-
+            */
         }
 
     }
