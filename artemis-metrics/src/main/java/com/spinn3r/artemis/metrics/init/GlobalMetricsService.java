@@ -2,6 +2,8 @@ package com.spinn3r.artemis.metrics.init;
 
 import com.codahale.metrics.JmxReporter;
 import com.codahale.metrics.MetricRegistry;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.init.Config;
@@ -9,7 +11,9 @@ import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.sequence.GlobalMutex;
 import com.spinn3r.artemis.sequence.GlobalMutexExpiredException;
+import com.spinn3r.artemis.threads.Shutdownable;
 import com.spinn3r.artemis.threads.ShutdownableIndex;
+import com.spinn3r.artemis.threads.Shutdownables;
 import com.spinn3r.artemis.util.misc.ExecutorServices;
 import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 import com.spinn3r.metrics.kairosdb.KairosDb;
@@ -18,6 +22,7 @@ import com.spinn3r.metrics.kairosdb.ReportWaiter;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -46,7 +51,7 @@ public class GlobalMetricsService extends MetricsService {
 
     private final Provider<GlobalMutex> globalMutexProvider;
 
-    private final ShutdownableIndex shutdownableIndex = new ShutdownableIndex(GlobalMetricsService.class);
+    private final Map<String,Shutdownable> shutdownableMap = Maps.newConcurrentMap();
 
     @Inject
     GlobalMetricsService(MetricsConfig metricConfig, Provider<Hostname> hostnameProvider, Role role, Provider<GlobalMutex> globalMutexProvider) {
@@ -91,7 +96,7 @@ public class GlobalMetricsService extends MetricsService {
         ScheduledExecutorService scheduledExecutorService
           = Executors.newSingleThreadScheduledExecutor(new NamedThreadFactory(KairosDbReporter.class, Thread.MAX_PRIORITY));
 
-        shutdownableIndex.put(ScheduledExecutorService.class, () -> {
+        shutdownableMap.put(ScheduledExecutorService.class.getName(), () -> {
             ExecutorServices.shutdownNowAndAwaitTermination(scheduledExecutorService);
         });
 
@@ -116,7 +121,7 @@ public class GlobalMetricsService extends MetricsService {
 
         kairosDbReporter.start( reporter.getInterval(), TimeUnit.MILLISECONDS );
 
-        shutdownableIndex.put(KairosDbReporter.class, () -> {
+        shutdownableMap.put(KairosDbReporter.class.getName(), () -> {
             kairosDbReporter.stop();
         });
 
@@ -129,7 +134,7 @@ public class GlobalMetricsService extends MetricsService {
         jmxReporter = JmxReporter.forRegistry( metricRegistry ).build();
         jmxReporter.start();
 
-        shutdownableIndex.put(JmxReporter.class, () -> {
+        shutdownableMap.put(JmxReporter.class.getName(), () -> {
             jmxReporter.stop();
         });
 
@@ -138,7 +143,8 @@ public class GlobalMetricsService extends MetricsService {
     @Override
     public void stop() throws Exception {
 
-        shutdownableIndex.shutdown();
+        Shutdownables.shutdown(new ShutdownableIndex(getClass(),
+                                                     ImmutableMap.copyOf(shutdownableMap)));
 
     }
 
