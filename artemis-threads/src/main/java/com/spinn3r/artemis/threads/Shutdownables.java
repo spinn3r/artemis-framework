@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.spinn3r.artemis.util.misc.Throwables;
 import com.spinn3r.log5j.Logger;
 
-import java.util.Collection;
+import java.io.Closeable;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +25,9 @@ public class Shutdownables {
             if ( shutdownableIndex.size() == 0 )
                 continue;
 
-            log.info( "Shutting down %,d shutdownable: %s...", shutdownableIndex.size(), shutdownableIndex.getName() );
+            log.info( "Shutting down %,d shutdownable: %s...", shutdownableIndex.size(), shutdownableIndex.getOwner().getName() );
 
-            for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.entrySet()) {
+            for (Map.Entry<String, ? extends Shutdownable> entry : shutdownableIndex.getBacking().entrySet()) {
 
                 String identifier = entry.getKey();
                 Shutdownable shutdownable = entry.getValue();
@@ -48,7 +48,7 @@ public class Shutdownables {
 
             }
 
-            log.info( "Shutting down %,d shutdownables: %s...done", shutdownableIndex.size(), shutdownableIndex.getName() );
+            log.info( "Shutting down %,d shutdownables: %s...done", shutdownableIndex.size(), shutdownableIndex.getOwner().getName() );
 
 
         }
@@ -58,27 +58,8 @@ public class Shutdownables {
 
     }
 
-    public static void shutdown(Shutdownable... shutdownables) throws Exception {
-
-        List<Exception> exceptions = Lists.newArrayList();
-
-        for (Shutdownable shutdownable : shutdownables) {
-
-            try {
-
-                if ( shutdownable == null )
-                    continue;
-
-                shutdownable.shutdown();
-            } catch (Exception e) {
-                exceptions.add( e );
-            }
-
-        }
-
-        if ( exceptions.size() > 0 )
-            throw Throwables.createMultiException(exceptions );
-
+    public static Shutdownable toShutdownable(Closeable closeable) {
+        return closeable::close;
     }
 
 }

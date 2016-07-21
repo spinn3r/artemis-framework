@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.threads;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 import java.util.Map;
@@ -8,86 +9,26 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Contains an index of shutdownables and a name that represents them.
  */
-public class ShutdownableIndex implements Shutdownable {
+public class ShutdownableIndex {
 
-    private final String name;
+    private final Class<?> owner;
 
-    private final ConcurrentHashMap<String,Shutdownable> backing = new ConcurrentHashMap<>();
+    private final ImmutableMap<String,? extends Shutdownable> backing;
 
-    public ShutdownableIndex(String name) {
-        this.name = name;
+    public ShutdownableIndex(Class<?> owner, ImmutableMap<String,? extends Shutdownable> shutdownables) {
+        this.owner = owner;
+        this.backing = shutdownables;
     }
 
-    public ShutdownableIndex(Class<?> clazz) {
-        this(clazz.getName());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void put(Class<?> clazz, Shutdownable entry) {
-        put(clazz.getName(), entry);
-    }
-
-    public void put(String key, Shutdownable entry) {
-        if (backing.containsKey( key )) {
-            throw new IllegalStateException("Entry with key already exists: " + key);
-        }
-
-        backing.put(key, entry);
-
-    }
-
-    public void putAll(Map<String,Shutdownable> newEntries) {
-        for (Map.Entry<String, Shutdownable> entry : newEntries.entrySet()) {
-            put(entry.getKey(), entry.getValue());
-        }
-    }
-
-    public void putAll(ShutdownableIndex shutdownableIndex) {
-        putAll(shutdownableIndex.backing);
-    }
-
-    public void add(Shutdownable shutdownable) {
-        put(shutdownable.getClass().getName(), shutdownable);
+    public Class<?> getOwner() {
+        return owner;
     }
 
     public int size() {
         return backing.size();
     }
 
-    public ImmutableSet<Map.Entry<String, ? extends Shutdownable>> entrySet() {
-        return ImmutableSet.copyOf(backing.entrySet());
+    protected ImmutableMap<String, ? extends Shutdownable> getBacking() {
+        return backing;
     }
-
-    @Override
-    public void shutdown() throws Exception {
-        Shutdownables.shutdown(this);
-    }
-
-    public static class Builder {
-
-        private final ShutdownableIndex result;
-
-        public Builder(String name) {
-            result = new ShutdownableIndex(name);
-        }
-
-        public Builder(Class<?> clazz) {
-            this(clazz.getName());
-
-        }
-
-        public Builder with(ShutdownableIndex shutdownableIndex) {
-            result.putAll(shutdownableIndex);
-            return this;
-        }
-
-        public ShutdownableIndex build() {
-            return result;
-        }
-
-    }
-
 }

@@ -1,11 +1,14 @@
 package com.spinn3r.artemis.init;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.google.common.base.Charsets;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.CharStreams;
 import com.jasonclawson.jackson.dataformat.hocon.HoconFactory;
 import com.spinn3r.artemis.init.config.ConfigLoader;
+import com.spinn3r.artemis.json.JSON;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -135,6 +138,8 @@ public class ServiceInitializer {
             try {
 
                 ObjectMapper mapper = new ObjectMapper( new HoconFactory() );
+                mapper.registerModule(new Jdk8Module());
+                mapper.registerModule(new GuavaModule());
 
                 return mapper.readValue( data, clazz );
 
