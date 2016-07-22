@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.ref;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_READ_TIMEOUT;
 import static org.junit.Assert.*;
 
 public class DefaultHttpRequestBuilderTest {
@@ -152,6 +153,24 @@ public class DefaultHttpRequestBuilderTest {
             .getContentWithEncoding();
 
     }
+
+    @Test
+    public void testCustomHttpTimeoutsWithFailure2() throws Exception {
+
+        try {
+            String result =
+              httpRequestBuilder
+                .get( "https://httpbin.org/delay/5" )
+                .withConnectTimeout( 1_000 )
+                .withReadTimeout( 1_000 )
+                .execute()
+                .getContentWithEncoding();
+        } catch (NetworkException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Test
     public void testHttpPost() throws Exception {
@@ -308,9 +327,8 @@ public class DefaultHttpRequestBuilderTest {
 
         } catch (NetworkException e) {
 
-            assertEquals( URLResourceRequest.STATUS_READ_TIMEOUT, request.getResponseCode() );
-
-            assertEquals( URLResourceRequest.STATUS_READ_TIMEOUT, e.getResponseCode() );
+            assertEquals( STATUS_READ_TIMEOUT, request.getResponseCode() );
+            assertEquals( STATUS_READ_TIMEOUT, e.getResponseCode() );
 
             throw e;
 
@@ -371,6 +389,8 @@ public class DefaultHttpRequestBuilderTest {
                       contentWithEncoding );
 
     }
+
+
 
     @Test
     public void testNotFound() throws Exception {

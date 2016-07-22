@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network;
 
+import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.log5j.Logger;
 
 import java.io.IOException;
@@ -7,6 +8,7 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
+import java.util.Optional;
 
 /**
  *
@@ -43,12 +45,27 @@ public class NetworkException extends IOException {
 
     public NetworkException( String message, Throwable t ) {
         super( message + ": " + t.getClass().getName() + ": " + t.getMessage() );
-        initCause( t );
+        init(t);
     }
 
     public NetworkException( Throwable t ) {
         super( t.getClass().getName() + ": " + t.getMessage() );
-        initCause( t );
+        init(t);
+    }
+
+    /**
+     *
+     * Create a new <code>NetworkException</code> instance.
+     *
+     *
+     */
+    public NetworkException( Exception e,
+                             ResourceRequest request,
+                             URL _url,
+                             URLConnection _urlConnection ) {
+
+        this( e.getMessage(), e, request, _url, _urlConnection );
+
     }
 
     /**
@@ -66,6 +83,7 @@ public class NetworkException extends IOException {
         this._url = _url;
         this._urlConnection = _urlConnection;
 
+        // FIXME: this needs to look at the computed codes...
         boolean timeout = e instanceof SocketTimeoutException;
 
         // do not attempt to read the status if we timed out...
@@ -74,7 +92,7 @@ public class NetworkException extends IOException {
             this.status = _urlConnection.getHeaderField( null );
         }
 
-        initCause( e );
+        init(e);
 
     }
 
@@ -83,7 +101,6 @@ public class NetworkException extends IOException {
                              URL _url,
                              URLConnection _urlConnection ) {
 
-        //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
         this._url = _url;
@@ -95,18 +112,17 @@ public class NetworkException extends IOException {
 
     }
 
-    /**
-     *
-     * Create a new <code>NetworkException</code> instance.
-     *
-     *
-     */
-    public NetworkException( Exception e,
-                             ResourceRequest request,
-                             URL _url,
-                             URLConnection _urlConnection ) {
+    private void init(Throwable t) {
 
-        this( e.getMessage(), e, request, _url, _urlConnection );
+        Optional<Integer> calculatedResponseCode = ResponseCodes.calculateFromException(t);
+
+        if ( calculatedResponseCode.isPresent()) {
+            this.responseCode = calculatedResponseCode.get();
+        } else {
+
+        }
+
+        super.initCause(t);
 
     }
 
@@ -139,47 +155,45 @@ public class NetworkException extends IOException {
 
         if ( responseCode == Integer.MIN_VALUE ) {
 
-            if ( request != null &&
-                ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                  request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
+            if ( status == null ) {
 
-                // we have a connect or read timeout so yield to this value.
-
-                responseCode = request.getResponseCode();
-
-            } else if ( status == null ) {
+                // FIXME: this will keep re-defining it since we're always MIN_VALUE
 
                 // some other type of error happened, set it to an unknown
                 // status code.
 
-                responseCode = -1;
+                responseCode = Integer.MIN_VALUE;
 
             } else {
-
-                // now parse it from the HTTP response directly.  I don't like
-                // this here but it's the only way to do it with this
-                // java.net.URL
-
-                int begin = "HTTP/1.1 ".length();
-                int offset = "200".length();
-                int end = begin + offset;
-
-                try {
-
-                    responseCode = Integer.parseInt( status.substring( begin, end ) );
-
-                } catch ( NumberFormatException e ) {
-
-                    log.warn( "Unable to parse response code in header: " + status );
-                    responseCode = -1;
-
-                }
-
+                responseCode = parseResponseCodeFromStatus(status);
             }
 
         }
 
         return responseCode;
+
+    }
+
+    private static int parseResponseCodeFromStatus(String status) {
+
+        // now parse it from the HTTP response directly.  I don't like
+        // this here but it's the only way to do it with this
+        // java.net.URL
+
+        int begin = "HTTP/1.1 ".length();
+        int offset = "200".length();
+        int end = begin + offset;
+
+        try {
+
+            return Integer.parseInt( status.substring( begin, end ) );
+
+        } catch ( NumberFormatException e ) {
+
+            log.warn( "Unable to parse response code in header: " + status );
+            return Integer.MIN_VALUE;
+
+        }
 
     }
 
@@ -191,8 +205,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+        return responseCode == HttpRequest.STATUS_CONNECT_TIMEOUT ||
+               responseCode == HttpRequest.STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 
     }

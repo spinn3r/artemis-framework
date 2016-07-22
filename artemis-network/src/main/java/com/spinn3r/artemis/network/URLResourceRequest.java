@@ -15,6 +15,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+
 /**
  * ResourceRequest implementation that uses java.net.URL as the backend.
  *
@@ -64,18 +66,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      *
      */
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
-
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a read timeout.
-     */
-    public static final int STATUS_READ_TIMEOUT    = -1024;
-
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a connect timeout.
-     */
-    public static final int STATUS_CONNECT_TIMEOUT = -1025;
 
     public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
     public static final String IF_NONE_MATCH_HEADER = "If-None-Match";
@@ -794,6 +784,9 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      *
      */
     private void handleNetworkException( NetworkException ne, IOException cause ) {
+
+        // FIXME: there are two status codes that need to be handled here...
+        // one of the netwrokException and another on the current response...
 
         // record socket timeout and connect exceptions, otherwise, use
         // the HTTP status code returned.

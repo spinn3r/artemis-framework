@@ -76,10 +76,10 @@ public class HttpRequestExecutor {
 
     private boolean isTransientHttpException(NetworkException e) {
 
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT )
+        if ( e.getResponseCode() == HttpRequest.STATUS_CONNECT_TIMEOUT )
             return true;
 
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT )
+        if ( e.getResponseCode() == HttpRequest.STATUS_READ_TIMEOUT )
             return true;
 
         return e.getResponseCode() >= 500 && e.getResponseCode() <= 599;
