@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.network;
 
+import com.spinn3r.artemis.network.builder.HttpRequest;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -24,6 +26,10 @@ public class ResponseCodes {
 
         return Optional.empty();
 
+    }
+    public static boolean isTimeoutResponseCode(int responseCode){
+        return STATUS_CONNECT_TIMEOUT == responseCode ||
+                STATUS_READ_TIMEOUT == responseCode;
     }
 
 }

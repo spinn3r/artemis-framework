@@ -4,7 +4,6 @@ import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.log5j.Logger;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
@@ -17,40 +16,51 @@ public class NetworkException extends IOException {
 
     private static Logger log = Logger.getLogger();
 
-    private ResourceRequest request = null;
-
     public Exception e = null;
 
     private URL _url = null;
 
     private URLConnection _urlConnection = null;
 
-    private int responseCode = Integer.MIN_VALUE;
+    private final int responseCode;
 
     /**
      * The status string in the HTTP response.
      *
      * Example: HTTP/1.1 200 OK
      */
-    public String status = null;
+    public final String status;
 
     public NetworkException( String message ) {
-        super( message );
+        this( message , Integer.MIN_VALUE);
     }
 
     public NetworkException( String message, int responseCode ) {
         super( message );
         this.responseCode = responseCode;
+        this.status = null;
     }
 
     public NetworkException( String message, Throwable t ) {
-        super( message + ": " + t.getClass().getName() + ": " + t.getMessage() );
-        init(t);
+        super( message == null ?
+                                    t.getClass().getName() + ": " + t.getMessage() :
+                message + ": " +    t.getClass().getName() + ": " + t.getMessage() );
+
+        Optional<Integer> responseCode = ResponseCodes.calculateFromException(t);
+        if(responseCode.isPresent()){
+            this.responseCode = responseCode.get();
+        }else {
+            this.responseCode = Integer.MIN_VALUE;
+        }
+        this.status = null;
+
+        super.initCause(t);
+
     }
 
     public NetworkException( Throwable t ) {
-        super( t.getClass().getName() + ": " + t.getMessage() );
-        init(t);
+
+        this( null, t );
     }
 
     /**
@@ -79,20 +89,34 @@ public class NetworkException extends IOException {
         super( request.getResource() + ": " + getMessageFromCause( e, message ) );
 
         this.e = e;
-        this.request = request;
         this._url = _url;
         this._urlConnection = _urlConnection;
 
-        // FIXME: this needs to look at the computed codes...
-        boolean timeout = e instanceof SocketTimeoutException;
+        Optional<Integer> responseCodeFromException = ResponseCodes.calculateFromException(e);
+
+        boolean timeout = responseCodeFromException.isPresent() && ResponseCodes.isTimeoutResponseCode(responseCodeFromException.get());
 
         // do not attempt to read the status if we timed out...
 
         if ( _urlConnection != null && ! timeout ) {
             this.status = _urlConnection.getHeaderField( null );
+        } else {
+            this.status = null;
+        }
+        Optional<Integer> parseResponseCodeFromStatus = parseResponseCodeFromStatus(status);
+
+
+        if(parseResponseCodeFromStatus.isPresent()){
+            this.responseCode = parseResponseCodeFromStatus.get();
+
+        }else if(responseCodeFromException.isPresent()){
+            this.responseCode = responseCodeFromException.get();
+
+        }else {
+            this.responseCode = Integer.MIN_VALUE;
         }
 
-        init(e);
+        super.initCause(e);
 
     }
 
@@ -102,27 +126,22 @@ public class NetworkException extends IOException {
                              URLConnection _urlConnection ) {
 
         super( request.getResource() + ": " + message );
-        this.request = request;
         this._url = _url;
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
             this.status = _urlConnection.getHeaderField( null );
-        }
-
-    }
-
-    private void init(Throwable t) {
-
-        Optional<Integer> calculatedResponseCode = ResponseCodes.calculateFromException(t);
-
-        if ( calculatedResponseCode.isPresent()) {
-            this.responseCode = calculatedResponseCode.get();
+            Optional<Integer> responseCodeFromStatus = parseResponseCodeFromStatus(status);
+            if(responseCodeFromStatus.isPresent()){
+                this.responseCode = responseCodeFromStatus.get();
+            }else{
+                this.responseCode = Integer.MIN_VALUE;
+            }
         } else {
+            this.status = null;
+            this.responseCode = Integer.MIN_VALUE;
 
         }
-
-        super.initCause(t);
 
     }
 
@@ -153,29 +172,14 @@ public class NetworkException extends IOException {
      */
     public int getResponseCode() {
 
-        if ( responseCode == Integer.MIN_VALUE ) {
-
-            if ( status == null ) {
-
-                // FIXME: this will keep re-defining it since we're always MIN_VALUE
-
-                // some other type of error happened, set it to an unknown
-                // status code.
-
-                responseCode = Integer.MIN_VALUE;
-
-            } else {
-                responseCode = parseResponseCodeFromStatus(status);
-            }
-
-        }
-
         return responseCode;
-
     }
 
-    private static int parseResponseCodeFromStatus(String status) {
+    private static Optional<Integer> parseResponseCodeFromStatus(String status) {
 
+        if(status == null){
+            return Optional.empty();
+        }
         // now parse it from the HTTP response directly.  I don't like
         // this here but it's the only way to do it with this
         // java.net.URL
@@ -186,12 +190,12 @@ public class NetworkException extends IOException {
 
         try {
 
-            return Integer.parseInt( status.substring( begin, end ) );
+            return Optional.of(Integer.parseInt( status.substring( begin, end ) ));
 
-        } catch ( NumberFormatException e ) {
+        } catch ( NumberFormatException | IndexOutOfBoundsException e1) {
 
             log.warn( "Unable to parse response code in header: " + status );
-            return Integer.MIN_VALUE;
+            return Optional.empty();
 
         }
 
