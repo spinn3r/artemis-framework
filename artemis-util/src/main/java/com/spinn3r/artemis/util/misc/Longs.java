@@ -1,12 +1,9 @@
 package com.spinn3r.artemis.util.misc;
 
-import com.google.common.base.Preconditions;
-import com.google.common.primitives.Doubles;
-
 import java.util.Collection;
 import java.util.List;
 
-import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
@@ -76,5 +73,36 @@ public class Longs {
 
     }
 
+    public static long max(Collection<Long> values) {
+
+        if (values.size() == 0 )
+            throw new IllegalArgumentException("Values has no entries");
+
+        long max = Long.MIN_VALUE;
+
+        for (Long value : values) {
+            if ( value > max)
+                max = value;
+        }
+
+        return max;
+
+    }
+
+    public static long min(Collection<Long> values) {
+
+        if (values.size() == 0 )
+            throw new IllegalArgumentException("Values has no entries");
+
+        long min = Long.MAX_VALUE;
+
+        for (Long value : values) {
+            if ( value < min)
+                min = value;
+        }
+
+        return min;
+
+    }
 
 }
