@@ -204,12 +204,13 @@ public class NetworkException extends IOException {
      */
     public boolean isProxyError() {
 
+        if (_urlConnection == null) {
+            return false;
+        }
+
         String squidError =_urlConnection.getHeaderField( "X-Squid-Error" );
 
-        if ( squidError != null )
-            return true;
-
-        return false;
+        return squidError != null;
 
     }
 
