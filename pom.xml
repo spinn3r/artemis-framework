@@ -75,6 +75,7 @@
         <module>artemis-network-test</module>
         <module>artemis-network-test-framework</module>
         <module>artemis-objects-formatter</module>
+        <module>artemis-background-scanner-framework</module>
     </modules>
 
     <description>

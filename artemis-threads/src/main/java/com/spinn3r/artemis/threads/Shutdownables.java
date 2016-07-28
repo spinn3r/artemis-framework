@@ -7,6 +7,8 @@ import com.spinn3r.log5j.Logger;
 import java.io.Closeable;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 
 /**
  *
@@ -60,6 +62,10 @@ public class Shutdownables {
 
     public static Shutdownable toShutdownable(Closeable closeable) {
         return closeable::close;
+    }
+
+    public static Shutdownable toShutdownable(ExecutorService executorService) {
+        return executorService::shutdown;
     }
 
 }
