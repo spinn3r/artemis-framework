@@ -64,8 +64,4 @@ public class Shutdownables {
         return closeable::close;
     }
 
-    public static Shutdownable toShutdownable(ExecutorService executorService) {
-        return executorService::shutdown;
-    }
-
 }

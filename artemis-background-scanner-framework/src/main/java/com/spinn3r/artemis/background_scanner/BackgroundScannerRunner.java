@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.background_scanner;
 
 import com.google.common.collect.ImmutableMap;
+import com.spinn3r.artemis.threads.ExecutorServices;
 import com.spinn3r.artemis.threads.Shutdownable;
 import com.spinn3r.artemis.threads.ShutdownableIndex;
 import com.spinn3r.artemis.threads.Shutdownables;
@@ -8,6 +9,8 @@ import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import static com.spinn3r.artemis.threads.ExecutorServices.shutdownAndAwaitTermination;
 
 /**
  * Handles starting all the background services and hiding all the complexities
@@ -44,7 +47,7 @@ public class BackgroundScannerRunner implements Shutdownable {
 
         Shutdownables.shutdown(new ShutdownableIndex(BackgroundScannerRunner.class,
                                                      ImmutableMap.of("runner", this.runner,
-                                                                     "executorService", Shutdownables.toShutdownable(executorService))));
+                                                                     "executorService", shutdownAndAwaitTermination(executorService))));
 
     }
 

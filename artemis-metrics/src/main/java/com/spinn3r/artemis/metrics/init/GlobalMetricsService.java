@@ -14,7 +14,7 @@ import com.spinn3r.artemis.sequence.GlobalMutexExpiredException;
 import com.spinn3r.artemis.threads.Shutdownable;
 import com.spinn3r.artemis.threads.ShutdownableIndex;
 import com.spinn3r.artemis.threads.Shutdownables;
-import com.spinn3r.artemis.util.misc.ExecutorServices;
+import com.spinn3r.artemis.threads.ExecutorServices;
 import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 import com.spinn3r.metrics.kairosdb.KairosDb;
 import com.spinn3r.metrics.kairosdb.KairosDbReporter;

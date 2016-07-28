@@ -48,6 +48,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.spinn3r.artemis.awaitility</groupId>
+            <artifactId>artemis-awaitility</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
 </project>
