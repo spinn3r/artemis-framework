@@ -10,6 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.jayway.awaitility.Awaitility.*;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 public class BackgroundScannerRunnerTest extends BaseLauncherTest {
 
@@ -26,9 +31,9 @@ public class BackgroundScannerRunnerTest extends BaseLauncherTest {
     }
 
     @Test
-    public void testBackgroundScanner() throws Exception {
+    public void testWithSuccessfulBackgroundScanner() throws Exception {
 
-        MyBackgroundScanner backgroundScanner = new MyBackgroundScanner();
+        SuccessfulBackgroundScanner backgroundScanner = new SuccessfulBackgroundScanner();
         BackgroundScannerRunner backgroundScannerRunner =
           backgroundScannerRunnerFactory.create(backgroundScanner, new BackgroundScannerOptions());
 
@@ -38,7 +43,39 @@ public class BackgroundScannerRunnerTest extends BaseLauncherTest {
 
     }
 
-    static class MyBackgroundScanner implements BackgroundScanner {
+    @Test
+    public void testWithFailingBackgroundScanner() throws Exception {
+
+        FailingBackgroundScanner backgroundScanner = new FailingBackgroundScanner();
+
+        BackgroundScannerRunner backgroundScannerRunner =
+          backgroundScannerRunnerFactory.create(backgroundScanner, new BackgroundScannerOptions());
+
+        backgroundScanner.countDownLatch.await();
+
+        await().until(() -> {
+            assertThat(backgroundScanner.scans.get(), greaterThanOrEqualTo(2));
+        } );
+
+        backgroundScannerRunner.shutdown();
+
+    }
+
+    @Test
+    public void testWithBlockingBackgroundScanner() throws Exception {
+
+        BlockingBackgroundScanner backgroundScanner = new BlockingBackgroundScanner();
+
+        BackgroundScannerRunner backgroundScannerRunner =
+          backgroundScannerRunnerFactory.create(backgroundScanner, new BackgroundScannerOptions());
+
+        backgroundScanner.countDownLatch.await();
+
+        backgroundScannerRunner.shutdown();
+
+    }
+
+    private static class SuccessfulBackgroundScanner implements BackgroundScanner {
 
         CountDownLatch countDownLatch = new CountDownLatch(1);
 
@@ -47,6 +84,37 @@ public class BackgroundScannerRunnerTest extends BaseLauncherTest {
             countDownLatch.countDown();
         }
 
+    }
+
+    private static class FailingBackgroundScanner implements BackgroundScanner {
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        AtomicInteger scans = new AtomicInteger();
+
+        @Override
+        public void scan() throws BackgroundScannerException {
+            countDownLatch.countDown();
+            scans.getAndIncrement();
+            throw new RuntimeException("Failed");
+        }
+
+    }
+
+    private static class BlockingBackgroundScanner implements BackgroundScanner {
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        @Override
+        public void scan() throws BackgroundScannerException {
+            try {
+                countDownLatch.countDown();
+                Thread.sleep(Long.MAX_VALUE);
+            } catch (InterruptedException e) {
+                throw new BackgroundScannerException("Could not scan: ", e);
+            }
+
+        }
     }
 
 }

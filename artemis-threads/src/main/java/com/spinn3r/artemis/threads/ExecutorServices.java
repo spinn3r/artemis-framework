@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.util.misc;
+package com.spinn3r.artemis.threads;
 
 import org.apache.log4j.Logger;
 
@@ -12,9 +12,6 @@ public class ExecutorServices {
 
     private static final Logger log = Logger.getLogger( ExecutorServices.class );
 
-    /**
-     *
-     */
     public static ShutdownAwaiter shutdownAndAwaitTermination( ExecutorService executorService ) {
         return new ShutdownAwaiter( executorService, false );
     }
@@ -23,8 +20,7 @@ public class ExecutorServices {
         return new ShutdownAwaiter( executorService, true );
     }
 
-
-    public static class ShutdownAwaiter {
+    public static class ShutdownAwaiter implements Shutdownable {
 
         private long softTimeout = 15;
 
@@ -38,7 +34,7 @@ public class ExecutorServices {
 
         private final boolean now;
 
-        public ShutdownAwaiter(ExecutorService executorService, boolean now) {
+        ShutdownAwaiter(ExecutorService executorService, boolean now) {
             this.executorService = executorService;
             this.now = now;
         }
@@ -53,6 +49,11 @@ public class ExecutorServices {
             this.hardTimeout = timeout;
             this.hardTimeUnit = timeUnit;
             return this;
+        }
+
+        @Override
+        public void shutdown() throws Exception {
+            await();
         }
 
         public void await() {

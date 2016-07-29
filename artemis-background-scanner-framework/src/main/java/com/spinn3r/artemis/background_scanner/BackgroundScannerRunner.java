@@ -9,6 +9,8 @@ import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import static com.spinn3r.artemis.threads.ExecutorServices.*;
+
 /**
  * Handles starting all the background services and hiding all the complexities
  * around the ExecutorService and stopping the scanner, even if the scanner blocks.
@@ -44,7 +46,7 @@ public class BackgroundScannerRunner implements Shutdownable {
 
         Shutdownables.shutdown(new ShutdownableIndex(BackgroundScannerRunner.class,
                                                      ImmutableMap.of("runner", this.runner,
-                                                                     "executorService", Shutdownables.toShutdownable(executorService))));
+                                                                     "executorService", shutdownAndAwaitTermination(executorService))));
 
     }
 
