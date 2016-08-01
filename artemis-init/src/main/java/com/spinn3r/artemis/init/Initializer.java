@@ -49,6 +49,8 @@ public class Initializer {
 
         this.launcher = Launcher.newBuilder(this.configLoader)
                                 .setModule(this.module)
+                                .setRole(role)
+                                .setCaller(caller)
                                 .build();
 
         Advertised advertised = launcher.advertised;
@@ -109,8 +111,7 @@ public class Initializer {
         return configLoader;
     }
 
-    public static class
-    Builder {
+    public static class Builder {
 
         private Optional<ConfigLoader> configLoader = Optional.empty();
 
