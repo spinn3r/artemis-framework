@@ -15,7 +15,7 @@ public class Tags {
      * for example.. HTTP status code 200 becomes 2xx.  11432 bytes becomes 11k.
      *
      */
-    public static String tokenize(long value, int divisor, String suffix) {
+    public static String tokenized(long value, int divisor, String suffix) {
         return Long.toString(value / divisor) + suffix;
     }
 
@@ -30,7 +30,7 @@ public class Tags {
      * @param interval
      * @return
      */
-    public static long round( long value, long interval ) {
+    public static long rounded(long value, long interval ) {
 
         if ( interval == 0 )
             return 0;
