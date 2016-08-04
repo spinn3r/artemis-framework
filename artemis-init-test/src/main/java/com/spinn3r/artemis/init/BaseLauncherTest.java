@@ -19,7 +19,7 @@ public class BaseLauncherTest {
     /**
      * Setup with no services but run an injector.
      */
-    @Before
+    //@Before
     public void setUp() throws Exception {
         setUp( new ResourceConfigLoader(), new ServiceReferences() );
     }
