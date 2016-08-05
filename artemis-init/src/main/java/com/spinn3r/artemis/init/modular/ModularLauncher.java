@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.advertisements.Role;
+import com.spinn3r.artemis.init.cache.NullServiceCache;
+import com.spinn3r.artemis.init.cache.ServiceCache;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.modular.stages.StageRunner;
@@ -55,6 +57,8 @@ public class ModularLauncher {
 
     private final List<Module> modules = Lists.newArrayList();
 
+    private ServiceCache serviceCache = new NullServiceCache();
+
     ModularLauncher(ConfigLoader configLoader, Role role, Advertised advertised, ServiceTypeReferences serviceTypeReferences) {
         this.configLoader = configLoader;
         this.role = role;
@@ -77,7 +81,7 @@ public class ModularLauncher {
 
         lifecycleProvider.set( Lifecycle.INITIALIZING );
 
-        launch( new InitStageRunner( configLoader, advertised ) );
+        launch( new InitStageRunner( configLoader, advertised, serviceCache ) );
 
         lifecycleProvider.set( Lifecycle.INITIALIZED );
 
@@ -91,7 +95,7 @@ public class ModularLauncher {
 
         lifecycleProvider.set( Lifecycle.STARTING );
 
-        InitStageRunner initStageRunner = new InitStageRunner( configLoader, advertised );
+        InitStageRunner initStageRunner = new InitStageRunner( configLoader, advertised, serviceCache );
         StartStageRunner startStageRunner = new StartStageRunner();
 
         launch( (injector, modularService) -> {

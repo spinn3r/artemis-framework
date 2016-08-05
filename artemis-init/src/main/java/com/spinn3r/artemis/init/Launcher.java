@@ -4,6 +4,9 @@ import com.google.common.base.Stopwatch;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
+import com.spinn3r.artemis.init.cache.DefaultServiceCache;
+import com.spinn3r.artemis.init.cache.NullServiceCache;
+import com.spinn3r.artemis.init.cache.ServiceCache;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.guice.NullModule;
@@ -22,6 +25,8 @@ import java.util.Optional;
  *
  */
 public class Launcher {
+
+    private static ServiceCache STATIC_SERVICE_CACHE = new DefaultServiceCache();
 
     private ConfigLoader configLoader;
 
@@ -47,6 +52,8 @@ public class Launcher {
 
     private Module module = new NullModule();
 
+    private ServiceCache serviceCache = new NullServiceCache();
+
     public Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
         this.advertised = advertised;
@@ -56,6 +63,11 @@ public class Launcher {
 
         advertised.advertise(this.getClass(), Launcher.class, this);
         advertised.provider(this.getClass(), Lifecycle.class, lifecycleProvider);
+
+        if ( TestingFrameworks.isTesting() ) {
+            info("Now using static caching for testing frameworks.");
+            serviceCache = STATIC_SERVICE_CACHE;
+        }
 
     }
 
@@ -218,7 +230,11 @@ public class Launcher {
         return serviceReferences;
     }
 
-    public void include( ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
+    public ServiceCache getServiceCache() {
+        return serviceCache;
+    }
+
+    public void include(ServiceReference currentServiceReference, List<ServiceReference> additionalServiceReferences ) {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 

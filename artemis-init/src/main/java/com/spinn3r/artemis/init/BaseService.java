@@ -1,9 +1,11 @@
 package com.spinn3r.artemis.init;
 
+import com.google.common.base.Supplier;
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.spinn3r.artemis.init.cache.ServiceCache;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.tracer.Tracer;
 
@@ -22,9 +24,16 @@ public abstract class BaseService extends AbstractModule implements Service {
 
     protected ConfigLoader configLoader = null;
 
+    protected ServiceCache serviceCache = null;
+
     @Override
     public void setAdvertised(Advertised advertised) {
         this.advertised = advertised;
+    }
+
+    @Override
+    public void setServiceCache(ServiceCache serviceCache) {
+        this.serviceCache = serviceCache;
     }
 
     @Override
@@ -123,6 +132,21 @@ public abstract class BaseService extends AbstractModule implements Service {
     @Override
     public void error(String format, Throwable throwable, Object... args) {
         tracer.error( format, throwable, args );
+    }
+
+    public <T> T cached(Class<T> clazz, Supplier<T> supplier) {
+
+        if ( serviceCache.hasInstance(clazz)) {
+            info( "Returning instance from cache for: %s", clazz);
+            return serviceCache.getInstance(clazz);
+        }
+
+        T result = supplier.get();
+
+        serviceCache.putInstance(clazz, result);
+
+        return result;
+
     }
 
 }
