@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
+import com.spinn3r.artemis.init.cache.CachingInstanceSupplier;
 import com.spinn3r.artemis.init.cache.ServiceCache;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.tracer.Tracer;
@@ -134,7 +135,7 @@ public abstract class BaseService extends AbstractModule implements Service {
         tracer.error( format, throwable, args );
     }
 
-    public <T> T cached(Class<T> clazz, Supplier<T> supplier) {
+    public <T> T cached(Class<T> clazz, CachingInstanceSupplier<T> supplier) throws Exception {
 
         if ( serviceCache.hasInstance(clazz)) {
             info( "Returning instance from cache for: %s", clazz);
