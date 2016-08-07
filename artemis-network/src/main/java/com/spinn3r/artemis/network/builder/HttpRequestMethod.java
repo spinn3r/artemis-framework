@@ -91,4 +91,5 @@ public interface HttpRequestMethod {
     @VisibleForTesting
     Proxy getProxy();
 
+    String getUserAgent();
 }

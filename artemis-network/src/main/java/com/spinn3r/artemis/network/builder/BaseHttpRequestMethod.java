@@ -192,4 +192,9 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
         return properties;
     }
 
+    @Override
+    public String getUserAgent() {
+        return userAgent;
+    }
+
 }
