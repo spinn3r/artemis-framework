@@ -43,6 +43,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.objects.formatter</groupId>
+            <artifactId>artemis-objects-formatter</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.init</groupId>
             <artifactId>artemis-init-test</artifactId>
             <version>${project.version}</version>
@@ -52,6 +59,13 @@
         <dependency>
             <groupId>com.spinn3r.artemis.time.init</groupId>
             <artifactId>artemis-time-init</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.corpus.test</groupId>
+            <artifactId>artemis-corpus-test-framework</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
