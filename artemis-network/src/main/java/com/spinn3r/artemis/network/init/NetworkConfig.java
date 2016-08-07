@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
@@ -18,6 +19,8 @@ import com.spinn3r.artemis.network.cookies.jar.CookieJarReference;
 public class NetworkConfig {
 
     private String userAgent;
+
+    private ImmutableList<String> userAgents = ImmutableList.of();
 
     private boolean blockSSL;
 
@@ -45,6 +48,10 @@ public class NetworkConfig {
 
     public String getUserAgent() {
         return userAgent;
+    }
+
+    public ImmutableList<String> getUserAgents() {
+        return userAgents;
     }
 
     public void setUserAgent(String userAgent) {
@@ -126,10 +133,12 @@ public class NetworkConfig {
     public void setCookieManagerEnabled(boolean cookieManagerEnabled) {
         this.cookieManagerEnabled = cookieManagerEnabled;
     }
+
     @Override
     public String toString() {
         return "NetworkConfig{" +
                  "userAgent='" + userAgent + '\'' +
+                 ", userAgents=" + userAgents +
                  ", blockSSL=" + blockSSL +
                  ", defaultProxy='" + defaultProxy + '\'' +
                  ", proxies=" + proxies +

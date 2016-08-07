@@ -2,6 +2,7 @@ package com.spinn3r.artemis.network.builder.proxies;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.spinn3r.artemis.corpus.test.CorporaAsserter;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.init.config.TestResourcesConfigLoader;
 import com.spinn3r.artemis.network.builder.HttpRequest;
@@ -9,6 +10,7 @@ import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.network.init.NetworkService;
+import com.spinn3r.artemis.objects.formatter.ObjectsFormatter;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +27,8 @@ public class ProxyRegistryWithNetworkConfigTest extends BaseLauncherTest {
     @Inject
     Provider<ProxyRegistry> proxyRegistryProvider;
 
+    CorporaAsserter corporaAsserter = new CorporaAsserter(getClass());
+
     @Override
     @Before
     public void setUp() throws Exception {
@@ -37,8 +41,7 @@ public class ProxyRegistryWithNetworkConfigTest extends BaseLauncherTest {
     @Test
     public void testVerifyConfig() throws Exception {
 
-        assertEquals( "NetworkConfig{userAgent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36', blockSSL=false, defaultProxy='default', proxies={default=ProxySettings{host='127.0.0.1', port=9997, regex='.*', priority=1}, facebook=ProxySettings{host='127.0.0.1', port=9996, regex='https?://(([a-zA-Z0-9]+)\\.)?facebook\\.com', priority=10}}, defaultMaxContentLength=2000000, defaultReadTimeout=30000, defaultConnectTimeout=30000, requireProxy=true, requests={vk_com=Request{regex='https?://(www\\.)?vk\\.com', userAgent='Optional.empty', cookies={}, requestHeaders={}, connectTimeout=null, readTimeout=null, followRedirects=null, followContentRedirects=false}, twitter_com=Request{regex='https?://(www\\.)?twitter\\.com', userAgent='Optional.empty', cookies={}, requestHeaders={}, connectTimeout=null, readTimeout=null, followRedirects=null, followContentRedirects=false}}, executor=ExecutorConfig{maxRetries=5, sleepIntervalMillis=30000}, cookieJarReferences=[CookieJarReference{regex='https?://(www\\.)?facebook\\.com', path='null', store=[{datr=bd04V9F4B64dMqvqlehNmNe6}]}], cookies=[SetCookieDescription{domain='facebook.com', setCookie='datr=bd04V9F4B64dMqvqlehNmNe6'}], cookieManagerEnabled=true}",
-                      networkConfig.toString() );
+        corporaAsserter.assertEquals("testVerifyConfig", ObjectsFormatter.format(networkConfig) );
 
     }
 

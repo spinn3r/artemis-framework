@@ -46,6 +46,8 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         this.resource = resource;
         this.method = method;
 
+        init();
+
         // TODO: apply default values like proxies...
 
     }
@@ -58,8 +60,13 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         this.outputContentEncoding = outputContentEncoding;
         this.outputContentType = outputContentType;
 
+        init();
+
         // TODO: apply default values like proxies...
 
+    }
+
+    private void init() {
     }
 
     @Override
@@ -114,7 +121,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         resourceRequest.setCookies(Cookies.toMap(cookies));
         resourceRequest.setRequestMethod( method );
-        resourceRequest.setUserAgent( defaultHttpRequestBuilder.userAgent );
+        resourceRequest.setUserAgent( userAgent );
         resourceRequest.setMaxContentLength( maxContentLength );
         resourceRequest.setReadTimeout( readTimeout );
         resourceRequest.setConnectTimeout( connectTimeout );

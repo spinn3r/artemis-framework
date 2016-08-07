@@ -18,6 +18,7 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
 
     @Inject
     ConfiguredHttpRequestBuilder(NetworkConfig networkConfig,
+                                 UserAgentRandomizer userAgentRandomizer,
                                  Provider<ProxyReference> proxyReferenceProvider,
                                  Provider<ProxyRegistry> proxyRegistryProvider,
                                  Provider<RequestSettingsRegistry> requestSettingsRegistryProvider,
@@ -26,7 +27,8 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
                                  Provider<CookieJarManager> cookieJarManagerProvider,
                                  ThreadLocalCookies threadLocalCookies) {
 
-        super(networkConfig, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
+        super(networkConfig, userAgentRandomizer, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
+
         if ( networkConfig.getUserAgent() == null ) {
             throw new RuntimeException( "No user agent: " + networkConfig );
         }

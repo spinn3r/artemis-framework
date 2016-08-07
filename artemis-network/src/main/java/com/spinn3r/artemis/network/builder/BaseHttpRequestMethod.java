@@ -41,6 +41,14 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
     protected boolean followContentRedirects = true;
 
+    protected String userAgent = URLResourceRequest.USER_AGENT;
+
+    @Override
+    public HttpRequestMethod withUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+        return this;
+    }
+
     @Override
     public HttpRequestMethod withEtag(String etag) {
         this.etag = etag;
@@ -182,6 +190,11 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     @Override
     public Map<String, String> getProperties() {
         return properties;
+    }
+
+    @Override
+    public String getUserAgent() {
+        return userAgent;
     }
 
 }

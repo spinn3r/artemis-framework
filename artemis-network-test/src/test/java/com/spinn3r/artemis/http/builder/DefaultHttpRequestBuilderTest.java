@@ -16,6 +16,8 @@ import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
+import com.spinn3r.artemis.util.misc.HitIndex;
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +26,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.ref;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 
 public class DefaultHttpRequestBuilderTest {
@@ -137,6 +140,22 @@ public class DefaultHttpRequestBuilderTest {
             .withReadTimeout( 6_000 )
             .execute()
             .getContentWithEncoding();
+
+    }
+
+    @Test
+    public void testUserAgentRandomization() throws Exception {
+
+        HitIndex<String> hitIndex = new HitIndex<>();
+
+        for (int i = 0; i < 10; i++) {
+            HttpRequestMethod httpRequestMethod = httpRequestBuilder.get("https://www.example.com");
+            hitIndex.registerHit(httpRequestMethod.getUserAgent());
+        }
+
+        assertThat(hitIndex.size(), greaterThan(1));
+
+        System.out.printf("%s\n", hitIndex.read());
 
     }
 

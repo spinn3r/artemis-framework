@@ -15,6 +15,8 @@ import java.util.Map;
  */
 public interface HttpRequestMethod {
 
+    HttpRequestMethod withUserAgent(String userAgent);
+
     /**
      * Set an etag for conditional HTTP requests.  Ignored if null.
      */
@@ -89,4 +91,5 @@ public interface HttpRequestMethod {
     @VisibleForTesting
     Proxy getProxy();
 
+    String getUserAgent();
 }
