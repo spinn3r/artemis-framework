@@ -291,6 +291,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
         String logMethod = requestMethod;
         long before = System.currentTimeMillis();
 
+        String _userAgent = getUserAgent();
+
         try {
 
             // determine if this URL is robots.txt blocked by dependency injection
@@ -311,10 +313,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             // before setting this to true.
             initConnection = true;
 
-            String _userAgent = getUserAgent();
-
             //set the user agent if it hasn't ALREADY been set by the caller.
-            if ( getRequestHeader( USER_AGENT_HEADER ) == null && _userAgent != null ) {
+            if ( getRequestHeader(USER_AGENT_HEADER) == null && _userAgent != null ) {
                 _urlConnection.setRequestProperty( USER_AGENT_HEADER, _userAgent );
             }
 
@@ -488,8 +488,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             this.duration = (int)(after - before);
 
-            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s, proxy=%s",
-                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy );
+            log.info( "%s: %s, duration: %s, status: %s (%s) followRedirects=%s, http.maxRedirects=%s, cookies=%s, contentEncoding=%s, proxy=%s, userAgent=%s",
+                      logMethod, resource, duration, getResponseCode(), getResponseCodeFormatted(), getFollowRedirects(), System.getProperty( HTTP_MAX_REDIRECTS ), getCookies(), _urlConnection.getContentEncoding(), proxy, _userAgent );
         }
 
         try {
