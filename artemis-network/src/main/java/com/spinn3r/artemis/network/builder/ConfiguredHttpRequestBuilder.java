@@ -26,7 +26,8 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
                                  Provider<CookieJarManager> cookieJarManagerProvider,
                                  ThreadLocalCookies threadLocalCookies) {
 
-        super(networkConfig, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
+        super(networkConfig, userAgentRandomizer, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
+
         if ( networkConfig.getUserAgent() == null ) {
             throw new RuntimeException( "No user agent: " + networkConfig );
         }
