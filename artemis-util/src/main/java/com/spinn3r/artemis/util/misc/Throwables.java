@@ -21,7 +21,7 @@ public class Throwables {
 
     }
 
-    public static <T extends Throwable> T createMultiException(List<T> exceptions ) throws T {
+    public static <T extends Throwable> T createMultiException(List<T> exceptions) {
 
         T root = exceptions.remove( 0 );
 
@@ -32,6 +32,5 @@ public class Throwables {
         return root;
 
     }
-
 
 }
