@@ -16,7 +16,7 @@ public class AtomicReferenceSupplier<T> implements Supplier<T> {
     }
 
     public AtomicReferenceSupplier(T value ) {
-        set( value );
+        set(value );
     }
 
     @Override
@@ -24,8 +24,17 @@ public class AtomicReferenceSupplier<T> implements Supplier<T> {
         return reference.get();
     }
 
-    public void set( T value ) {
+    /**
+     * Define the value of this supplier.  We only allow this to be called once,
+     * during initialization.
+     */
+    public void set(T value ) {
+
+        if ( reference.get() != null )
+            throw new RuntimeException("Value already defined");
+
         reference.set( value );
+
     }
 
 }
