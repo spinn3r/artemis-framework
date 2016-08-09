@@ -30,8 +30,12 @@ public class AtomicReferenceSupplier<T> implements Supplier<T> {
      */
     public void set(T value ) {
 
-        if ( reference.get() != null )
-            throw new RuntimeException("Value already defined");
+        // TODO: we can't enable this right now because the ConsoleLoggingService
+        // depends on it but it's rather nasty.  This should not be mutable
+        // and the set() method is exposed to all classes that inject it.
+        //
+        //if ( reference.get() != null )
+        //    throw new RuntimeException("Value already defined");
 
         reference.set( value );
 
