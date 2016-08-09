@@ -70,6 +70,20 @@
             <scope>test</scope>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.spinn3r.artemis.http</groupId>-->
+            <!--<artifactId>artemis-http</artifactId>-->
+            <!--<version>${project.version}</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.spinn3r.artemis.http.init</groupId>-->
+            <!--<artifactId>artemis-http-init</artifactId>-->
+            <!--<version>${project.version}</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
     </dependencies>
 
 </project>

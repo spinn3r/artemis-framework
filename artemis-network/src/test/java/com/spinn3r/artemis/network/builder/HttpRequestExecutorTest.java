@@ -24,7 +24,10 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Before
     public void setUp() throws Exception {
         super.setUp( SyntheticClockService.class,
-                     DirectNetworkService.class );
+                     DirectNetworkService.class
+//                     DefaultWebserverReferencesService.class,
+//                     WebserverService.class
+        );
     }
 
     @Test
