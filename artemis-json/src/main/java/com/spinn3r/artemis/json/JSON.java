@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.common.base.Preconditions;
 
 import java.io.*;
@@ -152,6 +153,7 @@ public class JSON {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new GuavaModule());
         objectMapper.registerModule(new Jdk8Module());
+        objectMapper.registerModule(new JavaTimeModule());
 
         return objectMapper;
     }
@@ -160,6 +162,7 @@ public class JSON {
         ObjectMapper objectMapper = new ObjectMapper( new CustomJSONFactory(pretty) );
         objectMapper.registerModule(new Jdk8Module());
         objectMapper.registerModule(new GuavaModule());
+        objectMapper.registerModule(new JavaTimeModule());
 
         objectMapper.configure( SerializationFeature.INDENT_OUTPUT, indentOutput );
         objectMapper.disable( SerializationFeature.FAIL_ON_EMPTY_BEANS );
