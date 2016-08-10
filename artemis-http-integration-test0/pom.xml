@@ -10,7 +10,6 @@
     <groupId>com.spinn3r.artemis.http</groupId>
     <artifactId>artemis-http-integration-test0</artifactId>
 
-
     <dependencies>
 
         <dependency>
