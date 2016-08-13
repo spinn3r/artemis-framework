@@ -287,7 +287,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
                        "  \"pathInfo\" : null,\n" +
                        "  \"queryString\" : null,\n" +
                        "  \"headers\" : {\n" +
-                       "    \"User-Agent\" : \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36\",\n" +
+                       "    \"User-Agent\" : \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\",\n" +
                        "    \"Connection\" : \"close\",\n" +
                        "    \"Cookie\" : \"$Version=\\\"1\\\"; foo=\\\"bar\\\";$Path=\\\"/\\\"\",\n" +
                        "    \"Host\" : \"localhost:xxxx\",\n" +
