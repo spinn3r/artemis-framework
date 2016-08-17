@@ -6,11 +6,20 @@ import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Format a time range into a human date.
  */
 public class TimeRangeFormatter {
+
+    public static String formatMillis(long millis) {
+        return format(new TimeRange(millis, TimeUnit.MILLISECONDS));
+    }
+
+    public static String formatSeconds(long seconds) {
+        return format(new TimeRange(seconds, TimeUnit.SECONDS));
+    }
 
     public static String format( TimeRange timeRange ) {
 
