@@ -52,7 +52,7 @@ public class Throwables {
 
                     try {
 
-                        Constructor<C> declaredConstructor = checkedExceptionClazz.getDeclaredConstructor(String.class);
+                        Constructor<C> declaredConstructor = checkedExceptionClazz.getDeclaredConstructor(String.class, Throwable.class);
 
                         checkedException = declaredConstructor.newInstance(e.getMessage(), e);
 
@@ -61,10 +61,10 @@ public class Throwables {
                         // we cant init the exception with a message as there is
                         // no message constructor.
                         checkedException = checkedExceptionClazz.newInstance();
+                        checkedException.initCause(e);
 
                     }
 
-                    checkedException.initCause(e);
                     throw checkedException;
 
                 } catch (InstantiationException|IllegalAccessException|InvocationTargetException e1) {
