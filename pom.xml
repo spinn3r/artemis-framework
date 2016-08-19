@@ -78,6 +78,7 @@
         <module>artemis-background-scanner-framework</module>
         <module>artemis-awaitility</module>
         <module>artemis-http-integration-test0</module>
+        <module>artemis-mockito</module>
 
     </modules>
 
