@@ -82,6 +82,8 @@ public class HttpRequestExecutor {
 
         if ( e.getCause() != null ) {
 
+            // TODO: we probably need to recursively test all the causes
+
             Throwable cause= e.getCause();
 
             if ( cause instanceof SSLException)
