@@ -1,5 +1,12 @@
 package com.spinn3r.artemis.network.builder;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -9,14 +16,6 @@ import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.listener.RequestListener;
 import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.Cookies;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.InetAddress;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  *
@@ -243,7 +242,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         connect();
 
-        return new DefaultHttpResponseMeta(getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.fromHttpRequest(this) );
+        return new DefaultHttpResponseMeta(getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.toCookieMap(getEffectiveCookies()) );
 
     }
 
@@ -252,7 +251,7 @@ public class DefaultHttpRequest implements HttpRequest {
 
         String contentWithEncoding = getContentWithEncoding();
 
-        return new DefaultHttpContentResponseMeta( getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.fromHttpRequest(this), contentWithEncoding );
+        return new DefaultHttpContentResponseMeta( getResource(), getResourceFromRedirect(), getResponseCode(), getResponseHeadersMap(), Cookies.toCookieMap(getEffectiveCookies()), contentWithEncoding );
 
     }
 

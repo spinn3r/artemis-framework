@@ -25,6 +25,18 @@ public class Cookies {
 
     }
 
+    public static ImmutableMap<String,Cookie> toCookieMap(List<Cookie> cookies) {
+
+        Map<String, Cookie> result = Maps.newLinkedHashMap();
+
+        for (Cookie cookie : cookies) {
+            result.put(cookie.getName(), cookie);
+        }
+
+        return ImmutableMap.copyOf(result);
+
+    }
+    
     public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
