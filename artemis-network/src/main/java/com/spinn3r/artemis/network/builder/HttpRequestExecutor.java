@@ -6,6 +6,10 @@ import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
+import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
+import javax.net.ssl.SSLProtocolException;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.*;
@@ -75,6 +79,15 @@ public class HttpRequestExecutor {
     }
 
     private boolean isTransientHttpException(NetworkException e) {
+
+        if ( e.getCause() != null ) {
+
+            Throwable cause= e.getCause();
+
+            if ( cause instanceof SSLException)
+                return true;
+
+        }
 
         if ( e.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT )
             return true;
