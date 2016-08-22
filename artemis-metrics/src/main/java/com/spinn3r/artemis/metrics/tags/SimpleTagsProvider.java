@@ -12,7 +12,7 @@ import java.util.Set;
  */
 public abstract class SimpleTagsProvider<T> implements TagsProvider<T> {
 
-    private boolean denormalizedOnly = true;
+    private boolean denormalizedOnly = false;
 
     private Set<TagNameSet> denormalizedTagNames = Sets.newHashSet();
 
