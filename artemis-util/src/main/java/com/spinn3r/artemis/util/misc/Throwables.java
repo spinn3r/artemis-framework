@@ -36,6 +36,21 @@ public class Throwables {
 
     }
 
+    public static <C extends Exception> C createMultiException(C exception, List<Throwable> throwables) {
+
+        if (throwables.size() > 0) {
+            Throwable cause = throwables.remove(0);
+            exception.initCause(cause);
+        }
+
+        for (Throwable throwable : throwables) {
+            exception.addSuppressed(throwable);
+        }
+
+        return exception;
+
+    }
+
     public static <T, U extends RuntimeException, C extends Exception> T withCheckedException(Class<U> uncheckedExceptionClazz , Class<C> checkedExceptionClazz, Supplier<T> supplier) throws C {
 
         try {
