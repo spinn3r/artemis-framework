@@ -10,7 +10,8 @@ import java.nio.ByteBuffer;
  * to build aggregate streams of byte blocks across files (similar to chunks in
  * a DFS).
  *
- * The underlying blocks can be anything.  JSON, Protocol Buffers, AVRO, etc.
+ * The underlying blocks can be anything.  JSON, Protocol Buffers, AVRO, blob
+ * of binary data or text data, etc.
  */
 public class ByteBlock {
 
