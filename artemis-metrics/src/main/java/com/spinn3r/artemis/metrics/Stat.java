@@ -61,7 +61,7 @@ public class Stat<T> {
      * @param value
      * @param delta
      */
-    public void incr( T value, int delta ) {
+    public void incr( T value, long delta ) {
 
         if ( delta == 0 ) {
 
