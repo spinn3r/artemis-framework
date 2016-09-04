@@ -64,8 +64,7 @@ public class Strings {
 
     }
 
-    public static String
-    truncate( String value, int maxLength ) {
+    public static String truncate( String value, int maxLength ) {
 
         if ( value == null ) {
             return null;
