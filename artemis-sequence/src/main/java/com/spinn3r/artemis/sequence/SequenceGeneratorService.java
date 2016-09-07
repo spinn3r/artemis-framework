@@ -22,7 +22,7 @@ public class SequenceGeneratorService extends BaseService {
 
     @Override
     public void init() {
-        advertise( SequenceGenerator.class,  new SequenceGenerator(clock, globalMutexProvider) );
+        advertise( SequenceGenerator.class,  new SequenceGenerator(clock, globalMutexProvider));
     }
 
 }
