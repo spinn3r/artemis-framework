@@ -4236,7 +4236,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setDateFound ( ZonedDateTime dateFound ) {
+    public BaseContent setDateFoundAsZonedDateTime ( ZonedDateTime dateFound ) {
 
         if (dateFound != null) {
             setDateFound(Date.from(dateFound.toInstant()));
@@ -5317,7 +5317,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setLastUpdated ( ZonedDateTime lastUpdated ) {
+    public BaseContent setLastUpdatedAsZonedDateTime ( ZonedDateTime lastUpdated ) {
 
         if (lastUpdated != null) {
             setLastUpdated(Date.from(lastUpdated.toInstant()));
@@ -5935,7 +5935,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceDateFound ( ZonedDateTime sourceDateFound ) {
+    public BaseContent setSourceDateFoundAsZonedDateTime ( ZonedDateTime sourceDateFound ) {
 
         if (sourceDateFound != null) {
             setSourceDateFound(Date.from(sourceDateFound.toInstant()));
@@ -6052,7 +6052,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceLastUpdated ( ZonedDateTime sourceLastUpdated ) {
+    public BaseContent setSourceLastUpdatedAsZonedDateTime ( ZonedDateTime sourceLastUpdated ) {
 
         if (sourceLastUpdated != null) {
             setSourceLastUpdated(Date.from(sourceLastUpdated.toInstant()));
@@ -6169,7 +6169,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceLastPublished ( ZonedDateTime sourceLastPublished ) {
+    public BaseContent setSourceLastPublishedAsZonedDateTime ( ZonedDateTime sourceLastPublished ) {
 
         if (sourceLastPublished != null) {
             setSourceLastPublished(Date.from(sourceLastPublished.toInstant()));
@@ -6286,7 +6286,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceLastPosted ( ZonedDateTime sourceLastPosted ) {
+    public BaseContent setSourceLastPostedAsZonedDateTime ( ZonedDateTime sourceLastPosted ) {
 
         if (sourceLastPosted != null) {
             setSourceLastPosted(Date.from(sourceLastPosted.toInstant()));
@@ -7473,7 +7473,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourcePshbLastPosted ( ZonedDateTime sourcePshbLastPosted ) {
+    public BaseContent setSourcePshbLastPostedAsZonedDateTime ( ZonedDateTime sourcePshbLastPosted ) {
 
         if (sourcePshbLastPosted != null) {
             setSourcePshbLastPosted(Date.from(sourcePshbLastPosted.toInstant()));
@@ -7590,7 +7590,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourcePshbLeaseExpires ( ZonedDateTime sourcePshbLeaseExpires ) {
+    public BaseContent setSourcePshbLeaseExpiresAsZonedDateTime ( ZonedDateTime sourcePshbLeaseExpires ) {
 
         if (sourcePshbLeaseExpires != null) {
             setSourcePshbLeaseExpires(Date.from(sourcePshbLeaseExpires.toInstant()));
@@ -7915,7 +7915,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceNextUpdate ( ZonedDateTime sourceNextUpdate ) {
+    public BaseContent setSourceNextUpdateAsZonedDateTime ( ZonedDateTime sourceNextUpdate ) {
 
         if (sourceNextUpdate != null) {
             setSourceNextUpdate(Date.from(sourceNextUpdate.toInstant()));
@@ -9870,7 +9870,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setSourceCreated ( ZonedDateTime sourceCreated ) {
+    public BaseContent setSourceCreatedAsZonedDateTime ( ZonedDateTime sourceCreated ) {
 
         if (sourceCreated != null) {
             setSourceCreated(Date.from(sourceCreated.toInstant()));
@@ -13417,7 +13417,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setPublished ( ZonedDateTime published ) {
+    public BaseContent setPublishedAsZonedDateTime ( ZonedDateTime published ) {
 
         if (published != null) {
             setPublished(Date.from(published.toInstant()));
@@ -13534,7 +13534,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setModified ( ZonedDateTime modified ) {
+    public BaseContent setModifiedAsZonedDateTime ( ZonedDateTime modified ) {
 
         if (modified != null) {
             setModified(Date.from(modified.toInstant()));
@@ -13651,7 +13651,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setPublishedPartial ( ZonedDateTime publishedPartial ) {
+    public BaseContent setPublishedPartialAsZonedDateTime ( ZonedDateTime publishedPartial ) {
 
         if (publishedPartial != null) {
             setPublishedPartial(Date.from(publishedPartial.toInstant()));
@@ -13768,7 +13768,7 @@ public abstract class BaseContent
     }
 
     // support for ZonedDateTime
-    public BaseContent setModifiedPartial ( ZonedDateTime modifiedPartial ) {
+    public BaseContent setModifiedPartialAsZonedDateTime ( ZonedDateTime modifiedPartial ) {
 
         if (modifiedPartial != null) {
             setModifiedPartial(Date.from(modifiedPartial.toInstant()));

@@ -4687,7 +4687,7 @@ public abstract class BaseContentMetadata
     }
 
     // support for ZonedDateTime
-    public BaseContentMetadata setPublished ( ZonedDateTime published ) {
+    public BaseContentMetadata setPublishedAsZonedDateTime ( ZonedDateTime published ) {
 
         if (published != null) {
             setPublished(Date.from(published.toInstant()));
@@ -4804,7 +4804,7 @@ public abstract class BaseContentMetadata
     }
 
     // support for ZonedDateTime
-    public BaseContentMetadata setModified ( ZonedDateTime modified ) {
+    public BaseContentMetadata setModifiedAsZonedDateTime ( ZonedDateTime modified ) {
 
         if (modified != null) {
             setModified(Date.from(modified.toInstant()));
@@ -4921,7 +4921,7 @@ public abstract class BaseContentMetadata
     }
 
     // support for ZonedDateTime
-    public BaseContentMetadata setPublishedPartial ( ZonedDateTime publishedPartial ) {
+    public BaseContentMetadata setPublishedPartialAsZonedDateTime ( ZonedDateTime publishedPartial ) {
 
         if (publishedPartial != null) {
             setPublishedPartial(Date.from(publishedPartial.toInstant()));
@@ -5038,7 +5038,7 @@ public abstract class BaseContentMetadata
     }
 
     // support for ZonedDateTime
-    public BaseContentMetadata setModifiedPartial ( ZonedDateTime modifiedPartial ) {
+    public BaseContentMetadata setModifiedPartialAsZonedDateTime ( ZonedDateTime modifiedPartial ) {
 
         if (modifiedPartial != null) {
             setModifiedPartial(Date.from(modifiedPartial.toInstant()));
