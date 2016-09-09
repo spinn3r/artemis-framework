@@ -79,8 +79,13 @@ public class ZKGlobalMutexService extends BaseService {
 
     @Override
     public void stop() throws Exception {
-        zkGlobalMutexFactory.close();
-        zkNamedMutexFactory.close();
+
+        if ( zkGlobalMutexFactory != null )
+            zkGlobalMutexFactory.close();
+
+        if ( zkNamedMutexFactory != null )
+            zkNamedMutexFactory.close();
+
     }
 
 }
