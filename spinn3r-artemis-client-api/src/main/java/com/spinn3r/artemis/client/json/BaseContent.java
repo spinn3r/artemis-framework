@@ -33,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.*;
 
+import java.time.ZonedDateTime;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -4233,6 +4235,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setDateFound ( ZonedDateTime dateFound ) {
+
+        if (dateFound != null) {
+            setDateFound(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setDateFound(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The time we fetched and added this content to our index.
@@ -5301,6 +5315,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setLastUpdated ( ZonedDateTime lastUpdated ) {
+
+        if (lastUpdated != null) {
+            setLastUpdated(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setLastUpdated(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The last time we updated the metadata on this content.  On initial record creation last_updated and date_found will be identical but last_updated will change over time as we update metadata.
@@ -5906,6 +5932,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceDateFound ( ZonedDateTime sourceDateFound ) {
+
+        if (sourceDateFound != null) {
+            setSourceDateFound(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceDateFound(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The time we added this source to our index.  This is the time we found the source not when it was created.
@@ -6008,6 +6046,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourceLastUpdated ( ZonedDateTime sourceLastUpdated ) {
+
+        if (sourceLastUpdated != null) {
+            setSourceLastUpdated(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceLastUpdated(null);
+        }
+
+        return this;
     }
 
     /**
@@ -6114,6 +6164,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceLastPublished ( ZonedDateTime sourceLastPublished ) {
+
+        if (sourceLastPublished != null) {
+            setSourceLastPublished(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceLastPublished(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The last time this source published a new HTML file (as measured by content_sha1).  This may not be updated if we aren't fetching the source via HTTP.
@@ -6216,6 +6278,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourceLastPosted ( ZonedDateTime sourceLastPosted ) {
+
+        if (sourceLastPosted != null) {
+            setSourceLastPosted(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceLastPosted(null);
+        }
+
+        return this;
     }
 
     /**
@@ -7392,6 +7466,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourcePshbLastPosted ( ZonedDateTime sourcePshbLastPosted ) {
+
+        if (sourcePshbLastPosted != null) {
+            setSourcePshbLastPosted(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourcePshbLastPosted(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The last time this source posted and sent a message to the PSHB endpoint.
@@ -7494,6 +7580,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourcePshbLeaseExpires ( ZonedDateTime sourcePshbLeaseExpires ) {
+
+        if (sourcePshbLeaseExpires != null) {
+            setSourcePshbLeaseExpires(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourcePshbLeaseExpires(null);
+        }
+
+        return this;
     }
 
     /**
@@ -7806,6 +7904,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourceNextUpdate ( ZonedDateTime sourceNextUpdate ) {
+
+        if (sourceNextUpdate != null) {
+            setSourceNextUpdate(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceNextUpdate(null);
+        }
+
+        return this;
     }
 
     /**
@@ -9748,6 +9858,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourceCreated ( ZonedDateTime sourceCreated ) {
+
+        if (sourceCreated != null) {
+            setSourceCreated(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setSourceCreated(null);
+        }
+
+        return this;
     }
 
     /**
@@ -13284,6 +13406,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setPublished ( ZonedDateTime published ) {
+
+        if (published != null) {
+            setPublished(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setPublished(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * Date of first broadcast/publication.
@@ -13386,6 +13520,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setModified ( ZonedDateTime modified ) {
+
+        if (modified != null) {
+            setModified(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setModified(null);
+        }
+
+        return this;
     }
 
     /**
@@ -13492,6 +13638,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setPublishedPartial ( ZonedDateTime publishedPartial ) {
+
+        if (publishedPartial != null) {
+            setPublishedPartial(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setPublishedPartial(null);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * This is identical to `published` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
@@ -13594,6 +13752,18 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setModifiedPartial ( ZonedDateTime modifiedPartial ) {
+
+        if (modifiedPartial != null) {
+            setModifiedPartial(Date.from(zonedDateTime.toInstant()));
+        } else {
+            setModifiedPartial(null);
+        }
+
+        return this;
     }
 
     /**
