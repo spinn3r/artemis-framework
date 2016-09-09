@@ -32,6 +32,8 @@ public class ResponseDescriptor {
 
     protected ImmutableList<ResponseDescriptor.Cookie> cookies = ImmutableList.of();
 
+    protected String content = null;
+
     public int getStatus() {
         return status;
     }
@@ -52,7 +54,11 @@ public class ResponseDescriptor {
         return cookies;
     }
 
-    public String toURL( String host, int port ) {
+    public String getContent() {
+        return content;
+    }
+
+    public String toURL(String host, int port ) {
         return String.format( "http://%s:%s/evaluate?response=%s", host, port, toParam() );
     }
 
@@ -199,6 +205,11 @@ public class ResponseDescriptor {
 
         public Builder withCookie(ResponseDescriptor.Cookie cookie) {
             this.cookies.add(cookie);
+            return this;
+        }
+
+        public Builder withContent(String content) {
+            responseDescriptor.content = content;
             return this;
         }
 

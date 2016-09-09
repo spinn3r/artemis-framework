@@ -7,6 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
 
 /**
@@ -16,7 +17,20 @@ public class EvaluateServlet extends DefaultServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handleMethod(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handleMethod(request, response);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        handleMethod(request, response);
+    }
+
+    private void handleMethod(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // merge this and the RequestMeta servlet...
 
         String responseDescriptorText = request.getParameter("response");
@@ -44,6 +58,15 @@ public class EvaluateServlet extends DefaultServlet {
         response.setCharacterEncoding(responseDescriptor.getCharacterEncoding());
         response.setStatus(responseDescriptor.getStatus());
 
+        if (responseDescriptor.getContent() != null ) {
+
+            try(OutputStream out = response.getOutputStream()) {
+                out.write(responseDescriptor.getContent().getBytes(responseDescriptor.getCharacterEncoding()));
+            }
+
+        }
+
     }
+
 
 }

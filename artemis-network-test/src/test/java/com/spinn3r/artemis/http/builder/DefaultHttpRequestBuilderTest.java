@@ -4,11 +4,17 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Maps;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
+import com.spinn3r.artemis.http.init.DefaultWebserverReferencesService;
 import com.spinn3r.artemis.http.init.WebserverPort;
 import com.spinn3r.artemis.http.init.WebserverService;
+import com.spinn3r.artemis.http.servlets.evaluate.ResponseDescriptor;
 import com.spinn3r.artemis.init.Launcher;
+import com.spinn3r.artemis.init.MockHostnameService;
+import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.metrics.init.MetricsService;
+import com.spinn3r.artemis.metrics.init.uptime.UptimeMetricsService;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
@@ -16,6 +22,7 @@ import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
+import com.spinn3r.artemis.time.init.UptimeService;
 import com.spinn3r.artemis.util.misc.HitIndex;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -26,6 +33,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.ref;
+import static org.apache.cassandra.db.marshal.CompositeType.build;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
 
@@ -46,9 +54,14 @@ public class DefaultHttpRequestBuilderTest {
 
         launcher = Launcher.newBuilder(configLoader ).build();
 
-        launcher.launch( ref( TestServletReferencesServices.class ),
-                         ref( WebserverService.class ),
-                         ref( DirectNetworkService.class ) );
+        launcher.launch( ref(MockHostnameService.class),
+                         ref(MockVersionService.class),
+                         ref(MetricsService.class),
+                         ref(UptimeService.class),
+                         ref(UptimeMetricsService.class),
+                         ref(DefaultWebserverReferencesService.class),
+                         ref(WebserverService.class),
+                         ref(DirectNetworkService.class));
 
         launcher.getInjector().injectMembers( this );
 
@@ -211,16 +224,24 @@ public class DefaultHttpRequestBuilderTest {
         String encoding = "UTF-8";
         String type = "text/plain";
 
-        String result =
-            httpRequestBuilder.put( "http://httpbin.org/put", data, encoding, type )
-                .execute()
-                .getContentWithEncoding()
-                ;
+        String url = new ResponseDescriptor.Builder()
+                             .withStatus(200)
+                             .withContent(data)
+                             .build()
+                             .toURL("localhost", webserverPort.getPort());
+
+        HttpRequest httpRequest
+          = httpRequestBuilder
+              .put(url, data, encoding, type)
+              .execute();
+
+        String result = httpRequest.getContentWithEncoding();
 
         System.out.printf( "result: %s\n", result );
 
         assertTrue( result.contains( data ) );
-        assertTrue( result.contains( "\"Content-Type\": \"text/plain; charset=UTF-8\"" ) );
+
+        assertEquals("text/plain;charset=utf-8", httpRequest.getResponseHeader("Content-Type"));
 
     }
 
