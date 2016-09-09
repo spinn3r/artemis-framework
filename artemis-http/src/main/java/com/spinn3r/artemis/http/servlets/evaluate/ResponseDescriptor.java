@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
+
 /**
  *
  */
@@ -33,6 +35,8 @@ public class ResponseDescriptor {
     protected ImmutableList<ResponseDescriptor.Cookie> cookies = ImmutableList.of();
 
     protected String content = null;
+
+    protected long delayMillis = 0;
 
     public int getStatus() {
         return status;
@@ -56,6 +60,10 @@ public class ResponseDescriptor {
 
     public String getContent() {
         return content;
+    }
+
+    public long getDelayMillis() {
+        return delayMillis;
     }
 
     public String toURL(String host, int port ) {
@@ -212,6 +220,12 @@ public class ResponseDescriptor {
             responseDescriptor.content = content;
             return this;
         }
+
+        public Builder withDelayMillis(long delayMillis) {
+            responseDescriptor.delayMillis = delayMillis;
+            return this;
+        }
+
 
         public ResponseDescriptor build() {
             responseDescriptor.headers = ImmutableMap.copyOf(headers);

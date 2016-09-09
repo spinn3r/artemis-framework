@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import static com.google.common.util.concurrent.Uninterruptibles.*;
 
 /**
  *
@@ -64,6 +67,10 @@ public class EvaluateServlet extends DefaultServlet {
                 out.write(responseDescriptor.getContent().getBytes(responseDescriptor.getCharacterEncoding()));
             }
 
+        }
+
+        if (responseDescriptor.getDelayMillis() > 0)  {
+            sleepUninterruptibly(responseDescriptor.getDelayMillis(), TimeUnit.MILLISECONDS);
         }
 
     }

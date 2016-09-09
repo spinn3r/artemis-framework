@@ -7,12 +7,14 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.http.init.DefaultWebserverReferencesService;
 import com.spinn3r.artemis.http.init.WebserverPort;
 import com.spinn3r.artemis.http.init.WebserverService;
+import com.spinn3r.artemis.http.servlets.RequestMeta;
 import com.spinn3r.artemis.http.servlets.evaluate.ResponseDescriptor;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.logging.init.ConsoleLoggingService;
 import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.metrics.init.uptime.UptimeMetricsService;
 import com.spinn3r.artemis.network.NetworkException;
@@ -56,6 +58,7 @@ public class DefaultHttpRequestBuilderTest {
 
         launcher.launch( ref(MockHostnameService.class),
                          ref(MockVersionService.class),
+                         ref(ConsoleLoggingService.class),
                          ref(MetricsService.class),
                          ref(UptimeService.class),
                          ref(UptimeMetricsService.class),
@@ -130,25 +133,35 @@ public class DefaultHttpRequestBuilderTest {
     @Test
     public void testGetWithHeaders() throws Exception {
 
-        String result =
-          httpRequestBuilder.get( "http://httpbin.org/get" )
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
+        String contentWithEncoding =
+          httpRequestBuilder.get( url )
             .withRequestHeader( "X-Foo", "bar" )
             .execute()
             .getContentWithEncoding()
           ;
 
-        System.out.printf( "result: %s\n", result );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
 
-        assertTrue( result.contains( "X-Foo" ) );
+        System.out.printf( "result: %s\n", contentWithEncoding );
+
+        assertTrue(requestMeta.getHeaders().containsKey("X-Foo"));
 
     }
 
     @Test
     public void testCustomHttpTimeouts() throws Exception {
 
+        String url = new ResponseDescriptor.Builder()
+                       .withStatus(200)
+                       .withDelayMillis(5000)
+                       .build()
+                       .toURL("localhost", webserverPort.getPort());
+
         String result =
           httpRequestBuilder
-            .get( "https://httpbin.org/delay/5" )
+            .get( url )
             .withConnectTimeout( 6_000 )
             .withReadTimeout( 6_000 )
             .execute()
@@ -175,9 +188,15 @@ public class DefaultHttpRequestBuilderTest {
     @Test(expected = NetworkException.class)
     public void testCustomHttpTimeoutsWithFailure() throws Exception {
 
+        String url = new ResponseDescriptor.Builder()
+                       .withStatus(200)
+                       .withDelayMillis(5000)
+                       .build()
+                       .toURL("localhost", webserverPort.getPort());
+
         String result =
           httpRequestBuilder
-            .get( "https://httpbin.org/delay/5" )
+            .get( url )
             .withConnectTimeout( 1_000 )
             .withReadTimeout( 1_000 )
             .execute()
@@ -199,20 +218,19 @@ public class DefaultHttpRequestBuilderTest {
         String encoding = "UTF-8";
         String type = "application/x-www-form-urlencoded";
 
-        // TODO: I think I can migrate to httpbin for this.
+        String url = String.format( "http://localhost:%s/request-meta", webserverPort.getPort() );
 
-        String url = String.format( "http://localhost:%s/params", webserverPort.getPort() );
+        String contentWithEncoding
+          = httpRequestBuilder
+              .post(url, data, encoding, type)
+              .execute()
+              .getContentWithEncoding();
 
-        httpRequestBuilder.post( url, data, encoding, type )
-            .execute()
-            .getContentWithEncoding()
-            ;
+        System.out.printf("%s\n", contentWithEncoding);
 
-        ParamServlet paramServlet = launcher.getInjector().getInstance( ParamServlet.class );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
 
-        assertEquals( 1, paramServlet.requestParameters.size() );
-
-        assertEquals( "{foo=[bar]}", paramServlet.requestParameters.get( 0 ).toString() );
+        assertEquals("{foo=bar}", requestMeta.getParameters().toString());
 
     }
 
@@ -253,7 +271,7 @@ public class DefaultHttpRequestBuilderTest {
         String encoding = "UTF-8";
         String type = "text/plain";
 
-        String url = String.format( "http://localhost:%s/put", webserverPort.getPort() );
+        String url = String.format( "http://localhost:%s/echo", webserverPort.getPort() );
 
         String result =
           httpRequestBuilder.put( url, data, encoding, type )
@@ -304,8 +322,10 @@ public class DefaultHttpRequestBuilderTest {
     @Test
     public void testGetUsingDirectInputStream() throws Exception {
 
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
         InputStream inputStream =
-          httpRequestBuilder.get( "http://httpbin.org/get" )
+          httpRequestBuilder.get( url )
             .execute()
             .getDirectInputStream();
 
@@ -365,21 +385,19 @@ public class DefaultHttpRequestBuilderTest {
 
         cookies.put( "hello", "world" );
 
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
         HttpRequest request =
-          httpRequestBuilder.get( "http://httpbin.org/cookies" )
+          httpRequestBuilder.get(url)
             .withCookies( cookies )
             .execute();
 
         String contentWithEncoding = request.getContentWithEncoding();
 
-        assertEquals( "{\n" +
-                        "  \"cookies\": {\n" +
-                        "    \"$Path\": \"/\", \n" +
-                        "    \"$Version\": \"1\", \n" +
-                        "    \"hello\": \"world\"\n" +
-                        "  }\n" +
-                        "}\n",
-                      contentWithEncoding );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
+
+        assertEquals("[Cookie{name='hello', value='world', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}]",
+                     requestMeta.getCookies().toString());
 
     }
 
@@ -391,33 +409,35 @@ public class DefaultHttpRequestBuilderTest {
         cookies.put( "hello", "world" );
         cookies.put( "cat", "dog" );
 
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
         HttpRequest request =
           httpRequestBuilder
-            //.withProxy("http://localhost:8080")
-            .get( "http://httpbin.org/cookies" )
+            .get( url )
             .withCookies( cookies )
             .execute();
 
         String contentWithEncoding = request.getContentWithEncoding();
 
-        assertEquals( "{\n" +
-                        "  \"cookies\": {\n" +
-                        "    \"$Path\": \"/\", \n" +
-                        "    \"$Version\": \"1\", \n" +
-                        "    \"cat\": \"dog\", \n" +
-                        "    \"hello\": \"world\"\n" +
-                        "  }\n" +
-                        "}\n",
-                      contentWithEncoding );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
+
+        assertEquals("[Cookie{name='cat', value='dog', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}, Cookie{name='hello', value='world', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}]",
+                     requestMeta.getCookies().toString());
 
     }
 
-    @Test
+    @Test(expected = NetworkException.class)
     public void testNotFound() throws Exception {
 
+        String url = new ResponseDescriptor.Builder()
+                       .withStatus(404)
+                       .build()
+                       .toURL("localhost", webserverPort.getPort());
+
         HttpRequest request =
-          httpRequestBuilder.get( "https://httpbin.org/status/404" )
-            .execute();
+          httpRequestBuilder.get( url )
+                            .execute()
+                            .connect();
 
     }
 
