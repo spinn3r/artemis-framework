@@ -14,6 +14,7 @@ import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
+import com.spinn3r.artemis.logging.init.ConsoleLoggingService;
 import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.metrics.init.uptime.UptimeMetricsService;
 import com.spinn3r.artemis.network.NetworkException;
@@ -57,6 +58,7 @@ public class DefaultHttpRequestBuilderTest {
 
         launcher.launch( ref(MockHostnameService.class),
                          ref(MockVersionService.class),
+                         ref(ConsoleLoggingService.class),
                          ref(MetricsService.class),
                          ref(UptimeService.class),
                          ref(UptimeMetricsService.class),
@@ -131,16 +133,20 @@ public class DefaultHttpRequestBuilderTest {
     @Test
     public void testGetWithHeaders() throws Exception {
 
-        String result =
-          httpRequestBuilder.get( "http://httpbin.org/get" )
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
+        String contentWithEncoding =
+          httpRequestBuilder.get( url )
             .withRequestHeader( "X-Foo", "bar" )
             .execute()
             .getContentWithEncoding()
           ;
 
-        System.out.printf( "result: %s\n", result );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
 
-        assertTrue( result.contains( "X-Foo" ) );
+        System.out.printf( "result: %s\n", contentWithEncoding );
+
+        assertTrue(requestMeta.getHeaders().containsKey("X-Foo"));
 
     }
 
@@ -366,8 +372,9 @@ public class DefaultHttpRequestBuilderTest {
 
         cookies.put( "hello", "world" );
 
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
         HttpRequest request =
-          httpRequestBuilder.get( String.format("http://localhost:%s/request-meta", webserverPort.getPort()))
+          httpRequestBuilder.get(url)
             .withCookies( cookies )
             .execute();
 
