@@ -15,14 +15,14 @@ public class ZonedDateTimes {
     private static final ZoneId UTC = ZoneId.of("UTC");
 
     public static Date toDate(ZonedDateTime zonedDateTime ) {
-        return Date.from( zonedDateTime.toInstant() );
+        return Date.from(zonedDateTime.toInstant());
     }
 
     public static ZonedDateTime fromDate(Date date) {
         return ZonedDateTime.ofInstant(date.toInstant(), UTC);
     }
 
-    public static Optional<Date> toDate( Optional<ZonedDateTime> zonedDateTime ) {
+    public static Optional<Date> toDate(Optional<ZonedDateTime> zonedDateTime) {
 
         if ( zonedDateTime.isPresent() ) {
             return Optional.of( toDate( zonedDateTime.get() ) );

@@ -13,12 +13,16 @@ public class Time extends TimeRange {
 
     private static final ZoneId UTC = ZoneId.of("UTC");
 
-    public Time( long unixtime ) {
+    public Time(long unixtime) {
         this( unixtime, TimeUnit.MILLISECONDS );
     }
 
-    public Time( Date date ) {
+    public Time(Date date) {
         this( date.getTime(), TimeUnit.MILLISECONDS );
+    }
+
+    public Time(ZonedDateTime zonedDateTime){
+        this(Date.from( zonedDateTime.toInstant()));
     }
 
     public Time(long time, TimeUnit unit) {
