@@ -4235,6 +4235,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setDateFound ( ZonedDateTime dateFound ) {
+
+        if (dateFound != null) {
+            setDateFound(Date.from(dateFound.toInstant()));
+        } else {
+            Date _dateFound = null;
+            setDateFound(_dateFound);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -5304,6 +5316,19 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setLastUpdated ( ZonedDateTime lastUpdated ) {
+
+        if (lastUpdated != null) {
+            setLastUpdated(Date.from(lastUpdated.toInstant()));
+        } else {
+            Date _lastUpdated = null;
+            setLastUpdated(_lastUpdated);
+        }
+
+        return this;
+    }
+
     /**
      * <p>
      * The last time we updated the metadata on this content.  On initial record creation last_updated and date_found will be identical but last_updated will change over time as we update metadata.
@@ -5909,6 +5934,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceDateFound ( ZonedDateTime sourceDateFound ) {
+
+        if (sourceDateFound != null) {
+            setSourceDateFound(Date.from(sourceDateFound.toInstant()));
+        } else {
+            Date _sourceDateFound = null;
+            setSourceDateFound(_sourceDateFound);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -6014,6 +6051,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceLastUpdated ( ZonedDateTime sourceLastUpdated ) {
+
+        if (sourceLastUpdated != null) {
+            setSourceLastUpdated(Date.from(sourceLastUpdated.toInstant()));
+        } else {
+            Date _sourceLastUpdated = null;
+            setSourceLastUpdated(_sourceLastUpdated);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -6119,7 +6168,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceLastPublished ( ZonedDateTime sourceLastPublished ) {
 
+        if (sourceLastPublished != null) {
+            setSourceLastPublished(Date.from(sourceLastPublished.toInstant()));
+        } else {
+            Date _sourceLastPublished = null;
+            setSourceLastPublished(_sourceLastPublished);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -6225,6 +6285,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceLastPosted ( ZonedDateTime sourceLastPosted ) {
+
+        if (sourceLastPosted != null) {
+            setSourceLastPosted(Date.from(sourceLastPosted.toInstant()));
+        } else {
+            Date _sourceLastPosted = null;
+            setSourceLastPosted(_sourceLastPosted);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -7400,6 +7472,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourcePshbLastPosted ( ZonedDateTime sourcePshbLastPosted ) {
+
+        if (sourcePshbLastPosted != null) {
+            setSourcePshbLastPosted(Date.from(sourcePshbLastPosted.toInstant()));
+        } else {
+            Date _sourcePshbLastPosted = null;
+            setSourcePshbLastPosted(_sourcePshbLastPosted);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -7505,7 +7589,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourcePshbLeaseExpires ( ZonedDateTime sourcePshbLeaseExpires ) {
 
+        if (sourcePshbLeaseExpires != null) {
+            setSourcePshbLeaseExpires(Date.from(sourcePshbLeaseExpires.toInstant()));
+        } else {
+            Date _sourcePshbLeaseExpires = null;
+            setSourcePshbLeaseExpires(_sourcePshbLeaseExpires);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -7817,6 +7912,19 @@ public abstract class BaseContent
 
         return this;
 
+    }
+
+    // support for ZonedDateTime
+    public BaseContent setSourceNextUpdate ( ZonedDateTime sourceNextUpdate ) {
+
+        if (sourceNextUpdate != null) {
+            setSourceNextUpdate(Date.from(sourceNextUpdate.toInstant()));
+        } else {
+            Date _sourceNextUpdate = null;
+            setSourceNextUpdate(_sourceNextUpdate);
+        }
+
+        return this;
     }
 
     /**
@@ -9761,6 +9869,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setSourceCreated ( ZonedDateTime sourceCreated ) {
+
+        if (sourceCreated != null) {
+            setSourceCreated(Date.from(sourceCreated.toInstant()));
+        } else {
+            Date _sourceCreated = null;
+            setSourceCreated(_sourceCreated);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -13296,7 +13416,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setPublished ( ZonedDateTime published ) {
 
+        if (published != null) {
+            setPublished(Date.from(published.toInstant()));
+        } else {
+            Date _published = null;
+            setPublished(_published);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -13402,6 +13533,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setModified ( ZonedDateTime modified ) {
+
+        if (modified != null) {
+            setModified(Date.from(modified.toInstant()));
+        } else {
+            Date _modified = null;
+            setModified(_modified);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -13507,6 +13650,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setPublishedPartial ( ZonedDateTime publishedPartial ) {
+
+        if (publishedPartial != null) {
+            setPublishedPartial(Date.from(publishedPartial.toInstant()));
+        } else {
+            Date _publishedPartial = null;
+            setPublishedPartial(_publishedPartial);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
@@ -13612,6 +13767,18 @@ public abstract class BaseContent
 
     }
 
+    // support for ZonedDateTime
+    public BaseContent setModifiedPartial ( ZonedDateTime modifiedPartial ) {
+
+        if (modifiedPartial != null) {
+            setModifiedPartial(Date.from(modifiedPartial.toInstant()));
+        } else {
+            Date _modifiedPartial = null;
+            setModifiedPartial(_modifiedPartial);
+        }
+
+        return this;
+    }
 
     /**
      * <p>
