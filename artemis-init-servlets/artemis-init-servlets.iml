@@ -45,14 +45,6 @@
     <orderEntry type="library" name="Maven: com.google.inject.extensions:guice-multibindings:4.0" level="project" />
     <orderEntry type="module" module-name="artemis-json" />
     <orderEntry type="module" module-name="artemis-http" />
-    <orderEntry type="module" module-name="artemis-network-lib" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore:4.4.4" level="project" />
-    <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.9" level="project" />
-    <orderEntry type="library" name="Maven: commons-validator:commons-validator:1.5.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-digester:commons-digester:1.8.1" level="project" />
-    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
     <orderEntry type="module" module-name="artemis-metrics" />
     <orderEntry type="module" module-name="artemis-threads" />
     <orderEntry type="module" module-name="log5j" />

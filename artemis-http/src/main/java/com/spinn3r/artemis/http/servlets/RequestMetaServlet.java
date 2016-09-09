@@ -49,11 +49,11 @@ public class RequestMetaServlet extends DefaultServlet {
 
         for (Cookie cookie : req.getCookies()) {
 
-            requestMeta.cookies.add(new com.spinn3r.artemis.network.cookies.Cookie(cookie.getName(),
-                                                                                   cookie.getValue(),
-                                                                                   cookie.getPath(),
-                                                                                   cookie.getDomain(),
-                                                                                   cookie.isHttpOnly()));
+            requestMeta.cookies.add(new RequestMeta.Cookie(cookie.getName(),
+                                                           cookie.getValue(),
+                                                           cookie.getPath(),
+                                                           cookie.getDomain(),
+                                                           cookie.isHttpOnly()));
         }
 
         resp.setContentType( "application/json" );

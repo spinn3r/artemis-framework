@@ -21,12 +21,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.spinn3r.artemis.network</groupId>
-            <artifactId>artemis-network-lib</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.spinn3r.artemis.metrics</groupId>
             <artifactId>artemis-metrics</artifactId>
             <version>${project.version}</version>
