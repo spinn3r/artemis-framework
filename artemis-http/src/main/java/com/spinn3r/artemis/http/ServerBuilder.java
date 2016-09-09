@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.http;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.http.logs.ExceptionLogger;
 import com.spinn3r.log5j.Logger;
 import org.eclipse.jetty.http.HttpMethod;
 import org.eclipse.jetty.jmx.MBeanContainer;
@@ -153,6 +154,7 @@ public class ServerBuilder {
 
         List<RequestLog> requestLogs = Lists.newArrayList();
         requestLogs.add( createSlf4jRequestLog() );
+        requestLogs.add( new ExceptionLogger());
 
         for (RequestLogReference requestLogReference : requestLogReferences) {
             requestLogs.add( requestLogReference.getRequestLog() );
