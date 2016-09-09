@@ -4686,18 +4686,6 @@ public abstract class BaseContentMetadata
 
     }
 
-    // support for ZonedDateTime
-    public BaseContentMetadata setPublished ( ZonedDateTime published ) {
-
-        if (published != null) {
-            setPublished(Date.from(zonedDateTime.toInstant()));
-        } else {
-            setPublished(null);
-        }
-
-        return this;
-    }
-
     /**
      * <p>
      * Date of first broadcast/publication.
@@ -4802,17 +4790,6 @@ public abstract class BaseContentMetadata
 
     }
 
-    // support for ZonedDateTime
-    public BaseContentMetadata setModified ( ZonedDateTime modified ) {
-
-        if (modified != null) {
-            setModified(Date.from(zonedDateTime.toInstant()));
-        } else {
-            setModified(null);
-        }
-
-        return this;
-    }
 
     /**
      * <p>
@@ -4918,18 +4895,6 @@ public abstract class BaseContentMetadata
 
     }
 
-    // support for ZonedDateTime
-    public BaseContentMetadata setPublishedPartial ( ZonedDateTime publishedPartial ) {
-
-        if (publishedPartial != null) {
-            setPublishedPartial(Date.from(zonedDateTime.toInstant()));
-        } else {
-            setPublishedPartial(null);
-        }
-
-        return this;
-    }
-
     /**
      * <p>
      * This is identical to `published` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
@@ -5032,18 +4997,6 @@ public abstract class BaseContentMetadata
 
         return this;
 
-    }
-
-    // support for ZonedDateTime
-    public BaseContentMetadata setModifiedPartial ( ZonedDateTime modifiedPartial ) {
-
-        if (modifiedPartial != null) {
-            setModifiedPartial(Date.from(zonedDateTime.toInstant()));
-        } else {
-            setModifiedPartial(null);
-        }
-
-        return this;
     }
 
     /**
