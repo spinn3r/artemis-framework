@@ -49,7 +49,7 @@ public class RequestMetaServlet extends DefaultServlet {
             }
 
             for( String parameterName : Collections.list( req.getParameterNames() ) ) {
-                requestMeta.headers.put( parameterName, req.getParameter( parameterName ) );
+                requestMeta.parameters.put( parameterName, req.getParameter( parameterName ) );
             }
 
             if ( req.getCookies() != null) {
