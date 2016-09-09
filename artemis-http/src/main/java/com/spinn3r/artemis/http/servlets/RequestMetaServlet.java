@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import org.eclipse.jetty.servlet.DefaultServlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -44,6 +45,15 @@ public class RequestMetaServlet extends DefaultServlet {
 
         for( String parameterName : Collections.list( req.getParameterNames() ) ) {
             requestMeta.headers.put( parameterName, req.getParameter( parameterName ) );
+        }
+
+        for (Cookie cookie : req.getCookies()) {
+
+            requestMeta.cookies.add(new com.spinn3r.artemis.network.cookies.Cookie(cookie.getName(),
+                                                                                   cookie.getValue(),
+                                                                                   cookie.getPath(),
+                                                                                   cookie.getDomain(),
+                                                                                   cookie.isHttpOnly()));
         }
 
         resp.setContentType( "application/json" );

@@ -13,6 +13,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.json</groupId>
+            <artifactId>artemis-json</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.util</groupId>
             <artifactId>artemis-util</artifactId>
             <version>${project.version}</version>

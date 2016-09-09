@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.spinn3r.artemis.http.init.DefaultWebserverReferencesService;
 import com.spinn3r.artemis.http.init.WebserverPort;
 import com.spinn3r.artemis.http.init.WebserverService;
+import com.spinn3r.artemis.http.servlets.RequestMeta;
 import com.spinn3r.artemis.http.servlets.evaluate.ResponseDescriptor;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockHostnameService;
@@ -366,20 +367,16 @@ public class DefaultHttpRequestBuilderTest {
         cookies.put( "hello", "world" );
 
         HttpRequest request =
-          httpRequestBuilder.get( "http://httpbin.org/cookies" )
+          httpRequestBuilder.get( String.format("http://localhost:%s/request-meta", webserverPort.getPort()))
             .withCookies( cookies )
             .execute();
 
         String contentWithEncoding = request.getContentWithEncoding();
 
-        assertEquals( "{\n" +
-                        "  \"cookies\": {\n" +
-                        "    \"$Path\": \"/\", \n" +
-                        "    \"$Version\": \"1\", \n" +
-                        "    \"hello\": \"world\"\n" +
-                        "  }\n" +
-                        "}\n",
-                      contentWithEncoding );
+        RequestMeta requestMeta = RequestMeta.fromJSON(contentWithEncoding);
+
+        assertEquals("[Cookie{name='hello', value='world', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}]",
+                     requestMeta.getCookies().toString());
 
     }
 
