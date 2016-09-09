@@ -31,7 +31,7 @@ public class RequestSettingsTest extends BaseLauncherTest {
     @Test
     public void testFetchingContentWithDefaultFollowContent() throws Exception {
 
-        String link = "https://httpbin.org/get";
+        String link = "https://google.com";
 
         // this isn't actually working.. I'm not sure what they could be rejecting
         // my requests on... I'm not sending cookies but neither is curl...
