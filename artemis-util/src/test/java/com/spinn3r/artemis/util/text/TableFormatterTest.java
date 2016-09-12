@@ -15,8 +15,8 @@ public class TableFormatterTest extends TestCase {
         tmp.add( Lists.newArrayList( "xxxxxxxxxxx", "xx") );
 
 
-        assertEquals( "xxx         xxxxxxxxxxxxxx \n" +
-                        "xxxxxxxxxxx xx             \n",
+        assertEquals( "xxx           xxxxxxxxxxxxxx   \n" +
+                      "xxxxxxxxxxx   xx               \n",
                       TableFormatter.format( tmp ) );
 
 

@@ -30,8 +30,8 @@ public class HistographTest {
 
         assertEquals( "{alice=4, bob=2}", histograph.toString() );
 
-        assertEquals( "alice 4 \n" +
-                        "bob   2 \n",
+        assertEquals( "alice   4   \n" +
+                        "bob     2   \n",
                       histograph.format() );
     }
 
@@ -54,8 +54,8 @@ public class HistographTest {
 
         assertEquals( "{bob=4, alice=2}", histograph.toString() );
 
-        assertEquals( "bob   4 \n" +
-                        "alice 2 \n",
+        assertEquals( "bob     4   \n" +
+                        "alice   2   \n",
                       histograph.format() );
     }
 
@@ -82,10 +82,10 @@ public class HistographTest {
 
         assertEquals( "{ALICE=4, BOB=2, CAROL=1, DAN=1}", histograph.toString() );
 
-        assertEquals( "ALICE 4 \n" +
-                        "BOB   2 \n" +
-                        "CAROL 1 \n" +
-                        "DAN   1 \n", histograph.format() );
+        assertEquals( "ALICE   4   \n" +
+                        "BOB     2   \n" +
+                        "CAROL   1   \n" +
+                        "DAN     1   \n", histograph.format() );
 
     }
 
