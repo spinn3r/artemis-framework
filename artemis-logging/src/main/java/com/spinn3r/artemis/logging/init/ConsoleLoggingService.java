@@ -41,13 +41,15 @@ public class ConsoleLoggingService extends BaseService implements ModularService
 
         String conf = "/log4j-stdout.xml";
 
-        info( "Loading log4j config file: %s", conf );
+        info( "Loading log4j config path: %s", conf );
 
         URL url = ConsoleLoggingService.class.getResource( conf );
 
         if ( url == null ) {
             throw new Exception( "Could not find config file: " + conf );
         }
+
+        info( "Loading log4j config resource URL: %s", url );
 
         DOMConfigurator.configure( url );
 
