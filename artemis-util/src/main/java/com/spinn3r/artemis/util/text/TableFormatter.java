@@ -34,7 +34,7 @@ public class TableFormatter {
                 int len = widths.get( i );
 
                 buff.append( String.format( fmt( len ), value ) );
-                buff.append( " " );
+                buff.append( "   " );
 
             }
 
