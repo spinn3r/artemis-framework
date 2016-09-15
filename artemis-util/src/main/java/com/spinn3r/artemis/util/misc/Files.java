@@ -35,7 +35,7 @@ public class Files {
     }
 
     public static final String toUTF8( InputStream inputStream ) throws IOException {
-        checkNotNull( inputStream );
+        checkNotNull(inputStream, "Input stream is null");
         return CharStreams.toString( new InputStreamReader( inputStream, Charsets.UTF_8 ) );
     }
 
