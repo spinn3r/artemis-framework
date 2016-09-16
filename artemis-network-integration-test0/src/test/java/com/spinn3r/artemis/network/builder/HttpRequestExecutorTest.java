@@ -12,12 +12,15 @@ import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
 import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.builder.proxies.Proxies;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,6 +47,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
 
 
     Server server;
+
     PortMutex server503Port;
 
 
@@ -64,7 +68,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         server.setHandler(new AbstractHandler() {
             @Override
             public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-                response.setStatus(503);
+                response.sendError(503);
 
             }
         });
@@ -73,6 +77,9 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
 
 
 
+    }
+    public void tearDown() throws Exception {
+        server.stop();
     }
 
     @Test
@@ -125,10 +132,11 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
         NetworkException cause = null;
-        HttpRequest httpRequest = null;
+        ProxyReference proxy = Proxies.create( url );
 
         try {
-            httpRequest = httpRequestExecutor.execute( () -> httpRequestBuilder.get( url ).execute().connect() );
+
+            httpRequestExecutor.execute( () -> httpRequestBuilder.get( url ).withProxy(proxy).execute().connect() );
         } catch ( NetworkException ne ) {
             cause = ne;
         }
@@ -136,6 +144,8 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         assertEquals( 5, httpRequestExecutor.getRetries() );
         assertNotNull( cause );
         assertEquals( 503, cause.getResponseCode() );
+        assertThat(cause.getCause().getMessage(), Matchers.startsWith("Server returned HTTP response code: 503 for URL:"));
+
 
     }
 
