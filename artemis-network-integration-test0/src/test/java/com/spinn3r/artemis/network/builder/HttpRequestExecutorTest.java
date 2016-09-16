@@ -8,13 +8,23 @@ import com.spinn3r.artemis.http.servlets.evaluate.ResponseDescriptor;
 import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.init.MockHostnameService;
 import com.spinn3r.artemis.init.MockVersionService;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
 import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -29,6 +39,14 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Inject
     WebserverPort webserverPort;
 
+    @Inject
+    PortMutexes portMutexes;
+
+
+    Server server;
+    PortMutex server503Port;
+
+
     @Override
     @Before
     public void setUp() throws Exception {
@@ -40,6 +58,21 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
                      DirectNetworkService.class,
                      DefaultWebserverReferencesService.class,
                      WebserverService.class);
+        server503Port = portMutexes.acquire(10000, 11000);
+
+        server = new Server(server503Port.getPort());
+        server.setHandler(new AbstractHandler() {
+            @Override
+            public void handle(String target, Request baseRequest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+                response.setStatus(503);
+
+            }
+        });
+        server.start();
+        server.dumpStdErr();
+
+
+
     }
 
     @Test
@@ -87,10 +120,7 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Test
     public void test503() throws Exception {
 
-        String url = new ResponseDescriptor.Builder()
-                       .withStatus(503)
-                       .build()
-                       .toURL("localhost", webserverPort.getPort());
+        String url = "http://localhost:"+server503Port.getPort();
 
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
