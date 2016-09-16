@@ -127,12 +127,17 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
     @Test
     public void test503() throws Exception {
 
-        String url = "http://localhost:"+server503Port.getPort();
+        String url = new ResponseDescriptor.Builder()
+                .withStatus(200)
+                .build()
+                .toURL("localhost", webserverPort.getPort());
+
+        String proxyUrl = "http://localhost:"+server503Port.getPort();
 
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
         NetworkException cause = null;
-        ProxyReference proxy = Proxies.create( url );
+        ProxyReference proxy = Proxies.create( proxyUrl );
 
         try {
 
