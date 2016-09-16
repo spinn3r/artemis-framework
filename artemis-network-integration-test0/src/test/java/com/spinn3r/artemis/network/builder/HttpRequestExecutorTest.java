@@ -84,6 +84,30 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         assertEquals( 404, cause.getResponseCode() );
 
     }
+    @Test
+    public void test503() throws Exception {
+
+        String url = new ResponseDescriptor.Builder()
+                       .withStatus(503)
+                       .build()
+                       .toURL("localhost", webserverPort.getPort());
+
+        HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
+
+        NetworkException cause = null;
+        HttpRequest httpRequest = null;
+
+        try {
+            httpRequest = httpRequestExecutor.execute( () -> httpRequestBuilder.get( url ).execute().connect() );
+        } catch ( NetworkException ne ) {
+            cause = ne;
+        }
+
+        assertEquals( 5, httpRequestExecutor.getRetries() );
+        assertNotNull( cause );
+        assertEquals( 503, cause.getResponseCode() );
+
+    }
 
     @Test
     public void test500() throws Exception {
