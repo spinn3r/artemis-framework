@@ -13,6 +13,7 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -107,6 +108,33 @@ public class HttpRequestExecutorTest extends BaseLauncherTest {
         assertEquals( 5, httpRequestExecutor.getRetries() );
         assertNotNull( cause );
         assertEquals( 500, cause.getResponseCode() );
+        assertThat(cause.getCause().getMessage(), Matchers.startsWith("Server returned HTTP response code: 500 for URL:"));
+
+    }
+
+    @Test
+    public void test503() throws Exception {
+
+        String url = new ResponseDescriptor.Builder()
+                       .withStatus(503)
+                       .build()
+                       .toURL("localhost", webserverPort.getPort());
+
+        HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
+
+        NetworkException cause = null;
+        HttpRequest httpRequest = null;
+
+        try {
+            httpRequest = httpRequestExecutor.execute( () -> httpRequestBuilder.get( url ).execute().connect() );
+        } catch ( NetworkException ne ) {
+            cause = ne;
+        }
+
+        assertEquals( 5, httpRequestExecutor.getRetries() );
+        assertNotNull( cause );
+        assertEquals( 503, cause.getResponseCode() );
+        assertThat(cause.getCause().getMessage(), Matchers.startsWith("Server returned HTTP response code: 503 for URL:"));
 
     }
 
