@@ -52,6 +52,8 @@ public class DirectNetworkService extends BaseService {
         provider( CookieJarManager.class, cookieJarManagerProvider );
         provider( ThreadLocalCookieStore.class, threadLocalCookieStoreProvider );
 
+        NetworkSupport.disablePlatformLogger();
+
     }
 
     @Override
