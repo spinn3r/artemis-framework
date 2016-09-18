@@ -30,7 +30,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import sun.util.logging.PlatformLogger;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -446,8 +445,6 @@ public class DefaultHttpRequestBuilderTest {
     public void testInvalidCookies() throws Exception {
 
         String link = "http://trib.al/qN1OsNP";
-
-
 
         httpRequestBuilder
           .get( link )
