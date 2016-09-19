@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * Represents a specific time, since unix epoch.
  */
-public class Time extends TimeRange {
+public class
+Time extends TimeRange {
 
     private static final ZoneId UTC = ZoneId.of("UTC");
 

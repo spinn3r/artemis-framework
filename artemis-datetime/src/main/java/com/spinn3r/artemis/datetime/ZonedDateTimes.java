@@ -22,6 +22,17 @@ public class ZonedDateTimes {
         return ZonedDateTime.ofInstant(date.toInstant(), UTC);
     }
 
+    /**
+     * Return the given ZonedDateTime at hour resolution
+     */
+    public static ZonedDateTime toHour(ZonedDateTime zonedDateTime) {
+
+        return zonedDateTime.withNano(0)
+                            .withSecond(0)
+                            .withMinute(0);
+
+    }
+
     public static Optional<Date> toDate(Optional<ZonedDateTime> zonedDateTime) {
 
         if ( zonedDateTime.isPresent() ) {
