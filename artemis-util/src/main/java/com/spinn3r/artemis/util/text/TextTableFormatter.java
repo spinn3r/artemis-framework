@@ -52,6 +52,18 @@ public class TextTableFormatter {
         return result;
     }
 
+    public static TextTableFormatter4 forHeadings(String col0, String col1, String col2, String col3) {
+        TextTableFormatter4 result = new TextTableFormatter4();
+        result.headings(col0, col1, col2, col3);
+        return result;
+    }
+
+    public static TextTableFormatter5 forHeadings(String col0, String col1, String col2, String col3, String col4) {
+        TextTableFormatter5 result = new TextTableFormatter5();
+        result.headings(col0, col1, col2, col3, col4);
+        return result;
+    }
+
     public static class TextTableFormatter1 extends TextTableFormatter {
 
         public TextTableFormatter1 row(Object col0) {
@@ -79,6 +91,23 @@ public class TextTableFormatter {
 
     }
 
+    public static class TextTableFormatter4 extends TextTableFormatter {
+
+        public TextTableFormatter4 row(Object col0, Object col1, Object col2, Object col3) {
+            rows.add(Lists.newArrayList(col0.toString(), col1.toString(), col2.toString(), col3.toString()));
+            return this;
+        }
+
+    }
+
+    public static class TextTableFormatter5 extends TextTableFormatter {
+
+        public TextTableFormatter5 row(Object col0, Object col1, Object col2, Object col3, Object col4) {
+            rows.add(Lists.newArrayList(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString()));
+            return this;
+        }
+
+    }
 
 
 }
