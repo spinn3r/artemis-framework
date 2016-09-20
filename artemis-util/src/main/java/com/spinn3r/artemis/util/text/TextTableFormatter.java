@@ -66,7 +66,7 @@ public class TextTableFormatter {
         List<Justification> result = Lists.newArrayList();
 
         for (String heading : headings) {
-            result.add(Justification.LEFT);
+            result.add(Justification.RIGHT);
         }
 
         return ImmutableList.copyOf(result);
@@ -204,7 +204,7 @@ public class TextTableFormatter {
                                 .addAll(this.headings).toImmutableList());
 
             table.setJustifications(new ListBuilder<Justification>()
-                                      .add(Justification.RIGHT)
+                                      .add(Justification.LEFT)
                                       .addAll(this.justifications).toImmutableList());
 
             table.setUnderlines(new StringListBuilder()
@@ -259,6 +259,7 @@ public class TextTableFormatter {
             result.addAll(rows);
 
             return justify(result);
+            //return result;
 
         }
 
