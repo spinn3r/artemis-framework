@@ -59,6 +59,10 @@ public class Histograph<K extends Comparable<K>> {
         return delegate.get( key ).get();
     }
 
+    public int getOrDefault(K key, int defaultValue) {
+        return delegate.getOrDefault(key, new AtomicInteger(0)).get();
+    }
+
     public int size() {
         return delegate.size();
     }

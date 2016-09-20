@@ -814,15 +814,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     java.lang.reflect.Field FIELD_HTTP_CLIENT_URL = null;
 
     /**
-     * This method used Reflection to pull out the redirected URL in
+     * This method uses reflection to pull out the redirected URL in
      * java.net.URL.  Internally sun.net.www.protocol.http.HttpURLConnection
      * stores a reference to sun.net.www.http.HttpClient which then in turn does
      * all the redirection and stores the redirect java.net.URL.  We just use
      * reflection to FETCH this URL and then call toString to get the correct
      * value.
-     *
-     * Java needs the concept of readonly private variables.
-     *
      *
      */
     public String getResourceFromRedirect() {

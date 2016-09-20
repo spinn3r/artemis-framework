@@ -117,6 +117,8 @@ public class NetworkService extends BaseService {
         RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
         requestSettingsRegistryProvider.set( requestSettingsRegistry );
 
+        NetworkSupport.disablePlatformLogger();
+
     }
 
     @Override

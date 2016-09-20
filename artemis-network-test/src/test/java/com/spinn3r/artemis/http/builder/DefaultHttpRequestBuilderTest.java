@@ -26,17 +26,16 @@ import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.UptimeService;
 import com.spinn3r.artemis.util.misc.HitIndex;
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
 import java.util.Map;
 
-import static com.spinn3r.artemis.init.Services.ref;
-import static org.apache.cassandra.db.marshal.CompositeType.build;
-import static org.hamcrest.Matchers.greaterThan;
+import static com.spinn3r.artemis.init.Services.*;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 public class DefaultHttpRequestBuilderTest {
@@ -438,6 +437,18 @@ public class DefaultHttpRequestBuilderTest {
           httpRequestBuilder.get( url )
                             .execute()
                             .connect();
+
+    }
+
+    @Test
+    @Ignore
+    public void testInvalidCookies() throws Exception {
+
+        String link = "http://trib.al/qN1OsNP";
+
+        httpRequestBuilder
+          .get( link )
+          .execute().getContentWithEncoding();
 
     }
 
