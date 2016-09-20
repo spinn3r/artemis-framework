@@ -45,7 +45,8 @@ public class HttpRequestExecutor {
 
         NetworkException cause = null;
 
-        for (int retryIter = 0; retryIter <= maxRetries; retryIter++) {
+        int retryIter = 0;
+        for ( ; retryIter <= maxRetries; retryIter++) {
 
             try {
 
@@ -74,6 +75,7 @@ public class HttpRequestExecutor {
 
         }
 
+        log.warn("Throwing non transient exception after %d retries: %s", retryIter, cause);
         throw cause;
 
     }

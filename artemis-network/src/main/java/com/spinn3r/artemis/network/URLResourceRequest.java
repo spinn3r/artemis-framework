@@ -4,10 +4,8 @@ package com.spinn3r.artemis.network;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
-import java.net.HttpURLConnection;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -419,6 +417,11 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                     //now copy over timeout and read settings
                     httpURLConn.setConnectTimeout( (int) getConnectTimeout() );
                     httpURLConn.setReadTimeout( (int) getReadTimeout() );
+
+                    boolean throwException = false;
+                    if (throwException) {
+                        throw new IOException("Unable to tunnel through proxy. Proxy returns \"HTTP/1.0 503 Service Unavailable\"");
+                    }
 
                     httpURLConn.connect();
 
