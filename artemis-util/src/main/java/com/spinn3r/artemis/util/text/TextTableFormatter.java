@@ -1,8 +1,11 @@
 package com.spinn3r.artemis.util.text;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.util.misc.Strings;
+import jdk.nashorn.internal.ir.annotations.Immutable;
 
+import javax.xml.soap.Text;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,18 +14,94 @@ import java.util.List;
  */
 public class TextTableFormatter {
 
+    private static final String LINE_NUMBER_FORMAT = "%,d.";
+
+    protected List<String>headings = Lists.newArrayList();
+
+    protected List<String> underlines = Lists.newArrayList();
+
     protected List<List<String>> rows = Lists.newArrayList();
 
     private TextTableFormatter() {
     }
 
     public String format() {
-        return TableFormatter.format(rows);
+
+        List<List<String>> lines = Lists.newArrayList();
+
+        lines.add(withLineNumberPrefix(headings));
+        lines.add(withLineNumberPrefix(underlines));
+        lines.addAll(withLineNumbers(this.rows));
+
+        return TableFormatter.format(lines);
+
+    }
+
+    private ImmutableList<ImmutableList<String>> withLineNumbers(List<List<String>> lines) {
+
+        List<ImmutableList<String>> result = Lists.newArrayList();
+
+        for (int i = 0; i < lines.size(); i++) {
+            List<String> line = lines.get(i);
+            List<String> tmp = Lists.newArrayList();
+            tmp.add(String.format(LINE_NUMBER_FORMAT, i+1));
+            tmp.addAll(line);
+            result.add(ImmutableList.copyOf(tmp));
+        }
+
+        return ImmutableList.copyOf(result);
+
+    }
+
+    private ImmutableList<ImmutableList<String>> withJustification(List<List<String>> lines) {
+
+        List<ImmutableList<String>> result = Lists.newArrayList();
+
+        for (int i = 0; i < lines.size(); i++) {
+            List<String> line = lines.get(i);
+            List<String> tmp = Lists.newArrayList();
+            tmp.add(String.format(LINE_NUMBER_FORMAT, i+1));
+            tmp.addAll(line);
+            result.add(ImmutableList.copyOf(tmp));
+        }
+
+        return ImmutableList.copyOf(result);
+
+    }
+
+    private ImmutableList<String> withLineNumberPrefix(List<String> data) {
+
+        List<String> result = Lists.newArrayList();
+        result.add("");
+        result.addAll(data);
+
+        return ImmutableList.copyOf(result);
+
+    }
+
+    private ImmutableList<ImmutableList<String>> withJustification(int col, Justification justification) {
+
+        List<ImmutableList<String>> result = Lists.newArrayList();
+
+
+
+        return ImmutableList.copyOf(result);
+
+    }
+
+    protected String leftJustify(String text, int width) {
+        String fmt = "%-" + width + "s";
+        return String.format(fmt, text);
+    }
+
+    protected String rightJustify(String text, int width) {
+        String fmt = "%" + width + "s";
+        return String.format(fmt, text);
     }
 
     protected void headings(String... headings) {
 
-        rows.add(Arrays.asList(headings));
+        this.headings = Arrays.asList(headings);
 
         List<String> underlines = Lists.newArrayList();
 
@@ -30,7 +109,7 @@ public class TextTableFormatter {
             underlines.add(Strings.repeat("-", heading.length()));
         }
 
-        rows.add(underlines);
+        this.underlines = underlines;
 
     }
 
@@ -108,6 +187,12 @@ public class TextTableFormatter {
         }
 
     }
+
+    enum Justification {
+        LEFT,
+        RIGHT
+    }
+
 
 
 }
