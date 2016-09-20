@@ -22,6 +22,22 @@ public class TextTableFormatterTest {
     }
 
     @Test
+    public void testWithBadLayout() throws Exception {
+
+        TextTableFormatter.TextTableFormatter1 textTableFormatter
+          = TextTableFormatter.forHeadings("");
+
+        textTableFormatter.row("");
+
+        // this wouldn't be used, except by accident, but it shouldn't generate
+        // any exceptions.
+        assertEquals("         \n" +
+                       "         \n" +
+                       "1.       \n", textTableFormatter.format());
+
+    }
+
+    @Test
     public void testObjectFormatting() throws Exception {
         Object val = 10000;
         assertEquals("10,000", String.format("%,d", val));

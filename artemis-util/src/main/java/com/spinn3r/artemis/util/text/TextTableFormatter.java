@@ -377,7 +377,7 @@ public class TextTableFormatter {
                 }
             }
 
-            return result;
+            return Math.max(1,result);
 
         }
 
