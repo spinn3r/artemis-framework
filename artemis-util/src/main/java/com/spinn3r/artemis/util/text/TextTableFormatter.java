@@ -3,10 +3,9 @@ package com.spinn3r.artemis.util.text;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.util.misc.Strings;
-import jdk.nashorn.internal.ir.annotations.Immutable;
 
-import javax.xml.soap.Text;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,11 +15,7 @@ public class TextTableFormatter {
 
     private static final String LINE_NUMBER_FORMAT = "%,d.";
 
-    protected List<String>headings = Lists.newArrayList();
-
-    protected List<String> underlines = Lists.newArrayList();
-
-    protected List<List<String>> rows = Lists.newArrayList();
+    protected Table table = new Table();
 
     private TextTableFormatter() {
     }
@@ -29,43 +24,12 @@ public class TextTableFormatter {
 
         List<List<String>> lines = Lists.newArrayList();
 
-        lines.add(withLineNumberPrefix(headings));
-        lines.add(withLineNumberPrefix(underlines));
-        lines.addAll(withLineNumbers(this.rows));
+//        lines.add(withLineNumberPrefix(headings));
+//        lines.add(withLineNumberPrefix(underlines));
+//        //lines.addAll(withLineNumbers(this.rows));
+//        lines.addAll(this.rows);
 
-        return TableFormatter.format(lines);
-
-    }
-
-    private ImmutableList<ImmutableList<String>> withLineNumbers(List<List<String>> lines) {
-
-        List<ImmutableList<String>> result = Lists.newArrayList();
-
-        for (int i = 0; i < lines.size(); i++) {
-            List<String> line = lines.get(i);
-            List<String> tmp = Lists.newArrayList();
-            tmp.add(String.format(LINE_NUMBER_FORMAT, i+1));
-            tmp.addAll(line);
-            result.add(ImmutableList.copyOf(tmp));
-        }
-
-        return ImmutableList.copyOf(result);
-
-    }
-
-    private ImmutableList<ImmutableList<String>> withJustification(List<List<String>> lines) {
-
-        List<ImmutableList<String>> result = Lists.newArrayList();
-
-        for (int i = 0; i < lines.size(); i++) {
-            List<String> line = lines.get(i);
-            List<String> tmp = Lists.newArrayList();
-            tmp.add(String.format(LINE_NUMBER_FORMAT, i+1));
-            tmp.addAll(line);
-            result.add(ImmutableList.copyOf(tmp));
-        }
-
-        return ImmutableList.copyOf(result);
+        return TableFormatter.format(table.withLineNumbers().toCells());
 
     }
 
@@ -89,27 +53,35 @@ public class TextTableFormatter {
 
     }
 
-    protected String leftJustify(String text, int width) {
-        String fmt = "%-" + width + "s";
-        return String.format(fmt, text);
-    }
-
-    protected String rightJustify(String text, int width) {
-        String fmt = "%" + width + "s";
-        return String.format(fmt, text);
-    }
-
     protected void headings(String... headings) {
 
-        this.headings = Arrays.asList(headings);
+        table.setHeadings(ImmutableList.copyOf(Arrays.asList(headings)));
+        table.setUnderlines(createUnderlines(headings));
+        table.setJustifications(createJustifications(headings));
 
-        List<String> underlines = Lists.newArrayList();
+    }
+
+    protected ImmutableList<Justification> createJustifications(String... headings) {
+
+        List<Justification> result = Lists.newArrayList();
 
         for (String heading : headings) {
-            underlines.add(Strings.repeat("-", heading.length()));
+            result.add(Justification.LEFT);
         }
 
-        this.underlines = underlines;
+        return ImmutableList.copyOf(result);
+
+    }
+
+    protected ImmutableList<String> createUnderlines(String... headings) {
+
+        List<String> result = Lists.newArrayList();
+
+        for (String heading : headings) {
+            result.add(Strings.repeat("-", heading.length()));
+        }
+
+        return ImmutableList.copyOf(result);
 
     }
 
@@ -146,7 +118,7 @@ public class TextTableFormatter {
     public static class TextTableFormatter1 extends TextTableFormatter {
 
         public TextTableFormatter1 row(Object col0) {
-            rows.add(Lists.newArrayList(col0.toString()));
+            table.addRow(ImmutableList.of(col0.toString()));
             return this;
         }
 
@@ -155,7 +127,7 @@ public class TextTableFormatter {
     public static class TextTableFormatter2 extends TextTableFormatter {
 
         public TextTableFormatter2 row(Object col0, Object col1) {
-            rows.add(Lists.newArrayList(col0.toString(), col1.toString()));
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString()));
             return this;
         }
 
@@ -164,7 +136,7 @@ public class TextTableFormatter {
     public static class TextTableFormatter3 extends TextTableFormatter {
 
         public TextTableFormatter3 row(Object col0, Object col1, Object col2) {
-            rows.add(Lists.newArrayList(col0.toString(), col1.toString(), col2.toString()));
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString()));
             return this;
         }
 
@@ -173,7 +145,7 @@ public class TextTableFormatter {
     public static class TextTableFormatter4 extends TextTableFormatter {
 
         public TextTableFormatter4 row(Object col0, Object col1, Object col2, Object col3) {
-            rows.add(Lists.newArrayList(col0.toString(), col1.toString(), col2.toString(), col3.toString()));
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString(), col3.toString()));
             return this;
         }
 
@@ -182,17 +154,238 @@ public class TextTableFormatter {
     public static class TextTableFormatter5 extends TextTableFormatter {
 
         public TextTableFormatter5 row(Object col0, Object col1, Object col2, Object col3, Object col4) {
-            rows.add(Lists.newArrayList(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString()));
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString()));
             return this;
         }
 
     }
 
+    static class Table {
+
+        protected ImmutableList<String> headings = ImmutableList.of();
+
+        protected ImmutableList<Justification> justifications = ImmutableList.of();
+
+        protected ImmutableList<String> underlines = ImmutableList.of();
+
+        protected List<ImmutableList<String>> rows = Lists.newArrayList();
+
+        public Table() {
+        }
+
+        public Table(ImmutableList<ImmutableList<String>> rows) {
+            this.rows = rows;
+        }
+
+        public void setHeadings(ImmutableList<String> headings) {
+            this.headings = headings;
+        }
+
+        public void setJustifications(ImmutableList<Justification> justifications) {
+            this.justifications = justifications;
+        }
+
+        public void setUnderlines(ImmutableList<String> underlines) {
+            this.underlines = underlines;
+        }
+
+        public void addRow(ImmutableList<String> row) {
+            rows.add(row);
+        }
+
+        public Table withLineNumbers() {
+
+            Table table = new Table();
+
+            // have to adjust headings, justification, etc.
+
+            table.setHeadings(new StringListBuilder()
+                                .add("")
+                                .addAll(this.headings).toImmutableList());
+
+            table.setJustifications(new ListBuilder<Justification>()
+                                      .add(Justification.RIGHT)
+                                      .addAll(this.justifications).toImmutableList());
+
+            table.setUnderlines(new StringListBuilder()
+                                .add("")
+                                .addAll(this.underlines)
+                                .toImmutableList());
+
+            for (int i = 0; i < rows.size(); i++) {
+
+                List<String> row = rows.get(i);
+                table.addRow(new StringListBuilder()
+                               .add(String.format(LINE_NUMBER_FORMAT, i+1))
+                               .addAll(row).toImmutableList());
+
+            }
+
+            return table;
+
+        }
+
+        private List<List<String>> justify(List<List<String>> cells) {
+
+            List<List<String>> result = Lists.newArrayList();
+
+            Grid grid = new Grid(cells);
+
+            ImmutableList<Integer> columnWidths = grid.columnWidths();
+
+            for (List<String> row : cells) {
+                List<String> newRow = Lists.newArrayList();
+                for (int i = 0; i < row.size(); i++) {
+                    Justification justification = justifications.get(0);
+                    String value = row.get(i);
+                    int columnWidth = columnWidths.get(i);
+                    newRow.add(Justifier.justify(justification, value, columnWidth));
+                }
+                result.add(newRow);
+            }
+
+            return result;
+
+        }
+
+        public List<List<String>> toCells() {
+
+            List<List<String>> result = Lists.newArrayList();
+
+            // TODO: apply justification...
+
+            result.add(ImmutableList.copyOf(headings));
+            result.add(ImmutableList.copyOf(underlines));
+            result.addAll(rows);
+
+            return justify(result);
+
+        }
+
+    }
+
+    static class Justifier {
+
+        public static String left(String text, int width) {
+            String fmt = "%-" + width + "s";
+            return String.format(fmt, text);
+        }
+
+        public static String right(String text, int width) {
+            String fmt = "%" + width + "s";
+            return String.format(fmt, text);
+        }
+
+        public static String justify(Justification justification, String text, int width) {
+
+            if (justification.equals(Justification.LEFT)) {
+                return left(text, width);
+            } else {
+                return right(text, width);
+            }
+
+        }
+
+    }
+
+    static class StringListBuilder extends ListBuilder<String> {
+
+    }
+
+    static class ListBuilder<T> {
+
+        private List<T> list = Lists.newArrayList();
+
+        public ListBuilder<T> add(T entry) {
+            list.add(entry);
+            return this;
+        }
+
+        public ListBuilder<T> addAll(Collection<T> entry) {
+            list.addAll(entry);
+            return this;
+        }
+
+        public ImmutableList<T> toImmutableList() {
+            return ImmutableList.copyOf(list);
+        }
+
+        public List<T> toList() {
+            return Lists.newArrayList(list);
+        }
+
+    }
+
+    /**
+     * Functions for an NxN grid of objects..
+     */
+    static class Grid {
+
+        private final List<List<String>> table;
+
+        public Grid(List<List<String>> table) {
+            this.table = table;
+        }
+
+        private ImmutableList<Integer> columnWidths() {
+
+            List<Integer> result = Lists.newArrayList();
+
+            List<String> first = table.get( 0 );
+
+            for (int i = 0; i < first.size(); i++) {
+                result.add( new Row(column(i)).maxLen() );
+            }
+
+            return ImmutableList.copyOf(result);
+
+        }
+
+        private List<String> column(int column ) {
+
+            List<String> result = Lists.newArrayList();
+
+            for (List<String> strings : table) {
+                result.add( strings.get( column ) );
+            }
+
+            return result;
+
+        }
+
+    }
+
+    /**
+     * Functions for working with a row of objects stored in a list.
+     */
+    static class Row {
+
+        private final Collection<String> values;
+
+        public Row(Collection<String> values) {
+            this.values = values;
+        }
+
+        public int maxLen(  ) {
+
+            int result = 0;
+
+            for (String value : values) {
+                if ( value.length() > result ) {
+                    result = value.length();
+                }
+            }
+
+            return result;
+
+        }
+
+    }
+
+
     enum Justification {
         LEFT,
         RIGHT
     }
-
-
 
 }

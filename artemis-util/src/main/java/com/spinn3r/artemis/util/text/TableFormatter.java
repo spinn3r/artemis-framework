@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.util.text;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import java.util.Collection;
@@ -57,7 +58,7 @@ public class TableFormatter {
 
     }
 
-    private static List<Integer> widths( List<List<String>> table ) {
+    private static ImmutableList<Integer> widths(List<List<String>> table ) {
 
         List<Integer> result = Lists.newArrayList();
 
@@ -67,7 +68,7 @@ public class TableFormatter {
             result.add( maxLen( column( table, i ) ) );
         }
 
-        return result;
+        return ImmutableList.copyOf(result);
 
     }
 
