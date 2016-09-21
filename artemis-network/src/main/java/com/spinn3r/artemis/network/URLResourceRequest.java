@@ -418,11 +418,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                     httpURLConn.setConnectTimeout( (int) getConnectTimeout() );
                     httpURLConn.setReadTimeout( (int) getReadTimeout() );
 
-                    boolean throwException = false;
-                    if (throwException) {
-                        throw new IOException("Unable to tunnel through proxy. Proxy returns \"HTTP/1.0 503 Service Unavailable\"");
-                    }
-
                     httpURLConn.connect();
 
                     // save and store the response code.
