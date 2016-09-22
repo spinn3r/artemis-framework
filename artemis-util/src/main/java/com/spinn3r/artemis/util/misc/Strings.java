@@ -92,7 +92,7 @@ public class Strings {
     }
 
     public static List<String> split( String string, String regex ) {
-        return toList( string.split( regex ) );
+        return Arrays.asList(string.split( regex ));
 
     }
 
@@ -103,25 +103,37 @@ public class Strings {
 
     }
 
-    public static List<String> toList(Object... objects ) {
+    /**
+     * @Deprecated use toStrings instead.
+     */
+    @Deprecated
+    public static List<String> toList( String[] strings ) {
+
+        List<String> list = Lists.newArrayList();
+
+        Collections.addAll( list, strings );
+
+        return list;
+
+    }
+    public static ImmutableList<String> toStrings(Object... objects) {
 
         List<String> list = Lists.newArrayList();
 
         for (Object object : objects) {
 
-            if ( object != null ) {
-                list.add(object.toString());
-            }
+            if (object == null)
+                throw new NullPointerException("Null objects not allowed");
 
+            list.add(object.toString());
         }
 
-        // TODO: we should be returning an immutable list
-        return list;
+        return ImmutableList.copyOf(list);
 
     }
 
     public static List<String> toLines( String data ) {
-        return toList( data.split( "\n" ) );
+        return Arrays.asList( data.split( "\n" ) );
     }
 
     /**
