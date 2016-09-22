@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.util.misc;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import difflib.Delta;
 import difflib.DiffUtils;
@@ -102,13 +103,19 @@ public class Strings {
 
     }
 
-    public static List<String> toList( String[] strings ) {
+    public static ImmutableList<String> toList(Object... objects ) {
 
         List<String> list = Lists.newArrayList();
 
-        Collections.addAll( list, strings );
+        for (Object object : objects) {
 
-        return list;
+            if ( object != null ) {
+                list.add(object.toString());
+            }
+
+        }
+
+        return ImmutableList.copyOf(list);
 
     }
 
