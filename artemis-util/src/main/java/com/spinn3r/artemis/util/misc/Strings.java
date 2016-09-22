@@ -103,7 +103,7 @@ public class Strings {
 
     }
 
-    public static ImmutableList<String> toList(Object... objects ) {
+    public static List<String> toList(Object... objects ) {
 
         List<String> list = Lists.newArrayList();
 
@@ -115,7 +115,8 @@ public class Strings {
 
         }
 
-        return ImmutableList.copyOf(list);
+        // TODO: we should be returning an immutable list
+        return list;
 
     }
 
