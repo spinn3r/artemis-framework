@@ -7,8 +7,7 @@ import java.util.Optional;
 /**
  *
  */
-public class OptionalStringConverter
-
+public class OptionalStringConverter implements IStringConverter<Optional<String>> {
 
     @Override
     public Optional<String> convert(String value) {
