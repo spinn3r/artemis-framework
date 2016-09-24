@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.jcommander.optionals;
+package com.spinn3r.artemis.jcommander.converters.optional;
 
 import com.beust.jcommander.IStringConverter;
 
@@ -7,7 +7,8 @@ import java.util.Optional;
 /**
  *
  */
-public class OptionalStringConverter implements IStringConverter<Optional<String>> {
+public class OptionalStringConverter
+
 
     @Override
     public Optional<String> convert(String value) {
