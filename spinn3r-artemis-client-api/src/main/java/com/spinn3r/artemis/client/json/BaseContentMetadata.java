@@ -9551,6 +9551,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * Provides a map between algorithmically determined categories (entertainment, politics, technology, science, sports, business, health) and their probabilities.  The probabilities are between 0.0 and 1.0 and if you sum them all they will equal 1.0.  
+     * </p>
+     *
+     * <p>
+     * Schema type: map&lt;ascii,double&gt; , name: categories
+     * </p>
+     */
+    public Optional<Map<String,Double>> getCategoriesAsOptional() {
+
+        if ( this.constructed == false && this.hasCategories == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.categories );
+
+    }
+
+    /**
      *
      * Get the value of a member and provide a default if it's not defined.
      *
@@ -9633,6 +9652,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.duplicates;
+    }
+
+    /**
+     * <p>
+     * Provides data on previously posted documents which are duplicates of this document.  Keys are sequence values for the documents and the is a double between 0.0 and 1.0 where 0.0 is no duplication and 1.0 is full duplication
+     * </p>
+     *
+     * <p>
+     * Schema type: map&lt;bigint,double&gt; , name: duplicates
+     * </p>
+     */
+    public Optional<Map<Long,Double>> getDuplicatesAsOptional() {
+
+        if ( this.constructed == false && this.hasDuplicates == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.duplicates );
+
     }
 
     /**
@@ -9822,6 +9860,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.classifications;
+    }
+
+    /**
+     * <p>
+     * Provides a map between algorithmically determined classifications driven by customers.  The keys are keys given to customers identify their classification and the value is the probability of that classification.  The values DO NOT sum to 1.0 as there may be multiple classifications here.
+     * </p>
+     *
+     * <p>
+     * Schema type: map&lt;ascii,double&gt; , name: classifications
+     * </p>
+     */
+    public Optional<Map<String,Double>> getClassificationsAsOptional() {
+
+        if ( this.constructed == false && this.hasClassifications == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.classifications );
+
     }
 
     /**
