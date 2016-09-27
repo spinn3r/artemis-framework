@@ -232,8 +232,10 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         System.out.printf("%s\n", content);
 
-        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[2147483646]}]",
-                     httpRequest.getEffectiveCookies().toString());
+
+
+        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[2147xxxx]}]",
+                     httpRequest.getEffectiveCookies().toString().replaceAll("maxAge=Optional\\[2147[0-9]+\\]", "maxAge=Optional[2147xxxx]"));
 
     }
 
