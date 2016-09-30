@@ -67,7 +67,7 @@ public class ProxyRegistryWithNetworkConfigTest extends BaseLauncherTest {
 
         assertEquals( "HTTP @ /127.0.0.1:9997", httpRequestMethod.getProxy().toString() );
 
-        assertEquals( "http://127.0.0.1:9997", Proxies.format( httpRequestMethod.getProxy() ) );
+        assertEquals("http://127.0.0.1:9997", ProxyReferences.format(httpRequestMethod.getProxy() ) );
     }
 
     @Test

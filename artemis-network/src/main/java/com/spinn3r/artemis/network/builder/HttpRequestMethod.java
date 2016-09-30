@@ -71,6 +71,8 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withFollowContentRedirects( boolean followContentRedirects );
 
+    // TODO: HttpRequestMethod withProxy(String proxy);
+
     HttpRequestMethod withProxy(ProxyReference proxyReference);
 
     /**
