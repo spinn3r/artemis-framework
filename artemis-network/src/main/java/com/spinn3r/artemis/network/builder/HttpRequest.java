@@ -76,10 +76,13 @@ public interface HttpRequest {
 
     int getResponseCode();
 
+    @Deprecated
     String getRequestHeader(String name);
 
+    @Deprecated
     Set<String> getRequestHeaderNames();
 
+    @Deprecated
     ImmutableMap<String,String> getRequestHeadersMap();
 
     ImmutableList<Cookie> getCookies();

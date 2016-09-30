@@ -94,4 +94,7 @@ public interface HttpRequestMethod {
     Proxy getProxy();
 
     String getUserAgent();
+
 }
+
+
