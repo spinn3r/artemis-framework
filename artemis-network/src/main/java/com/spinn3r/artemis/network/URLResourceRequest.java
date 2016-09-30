@@ -65,18 +65,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      */
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
 
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a read timeout.
-     */
-    public static final int STATUS_READ_TIMEOUT    = -1024;
-
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a connect timeout.
-     */
-    public static final int STATUS_CONNECT_TIMEOUT = -1025;
-
     public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
     public static final String IF_NONE_MATCH_HEADER = "If-None-Match";
     public static final String GZIP_ENCODING = "gzip";

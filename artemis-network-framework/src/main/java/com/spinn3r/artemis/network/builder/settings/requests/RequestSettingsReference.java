@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.network.builder.settings.requests;
 
-import com.spinn3r.artemis.network.init.RequestSettings;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
 import com.spinn3r.artemis.network.URLResourceRequest;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettings;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarReference;
 

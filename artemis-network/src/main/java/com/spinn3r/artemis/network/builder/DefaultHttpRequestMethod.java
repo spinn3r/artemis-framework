@@ -13,7 +13,7 @@ import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRefe
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.cookies.Cookie;
 import com.spinn3r.artemis.network.cookies.Cookies;
-import com.spinn3r.artemis.network.init.RequestSettings;
+import com.spinn3r.artemis.network.builder.settings.requests.RequestSettings;
 import com.spinn3r.artemis.network.validators.HttpResponseValidator;
 
 import java.net.HttpCookie;

@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.network;
 
+import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.log5j.Logger;
+import jdk.management.resource.ResourceRequest;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -140,8 +142,8 @@ public class NetworkException extends IOException {
         if ( responseCode == Integer.MIN_VALUE ) {
 
             if ( request != null &&
-                ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                  request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
+                ( request.getResponseCode() == HttpRequest.STATUS_CONNECT_TIMEOUT ||
+                  request.getResponseCode() == HttpRequest.STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
 
@@ -191,8 +193,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+        return responseCode == HttpRequest.STATUS_CONNECT_TIMEOUT ||
+               responseCode == HttpRequest.STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 
     }

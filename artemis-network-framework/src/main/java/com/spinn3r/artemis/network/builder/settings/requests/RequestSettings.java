@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.network.init;
+package com.spinn3r.artemis.network.builder.settings.requests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Maps;

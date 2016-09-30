@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.*;
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
 
 /**
  * Execute HTTP request but wrap them in retry logic.
@@ -91,10 +92,10 @@ public class HttpRequestExecutor {
 
         }
 
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT )
+        if ( e.getResponseCode() == STATUS_CONNECT_TIMEOUT )
             return true;
 
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT )
+        if ( e.getResponseCode() == STATUS_READ_TIMEOUT )
             return true;
 
         return e.getResponseCode() >= 500 && e.getResponseCode() <= 599;
