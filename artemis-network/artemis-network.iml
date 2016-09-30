@@ -11,6 +11,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="artemis-network-framework" />
     <orderEntry type="module" module-name="artemis-log5j" />
     <orderEntry type="module" module-name="log5j" />
     <orderEntry type="module" module-name="artemis-time" />

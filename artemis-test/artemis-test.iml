@@ -133,6 +133,7 @@
     <orderEntry type="library" name="Maven: org.apache.commons:commons-math:2.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-proxy:1.0" level="project" />
     <orderEntry type="module" module-name="artemis-network" scope="TEST" />
+    <orderEntry type="module" module-name="artemis-network-framework" scope="TEST" />
     <orderEntry type="module" module-name="artemis-log5j" />
     <orderEntry type="module" module-name="log5j" />
     <orderEntry type="module" module-name="artemis-network-lib" scope="TEST" />
