@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network;
 
 import com.spinn3r.log5j.Logger;
+import org.apache.http.protocol.HTTP;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -19,18 +20,12 @@ public class NetworkException extends IOException {
 
     public Exception e = null;
 
-    private URL _url = null;
-
     private URLConnection _urlConnection = null;
 
     private int responseCode = Integer.MIN_VALUE;
 
-    /**
-     * The status string in the HTTP response.
-     *
-     * Example: HTTP/1.1 200 OK
-     */
-    public String status = null;
+    // The status string in the HTTP response. Example: HTTP/1.1 200 OK
+    private String status = null;
 
     public NetworkException( String message ) {
         super( message );
@@ -56,14 +51,12 @@ public class NetworkException extends IOException {
     public NetworkException( String message,
                              Exception e,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
         super( request.getResource() + ": " + getMessageFromCause( e, message ) );
 
         this.e = e;
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
         boolean timeout = e instanceof SocketTimeoutException;
@@ -78,15 +71,13 @@ public class NetworkException extends IOException {
 
     }
 
-    public NetworkException( String message,
-                             ResourceRequest request,
-                             URL _url,
-                             URLConnection _urlConnection ) {
+    public NetworkException(String message,
+                            ResourceRequest request,
+                            URLConnection _urlConnection) {
 
         //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
@@ -103,10 +94,9 @@ public class NetworkException extends IOException {
      */
     public NetworkException( Exception e,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
-        this( e.getMessage(), e, request, _url, _urlConnection );
+        this( e.getMessage(), e, request, _urlConnection );
 
     }
 
@@ -126,10 +116,6 @@ public class NetworkException extends IOException {
 
         return message;
 
-    }
-
-    public URL getURL() {
-        return _url;
     }
 
     /**
@@ -193,7 +179,7 @@ public class NetworkException extends IOException {
 
         return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
                responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
-               (responseCode >= 500 && responseCode <= 599);
+               (getResponseCode() >= 500 && getResponseCode() <= 599);
 
     }
 
@@ -215,7 +201,7 @@ public class NetworkException extends IOException {
 
     public static class RequestBlockedDueToCaptcha extends NetworkException {
 
-        public RequestBlockedDueToCaptcha(String link ) {
+        public RequestBlockedDueToCaptcha(String link) {
             super( "Request blocked due to captcha: " + link, 599 );
         }
 
