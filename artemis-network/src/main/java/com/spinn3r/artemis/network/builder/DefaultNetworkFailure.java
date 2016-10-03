@@ -2,9 +2,9 @@ package com.spinn3r.artemis.network.builder;
 
 import com.spinn3r.artemis.network.NetworkFailure;
 import com.spinn3r.artemis.network.ResourceRequest;
-import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.log5j.Logger;
 
+import java.net.SocketTimeoutException;
 import java.net.URLConnection;
 
 /**
@@ -23,16 +23,49 @@ public class DefaultNetworkFailure implements NetworkFailure {
     // The status string in the HTTP response. Example: HTTP/1.1 200 OK
     private String status = null;
 
+    public DefaultNetworkFailure(Exception e,
+                                 ResourceRequest request,
+                                 URLConnection _urlConnection) {
+
+        this.request = request;
+        this._urlConnection = _urlConnection;
+
+        boolean timeout = e instanceof SocketTimeoutException;
+
+        // do not attempt to read the status if we timed out...
+
+        if ( _urlConnection != null && ! timeout ) {
+            this.status = _urlConnection.getHeaderField( null );
+        }
+
+    }
+
+    public DefaultNetworkFailure(ResourceRequest request,
+                                 URLConnection _urlConnection) {
+
+        this.request = request;
+        this._urlConnection = _urlConnection;
+
+        if ( _urlConnection != null ) {
+            this.status = _urlConnection.getHeaderField( null );
+        }
+
+    }
+
+    @Override
+    public String getResource() {
+        return request.getResource();
+    }
+
     /**
+     *
      * Get the HTTP response code form this error.
      */
     public int getResponseCode() {
 
         if ( responseCode == Integer.MIN_VALUE ) {
 
-            if ( request != null &&
-                   ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                       request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
+            if ( request != null && ( request.getResponseCode() == HttpRequest.STATUS_CONNECT_TIMEOUT || request.getResponseCode() == HttpRequest.STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
 

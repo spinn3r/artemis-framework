@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network;
 
+import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.log5j.Logger;
 import org.apache.http.protocol.HTTP;
 
@@ -26,6 +27,8 @@ public class NetworkException extends IOException {
 
     // The status string in the HTTP response. Example: HTTP/1.1 200 OK
     private String status = null;
+
+    private NetworkFailure networkFailure = null;
 
     public NetworkException( String message ) {
         super( message );
@@ -100,21 +103,26 @@ public class NetworkException extends IOException {
 
     }
 
+    public NetworkException(Exception cause, NetworkFailure networkFailure) {
+        super( networkFailure.getResource() + ": " + getMessageFromCause( cause, cause.getMessage() ) );
+        this.networkFailure = networkFailure;
+    }
+
     /**
      * If the cause is specified, and we can provide more metadata, go for it...
      *
      */
-    private static String getMessageFromCause( Exception cause, String message ) {
+    private static String getMessageFromCause( Exception cause, String defaultMessage ) {
 
         if ( cause != null ) {
 
-            if ( cause instanceof UnknownHostException) {
+            if (cause instanceof UnknownHostException) {
                 return String.format( "Unknown host: %s", cause.getMessage() );
             }
 
         }
 
-        return message;
+        return defaultMessage;
 
     }
 
@@ -123,49 +131,11 @@ public class NetworkException extends IOException {
      */
     public int getResponseCode() {
 
-        if ( responseCode == Integer.MIN_VALUE ) {
-
-            if ( request != null &&
-                ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                  request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
-
-                // we have a connect or read timeout so yield to this value.
-
-                responseCode = request.getResponseCode();
-
-            } else if ( status == null ) {
-
-                // some other type of error happened, set it to an unknown
-                // status code.
-
-                responseCode = -1;
-
-            } else {
-
-                // now parse it from the HTTP response directly.  I don't like
-                // this here but it's the only way to do it with this
-                // java.net.URL
-
-                int begin = "HTTP/1.1 ".length();
-                int offset = "200".length();
-                int end = begin + offset;
-
-                try {
-
-                    responseCode = Integer.parseInt( status.substring( begin, end ) );
-
-                } catch ( NumberFormatException e ) {
-
-                    log.warn( "Unable to parse response code in header: " + status );
-                    responseCode = -1;
-
-                }
-
-            }
-
+        if (networkFailure != null) {
+            return networkFailure.getResponseCode();
         }
 
-        return responseCode;
+        return -1;
 
     }
 
@@ -177,8 +147,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+        return responseCode == HttpRequest.STATUS_CONNECT_TIMEOUT ||
+               responseCode == HttpRequest.STATUS_READ_TIMEOUT ||
                (getResponseCode() >= 500 && getResponseCode() <= 599);
 
     }
@@ -190,10 +160,9 @@ public class NetworkException extends IOException {
      */
     public boolean isProxyError() {
 
-        String squidError =_urlConnection.getHeaderField( "X-Squid-Error" );
-
-        if ( squidError != null )
-            return true;
+        if (networkFailure != null){
+            return networkFailure.isProxyError();
+        }
 
         return false;
 
