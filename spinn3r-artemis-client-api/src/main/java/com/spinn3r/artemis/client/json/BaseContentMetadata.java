@@ -1933,6 +1933,22 @@ public abstract class BaseContentMetadata
 
     protected int shares;
 
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasMetadataUpdates = 0;
+
+    public int hasModifiedMetadataUpdates = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedMetadataUpdates = false;
+
+    protected int metadataUpdates;
+
     // **** methods for this POJO
 
     public BaseContentMetadata setPermalink ( String permalink ) {
@@ -9177,6 +9193,88 @@ public abstract class BaseContentMetadata
         return this.hasDefinedShares;
     }
 
+    public BaseContentMetadata setMetadataUpdates ( int metadataUpdates ) {
+
+        ++this.hasMetadataUpdates;
+        ++this.hasModifiedMetadataUpdates;
+
+        this.metadataUpdates = metadataUpdates;
+
+        hasDefinedMetadataUpdates = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of updates to metadata we have
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: metadata_updates
+     * </p>
+     */
+    public int getMetadataUpdates() {
+
+        if ( this.constructed == false && this.hasMetadataUpdates == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.metadataUpdates" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.metadataUpdates;
+    }
+
+    /**
+     * <p>
+     * The number of updates to metadata we have
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: metadata_updates
+     * </p>
+     */
+    public Optional<Integer> getMetadataUpdatesAsOptional() {
+
+        if ( this.constructed == false && this.hasMetadataUpdates == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.metadataUpdates );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasMetadataUpdates () {
+        return this.hasMetadataUpdates > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearMetadataUpdates () {
+        this.hasMetadataUpdates = 0;
+        this.hasModifiedMetadataUpdates = 0;
+        this.hasDefinedMetadataUpdates = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedMetadataUpdates () {
+        return this.hasModifiedMetadataUpdates > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedMetadataUpdates () {
+        return this.hasDefinedMetadataUpdates;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -9536,6 +9634,10 @@ public abstract class BaseContentMetadata
 
         if ( obj.hasShares() ) {
             setShares( obj.getShares() );
+        }
+
+        if ( obj.hasMetadataUpdates() ) {
+            setMetadataUpdates( obj.getMetadataUpdates() );
         }
 
     }
@@ -10162,6 +10264,10 @@ public abstract class BaseContentMetadata
             setShares( obj.getShares() );
         }
 
+        if ( ! hasMetadataUpdates() && obj.hasMetadataUpdates() ) {
+            setMetadataUpdates( obj.getMetadataUpdates() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -10344,6 +10450,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedMetadataScore = 0;
 
         this.hasModifiedShares = 0;
+
+        this.hasModifiedMetadataUpdates = 0;
 
     }
 
@@ -10705,6 +10813,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedShares() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedMetadataUpdates() ) {
             return true;
         }
 
@@ -11450,6 +11562,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "shares=" );
             buff.append( shares );
+            buff.append( " " );
+
+        }
+
+        if ( hasMetadataUpdates > 0 ) {
+
+            buff.append( "metadataUpdates=" );
+            buff.append( metadataUpdates );
             buff.append( " " );
 
         }
@@ -12265,6 +12385,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( shares != cmp.shares ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasMetadataUpdates() != cmp.hasMetadataUpdates() ) {
+            return false;
+        }
+
+        if ( metadataUpdates != cmp.metadataUpdates ) {
             return false;
         }
 
@@ -13855,6 +13984,21 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member metadata_updates from int
+
+            __name = "metadataUpdates";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "metadata_updates";
+            }
+
+            if ( this.hasMetadataUpdates > 0 ) {
+
+                if ( hasDefinedMetadataUpdates )
+                    generator.writeNumberField( __name, metadataUpdates );
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -14785,6 +14929,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setShares( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member metadata_updates from int
+
+                case "metadata_updates":
+
+                    jParser.nextToken();
+                    setMetadataUpdates( jParser.getIntValue() );
 
                     break;
 
