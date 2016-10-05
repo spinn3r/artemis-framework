@@ -149,6 +149,14 @@ public class JSON {
 
     }
 
+    /**
+     * Make a string of JSON pretty by formatting it properly. Often used for
+     * testing.
+     */
+    public static String makePretty(String json) {
+        return JSON.toJSON(JSON.fromJSON(JSONMap.class, json));
+    }
+
     private static ObjectMapper createObjectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.registerModule(new GuavaModule());
