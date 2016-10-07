@@ -18,11 +18,14 @@
 package com.spinn3r.artemis.corpus.test;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.io.ByteStreams;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -54,6 +57,8 @@ public class CorporaCache {
     }
 
     public void write( String key, String data ) throws IOException {
+
+        checkNotNull(data, "data");
 
         String path = computePath( key );
 
