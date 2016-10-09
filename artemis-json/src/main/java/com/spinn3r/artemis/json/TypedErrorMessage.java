@@ -3,18 +3,21 @@ package com.spinn3r.artemis.json;
 /**
  * Generic JSON error message.
  */
-public class ErrorMessage {
+public class TypedErrorMessage {
 
     private boolean failed = true;
 
     private String message = null;
 
-    public ErrorMessage(boolean failed, String message) {
+    private Enum type;
+
+    public TypedErrorMessage(boolean failed, String message, Enum type) {
         this.failed = failed;
         this.message = message;
+        this.type = type;
     }
 
-    public ErrorMessage(String message) {
+    public TypedErrorMessage(String message) {
         this.message = message;
     }
 
@@ -26,15 +29,20 @@ public class ErrorMessage {
         return message;
     }
 
+    public Enum getType() {
+        return type;
+    }
+
     public String toJSON() {
         return JSON.toJSON(this);
     }
 
     @Override
     public String toString() {
-        return "ErrorMessage{" +
+        return "TypedErrorMessage{" +
                  "failed=" + failed +
                  ", message='" + message + '\'' +
+                 ", type=" + type +
                  '}';
     }
 
