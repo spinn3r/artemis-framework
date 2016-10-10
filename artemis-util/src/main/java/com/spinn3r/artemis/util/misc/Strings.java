@@ -61,7 +61,13 @@ public class Strings {
 
     public static boolean empty( String value ) {
 
-        return value == null || "".equals( value );
+        return value == null || "".equals(value);
+
+    }
+
+    public static boolean emptyWithTrimming( String value ) {
+
+        return value == null || "".equals(value.trim());
 
     }
 
