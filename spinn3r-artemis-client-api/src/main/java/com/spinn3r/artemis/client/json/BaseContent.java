@@ -12677,7 +12677,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * User ID in the target platform (when available, twitter for instance)
+     * User ID in the target platform (when available)
      * </p>
      *
      * <p>
@@ -12696,7 +12696,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * User ID in the target platform (when available, twitter for instance)
+     * User ID in the target platform (when available)
      * </p>
      *
      * <p>
