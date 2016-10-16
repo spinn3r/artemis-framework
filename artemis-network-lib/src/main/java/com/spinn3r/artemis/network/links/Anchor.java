@@ -6,6 +6,8 @@ package com.spinn3r.artemis.network.links;
  */
 public class Anchor {
 
+    private String absHref = null;
+
     private String href = null;
 
     private String ownText = null;
@@ -15,6 +17,10 @@ public class Anchor {
     private String rel = null;
 
     private String type = null;
+
+    public String getAbsHref() {
+        return absHref;
+    }
 
     public String getHref() {
         return href;
@@ -39,7 +45,8 @@ public class Anchor {
     @Override
     public String toString() {
         return "Anchor{" +
-                 "href='" + href + '\'' +
+                 "absHref='" + absHref + '\'' +
+                 ", href='" + href + '\'' +
                  ", ownText='" + ownText + '\'' +
                  ", text='" + text + '\'' +
                  ", rel='" + rel + '\'' +
@@ -50,6 +57,11 @@ public class Anchor {
     public static class Builder {
 
         private Anchor anchor = new Anchor();
+
+        public Builder setAbsHref(String absHref) {
+            anchor.absHref = absHref;
+            return this;
+        }
 
         public Builder setHref(String href) {
             anchor.href = href;
