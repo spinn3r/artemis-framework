@@ -30,9 +30,6 @@ public class DebugWebserverReferencesService extends BaseService {
     public void init() {
 
         servletReferences.add( "/chaos", chaosServlet );
-        servletReferences.add( "/ping", new PingServlet() );
-        servletReferences.add( "/evaluate", new EvaluateServlet() );
-        servletReferences.add( "/echo", new EchoServlet() );
 
     }
 
