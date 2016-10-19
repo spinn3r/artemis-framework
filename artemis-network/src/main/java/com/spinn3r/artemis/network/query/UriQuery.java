@@ -1,9 +1,7 @@
 package com.spinn3r.artemis.network.query;
 
-import java.awt.DisplayMode;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.security.cert.PKIXRevocationChecker;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
