@@ -4256,6 +4256,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The method that we used to discovery and index the content.  We have various algorithms to discover content and this lets the algorithm tag the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: index_method
+     * </p>
+     */
+    public Optional<IndexMethod> getIndexMethodAsOptional() {
+
+        if ( this.constructed == false && this.hasIndexMethod == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.indexMethod );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasIndexMethod () {
@@ -4316,6 +4335,25 @@ public abstract class BaseContent
         }
 
         return this.detectionMethod;
+    }
+
+    /**
+     * <p>
+     * The method we used to detect this URL was new and recently published. 
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: detection_method
+     * </p>
+     */
+    public Optional<DetectionMethod> getDetectionMethodAsOptional() {
+
+        if ( this.constructed == false && this.hasDetectionMethod == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.detectionMethod );
+
     }
 
     /**
@@ -5341,6 +5379,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The publisher type (mainstream news, weblog, forum, etc) of this source encoded as an int.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_publisher_type
+     * </p>
+     */
+    public Optional<SourcePublisherType> getSourcePublisherTypeAsOptional() {
+
+        if ( this.constructed == false && this.hasSourcePublisherType == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourcePublisherType );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSourcePublisherType () {
@@ -6360,6 +6417,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The update strategy for computing the update interval.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_setting_update_strategy
+     * </p>
+     */
+    public Optional<SourceSettingUpdateStrategy> getSourceSettingUpdateStrategyAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceSettingUpdateStrategy == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceSettingUpdateStrategy );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSourceSettingUpdateStrategy () {
@@ -6423,6 +6499,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The update stratey for computing the update interval.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_setting_index_strategy
+     * </p>
+     */
+    public Optional<SourceSettingIndexStrategy> getSourceSettingIndexStrategyAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceSettingIndexStrategy == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceSettingIndexStrategy );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSourceSettingIndexStrategy () {
@@ -6483,6 +6578,25 @@ public abstract class BaseContent
         }
 
         return this.sourceSettingAuthorPolicy;
+    }
+
+    /**
+     * <p>
+     * Policy on handling author metadata. 
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_setting_author_policy
+     * </p>
+     */
+    public Optional<SourceSettingAuthorPolicy> getSourceSettingAuthorPolicyAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceSettingAuthorPolicy == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceSettingAuthorPolicy );
+
     }
 
     /**
@@ -9231,6 +9345,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The format of the feed as a token.  RSS or ATOM, etc.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: source_feed_format
+     * </p>
+     */
+    public Optional<SourceFeedFormat> getSourceFeedFormatAsOptional() {
+
+        if ( this.constructed == false && this.hasSourceFeedFormat == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sourceFeedFormat );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSourceFeedFormat () {
@@ -10521,6 +10654,25 @@ public abstract class BaseContent
         }
 
         return this.mainFormat;
+    }
+
+    /**
+     * <p>
+     * The format of the main element (either HTML or text)
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: main_format
+     * </p>
+     */
+    public Optional<MainFormat> getMainFormatAsOptional() {
+
+        if ( this.constructed == false && this.hasMainFormat == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainFormat );
+
     }
 
     /**
@@ -12777,6 +12929,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * When present, the gender of the author.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: author_gender
+     * </p>
+     */
+    public Optional<AuthorGender> getAuthorGenderAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorGender == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorGender );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorGender () {
@@ -13657,6 +13828,25 @@ public abstract class BaseContent
         }
 
         return this.geoMethod;
+    }
+
+    /**
+     * <p>
+     * Contains the name of the field used to parse the geo data
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: geo_method
+     * </p>
+     */
+    public Optional<GeoMethod> getGeoMethodAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoMethod == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoMethod );
+
     }
 
     /**
@@ -14789,6 +14979,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * When present, the type of card that can be used to display this content within web applications
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: card
+     * </p>
+     */
+    public Optional<Card> getCardAsOptional() {
+
+        if ( this.constructed == false && this.hasCard == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.card );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasCard () {
@@ -15098,6 +15307,25 @@ public abstract class BaseContent
     }
 
     /**
+     * <p>
+     * The type of this content as either a POST or a COMMENT.  This allows us to index posts and comments through the same API.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: type
+     * </p>
+     */
+    public Optional<Type> getTypeAsOptional() {
+
+        if ( this.constructed == false && this.hasType == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.type );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasType () {
@@ -15158,6 +15386,25 @@ public abstract class BaseContent
         }
 
         return this.sentiment;
+    }
+
+    /**
+     * <p>
+     * The overall sentiment for this content
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: sentiment
+     * </p>
+     */
+    public Optional<Sentiment> getSentimentAsOptional() {
+
+        if ( this.constructed == false && this.hasSentiment == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sentiment );
+
     }
 
     /**

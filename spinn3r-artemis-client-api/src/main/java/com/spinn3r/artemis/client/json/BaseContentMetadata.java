@@ -3214,6 +3214,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * The format of the main element (either HTML or text)
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: main_format
+     * </p>
+     */
+    public Optional<MainFormat> getMainFormatAsOptional() {
+
+        if ( this.constructed == false && this.hasMainFormat == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.mainFormat );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasMainFormat () {
@@ -5467,6 +5486,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * When present, the gender of the author.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: author_gender
+     * </p>
+     */
+    public Optional<AuthorGender> getAuthorGenderAsOptional() {
+
+        if ( this.constructed == false && this.hasAuthorGender == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.authorGender );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorGender () {
@@ -6347,6 +6385,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.geoMethod;
+    }
+
+    /**
+     * <p>
+     * Contains the name of the field used to parse the geo data
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: geo_method
+     * </p>
+     */
+    public Optional<GeoMethod> getGeoMethodAsOptional() {
+
+        if ( this.constructed == false && this.hasGeoMethod == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.geoMethod );
+
     }
 
     /**
@@ -7479,6 +7536,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * When present, the type of card that can be used to display this content within web applications
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: card
+     * </p>
+     */
+    public Optional<Card> getCardAsOptional() {
+
+        if ( this.constructed == false && this.hasCard == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.card );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasCard () {
@@ -7788,6 +7864,25 @@ public abstract class BaseContentMetadata
     }
 
     /**
+     * <p>
+     * The type of this content as either a POST or a COMMENT.  This allows us to index posts and comments through the same API.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: type
+     * </p>
+     */
+    public Optional<Type> getTypeAsOptional() {
+
+        if ( this.constructed == false && this.hasType == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.type );
+
+    }
+
+    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasType () {
@@ -7848,6 +7943,25 @@ public abstract class BaseContentMetadata
         }
 
         return this.sentiment;
+    }
+
+    /**
+     * <p>
+     * The overall sentiment for this content
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: sentiment
+     * </p>
+     */
+    public Optional<Sentiment> getSentimentAsOptional() {
+
+        if ( this.constructed == false && this.hasSentiment == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sentiment );
+
     }
 
     /**
