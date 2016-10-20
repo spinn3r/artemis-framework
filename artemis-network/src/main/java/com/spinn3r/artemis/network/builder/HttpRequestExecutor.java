@@ -75,7 +75,7 @@ public class HttpRequestExecutor {
 
     }
 
-    private boolean isTransientHttpException(Throwable e) {
+    static boolean isTransientHttpException(Throwable e) {
 
         if (e instanceof NetworkException) {
 
