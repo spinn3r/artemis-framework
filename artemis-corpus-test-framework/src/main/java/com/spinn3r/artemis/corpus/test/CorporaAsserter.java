@@ -17,6 +17,8 @@
  */
 package com.spinn3r.artemis.corpus.test;
 
+import org.junit.Assert;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Objects;
@@ -72,6 +74,8 @@ public class CorporaAsserter {
      * @throws IOException
      */
     public void assertEquals(String key, String actual) throws IOException {
+
+        Assert.assertNotNull(actual);
 
         if ( usedKeys.contains( key ) ) {
             throw new RuntimeException( "Key already used in this test.  This will yield incorrect results." );

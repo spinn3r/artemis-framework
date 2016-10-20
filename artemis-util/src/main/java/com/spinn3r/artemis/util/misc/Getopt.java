@@ -129,4 +129,11 @@ public class Getopt {
 
     }
 
+    @Override
+    public String toString() {
+        return "Getopt{" +
+                "params=" + params +
+                ", values=" + values +
+                '}';
+    }
 }

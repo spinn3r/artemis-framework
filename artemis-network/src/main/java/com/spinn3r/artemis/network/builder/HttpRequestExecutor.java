@@ -7,12 +7,9 @@ import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLProtocolException;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Execute HTTP request but wrap them in retry logic.
@@ -78,26 +75,28 @@ public class HttpRequestExecutor {
 
     }
 
-    private boolean isTransientHttpException(NetworkException e) {
+    static boolean isTransientHttpException(Throwable e) {
 
-        if ( e.getCause() != null ) {
+        if (e instanceof NetworkException) {
 
-            // TODO: we probably need to recursively test all the causes
+            int responseCode = ((NetworkException) e).getResponseCode();
 
-            Throwable cause= e.getCause();
-
-            if ( cause instanceof SSLException)
+            if (responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT)
                 return true;
+
+            if (responseCode == URLResourceRequest.STATUS_READ_TIMEOUT)
+                return true;
+
+            if (responseCode >= 500 && responseCode <= 599)
+                return true;
+
+        } else if (e instanceof SSLException) {
+
+            return true;
 
         }
 
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT )
-            return true;
-
-        if ( e.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT )
-            return true;
-
-        return e.getResponseCode() >= 500 && e.getResponseCode() <= 599;
+        return e.getCause() != null && isTransientHttpException(e.getCause());
 
     }
 
