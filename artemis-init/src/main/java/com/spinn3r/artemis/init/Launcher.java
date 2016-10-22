@@ -16,6 +16,7 @@ import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
+import com.spinn3r.artemis.util.misc.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +56,8 @@ public class Launcher {
 
     private ServiceCache serviceCache = new NullServiceCache();
 
+    AutoServiceModule autoServiceModule = new AutoServiceModule();
+
     private Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
         this.advertised = advertised;
@@ -93,6 +96,10 @@ public class Launcher {
     }
 
     public Launcher launch( ServiceReferences references ) throws Exception {
+
+        for (AutoService autoService : autoServiceModule.getAutoServices()) {
+            autoService.start();
+        }
 
         return launch( references, (servicesTool) -> {
                 servicesTool.init();
@@ -208,6 +215,10 @@ public class Launcher {
 
         new ServicesTool( this, services ).stop();
 
+        for (AutoService autoService : autoServiceModule.getAutoServices().reverse()) {
+            autoService.stop();
+        }
+
         lifecycleProvider.set( Lifecycle.STOPPED );
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
@@ -218,6 +229,7 @@ public class Launcher {
         threadSnapshot = new ThreadSnapshot();
 
         return this;
+
     }
 
     public ThreadSnapshot getThreadSnapshot() {
@@ -357,7 +369,7 @@ public class Launcher {
             AutoConfigurationModule autoConfigurationModule
               = new AutoConfigurationModule(autoConfigurationLoader);
 
-            result.module = Modules.combine(result.module, autoConfigurationModule);
+            result.module = Modules.combine(result.module, autoConfigurationModule, result.autoServiceModule);
 
             return result;
 
