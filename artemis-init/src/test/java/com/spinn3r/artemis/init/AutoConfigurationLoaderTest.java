@@ -43,6 +43,19 @@ public class AutoConfigurationLoaderTest {
 
     }
 
+    @Test(expected = RuntimeException.class)
+    public void testLoadWithLauncherRequiredAutoWithWrongPathConfiguration() throws Exception {
+
+        Launcher launcher = Launcher.newBuilder()
+                                    .setConfigLoader(new ResourceConfigLoader())
+                                    .build();
+        launcher.launch();
+
+        launcher.getInstance(RequiredAutoWithWrongPathConfiguration.class);
+
+    }
+
+
     @Test
     public void testAddress() throws Exception {
 
