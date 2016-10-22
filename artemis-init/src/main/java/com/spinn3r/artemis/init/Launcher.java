@@ -81,27 +81,27 @@ public class Launcher {
      * bindings are working properly.
      *
      */
-    public Launcher init( ServiceReferences references ) throws Exception {
-        return launch( references, ServicesTool::init );
+    public void init( ServiceReferences references ) throws Exception {
+        launch( references, ServicesTool::init );
     }
 
-    public Launcher launch() throws Exception {
-        return launch( new ServiceReferences() );
+    public void launch() throws Exception {
+        launch( new ServiceReferences() );
     }
 
-    public Launcher launch( ServiceReference... references ) throws Exception {
+    public void launch( ServiceReference... references ) throws Exception {
 
-        return launch( new ServiceReferences( references ) );
+        launch( new ServiceReferences( references ) );
 
     }
 
-    public Launcher launch( ServiceReferences references ) throws Exception {
+    public void launch( ServiceReferences references ) throws Exception {
 
         for (AutoService autoService : autoServiceModule.getAutoServices()) {
             autoService.start();
         }
 
-        return launch( references, (servicesTool) -> {
+        launch( references, (servicesTool) -> {
                 servicesTool.init();
                 servicesTool.start();
         } );
@@ -109,7 +109,7 @@ public class Launcher {
     }
 
     @SuppressWarnings("unchecked")
-    public Launcher launch( Class<? extends Service>... services ) throws Exception {
+    public void launch( Class<? extends Service>... services ) throws Exception {
 
         ServiceReferences serviceReferences = new ServiceReferences();
 
@@ -117,7 +117,7 @@ public class Launcher {
             serviceReferences.add( service );
         }
 
-        return launch( serviceReferences );
+        launch( serviceReferences );
 
     }
 
@@ -126,7 +126,7 @@ public class Launcher {
      * instantiate each one.
      *
      */
-    public Launcher launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
+    public void launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
 
         info( "Launching...");
 
@@ -179,8 +179,6 @@ public class Launcher {
         info( "Launching... done (%s)", stopwatch.stop());
 
         lifecycleProvider.set( Lifecycle.STARTED );
-
-        return this;
 
     }
 
