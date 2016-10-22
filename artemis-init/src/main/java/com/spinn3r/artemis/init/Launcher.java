@@ -54,7 +54,7 @@ public class Launcher {
 
     private ServiceCache serviceCache = new NullServiceCache();
 
-    public Launcher(ConfigLoader configLoader, Advertised advertised ) {
+    private Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
         this.advertised = advertised;
 
