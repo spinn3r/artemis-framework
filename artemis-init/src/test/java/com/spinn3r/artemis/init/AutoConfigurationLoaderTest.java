@@ -40,6 +40,15 @@ public class AutoConfigurationLoaderTest {
 
     }
 
+    @Test(expected = AutoConfigurationException.NotSingletonException.class)
+    public void testNotSingletonAutoConfiguration() throws Exception {
+
+        AutoConfigurationLoader autoConfigurationLoader = createAutoConfigurationLoader();
+
+        autoConfigurationLoader.load(new NotSingletonAutoConfiguration());
+
+    }
+
     @Test(expected = AutoConfigurationException.MissingConfigException.class)
     public void testRequiredAutoWithWrongPathConfiguration() throws Exception {
 
@@ -71,20 +80,29 @@ public class AutoConfigurationLoaderTest {
     }
 
     @AutoConfiguration( path="/empty.conf", required = false)
+    static class NotSingletonAutoConfiguration {
+
+    }
+
+    @Singleton
+    @AutoConfiguration( path="/empty.conf", required = false)
     static class OptionalAutoConfiguration {
 
     }
 
+    @Singleton
     @AutoConfiguration( path="/empty.conf", required = true)
     static class RequiredAutoConfiguration {
 
     }
 
+    @Singleton
     @AutoConfiguration( path="/broken-path.conf", required = true)
     static class RequiredAutoWithWrongPathConfiguration {
 
     }
 
+    @Singleton
     @AutoConfiguration( path="   ", required = false)
     static class BrokenPathAutoConfiguration {
 

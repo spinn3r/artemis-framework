@@ -7,6 +7,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.jasonclawson.jackson.dataformat.hocon.HoconFactory;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.tracer.Tracer;
@@ -42,6 +43,9 @@ public class AutoConfigurationLoader {
 
         Preconditions.checkNotNull(config);
         Preconditions.checkNotNull(autoConfiguration);
+
+        if (config.getClass().getAnnotation(Singleton.class) == null)
+            throw new AutoConfigurationException.NotSingletonException("Class is not a singleton: " + config.getClass().getName());
 
         Tracer tracer = tracerFactorySupplier.get().create(config);
 

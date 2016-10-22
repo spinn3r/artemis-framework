@@ -52,4 +52,19 @@ public class AutoConfigurationException extends IOException {
 
     }
 
+    public static class NotSingletonException extends AutoConfigurationException {
+
+        public NotSingletonException() {
+        }
+
+        public NotSingletonException(String message) {
+            super(message);
+        }
+
+        public NotSingletonException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+    }
+
 }
