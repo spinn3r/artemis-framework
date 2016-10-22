@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init;
 
 import com.google.common.base.Stopwatch;
 import com.google.inject.*;
+import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.cache.DefaultServiceCache;
@@ -349,6 +350,14 @@ public class Launcher {
 
             if (caller.isPresent())
                 result.advertised.advertise( this, Caller.class, caller.get() );
+
+            AutoConfigurationLoader autoConfigurationLoader
+              = new AutoConfigurationLoader(configLoader, result.advertised.tracerFactorySupplier);
+
+            AutoConfigurationModule autoConfigurationModule
+              = new AutoConfigurationModule(autoConfigurationLoader);
+
+            result.module = Modules.combine(result.module, autoConfigurationModule);
 
             return result;
 

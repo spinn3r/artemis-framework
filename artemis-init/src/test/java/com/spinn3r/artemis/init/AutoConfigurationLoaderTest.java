@@ -28,6 +28,22 @@ public class AutoConfigurationLoaderTest {
     }
 
     @Test
+    public void testLoadWithLauncher() throws Exception {
+
+        Launcher launcher = Launcher.newBuilder()
+                                    .setConfigLoader(new ResourceConfigLoader())
+                                    .build();
+        launcher.launch();
+
+        AddressAutoConfiguration addressAutoConfiguration
+          = launcher.getInstance(AddressAutoConfiguration.class);
+
+        assertEquals("AddressAutoConfiguration{name='John Smith', street='123 Fake Street', city='San Francisco', state='California'}",
+                     addressAutoConfiguration.toString());
+
+    }
+
+    @Test
     public void testAddress() throws Exception {
 
         AutoConfigurationLoader autoConfigurationLoader = createAutoConfigurationLoader();

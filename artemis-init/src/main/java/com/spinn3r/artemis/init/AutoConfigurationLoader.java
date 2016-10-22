@@ -64,7 +64,7 @@ public class AutoConfigurationLoader {
 
                 MAPPER.readerForUpdating(config).readValue(content);
 
-                tracer.info("Using %s for AutoConfiguration: %s", resource, config.getClass().getName());
+                tracer.info("Using %s for: %s", resource, config.getClass().getName());
 
             }
 
