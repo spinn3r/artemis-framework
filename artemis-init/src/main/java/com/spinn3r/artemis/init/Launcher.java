@@ -63,6 +63,7 @@ public class Launcher {
 
         advertised.advertise(this.getClass(), Launcher.class, this);
         advertised.provider(this.getClass(), Lifecycle.class, lifecycleProvider);
+        advertised.advertise(this.getClass(), ConfigLoader.class, configLoader);
 
         if ( TestingFrameworks.isTesting() ) {
             info("Now using static caching for testing frameworks.");

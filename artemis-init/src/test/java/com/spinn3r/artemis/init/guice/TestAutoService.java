@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.init.guice;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.*;
 import com.google.inject.matcher.Matchers;
@@ -113,7 +114,6 @@ public class TestAutoService {
                 @Override
                 public <T> void onProvision(ProvisionInvocation<T> provision) {
 
-
                     //System.out.printf("FIXME: %s\n", provision.getBinding().getProvider().get());
 
                     System.out.printf("Got provision for binding: %s\n", provision.getBinding());
@@ -132,7 +132,10 @@ public class TestAutoService {
 
         }
 
-    }
+        public ImmutableList<AutoService> getAutoServices() {
+            return ImmutableList.copyOf(autoServices);
+        }
 
+    }
 
 }

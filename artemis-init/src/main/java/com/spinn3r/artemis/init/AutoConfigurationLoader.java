@@ -10,6 +10,7 @@ import com.google.inject.Inject;
 import com.jasonclawson.jackson.dataformat.hocon.HoconFactory;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.tracer.Tracer;
+import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,14 +22,20 @@ import java.net.URL;
  */
 public class AutoConfigurationLoader {
 
+    private static final ObjectMapper MAPPER = createObjectMapper();
+
     private final ConfigLoader configLoader;
 
-    private final Tracer tracer;
+    private final TracerFactorySupplier tracerFactorySupplier;
 
     @Inject
-    AutoConfigurationLoader(ConfigLoader configLoader, Tracer tracer) {
+    AutoConfigurationLoader(ConfigLoader configLoader, TracerFactorySupplier tracerFactorySupplier) {
         this.configLoader = configLoader;
-        this.tracer = tracer;
+        this.tracerFactorySupplier = tracerFactorySupplier;
+    }
+
+    public void load(Object config) throws IOException {
+        load(config, config.getClass().getAnnotation(AutoConfiguration.class));
     }
 
     public void load(Object config, AutoConfiguration autoConfiguration) throws IOException {
@@ -36,37 +43,45 @@ public class AutoConfigurationLoader {
         Preconditions.checkNotNull(config);
         Preconditions.checkNotNull(autoConfiguration);
 
-        URL resource = null;
+        Tracer tracer = tracerFactorySupplier.get().create(config);
 
-        if ( ! "".equals( autoConfiguration.path() ) ) {
-            resource = configLoader.getResource( config.getClass(), autoConfiguration.path() );
+        if ("".equals(autoConfiguration.path().trim())) {
+            throw new AutoConfigurationException.InvalidPathException();
         }
 
-        if ( resource == null && autoConfiguration.required() ) {
-            throw new IOException(String.format("Config file not found: %s (loaded from %s)", autoConfiguration.path(), config.getClass() ) );
-        }
+        URL resource = configLoader.getResource( config.getClass(), autoConfiguration.path() );
 
-        try(InputStream inputStream = resource.openStream(); ) {
+        if ( resource != null ) {
 
-            byte[] data = ByteStreams.toByteArray(inputStream );
-            String content = new String(data, Charsets.UTF_8 );
+            try(InputStream inputStream = resource.openStream(); ) {
 
-            load(content, config);
+                byte[] data = ByteStreams.toByteArray(inputStream );
+                String content = new String(data, Charsets.UTF_8 );
 
-            tracer.info("Using %s for AutoConfiguration: %s", resource, config.getClass().getName());
+                MAPPER.readerForUpdating(config).readValue(content);
+
+                tracer.info("Using %s for AutoConfiguration: %s", resource, config.getClass().getName());
+
+            }
+
+        } else {
+
+            if(autoConfiguration.required()) {
+                // the configuration we're working with is required to load
+                // from a config file.
+                String msg = String.format("Config file not found: %s (loaded from %s)", autoConfiguration.path(), config.getClass());
+                throw new AutoConfigurationException.MissingConfigException(msg);
+            }
 
         }
 
     }
 
-    protected void load(String content, Object instance) throws IOException {
-
+    private static ObjectMapper createObjectMapper() {
         ObjectMapper mapper = new ObjectMapper(new HoconFactory() );
         mapper.registerModule(new Jdk8Module());
         mapper.registerModule(new GuavaModule());
-
-        mapper.readerForUpdating(instance).readValue(content);
-
+        return mapper;
     }
 
 }
