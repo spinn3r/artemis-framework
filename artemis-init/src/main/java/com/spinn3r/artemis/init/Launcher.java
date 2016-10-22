@@ -16,7 +16,6 @@ import com.spinn3r.artemis.init.threads.ThreadSnapshot;
 import com.spinn3r.artemis.init.threads.ThreadSnapshots;
 import com.spinn3r.artemis.init.tracer.Tracer;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
-import com.spinn3r.artemis.util.misc.CollectionUtils;
 
 import java.util.List;
 import java.util.Optional;
