@@ -108,28 +108,6 @@ public class TestAutoService {
                 }
             });
 
-
-            bindListener(Matchers.any(), new ProvisionListener() {
-
-                @Override
-                public <T> void onProvision(ProvisionInvocation<T> provision) {
-
-                    //System.out.printf("FIXME: %s\n", provision.getBinding().getProvider().get());
-
-                    System.out.printf("Got provision for binding: %s\n", provision.getBinding());
-
-                    List<DependencyAndSource> dependencyChain = provision.getDependencyChain();
-
-                    System.out.printf("\tDependency chain: \n");
-
-                    for (DependencyAndSource dependencyAndSource : dependencyChain) {
-                        System.out.printf("\t\t%s\n", dependencyAndSource);
-                    }
-
-                }
-
-            });
-
         }
 
         public ImmutableList<AutoService> getAutoServices() {
