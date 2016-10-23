@@ -117,10 +117,7 @@ public class Advertised {
 
     }
 
-    protected <T, V extends T> void replace( Object source, Class<T> clazz, V object ) {
-        replace( source.getClass(), clazz, object );
-    }
-
+    // TODO: only called by BaseService/Advertised so safe / close to removal
     protected <T,V extends T> void replace( Class source, Class<T> clazz, Class<V> impl ) {
         advertisements.put( clazz, impl );
         sources.put( clazz, source );
@@ -130,6 +127,7 @@ public class Advertised {
      * Replace the current TracerFactory with a new TracerFactory. Normally after
      * we've initialized some other tracing system like log4j.
      */
+    // TODO: only called by BaseService/Advertised so safe / close to removal
     protected <T, V extends T> void replace( Class source, Class<T> clazz, V object ) {
         advertisements.put( clazz, object );
         sources.put( clazz, source );

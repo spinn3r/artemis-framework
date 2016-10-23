@@ -87,6 +87,7 @@ public abstract class BaseService extends AbstractModule implements Service {
     }
 
     @Deprecated
+    // NOTE: this is safe to start removing as it is only in init()
     protected <T,V extends T> void replace(Class<T> clazz, Class<V> impl ) {
         advertised.replace( this.getClass(), clazz, impl );
     }
