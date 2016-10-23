@@ -4,12 +4,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
-import com.spinn3r.artemis.init.guice.TestEagerSingleton;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  *
@@ -17,7 +16,6 @@ import static org.junit.Assert.assertTrue;
 public class TestSingletonsInFirstModule {
 
     @Test
-    @Ignore
     public void testSingletonsInFirstModule() throws Exception {
 
         Launcher launcher = Launcher.newBuilder()

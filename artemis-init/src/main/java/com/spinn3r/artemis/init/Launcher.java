@@ -249,10 +249,6 @@ public class Launcher {
         this.serviceReferences.include( currentServiceReference, additionalServiceReferences );
     }
 
-    public void verify() {
-        advertised.createInjector(Stage.TOOL, module);
-    }
-
     protected Injector createInjector() {
         return advertised.createInjector(module);
     }

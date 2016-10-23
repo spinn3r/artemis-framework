@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init;
 
 import com.google.common.collect.Lists;
 import com.google.inject.*;
+import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.guice.NullModule;
 import com.spinn3r.artemis.init.tracer.StandardTracerFactory;
 import com.spinn3r.artemis.init.tracer.TracerFactory;
@@ -26,9 +27,15 @@ public class Advertised {
 
     protected Map<Class,Class> sources = new ConcurrentHashMap<>();
 
-    protected Module module = null;
+    protected Module module = new NullModule();
 
     public TracerFactorySupplier tracerFactorySupplier;
+
+    private Injector injector = Guice.createInjector();
+
+    private List<Module> modules = Lists.newArrayList();
+
+    protected Module effectiveModule = new NullModule();
 
     public Advertised() {
 
@@ -164,11 +171,12 @@ public class Advertised {
     }
 
     public Injector createInjector(Module module) {
-        return Guice.createInjector(module, toModule());
-    }
 
-    public Injector createInjector(Stage stage, Module module) {
-        return Guice.createInjector(stage, module, toModule() );
+        Module newEffectiveModule = Modules.override(effectiveModule).with(module);
+        injector = injector.createChildInjector(newEffectiveModule);
+        this.effectiveModule = newEffectiveModule;
+
+        return injector;
     }
 
     @Deprecated
