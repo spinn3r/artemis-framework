@@ -19,6 +19,8 @@ class AdvertisedFormatter {
     @SuppressWarnings( "rawtypes" )
     public String format() {
 
+        // TODO migrate this to using TextTableFormatter
+
         Map<String,String> formattedMap = new TreeMap<>();
 
         for (Class key : advertised.advertisements.keySet()) {

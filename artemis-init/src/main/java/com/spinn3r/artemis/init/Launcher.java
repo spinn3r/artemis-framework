@@ -2,6 +2,7 @@ package com.spinn3r.artemis.init;
 
 import com.google.common.base.Stopwatch;
 import com.google.inject.*;
+import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.advertisements.Role;
 import com.spinn3r.artemis.init.cache.DefaultServiceCache;
@@ -54,7 +55,9 @@ public class Launcher {
 
     private ServiceCache serviceCache = new NullServiceCache();
 
-    public Launcher(ConfigLoader configLoader, Advertised advertised ) {
+    AutoServiceModule autoServiceModule = new AutoServiceModule();
+
+    private Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
         this.advertised = advertised;
 
@@ -63,6 +66,7 @@ public class Launcher {
 
         advertised.advertise(this.getClass(), Launcher.class, this);
         advertised.provider(this.getClass(), Lifecycle.class, lifecycleProvider);
+        advertised.advertise(this.getClass(), ConfigLoader.class, configLoader);
 
         if ( TestingFrameworks.isTesting() ) {
             info("Now using static caching for testing frameworks.");
@@ -76,23 +80,27 @@ public class Launcher {
      * bindings are working properly.
      *
      */
-    public Launcher init( ServiceReferences references ) throws Exception {
-        return launch( references, ServicesTool::init );
+    public void init( ServiceReferences references ) throws Exception {
+        launch( references, ServicesTool::init );
     }
 
-    public Launcher launch() throws Exception {
-        return launch( new ServiceReferences() );
+    public void launch() throws Exception {
+        launch( new ServiceReferences() );
     }
 
-    public Launcher launch( ServiceReference... references ) throws Exception {
+    public void launch( ServiceReference... references ) throws Exception {
 
-        return launch( new ServiceReferences( references ) );
+        launch( new ServiceReferences( references ) );
 
     }
 
-    public Launcher launch( ServiceReferences references ) throws Exception {
+    public void launch( ServiceReferences references ) throws Exception {
 
-        return launch( references, (servicesTool) -> {
+        for (AutoService autoService : autoServiceModule.getAutoServices()) {
+            autoService.start();
+        }
+
+        launch( references, (servicesTool) -> {
                 servicesTool.init();
                 servicesTool.start();
         } );
@@ -100,7 +108,7 @@ public class Launcher {
     }
 
     @SuppressWarnings("unchecked")
-    public Launcher launch( Class<? extends Service>... services ) throws Exception {
+    public void launch( Class<? extends Service>... services ) throws Exception {
 
         ServiceReferences serviceReferences = new ServiceReferences();
 
@@ -108,7 +116,7 @@ public class Launcher {
             serviceReferences.add( service );
         }
 
-        return launch( serviceReferences );
+        launch( serviceReferences );
 
     }
 
@@ -117,7 +125,7 @@ public class Launcher {
      * instantiate each one.
      *
      */
-    public Launcher launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
+    public void launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
 
         info( "Launching...");
 
@@ -171,8 +179,6 @@ public class Launcher {
 
         lifecycleProvider.set( Lifecycle.STARTED );
 
-        return this;
-
     }
 
     private void launch0( LaunchHandler launchHandler, Service... services  ) throws Exception {
@@ -206,6 +212,10 @@ public class Launcher {
 
         new ServicesTool( this, services ).stop();
 
+        for (AutoService autoService : autoServiceModule.getAutoServices().reverse()) {
+            autoService.stop();
+        }
+
         lifecycleProvider.set( Lifecycle.STOPPED );
 
         ThreadDiff threadDiff = ThreadSnapshots.diff( threadSnapshot, ThreadSnapshots.create() );
@@ -216,6 +226,7 @@ public class Launcher {
         threadSnapshot = new ThreadSnapshot();
 
         return this;
+
     }
 
     public ThreadSnapshot getThreadSnapshot() {
@@ -348,6 +359,14 @@ public class Launcher {
 
             if (caller.isPresent())
                 result.advertised.advertise( this, Caller.class, caller.get() );
+
+            AutoConfigurationLoader autoConfigurationLoader
+              = new AutoConfigurationLoader(configLoader, result.advertised.tracerFactorySupplier);
+
+            AutoConfigurationModule autoConfigurationModule
+              = new AutoConfigurationModule(autoConfigurationLoader);
+
+            result.module = Modules.combine(result.module, autoConfigurationModule, result.autoServiceModule);
 
             return result;
 
