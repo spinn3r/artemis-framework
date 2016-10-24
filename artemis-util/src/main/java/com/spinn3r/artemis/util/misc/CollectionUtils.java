@@ -97,8 +97,9 @@ public class CollectionUtils {
      * Shuffle the given list, then return it.
      */
     public static <T> List<T> shuffle( List<T> list ) {
-        java.util.Collections.shuffle( list );
-        return list;
+        ArrayList<T> tmp = Lists.newArrayList(list);
+        java.util.Collections.shuffle( tmp );
+        return tmp;
     }
 
     public static <T> List<List<T>> group( Collection<T> input, int groupSize ) {

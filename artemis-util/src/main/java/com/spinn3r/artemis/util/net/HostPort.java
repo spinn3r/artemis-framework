@@ -54,6 +54,25 @@ public class HostPort {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HostPort)) return false;
+
+        HostPort hostPort = (HostPort) o;
+
+        if (port != hostPort.port) return false;
+        return hostname.equals(hostPort.hostname);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = hostname.hashCode();
+        result = 31 * result + port;
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "HostPort{" +
                  "hostname='" + hostname + '\'' +
