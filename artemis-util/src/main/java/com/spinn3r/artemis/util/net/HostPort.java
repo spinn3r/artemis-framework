@@ -3,11 +3,12 @@ package com.spinn3r.artemis.util.net;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
+import java.util.Comparator;
 
 /**
  * Represents a host and port.
  */
-public class HostPort {
+public class HostPort implements Comparable<HostPort> {
 
     private final String hostname;
 
@@ -63,6 +64,11 @@ public class HostPort {
         if (port != hostPort.port) return false;
         return hostname.equals(hostPort.hostname);
 
+    }
+
+    @Override
+    public int compareTo(HostPort o) {
+        return format().compareTo(o.format());
     }
 
     @Override
