@@ -7,12 +7,9 @@ import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import javax.net.ssl.SSLException;
-import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.SSLProtocolException;
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import static com.google.common.base.Preconditions.*;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Execute HTTP request but wrap them in retry logic.
@@ -45,8 +42,7 @@ public class HttpRequestExecutor {
 
         NetworkException cause = null;
 
-        int retryIter = 0;
-        for ( ; retryIter <= maxRetries; retryIter++) {
+        for (int retryIter = 0; retryIter <= maxRetries; retryIter++) {
 
             try {
 
@@ -75,7 +71,7 @@ public class HttpRequestExecutor {
 
         }
 
-        log.warn("Throwing non transient exception after %d retries: %s", retryIter, cause);
+        log.warn("Throwing non transient exception %s", cause);
         throw cause;
 
     }
