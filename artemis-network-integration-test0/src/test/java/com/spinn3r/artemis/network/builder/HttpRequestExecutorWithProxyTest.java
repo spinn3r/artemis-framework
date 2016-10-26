@@ -12,8 +12,8 @@ import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
 import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
 import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.proxies.Proxies;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.SyntheticClockService;
 import com.spinn3r.artemis.time.init.UptimeService;
@@ -96,7 +96,7 @@ public class HttpRequestExecutorWithProxyTest extends BaseLauncherTest {
         HttpRequestExecutor httpRequestExecutor = httpRequestExecutorFactory.create();
 
         NetworkException cause = null;
-        ProxyReference proxy = Proxies.create( proxyUrl );
+        ProxyReference proxy = ProxyReferences.create(proxyUrl );
 
         try {
 
