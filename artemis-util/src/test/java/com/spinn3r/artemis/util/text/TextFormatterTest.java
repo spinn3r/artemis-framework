@@ -2,13 +2,13 @@ package com.spinn3r.artemis.util.text;
 
 import org.junit.Test;
 
-import static com.spinn3r.artemis.util.text.TextFormatter.indent;
+import static com.spinn3r.artemis.util.text.TextFormatter.*;
 import static org.junit.Assert.*;
 
 public class TextFormatterTest {
 
     @Test
-    public void test1() throws Exception {
+    public void testIndent() throws Exception {
 
         assertEquals( "    hello\n",
                       indent( "hello" ) );
@@ -37,4 +37,17 @@ public class TextFormatterTest {
                       indent( "hello\n\nworld\n\n\n\n" ) );
 
     }
+
+    @Test
+    public void testUnindent() throws Exception {
+
+        assertEquals("hello",
+                     unindent("   hello"));
+
+        assertEquals("hello\nworld\n",
+                     unindent("   hello\n   world\n"));
+
+
+    }
+
 }
