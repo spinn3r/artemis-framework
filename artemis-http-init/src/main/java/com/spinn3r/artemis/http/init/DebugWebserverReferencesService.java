@@ -1,16 +1,17 @@
 package com.spinn3r.artemis.http.init;
 
+import com.codahale.metrics.servlets.PingServlet;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.http.ServletReferences;
 import com.spinn3r.artemis.http.servlets.ChaosServlet;
 import com.spinn3r.artemis.http.servlets.EchoServlet;
+import com.spinn3r.artemis.http.servlets.evaluate.EvaluateServlet;
 import com.spinn3r.artemis.init.BaseService;
 
 /**
  * Extended servlets for use in debugging and testing
  */
 public class DebugWebserverReferencesService extends BaseService {
-
 
     private final ServletReferences servletReferences;
 
@@ -28,7 +29,7 @@ public class DebugWebserverReferencesService extends BaseService {
     @Override
     public void init() {
 
-        this.servletReferences.add( "/chaos", chaosServlet );
+        servletReferences.add( "/chaos", chaosServlet );
 
     }
 

@@ -54,10 +54,6 @@ public class Files {
 
     }
 
-    public static void createDirectories(File file) throws IOException {
-        java.nio.file.Files.createDirectories(file.toPath());
-    }
-
     public static void renameTo( File source, File target ) throws IOException {
 
         if ( ! source.renameTo( target )) {

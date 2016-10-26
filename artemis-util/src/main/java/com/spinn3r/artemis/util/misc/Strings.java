@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.util.misc;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import difflib.Delta;
 import difflib.DiffUtils;
@@ -60,7 +61,13 @@ public class Strings {
 
     public static boolean empty( String value ) {
 
-        return value == null || "".equals( value );
+        return value == null || "".equals(value);
+
+    }
+
+    public static boolean emptyWithTrimming( String value ) {
+
+        return value == null || "".equals(value.trim());
 
     }
 
@@ -91,7 +98,7 @@ public class Strings {
     }
 
     public static List<String> split( String string, String regex ) {
-        return toList( string.split( regex ) );
+        return Arrays.asList(string.split( regex ));
 
     }
 
@@ -102,6 +109,10 @@ public class Strings {
 
     }
 
+    /**
+     * @Deprecated use toStrings instead.
+     */
+    @Deprecated
     public static List<String> toList( String[] strings ) {
 
         List<String> list = Lists.newArrayList();
@@ -112,8 +123,24 @@ public class Strings {
 
     }
 
+    public static ImmutableList<String> toStrings(Object... objects) {
+
+        List<String> list = Lists.newArrayList();
+
+        for (Object object : objects) {
+
+            if (object == null)
+                throw new NullPointerException("Null objects not allowed");
+
+            list.add(object.toString());
+        }
+
+        return ImmutableList.copyOf(list);
+
+    }
+
     public static List<String> toLines( String data ) {
-        return toList( data.split( "\n" ) );
+        return Arrays.asList( data.split( "\n" ) );
     }
 
     /**

@@ -1933,6 +1933,22 @@ public abstract class BaseContentMetadata
 
     protected int shares;
 
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasMetadataUpdates = 0;
+
+    public int hasModifiedMetadataUpdates = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedMetadataUpdates = false;
+
+    protected int metadataUpdates;
+
     // **** methods for this POJO
 
     public BaseContentMetadata setPermalink ( String permalink ) {
@@ -1983,28 +1999,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.permalink );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The unique URL to the content.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: permalink
-     * </p>
-     */
-    public String getPermalink ( String _default ) {
-
-        if ( ! hasPermalink() ) {
-            return _default;
-        }
-
-        return getPermalink();
 
     }
 
@@ -2091,28 +2085,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Same as permalink but if the site performs a 301 or 302 redirect this is the URL we were redirected to.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: permalink_redirect
-     * </p>
-     */
-    public String getPermalinkRedirect ( String _default ) {
-
-        if ( ! hasPermalinkRedirect() ) {
-            return _default;
-        }
-
-        return getPermalinkRedirect();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasPermalinkRedirect () {
@@ -2191,28 +2163,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.permalinkRedirectDomain );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The domain for the permalink_redirect. Identical in semantics to the domain field.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: permalink_redirect_domain
-     * </p>
-     */
-    public String getPermalinkRedirectDomain ( String _default ) {
-
-        if ( ! hasPermalinkRedirectDomain() ) {
-            return _default;
-        }
-
-        return getPermalinkRedirectDomain();
 
     }
 
@@ -2299,28 +2249,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The site for the permalink_redirect. The full hostname.  For example, www.cnn.com, alice.blogspot.com, etc.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: permalink_redirect_site
-     * </p>
-     */
-    public String getPermalinkRedirectSite ( String _default ) {
-
-        if ( ! hasPermalinkRedirectSite() ) {
-            return _default;
-        }
-
-        return getPermalinkRedirectSite();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasPermalinkRedirectSite () {
@@ -2399,28 +2327,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.link );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The primary link to the content.  The vast majority of the time, this is identical to permalink.  However, some publisher types (MEMETRACKER) have a different link to the content which is external to the site.  If the link is NOT the same as the permalink, then we include it in the links field for search and accuracy purposes.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: link
-     * </p>
-     */
-    public String getLink ( String _default ) {
-
-        if ( ! hasLink() ) {
-            return _default;
-        }
-
-        return getLink();
 
     }
 
@@ -2507,28 +2413,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The domain for the link. Identical in semantics to the domain field.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: link_domain
-     * </p>
-     */
-    public String getLinkDomain ( String _default ) {
-
-        if ( ! hasLinkDomain() ) {
-            return _default;
-        }
-
-        return getLinkDomain();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasLinkDomain () {
@@ -2607,28 +2491,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.linkSite );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The site for the link. The full hostname.  For example, www.cnn.com, alice.blogspot.com, etc.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: link_site
-     * </p>
-     */
-    public String getLinkSite ( String _default ) {
-
-        if ( ! hasLinkSite() ) {
-            return _default;
-        }
-
-        return getLinkSite();
 
     }
 
@@ -2715,28 +2577,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The shortlink URL, if known.  This is the prefered 'short' URL discovered from either the content itself or through metdata.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: shortlink
-     * </p>
-     */
-    public String getShortlink ( String _default ) {
-
-        if ( ! hasShortlink() ) {
-            return _default;
-        }
-
-        return getShortlink();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasShortlink () {
@@ -2815,28 +2655,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.canonical );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The canonical URL to the content (as specified by the publisher) in rel=canonical (and other specs such as og:url).
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: canonical
-     * </p>
-     */
-    public String getCanonical ( String _default ) {
-
-        if ( ! hasCanonical() ) {
-            return _default;
-        }
-
-        return getCanonical();
 
     }
 
@@ -2923,28 +2741,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The domain name of the permalink.  blogspot.com, example,com, etc. 
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: domain
-     * </p>
-     */
-    public String getDomain ( String _default ) {
-
-        if ( ! hasDomain() ) {
-            return _default;
-        }
-
-        return getDomain();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasDomain () {
@@ -3023,28 +2819,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.site );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The site of the permalink including the full host name.  www.cnn.com would be a site and cnn.com would be a domain.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: site
-     * </p>
-     */
-    public String getSite ( String _default ) {
-
-        if ( ! hasSite() ) {
-            return _default;
-        }
-
-        return getSite();
 
     }
 
@@ -3131,28 +2905,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The actual main content of the article.  The authoritative 'main' of the post derived by removing sidebar content. (html).  This content is sanitized, cleaned so that javascript, event handlers, etc are removed.  This is analagous to the HTML5 main element.  IE the main content of the page, with no header, footer, or sidebar content.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: main
-     * </p>
-     */
-    public String getMain ( String _default ) {
-
-        if ( ! hasMain() ) {
-            return _default;
-        }
-
-        return getMain();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasMain () {
@@ -3231,28 +2983,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.mainLength );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The length of the main field, in bytes.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: main_length
-     * </p>
-     */
-    public int getMainLength ( int _default ) {
-
-        if ( ! hasMainLength() ) {
-            return _default;
-        }
-
-        return getMainLength();
 
     }
 
@@ -3339,28 +3069,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The checksum of the main field.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: main_checksum
-     * </p>
-     */
-    public String getMainChecksum ( String _default ) {
-
-        if ( ! hasMainChecksum() ) {
-            return _default;
-        }
-
-        return getMainChecksum();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasMainChecksum () {
@@ -3443,28 +3151,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * True when the main content is 100% accurate and the extract is not needed.
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: main_authoritative
-     * </p>
-     */
-    public boolean getMainAuthoritative ( boolean _default ) {
-
-        if ( ! hasMainAuthoritative() ) {
-            return _default;
-        }
-
-        return getMainAuthoritative();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasMainAuthoritative () {
@@ -3528,9 +3214,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * The format of the main element (either HTML or text)
      * </p>
@@ -3539,13 +3222,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: main_format
      * </p>
      */
-    public MainFormat getMainFormat ( MainFormat _default ) {
+    public Optional<MainFormat> getMainFormatAsOptional() {
 
-        if ( ! hasMainFormat() ) {
-            return _default;
+        if ( this.constructed == false && this.hasMainFormat == 0 ) {
+            return Optional.empty();
         }
 
-        return getMainFormat();
+        return Optional.ofNullable( this.mainFormat );
 
     }
 
@@ -3632,28 +3315,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The extract of the content with applied chrome/boilerpipe removal algorithms applied.  
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: extract
-     * </p>
-     */
-    public String getExtract ( String _default ) {
-
-        if ( ! hasExtract() ) {
-            return _default;
-        }
-
-        return getExtract();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasExtract () {
@@ -3732,28 +3393,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.extractLength );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The length of the extract field, in bytes.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: extract_length
-     * </p>
-     */
-    public int getExtractLength ( int _default ) {
-
-        if ( ! hasExtractLength() ) {
-            return _default;
-        }
-
-        return getExtractLength();
 
     }
 
@@ -3840,28 +3479,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The checksum of the extract field.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: extract_checksum
-     * </p>
-     */
-    public String getExtractChecksum ( String _default ) {
-
-        if ( ! hasExtractChecksum() ) {
-            return _default;
-        }
-
-        return getExtractChecksum();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasExtractChecksum () {
@@ -3940,28 +3557,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.summaryText );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * A summary of the document computed by our document summarizer. This summary is in plain text. If mulitiple paragraphs are present they are separated by a newline. If you would like to separate the paragraphs in your UI and you're rendering HTML you can split the summary text by newline and wrap each paragraph in a P element.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: summary_text
-     * </p>
-     */
-    public String getSummaryText ( String _default ) {
-
-        if ( ! hasSummaryText() ) {
-            return _default;
-        }
-
-        return getSummaryText();
 
     }
 
@@ -4048,28 +3643,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The title of the post.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: title
-     * </p>
-     */
-    public String getTitle ( String _default ) {
-
-        if ( ! hasTitle() ) {
-            return _default;
-        }
-
-        return getTitle();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasTitle () {
@@ -4148,28 +3721,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.publisher );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The publisher name.  (CNN, MSNBC, Techcrunch, etc)
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: publisher
-     * </p>
-     */
-    public String getPublisher ( String _default ) {
-
-        if ( ! hasPublisher() ) {
-            return _default;
-        }
-
-        return getPublisher();
 
     }
 
@@ -4256,28 +3807,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Articles may belong to one or more 'sections' in a magazine or newspaper, such as Sports, Lifestyle, etc.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: section
-     * </p>
-     */
-    public String getSection ( String _default ) {
-
-        if ( ! hasSection() ) {
-            return _default;
-        }
-
-        return getSection();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSection () {
@@ -4360,28 +3889,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * A short description of the item (HTML)
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: description
-     * </p>
-     */
-    public String getDescription ( String _default ) {
-
-        if ( ! hasDescription() ) {
-            return _default;
-        }
-
-        return getDescription();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasDescription () {
@@ -4447,9 +3954,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Tags for the item.
      * </p>
@@ -4458,13 +3962,13 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: tags
      * </p>
      */
-    public Set<String> getTags ( Set<String> _default ) {
+    public Optional<Set<String>> getTagsAsOptional() {
 
-        if ( ! hasTags() ) {
-            return _default;
+        if ( this.constructed == false && this.hasTags == 0 ) {
+            return Optional.empty();
         }
 
-        return getTags();
+        return Optional.ofNullable( this.tags );
 
     }
 
@@ -4534,9 +4038,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Username mentions for users within the content of this post.
      * </p>
@@ -4545,13 +4046,13 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: mentions
      * </p>
      */
-    public Set<String> getMentions ( Set<String> _default ) {
+    public Optional<Set<String>> getMentionsAsOptional() {
 
-        if ( ! hasMentions() ) {
-            return _default;
+        if ( this.constructed == false && this.hasMentions == 0 ) {
+            return Optional.empty();
         }
 
-        return getMentions();
+        return Optional.ofNullable( this.mentions );
 
     }
 
@@ -4621,9 +4122,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * All outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
      * </p>
@@ -4632,13 +4130,13 @@ public abstract class BaseContentMetadata
      * Schema type: set&lt;text&gt; , name: links
      * </p>
      */
-    public Set<String> getLinks ( Set<String> _default ) {
+    public Optional<Set<String>> getLinksAsOptional() {
 
-        if ( ! hasLinks() ) {
-            return _default;
+        if ( this.constructed == false && this.hasLinks == 0 ) {
+            return Optional.empty();
         }
 
-        return getLinks();
+        return Optional.ofNullable( this.links );
 
     }
 
@@ -4738,28 +4236,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Date of first broadcast/publication.
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: published
-     * </p>
-     */
-    public Date getPublished ( Date _default ) {
-
-        if ( ! hasPublished() ) {
-            return _default;
-        }
-
-        return getPublished();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasPublished () {
@@ -4851,28 +4327,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.modified );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The date on which the content was most recently modified.
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: modified
-     * </p>
-     */
-    public Date getModified ( Date _default ) {
-
-        if ( ! hasModified() ) {
-            return _default;
-        }
-
-        return getModified();
 
     }
 
@@ -4972,28 +4426,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * This is identical to `published` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: published_partial
-     * </p>
-     */
-    public Date getPublishedPartial ( Date _default ) {
-
-        if ( ! hasPublishedPartial() ) {
-            return _default;
-        }
-
-        return getPublishedPartial();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasPublishedPartial () {
@@ -5089,28 +4521,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * This is identical to `modified` except it's a partial value.  If an exact date is found we both fields are populated but if we only have a partial date then we only specify this field.  The value is ISO8601.  For example, 2014-01-01.
-     * </p>
-     *
-     * <p>
-     * Schema type: timestamp , name: modified_partial
-     * </p>
-     */
-    public Date getModifiedPartial ( Date _default ) {
-
-        if ( ! hasModifiedPartial() ) {
-            return _default;
-        }
-
-        return getModifiedPartial();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasModifiedPartial () {
@@ -5189,28 +4599,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorName );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The name of the author.  This is the human readable name like 'Barack Obama' or 'Michael Jordan'
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_name
-     * </p>
-     */
-    public String getAuthorName ( String _default ) {
-
-        if ( ! hasAuthorName() ) {
-            return _default;
-        }
-
-        return getAuthorName();
 
     }
 
@@ -5297,28 +4685,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The link for the author.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_link
-     * </p>
-     */
-    public String getAuthorLink ( String _default ) {
-
-        if ( ! hasAuthorLink() ) {
-            return _default;
-        }
-
-        return getAuthorLink();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorLink () {
@@ -5397,28 +4763,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorHandle );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The handle of the author.  This is a unique token/handle for the author across the whole site.  For example 'barackobama' and would never conflict with another account.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_handle
-     * </p>
-     */
-    public String getAuthorHandle ( String _default ) {
-
-        if ( ! hasAuthorHandle() ) {
-            return _default;
-        }
-
-        return getAuthorHandle();
 
     }
 
@@ -5505,28 +4849,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of followers for this author.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: author_followers
-     * </p>
-     */
-    public int getAuthorFollowers ( int _default ) {
-
-        if ( ! hasAuthorFollowers() ) {
-            return _default;
-        }
-
-        return getAuthorFollowers();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorFollowers () {
@@ -5605,28 +4927,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorLocation );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The location for this author.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_location
-     * </p>
-     */
-    public String getAuthorLocation ( String _default ) {
-
-        if ( ! hasAuthorLocation() ) {
-            return _default;
-        }
-
-        return getAuthorLocation();
 
     }
 
@@ -5713,28 +5013,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The URL to the img which is an avatar for the user who posted this content.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_avatar_img
-     * </p>
-     */
-    public String getAuthorAvatarImg ( String _default ) {
-
-        if ( ! hasAuthorAvatarImg() ) {
-            return _default;
-        }
-
-        return getAuthorAvatarImg();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorAvatarImg () {
@@ -5813,28 +5091,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorAvatarWidth );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The width of the avatar img.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: author_avatar_width
-     * </p>
-     */
-    public int getAuthorAvatarWidth ( int _default ) {
-
-        if ( ! hasAuthorAvatarWidth() ) {
-            return _default;
-        }
-
-        return getAuthorAvatarWidth();
 
     }
 
@@ -5921,28 +5177,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The height of the avatar img.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: author_avatar_height
-     * </p>
-     */
-    public int getAuthorAvatarHeight ( int _default ) {
-
-        if ( ! hasAuthorAvatarHeight() ) {
-            return _default;
-        }
-
-        return getAuthorAvatarHeight();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorAvatarHeight () {
@@ -6021,28 +5255,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorTwitterHandle );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Deprecated.  Use author_handle instead
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_twitter_handle
-     * </p>
-     */
-    public String getAuthorTwitterHandle ( String _default ) {
-
-        if ( ! hasAuthorTwitterHandle() ) {
-            return _default;
-        }
-
-        return getAuthorTwitterHandle();
 
     }
 
@@ -6129,28 +5341,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Deprecated.  Use author_user_id instead.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_twitter_userid
-     * </p>
-     */
-    public String getAuthorTwitterUserid ( String _default ) {
-
-        if ( ! hasAuthorTwitterUserid() ) {
-            return _default;
-        }
-
-        return getAuthorTwitterUserid();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasAuthorTwitterUserid () {
@@ -6196,7 +5386,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * User ID in the target platform (when available, twitter for instance)
+     * User ID in the target platform (when available)
      * </p>
      *
      * <p>
@@ -6215,7 +5405,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * User ID in the target platform (when available, twitter for instance)
+     * User ID in the target platform (when available)
      * </p>
      *
      * <p>
@@ -6229,28 +5419,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.authorUserId );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * User ID in the target platform (when available, twitter for instance)
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: author_user_id
-     * </p>
-     */
-    public String getAuthorUserId ( String _default ) {
-
-        if ( ! hasAuthorUserId() ) {
-            return _default;
-        }
-
-        return getAuthorUserId();
 
     }
 
@@ -6318,9 +5486,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * When present, the gender of the author.
      * </p>
@@ -6329,13 +5494,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: author_gender
      * </p>
      */
-    public AuthorGender getAuthorGender ( AuthorGender _default ) {
+    public Optional<AuthorGender> getAuthorGenderAsOptional() {
 
-        if ( ! hasAuthorGender() ) {
-            return _default;
+        if ( this.constructed == false && this.hasAuthorGender == 0 ) {
+            return Optional.empty();
         }
 
-        return getAuthorGender();
+        return Optional.ofNullable( this.authorGender );
 
     }
 
@@ -6422,28 +5587,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The human readable location of the source.  Example: 'Washington, DC'
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_location
-     * </p>
-     */
-    public String getGeoLocation ( String _default ) {
-
-        if ( ! hasGeoLocation() ) {
-            return _default;
-        }
-
-        return getGeoLocation();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoLocation () {
@@ -6522,28 +5665,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.geoLocationId );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The location identifier (if available) for this location.  This is platform specific.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_location_id
-     * </p>
-     */
-    public String getGeoLocationId ( String _default ) {
-
-        if ( ! hasGeoLocationId() ) {
-            return _default;
-        }
-
-        return getGeoLocationId();
 
     }
 
@@ -6630,28 +5751,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Name of the feature we're representing.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_featurename
-     * </p>
-     */
-    public String getGeoFeaturename ( String _default ) {
-
-        if ( ! hasGeoFeaturename() ) {
-            return _default;
-        }
-
-        return getGeoFeaturename();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoFeaturename () {
@@ -6730,28 +5829,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.geoPoint );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * A point contains a single latitude-longitude pair, separated by whitespace.
-     * </p>
-     *
-     * <p>
-     * Schema type: geo_point , name: geo_point
-     * </p>
-     */
-    public String getGeoPoint ( String _default ) {
-
-        if ( ! hasGeoPoint() ) {
-            return _default;
-        }
-
-        return getGeoPoint();
 
     }
 
@@ -6838,28 +5915,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * A bounding box is a rectangular region, often used to define the extents of a map or a rough area of interest. A box contains two space seperate latitude-longitude pairs, with each pair separated by whitespace. The first pair is the lower corner, the second is the upper corner.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_box
-     * </p>
-     */
-    public String getGeoBox ( String _default ) {
-
-        if ( ! hasGeoBox() ) {
-            return _default;
-        }
-
-        return getGeoBox();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoBox () {
@@ -6938,28 +5993,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.geoNameId );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * Id in geonames database.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_name_id
-     * </p>
-     */
-    public String getGeoNameId ( String _default ) {
-
-        if ( ! hasGeoNameId() ) {
-            return _default;
-        }
-
-        return getGeoNameId();
 
     }
 
@@ -7046,28 +6079,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The human readable location including its parent locations
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_name
-     * </p>
-     */
-    public String getGeoName ( String _default ) {
-
-        if ( ! hasGeoName() ) {
-            return _default;
-        }
-
-        return getGeoName();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoName () {
@@ -7146,28 +6157,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.geoCountry );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The human readable country derived from geo_location.  These are represented as ISO 3166-1 alpha-2: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_country
-     * </p>
-     */
-    public String getGeoCountry ( String _default ) {
-
-        if ( ! hasGeoCountry() ) {
-            return _default;
-        }
-
-        return getGeoCountry();
 
     }
 
@@ -7254,28 +6243,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The human readable state derived from geo_location.  
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_state
-     * </p>
-     */
-    public String getGeoState ( String _default ) {
-
-        if ( ! hasGeoState() ) {
-            return _default;
-        }
-
-        return getGeoState();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoState () {
@@ -7358,28 +6325,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The human readable city derived from geo_location.  
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: geo_city
-     * </p>
-     */
-    public String getGeoCity ( String _default ) {
-
-        if ( ! hasGeoCity() ) {
-            return _default;
-        }
-
-        return getGeoCity();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasGeoCity () {
@@ -7443,9 +6388,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Contains the name of the field used to parse the geo data
      * </p>
@@ -7454,13 +6396,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: geo_method
      * </p>
      */
-    public GeoMethod getGeoMethod ( GeoMethod _default ) {
+    public Optional<GeoMethod> getGeoMethodAsOptional() {
 
-        if ( ! hasGeoMethod() ) {
-            return _default;
+        if ( this.constructed == false && this.hasGeoMethod == 0 ) {
+            return Optional.empty();
         }
 
-        return getGeoMethod();
+        return Optional.ofNullable( this.geoMethod );
 
     }
 
@@ -7547,28 +6489,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The rating for this item provided by the user. 
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: rating_value
-     * </p>
-     */
-    public String getRatingValue ( String _default ) {
-
-        if ( ! hasRatingValue() ) {
-            return _default;
-        }
-
-        return getRatingValue();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasRatingValue () {
@@ -7647,28 +6567,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.faviconSrc );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The URL to the favicon which represents this source.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: favicon_src
-     * </p>
-     */
-    public String getFaviconSrc ( String _default ) {
-
-        if ( ! hasFaviconSrc() ) {
-            return _default;
-        }
-
-        return getFaviconSrc();
 
     }
 
@@ -7755,28 +6653,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The width of the favicon.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: favicon_width
-     * </p>
-     */
-    public int getFaviconWidth ( int _default ) {
-
-        if ( ! hasFaviconWidth() ) {
-            return _default;
-        }
-
-        return getFaviconWidth();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasFaviconWidth () {
@@ -7855,28 +6731,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.faviconHeight );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The height of the favicon.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: favicon_height
-     * </p>
-     */
-    public int getFaviconHeight ( int _default ) {
-
-        if ( ! hasFaviconHeight() ) {
-            return _default;
-        }
-
-        return getFaviconHeight();
 
     }
 
@@ -7963,28 +6817,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The URL to the img which represents this content.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: image_src
-     * </p>
-     */
-    public String getImageSrc ( String _default ) {
-
-        if ( ! hasImageSrc() ) {
-            return _default;
-        }
-
-        return getImageSrc();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasImageSrc () {
@@ -8063,28 +6895,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.imageWidth );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The width of the image.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: image_width
-     * </p>
-     */
-    public int getImageWidth ( int _default ) {
-
-        if ( ! hasImageWidth() ) {
-            return _default;
-        }
-
-        return getImageWidth();
 
     }
 
@@ -8171,28 +6981,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The height of the image.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: image_height
-     * </p>
-     */
-    public int getImageHeight ( int _default ) {
-
-        if ( ! hasImageHeight() ) {
-            return _default;
-        }
-
-        return getImageHeight();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasImageHeight () {
@@ -8271,28 +7059,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.shared );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: shared
-     * </p>
-     */
-    public boolean getShared ( boolean _default ) {
-
-        if ( ! hasShared() ) {
-            return _default;
-        }
-
-        return getShared();
 
     }
 
@@ -8379,28 +7145,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The link to the profile of the person who originally posted this story.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: shared_profile_link
-     * </p>
-     */
-    public String getSharedProfileLink ( String _default ) {
-
-        if ( ! hasSharedProfileLink() ) {
-            return _default;
-        }
-
-        return getSharedProfileLink();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasSharedProfileLink () {
@@ -8479,28 +7223,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.sharedProfileTitle );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The title of the profile of the person who originally posted this story.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: shared_profile_title
-     * </p>
-     */
-    public String getSharedProfileTitle ( String _default ) {
-
-        if ( ! hasSharedProfileTitle() ) {
-            return _default;
-        }
-
-        return getSharedProfileTitle();
 
     }
 
@@ -8587,28 +7309,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * True when this source was a reply, false otherwhise
-     * </p>
-     *
-     * <p>
-     * Schema type: boolean , name: replied
-     * </p>
-     */
-    public boolean getReplied ( boolean _default ) {
-
-        if ( ! hasReplied() ) {
-            return _default;
-        }
-
-        return getReplied();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasReplied () {
@@ -8687,28 +7387,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.repliedProfileLink );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The link to the profile of the person being replied to.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: replied_profile_link
-     * </p>
-     */
-    public String getRepliedProfileLink ( String _default ) {
-
-        if ( ! hasRepliedProfileLink() ) {
-            return _default;
-        }
-
-        return getRepliedProfileLink();
 
     }
 
@@ -8795,28 +7473,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The title of the profile of the person being replied to.
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: replied_profile_title
-     * </p>
-     */
-    public String getRepliedProfileTitle ( String _default ) {
-
-        if ( ! hasRepliedProfileTitle() ) {
-            return _default;
-        }
-
-        return getRepliedProfileTitle();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasRepliedProfileTitle () {
@@ -8880,9 +7536,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * When present, the type of card that can be used to display this content within web applications
      * </p>
@@ -8891,13 +7544,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: card
      * </p>
      */
-    public Card getCard ( Card _default ) {
+    public Optional<Card> getCardAsOptional() {
 
-        if ( ! hasCard() ) {
-            return _default;
+        if ( this.constructed == false && this.hasCard == 0 ) {
+            return Optional.empty();
         }
 
-        return getCard();
+        return Optional.ofNullable( this.card );
 
     }
 
@@ -8984,28 +7637,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The URL to an iframe which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: video_player
-     * </p>
-     */
-    public String getVideoPlayer ( String _default ) {
-
-        if ( ! hasVideoPlayer() ) {
-            return _default;
-        }
-
-        return getVideoPlayer();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasVideoPlayer () {
@@ -9084,28 +7715,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.videoPlayerWidth );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The width of the player iframe.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: video_player_width
-     * </p>
-     */
-    public int getVideoPlayerWidth ( int _default ) {
-
-        if ( ! hasVideoPlayerWidth() ) {
-            return _default;
-        }
-
-        return getVideoPlayerWidth();
 
     }
 
@@ -9192,28 +7801,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The height of the player iframe.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: video_player_height
-     * </p>
-     */
-    public int getVideoPlayerHeight ( int _default ) {
-
-        if ( ! hasVideoPlayerHeight() ) {
-            return _default;
-        }
-
-        return getVideoPlayerHeight();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasVideoPlayerHeight () {
@@ -9277,9 +7864,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * The type of this content as either a POST or a COMMENT.  This allows us to index posts and comments through the same API.
      * </p>
@@ -9288,13 +7872,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: type
      * </p>
      */
-    public Type getType ( Type _default ) {
+    public Optional<Type> getTypeAsOptional() {
 
-        if ( ! hasType() ) {
-            return _default;
+        if ( this.constructed == false && this.hasType == 0 ) {
+            return Optional.empty();
         }
 
-        return getType();
+        return Optional.ofNullable( this.type );
 
     }
 
@@ -9362,9 +7946,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * The overall sentiment for this content
      * </p>
@@ -9373,13 +7954,13 @@ public abstract class BaseContentMetadata
      * Schema type: enum , name: sentiment
      * </p>
      */
-    public Sentiment getSentiment ( Sentiment _default ) {
+    public Optional<Sentiment> getSentimentAsOptional() {
 
-        if ( ! hasSentiment() ) {
-            return _default;
+        if ( this.constructed == false && this.hasSentiment == 0 ) {
+            return Optional.empty();
         }
 
-        return getSentiment();
+        return Optional.ofNullable( this.sentiment );
 
     }
 
@@ -9466,28 +8047,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * ISO language code for this source.  All our language codes are ISO 639 two letter lang codes. We use the special lang code of U when we are unable to determine the language from the underlying text - usually because we don't have enough data.
-     * </p>
-     *
-     * <p>
-     * Schema type: ascii , name: lang
-     * </p>
-     */
-    public String getLang ( String _default ) {
-
-        if ( ! hasLang() ) {
-            return _default;
-        }
-
-        return getLang();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasLang () {
@@ -9551,9 +8110,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Provides a map between algorithmically determined categories (entertainment, politics, technology, science, sports, business, health) and their probabilities.  The probabilities are between 0.0 and 1.0 and if you sum them all they will equal 1.0.  
      * </p>
@@ -9562,13 +8118,13 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;ascii,double&gt; , name: categories
      * </p>
      */
-    public Map<String,Double> getCategories ( Map<String,Double> _default ) {
+    public Optional<Map<String,Double>> getCategoriesAsOptional() {
 
-        if ( ! hasCategories() ) {
-            return _default;
+        if ( this.constructed == false && this.hasCategories == 0 ) {
+            return Optional.empty();
         }
 
-        return getCategories();
+        return Optional.ofNullable( this.categories );
 
     }
 
@@ -9636,9 +8192,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Provides data on previously posted documents which are duplicates of this document.  Keys are sequence values for the documents and the is a double between 0.0 and 1.0 where 0.0 is no duplication and 1.0 is full duplication
      * </p>
@@ -9647,13 +8200,13 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;bigint,double&gt; , name: duplicates
      * </p>
      */
-    public Map<Long,Double> getDuplicates ( Map<Long,Double> _default ) {
+    public Optional<Map<Long,Double>> getDuplicatesAsOptional() {
 
-        if ( ! hasDuplicates() ) {
-            return _default;
+        if ( this.constructed == false && this.hasDuplicates == 0 ) {
+            return Optional.empty();
         }
 
-        return getDuplicates();
+        return Optional.ofNullable( this.duplicates );
 
     }
 
@@ -9740,28 +8293,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The total number of duplicates.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: duplicates_count
-     * </p>
-     */
-    public int getDuplicatesCount ( int _default ) {
-
-        if ( ! hasDuplicatesCount() ) {
-            return _default;
-        }
-
-        return getDuplicatesCount();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasDuplicatesCount () {
@@ -9825,9 +8356,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
      * <p>
      * Provides a map between algorithmically determined classifications driven by customers.  The keys are keys given to customers identify their classification and the value is the probability of that classification.  The values DO NOT sum to 1.0 as there may be multiple classifications here.
      * </p>
@@ -9836,13 +8364,13 @@ public abstract class BaseContentMetadata
      * Schema type: map&lt;ascii,double&gt; , name: classifications
      * </p>
      */
-    public Map<String,Double> getClassifications ( Map<String,Double> _default ) {
+    public Optional<Map<String,Double>> getClassificationsAsOptional() {
 
-        if ( ! hasClassifications() ) {
-            return _default;
+        if ( this.constructed == false && this.hasClassifications == 0 ) {
+            return Optional.empty();
         }
 
-        return getClassifications();
+        return Optional.ofNullable( this.classifications );
 
     }
 
@@ -9929,28 +8457,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * See content.hashcode
-     * </p>
-     *
-     * <p>
-     * Schema type: ascii , name: parent_hashcode
-     * </p>
-     */
-    public String getParentHashcode ( String _default ) {
-
-        if ( ! hasParentHashcode() ) {
-            return _default;
-        }
-
-        return getParentHashcode();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasParentHashcode () {
@@ -10029,28 +8535,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.parentPermalink );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * See content.permalink
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: parent_permalink
-     * </p>
-     */
-    public String getParentPermalink ( String _default ) {
-
-        if ( ! hasParentPermalink() ) {
-            return _default;
-        }
-
-        return getParentPermalink();
 
     }
 
@@ -10137,28 +8621,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * See content.title
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: parent_title
-     * </p>
-     */
-    public String getParentTitle ( String _default ) {
-
-        if ( ! hasParentTitle() ) {
-            return _default;
-        }
-
-        return getParentTitle();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasParentTitle () {
@@ -10237,28 +8699,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.parentLang );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * See content.lang
-     * </p>
-     *
-     * <p>
-     * Schema type: ascii , name: parent_lang
-     * </p>
-     */
-    public String getParentLang ( String _default ) {
-
-        if ( ! hasParentLang() ) {
-            return _default;
-        }
-
-        return getParentLang();
 
     }
 
@@ -10345,28 +8785,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * See content.resource
-     * </p>
-     *
-     * <p>
-     * Schema type: text , name: parent_resource
-     * </p>
-     */
-    public String getParentResource ( String _default ) {
-
-        if ( ! hasParentResource() ) {
-            return _default;
-        }
-
-        return getParentResource();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasParentResource () {
@@ -10445,28 +8863,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.likes );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: likes
-     * </p>
-     */
-    public int getLikes ( int _default ) {
-
-        if ( ! hasLikes() ) {
-            return _default;
-        }
-
-        return getLikes();
 
     }
 
@@ -10553,28 +8949,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: dislikes
-     * </p>
-     */
-    public int getDislikes ( int _default ) {
-
-        if ( ! hasDislikes() ) {
-            return _default;
-        }
-
-        return getDislikes();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasDislikes () {
@@ -10653,28 +9027,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.comments );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: comments
-     * </p>
-     */
-    public int getComments ( int _default ) {
-
-        if ( ! hasComments() ) {
-            return _default;
-        }
-
-        return getComments();
 
     }
 
@@ -10761,28 +9113,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: views
-     * </p>
-     */
-    public int getViews ( int _default ) {
-
-        if ( ! hasViews() ) {
-            return _default;
-        }
-
-        return getViews();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasViews () {
@@ -10861,28 +9191,6 @@ public abstract class BaseContentMetadata
         }
 
         return Optional.ofNullable( this.metadataScore );
-
-    }
-
-    /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: metadata_score
-     * </p>
-     */
-    public int getMetadataScore ( int _default ) {
-
-        if ( ! hasMetadataScore() ) {
-            return _default;
-        }
-
-        return getMetadataScore();
 
     }
 
@@ -10969,28 +9277,6 @@ public abstract class BaseContentMetadata
     }
 
     /**
-     *
-     * Get the value of a member and provide a default if it's not defined.
-     *
-     * <p>
-     * The number of shares for this post.  For some microblogging platforms this could be a rewtweet but for others its a share.  Most platforms have this concept.
-     * </p>
-     *
-     * <p>
-     * Schema type: int , name: shares
-     * </p>
-     */
-    public int getShares ( int _default ) {
-
-        if ( ! hasShares() ) {
-            return _default;
-        }
-
-        return getShares();
-
-    }
-
-    /**
      * Return true if this member has a defined value of this field.
      */
     public boolean hasShares () {
@@ -11019,6 +9305,88 @@ public abstract class BaseContentMetadata
      */
     public boolean hasDefinedShares () {
         return this.hasDefinedShares;
+    }
+
+    public BaseContentMetadata setMetadataUpdates ( int metadataUpdates ) {
+
+        ++this.hasMetadataUpdates;
+        ++this.hasModifiedMetadataUpdates;
+
+        this.metadataUpdates = metadataUpdates;
+
+        hasDefinedMetadataUpdates = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The number of updates to metadata we have
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: metadata_updates
+     * </p>
+     */
+    public int getMetadataUpdates() {
+
+        if ( this.constructed == false && this.hasMetadataUpdates == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.metadataUpdates" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.metadataUpdates;
+    }
+
+    /**
+     * <p>
+     * The number of updates to metadata we have
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: metadata_updates
+     * </p>
+     */
+    public Optional<Integer> getMetadataUpdatesAsOptional() {
+
+        if ( this.constructed == false && this.hasMetadataUpdates == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.metadataUpdates );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasMetadataUpdates () {
+        return this.hasMetadataUpdates > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearMetadataUpdates () {
+        this.hasMetadataUpdates = 0;
+        this.hasModifiedMetadataUpdates = 0;
+        this.hasDefinedMetadataUpdates = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedMetadataUpdates () {
+        return this.hasModifiedMetadataUpdates > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedMetadataUpdates () {
+        return this.hasDefinedMetadataUpdates;
     }
 
     /**
@@ -11380,6 +9748,10 @@ public abstract class BaseContentMetadata
 
         if ( obj.hasShares() ) {
             setShares( obj.getShares() );
+        }
+
+        if ( obj.hasMetadataUpdates() ) {
+            setMetadataUpdates( obj.getMetadataUpdates() );
         }
 
     }
@@ -12006,6 +10378,10 @@ public abstract class BaseContentMetadata
             setShares( obj.getShares() );
         }
 
+        if ( ! hasMetadataUpdates() && obj.hasMetadataUpdates() ) {
+            setMetadataUpdates( obj.getMetadataUpdates() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -12188,6 +10564,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedMetadataScore = 0;
 
         this.hasModifiedShares = 0;
+
+        this.hasModifiedMetadataUpdates = 0;
 
     }
 
@@ -12549,6 +10927,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedShares() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedMetadataUpdates() ) {
             return true;
         }
 
@@ -13294,6 +11676,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "shares=" );
             buff.append( shares );
+            buff.append( " " );
+
+        }
+
+        if ( hasMetadataUpdates > 0 ) {
+
+            buff.append( "metadataUpdates=" );
+            buff.append( metadataUpdates );
             buff.append( " " );
 
         }
@@ -14109,6 +12499,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( shares != cmp.shares ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasMetadataUpdates() != cmp.hasMetadataUpdates() ) {
+            return false;
+        }
+
+        if ( metadataUpdates != cmp.metadataUpdates ) {
             return false;
         }
 
@@ -15699,6 +14098,21 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member metadata_updates from int
+
+            __name = "metadataUpdates";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "metadata_updates";
+            }
+
+            if ( this.hasMetadataUpdates > 0 ) {
+
+                if ( hasDefinedMetadataUpdates )
+                    generator.writeNumberField( __name, metadataUpdates );
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -16629,6 +15043,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setShares( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member metadata_updates from int
+
+                case "metadata_updates":
+
+                    jParser.nextToken();
+                    setMetadataUpdates( jParser.getIntValue() );
 
                     break;
 

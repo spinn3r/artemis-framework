@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.metrics.jvm.threads;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 import com.spinn3r.artemis.metrics.tags.SimpleTagsProvider;
 import com.spinn3r.artemis.metrics.gauge.GaugeProvider;
 import com.spinn3r.metrics.kairosdb.Tag;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  *
  */
+@Singleton
 public class ThreadMetaGaugeProvider extends SimpleTagsProvider<ThreadMeta> implements GaugeProvider<ThreadMeta> {
 
     @Override

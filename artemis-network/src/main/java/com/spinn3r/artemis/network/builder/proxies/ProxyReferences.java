@@ -1,19 +1,17 @@
 package com.spinn3r.artemis.network.builder.proxies;
 
-import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
-
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.SocketAddress;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.*;
 
 /**
  *
  */
-public class Proxies {
+public class ProxyReferences {
 
     public static ProxyReference create( String type, String host, int port ) {
 

@@ -501,19 +501,19 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                 if (ENABLE_FOLLOW_CONTENT_REDIRECTS && getFollowContentRedirects()) {
 
                     if (followRedirect(parseRedirectFromFrameContent( data ))) {
-                        log.info( "Following redirect from frame content..." );
+                        //log.info( "Following redirect from frame content..." );
                         return;
                     }
 
                     if (followRedirect(parseRedirectFromMetaRefreshEquiv(data))) {
-                        log.info( "Following HTTP meta redirect..." );
+                        //log.info( "Following HTTP meta redirect..." );
                         return;
                     }
 
                 }
 
                 if (followRedirect( parseSSLRedirect() )) {
-                    log.info( "Following SSL redirect..." );
+                    //log.info( "Following SSL redirect..." );
                     return;
                 }
 

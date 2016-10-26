@@ -110,10 +110,14 @@ public class JSON {
 
     }
 
+    /**
+     * Deprecating this as it should properly throw an IOException.
+     */
+    @Deprecated
     public static <T> T fromJSON( Class<T> clazz, InputStream inputStream ) {
 
         if ( inputStream == null )
-            throw new NullPointerException( "content" );
+            throw new NullPointerException( "inputStream" );
 
         try {
 
@@ -121,10 +125,23 @@ public class JSON {
             return objectMapper.readValue( inputStream, clazz );
 
         } catch (IOException e) {
+            // FIXME: we whould NOT swallow this IOException here. It should be
+            // thrown so we can properly handle it.
             throw new RuntimeException( e );
         }
 
     }
+
+    public static <T> T deserialize( Class<T> clazz, InputStream inputStream ) throws IOException {
+
+        if ( inputStream == null )
+            throw new NullPointerException( "inputStream" );
+
+        ObjectMapper objectMapper = createObjectMapper();
+        return objectMapper.readValue( inputStream, clazz );
+
+    }
+
 
     public static <T> T fromJSON( Class<T> clazz, byte[] data ) {
 
@@ -147,6 +164,14 @@ public class JSON {
         ObjectMapper objectMapper = createObjectMapper();
         return objectMapper.convertValue( map, clazz );
 
+    }
+
+    /**
+     * Make a string of JSON pretty by formatting it properly. Often used for
+     * testing.
+     */
+    public static String makePretty(String json) {
+        return JSON.toJSON(JSON.fromJSON(JSONMap.class, json));
     }
 
     private static ObjectMapper createObjectMapper() {

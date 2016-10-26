@@ -97,8 +97,9 @@ public class CollectionUtils {
      * Shuffle the given list, then return it.
      */
     public static <T> List<T> shuffle( List<T> list ) {
-        java.util.Collections.shuffle( list );
-        return list;
+        ArrayList<T> tmp = Lists.newArrayList(list);
+        java.util.Collections.shuffle( tmp );
+        return tmp;
     }
 
     public static <T> List<List<T>> group( Collection<T> input, int groupSize ) {
@@ -236,6 +237,7 @@ public class CollectionUtils {
 
     /**
      * Convert the collection of objects to strings by caling toString() on each.
+     * @Deprecated use {@link CollectionUtils#toStrings(Collection)}
      */
     public static <T> List<String> strings( Collection<T> input ) {
         
@@ -246,6 +248,22 @@ public class CollectionUtils {
         }
 
         return result;
+
+    }
+
+    public static <T> ImmutableList<String> toStrings( Collection<T> input ) {
+
+        List<String> result = Lists.newArrayList();
+
+        for (T current : input) {
+
+            if (current == null)
+                throw new NullPointerException("Null objects not allowed");
+
+            result.add( current.toString() );
+        }
+
+        return ImmutableList.copyOf(result);
 
     }
 

@@ -1,4 +1,4 @@
-package com.spinn3r.artemis.jcommander.optionals;
+package com.spinn3r.artemis.jcommander.converters.optional;
 
 import com.beust.jcommander.IStringConverter;
 

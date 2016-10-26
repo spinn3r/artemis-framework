@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.util.text;
 
+import java.util.regex.Pattern;
+
 /**
  *
  */
@@ -23,6 +25,12 @@ public class TextFormatter {
         }
 
         return buff.toString();
+
+    }
+
+    public static String unindent(String input) {
+
+        return input.replaceAll("(?m)^\\s+", "");
 
     }
 

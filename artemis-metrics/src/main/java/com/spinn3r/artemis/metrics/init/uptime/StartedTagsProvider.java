@@ -3,6 +3,7 @@ package com.spinn3r.artemis.metrics.init.uptime;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Singleton;
 import com.spinn3r.artemis.metrics.tags.SimpleTagsProvider;
 import com.spinn3r.artemis.time.Started;
 import com.spinn3r.metrics.kairosdb.Tag;
@@ -10,6 +11,7 @@ import com.spinn3r.metrics.kairosdb.Tag;
 /**
  *
  */
+@Singleton
 public class StartedTagsProvider extends SimpleTagsProvider<Started> {
 
     StartedTagsProvider() {

@@ -1,7 +1,5 @@
 package com.spinn3r.artemis.json;
 
-import com.spinn3r.artemis.json.JSON;
-
 /**
  * Generic JSON error message.
  */
@@ -39,4 +37,5 @@ public class ErrorMessage {
                  ", message='" + message + '\'' +
                  '}';
     }
+
 }

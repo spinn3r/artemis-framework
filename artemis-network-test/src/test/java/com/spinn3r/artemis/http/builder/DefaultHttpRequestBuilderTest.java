@@ -23,6 +23,7 @@ import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.UptimeService;
 import com.spinn3r.artemis.util.misc.HitIndex;
@@ -32,6 +33,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
+import java.net.URL;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.*;
@@ -77,6 +82,7 @@ public class DefaultHttpRequestBuilderTest {
     }
 
     @Test
+    @Ignore
     public void testBrokenCookies() throws Exception {
 
         String link = "http://www.elitesecurity.org/p3681726";
@@ -425,6 +431,141 @@ public class DefaultHttpRequestBuilderTest {
 
     }
 
+    @Test
+    @Ignore
+    public void testHEAD() throws Exception {
+
+        String url = "http://t.co/s8FdCa0tq6";
+        //String url = "http://cnn.com";
+
+        HttpRequest httpRequest = httpRequestBuilder
+                                .head(url)
+                                .withFollowContentRedirects(false)
+                                .withFollowRedirects(false)
+                                .withUserAgent("curl")
+                                .withProxy(ProxyReferences.create("http://localhost:8081"))
+                                .execute()
+                                .connect();
+
+        //assertEquals("", httpRequest.getContentWithEncoding());
+        assertNull(httpRequest.getResponseHeader("Location"));
+        //assertEquals("", httpRequest.getResourceFromRedirect());
+
+        System.out.printf("%s\n", httpRequest.getResponseHeaderNames());
+
+        System.out.printf("resourceFromRedirect: %s\n", httpRequest.getResourceFromRedirect());
+
+    }
+
+    @Test
+    @Ignore
+    public void testGETWithoutData() throws Exception {
+
+//        String url = "http://t.co/s8FdCa0tq6";
+//        //String url = "http://cnn.com";
+//
+//        HttpRequest httpRequest = httpRequestBuilder
+//                                    .head(url)
+//                                    .withFollowContentRedirects(false)
+//                                    .withFollowRedirects(false)
+//                                    .withUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36")
+//                                    .withProxy(ProxyReferences.create("http://localhost:8081"))
+//                                    .execute()
+//                                    .connect();
+//
+//        //assertEquals("", httpRequest.getContentWithEncoding());
+//        assertNull(httpRequest.getResponseHeader("Location"));
+//        //assertEquals("", httpRequest.getResourceFromRedirect());
+//
+//        System.out.printf("%s\n", httpRequest.getResponseHeaderNames());
+//
+//        System.out.printf("resourceFromRedirect: %s\n", httpRequest.getResourceFromRedirect());
+//
+
+        //String link = "https://t.co/s8FdCa0tq6";
+        String link = "http://t.co/o13p5fPNDg";
+        // https://t.co/o13p5fPNDg
+
+
+        URL url = new URL(link);
+
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8081));
+
+        HttpURLConnection myURLConnection = (HttpURLConnection)url.openConnection(proxy);
+        //HttpURLConnection myURLConnection = (HttpURLConnection)url.openConnection();
+        myURLConnection.setRequestMethod("GET");
+        myURLConnection.setUseCaches(false);
+        //myURLConnection.setDoInput(false);
+        //myURLConnection.setDoOutput(false);
+        myURLConnection.setInstanceFollowRedirects(true);
+        myURLConnection.setChunkedStreamingMode(1024);
+        myURLConnection.connect();
+        InputStream inputStream = myURLConnection.getInputStream();
+        System.out.printf("%s\n", inputStream.getClass().getName());
+        //assertEquals(301, myURLConnection.getResponseCode());
+
+        // we read 12k here.. thats horrible..
+        System.out.printf("available: %s\n", inputStream.available() );
+
+        //assertEquals("http://ofa.bo/2cZAI0q", myURLConnection.getHeaderField("Location"));
+
+        //assertEquals("", myURLConnection.get);
+
+        //sun.net.www.protocol.http.HttpURLConnection$HttpInputStream
+
+    }
+
+
+    @Test
+    @Ignore
+    public void testHEADDirectly() throws Exception {
+
+        String link = "http://t.co/s8FdCa0tq6";
+
+        URL url = new URL(link);
+
+        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 8081));
+
+        HttpURLConnection myURLConnection = (HttpURLConnection)url.openConnection(proxy);
+        //HttpURLConnection myURLConnection = (HttpURLConnection)url.openConnection();
+        myURLConnection.setRequestMethod("HEAD");
+        myURLConnection.setUseCaches(false);
+        myURLConnection.setChunkedStreamingMode(1024);
+        //myURLConnection.setDoInput(false);
+        //myURLConnection.setDoOutput(false);
+        myURLConnection.setInstanceFollowRedirects(false);
+        myURLConnection.connect();
+        myURLConnection.getInputStream();
+        assertEquals(301, myURLConnection.getResponseCode());
+        assertEquals("http://ofa.bo/2cZAI0q", myURLConnection.getHeaderField("Location"));
+
+    }
+
+
+    @Test
+    @Ignore
+    public void testRequestWithNoDataReads() throws Exception {
+
+        String url = "http://www.cnn.com";
+
+        HttpRequest httpRequest = httpRequestBuilder
+                                    .get(url)
+                                    .withProxy(ProxyReferences.create("http://localhost:8081"))
+                                    .execute()
+                                    .connect();
+
+        //assertEquals("", httpRequest.getContentWithEncoding());
+        //assertNull(httpRequest.getResponseHeader("Location"));
+        //assertEquals("", httpRequest.getResourceFromRedirect());
+
+        //System.out.printf("%s\n", httpRequest.getResponseHeaderNames());
+
+        //System.out.printf("resourceFromRedirect: %s\n", httpRequest.getResourceFromRedirect());
+
+    }
+
+
+
     @Test(expected = NetworkException.class)
     public void testNotFound() throws Exception {
 
@@ -453,3 +594,4 @@ public class DefaultHttpRequestBuilderTest {
     }
 
 }
+

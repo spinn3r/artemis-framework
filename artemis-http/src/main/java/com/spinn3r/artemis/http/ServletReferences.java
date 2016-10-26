@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.http;
 
+import com.google.inject.Singleton;
 import org.eclipse.jetty.servlet.ServletHolder;
 
 import javax.servlet.Servlet;
@@ -8,6 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  *
  */
+@Singleton
 public class ServletReferences extends CopyOnWriteArrayList<ServletReference> {
 
     private ServletReferences(ServletReference... servletReferences) {

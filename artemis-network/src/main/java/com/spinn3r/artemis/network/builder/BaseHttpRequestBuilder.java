@@ -5,13 +5,12 @@ import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.proxies.PrioritizedProxyReference;
-import com.spinn3r.artemis.network.builder.proxies.Proxies;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.log5j.Logger;
 
-import java.net.Proxy;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +68,7 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
 
         checkNotNull( type );
 
-        ProxyReference proxyReference = Proxies.create(type, host, port);
+        ProxyReference proxyReference = ProxyReferences.create(type, host, port);
 
         log.info( "Now using proxy type %s on %s:%s", type, host, port );
 
@@ -80,7 +79,7 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
     @Override
     public HttpRequestBuilder withProxy(String proxy) {
 
-        withProxy( Proxies.create( proxy ) );
+        withProxy(ProxyReferences.create(proxy ) );
         return this;
 
     }
