@@ -72,6 +72,7 @@ public class HttpRequestExecutor {
 
         }
 
+        log.warn("Throwing non transient exception %s", cause);
         throw cause;
 
     }
