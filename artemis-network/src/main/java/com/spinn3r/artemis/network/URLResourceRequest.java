@@ -4,6 +4,7 @@ package com.spinn3r.artemis.network;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 
 import java.io.*;
@@ -359,11 +360,13 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             }
 
             //perform cookie setting... DONE
+            /*
             Map<String, String> cookies = getCookies();
             if(cookies != null && !cookies.isEmpty()) {
                 _urlConnection.setRequestProperty( COOKIE , CookiesEncoder.encode(cookies) );
             }
-
+            */
+            
             if ( _urlConnection instanceof HttpURLConnection ) {
 
                 HttpURLConnection httpURLConn = (HttpURLConnection)_urlConnection;

@@ -64,6 +64,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         networkConfig.setCookieManagerEnabled(true);
 
+        threadLocalCookies.flush();
     }
 
     @Test
@@ -276,8 +277,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         String url = String.format( "http://localhost:%s/request-meta", webserverPort.getPort() );
 
-        HttpRequest httpRequest
-          = httpRequestBuilder
+        HttpRequest httpRequest = httpRequestBuilder
               .get(url)
               .withCookie("foo", "bar")
               .execute()
