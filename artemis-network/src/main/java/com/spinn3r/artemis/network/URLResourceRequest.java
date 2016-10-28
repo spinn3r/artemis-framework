@@ -4,10 +4,8 @@ package com.spinn3r.artemis.network;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
-import java.net.HttpURLConnection;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;

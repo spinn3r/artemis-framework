@@ -82,6 +82,7 @@ public class DefaultHttpRequestBuilderTest {
     }
 
     @Test
+    @Ignore
     public void testBrokenCookies() throws Exception {
 
         String link = "http://www.elitesecurity.org/p3681726";
