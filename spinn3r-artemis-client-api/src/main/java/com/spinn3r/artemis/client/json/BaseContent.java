@@ -121,6 +121,11 @@ public abstract class BaseContent
          */
         TWITTER_TASK( 6 ) ,
 
+        /**
+         * Content indexed by the webcache task.
+         */
+        WEBCACHE_TASK( 7 ) ,
+
         ;
 
         IndexMethod( int value ) {
@@ -155,6 +160,9 @@ public abstract class BaseContent
                 case 6:
                     return TWITTER_TASK;
 
+                case 7:
+                    return WEBCACHE_TASK;
+
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -182,6 +190,9 @@ public abstract class BaseContent
 
                 case "TWITTER_TASK":
                     return TWITTER_TASK;
+
+                case "WEBCACHE_TASK":
+                    return WEBCACHE_TASK;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
