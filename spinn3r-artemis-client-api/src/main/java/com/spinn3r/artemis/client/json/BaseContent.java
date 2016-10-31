@@ -121,11 +121,6 @@ public abstract class BaseContent
          */
         TWITTER_TASK( 6 ) ,
 
-        /**
-         * Content indexed by the webcache task.
-         */
-        WEBCACHE_TASK( 7 ) ,
-
         ;
 
         IndexMethod( int value ) {
@@ -160,9 +155,6 @@ public abstract class BaseContent
                 case 6:
                     return TWITTER_TASK;
 
-                case 7:
-                    return WEBCACHE_TASK;
-
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -190,9 +182,6 @@ public abstract class BaseContent
 
                 case "TWITTER_TASK":
                     return TWITTER_TASK;
-
-                case "WEBCACHE_TASK":
-                    return WEBCACHE_TASK;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
@@ -317,11 +306,6 @@ public abstract class BaseContent
          */
         PHOTO( 610000 ) ,
 
-        /**
-         * Regular website content.
-         */
-        WEBSITE( 620000 ) ,
-
         ;
 
         SourcePublisherType( int value ) {
@@ -371,9 +355,6 @@ public abstract class BaseContent
                 case 610000:
                     return PHOTO;
 
-                case 620000:
-                    return WEBSITE;
-
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -416,9 +397,6 @@ public abstract class BaseContent
 
                 case "PHOTO":
                     return PHOTO;
-
-                case "WEBSITE":
-                    return WEBSITE;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
@@ -3737,6 +3715,22 @@ public abstract class BaseContent
     public boolean hasDefinedMetadataUpdates = false;
 
     protected int metadataUpdates;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasPinned = 0;
+
+    public int hasModifiedPinned = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedPinned = false;
+
+    protected boolean pinned;
 
     // **** methods for this POJO
 
@@ -16854,6 +16848,88 @@ public abstract class BaseContent
         return this.hasDefinedMetadataUpdates;
     }
 
+    public BaseContent setPinned ( boolean pinned ) {
+
+        ++this.hasPinned;
+        ++this.hasModifiedPinned;
+
+        this.pinned = pinned;
+
+        hasDefinedPinned = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * True when when the user has pinned this content to their profile effectively locking the post in place.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: pinned
+     * </p>
+     */
+    public boolean getPinned() {
+
+        if ( this.constructed == false && this.hasPinned == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.pinned" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.pinned;
+    }
+
+    /**
+     * <p>
+     * True when when the user has pinned this content to their profile effectively locking the post in place.
+     * </p>
+     *
+     * <p>
+     * Schema type: boolean , name: pinned
+     * </p>
+     */
+    public Optional<Boolean> getPinnedAsOptional() {
+
+        if ( this.constructed == false && this.hasPinned == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.pinned );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasPinned () {
+        return this.hasPinned > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearPinned () {
+        this.hasPinned = 0;
+        this.hasModifiedPinned = 0;
+        this.hasDefinedPinned = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedPinned () {
+        return this.hasModifiedPinned > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedPinned () {
+        return this.hasDefinedPinned;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -17489,6 +17565,10 @@ public abstract class BaseContent
 
         if ( obj.hasMetadataUpdates() ) {
             setMetadataUpdates( obj.getMetadataUpdates() );
+        }
+
+        if ( obj.hasPinned() ) {
+            setPinned( obj.getPinned() );
         }
 
     }
@@ -18506,6 +18586,10 @@ public abstract class BaseContent
             setMetadataUpdates( obj.getMetadataUpdates() );
         }
 
+        if ( ! hasPinned() && obj.hasPinned() ) {
+            setPinned( obj.getPinned() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -18826,6 +18910,8 @@ public abstract class BaseContent
         this.hasModifiedShares = 0;
 
         this.hasModifiedMetadataUpdates = 0;
+
+        this.hasModifiedPinned = 0;
 
     }
 
@@ -19463,6 +19549,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedMetadataUpdates() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedPinned() ) {
             return true;
         }
 
@@ -20800,6 +20890,14 @@ public abstract class BaseContent
 
             buff.append( "metadataUpdates=" );
             buff.append( metadataUpdates );
+            buff.append( " " );
+
+        }
+
+        if ( hasPinned > 0 ) {
+
+            buff.append( "pinned=" );
+            buff.append( pinned );
             buff.append( " " );
 
         }
@@ -22236,6 +22334,15 @@ public abstract class BaseContent
         }
 
         if ( metadataUpdates != cmp.metadataUpdates ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasPinned() != cmp.hasPinned() ) {
+            return false;
+        }
+
+        if ( pinned != cmp.pinned ) {
             return false;
         }
 
@@ -24898,6 +25005,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member pinned from boolean
+
+            __name = "pinned";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "pinned";
+            }
+
+            if ( this.hasPinned > 0 ) {
+
+                if ( hasDefinedPinned )
+                    generator.writeBooleanField( __name, pinned );
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -26547,6 +26669,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setMetadataUpdates( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member pinned from boolean
+
+                case "pinned":
+
+                    jParser.nextToken();
+                    setPinned( jParser.getBooleanValue() );
 
                     break;
 
