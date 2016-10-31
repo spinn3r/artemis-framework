@@ -317,6 +317,11 @@ public abstract class BaseContent
          */
         PHOTO( 610000 ) ,
 
+        /**
+         * Regular website content.
+         */
+        WEBSITE( 620000 ) ,
+
         ;
 
         SourcePublisherType( int value ) {
@@ -366,6 +371,9 @@ public abstract class BaseContent
                 case 610000:
                     return PHOTO;
 
+                case 620000:
+                    return WEBSITE;
+
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -408,6 +416,9 @@ public abstract class BaseContent
 
                 case "PHOTO":
                     return PHOTO;
+
+                case "WEBSITE":
+                    return WEBSITE;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
