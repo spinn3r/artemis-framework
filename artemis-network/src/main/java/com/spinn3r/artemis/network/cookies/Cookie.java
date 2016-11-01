@@ -13,10 +13,15 @@ import static com.google.common.base.Preconditions.*;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cookie {
+    
+    // RFC version
+    public static final int DEFAULT_VERSION = 1;
 
     private String name;
 
     private String value;
+    
+    private int version;
 
     private Optional<String> path;
 
@@ -29,11 +34,12 @@ public class Cookie {
     private Optional<Long> maxAge;
 
     public Cookie(String name, String value) {
-        this(name, value, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+        this(name, value, DEFAULT_VERSION, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
     }
 
     public Cookie(String name,
                   String value,
+                  int version,
                   Optional<String> path,
                   Optional<String> domain,
                   boolean httpOnly,
@@ -48,6 +54,7 @@ public class Cookie {
 
         this.name = name;
         this.value = value;
+        this.version = version;
         this.path = path;
         this.domain = domain;
         this.httpOnly = httpOnly;
@@ -57,11 +64,13 @@ public class Cookie {
 
     public Cookie( @JsonProperty("name") String name,
                    @JsonProperty("value") String value,
+                   @JsonProperty("version") int version,
                    @JsonProperty("path") String path,
                    @JsonProperty("domain") String domain,
                    @JsonProperty("httpOnly") boolean httpOnly) {
         this.name = name;
         this.value = value;
+        this.version = version;
         this.path = Optional.ofNullable(path);
         this.domain = Optional.ofNullable(domain);
         this.httpOnly = httpOnly;
@@ -73,6 +82,10 @@ public class Cookie {
 
     public String getValue() {
         return value;
+    }
+
+    public int getVersion() {
+        return version;
     }
 
     /**
@@ -150,7 +163,7 @@ public class Cookie {
     public HttpCookie toHttpCookie() {
 
         HttpCookie httpCookie = new HttpCookie(getName(), getValue());
-
+        httpCookie.setVersion(version);
         path.ifPresent(httpCookie::setPath);
         domain.ifPresent(httpCookie::setDomain);
         maxAge.ifPresent(httpCookie::setMaxAge);
@@ -166,6 +179,7 @@ public class Cookie {
         return "Cookie{" +
                  "name='" + name + '\'' +
                  ", value='" + value + '\'' +
+                 ", version='" + version + '\'' +
                  ", path=" + path +
                  ", domain=" + domain +
                  ", httpOnly=" + httpOnly +
@@ -179,6 +193,8 @@ public class Cookie {
         private String name;
 
         private String value;
+        
+        private int version = DEFAULT_VERSION;
 
         private Optional<String> path = Optional.of("/");
 
@@ -202,6 +218,11 @@ public class Cookie {
 
         public Builder setValue(String value) {
             this.value = value;
+            return this;
+        }
+        
+        public Builder setVersion(int version) {
+            this.version = version;
             return this;
         }
 
@@ -241,7 +262,7 @@ public class Cookie {
         }
 
         public Cookie build() {
-            return new Cookie(name, value, path, domain, httpOnly, secure, maxAge);
+            return new Cookie(name, value, version, path, domain, httpOnly, secure, maxAge);
         }
 
     }

@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
+import com.spinn3r.artemis.network.cookies.Cookie;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,7 +35,7 @@ public class DefaultContentFetcher implements ContentFetcher {
     }
 
     @Override
-    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders, List<Cookie> cookies) throws NetworkException {
         return httpRequestBuilder.get( link )
                  .withRequestHeaders( requestHeaders )
                  .withCookies( cookies )

@@ -47,6 +47,7 @@ public class ThreadLocalCookies {
 
             Cookie cookie = new Cookie(httpCookie.getName(),
                                        httpCookie.getValue(),
+                                       httpCookie.getVersion(),
                                        Optional.ofNullable( httpCookie.getPath()),
                                        Optional.ofNullable(httpCookie.getDomain()),
                                        ! httpCookie.getSecure(),

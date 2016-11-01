@@ -1,23 +1,34 @@
 package com.spinn3r.artemis.corpus.network.test;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaCache;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.json.JSON;
 import com.spinn3r.artemis.network.NetworkException;
-import com.spinn3r.artemis.network.builder.*;
+import com.spinn3r.artemis.network.builder.DefaultDirectHttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.DefaultHttpRequestMeta;
+import com.spinn3r.artemis.network.builder.DefaultHttpResponseMeta;
+import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
+import com.spinn3r.artemis.network.builder.HttpRequest;
+import com.spinn3r.artemis.network.builder.HttpRequestMeta;
+import com.spinn3r.artemis.network.builder.HttpResponseMeta;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
+import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.Cookies;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
-
-import java.io.IOException;
-import java.util.Map;
-
-import static com.google.common.base.Preconditions.*;
 
 /**
  *
@@ -25,6 +36,8 @@ import static com.google.common.base.Preconditions.*;
 public class NetworkCorporaCache implements ContentFetcher {
 
     private static final ImmutableMap<String,String> EMPTY_MAP = ImmutableMap.copyOf( Maps.newHashMap() );
+    
+    private static final List<Cookie> EMPTY_COOKIES = ImmutableList.copyOf( Lists.newArrayList() );
 
     private static final String UPDATE_MODE_PROPERTY_NAME = "network-corpora-cache.update_mode";
 
@@ -53,30 +66,30 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     @Override
     public String fetch( String link ) throws NetworkException {
-        return fetch( link, EMPTY_MAP, EMPTY_MAP );
+        return fetch( link, EMPTY_MAP, EMPTY_COOKIES );
     }
 
     @Override
     public String fetch(String link, ImmutableMap<String, String> requestHeaders) throws NetworkException {
-        return fetch( link, requestHeaders, EMPTY_MAP );
+        return fetch( link, requestHeaders, EMPTY_COOKIES );
     }
 
     @Override
-    public String fetch(String link, ImmutableMap<String, String> requestHeaders, ImmutableMap<String, String> cookies) throws NetworkException {
+    public String fetch(String link, ImmutableMap<String, String> requestHeaders, List<Cookie> cookies) throws NetworkException {
         return fetchCachedContent( HttpMethod.GET, link, requestHeaders, cookies, null, null, null ).getContent();
     }
 
     public CachedContent fetchCachedContent( HttpMethod httpMethod,
                                              String link,
                                              ImmutableMap<String, String> requestHeaders,
-                                             ImmutableMap<String, String> cookies,
+                                             List<Cookie> cookies,
                                              String outputContent,
                                              String outputContentEncoding,
                                              String outputContentType ) throws NetworkException {
 
         checkNotNull( link, "link" );
 
-        String key = computeKey( httpMethod, link, requestHeaders, cookies, outputContent, outputContentEncoding, outputContentType );
+        String key = computeKey( httpMethod, link, requestHeaders, Cookies.toMap(cookies), outputContent, outputContentEncoding, outputContentType );
 
         // the key here is raw... so we can add a suffix to include the metadata
         // we want to include.. .
