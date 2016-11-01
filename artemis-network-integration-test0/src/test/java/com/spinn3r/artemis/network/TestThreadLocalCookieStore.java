@@ -86,7 +86,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+        assertEquals("[Cookie{name='name', value='test1', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
                      httpRequest.getEffectiveCookies().toString());
 
     }
@@ -103,7 +103,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+        assertEquals("[Cookie{name='name', value='test1', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
                      httpRequest.getEffectiveCookies().toString());
 
     }
@@ -120,7 +120,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
         HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
 
-        assertEquals("[Cookie{name='name', value='test1', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+        assertEquals("[Cookie{name='name', value='test1', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
                      httpRequest.getEffectiveCookies().toString());
 
         assertEquals("[]", threadLocalCookies.getCookies().toString());
@@ -149,8 +149,8 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         HttpRequest httpRequest = httpRequestBuilder.get(url).execute().connect();
 
 
-        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
-                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+        assertEquals("Cookie{name='foo', value='bar', version='0', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
                      CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
@@ -176,7 +176,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
               //.withProxy("http://localhost:8080")
               .get(firstURL).execute().connect();
 
-        assertEquals("[Cookie{name='name', value='test2', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+        assertEquals("[Cookie{name='name', value='test2', version='0', path=Optional[/], domain=Optional[httpbin.org], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
                      httpRequest.getEffectiveCookies().toString());
 
     }
@@ -203,7 +203,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
               //.withProxy("http://localhost:8080")
               .get(url).execute().connect();
 
-        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
+        assertEquals("[Cookie{name='foo', value='bar', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}]",
                      httpRequest.getEffectiveCookies().toString());
 
 
@@ -235,7 +235,7 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
 
 
 
-        assertEquals("[Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[2147xxxx]}]",
+        assertEquals("[Cookie{name='foo', value='bar', version='0', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[2147xxxx]}]",
                      httpRequest.getEffectiveCookies().toString().replaceAll("maxAge=Optional\\[2147[0-9]+\\]", "maxAge=Optional[2147xxxx]"));
 
     }
@@ -266,8 +266,8 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
               .execute()
               .connect();
 
-        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
-                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+        assertEquals("Cookie{name='foo', value='bar', version='0', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
                      CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
@@ -349,9 +349,9 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
               .execute()
               .connect();
 
-        assertEquals("Cookie{name='foo', value='bar', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
-                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[example.org], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
-                       "Cookie{name='cat', value='dog', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
+        assertEquals("Cookie{name='foo', value='bar', version='1', path=Optional[/], domain=Optional[localhost.localdomain], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', version='1', path=Optional[/], domain=Optional[example.org], httpOnly=true, secure=false, maxAge=Optional[-1]}\n" +
+                       "Cookie{name='cat', value='dog', version='0', path=Optional[/], domain=Optional[localhost.local], httpOnly=true, secure=false, maxAge=Optional[-1]}\n",
                      CollectionFormatter.table(httpRequest.getEffectiveCookies()));
 
     }
