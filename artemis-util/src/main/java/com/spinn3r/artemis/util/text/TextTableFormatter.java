@@ -115,6 +115,18 @@ public class TextTableFormatter {
         return result;
     }
 
+    public static TextTableFormatter6 forHeadings(String col0, String col1, String col2, String col3, String col4, String col5) {
+        TextTableFormatter6 result = new TextTableFormatter6();
+        result.headings(col0, col1, col2, col3, col4, col5);
+        return result;
+    }
+
+    public static TextTableFormatter7 forHeadings(String col0, String col1, String col2, String col3, String col4, String col5, String col6) {
+        TextTableFormatter7 result = new TextTableFormatter7();
+        result.headings(col0, col1, col2, col3, col4, col5, col6);
+        return result;
+    }
+
     public static class TextTableFormatter1 extends TextTableFormatter {
 
         public TextTableFormatter1 row(Object col0) {
@@ -155,6 +167,24 @@ public class TextTableFormatter {
 
         public TextTableFormatter5 row(Object col0, Object col1, Object col2, Object col3, Object col4) {
             table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString()));
+            return this;
+        }
+
+    }
+
+    public static class TextTableFormatter6 extends TextTableFormatter {
+
+        public TextTableFormatter6 row(Object col0, Object col1, Object col2, Object col3, Object col4, Object col5) {
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString(), col5.toString()));
+            return this;
+        }
+
+    }
+
+    public static class TextTableFormatter7 extends TextTableFormatter {
+
+        public TextTableFormatter7 row(Object col0, Object col1, Object col2, Object col3, Object col4, Object col5, Object col6) {
+            table.addRow(ImmutableList.of(col0.toString(), col1.toString(), col2.toString(), col3.toString(), col4.toString(), col5.toString(), col6.toString()));
             return this;
         }
 
