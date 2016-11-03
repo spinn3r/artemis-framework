@@ -63,18 +63,10 @@ public class Stat<T> {
      */
     public void incr( T value, long delta ) {
 
-        if ( delta == 0 ) {
-
-            // no work to do.  technically this is incorrect and we shouldn't
-            // attempt to increment the value but if the delta is the result of
-            // some sum or product of values then it would equal zero and we
-            // would need to have bounds checking everywhere.  So while this is
-            // somewhat incorrect to call with zero it shouldn't harm anything
-            // by making this a no op.
-
-            return;
-
-        }
+        // NOTE: in the past we didn't increment on zero but this is incorrect
+        // due to our shared use of gauges and accuracy metrics..  If an accuracy
+        // value emits zero, we need to record this as this is a BIG error and
+        // not recording zero would mean some of our alerting would fail
 
         if ( delta < 0 ) {
             throw new IllegalArgumentException( "Value must not be negative " + delta );
