@@ -52,7 +52,7 @@ public class CachedHttpRequestMethod extends BaseHttpRequestMethod implements Ht
             .fetchCachedContent( httpMethod,
                                  resource,
                                  ImmutableMap.copyOf( requestHeaders ),
-                                 Cookies.toMap(cookies),
+                                 cookies,
                                  outputContent,
                                  outputContentEncoding,
                                  outputContentType);

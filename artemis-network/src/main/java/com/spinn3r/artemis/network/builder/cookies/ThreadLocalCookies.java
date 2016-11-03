@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.spinn3r.artemis.network.cookies.Cookie;
+import com.spinn3r.artemis.network.cookies.CookieVersion;
 
 import java.net.CookieStore;
 import java.net.HttpCookie;
@@ -47,6 +48,7 @@ public class ThreadLocalCookies {
 
             Cookie cookie = new Cookie(httpCookie.getName(),
                                        httpCookie.getValue(),
+                                       CookieVersion.fromVersion(httpCookie.getVersion()),
                                        Optional.ofNullable( httpCookie.getPath()),
                                        Optional.ofNullable(httpCookie.getDomain()),
                                        ! httpCookie.getSecure(),

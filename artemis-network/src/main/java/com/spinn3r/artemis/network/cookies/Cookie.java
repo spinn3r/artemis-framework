@@ -17,6 +17,8 @@ public class Cookie {
     private String name;
 
     private String value;
+    
+    private CookieVersion version;
 
     private Optional<String> path;
 
@@ -29,11 +31,12 @@ public class Cookie {
     private Optional<Long> maxAge;
 
     public Cookie(String name, String value) {
-        this(name, value, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+        this(name, value, CookieVersion.DEFAULT, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
     }
 
     public Cookie(String name,
                   String value,
+                  CookieVersion version,
                   Optional<String> path,
                   Optional<String> domain,
                   boolean httpOnly,
@@ -48,6 +51,7 @@ public class Cookie {
 
         this.name = name;
         this.value = value;
+        this.version = version;
         this.path = path;
         this.domain = domain;
         this.httpOnly = httpOnly;
@@ -57,11 +61,13 @@ public class Cookie {
 
     public Cookie( @JsonProperty("name") String name,
                    @JsonProperty("value") String value,
+                   @JsonProperty("version") CookieVersion version,
                    @JsonProperty("path") String path,
                    @JsonProperty("domain") String domain,
                    @JsonProperty("httpOnly") boolean httpOnly) {
         this.name = name;
         this.value = value;
+        this.version = version;
         this.path = Optional.ofNullable(path);
         this.domain = Optional.ofNullable(domain);
         this.httpOnly = httpOnly;
@@ -73,6 +79,10 @@ public class Cookie {
 
     public String getValue() {
         return value;
+    }
+
+    public CookieVersion getVersion() {
+        return version;
     }
 
     /**
@@ -150,7 +160,7 @@ public class Cookie {
     public HttpCookie toHttpCookie() {
 
         HttpCookie httpCookie = new HttpCookie(getName(), getValue());
-
+        httpCookie.setVersion(version == null ? CookieVersion.DEFAULT.ordinal() : version.ordinal());
         path.ifPresent(httpCookie::setPath);
         domain.ifPresent(httpCookie::setDomain);
         maxAge.ifPresent(httpCookie::setMaxAge);
@@ -166,6 +176,7 @@ public class Cookie {
         return "Cookie{" +
                  "name='" + name + '\'' +
                  ", value='" + value + '\'' +
+                 ", version='" + version + '\'' +
                  ", path=" + path +
                  ", domain=" + domain +
                  ", httpOnly=" + httpOnly +
@@ -179,6 +190,8 @@ public class Cookie {
         private String name;
 
         private String value;
+        
+        private CookieVersion version = CookieVersion.DEFAULT;
 
         private Optional<String> path = Optional.of("/");
 
@@ -202,6 +215,11 @@ public class Cookie {
 
         public Builder setValue(String value) {
             this.value = value;
+            return this;
+        }
+        
+        public Builder setVersion(CookieVersion version) {
+            this.version = version;
             return this;
         }
 
@@ -241,7 +259,7 @@ public class Cookie {
         }
 
         public Cookie build() {
-            return new Cookie(name, value, path, domain, httpOnly, secure, maxAge);
+            return new Cookie(name, value, version, path, domain, httpOnly, secure, maxAge);
         }
 
     }

@@ -4,6 +4,7 @@ package com.spinn3r.artemis.network;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
+import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 
 import java.io.*;
@@ -35,6 +36,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     private static final String CONTENT_LENGTH = "Content-Length";
 
     private static final String HTTP_MAX_REDIRECTS = "http.maxRedirects";
+    
+    private static final String COOKIE = "Cookie";
 
     private static Logger log = Logger.getLogger();
 
@@ -356,8 +359,14 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             }
 
-            //perform cookie setting...
-
+            //perform cookie setting... DONE
+            /*
+            Map<String, String> cookies = getCookies();
+            if(cookies != null && !cookies.isEmpty()) {
+                _urlConnection.setRequestProperty( COOKIE , CookiesEncoder.encode(cookies) );
+            }
+            */
+            
             if ( _urlConnection instanceof HttpURLConnection ) {
 
                 HttpURLConnection httpURLConn = (HttpURLConnection)_urlConnection;
