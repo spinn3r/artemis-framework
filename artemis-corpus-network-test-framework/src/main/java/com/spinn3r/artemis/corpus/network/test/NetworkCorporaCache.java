@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaCache;
@@ -35,9 +34,9 @@ import com.spinn3r.artemis.util.misc.Base64;
  */
 public class NetworkCorporaCache implements ContentFetcher {
 
-    private static final ImmutableMap<String,String> EMPTY_MAP = ImmutableMap.copyOf( Maps.newHashMap() );
+    private static final ImmutableMap<String,String> EMPTY_MAP = ImmutableMap.of();
     
-    private static final List<Cookie> EMPTY_COOKIES = ImmutableList.copyOf( Lists.newArrayList() );
+    private static final List<Cookie> EMPTY_COOKIES = ImmutableList.of();
 
     private static final String UPDATE_MODE_PROPERTY_NAME = "network-corpora-cache.update_mode";
 

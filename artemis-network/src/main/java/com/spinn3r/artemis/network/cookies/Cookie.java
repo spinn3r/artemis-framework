@@ -31,7 +31,7 @@ public class Cookie {
     private Optional<Long> maxAge;
 
     public Cookie(String name, String value) {
-        this(name, value, CookieVersion.getDefault(), Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+        this(name, value, CookieVersion.DEFAULT, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
     }
 
     public Cookie(String name,
@@ -160,7 +160,7 @@ public class Cookie {
     public HttpCookie toHttpCookie() {
 
         HttpCookie httpCookie = new HttpCookie(getName(), getValue());
-        httpCookie.setVersion(version == null ? CookieVersion.getDefault().ordinal() : version.ordinal());
+        httpCookie.setVersion(version == null ? CookieVersion.DEFAULT.ordinal() : version.ordinal());
         path.ifPresent(httpCookie::setPath);
         domain.ifPresent(httpCookie::setDomain);
         maxAge.ifPresent(httpCookie::setMaxAge);
@@ -191,7 +191,7 @@ public class Cookie {
 
         private String value;
         
-        private CookieVersion version = CookieVersion.getDefault();
+        private CookieVersion version = CookieVersion.DEFAULT;
 
         private Optional<String> path = Optional.of("/");
 
