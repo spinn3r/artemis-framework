@@ -27,16 +27,16 @@ public class CookiesTest {
 
         ImmutableMap<String, Cookie> cookies = Cookies.fromSetCookiesList(setCookies );
 
-        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', version='1', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='csrftoken', value='201a762b9af5f6d96f08edbf7342263a', version='VERSION_1_RFC2965', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
                       cookies.get( "csrftoken" ).toString() );
 
-        assertEquals( "Cookie{name='target_sig', value='', version='1', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='target_sig', value='', version='VERSION_1_RFC2965', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
                       cookies.get( "target_sig" ).toString() );
 
-        assertEquals( "Cookie{name='target', value='', version='1', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='target', value='', version='VERSION_1_RFC2965', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
                       cookies.get( "target" ).toString() );
 
-        assertEquals( "Cookie{name='mid', value='VnBmeQAEAAHoKkHWDef1Ex8tvA2w', version='1', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='mid', value='VnBmeQAEAAHoKkHWDef1Ex8tvA2w', version='VERSION_1_RFC2965', path=Optional[/], domain=Optional.empty, httpOnly=false, secure=false, maxAge=Optional.empty}",
                       cookies.get( "mid" ).toString() );
 
     }

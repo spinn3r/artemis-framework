@@ -13,15 +13,12 @@ import static com.google.common.base.Preconditions.*;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cookie {
-    
-    // RFC version
-    public static final int DEFAULT_VERSION = 1;
 
     private String name;
 
     private String value;
     
-    private int version;
+    private CookieVersion version;
 
     private Optional<String> path;
 
@@ -34,12 +31,12 @@ public class Cookie {
     private Optional<Long> maxAge;
 
     public Cookie(String name, String value) {
-        this(name, value, DEFAULT_VERSION, Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
+        this(name, value, CookieVersion.getDefault(), Optional.of("/"), Optional.empty(), false, false, Optional.empty() );
     }
 
     public Cookie(String name,
                   String value,
-                  int version,
+                  CookieVersion version,
                   Optional<String> path,
                   Optional<String> domain,
                   boolean httpOnly,
@@ -64,7 +61,7 @@ public class Cookie {
 
     public Cookie( @JsonProperty("name") String name,
                    @JsonProperty("value") String value,
-                   @JsonProperty("version") int version,
+                   @JsonProperty("version") CookieVersion version,
                    @JsonProperty("path") String path,
                    @JsonProperty("domain") String domain,
                    @JsonProperty("httpOnly") boolean httpOnly) {
@@ -84,7 +81,7 @@ public class Cookie {
         return value;
     }
 
-    public int getVersion() {
+    public CookieVersion getVersion() {
         return version;
     }
 
@@ -163,7 +160,7 @@ public class Cookie {
     public HttpCookie toHttpCookie() {
 
         HttpCookie httpCookie = new HttpCookie(getName(), getValue());
-        httpCookie.setVersion(version);
+        httpCookie.setVersion(version == null ? CookieVersion.getDefault().ordinal() : version.ordinal());
         path.ifPresent(httpCookie::setPath);
         domain.ifPresent(httpCookie::setDomain);
         maxAge.ifPresent(httpCookie::setMaxAge);
@@ -194,7 +191,7 @@ public class Cookie {
 
         private String value;
         
-        private int version = DEFAULT_VERSION;
+        private CookieVersion version = CookieVersion.getDefault();
 
         private Optional<String> path = Optional.of("/");
 
@@ -221,7 +218,7 @@ public class Cookie {
             return this;
         }
         
-        public Builder setVersion(int version) {
+        public Builder setVersion(CookieVersion version) {
             this.version = version;
             return this;
         }

@@ -15,7 +15,7 @@ public class CookieDecoderTest {
         Cookie cookie = CookieDecoder.decode("YSC=fNc9hMYIAEo; path=/; domain=.youtube.com; httponly" );
 
         assertNotNull( cookie );
-        assertEquals( "Cookie{name='YSC', value='fNc9hMYIAEo', version='1', path=Optional[/], domain=Optional[.youtube.com], httpOnly=true, secure=false, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='YSC', value='fNc9hMYIAEo', version='VERSION_1_RFC2965', path=Optional[/], domain=Optional[.youtube.com], httpOnly=true, secure=false, maxAge=Optional.empty}",
                       cookie.toString() );
 
     }
@@ -26,7 +26,7 @@ public class CookieDecoderTest {
         Cookie cookie = CookieDecoder.decode("foo=bar; expires=DATE; path=.; domain=example.com; secure" );
         assertNotNull( cookie );
 
-        assertEquals( "Cookie{name='foo', value='bar', version='1', path=Optional[.], domain=Optional[example.com], httpOnly=false, secure=true, maxAge=Optional.empty}",
+        assertEquals( "Cookie{name='foo', value='bar', version='VERSION_1_RFC2965', path=Optional[.], domain=Optional[example.com], httpOnly=false, secure=true, maxAge=Optional.empty}",
                       cookie.toString() );
 
     }
