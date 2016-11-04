@@ -8,15 +8,11 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.json.JSON;
+import com.spinn3r.artemis.util.text.UnicodeURLEncoder;
 
-import javax.xml.ws.Response;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 /**
  *
@@ -177,11 +173,7 @@ public class ResponseDescriptor {
     }
 
     public String toParam() {
-        try {
-            return URLEncoder.encode(toJSONRecord(), Charsets.UTF_8.name());
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
+        return UnicodeURLEncoder.encode(toJSONRecord());
     }
 
     public static ResponseDescriptor parse(String content) {
