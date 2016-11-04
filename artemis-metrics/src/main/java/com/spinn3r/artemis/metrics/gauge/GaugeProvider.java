@@ -19,11 +19,11 @@ public interface GaugeProvider<T> extends TagsProvider<T> {
      * well as a key.
      *
      */
-    public String getKey( T value );
+    String getKey( T value );
 
     /**
      * Get the value for the gauge from the given object.
      */
-    public long getValue( T value );
+    long getValue( T value );
 
 }
