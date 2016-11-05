@@ -55,7 +55,7 @@ public class Cookies {
 
         for (String setCookie : setCookies) {
 
-            Cookie cookie = CookieDecoder.decode( setCookie );
+            Cookie cookie = CookieDecoder.decodeSingleResponseCookie(setCookie );
 
             if ( cookie == null )
                 continue;
