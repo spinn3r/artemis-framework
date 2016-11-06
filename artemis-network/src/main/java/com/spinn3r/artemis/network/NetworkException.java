@@ -19,9 +19,7 @@ public class NetworkException extends IOException {
 
     private ResourceRequest request = null;
 
-    public Exception e = null;
-
-    private URL _url = null;
+    public Exception cause = null;
 
     private URLConnection _urlConnection = null;
 
@@ -56,19 +54,17 @@ public class NetworkException extends IOException {
     /**
      */
     public NetworkException( String message,
-                             Exception e,
+                             Exception cause,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
-        super( request.getResource() + ": " + getMessageFromCause( e, message ) );
+        super( request.getResource() + ": " + getMessageFromCause( cause, message ) );
 
-        this.e = e;
+        this.cause = cause;
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
-        boolean timeout = e instanceof SocketTimeoutException;
+        boolean timeout = cause instanceof SocketTimeoutException;
 
         // do not attempt to read the status if we timed out...
 
@@ -76,19 +72,17 @@ public class NetworkException extends IOException {
             this.status = _urlConnection.getHeaderField( null );
         }
 
-        initCause( e );
+        initCause( cause );
 
     }
 
     public NetworkException( String message,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
         //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
@@ -103,12 +97,11 @@ public class NetworkException extends IOException {
      *
      *
      */
-    public NetworkException( Exception e,
+    public NetworkException( Exception cause,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
-        this( e.getMessage(), e, request, _url, _urlConnection );
+        this( cause.getMessage(), cause, request, _urlConnection );
 
     }
 
@@ -128,10 +121,6 @@ public class NetworkException extends IOException {
 
         return message;
 
-    }
-
-    public URL getURL() {
-        return _url;
     }
 
     /**

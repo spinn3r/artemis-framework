@@ -172,7 +172,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     String message = String.format( "HTTPS URLs not supported: %s", resource );
 
-                    throw new NetworkException( message, this, _url, _urlConnection );
+                    throw new NetworkException( message, this, _urlConnection );
 
                 }
 
@@ -192,7 +192,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
         } catch ( IOException e ) {
 
-            NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
+            NetworkException ne = new NetworkException( e, this, _urlConnection );
 
             handleNetworkException( ne , e );
 
@@ -426,7 +426,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 } catch ( IOException e ) {
 
-                    NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
+                    NetworkException ne = new NetworkException( e, this, _urlConnection );
 
                     handleNetworkException( ne , e );
 
@@ -662,7 +662,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             String message = String.format( "Unable to follow URL.  Too many redirects: %s", redirects );
 
-            throw new NetworkException( message, this, _url, _urlConnection );
+            throw new NetworkException( message, this, _urlConnection );
 
         }
 
@@ -672,7 +672,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             String message = String.format( "Redirected to identical URL: %s", resource );
 
-            throw new NetworkException( message, this, _url, _urlConnection );
+            throw new NetworkException( message, this, _urlConnection );
 
         }
 
@@ -781,7 +781,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             message = e.getMessage();
         }
 
-        return new NetworkException( message, e, this, _url, _urlConnection );
+        return new NetworkException( message, e, this, _urlConnection );
 
     }
 
