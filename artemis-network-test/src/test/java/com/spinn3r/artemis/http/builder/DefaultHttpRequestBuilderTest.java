@@ -325,6 +325,52 @@ public class DefaultHttpRequestBuilderTest {
     }
 
     @Test
+    public void testGetWithRedirectUsingHTTPS() throws Exception {
+
+        String link = "https://twitter.com/asdf654321";
+
+        HttpRequest httpRequest = httpRequestBuilder
+                                .get(link)
+                                .withFollowContentRedirects(false)
+                                .execute();
+
+        httpRequest.connect();
+
+        String resourceFromRedirect = httpRequest.getResourceFromRedirect();
+        System.out.printf("resourceFromRedirect: %s\n", resourceFromRedirect);
+
+        assertNotEquals(link, resourceFromRedirect);
+        assertEquals("https://twitter.com/account/suspended", resourceFromRedirect);
+
+    }
+
+    @Test
+    public void testGetWith302RedirectUsingHTTP() throws Exception {
+
+        String landingURL = "http://localhost:" + webserverPort.getPort();
+
+        String requestURL = new ResponseDescriptor.Builder()
+                              .withStatus(302)
+                              .withHeader("Location", landingURL)
+                              .build()
+                              .toURL("localhost", webserverPort.getPort());
+
+        HttpRequest httpRequest = httpRequestBuilder
+                                    .get(requestURL)
+                                    .withFollowContentRedirects(false)
+                                    .execute();
+
+        httpRequest.connect();
+
+        String resourceFromRedirect = httpRequest.getResourceFromRedirect();
+        System.out.printf("resourceFromRedirect: %s\n", resourceFromRedirect);
+
+        assertNotEquals(requestURL, resourceFromRedirect);
+        assertEquals(landingURL, resourceFromRedirect);
+
+    }
+
+    @Test
     public void testGetUsingDirectInputStream() throws Exception {
 
         String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
