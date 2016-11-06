@@ -40,6 +40,7 @@ import java.net.URL;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.*;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_READ_TIMEOUT;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -419,9 +420,9 @@ public class DefaultHttpRequestBuilderTest {
 
         } catch (NetworkException e) {
 
-            assertEquals( URLResourceRequest.STATUS_READ_TIMEOUT, request.getResponseCode() );
+            assertEquals( STATUS_READ_TIMEOUT, request.getResponseCode() );
 
-            assertEquals( URLResourceRequest.STATUS_READ_TIMEOUT, e.getResponseCode() );
+            assertEquals( STATUS_READ_TIMEOUT, e.getResponseCode() );
 
             throw e;
 

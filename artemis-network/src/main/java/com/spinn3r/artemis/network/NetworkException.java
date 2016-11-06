@@ -8,6 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+
 /**
  *
  */
@@ -15,16 +17,11 @@ public class NetworkException extends IOException {
 
     private static Logger log = Logger.getLogger();
 
-    private ResourceRequest request = null;
-
-    public Exception e = null;
-
-    private URL _url = null;
-
-    private URLConnection _urlConnection = null;
-
     private int responseCode = Integer.MIN_VALUE;
 
+    private ResourceRequest request = null;
+
+    private URLConnection _urlConnection = null;
     /**
      * The status string in the HTTP response.
      *
@@ -54,19 +51,16 @@ public class NetworkException extends IOException {
     /**
      */
     public NetworkException( String message,
-                             Exception e,
+                             Exception cause,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
-        super( request.getResource() + ": " + getMessageFromCause( e, message ) );
+        super( request.getResource() + ": " + getMessageFromCause( cause, message ) );
 
-        this.e = e;
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
-        boolean timeout = e instanceof SocketTimeoutException;
+        boolean timeout = cause instanceof SocketTimeoutException;
 
         // do not attempt to read the status if we timed out...
 
@@ -74,19 +68,17 @@ public class NetworkException extends IOException {
             this.status = _urlConnection.getHeaderField( null );
         }
 
-        initCause( e );
+        initCause( cause );
 
     }
 
     public NetworkException( String message,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
         //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
-        this._url = _url;
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
@@ -101,12 +93,11 @@ public class NetworkException extends IOException {
      *
      *
      */
-    public NetworkException( Exception e,
+    public NetworkException( Exception cause,
                              ResourceRequest request,
-                             URL _url,
                              URLConnection _urlConnection ) {
 
-        this( e.getMessage(), e, request, _url, _urlConnection );
+        this( cause.getMessage(), cause, request, _urlConnection );
 
     }
 
@@ -128,10 +119,6 @@ public class NetworkException extends IOException {
 
     }
 
-    public URL getURL() {
-        return _url;
-    }
-
     /**
      * Get the HTTP response code form this error.
      */
@@ -140,8 +127,8 @@ public class NetworkException extends IOException {
         if ( responseCode == Integer.MIN_VALUE ) {
 
             if ( request != null &&
-                ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                  request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
+                ( request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
+                  request.getResponseCode() == STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
 
@@ -191,8 +178,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+        return responseCode == STATUS_CONNECT_TIMEOUT ||
+               responseCode == STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 
     }

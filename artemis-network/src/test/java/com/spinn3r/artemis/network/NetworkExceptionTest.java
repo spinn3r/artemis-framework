@@ -11,7 +11,6 @@ public class NetworkExceptionTest {
         NetworkException networkException = new NetworkException(message);
 
         Assert.assertEquals(message, networkException.getLocalizedMessage());
-        Assert.assertEquals(null, networkException.getURL());
         Assert.assertEquals(-1, networkException.getResponseCode());
         Assert.assertFalse(networkException.isProxyError());
     }

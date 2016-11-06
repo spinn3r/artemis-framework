@@ -14,6 +14,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+
 /**
  * ResourceRequest implementation that uses java.net.URL as the backend.
  *
@@ -65,18 +67,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      *
      */
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
-
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a read timeout.
-     */
-    public static final int STATUS_READ_TIMEOUT    = -1024;
-
-    /**
-     * Instead of using -1 as a status code for connect timeouts we use negative
-     * values.  This represents a connect timeout.
-     */
-    public static final int STATUS_CONNECT_TIMEOUT = -1025;
 
     public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
     public static final String IF_NONE_MATCH_HEADER = "If-None-Match";
@@ -182,7 +172,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     String message = String.format( "HTTPS URLs not supported: %s", resource );
 
-                    throw new NetworkException( message, this, _url, _urlConnection );
+                    throw new NetworkException( message, this, _urlConnection );
 
                 }
 
@@ -202,7 +192,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
         } catch ( IOException e ) {
 
-            NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
+            NetworkException ne = new NetworkException( e, this, _urlConnection );
 
             handleNetworkException( ne , e );
 
@@ -436,7 +426,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                 } catch ( IOException e ) {
 
-                    NetworkException ne = new NetworkException( e, this, _url, _urlConnection );
+                    NetworkException ne = new NetworkException( e, this, _urlConnection );
 
                     handleNetworkException( ne , e );
 
@@ -672,7 +662,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             String message = String.format( "Unable to follow URL.  Too many redirects: %s", redirects );
 
-            throw new NetworkException( message, this, _url, _urlConnection );
+            throw new NetworkException( message, this, _urlConnection );
 
         }
 
@@ -682,7 +672,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
             String message = String.format( "Redirected to identical URL: %s", resource );
 
-            throw new NetworkException( message, this, _url, _urlConnection );
+            throw new NetworkException( message, this, _urlConnection );
 
         }
 
@@ -791,7 +781,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             message = e.getMessage();
         }
 
-        return new NetworkException( message, e, this, _url, _urlConnection );
+        return new NetworkException( message, e, this, _urlConnection );
 
     }
 
