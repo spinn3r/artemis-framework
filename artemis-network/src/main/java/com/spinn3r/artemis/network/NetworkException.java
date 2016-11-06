@@ -17,14 +17,11 @@ public class NetworkException extends IOException {
 
     private static Logger log = Logger.getLogger();
 
-    private ResourceRequest request = null;
-
-    public Exception cause = null;
-
-    private URLConnection _urlConnection = null;
-
     private int responseCode = Integer.MIN_VALUE;
 
+    private ResourceRequest request = null;
+
+    private URLConnection _urlConnection = null;
     /**
      * The status string in the HTTP response.
      *
@@ -60,7 +57,6 @@ public class NetworkException extends IOException {
 
         super( request.getResource() + ": " + getMessageFromCause( cause, message ) );
 
-        this.cause = cause;
         this.request = request;
         this._urlConnection = _urlConnection;
 
