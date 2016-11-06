@@ -11,6 +11,7 @@ import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
 
 /**
  * Execute HTTP request but wrap them in retry logic.
@@ -83,10 +84,10 @@ public class HttpRequestExecutor {
 
             int responseCode = ((NetworkException) e).getResponseCode();
 
-            if (responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT)
+            if (responseCode == STATUS_CONNECT_TIMEOUT)
                 return true;
 
-            if (responseCode == URLResourceRequest.STATUS_READ_TIMEOUT)
+            if (responseCode == STATUS_READ_TIMEOUT)
                 return true;
 
             if (responseCode >= 500 && responseCode <= 599)

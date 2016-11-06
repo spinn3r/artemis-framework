@@ -8,6 +8,7 @@ import javax.net.ssl.SSLException;
 
 import java.net.SocketTimeoutException;
 
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
 import static com.spinn3r.artemis.network.builder.HttpRequestExecutor.isTransientHttpException;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -18,8 +19,8 @@ public class HttpRequestExecutorTest {
     public void testIsTransientHttpException() {
 
         assertTrue(isTransientHttpException(new NetworkException("", 503)));
-        assertTrue(isTransientHttpException(new NetworkException("", URLResourceRequest.STATUS_CONNECT_TIMEOUT)));
-        assertTrue(isTransientHttpException(new NetworkException("", URLResourceRequest.STATUS_READ_TIMEOUT)));
+        assertTrue(isTransientHttpException(new NetworkException("", STATUS_CONNECT_TIMEOUT)));
+        assertTrue(isTransientHttpException(new NetworkException("", STATUS_READ_TIMEOUT)));
         assertTrue(isTransientHttpException(new SSLException("")));
         assertTrue(isTransientHttpException(new RuntimeException(new NetworkException("", 503))));
         assertTrue(isTransientHttpException(new SocketTimeoutException("")));

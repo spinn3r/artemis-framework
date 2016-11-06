@@ -8,6 +8,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+
 /**
  *
  */
@@ -140,8 +142,8 @@ public class NetworkException extends IOException {
         if ( responseCode == Integer.MIN_VALUE ) {
 
             if ( request != null &&
-                ( request.getResponseCode() == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-                  request.getResponseCode() == URLResourceRequest.STATUS_READ_TIMEOUT ) ) {
+                ( request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
+                  request.getResponseCode() == STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
 
@@ -191,8 +193,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == URLResourceRequest.STATUS_CONNECT_TIMEOUT ||
-               responseCode == URLResourceRequest.STATUS_READ_TIMEOUT ||
+        return responseCode == STATUS_CONNECT_TIMEOUT ||
+               responseCode == STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 
     }
