@@ -814,63 +814,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
     }
 
-    java.lang.reflect.Field FIELD_HTTP_URL_CONNECTION_HTTP = null;
-    java.lang.reflect.Field FIELD_HTTP_CLIENT_URL = null;
-
-    /**
-     * This method uses reflection to pull out the redirected URL in
-     * java.net.URL.  Internally sun.net.www.protocol.http.HttpURLConnection
-     * stores a reference to sun.net.www.http.HttpClient which then in turn does
-     * all the redirection and stores the redirect java.net.URL.  We just use
-     * reflection to FETCH this URL and then call toString to get the correct
-     * value.
-     *
-     */
     public String getResourceFromRedirect() {
-
-        try {
-
-            if ( FIELD_HTTP_URL_CONNECTION_HTTP == null ) {
-
-                //Note: when using a FILE URL this won't work!
-                FIELD_HTTP_URL_CONNECTION_HTTP = _urlConnection.getClass().getDeclaredField( "http" );
-                FIELD_HTTP_URL_CONNECTION_HTTP.setAccessible( true );
-
-            }
-
-            Object http = FIELD_HTTP_URL_CONNECTION_HTTP.get( _urlConnection );
-
-            //when java.net.URL has already cleaned itself up 'http' will be
-            //null here which isn't helpful.  I think this is only called when
-            //the connection is closed.
-            if ( http == null ) {
-                return getResource();
-            }
-
-            if ( FIELD_HTTP_CLIENT_URL == null ) {
-
-                FIELD_HTTP_CLIENT_URL = http.getClass().getDeclaredField( "url" );
-                FIELD_HTTP_CLIENT_URL.setAccessible( true );
-
-            }
-
-            Object url = FIELD_HTTP_CLIENT_URL.get( http );
-
-            //this will be a java.net.URL and now I can call the toString method
-            //on it which will return our full URI.
-            return url.toString();
-
-        } catch ( Exception t ) {
-            //log.error( t );
-            return getResource();
-        }
-
+        return _urlConnection.getURL().toString();
     }
 
     /**
      * Set the RequestMethod of this URLConnection.
-     *
-     *
      */
     public void setRequestMethod( String method ) throws NetworkException {
 
