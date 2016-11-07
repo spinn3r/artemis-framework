@@ -80,6 +80,7 @@
         <module>artemis-http-integration-test0</module>
         <module>artemis-mockito</module>
         <module>artemis-logging-test-framework</module>
+        <module>artemis-junit</module>
 
     </modules>
 
