@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.spinn3r.artemis.init.AtomicReferenceProvider;
 import com.spinn3r.artemis.init.Config;
 import com.spinn3r.artemis.init.advertisements.Hostname;
 import com.spinn3r.artemis.init.advertisements.Role;
@@ -53,12 +54,19 @@ public class GlobalMetricsService extends MetricsService {
 
     private final Map<String,Shutdownable> shutdownableMap = Maps.newConcurrentMap();
 
+    private final AtomicReferenceProvider<ReportWaiter> reportWaiterAtomicReferenceProvider = new AtomicReferenceProvider<>(null);
+
     @Inject
     GlobalMetricsService(MetricsConfig metricConfig, Provider<Hostname> hostnameProvider, Role role, Provider<GlobalMutex> globalMutexProvider) {
         super( metricConfig );
         this.hostnameProvider = hostnameProvider;
         this.role = role;
         this.globalMutexProvider = globalMutexProvider;
+    }
+
+    @Override
+    public void init() {
+        provider(ReportWaiter.class, reportWaiterAtomicReferenceProvider);
     }
 
     @Override
@@ -125,7 +133,7 @@ public class GlobalMetricsService extends MetricsService {
             kairosDbReporter.stop();
         });
 
-        advertise(ReportWaiter.class, kairosDbReporter.getReportWaiter());
+        reportWaiterAtomicReferenceProvider.set(kairosDbReporter.getReportWaiter());
 
     }
 
