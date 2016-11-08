@@ -20,6 +20,7 @@ import com.spinn3r.artemis.util.threads.NamedThreadFactory;
 import com.spinn3r.metrics.kairosdb.KairosDb;
 import com.spinn3r.metrics.kairosdb.KairosDbReporter;
 import com.spinn3r.metrics.kairosdb.ReportWaiter;
+import com.spinn3r.metrics.kairosdb.TaggedMetrics;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -66,6 +67,7 @@ public class GlobalMetricsService extends MetricsService {
 
     @Override
     public void init() {
+        advertise(TaggedMetrics.class, taggedMetrics );
         provider(ReportWaiter.class, reportWaiterAtomicReferenceProvider);
     }
 
