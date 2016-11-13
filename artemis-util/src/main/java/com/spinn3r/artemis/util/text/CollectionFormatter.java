@@ -1,11 +1,9 @@
 package com.spinn3r.artemis.util.text;
 
-import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.spinn3r.artemis.util.reports.Reportable;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
 
 /**
