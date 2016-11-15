@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  */
 public class LiberalIntParser {
 
-    private static Pattern pattern = Pattern.compile( "([0-9.,]+)([kKmM])?" );
+    private static Pattern pattern = Pattern.compile( "([0-9.,]+)\\s?([kKmM])?" );
 
     /**
      * Parse an integer and take into consideration commas, any type of suffix like K, etc.
@@ -33,7 +33,7 @@ public class LiberalIntParser {
         if ( matcher.find() ) {
 
             String data = matcher.group( 1 );
-            data = data.replaceAll( "[,\\.]", "" );
+            data = data.replaceAll( ",", "" );
 
             // this has to be parsed as a double because an input could be
             // 53.4M

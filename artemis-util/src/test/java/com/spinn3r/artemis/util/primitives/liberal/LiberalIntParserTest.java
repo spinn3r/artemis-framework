@@ -9,7 +9,7 @@ public class LiberalIntParserTest {
     @Test
     public void testParse() throws Exception {
 
-        assertEquals( 53_400_000, LiberalIntParser.parse( "53.4M") );
+        assertEquals( 53400000, LiberalIntParser.parse( "53.4M") );
         assertEquals( 1000, LiberalIntParser.parse( "1k" ) );
         assertEquals( 0, LiberalIntParser.parse( "0" ) );
         assertEquals( 1000, LiberalIntParser.parse( "1,000" ) );
@@ -31,6 +31,13 @@ public class LiberalIntParserTest {
 
     }
 
+    @Test
+    public void testParseSpacingNumber() throws Exception {
+
+        assertEquals( 15_000_000, LiberalIntParser.parse( "15.0 Mi" ) );
+
+    }
+    
     @Test(expected = NumberFormatException.class)
     public void testParseBrokenString() throws Exception {
 
