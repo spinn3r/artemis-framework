@@ -44,5 +44,18 @@ public class LiberalIntParserTest {
         LiberalIntParser.parse( "asdf" );
 
     }
+    
+    @Test
+    public void testParsePointSeparators() throws Exception {
+
+        assertEquals( 1000234, LiberalIntParser.parse( "1.000.234") );
+        assertEquals( 1500, LiberalIntParser.parse( "1,5k" ) );
+        assertEquals( 0, LiberalIntParser.parse( "0" ) );
+        assertEquals( 1000, LiberalIntParser.parse( "1.000" ) );
+        assertEquals( 12500000, LiberalIntParser.parse( "12,5M" ) );
+        
+        assertEquals( 1540, LiberalIntParser.parse( "1,54 K" ) );
+
+    }
 
 }
