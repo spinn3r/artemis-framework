@@ -33,7 +33,7 @@ public class LiberalIntParser {
         if ( matcher.find() ) {
 
             String data = matcher.group( 1 );
-            data = data.replaceAll( ",", "" );
+            data = data.replaceAll( "[,\\.]", "" );
 
             // this has to be parsed as a double because an input could be
             // 53.4M
