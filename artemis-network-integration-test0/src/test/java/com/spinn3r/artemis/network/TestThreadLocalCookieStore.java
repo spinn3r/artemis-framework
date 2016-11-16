@@ -291,32 +291,30 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
                                      "\"Host\" : \"localhost:xxxx\"");
 
         assertEquals("{\n" +
-                       "  \"pathInfo\" : null,\n" +
-                       "  \"queryString\" : null,\n" +
-                       "  \"headers\" : {\n" +
-                       "    \"User-Agent\" : \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\",\n" +
-                       "    \"Connection\" : \"close\",\n" +
-                       "    \"Cookie\" : \"$Version=\\\"1\\\"; foo=\\\"bar\\\";$Path=\\\"/\\\"\",\n" +
-                       "    \"Host\" : \"localhost:xxxx\",\n" +
-                       "    \"Accept-Encoding\" : \"gzip\",\n" +
-                       "    \"Accept\" : \"text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2\"\n" +
-                       "  },\n" +
-                       "  \"parameters\" : { },\n" +
-                       "  \"cookies\" : [\n" +
-                       "    {\n" +
-                       "      \"name\" : \"foo\",\n" +
-                       "      \"value\" : \"bar\",\n" +
-                       "      \"path\" : \"/\",\n" +
-                       "      \"domain\" : null,\n" +
-                       "      \"httpOnly\" : false,\n" +
-                       "      \"secure\" : false,\n" +
-                       "      \"maxAge\" : null\n" +
-                       "    }\n" +
-                       "  ]\n" +
-                       "}",
+                    "  \"pathInfo\" : null,\n" +
+                    "  \"queryString\" : null,\n" +
+                    "  \"headers\" : {\n" +
+                    "    \"Cookie\" : \"$Version=\\\"1\\\"; foo=\\\"bar\\\";$Path=\\\"/\\\"\",\n" +
+                    "    \"Accept\" : \"text/html, image/gif, image/jpeg, *; q=.2, */*; q=.2\",\n" +
+                    "    \"User-Agent\" : \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\",\n" +
+                    "    \"Connection\" : \"close\",\n" +
+                    "    \"Host\" : \"localhost:xxxx\",\n" +
+                    "    \"Accept-Language\" : \"en-US,en;q=0.8\",\n" +
+                    "    \"Accept-Encoding\" : \"gzip\"\n" +
+                    "  },\n" +
+                    "  \"parameters\" : { },\n" +
+                    "  \"cookies\" : [\n" +
+                    "    {\n" +
+                    "      \"name\" : \"foo\",\n" +
+                    "      \"value\" : \"bar\",\n" +
+                    "      \"path\" : \"/\",\n" +
+                    "      \"domain\" : null,\n" +
+                    "      \"httpOnly\" : false,\n" +
+                    "      \"secure\" : false,\n" +
+                    "      \"maxAge\" : null\n" +
+                    "    }\n" +
+                    "  ]\n}",
                      content);
-
-
     }
 
     @Test
