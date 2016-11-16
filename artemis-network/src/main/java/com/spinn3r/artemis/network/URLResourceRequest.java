@@ -1,20 +1,37 @@
 package com.spinn3r.artemis.network;
 
 
-import com.google.common.base.Charsets;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
-import com.spinn3r.artemis.network.cookies.CookiesEncoder;
-import com.spinn3r.log5j.Logger;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_CONNECT_TIMEOUT;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_READ_TIMEOUT;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ConnectException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.ProtocolException;
+import java.net.Proxy;
+import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
 
-import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+import com.google.common.base.Charsets;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import com.spinn3r.log5j.Logger;
 
 /**
  * ResourceRequest implementation that uses java.net.URL as the backend.
@@ -69,6 +86,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     public static boolean ENABLE_FOLLOW_CONTENT_REDIRECTS = true;
 
     public static final String ACCEPT_ENCODING_HEADER = "Accept-Encoding";
+    public static final String ACCEPT_LANGUAGE_HEADER = "Accept-Language";
     public static final String IF_NONE_MATCH_HEADER = "If-None-Match";
     public static final String GZIP_ENCODING = "gzip";
     public static final String USER_AGENT_HEADER = "User-Agent";
@@ -90,6 +108,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
      */
     public static String USER_AGENT
         = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36";
+    
+    public static String ACCEPT_LANGUAGE = "en-US,en;q=0.8";
 
     /**
      * If a domain is included in this map, we disable GZIP encoding.
@@ -309,6 +329,12 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                 _urlConnection.setRequestProperty( USER_AGENT_HEADER, _userAgent );
             }
 
+            final String language = getAcceptLanguage();
+            
+            if ( getRequestHeader( ACCEPT_LANGUAGE_HEADER ) == null && language != null ) {
+                _urlConnection.setRequestProperty( ACCEPT_LANGUAGE_HEADER, language );
+            }
+            
             if ( authUsername != null && authPassword != null ) {
 
                 /*

@@ -49,6 +49,8 @@ public abstract class BaseResourceRequest implements ResourceRequest {
     protected Map<String,String> requestHeaders = new HashMap<>();
 
     private String userAgent = URLResourceRequest.USER_AGENT;
+    
+    private String acceptLanguage = URLResourceRequest.ACCEPT_LANGUAGE; 
 
     protected String authUsername = null;
     protected String authPassword = null;
@@ -501,6 +503,20 @@ public abstract class BaseResourceRequest implements ResourceRequest {
 
     public String getUserAgent() {
         return this.userAgent;
+    }
+    
+    @Override
+    public void setAcceptLanguage(String acceptLanguage) {
+        if(acceptLanguage == null) {
+            return;
+        }
+        
+        this.acceptLanguage = acceptLanguage;
+    }
+    
+    @Override
+    public String getAcceptLanguage() {
+        return acceptLanguage;
     }
 
     public void setAuthPassword( String v ) {

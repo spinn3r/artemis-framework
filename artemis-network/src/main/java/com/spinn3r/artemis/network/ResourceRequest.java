@@ -165,6 +165,16 @@ public interface ResourceRequest {
     void setUserAgent( String userAgent );
     String getUserAgent();
 
+    /*
+     * Set Accept-Language header
+     */
+    void setAcceptLanguage( String acceptLanguage );
+    
+    /*
+     * Get Accept-Language header
+     */
+    String getAcceptLanguage();
+    
     /**
      * Return true if our status is NOT_NODIFIED
      */

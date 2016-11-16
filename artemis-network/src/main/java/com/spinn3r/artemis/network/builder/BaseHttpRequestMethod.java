@@ -42,10 +42,18 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
     protected boolean followContentRedirects = true;
 
     protected String userAgent = URLResourceRequest.USER_AGENT;
+    
+    protected String acceptLanguage = URLResourceRequest.ACCEPT_LANGUAGE;
 
     @Override
     public HttpRequestMethod withUserAgent(String userAgent) {
         this.userAgent = userAgent;
+        return this;
+    }
+
+    @Override
+    public HttpRequestMethod withAcceptLanguage(String acceptLanguage) {
+        this.acceptLanguage = acceptLanguage;
         return this;
     }
 

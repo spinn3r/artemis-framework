@@ -71,6 +71,8 @@ public interface HttpRequestMethod {
 
     HttpRequestMethod withFollowContentRedirects( boolean followContentRedirects );
 
+    HttpRequestMethod withAcceptLanguage(String acceptLanguage);
+    
     // TODO: HttpRequestMethod withProxy(String proxy);
 
     HttpRequestMethod withProxy(ProxyReference proxyReference);

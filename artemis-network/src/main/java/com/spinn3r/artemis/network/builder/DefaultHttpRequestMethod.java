@@ -122,6 +122,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
         resourceRequest.setCookies(Cookies.toMap(cookies));
         resourceRequest.setRequestMethod( method );
         resourceRequest.setUserAgent( userAgent );
+        resourceRequest.setAcceptLanguage( acceptLanguage );
         resourceRequest.setMaxContentLength( maxContentLength );
         resourceRequest.setReadTimeout( readTimeout );
         resourceRequest.setConnectTimeout( connectTimeout );
