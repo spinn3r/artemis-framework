@@ -153,9 +153,9 @@ public class GlobalMetricsService extends MetricsService {
     @Override
     public void stop() throws Exception {
 
-        //info("Waiting for final report to complete...");
-        //reportWaiterAtomicReferenceProvider.get().getCountDownLatch().await();
-        //info("Waiting for final report to complete...done");
+        info("Waiting for final report to complete...");
+        reportWaiterAtomicReferenceProvider.get().getCountDownLatch().await();
+        info("Waiting for final report to complete...done");
 
         Shutdownables.shutdown(new ShutdownableIndex(getClass(),
                                                      ImmutableMap.copyOf(shutdownableMap)));

@@ -193,8 +193,6 @@ public class Launcher {
             advertised.advertise( this, ConfigLoader.class, configLoader );
         }
 
-        this.services.addAll( newServices );
-
         ServicesTool servicesTool = new ServicesTool( this, newServices );
 
         launchHandler.onLaunch( servicesTool );
