@@ -1584,6 +1584,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSharedAuthorUserId = 0;
+
+    public int hasModifiedSharedAuthorUserId = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorUserId = false;
+
+    protected String sharedAuthorUserId;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasSharedIdentifier = 0;
 
     public int hasModifiedSharedIdentifier = 0;
@@ -7583,6 +7599,88 @@ public abstract class BaseContentMetadata
         return this.hasDefinedSharedAuthorName;
     }
 
+    public BaseContentMetadata setSharedAuthorUserId ( String sharedAuthorUserId ) {
+
+        ++this.hasSharedAuthorUserId;
+        ++this.hasModifiedSharedAuthorUserId;
+
+        this.sharedAuthorUserId = sharedAuthorUserId;
+
+        hasDefinedSharedAuthorUserId = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * User ID in the target platform (when available)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_user_id
+     * </p>
+     */
+    public String getSharedAuthorUserId() {
+
+        if ( this.constructed == false && this.hasSharedAuthorUserId == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorUserId" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorUserId;
+    }
+
+    /**
+     * <p>
+     * User ID in the target platform (when available)
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_user_id
+     * </p>
+     */
+    public Optional<String> getSharedAuthorUserIdAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorUserId == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorUserId );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorUserId () {
+        return this.hasSharedAuthorUserId > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorUserId () {
+        this.hasSharedAuthorUserId = 0;
+        this.hasModifiedSharedAuthorUserId = 0;
+        this.hasDefinedSharedAuthorUserId = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorUserId () {
+        return this.hasModifiedSharedAuthorUserId > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorUserId () {
+        return this.hasDefinedSharedAuthorUserId;
+    }
+
     public BaseContentMetadata setSharedIdentifier ( String sharedIdentifier ) {
 
         ++this.hasSharedIdentifier;
@@ -10152,6 +10250,10 @@ public abstract class BaseContentMetadata
             setSharedAuthorName( obj.getSharedAuthorName() );
         }
 
+        if ( obj.hasSharedAuthorUserId() ) {
+            setSharedAuthorUserId( obj.getSharedAuthorUserId() );
+        }
+
         if ( obj.hasSharedIdentifier() ) {
             setSharedIdentifier( obj.getSharedIdentifier() );
         }
@@ -10770,6 +10872,15 @@ public abstract class BaseContentMetadata
             setSharedAuthorName( obj.getSharedAuthorName() );
         }
 
+        if ( ! hasSharedAuthorUserId() && obj.hasSharedAuthorUserId() ) {
+            setSharedAuthorUserId( obj.getSharedAuthorUserId() );
+        }
+
+        if ( hasSharedAuthorUserId() && getSharedAuthorUserId() == null &&
+            obj.hasSharedAuthorUserId() && obj.getSharedAuthorUserId() != null ) {
+            setSharedAuthorUserId( obj.getSharedAuthorUserId() );
+        }
+
         if ( ! hasSharedIdentifier() && obj.hasSharedIdentifier() ) {
             setSharedIdentifier( obj.getSharedIdentifier() );
         }
@@ -11070,6 +11181,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedSharedAuthorLink = 0;
 
         this.hasModifiedSharedAuthorName = 0;
+
+        this.hasModifiedSharedAuthorUserId = 0;
 
         this.hasModifiedSharedIdentifier = 0;
 
@@ -11399,6 +11512,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedSharedAuthorName() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorUserId() ) {
             return true;
         }
 
@@ -12080,6 +12197,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "sharedAuthorName=" );
             buff.append( sharedAuthorName );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorUserId > 0 ) {
+
+            buff.append( "sharedAuthorUserId=" );
+            buff.append( sharedAuthorUserId );
             buff.append( " " );
 
         }
@@ -12921,6 +13046,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( sharedAuthorName, cmp.sharedAuthorName ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorUserId() != cmp.hasSharedAuthorUserId() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorUserId, cmp.sharedAuthorUserId ) ) {
             return false;
         }
 
@@ -14418,6 +14552,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member shared_author_user_id from String
+
+            __name = "sharedAuthorUserId";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_user_id";
+            }
+
+            if ( this.hasSharedAuthorUserId > 0 ) {
+
+                if ( sharedAuthorUserId != null ) {
+                    generator.writeStringField( __name, sharedAuthorUserId );
+                }
+
+            }
+
             // ***** json encode member shared_identifier from String
 
             __name = "sharedIdentifier";
@@ -15573,6 +15723,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setSharedAuthorName( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_user_id from String
+
+                case "shared_author_user_id":
+
+                    jParser.nextToken();
+                    setSharedAuthorUserId( jParser.getValueAsString() );
 
                     break;
 
