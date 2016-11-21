@@ -2287,6 +2287,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasIdentifier = 0;
+
+    public int hasModifiedIdentifier = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedIdentifier = false;
+
+    protected String identifier;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasPermalinkRedirect = 0;
 
     public int hasModifiedPermalinkRedirect = 0;
@@ -3299,6 +3315,54 @@ public abstract class BaseContent
     public boolean hasDefinedSharedProfileTitle = false;
 
     protected String sharedProfileTitle;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedAuthorLink = 0;
+
+    public int hasModifiedSharedAuthorLink = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorLink = false;
+
+    protected String sharedAuthorLink;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedAuthorName = 0;
+
+    public int hasModifiedSharedAuthorName = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorName = false;
+
+    protected String sharedAuthorName;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedIdentifier = 0;
+
+    public int hasModifiedSharedIdentifier = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedIdentifier = false;
+
+    protected String sharedIdentifier;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -9492,6 +9556,88 @@ public abstract class BaseContent
         return this.hasDefinedPermalink;
     }
 
+    public BaseContent setIdentifier ( String identifier ) {
+
+        ++this.hasIdentifier;
+        ++this.hasModifiedIdentifier;
+
+        this.identifier = identifier;
+
+        hasDefinedIdentifier = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * A platform specific unique identifier for this post.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: identifier
+     * </p>
+     */
+    public String getIdentifier() {
+
+        if ( this.constructed == false && this.hasIdentifier == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.identifier" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.identifier;
+    }
+
+    /**
+     * <p>
+     * A platform specific unique identifier for this post.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: identifier
+     * </p>
+     */
+    public Optional<String> getIdentifierAsOptional() {
+
+        if ( this.constructed == false && this.hasIdentifier == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.identifier );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasIdentifier () {
+        return this.hasIdentifier > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearIdentifier () {
+        this.hasIdentifier = 0;
+        this.hasModifiedIdentifier = 0;
+        this.hasDefinedIdentifier = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedIdentifier () {
+        return this.hasModifiedIdentifier > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedIdentifier () {
+        return this.hasDefinedIdentifier;
+    }
+
     public BaseContent setPermalinkRedirect ( String permalinkRedirect ) {
 
         ++this.hasPermalinkRedirect;
@@ -14567,7 +14713,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The link to the profile of the person who originally posted this story.
+     * Deprecated: See shared_author_link
      * </p>
      *
      * <p>
@@ -14586,7 +14732,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The link to the profile of the person who originally posted this story.
+     * Deprecated: See shared_author_link
      * </p>
      *
      * <p>
@@ -14649,7 +14795,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The title of the profile of the person who originally posted this story.
+     * Deprecated: See shared_author_name
      * </p>
      *
      * <p>
@@ -14668,7 +14814,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The title of the profile of the person who originally posted this story.
+     * Deprecated: See shared_author_name
      * </p>
      *
      * <p>
@@ -14714,6 +14860,252 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSharedProfileTitle () {
         return this.hasDefinedSharedProfileTitle;
+    }
+
+    public BaseContent setSharedAuthorLink ( String sharedAuthorLink ) {
+
+        ++this.hasSharedAuthorLink;
+        ++this.hasModifiedSharedAuthorLink;
+
+        this.sharedAuthorLink = sharedAuthorLink;
+
+        hasDefinedSharedAuthorLink = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The link to the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_link
+     * </p>
+     */
+    public String getSharedAuthorLink() {
+
+        if ( this.constructed == false && this.hasSharedAuthorLink == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorLink" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorLink;
+    }
+
+    /**
+     * <p>
+     * The link to the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_link
+     * </p>
+     */
+    public Optional<String> getSharedAuthorLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorLink );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorLink () {
+        return this.hasSharedAuthorLink > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorLink () {
+        this.hasSharedAuthorLink = 0;
+        this.hasModifiedSharedAuthorLink = 0;
+        this.hasDefinedSharedAuthorLink = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorLink () {
+        return this.hasModifiedSharedAuthorLink > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorLink () {
+        return this.hasDefinedSharedAuthorLink;
+    }
+
+    public BaseContent setSharedAuthorName ( String sharedAuthorName ) {
+
+        ++this.hasSharedAuthorName;
+        ++this.hasModifiedSharedAuthorName;
+
+        this.sharedAuthorName = sharedAuthorName;
+
+        hasDefinedSharedAuthorName = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The title of the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_name
+     * </p>
+     */
+    public String getSharedAuthorName() {
+
+        if ( this.constructed == false && this.hasSharedAuthorName == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorName" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorName;
+    }
+
+    /**
+     * <p>
+     * The title of the profile of the person who originally posted this story.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_name
+     * </p>
+     */
+    public Optional<String> getSharedAuthorNameAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorName == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorName );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorName () {
+        return this.hasSharedAuthorName > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorName () {
+        this.hasSharedAuthorName = 0;
+        this.hasModifiedSharedAuthorName = 0;
+        this.hasDefinedSharedAuthorName = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorName () {
+        return this.hasModifiedSharedAuthorName > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorName () {
+        return this.hasDefinedSharedAuthorName;
+    }
+
+    public BaseContent setSharedIdentifier ( String sharedIdentifier ) {
+
+        ++this.hasSharedIdentifier;
+        ++this.hasModifiedSharedIdentifier;
+
+        this.sharedIdentifier = sharedIdentifier;
+
+        hasDefinedSharedIdentifier = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * A platform specific unique identifier for this post.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_identifier
+     * </p>
+     */
+    public String getSharedIdentifier() {
+
+        if ( this.constructed == false && this.hasSharedIdentifier == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedIdentifier" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedIdentifier;
+    }
+
+    /**
+     * <p>
+     * A platform specific unique identifier for this post.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_identifier
+     * </p>
+     */
+    public Optional<String> getSharedIdentifierAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedIdentifier == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedIdentifier );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedIdentifier () {
+        return this.hasSharedIdentifier > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedIdentifier () {
+        this.hasSharedIdentifier = 0;
+        this.hasModifiedSharedIdentifier = 0;
+        this.hasDefinedSharedIdentifier = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedIdentifier () {
+        return this.hasModifiedSharedIdentifier > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedIdentifier () {
+        return this.hasDefinedSharedIdentifier;
     }
 
     public BaseContent setReplied ( boolean replied ) {
@@ -17211,6 +17603,10 @@ public abstract class BaseContent
             setPermalink( obj.getPermalink() );
         }
 
+        if ( obj.hasIdentifier() ) {
+            setIdentifier( obj.getIdentifier() );
+        }
+
         if ( obj.hasPermalinkRedirect() ) {
             setPermalinkRedirect( obj.getPermalinkRedirect() );
         }
@@ -17461,6 +17857,18 @@ public abstract class BaseContent
 
         if ( obj.hasSharedProfileTitle() ) {
             setSharedProfileTitle( obj.getSharedProfileTitle() );
+        }
+
+        if ( obj.hasSharedAuthorLink() ) {
+            setSharedAuthorLink( obj.getSharedAuthorLink() );
+        }
+
+        if ( obj.hasSharedAuthorName() ) {
+            setSharedAuthorName( obj.getSharedAuthorName() );
+        }
+
+        if ( obj.hasSharedIdentifier() ) {
+            setSharedIdentifier( obj.getSharedIdentifier() );
         }
 
         if ( obj.hasReplied() ) {
@@ -17975,6 +18383,15 @@ public abstract class BaseContent
             setPermalink( obj.getPermalink() );
         }
 
+        if ( ! hasIdentifier() && obj.hasIdentifier() ) {
+            setIdentifier( obj.getIdentifier() );
+        }
+
+        if ( hasIdentifier() && getIdentifier() == null &&
+            obj.hasIdentifier() && obj.getIdentifier() != null ) {
+            setIdentifier( obj.getIdentifier() );
+        }
+
         if ( ! hasPermalinkRedirect() && obj.hasPermalinkRedirect() ) {
             setPermalinkRedirect( obj.getPermalinkRedirect() );
         }
@@ -18437,6 +18854,33 @@ public abstract class BaseContent
             setSharedProfileTitle( obj.getSharedProfileTitle() );
         }
 
+        if ( ! hasSharedAuthorLink() && obj.hasSharedAuthorLink() ) {
+            setSharedAuthorLink( obj.getSharedAuthorLink() );
+        }
+
+        if ( hasSharedAuthorLink() && getSharedAuthorLink() == null &&
+            obj.hasSharedAuthorLink() && obj.getSharedAuthorLink() != null ) {
+            setSharedAuthorLink( obj.getSharedAuthorLink() );
+        }
+
+        if ( ! hasSharedAuthorName() && obj.hasSharedAuthorName() ) {
+            setSharedAuthorName( obj.getSharedAuthorName() );
+        }
+
+        if ( hasSharedAuthorName() && getSharedAuthorName() == null &&
+            obj.hasSharedAuthorName() && obj.getSharedAuthorName() != null ) {
+            setSharedAuthorName( obj.getSharedAuthorName() );
+        }
+
+        if ( ! hasSharedIdentifier() && obj.hasSharedIdentifier() ) {
+            setSharedIdentifier( obj.getSharedIdentifier() );
+        }
+
+        if ( hasSharedIdentifier() && getSharedIdentifier() == null &&
+            obj.hasSharedIdentifier() && obj.getSharedIdentifier() != null ) {
+            setSharedIdentifier( obj.getSharedIdentifier() );
+        }
+
         if ( ! hasReplied() && obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -18733,6 +19177,8 @@ public abstract class BaseContent
 
         this.hasModifiedPermalink = 0;
 
+        this.hasModifiedIdentifier = 0;
+
         this.hasModifiedPermalinkRedirect = 0;
 
         this.hasModifiedPermalinkRedirectDomain = 0;
@@ -18858,6 +19304,12 @@ public abstract class BaseContent
         this.hasModifiedSharedProfileLink = 0;
 
         this.hasModifiedSharedProfileTitle = 0;
+
+        this.hasModifiedSharedAuthorLink = 0;
+
+        this.hasModifiedSharedAuthorName = 0;
+
+        this.hasModifiedSharedIdentifier = 0;
 
         this.hasModifiedReplied = 0;
 
@@ -19196,6 +19648,10 @@ public abstract class BaseContent
             return true;
         }
 
+        if ( this.hasModifiedIdentifier() ) {
+            return true;
+        }
+
         if ( this.hasModifiedPermalinkRedirect() ) {
             return true;
         }
@@ -19445,6 +19901,18 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSharedProfileTitle() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorLink() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorName() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedIdentifier() ) {
             return true;
         }
 
@@ -20166,6 +20634,14 @@ public abstract class BaseContent
 
         }
 
+        if ( hasIdentifier > 0 ) {
+
+            buff.append( "identifier=" );
+            buff.append( identifier );
+            buff.append( " " );
+
+        }
+
         if ( hasPermalinkRedirect > 0 ) {
 
             buff.append( "permalinkRedirect=" );
@@ -20682,6 +21158,30 @@ public abstract class BaseContent
 
             buff.append( "sharedProfileTitle=" );
             buff.append( sharedProfileTitle );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorLink > 0 ) {
+
+            buff.append( "sharedAuthorLink=" );
+            buff.append( sharedAuthorLink );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorName > 0 ) {
+
+            buff.append( "sharedAuthorName=" );
+            buff.append( sharedAuthorName );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedIdentifier > 0 ) {
+
+            buff.append( "sharedIdentifier=" );
+            buff.append( sharedIdentifier );
             buff.append( " " );
 
         }
@@ -21537,6 +22037,15 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
+        if ( hasIdentifier() != cmp.hasIdentifier() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( identifier, cmp.identifier ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasPermalinkRedirect() != cmp.hasPermalinkRedirect() ) {
             return false;
         }
@@ -22100,6 +22609,33 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( sharedProfileTitle, cmp.sharedProfileTitle ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorLink() != cmp.hasSharedAuthorLink() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorLink, cmp.sharedAuthorLink ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorName() != cmp.hasSharedAuthorName() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorName, cmp.sharedAuthorName ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedIdentifier() != cmp.hasSharedIdentifier() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedIdentifier, cmp.sharedIdentifier ) ) {
             return false;
         }
 
@@ -23601,6 +24137,22 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member identifier from String
+
+            __name = "identifier";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "identifier";
+            }
+
+            if ( this.hasIdentifier > 0 ) {
+
+                if ( identifier != null ) {
+                    generator.writeStringField( __name, identifier );
+                }
+
+            }
+
             // ***** json encode member permalink_redirect from String
 
             __name = "permalinkRedirect";
@@ -24593,6 +25145,54 @@ public abstract class BaseContent
 
                 if ( sharedProfileTitle != null ) {
                     generator.writeStringField( __name, sharedProfileTitle );
+                }
+
+            }
+
+            // ***** json encode member shared_author_link from String
+
+            __name = "sharedAuthorLink";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_link";
+            }
+
+            if ( this.hasSharedAuthorLink > 0 ) {
+
+                if ( sharedAuthorLink != null ) {
+                    generator.writeStringField( __name, sharedAuthorLink );
+                }
+
+            }
+
+            // ***** json encode member shared_author_name from String
+
+            __name = "sharedAuthorName";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_name";
+            }
+
+            if ( this.hasSharedAuthorName > 0 ) {
+
+                if ( sharedAuthorName != null ) {
+                    generator.writeStringField( __name, sharedAuthorName );
+                }
+
+            }
+
+            // ***** json encode member shared_identifier from String
+
+            __name = "sharedIdentifier";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_identifier";
+            }
+
+            if ( this.hasSharedIdentifier > 0 ) {
+
+                if ( sharedIdentifier != null ) {
+                    generator.writeStringField( __name, sharedIdentifier );
                 }
 
             }
@@ -25779,6 +26379,16 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member identifier from String
+
+                case "identifier":
+
+                    jParser.nextToken();
+                    setIdentifier( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member permalink_redirect from String
 
                 case "permalink_redirect":
@@ -26415,6 +27025,36 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSharedProfileTitle( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_link from String
+
+                case "shared_author_link":
+
+                    jParser.nextToken();
+                    setSharedAuthorLink( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_name from String
+
+                case "shared_author_name":
+
+                    jParser.nextToken();
+                    setSharedAuthorName( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_identifier from String
+
+                case "shared_identifier":
+
+                    jParser.nextToken();
+                    setSharedIdentifier( jParser.getValueAsString() );
 
                     break;
 
