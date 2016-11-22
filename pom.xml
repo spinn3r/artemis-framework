@@ -148,6 +148,13 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.spinn3r.junit.categories</groupId>
+            <artifactId>artemis-junit-categories</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <profiles>
