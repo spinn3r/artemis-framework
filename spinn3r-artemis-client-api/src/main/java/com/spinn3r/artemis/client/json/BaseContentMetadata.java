@@ -1632,6 +1632,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSharedAuthorHandle = 0;
+
+    public int hasModifiedSharedAuthorHandle = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorHandle = false;
+
+    protected String sharedAuthorHandle;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasReplied = 0;
 
     public int hasModifiedReplied = 0;
@@ -8019,6 +8035,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedSharedPermalink;
     }
 
+    public BaseContentMetadata setSharedAuthorHandle ( String sharedAuthorHandle ) {
+
+        ++this.hasSharedAuthorHandle;
+        ++this.hasModifiedSharedAuthorHandle;
+
+        this.sharedAuthorHandle = sharedAuthorHandle;
+
+        hasDefinedSharedAuthorHandle = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The handle of the author.  This is a unique token/handle for the author across the whole site.  For example 'barackobama' and would never conflict with another account.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_handle
+     * </p>
+     */
+    public String getSharedAuthorHandle() {
+
+        if ( this.constructed == false && this.hasSharedAuthorHandle == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorHandle" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorHandle;
+    }
+
+    /**
+     * <p>
+     * The handle of the author.  This is a unique token/handle for the author across the whole site.  For example 'barackobama' and would never conflict with another account.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_handle
+     * </p>
+     */
+    public Optional<String> getSharedAuthorHandleAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorHandle == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorHandle );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorHandle () {
+        return this.hasSharedAuthorHandle > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorHandle () {
+
+        this.hasSharedAuthorHandle = 0;
+        this.hasModifiedSharedAuthorHandle = 0;
+        this.hasDefinedSharedAuthorHandle = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorHandle () {
+        return this.hasModifiedSharedAuthorHandle > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorHandle () {
+        return this.hasDefinedSharedAuthorHandle;
+    }
+
     public BaseContentMetadata setReplied ( boolean replied ) {
 
         ++this.hasReplied;
@@ -10592,6 +10692,10 @@ public abstract class BaseContentMetadata
             setSharedPermalink( obj.getSharedPermalink() );
         }
 
+        if ( obj.hasSharedAuthorHandle() ) {
+            setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
         if ( obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -11233,6 +11337,15 @@ public abstract class BaseContentMetadata
             setSharedPermalink( obj.getSharedPermalink() );
         }
 
+        if ( ! hasSharedAuthorHandle() && obj.hasSharedAuthorHandle() ) {
+            setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
+        if ( hasSharedAuthorHandle() && getSharedAuthorHandle() == null &&
+            obj.hasSharedAuthorHandle() && obj.getSharedAuthorHandle() != null ) {
+            setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
         if ( ! hasReplied() && obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -11530,6 +11643,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedSharedIdentifier = 0;
 
         this.hasModifiedSharedPermalink = 0;
+
+        this.hasModifiedSharedAuthorHandle = 0;
 
         this.hasModifiedReplied = 0;
 
@@ -11869,6 +11984,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedSharedPermalink() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorHandle() ) {
             return true;
         }
 
@@ -12570,6 +12689,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "sharedPermalink=" );
             buff.append( sharedPermalink );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorHandle > 0 ) {
+
+            buff.append( "sharedAuthorHandle=" );
+            buff.append( sharedAuthorHandle );
             buff.append( " " );
 
         }
@@ -13430,6 +13557,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( sharedPermalink, cmp.sharedPermalink ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorHandle() != cmp.hasSharedAuthorHandle() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorHandle, cmp.sharedAuthorHandle ) ) {
             return false;
         }
 
@@ -14966,6 +15102,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member shared_author_handle from String
+
+            __name = "sharedAuthorHandle";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_handle";
+            }
+
+            if ( this.hasSharedAuthorHandle > 0 ) {
+
+                if ( sharedAuthorHandle != null ) {
+                    generator.writeStringField( __name, sharedAuthorHandle );
+                }
+
+            }
+
             // ***** json encode member replied from boolean
 
             __name = "replied";
@@ -16135,6 +16287,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setSharedPermalink( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_handle from String
+
+                case "shared_author_handle":
+
+                    jParser.nextToken();
+                    setSharedAuthorHandle( jParser.getValueAsString() );
 
                     break;
 
