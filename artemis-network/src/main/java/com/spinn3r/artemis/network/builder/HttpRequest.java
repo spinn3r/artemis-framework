@@ -76,12 +76,21 @@ public interface HttpRequest {
 
     int getResponseCode();
 
+    /**
+     * @Deprecated use {@link HttpRequest#getHttpRequestMeta()}
+     */
     @Deprecated
     String getRequestHeader(String name);
 
+    /**
+     * @Deprecated use {@link HttpRequest#getHttpRequestMeta()}
+     */
     @Deprecated
     Set<String> getRequestHeaderNames();
 
+    /**
+     * @Deprecated use {@link HttpRequest#getHttpRequestMeta()}
+     */
     @Deprecated
     ImmutableMap<String,String> getRequestHeadersMap();
 
