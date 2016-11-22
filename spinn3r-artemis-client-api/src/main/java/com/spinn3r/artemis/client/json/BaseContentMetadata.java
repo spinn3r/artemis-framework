@@ -1616,6 +1616,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSharedPermalink = 0;
+
+    public int hasModifiedSharedPermalink = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedPermalink = false;
+
+    protected String sharedPermalink;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasReplied = 0;
 
     public int hasModifiedReplied = 0;
@@ -7763,6 +7779,88 @@ public abstract class BaseContentMetadata
         return this.hasDefinedSharedIdentifier;
     }
 
+    public BaseContentMetadata setSharedPermalink ( String sharedPermalink ) {
+
+        ++this.hasSharedPermalink;
+        ++this.hasModifiedSharedPermalink;
+
+        this.sharedPermalink = sharedPermalink;
+
+        hasDefinedSharedPermalink = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The unique URL to the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_permalink
+     * </p>
+     */
+    public String getSharedPermalink() {
+
+        if ( this.constructed == false && this.hasSharedPermalink == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedPermalink" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedPermalink;
+    }
+
+    /**
+     * <p>
+     * The unique URL to the content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_permalink
+     * </p>
+     */
+    public Optional<String> getSharedPermalinkAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedPermalink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedPermalink );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedPermalink () {
+        return this.hasSharedPermalink > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedPermalink () {
+        this.hasSharedPermalink = 0;
+        this.hasModifiedSharedPermalink = 0;
+        this.hasDefinedSharedPermalink = false;
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedPermalink () {
+        return this.hasModifiedSharedPermalink > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedPermalink () {
+        return this.hasDefinedSharedPermalink;
+    }
+
     public BaseContentMetadata setReplied ( boolean replied ) {
 
         ++this.hasReplied;
@@ -10258,6 +10356,10 @@ public abstract class BaseContentMetadata
             setSharedIdentifier( obj.getSharedIdentifier() );
         }
 
+        if ( obj.hasSharedPermalink() ) {
+            setSharedPermalink( obj.getSharedPermalink() );
+        }
+
         if ( obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -10890,6 +10992,15 @@ public abstract class BaseContentMetadata
             setSharedIdentifier( obj.getSharedIdentifier() );
         }
 
+        if ( ! hasSharedPermalink() && obj.hasSharedPermalink() ) {
+            setSharedPermalink( obj.getSharedPermalink() );
+        }
+
+        if ( hasSharedPermalink() && getSharedPermalink() == null &&
+            obj.hasSharedPermalink() && obj.getSharedPermalink() != null ) {
+            setSharedPermalink( obj.getSharedPermalink() );
+        }
+
         if ( ! hasReplied() && obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -11185,6 +11296,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedSharedAuthorUserId = 0;
 
         this.hasModifiedSharedIdentifier = 0;
+
+        this.hasModifiedSharedPermalink = 0;
 
         this.hasModifiedReplied = 0;
 
@@ -11520,6 +11633,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedSharedIdentifier() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedPermalink() ) {
             return true;
         }
 
@@ -12213,6 +12330,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "sharedIdentifier=" );
             buff.append( sharedIdentifier );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedPermalink > 0 ) {
+
+            buff.append( "sharedPermalink=" );
+            buff.append( sharedPermalink );
             buff.append( " " );
 
         }
@@ -13064,6 +13189,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( sharedIdentifier, cmp.sharedIdentifier ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedPermalink() != cmp.hasSharedPermalink() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedPermalink, cmp.sharedPermalink ) ) {
             return false;
         }
 
@@ -14584,6 +14718,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member shared_permalink from String
+
+            __name = "sharedPermalink";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_permalink";
+            }
+
+            if ( this.hasSharedPermalink > 0 ) {
+
+                if ( sharedPermalink != null ) {
+                    generator.writeStringField( __name, sharedPermalink );
+                }
+
+            }
+
             // ***** json encode member replied from boolean
 
             __name = "replied";
@@ -15743,6 +15893,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setSharedIdentifier( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_permalink from String
+
+                case "shared_permalink":
+
+                    jParser.nextToken();
+                    setSharedPermalink( jParser.getValueAsString() );
 
                     break;
 
