@@ -19,7 +19,6 @@ import com.spinn3r.artemis.metrics.init.MetricsService;
 import com.spinn3r.artemis.metrics.init.uptime.UptimeMetricsService;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
-import com.spinn3r.artemis.network.URLResourceRequest;
 import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
@@ -31,6 +30,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -40,7 +40,7 @@ import java.net.URL;
 import java.util.Map;
 
 import static com.spinn3r.artemis.init.Services.*;
-import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_READ_TIMEOUT;
+import static com.spinn3r.artemis.network.builder.HttpRequest.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
@@ -402,7 +402,6 @@ public class DefaultHttpRequestBuilderTest {
 
         assertNotEquals( "", contentWithEncoding );
         assertTrue( contentWithEncoding.length() > 0 );
-
 
     }
 
