@@ -9779,7 +9779,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * A platform specific unique identifier for this post.
+     * A platform specific unique identifier for this post.  Note that this is NOT always present as some platforms lack the concept of unique identifiers.  Additionally, this may conflict with another identifier from another platform.
      * </p>
      *
      * <p>
@@ -9798,7 +9798,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * A platform specific unique identifier for this post.
+     * A platform specific unique identifier for this post.  Note that this is NOT always present as some platforms lack the concept of unique identifiers.  Additionally, this may conflict with another identifier from another platform.
      * </p>
      *
      * <p>
