@@ -8035,8 +8035,6 @@ public abstract class BaseContent
         this.hasModifiedSourceVerified = 0;
         this.hasDefinedSourceVerified = false;
 
-            sourceVerified = false;
-
     }
 
     /**
@@ -11011,8 +11009,6 @@ public abstract class BaseContent
         this.hasMainAuthoritative = 0;
         this.hasModifiedMainAuthoritative = 0;
         this.hasDefinedMainAuthoritative = false;
-
-            mainAuthoritative = false;
 
     }
 
@@ -15036,8 +15032,6 @@ public abstract class BaseContent
         this.hasModifiedShared = 0;
         this.hasDefinedShared = false;
 
-            shared = false;
-
     }
 
     /**
@@ -15793,8 +15787,6 @@ public abstract class BaseContent
         this.hasReplied = 0;
         this.hasModifiedReplied = 0;
         this.hasDefinedReplied = false;
-
-            replied = false;
 
     }
 
@@ -17999,8 +17991,6 @@ public abstract class BaseContent
         this.hasPinned = 0;
         this.hasModifiedPinned = 0;
         this.hasDefinedPinned = false;
-
-            pinned = false;
 
     }
 

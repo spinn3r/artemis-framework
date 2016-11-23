@@ -3409,8 +3409,6 @@ public abstract class BaseContentMetadata
         this.hasModifiedMainAuthoritative = 0;
         this.hasDefinedMainAuthoritative = false;
 
-            mainAuthoritative = false;
-
     }
 
     /**
@@ -7433,8 +7431,6 @@ public abstract class BaseContentMetadata
         this.hasModifiedShared = 0;
         this.hasDefinedShared = false;
 
-            shared = false;
-
     }
 
     /**
@@ -8190,8 +8186,6 @@ public abstract class BaseContentMetadata
         this.hasReplied = 0;
         this.hasModifiedReplied = 0;
         this.hasDefinedReplied = false;
-
-            replied = false;
 
     }
 
@@ -10396,8 +10390,6 @@ public abstract class BaseContentMetadata
         this.hasPinned = 0;
         this.hasModifiedPinned = 0;
         this.hasDefinedPinned = false;
-
-            pinned = false;
 
     }
 
