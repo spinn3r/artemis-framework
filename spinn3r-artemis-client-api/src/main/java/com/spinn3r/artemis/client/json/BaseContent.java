@@ -7342,7 +7342,7 @@ public abstract class BaseContent
         this.hasModifiedSourceSettingMinimumContentMetadataScore = 0;
         this.hasDefinedSourceSettingMinimumContentMetadataScore = false;
 
-            sourceSettingMinimumContentMetadataScore = 0;
+        sourceSettingMinimumContentMetadataScore = 0;
 
     }
 
@@ -7777,7 +7777,7 @@ public abstract class BaseContent
         this.hasModifiedSourceFavorites = 0;
         this.hasDefinedSourceFavorites = false;
 
-            sourceFavorites = 0;
+        sourceFavorites = 0;
 
     }
 
@@ -7863,7 +7863,7 @@ public abstract class BaseContent
         this.hasModifiedSourceFollowers = 0;
         this.hasDefinedSourceFollowers = false;
 
-            sourceFollowers = 0;
+        sourceFollowers = 0;
 
     }
 
@@ -7949,7 +7949,7 @@ public abstract class BaseContent
         this.hasModifiedSourceFollowing = 0;
         this.hasDefinedSourceFollowing = false;
 
-            sourceFollowing = 0;
+        sourceFollowing = 0;
 
     }
 
@@ -8035,7 +8035,7 @@ public abstract class BaseContent
         this.hasModifiedSourceVerified = 0;
         this.hasDefinedSourceVerified = false;
 
-            sourceVerified = false;
+        sourceVerified = false;
 
     }
 
@@ -8375,7 +8375,7 @@ public abstract class BaseContent
         this.hasModifiedSourceImageWidth = 0;
         this.hasDefinedSourceImageWidth = false;
 
-            sourceImageWidth = 0;
+        sourceImageWidth = 0;
 
     }
 
@@ -8461,7 +8461,7 @@ public abstract class BaseContent
         this.hasModifiedSourceImageHeight = 0;
         this.hasDefinedSourceImageHeight = false;
 
-            sourceImageHeight = 0;
+        sourceImageHeight = 0;
 
     }
 
@@ -8885,7 +8885,7 @@ public abstract class BaseContent
         this.hasModifiedSourceFaviconWidth = 0;
         this.hasDefinedSourceFaviconWidth = false;
 
-            sourceFaviconWidth = 0;
+        sourceFaviconWidth = 0;
 
     }
 
@@ -8971,7 +8971,7 @@ public abstract class BaseContent
         this.hasModifiedSourceFaviconHeight = 0;
         this.hasDefinedSourceFaviconHeight = false;
 
-            sourceFaviconHeight = 0;
+        sourceFaviconHeight = 0;
 
     }
 
@@ -9154,7 +9154,7 @@ public abstract class BaseContent
         this.hasModifiedSourceLikes = 0;
         this.hasDefinedSourceLikes = false;
 
-            sourceLikes = 0;
+        sourceLikes = 0;
 
     }
 
@@ -9326,7 +9326,7 @@ public abstract class BaseContent
         this.hasModifiedSourceParsedPosts = 0;
         this.hasDefinedSourceParsedPosts = false;
 
-            sourceParsedPosts = 0;
+        sourceParsedPosts = 0;
 
     }
 
@@ -9412,7 +9412,7 @@ public abstract class BaseContent
         this.hasModifiedSourceParsedPostsMax = 0;
         this.hasDefinedSourceParsedPostsMax = false;
 
-            sourceParsedPostsMax = 0;
+        sourceParsedPostsMax = 0;
 
     }
 
@@ -10842,7 +10842,7 @@ public abstract class BaseContent
         this.hasModifiedMainLength = 0;
         this.hasDefinedMainLength = false;
 
-            mainLength = 0;
+        mainLength = 0;
 
     }
 
@@ -11012,7 +11012,7 @@ public abstract class BaseContent
         this.hasModifiedMainAuthoritative = 0;
         this.hasDefinedMainAuthoritative = false;
 
-            mainAuthoritative = false;
+        mainAuthoritative = false;
 
     }
 
@@ -11266,7 +11266,7 @@ public abstract class BaseContent
         this.hasModifiedExtractLength = 0;
         this.hasDefinedExtractLength = false;
 
-            extractLength = 0;
+        extractLength = 0;
 
     }
 
@@ -12754,7 +12754,7 @@ public abstract class BaseContent
         this.hasModifiedAuthorFollowers = 0;
         this.hasDefinedAuthorFollowers = false;
 
-            authorFollowers = 0;
+        authorFollowers = 0;
 
     }
 
@@ -13008,7 +13008,7 @@ public abstract class BaseContent
         this.hasModifiedAuthorAvatarWidth = 0;
         this.hasDefinedAuthorAvatarWidth = false;
 
-            authorAvatarWidth = 0;
+        authorAvatarWidth = 0;
 
     }
 
@@ -13094,7 +13094,7 @@ public abstract class BaseContent
         this.hasModifiedAuthorAvatarHeight = 0;
         this.hasDefinedAuthorAvatarHeight = false;
 
-            authorAvatarHeight = 0;
+        authorAvatarHeight = 0;
 
     }
 
@@ -14608,7 +14608,7 @@ public abstract class BaseContent
         this.hasModifiedFaviconWidth = 0;
         this.hasDefinedFaviconWidth = false;
 
-            faviconWidth = 0;
+        faviconWidth = 0;
 
     }
 
@@ -14694,7 +14694,7 @@ public abstract class BaseContent
         this.hasModifiedFaviconHeight = 0;
         this.hasDefinedFaviconHeight = false;
 
-            faviconHeight = 0;
+        faviconHeight = 0;
 
     }
 
@@ -14864,7 +14864,7 @@ public abstract class BaseContent
         this.hasModifiedImageWidth = 0;
         this.hasDefinedImageWidth = false;
 
-            imageWidth = 0;
+        imageWidth = 0;
 
     }
 
@@ -14950,7 +14950,7 @@ public abstract class BaseContent
         this.hasModifiedImageHeight = 0;
         this.hasDefinedImageHeight = false;
 
-            imageHeight = 0;
+        imageHeight = 0;
 
     }
 
@@ -15036,7 +15036,7 @@ public abstract class BaseContent
         this.hasModifiedShared = 0;
         this.hasDefinedShared = false;
 
-            shared = false;
+        shared = false;
 
     }
 
@@ -15794,7 +15794,7 @@ public abstract class BaseContent
         this.hasModifiedReplied = 0;
         this.hasDefinedReplied = false;
 
-            replied = false;
+        replied = false;
 
     }
 
@@ -16216,7 +16216,7 @@ public abstract class BaseContent
         this.hasModifiedVideoPlayerWidth = 0;
         this.hasDefinedVideoPlayerWidth = false;
 
-            videoPlayerWidth = 0;
+        videoPlayerWidth = 0;
 
     }
 
@@ -16302,7 +16302,7 @@ public abstract class BaseContent
         this.hasModifiedVideoPlayerHeight = 0;
         this.hasDefinedVideoPlayerHeight = false;
 
-            videoPlayerHeight = 0;
+        videoPlayerHeight = 0;
 
     }
 
@@ -16808,7 +16808,7 @@ public abstract class BaseContent
         this.hasModifiedDuplicatesCount = 0;
         this.hasDefinedDuplicatesCount = false;
 
-            duplicatesCount = 0;
+        duplicatesCount = 0;
 
     }
 
@@ -17398,7 +17398,7 @@ public abstract class BaseContent
         this.hasModifiedLikes = 0;
         this.hasDefinedLikes = false;
 
-            likes = 0;
+        likes = 0;
 
     }
 
@@ -17484,7 +17484,7 @@ public abstract class BaseContent
         this.hasModifiedDislikes = 0;
         this.hasDefinedDislikes = false;
 
-            dislikes = 0;
+        dislikes = 0;
 
     }
 
@@ -17570,7 +17570,7 @@ public abstract class BaseContent
         this.hasModifiedComments = 0;
         this.hasDefinedComments = false;
 
-            comments = 0;
+        comments = 0;
 
     }
 
@@ -17656,7 +17656,7 @@ public abstract class BaseContent
         this.hasModifiedViews = 0;
         this.hasDefinedViews = false;
 
-            views = 0;
+        views = 0;
 
     }
 
@@ -17742,7 +17742,7 @@ public abstract class BaseContent
         this.hasModifiedMetadataScore = 0;
         this.hasDefinedMetadataScore = false;
 
-            metadataScore = 0;
+        metadataScore = 0;
 
     }
 
@@ -17828,7 +17828,7 @@ public abstract class BaseContent
         this.hasModifiedShares = 0;
         this.hasDefinedShares = false;
 
-            shares = 0;
+        shares = 0;
 
     }
 
@@ -17914,7 +17914,7 @@ public abstract class BaseContent
         this.hasModifiedMetadataUpdates = 0;
         this.hasDefinedMetadataUpdates = false;
 
-            metadataUpdates = 0;
+        metadataUpdates = 0;
 
     }
 
@@ -18000,7 +18000,7 @@ public abstract class BaseContent
         this.hasModifiedPinned = 0;
         this.hasDefinedPinned = false;
 
-            pinned = false;
+        pinned = false;
 
     }
 

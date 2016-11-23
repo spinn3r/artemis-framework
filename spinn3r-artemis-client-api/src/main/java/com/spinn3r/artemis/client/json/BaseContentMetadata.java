@@ -3239,7 +3239,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedMainLength = 0;
         this.hasDefinedMainLength = false;
 
-            mainLength = 0;
+        mainLength = 0;
 
     }
 
@@ -3409,7 +3409,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedMainAuthoritative = 0;
         this.hasDefinedMainAuthoritative = false;
 
-            mainAuthoritative = false;
+        mainAuthoritative = false;
 
     }
 
@@ -3663,7 +3663,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedExtractLength = 0;
         this.hasDefinedExtractLength = false;
 
-            extractLength = 0;
+        extractLength = 0;
 
     }
 
@@ -5151,7 +5151,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedAuthorFollowers = 0;
         this.hasDefinedAuthorFollowers = false;
 
-            authorFollowers = 0;
+        authorFollowers = 0;
 
     }
 
@@ -5405,7 +5405,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedAuthorAvatarWidth = 0;
         this.hasDefinedAuthorAvatarWidth = false;
 
-            authorAvatarWidth = 0;
+        authorAvatarWidth = 0;
 
     }
 
@@ -5491,7 +5491,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedAuthorAvatarHeight = 0;
         this.hasDefinedAuthorAvatarHeight = false;
 
-            authorAvatarHeight = 0;
+        authorAvatarHeight = 0;
 
     }
 
@@ -7005,7 +7005,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedFaviconWidth = 0;
         this.hasDefinedFaviconWidth = false;
 
-            faviconWidth = 0;
+        faviconWidth = 0;
 
     }
 
@@ -7091,7 +7091,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedFaviconHeight = 0;
         this.hasDefinedFaviconHeight = false;
 
-            faviconHeight = 0;
+        faviconHeight = 0;
 
     }
 
@@ -7261,7 +7261,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedImageWidth = 0;
         this.hasDefinedImageWidth = false;
 
-            imageWidth = 0;
+        imageWidth = 0;
 
     }
 
@@ -7347,7 +7347,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedImageHeight = 0;
         this.hasDefinedImageHeight = false;
 
-            imageHeight = 0;
+        imageHeight = 0;
 
     }
 
@@ -7433,7 +7433,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedShared = 0;
         this.hasDefinedShared = false;
 
-            shared = false;
+        shared = false;
 
     }
 
@@ -8191,7 +8191,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedReplied = 0;
         this.hasDefinedReplied = false;
 
-            replied = false;
+        replied = false;
 
     }
 
@@ -8613,7 +8613,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedVideoPlayerWidth = 0;
         this.hasDefinedVideoPlayerWidth = false;
 
-            videoPlayerWidth = 0;
+        videoPlayerWidth = 0;
 
     }
 
@@ -8699,7 +8699,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedVideoPlayerHeight = 0;
         this.hasDefinedVideoPlayerHeight = false;
 
-            videoPlayerHeight = 0;
+        videoPlayerHeight = 0;
 
     }
 
@@ -9205,7 +9205,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedDuplicatesCount = 0;
         this.hasDefinedDuplicatesCount = false;
 
-            duplicatesCount = 0;
+        duplicatesCount = 0;
 
     }
 
@@ -9795,7 +9795,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedLikes = 0;
         this.hasDefinedLikes = false;
 
-            likes = 0;
+        likes = 0;
 
     }
 
@@ -9881,7 +9881,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedDislikes = 0;
         this.hasDefinedDislikes = false;
 
-            dislikes = 0;
+        dislikes = 0;
 
     }
 
@@ -9967,7 +9967,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedComments = 0;
         this.hasDefinedComments = false;
 
-            comments = 0;
+        comments = 0;
 
     }
 
@@ -10053,7 +10053,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedViews = 0;
         this.hasDefinedViews = false;
 
-            views = 0;
+        views = 0;
 
     }
 
@@ -10139,7 +10139,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedMetadataScore = 0;
         this.hasDefinedMetadataScore = false;
 
-            metadataScore = 0;
+        metadataScore = 0;
 
     }
 
@@ -10225,7 +10225,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedShares = 0;
         this.hasDefinedShares = false;
 
-            shares = 0;
+        shares = 0;
 
     }
 
@@ -10311,7 +10311,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedMetadataUpdates = 0;
         this.hasDefinedMetadataUpdates = false;
 
-            metadataUpdates = 0;
+        metadataUpdates = 0;
 
     }
 
@@ -10397,7 +10397,7 @@ public abstract class BaseContentMetadata
         this.hasModifiedPinned = 0;
         this.hasDefinedPinned = false;
 
-            pinned = false;
+        pinned = false;
 
     }
 
