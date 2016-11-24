@@ -86,7 +86,8 @@ public class ServicesTool {
                 service.start();
 
             } catch ( Exception e ) {
-                throw new Exception( "Failed to start: " + service.getClass().getName(), e );
+                tracer.error("Failed to start: " + service.getClass().getName(), e );
+                throw e;
             }
 
             tracer.info( "Starting service: %s ...done (%s)", service.getClass().getName(), stopwatch.stop() );
