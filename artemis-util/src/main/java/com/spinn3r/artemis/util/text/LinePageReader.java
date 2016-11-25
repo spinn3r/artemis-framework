@@ -38,7 +38,7 @@ public class LinePageReader implements Closeable {
 
         private ImmutableList<String> current;
 
-        public DefaultLinePageIterator() throws IOException {
+        DefaultLinePageIterator() throws IOException {
             current = read();
         }
 
