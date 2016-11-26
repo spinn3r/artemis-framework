@@ -4,23 +4,22 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.spinn3r.artemis.init.AutoService;
 import com.spinn3r.artemis.init.Launcher;
+import com.spinn3r.artemis.init.Mode;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import static com.spinn3r.artemis.init.Lifecycle.STARTED;
+import static org.junit.Assert.*;
+
 /**
  *
  */
-@Ignore
 public class TestAutoService {
 
     @Test
-    @Ignore
     public void testBasicUsage() throws Exception {
-
-        // FIXME: there is a problem here - the injector only sees the instance
-        // AFTER we get the instance...
 
         Launcher launcher = Launcher.newBuilder()
                                     .setConfigLoader(new ResourceConfigLoader())
@@ -28,10 +27,18 @@ public class TestAutoService {
                                     .build();
         launcher.launch();
 
-        ShoppingCart instance = launcher.getInstance(ShoppingCart.class);
+        ShoppingCart shoppingCart = launcher.getInstance(ShoppingCart.class);
 
         DefaultShoppingCart defaultShoppingCart = launcher.getInstance(DefaultShoppingCart.class);
-        Assert.assertTrue(defaultShoppingCart.started);
+
+        assertTrue(shoppingCart == defaultShoppingCart);
+        assertEquals(State.STARTED, defaultShoppingCart.state);
+        assertEquals(Mode.LAUNCH, launcher.getMode());
+
+        launcher.stop();
+
+        assertEquals(State.STOPPED, defaultShoppingCart.state);
+
 
     }
 
@@ -55,7 +62,7 @@ public class TestAutoService {
     @Singleton
     static class DefaultShoppingCart implements AutoService, ShoppingCart {
 
-        boolean started = false;
+        State state = State.NONE;
 
         @Override
         public void checkout() {
@@ -64,13 +71,23 @@ public class TestAutoService {
 
         @Override
         public void start() throws Exception {
-            started = true;
+            state = State.STARTED;
         }
 
         @Override
         public void stop() throws Exception {
-
+            state = State.STOPPED;
         }
+
+    }
+
+    enum State {
+
+        NONE,
+
+        STARTED,
+
+        STOPPED
 
     }
 
