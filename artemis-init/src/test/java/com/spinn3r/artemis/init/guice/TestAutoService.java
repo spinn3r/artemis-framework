@@ -3,13 +3,9 @@ package com.spinn3r.artemis.init.guice;
 import com.google.inject.*;
 import com.spinn3r.artemis.init.*;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
-import jdk.management.resource.internal.inst.SocketRMHooks;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static com.spinn3r.artemis.init.Lifecycle.STARTED;
-import static org.apache.log4j.Category.getInstance;
 import static org.junit.Assert.*;
 
 /**
