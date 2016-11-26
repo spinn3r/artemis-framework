@@ -4,6 +4,7 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
 import com.google.inject.TypeLiteral;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.spi.InjectionListener;
@@ -21,7 +22,7 @@ import static com.spinn3r.artemis.init.Mode.*;
  */
 public class AutoServiceModule extends AbstractModule {
 
-    List<AutoService> autoServices = Lists.newArrayList();
+    List<AutoService> startedAutoServices = Lists.newArrayList();
 
     private final Supplier<Mode> modeSupplier;
 
@@ -45,9 +46,19 @@ public class AutoServiceModule extends AbstractModule {
                         if ( injectee instanceof AutoService) {
 
                             AutoService autoService = (AutoService) injectee;
-                            autoServices.add(autoService);
+
+                            if (autoService.getClass().getAnnotation(Singleton.class) == null) {
+
+                                // Force @Singleton because we would end up having
+                                // too many instance references which would mean
+                                // we would run out of memory.
+
+                                throw new AutoServiceException.NotSingletonException("AutoService is not a singleton: " + autoService.getClass().getName());
+                            }
 
                             if (LAUNCH.equals(modeSupplier.get())) {
+
+                                startedAutoServices.add(autoService);
 
                                 Tracer tracer = tracerSupplier.get();
                                 Stopwatch stopwatch = Stopwatch.createStarted();
@@ -77,8 +88,8 @@ public class AutoServiceModule extends AbstractModule {
     /**
      * Provide the ability to the auto services.  Needed to support stopping them.
      */
-    public ImmutableList<AutoService> getAutoServices() {
-        return ImmutableList.copyOf(autoServices);
+    public ImmutableList<AutoService> getStartedAutoServices() {
+        return ImmutableList.copyOf(startedAutoServices);
     }
 
 }

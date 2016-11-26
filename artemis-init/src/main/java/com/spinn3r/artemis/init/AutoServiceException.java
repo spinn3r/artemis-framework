@@ -55,6 +55,26 @@ public class AutoServiceException extends RuntimeException {
         public StopFailedException(Throwable cause) {
             super(cause);
         }
+
+    }
+
+
+    /**
+     * AutoService instances must be @Singleton.
+     */
+    public static class NotSingletonException extends AutoServiceException {
+
+        public NotSingletonException() {
+        }
+
+        public NotSingletonException(String message) {
+            super(message);
+        }
+
+        public NotSingletonException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
     }
 
 }

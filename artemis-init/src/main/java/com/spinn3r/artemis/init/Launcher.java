@@ -1,7 +1,6 @@
 package com.spinn3r.artemis.init;
 
 import com.google.common.base.Stopwatch;
-import com.google.common.collect.Sets;
 import com.google.inject.*;
 import com.google.inject.util.Modules;
 import com.spinn3r.artemis.init.advertisements.Caller;
@@ -20,8 +19,6 @@ import com.spinn3r.artemis.init.tracer.TracerFactory;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.function.Supplier;
 
 /**
  *
@@ -220,7 +217,7 @@ public class Launcher {
 
         new ServicesTool( this, services ).stop();
 
-        for (AutoService autoService : autoServiceModule.getAutoServices().reverse()) {
+        for (AutoService autoService : autoServiceModule.getStartedAutoServices().reverse()) {
 
             getTracer().info( "Stopping service: %s ...", autoService.getClass().getName() );
 
