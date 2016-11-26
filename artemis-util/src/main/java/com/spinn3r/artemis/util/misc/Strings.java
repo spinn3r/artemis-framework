@@ -1,11 +1,16 @@
 package com.spinn3r.artemis.util.misc;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import difflib.Delta;
 import difflib.DiffUtils;
 import difflib.Patch;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -189,5 +194,18 @@ public class Strings {
         return null;
 
     }
+
+    public static InputStream toInputStream(String text) {
+        return toInputStream(text, Charsets.UTF_8);
+    }
+
+    /**
+     * Convert the given text to an InputStream so that it can be read as IO.
+     */
+    public static InputStream toInputStream(String text, Charset charset) {
+        return new ByteArrayInputStream(text.getBytes(charset));
+    }
+
+
 
 }
