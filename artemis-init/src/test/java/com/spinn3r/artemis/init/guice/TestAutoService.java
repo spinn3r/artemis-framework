@@ -66,8 +66,6 @@ public class TestAutoService {
 
     }
 
-    // FIXME: test that multiple getInstance() calls don't call start N times... just once.
-
     @Test
     @Ignore
     public void testLaunchWithServices() throws Exception {
