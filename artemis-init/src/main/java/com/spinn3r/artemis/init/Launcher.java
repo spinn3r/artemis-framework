@@ -55,7 +55,9 @@ public class Launcher {
 
     private ServiceCache serviceCache = new NullServiceCache();
 
-    AutoServiceModule autoServiceModule = new AutoServiceModule();
+    private Mode mode = Mode.NONE;
+
+    private AutoServiceModule autoServiceModule = new AutoServiceModule(this::getMode, this::getTracer);
 
     private Launcher(ConfigLoader configLoader, Advertised advertised ) {
         this.configLoader = configLoader;
@@ -81,6 +83,7 @@ public class Launcher {
      *
      */
     public void init( ServiceReferences references ) throws Exception {
+        mode = Mode.INIT;
         launch( references, ServicesTool::init );
     }
 
@@ -94,21 +97,10 @@ public class Launcher {
 
     }
 
-    public void launch( ServiceReferences references ) throws Exception {
-
-        for (AutoService autoService : autoServiceModule.getAutoServices()) {
-            autoService.start();
-        }
-
-        launch( references, (servicesTool) -> {
-                servicesTool.init();
-                servicesTool.start();
-        } );
-
-    }
-
     @SuppressWarnings("unchecked")
     public void launch( Class<? extends Service>... services ) throws Exception {
+
+        // this just wraps the services in service references and then calls launch
 
         ServiceReferences serviceReferences = new ServiceReferences();
 
@@ -120,12 +112,27 @@ public class Launcher {
 
     }
 
+    public void launch( ServiceReferences references ) throws Exception {
+
+        launch( references, (servicesTool) -> {
+
+            servicesTool.init();
+            servicesTool.start();
+
+        } );
+
+    }
+
     /**
      * Launch services by class.  This allows us to use dependency injection to
      * instantiate each one.
      *
      */
     public void launch( ServiceReferences serviceReferences, LaunchHandler launchHandler ) throws Exception {
+
+        if ( mode.equals(Mode.NONE)) {
+            mode = Mode.LAUNCH;
+        }
 
         info( "Launching...");
 
@@ -210,8 +217,16 @@ public class Launcher {
 
         new ServicesTool( this, services ).stop();
 
-        for (AutoService autoService : autoServiceModule.getAutoServices().reverse()) {
+        for (AutoService autoService : autoServiceModule.getStartedAutoServices().reverse()) {
+
+            getTracer().info( "Stopping service: %s ...", autoService.getClass().getName() );
+
+            Stopwatch stopwatch = Stopwatch.createStarted();
+
             autoService.stop();
+
+            getTracer().info( "Stopping service: %s ...done (%s)", autoService.getClass().getName(), stopwatch.stop() );
+
         }
 
         lifecycleProvider.set( Lifecycle.STOPPED );
@@ -229,6 +244,10 @@ public class Launcher {
 
     public ThreadSnapshot getThreadSnapshot() {
         return threadSnapshot;
+    }
+
+    public Mode getMode() {
+        return mode;
     }
 
     public Services getServices() {
