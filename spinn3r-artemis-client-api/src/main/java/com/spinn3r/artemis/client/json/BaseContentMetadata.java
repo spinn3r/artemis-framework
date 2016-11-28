@@ -274,6 +274,75 @@ public abstract class BaseContentMetadata
 
     }
 
+    public enum SharedType {
+
+        /**
+         * Found via the source.
+         */
+        NONE( 1 ) ,
+
+        /**
+         * Found via the feed.
+         */
+        RAW( 2 ) ,
+
+        /**
+         * Found via the feed.
+         */
+        REPLY( 3 ) ,
+
+        ;
+
+        SharedType( int value ) {
+            this.value = value;
+        }
+
+        private int value;
+
+        public int getValue() {
+            return value;
+        }
+
+        public static SharedType fromValue( int value ) {
+
+            switch( value ) {
+
+                case 1:
+                    return NONE;
+
+                case 2:
+                    return RAW;
+
+                case 3:
+                    return REPLY;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+        public static SharedType fromValue( String value ) {
+
+            switch( value ) {
+
+                case "NONE":
+                    return NONE;
+
+                case "RAW":
+                    return RAW;
+
+                case "REPLY":
+                    return REPLY;
+
+                default:
+                    throw new RuntimeException( "No enum for value: " + value );
+            }
+
+        }
+
+    }
+
     public enum Card {
 
         /**
@@ -1516,6 +1585,22 @@ public abstract class BaseContentMetadata
     public boolean hasDefinedShared = false;
 
     protected boolean shared;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedType = 0;
+
+    public int hasModifiedSharedType = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedType = false;
+
+    protected SharedType sharedType;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -7451,6 +7536,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedShared;
     }
 
+    public BaseContentMetadata setSharedType ( SharedType sharedType ) {
+
+        ++this.hasSharedType;
+        ++this.hasModifiedSharedType;
+
+        this.sharedType = sharedType;
+
+        hasDefinedSharedType = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The type of shared content.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: shared_type
+     * </p>
+     */
+    public SharedType getSharedType() {
+
+        if ( this.constructed == false && this.hasSharedType == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedType" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedType;
+    }
+
+    /**
+     * <p>
+     * The type of shared content.
+     * </p>
+     *
+     * <p>
+     * Schema type: enum , name: shared_type
+     * </p>
+     */
+    public Optional<SharedType> getSharedTypeAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedType == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedType );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedType () {
+        return this.hasSharedType > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedType () {
+
+        this.hasSharedType = 0;
+        this.hasModifiedSharedType = 0;
+        this.hasDefinedSharedType = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedType () {
+        return this.hasModifiedSharedType > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedType () {
+        return this.hasDefinedSharedType;
+    }
+
     public BaseContentMetadata setSharedProfileLink ( String sharedProfileLink ) {
 
         ++this.hasSharedProfileLink;
@@ -10672,6 +10841,10 @@ public abstract class BaseContentMetadata
             setShared( obj.getShared() );
         }
 
+        if ( obj.hasSharedType() ) {
+            setSharedType( obj.getSharedType() );
+        }
+
         if ( obj.hasSharedProfileLink() ) {
             setSharedProfileLink( obj.getSharedProfileLink() );
         }
@@ -11282,6 +11455,10 @@ public abstract class BaseContentMetadata
             setShared( obj.getShared() );
         }
 
+        if ( sharedType == null && obj.hasSharedType() && obj.getSharedType() != null ) {
+            setSharedType( obj.getSharedType() );
+        }
+
         if ( ! hasSharedProfileLink() && obj.hasSharedProfileLink() ) {
             setSharedProfileLink( obj.getSharedProfileLink() );
         }
@@ -11638,6 +11815,8 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedShared = 0;
 
+        this.hasModifiedSharedType = 0;
+
         this.hasModifiedSharedProfileLink = 0;
 
         this.hasModifiedSharedProfileTitle = 0;
@@ -11964,6 +12143,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedShared() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedType() ) {
             return true;
         }
 
@@ -12641,6 +12824,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "shared=" );
             buff.append( shared );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedType > 0 ) {
+
+            buff.append( "sharedType=" );
+            buff.append( sharedType );
             buff.append( " " );
 
         }
@@ -13502,6 +13693,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( shared != cmp.shared ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedType() != cmp.hasSharedType() ) {
+            return false;
+        }
+
+        if ( sharedType != cmp.sharedType ) {
             return false;
         }
 
@@ -14998,6 +15198,21 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member shared_type from int
+
+            __name = "sharedType";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_type";
+            }
+
+            if ( this.hasSharedType > 0 ) {
+
+                if ( sharedType != null )
+                    generator.writeStringField( __name, sharedType.toString() );
+
+            }
+
             // ***** json encode member shared_profile_link from String
 
             __name = "sharedProfileLink";
@@ -16225,6 +16440,15 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setShared( jParser.getBooleanValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_type from int
+
+                case "shared_type":
+
+                    // FIXME not implemented yet.
 
                     break;
 
