@@ -277,17 +277,17 @@ public abstract class BaseContentMetadata
     public enum SharedType {
 
         /**
-         * Found via the source.
+         * This is not shared
          */
         NONE( 1 ) ,
 
         /**
-         * Found via the feed.
+         * This is shared content but no additional text has been given. IE it is raw.
          */
         RAW( 2 ) ,
 
         /**
-         * Found via the feed.
+         * Shared content but the user has added additional content/text.
          */
         REPLY( 3 ) ,
 
