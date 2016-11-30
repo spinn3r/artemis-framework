@@ -12,6 +12,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.spinn3r.junit.categories:artemis-junit-categories:5.1-LATEST-6" level="project" />
     <orderEntry type="library" name="Maven: com.datastax.cassandra:cassandra-driver-core:2.1.9" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-handler:4.0.27.Final" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty-buffer:4.0.27.Final" level="project" />

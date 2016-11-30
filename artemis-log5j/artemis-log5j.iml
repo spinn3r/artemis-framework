@@ -10,6 +10,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.spinn3r.junit.categories:artemis-junit-categories:5.1-LATEST-6" level="project" />
     <orderEntry type="module" module-name="log5j" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="module" module-name="artemis-time" />
