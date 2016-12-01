@@ -43,6 +43,10 @@ public class ProxyMeta {
         return provider;
     }
 
+    public ProxyReference toProxyReference() {
+        return ProxyReferences.create("HTTP", host, port);
+    }
+
     @Override
     public String toString() {
         return "ProxyMeta{" +
