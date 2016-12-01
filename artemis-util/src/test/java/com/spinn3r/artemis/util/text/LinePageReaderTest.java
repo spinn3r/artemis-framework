@@ -72,15 +72,12 @@ public class LinePageReaderTest {
 
         List<ImmutableList<String>> result = Lists.newArrayList();
 
-        try( InputStream inputStream = toInputStream(text);
-             LinePageReader linePageReader = new LinePageReader(inputStream, Charsets.UTF_8, pageSize)) {
+        LinePageReader linePageReader = new LinePageReader(Charsets.UTF_8, pageSize, () -> toInputStream(text));
 
-            LinePageIterator linePageIterator = linePageReader.iterator();
+        LinePageIterator linePageIterator = linePageReader.iterator();
 
-            while(linePageIterator.hasNext()) {
-                result.add(linePageIterator.next());
-            }
-
+        while(linePageIterator.hasNext()) {
+            result.add(linePageIterator.next());
         }
 
         return ImmutableList.copyOf(result);
