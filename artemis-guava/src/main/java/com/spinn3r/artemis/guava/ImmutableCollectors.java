@@ -8,7 +8,7 @@ import java.util.stream.Collector;
 /**
  *
  */
-public class GuavaCollectors {
+public class ImmutableCollectors {
 
     /** Collect a stream of elements into an {@link ImmutableList}. */
     public static <T> Collector<T, ImmutableList.Builder<T>, ImmutableList<T>> toImmutableList() {

@@ -1,9 +1,7 @@
 package com.spinn3r.artemis.util.primitives;
 
 import com.google.common.collect.ImmutableList;
-import com.spinn3r.artemis.guava.GuavaCollectors;
-
-import java.util.List;
+import com.spinn3r.artemis.guava.ImmutableCollectors;
 
 /**
  *
@@ -15,7 +13,7 @@ public class Characters {
         return Integers.range(start, end)
                        .stream()
                        .map( current -> (char)current.intValue())
-                       .collect(GuavaCollectors.toImmutableList());
+                       .collect(ImmutableCollectors.toImmutableList());
 
     }
 
