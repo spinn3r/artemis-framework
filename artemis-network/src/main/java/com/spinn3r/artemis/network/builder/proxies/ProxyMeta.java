@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProxyMeta {
+public class ProxyMeta implements Comparable<ProxyMeta> {
 
     private final String host;
 
@@ -45,6 +45,15 @@ public class ProxyMeta {
 
     public ProxyReference toProxyReference() {
         return ProxyReferences.create("HTTP", host, port);
+    }
+
+    public String format() {
+        return String.format("%s:%s", host, port);
+    }
+
+    @Override
+    public int compareTo(ProxyMeta o) {
+        return format().compareTo(o.format());
     }
 
     @Override
