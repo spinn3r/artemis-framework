@@ -56,6 +56,17 @@ public class RequestMeta {
         return JSON.fromJSON( RequestMeta.class, json );
     }
 
+    @Override
+    public String toString() {
+        return "RequestMeta{" +
+                 "pathInfo='" + pathInfo + '\'' +
+                 ", queryString='" + queryString + '\'' +
+                 ", headers=" + headers +
+                 ", parameters=" + parameters +
+                 ", cookies=" + cookies +
+                 '}';
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Cookie {
 

@@ -22,6 +22,7 @@ import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.builder.DefaultHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMethod;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import com.spinn3r.artemis.time.init.UptimeService;
@@ -30,7 +31,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -133,6 +133,24 @@ public class DefaultHttpRequestBuilderTest {
         assertTrue( method == method.withReadTimeout( -1 ) );
         assertTrue( method == method.withRequestHeader( "foo", "bar" ) );
         assertTrue( method == method.withRequestHeaders( null ) );
+
+    }
+
+    @Test
+    public void testWithDirectProxyReference() throws Exception {
+
+        String url = String.format("http://localhost:%s/request-meta", webserverPort.getPort());
+
+        ProxyReference proxyReference = new ProxyReference(null, -1, Proxy.NO_PROXY);
+
+        HttpRequest httpRequest
+          = httpRequestBuilder
+              .withProxy(proxyReference)
+              .get(url)
+              .execute()
+              .connect();
+
+        assertEquals(200, httpRequest.getResponseCode());
 
     }
 
