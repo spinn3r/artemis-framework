@@ -49,11 +49,17 @@ public class AutoServiceModule extends AbstractModule {
 
                             if (autoService.getClass().getAnnotation(Singleton.class) == null) {
 
-                                // Force @Singleton because we would end up having
-                                // too many instance references which would mean
-                                // we would run out of memory.
+                                // for test purposes we don't care about mockito
+                                if ( ! autoService.getClass().getName().contains("EnhancerByMockito")) {
 
-                                throw new AutoServiceException.NotSingletonException("AutoService is not a singleton: " + autoService.getClass().getName());
+                                    // Force @Singleton because we would end up having
+                                    // too many instance references which would mean
+                                    // we would run out of memory.
+
+                                    throw new AutoServiceException.NotSingletonException("AutoService is not a singleton: " + autoService.getClass().getName());
+
+                                }
+
                             }
 
                             if (LAUNCH.equals(modeSupplier.get())) {
