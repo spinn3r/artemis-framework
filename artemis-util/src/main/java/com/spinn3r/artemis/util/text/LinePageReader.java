@@ -2,6 +2,7 @@ package com.spinn3r.artemis.util.text;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.util.function.IOSupplier;
 import com.spinn3r.artemis.util.io.Closeables;
 
 import java.io.*;
@@ -11,17 +12,17 @@ import java.util.List;
 /**
  * Read an InputStream by batches of lines.
  */
-public class LinePageReader implements Closeable {
+public class LinePageReader {
 
-    private final InputStreamReader inputStreamReader;
+    private final IOSupplier<InputStream> inputStreamSupplier;
 
-    private final BufferedReader bufferedReader;
+    private final Charset charset;
 
     private final int pageSize;
 
-    public LinePageReader(InputStream inputStream, Charset charset, int pageSize) throws IOException {
-        this.inputStreamReader = new InputStreamReader(inputStream, charset);
-        this.bufferedReader = new BufferedReader(inputStreamReader);
+    public LinePageReader(Charset charset, int pageSize, IOSupplier<InputStream> inputStreamSupplier) throws IOException {
+        this.charset = charset;
+        this.inputStreamSupplier = inputStreamSupplier;
         this.pageSize = pageSize;
     }
 
@@ -29,16 +30,21 @@ public class LinePageReader implements Closeable {
         return new DefaultLinePageIterator();
     }
 
-    @Override
-    public void close() throws IOException {
-        Closeables.close(bufferedReader, inputStreamReader);
-    }
-
-    private class DefaultLinePageIterator implements LinePageIterator {
+    private class DefaultLinePageIterator implements LinePageIterator, Closeable {
 
         private ImmutableList<String> current;
 
+        private final InputStream inputStream;
+
+        private final InputStreamReader inputStreamReader;
+
+        private final BufferedReader bufferedReader;
+
         DefaultLinePageIterator() throws IOException {
+            this.inputStream = inputStreamSupplier.get();
+            this.inputStreamReader = new InputStreamReader(inputStream, charset);
+            this.bufferedReader = new BufferedReader(inputStreamReader);
+
             current = read();
         }
 
@@ -74,6 +80,11 @@ public class LinePageReader implements Closeable {
 
             return ImmutableList.copyOf(result);
 
+        }
+
+        @Override
+        public void close() throws IOException {
+            Closeables.close(bufferedReader, inputStreamReader, inputStream);
         }
 
     }
