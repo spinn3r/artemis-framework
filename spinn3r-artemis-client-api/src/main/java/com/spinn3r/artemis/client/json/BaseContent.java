@@ -1323,7 +1323,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedDateFound = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date dateFound;
 
@@ -1501,7 +1501,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedLastUpdated = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date lastUpdated;
 
@@ -1599,7 +1599,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceDateFound = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceDateFound;
 
@@ -1617,7 +1617,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceLastUpdated = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceLastUpdated;
 
@@ -1635,7 +1635,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceLastPublished = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceLastPublished;
 
@@ -1653,7 +1653,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceLastPosted = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceLastPosted;
 
@@ -1847,7 +1847,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourcePshbLastPosted = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourcePshbLastPosted;
 
@@ -1865,7 +1865,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourcePshbLeaseExpires = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourcePshbLeaseExpires;
 
@@ -1915,7 +1915,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceNextUpdate = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceNextUpdate;
 
@@ -2221,7 +2221,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSourceCreated = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date sourceCreated;
 
@@ -2799,7 +2799,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedPublished = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date published;
 
@@ -2817,7 +2817,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedModified = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date modified;
 
@@ -2835,7 +2835,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedPublishedPartial = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date publishedPartial;
 
@@ -2853,7 +2853,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedModifiedPartial = false;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss'Z'", timezone="UTC", locale="en_US")
 
     protected Date modifiedPartial;
 
