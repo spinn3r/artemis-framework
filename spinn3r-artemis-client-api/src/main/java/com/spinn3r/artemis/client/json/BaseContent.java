@@ -563,6 +563,11 @@ public abstract class BaseContent
          */
         SEARCH_KEYWORD_AND_CITY( 3 ) ,
 
+        /**
+         * This source is indexed via a covering set of subscriptions.
+         */
+        COVERING_SET( 4 ) ,
+
         ;
 
         SourceSettingIndexStrategy( int value ) {
@@ -591,6 +596,9 @@ public abstract class BaseContent
                 case 3:
                     return SEARCH_KEYWORD_AND_CITY;
 
+                case 4:
+                    return COVERING_SET;
+
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
             }
@@ -612,6 +620,9 @@ public abstract class BaseContent
 
                 case "SEARCH_KEYWORD_AND_CITY":
                     return SEARCH_KEYWORD_AND_CITY;
+
+                case "COVERING_SET":
+                    return COVERING_SET;
 
                 default:
                     throw new RuntimeException( "No enum for value: " + value );
