@@ -1,17 +1,19 @@
 package com.spinn3r.artemis.init;
 
-import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.util.misc.Stack;
 import org.junit.After;
 import org.junit.Before;
 
-import static com.spinn3r.artemis.init.Services.ref;
+import static com.spinn3r.artemis.init.Services.*;
 
 /**
  * JUnit test that uses a launcher and can shut down once tests are complete.
+ *
+ * @Deprecated use {@link LauncherTest} instead.  It will allow you to supply both ServiceReferences and modules.
  */
+@Deprecated
 public class BaseLauncherTest {
 
     protected Launcher launcher;
