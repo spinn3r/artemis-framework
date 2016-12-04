@@ -7,6 +7,8 @@ import com.spinn3r.artemis.http.servlets.RequestMetaServlet;
 import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.init.MockVersionService;
 import com.spinn3r.artemis.init.ServiceReferences;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutex;
+import com.spinn3r.artemis.init.resource_mutexes.PortMutexes;
 import com.spinn3r.artemis.logging.init.ConsoleLoggingService;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
@@ -25,8 +27,6 @@ import static com.jayway.awaitility.Awaitility.*;
 
 public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
-    private static final int PORT = 8081;
-
     private Server server;
 
     Launcher launcher;
@@ -36,6 +36,11 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
     @Inject
     HelloServletFactory helloServletFactory;
+
+    @Inject
+    PortMutexes portMutexes;
+
+    PortMutex portMutex;
 
     @Override
     @Before
@@ -48,6 +53,9 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         launcher.launch( new TestServiceReferences() );
 
         launcher.getInjector().injectMembers( this );
+
+        portMutex = portMutexes.acquire(8081, 9081);
+
     }
 
     @Override
@@ -58,6 +66,9 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         System.out.printf( "Stopping server..." );
 
         this.server.stop();
+
+        portMutex.close();
+
     }
 
     @Test
@@ -65,13 +76,13 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
     public void testRequestMeta() throws Exception {
 
         this.server = new ServerBuilder()
-                        .setPort( PORT )
+                        .setPort( portMutex.getPort() )
                         .addServlet( "/", new RequestMetaServlet() )
                         .build();
 
         this.server.start();
 
-        String link = String.format( "http://localhost:%s/", PORT );
+        String link = String.format( "http://localhost:%s/", portMutex.getPort() );
         String content = httpRequestBuilder.get( link ).execute().getContentWithEncoding();
 
         System.out.printf( "content: %s\n", content );
@@ -89,13 +100,13 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
     public void test1() throws Exception {
 
         this.server = new ServerBuilder()
-                        .setPort( PORT )
+                        .setPort( portMutex.getPort() )
                         .addServlet( "/", helloServletFactory.create() )
                         .build();
 
         this.server.start();
 
-        String link = String.format( "http://localhost:%s/", PORT );
+        String link = String.format( "http://localhost:%s/", portMutex.getPort() );
         String content = httpRequestBuilder.get( link ).execute().getContentWithEncoding();
 
         System.out.printf( "content: %s\n", content );
@@ -103,18 +114,25 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
         assertEquals( "hello world", content );
 
         await().until( () -> {
-            assertTrue( out.toString().contains( "GET //localhost:8081/ HTTP/1.1" ) );
-            assertTrue( out.toString().contains( "org.eclipse.jetty.server.RequestLog 127.0.0.1" ) );
-            assertTrue( out.toString().contains( "{HTTP/1.1,[http/1.1]}{0.0.0.0:8081}" ) );
+
+            String out = tokenizeResponse(this.out.toString());
+
+            assertTrue( out.contains( "GET //localhost:xxxx/ HTTP/1.1" ) );
+            assertTrue( out.contains( "org.eclipse.jetty.server.RequestLog 127.0.0.1" ) );
+            assertTrue( out.contains( "{HTTP/1.1,[http/1.1]}{0.0.0.0:xxxx}" ) );
         } );
 
+    }
+
+    private String tokenizeResponse(String content) {
+        return content.replaceAll(":[0-9]+", ":xxxx");
     }
 
     @Test
     public void testWithLargePost() throws Exception {
 
         this.server = new ServerBuilder()
-                        .setPort( PORT )
+                        .setPort( portMutex.getPort() )
                         .setRequestHeaderSize( 64 * 1024 )
                         .setResponseHeaderSize( 64 * 1024 )
                         .addServlet( "/post", new EchoServlet() )
@@ -128,7 +146,7 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
 
         assertEquals( dataLength, data.length() );
 
-        String link = String.format( "http://localhost:%s/post", PORT );
+        String link = String.format( "http://localhost:%s/post", portMutex.getPort() );
         String content = httpRequestBuilder.post( link, data, "UTF-8", "text/plain" ).execute().getContentWithEncoding();
 
         assertEquals( data.length(), content.length() );
@@ -139,25 +157,19 @@ public class ServerBuilderTest extends BaseTestWithCapturedOutput {
     public void testUseLocalhost() throws Exception {
 
         this.server = new ServerBuilder()
-                        .setPort( PORT )
+                        .setPort( portMutex.getPort() )
                         .setUseLocalhost( true )
                         .addServlet( "/", helloServletFactory.create() )
                         .build();
 
         this.server.start();
 
-        String link = String.format( "http://localhost:%s/", PORT );
+        String link = String.format( "http://localhost:%s/", portMutex.getPort() );
         String content = httpRequestBuilder.get( link ).execute().getContentWithEncoding();
 
         System.out.printf( "content: %s\n", content );
 
         assertEquals( "hello world", content );
-
-        await().until( () -> {
-            assertTrue( out.toString().contains( "GET //localhost:8081/ HTTP/1.1" ) );
-            assertTrue( out.toString().contains( "org.eclipse.jetty.server.RequestLog 127.0.0.1" ) );
-            assertTrue( out.toString().contains( "{HTTP/1.1,[http/1.1]}{127.0.0.1:8081}" ) );
-        } );
 
     }
 
