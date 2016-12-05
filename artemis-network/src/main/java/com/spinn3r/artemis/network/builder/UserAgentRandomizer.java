@@ -9,14 +9,11 @@ import com.spinn3r.artemis.util.Randomizer;
  */
 public class UserAgentRandomizer {
 
-    private final NetworkConfig networkConfig;
-
     private final Randomizer<String> randomizer;
 
     @Inject
-    UserAgentRandomizer(NetworkConfig networkConfig) {
-        this.networkConfig = networkConfig;
-        this.randomizer = new Randomizer<>(networkConfig.getUserAgents());
+    UserAgentRandomizer(UserAgentsConfig userAgentsConfig) {
+        this.randomizer = new Randomizer<>(userAgentsConfig.getUserAgents());
     }
 
     public String fetchRandomUserAgent() {

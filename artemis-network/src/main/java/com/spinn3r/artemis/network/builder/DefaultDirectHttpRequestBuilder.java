@@ -15,7 +15,7 @@ public class DefaultDirectHttpRequestBuilder extends DefaultHttpRequestBuilder i
 
     @Inject
     DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, UserAgentRandomizer userAgentRandomizer, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
-        super(networkConfig, userAgentRandomizer, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
+        super(networkConfig, userAgentsConfig, userAgentRandomizer, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
 
         RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
         withRequestSettingsRegistry( requestSettingsRegistry );
