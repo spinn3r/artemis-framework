@@ -18,6 +18,7 @@ public class ConfiguredHttpRequestBuilder extends DefaultHttpRequestBuilder {
 
     @Inject
     ConfiguredHttpRequestBuilder(NetworkConfig networkConfig,
+                                 UserAgentsConfig userAgentsConfig,
                                  UserAgentRandomizer userAgentRandomizer,
                                  Provider<ProxyReference> proxyReferenceProvider,
                                  Provider<ProxyRegistry> proxyRegistryProvider,

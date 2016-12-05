@@ -135,7 +135,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
             defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
         }
 
-        if (networkConfig.getUserAgents() != null && userAgentsConfig.getUserAgents().size() > 0 ) {
+        if (userAgentsConfig.getUserAgents() != null && userAgentsConfig.getUserAgents().size() > 0 ) {
             defaultHttpRequestMethod.withUserAgent(userAgentRandomizer.fetchRandomUserAgent());
         } else {
             defaultHttpRequestMethod.withUserAgent(networkConfig.getUserAgent());

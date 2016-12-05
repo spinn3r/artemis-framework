@@ -14,7 +14,7 @@ import com.spinn3r.artemis.network.validators.HttpResponseValidators;
 public class DefaultDirectHttpRequestBuilder extends DefaultHttpRequestBuilder implements DirectHttpRequestBuilder {
 
     @Inject
-    DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, UserAgentRandomizer userAgentRandomizer, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
+    DefaultDirectHttpRequestBuilder(NetworkConfig networkConfig, UserAgentsConfig userAgentsConfig, UserAgentRandomizer userAgentRandomizer, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
         super(networkConfig, userAgentsConfig, userAgentRandomizer, httpResponseValidators, cookieJarManagerProvider, threadLocalCookies);
 
         RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry( networkConfig.getRequests() );
