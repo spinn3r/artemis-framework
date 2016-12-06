@@ -13,13 +13,6 @@
     <dependencies>
 
         <dependency>
-            <groupId>com.spinn3r.artemis.network</groupId>
-            <artifactId>artemis-network-test-framework</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.spinn3r.artemis.log5j</groupId>
             <artifactId>artemis-log5j</artifactId>
             <version>${project.version}</version>
