@@ -290,11 +290,14 @@ public class TestThreadLocalCookieStore extends BaseLauncherTest {
         content = content.replaceAll("\"Host\" : \"localhost:[0-9]+\"",
                                      "\"Host\" : \"localhost:xxxx\"");
 
+        content = content.replaceAll("\"User-Agent\" : \"[^\"]+\"",
+                                     "\"User-Agent\" : \"XXXX\"");
+
         assertEquals("{\n" +
                        "  \"pathInfo\" : null,\n" +
                        "  \"queryString\" : null,\n" +
                        "  \"headers\" : {\n" +
-                       "    \"User-Agent\" : \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36\",\n" +
+                       "    \"User-Agent\" : \"XXXX\",\n" +
                        "    \"Connection\" : \"close\",\n" +
                        "    \"Cookie\" : \"$Version=\\\"1\\\"; foo=\\\"bar\\\";$Path=\\\"/\\\"\",\n" +
                        "    \"Host\" : \"localhost:xxxx\",\n" +
