@@ -32,65 +32,102 @@ public class LogSink implements Loggable {
         }
     }
 
+    @Override
     public void debug(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.debug(formatMessage, params);
         }
     }
 
+    @Override
     public void info(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.info(formatMessage, params);
         }
     }
 
+    @Override
     public void warn(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.warn(formatMessage, params);
         }
     }
 
+    @Override
     public void error(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.error(formatMessage, params);
         }
     }
 
+    @Override
     public void fatal(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.fatal(formatMessage, params);
         }
     }
 
-    public void fatal(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void fatal(String formatMessage, Throwable t) {
+        fatal(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void fatal(String formatMessage, Throwable t, Object param0) {
+        fatal(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void fatal(String formatMessage, Throwable t, Object param0, Object param1) {
+        fatal(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void fatal(String formatMessage, Throwable t, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.fatal(formatMessage, t, params);
         }
     }
 
-    public void error(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void error(String formatMessage, Throwable t) {
+        error(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void error(String formatMessage, Throwable t, Object param0) {
+        error(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void error(String formatMessage, Throwable t, Object param0, Object param1) {
+        error(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void error(String formatMessage, Throwable t, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.error(formatMessage, t, params);
         }
     }
 
-    public void warn(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void warn(String formatMessage, Throwable t) {
+        warn(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void warn(String formatMessage, Throwable t, Object param0) {
+        warn(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void warn(String formatMessage, Throwable t, Object param0, Object param1) {
+        warn(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void warn(String formatMessage, Throwable t, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.warn(formatMessage, t, params);
         }
     }
-
-    public void info(String formatMessage, Throwable t, Object... params) {
-        for (Loggable loggable : _loggables) {
-            loggable.info(formatMessage, t, params);
-        }
-    }
-
-    public void debug(String formatMessage, Throwable t, Object... params) {
-        for (Loggable loggable : _loggables) {
-            loggable.debug(formatMessage, t, params);
-        }
-    }
-
     
 }

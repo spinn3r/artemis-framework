@@ -140,14 +140,6 @@ public class Logger extends AbstractLoggable {
         super.error(String.valueOf(message));
     }
 
-    public void error(java.lang.Object message, java.lang.Throwable t) {
-        super.error(String.valueOf(message), t);
-    }
-
-    public void error(String format, Throwable t) {
-        super.error(format, t, new Object[0]);
-    }
-
     public void fatal(java.lang.Object message) {
         super.fatal(String.valueOf(message));
     }

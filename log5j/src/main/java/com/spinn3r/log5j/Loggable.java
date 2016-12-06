@@ -16,6 +16,7 @@
 package com.spinn3r.log5j;
 
 public interface Loggable {
+
     String getName();
 
     void debug(String formatMessage, Object... params);
@@ -28,14 +29,30 @@ public interface Loggable {
 
     void fatal(String formatMessage, Object... params);
 
-    void debug(String formatMessage, Throwable t, Object... params);
+    //void debug(String formatMessage, Throwable t, Object... params);
 
-    void info(String formatMessage, Throwable t, Object... params);
+    //void info(String formatMessage, Throwable t, Object... params);
 
-    void warn(String formatMessage, Throwable t, Object... params);
+    void warn(String formatMessage, Throwable t);
 
-    void error(String formatMessage, Throwable t, Object... params);
+    void warn(String formatMessage, Throwable t, Object param0);
 
-    void fatal(String formatMessage, Throwable t, Object... params);
+    void warn(String formatMessage, Throwable t, Object param0, Object param1);
+
+    void error(String formatMessage, Throwable t);
+
+    void error(String formatMessage, Throwable t, Object param0);
+
+    void error(String formatMessage, Throwable t, Object param0, Object param1);
+
+    void fatal(String formatMessage, Throwable t);
+
+    void fatal(String formatMessage, Throwable t, Object param0);
+
+    void fatal(String formatMessage, Throwable t, Object param0, Object param1);
+
+    default Object[] toArray(Object... params) {
+        return params;
+    }
 
 }

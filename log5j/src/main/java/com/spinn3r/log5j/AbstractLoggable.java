@@ -45,6 +45,7 @@ public abstract class AbstractLoggable implements Loggable {
         return _logger;
     }
 
+    @Override
     public String getName() {
         return _logName;
     }
@@ -56,6 +57,7 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
+    @Override
     public void debug(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.DEBUG)) {
             log(LogEvent.create(_logger, _logName, LogLevel.DEBUG,
@@ -63,13 +65,7 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
-    public void debug(String formatMessage, Throwable t, Object... params) {
-        if (_logger.isEnabled(LogLevel.DEBUG)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.DEBUG,
-                    formatMessage, params, t));
-        }
-    }
-
+    @Override
     public void info(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.INFO)) {
             log(LogEvent.create(_logger, _logName, LogLevel.INFO,
@@ -77,32 +73,40 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
-    public void info(String formatMessage, Throwable t, Object... params) {
-        if (_logger.isEnabled(LogLevel.INFO)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.INFO,
-                    formatMessage, params, t));
-        }
-    }
-
+    @Override
     public void warn(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.WARN)) {
-            if (params != null && params.length > 0
-                    && params[0] instanceof Throwable) {
+            if (params != null && params.length > 0 && params[0] instanceof Throwable) {
                 warn(formatMessage, (Throwable) params[0], withoutFirst(params));
             } else {
-                log(LogEvent.create(_logger, _logName, LogLevel.WARN,
-                        formatMessage, params));
+                log(LogEvent.create(_logger, _logName, LogLevel.WARN, formatMessage, params));
             }
         }
     }
 
-    public void warn(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void warn(String formatMessage, Throwable t) {
+        warn(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void warn(String formatMessage, Throwable t, Object param0) {
+        warn(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void warn(String formatMessage, Throwable t, Object param0, Object param1) {
+        warn(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void warn(String formatMessage, Throwable t, Object... params) {
         if (_logger.isEnabled(LogLevel.WARN)) {
             log(LogEvent.create(_logger, _logName, LogLevel.WARN,
                     formatMessage, params, t));
         }
     }
 
+    @Override
     public void error(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.ERROR)) {
             if (params != null && params.length > 0
@@ -115,13 +119,28 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
-    public void error(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void error(String formatMessage, Throwable t) {
+        error(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void error(String formatMessage, Throwable t, Object param0) {
+        error(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void error(String formatMessage, Throwable t, Object param0, Object param1) {
+        error(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void error(String formatMessage, Throwable t, Object... params) {
         if (_logger.isEnabled(LogLevel.ERROR)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.ERROR,
-                    formatMessage, params, t));
+            log(LogEvent.create(_logger, _logName, LogLevel.ERROR, formatMessage, params, t));
         }
     }
 
+    @Override
     public void fatal(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.FATAL)) {
             if (params != null && params.length > 0
@@ -134,7 +153,22 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
-    public void fatal(String formatMessage, Throwable t, Object... params) {
+    @Override
+    public void fatal(String formatMessage, Throwable t) {
+        fatal(formatMessage, t, toArray());
+    }
+
+    @Override
+    public void fatal(String formatMessage, Throwable t, Object param0) {
+        fatal(formatMessage, t, toArray(param0));
+    }
+
+    @Override
+    public void fatal(String formatMessage, Throwable t, Object param0, Object param1) {
+        fatal(formatMessage, t, toArray(param0, param1));
+    }
+
+    private void fatal(String formatMessage, Throwable t, Object... params) {
         if (_logger.isEnabled(LogLevel.FATAL)) {
             log(LogEvent.create(_logger, _logName, LogLevel.FATAL,
                     formatMessage, params, t));
