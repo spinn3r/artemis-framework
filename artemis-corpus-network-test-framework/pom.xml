@@ -19,6 +19,13 @@
 
         <dependency>
             <groupId>com.spinn3r.artemis.network</groupId>
+            <artifactId>artemis-network-test-framework</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.network</groupId>
             <artifactId>artemis-network</artifactId>
             <version>${project.version}</version>
         </dependency>
