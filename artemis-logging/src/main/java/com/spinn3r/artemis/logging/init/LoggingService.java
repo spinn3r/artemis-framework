@@ -43,7 +43,7 @@ public class LoggingService extends BaseService implements ModularService, Loggi
     @Override
     public void start() throws Exception {
 
-        info( "Using log config: %s", config );
+        info("Using log config: %s", config);
         info("Using platform default charset encoding: %s", Charset.defaultCharset().name());
 
         if ( config.getDir() != null ) {
