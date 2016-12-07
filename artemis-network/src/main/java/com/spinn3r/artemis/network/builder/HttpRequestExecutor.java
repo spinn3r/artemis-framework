@@ -7,6 +7,7 @@ import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import javax.net.ssl.SSLException;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 
@@ -94,6 +95,7 @@ public class HttpRequestExecutor {
                 return true;
 
         } else if ( e instanceof SSLException ||
+                    e instanceof SocketException ||
                     e instanceof SocketTimeoutException) {
 
             return true;
