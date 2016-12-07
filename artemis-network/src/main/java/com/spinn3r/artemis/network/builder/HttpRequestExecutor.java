@@ -7,6 +7,8 @@ import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import javax.net.ssl.SSLException;
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
@@ -101,6 +103,28 @@ public class HttpRequestExecutor {
             // we through hard about whether socket exceptions, timeouts, etc
             // should be retried.  these are essentially identical to HTTP
             // 5xx and so I think they should be treated as such.
+
+            return true;
+
+        } else if (e instanceof IOException && e.getMessage().startsWith("Unable to tunnel through proxy")) {
+
+            // Handle in an issue where the proxy itself is having problems.
+            //
+            // This can happen if haproxy is being restarted, if all the servers
+            // are loaded too high, temporary internet connectivity to the
+            // deployed proxies, etc.
+
+            // The problem in detecting this, is that we have to use a string
+            // since the JVM doesn't give us a typed exception.  This can be
+            // mitigated in the future when we move away from java.net.URL
+            // and start using Netty.
+
+            //  Caused by: java.io.IOException: Unable to tunnel through proxy. Proxy returns "HTTP/1.0 503 Service Unavailable"
+            // at sun.net.www.protocol.http.HttpURLConnection.doTunneling(HttpURLConnection.java:2084)
+            // at sun.net.www.protocol.https.AbstractDelegateHttpsURLConnection.connect(AbstractDelegateHttpsURLConnection.java:183)
+            // at sun.net.www.protocol.https.HttpsURLConnectionImpl.connect(HttpsURLConnectionImpl.java:153)
+            // at com.spinn3r.artemis.network.URLResourceRequest.initConnection1(URLResourceRequest.java:420)
+            // ... 22 more
 
             return true;
 
