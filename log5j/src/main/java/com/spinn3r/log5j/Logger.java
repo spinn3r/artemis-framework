@@ -69,8 +69,12 @@ public class Logger extends AbstractLoggable {
 
     public static boolean DEFAULT_ASYNC = true;
     
-    private Logger(String logName, boolean async) {
+    protected Logger(String logName, boolean async) {
         super(logName, async, LogManager.createInternalLogger(logName));
+    }
+
+    protected Logger(String logName, boolean async, InternalLogger logger) {
+        super(logName, async, logger);
     }
 
     // factories
@@ -138,14 +142,6 @@ public class Logger extends AbstractLoggable {
 
     public void error(java.lang.Object message) {
         super.error(String.valueOf(message));
-    }
-
-    public void error(java.lang.Object message, java.lang.Throwable t) {
-        super.error(String.valueOf(message), t);
-    }
-
-    public void error(String format, Throwable t) {
-        super.error(format, t, new Object[0]);
     }
 
     public void fatal(java.lang.Object message) {
