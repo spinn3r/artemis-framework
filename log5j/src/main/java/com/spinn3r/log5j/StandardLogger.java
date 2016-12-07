@@ -18,6 +18,7 @@ package com.spinn3r.log5j;
 import com.spinn3r.log5j.factories.StdoutInternalLoggerFactory;
 
 public class StandardLogger extends AbstractLoggable {
+
     public StandardLogger(Loggable logger) {
         this(logger.getName());
     }
@@ -25,4 +26,5 @@ public class StandardLogger extends AbstractLoggable {
     public StandardLogger(String logName) {
         super(logName, true, new StdoutInternalLoggerFactory().create(logName));
     }
+
 }

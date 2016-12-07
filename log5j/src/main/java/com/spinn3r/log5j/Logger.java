@@ -69,8 +69,12 @@ public class Logger extends AbstractLoggable {
 
     public static boolean DEFAULT_ASYNC = true;
     
-    private Logger(String logName, boolean async) {
+    protected Logger(String logName, boolean async) {
         super(logName, async, LogManager.createInternalLogger(logName));
+    }
+
+    protected Logger(String logName, boolean async, InternalLogger logger) {
+        super(logName, async, logger);
     }
 
     // factories
