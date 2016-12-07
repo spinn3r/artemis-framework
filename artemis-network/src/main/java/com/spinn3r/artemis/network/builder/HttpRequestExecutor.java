@@ -98,10 +98,15 @@ public class HttpRequestExecutor {
                     e instanceof SocketException ||
                     e instanceof SocketTimeoutException) {
 
+            // we through hard about whether socket exceptions, timeouts, etc
+            // should be retried.  these are essentially identical to HTTP
+            // 5xx and so I think they should be treated as such.
+
             return true;
 
         }
 
+        // recurse into the causes of this exception too.
         return e.getCause() != null && isTransientHttpException(e.getCause());
 
     }
