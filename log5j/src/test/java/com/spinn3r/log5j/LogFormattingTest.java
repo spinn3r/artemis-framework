@@ -29,8 +29,8 @@ public class LogFormattingTest {
 
         logger.info("This is a test");
 
-        Assert.assertEquals("[LogEvent{time=1481071728299, threadName='main', level=INFO, formatMessage='This is a test', params=[], throwable=null}]",
-                            logEvents.toString());
+        Assert.assertEquals("[LogEvent{time=xxxx, threadName='main', level=INFO, formatMessage='This is a test', params=[], throwable=null}]",
+                            canonicalize(logEvents.toString()));
     }
 
     @Test
@@ -38,10 +38,14 @@ public class LogFormattingTest {
 
         logger.info("This is a test: %s", "hello");
 
-        Assert.assertEquals("[LogEvent{time=1481071918713, threadName='main', level=INFO, formatMessage='This is a test: %s', params=[hello], throwable=null}]",
-                            logEvents.toString());
+        Assert.assertEquals("[LogEvent{time=xxxx, threadName='main', level=INFO, formatMessage='This is a test: %s', params=[hello], throwable=null}]",
+                            canonicalize(logEvents.toString()));
     }
 
+
+    private String canonicalize(String text) {
+        return text.replaceAll("time=[0-9]+", "time=xxxx");
+    }
 
     private class TestInternalLogger implements InternalLogger {
 
