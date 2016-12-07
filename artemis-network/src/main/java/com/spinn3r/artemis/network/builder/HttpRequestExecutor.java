@@ -7,6 +7,7 @@ import com.spinn3r.artemis.time.Clock;
 import com.spinn3r.log5j.Logger;
 
 import javax.net.ssl.SSLException;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.concurrent.TimeUnit;
 
@@ -94,12 +95,18 @@ public class HttpRequestExecutor {
                 return true;
 
         } else if ( e instanceof SSLException ||
+                    e instanceof SocketException ||
                     e instanceof SocketTimeoutException) {
+
+            // we through hard about whether socket exceptions, timeouts, etc
+            // should be retried.  these are essentially identical to HTTP
+            // 5xx and so I think they should be treated as such.
 
             return true;
 
         }
 
+        // recurse into the causes of this exception too.
         return e.getCause() != null && isTransientHttpException(e.getCause());
 
     }
