@@ -19,8 +19,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class
-HttpRequestExecutorTest extends BaseLauncherTest {
+public class HttpRequestExecutorTest extends BaseLauncherTest {
 
     @Inject
     HttpRequestExecutorFactory httpRequestExecutorFactory;
