@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import javax.net.ssl.SSLException;
 
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 public class HttpRequestExecutorTest {
 
     @Test
-    public void testIsTransientHttpException() {
+    public void testTransientExceptions() {
 
         assertTrue(isTransientHttpException(new NetworkException("", 503)));
         assertTrue(isTransientHttpException(new NetworkException("", STATUS_CONNECT_TIMEOUT)));
@@ -28,12 +29,21 @@ public class HttpRequestExecutorTest {
         assertTrue(isTransientHttpException(new SocketException("")));
         assertTrue(isTransientHttpException(new NetworkException("", new SocketTimeoutException(""))));
 
-        assertFalse(isTransientHttpException(new NetworkException("", 404)));
-        assertFalse(isTransientHttpException(new RuntimeException()));
-        assertFalse(isTransientHttpException(new RuntimeException(new NetworkException("", 404))));
+    }
 
+    @Test
+    public void testWithTunnelFailure() throws Exception {
+
+        assertTrue(isTransientHttpException(new IOException("Unable to tunnel through proxy. Proxy returns \"HTTP/1.0 503 Service Unavailable\"")));
+        assertTrue(isTransientHttpException(new NetworkException("", new IOException("Unable to tunnel through proxy. Proxy returns \"HTTP/1.0 503 Service Unavailable\""))));
 
     }
 
+    @Test
+    public void testFatalNetworkExceptions() throws Exception {
+        assertFalse(isTransientHttpException(new NetworkException("", 404)));
+        assertFalse(isTransientHttpException(new RuntimeException()));
+        assertFalse(isTransientHttpException(new RuntimeException(new NetworkException("", 404))));
+    }
 
 }
