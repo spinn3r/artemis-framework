@@ -64,6 +64,10 @@ public class Strings {
 
     }
 
+    public static boolean nonEmpty(String value) {
+        return ! empty(value);
+    }
+
     public static boolean empty( String value ) {
 
         return value == null || "".equals(value);
