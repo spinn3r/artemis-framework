@@ -14,7 +14,11 @@ import java.util.Optional;
  */
 public class LocalDates {
 
-    public static Date toDate(LocalDate localDate ) {
+    public static YearMonthDay toYearMonthDay(LocalDate localDate) {
+        return new YearMonthDay(localDate.getYear(), localDate.getMonthValue(), localDate.getDayOfMonth());
+    }
+
+    public static Date toDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay( ZoneOffset.UTC ).toInstant());
     }
 

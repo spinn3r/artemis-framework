@@ -12,6 +12,7 @@ import com.spinn3r.artemis.init.tracer.TracerFactorySupplier;
 import org.apache.log4j.xml.DOMConfigurator;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -42,7 +43,8 @@ public class LoggingService extends BaseService implements ModularService, Loggi
     @Override
     public void start() throws Exception {
 
-        info( "Using log config: %s", config );
+        info("Using log config: %s", config);
+        info("Using platform default charset encoding: %s", Charset.defaultCharset().name());
 
         if ( config.getDir() != null ) {
 

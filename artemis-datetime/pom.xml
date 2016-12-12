@@ -15,6 +15,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.jackson</groupId>
+            <artifactId>artemis-jackson</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.time</groupId>
             <artifactId>artemis-time</artifactId>
             <version>${project.version}</version>
