@@ -17,11 +17,11 @@
 
     <dependencies>
 
+        <!-- needed so that we have user-agents.conf -->
         <dependency>
             <groupId>com.spinn3r.artemis.network</groupId>
             <artifactId>artemis-network-test-framework</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
