@@ -50,6 +50,11 @@ public class NetworkConfig {
         return userAgent;
     }
 
+    /**
+     * Deprecated Use {@link com.spinn3r.artemis.network.builder.UserAgentsConfig} now.
+     * @return
+     */
+    @Deprecated
     public ImmutableList<String> getUserAgents() {
         return userAgents;
     }

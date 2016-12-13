@@ -28,6 +28,8 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
 
     private final NetworkConfig networkConfig;
 
+    private final UserAgentsConfig userAgentsConfig;
+
     private final UserAgentRandomizer userAgentRandomizer;
 
     protected final HttpResponseValidators httpResponseValidators;
@@ -47,8 +49,9 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
     private long defaultConnectTimeout = ResourceRequestFactory.DEFAULT_CONNECT_TIMEOUT;
 
     @Inject
-    DefaultHttpRequestBuilder(NetworkConfig networkConfig, UserAgentRandomizer userAgentRandomizer, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
+    DefaultHttpRequestBuilder(NetworkConfig networkConfig, UserAgentsConfig userAgentsConfig, UserAgentRandomizer userAgentRandomizer, HttpResponseValidators httpResponseValidators, Provider<CookieJarManager> cookieJarManagerProvider, ThreadLocalCookies threadLocalCookies) {
         this.networkConfig = networkConfig;
+        this.userAgentsConfig = userAgentsConfig;
         this.userAgentRandomizer = userAgentRandomizer;
         this.httpResponseValidators = httpResponseValidators;
         this.cookieJarManagerProvider = cookieJarManagerProvider;
@@ -132,7 +135,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
             defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
         }
 
-        if (networkConfig.getUserAgents() != null && networkConfig.getUserAgents().size() > 0 ) {
+        if (userAgentsConfig.getUserAgents() != null && userAgentsConfig.getUserAgents().size() > 0 ) {
             defaultHttpRequestMethod.withUserAgent(userAgentRandomizer.fetchRandomUserAgent());
         } else {
             defaultHttpRequestMethod.withUserAgent(networkConfig.getUserAgent());

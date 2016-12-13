@@ -10,8 +10,8 @@ public class MultiConfigLoadersTest {
     public void test1() throws Exception {
 
         ConfigLoader configLoader
-          = MultiConfigLoaders.createMultiConfigLoader(new ResourceConfigLoader("." ),
-                                                       new ResourceConfigLoader( "/" ) );
+          = MultiConfigLoaders.create(new ResourceConfigLoader("." ),
+                                      new ResourceConfigLoader( "/" ) );
 
         assertNotNull( configLoader.getResource( this.getClass(), "nested.conf" ) );
         assertNotNull( configLoader.getResource( this.getClass(), "root.conf" ) );

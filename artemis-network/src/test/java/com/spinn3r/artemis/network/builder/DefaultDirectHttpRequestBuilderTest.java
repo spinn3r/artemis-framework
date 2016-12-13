@@ -1,16 +1,18 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
-import com.spinn3r.artemis.init.BaseLauncherTest;
+import com.spinn3r.artemis.init.LauncherTest;
+import com.spinn3r.artemis.init.config.MultiConfigLoaders;
+import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.init.config.TestResourcesConfigLoader;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.hamcrest.Matchers.*;
 
-public class DefaultDirectHttpRequestBuilderTest extends BaseLauncherTest {
+public class DefaultDirectHttpRequestBuilderTest extends LauncherTest {
 
     @Inject
     DirectHttpRequestBuilder directHttpRequestBuilder;
@@ -19,9 +21,13 @@ public class DefaultDirectHttpRequestBuilderTest extends BaseLauncherTest {
     @Before
     public void setUp() throws Exception {
 
-        TestResourcesConfigLoader configLoader = new TestResourcesConfigLoader( "src/test/resources/profiles/noproxy" );
+        setConfigLoader(MultiConfigLoaders.create(new TestResourcesConfigLoader( "src/test/resources/profiles/noproxy" ),
+                                                  new ResourceConfigLoader()));
 
-        super.setUp( configLoader, DirectNetworkService.class );
+        setServiceReferences(ImmutableList.of(DirectNetworkService.class));
+
+        super.setUp();
+
     }
 
     @Test
