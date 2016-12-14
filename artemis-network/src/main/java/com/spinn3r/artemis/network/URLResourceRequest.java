@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.spinn3r.artemis.network.cookies.CookiesEncoder;
 import com.spinn3r.log5j.Logger;
 
+import javax.net.ssl.SSLException;
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -798,6 +799,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
             setResponseCode( STATUS_READ_TIMEOUT );
         } else if ( cause instanceof ConnectException ) {
             setResponseCode( STATUS_CONNECT_TIMEOUT );
+        } else if ( cause instanceof SSLException) {
+            setResponseCode( SSL_FAILURE );
         } else {
             setResponseCode( ne.getResponseCode() );
         }
