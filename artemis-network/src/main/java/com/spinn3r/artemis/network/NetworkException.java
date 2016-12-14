@@ -127,7 +127,8 @@ public class NetworkException extends IOException {
         if ( responseCode == Integer.MIN_VALUE ) {
 
             if ( request != null &&
-                ( request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
+                ( request.getResponseCode() == SSL_FAILURE ||
+                  request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
                   request.getResponseCode() == STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
@@ -178,7 +179,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == STATUS_CONNECT_TIMEOUT ||
+        return responseCode == SSL_FAILURE ||
+               responseCode == STATUS_CONNECT_TIMEOUT ||
                responseCode == STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 

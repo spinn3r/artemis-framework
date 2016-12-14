@@ -31,6 +31,11 @@ public interface HttpRequest {
      */
     int STATUS_CONNECT_TIMEOUT = -1025;
 
+    /**
+     * SSL failed when connecting.
+     */
+    int SSL_FAILURE = -1026;
+
     // TODO: refactor the name of this method as it is confusing when compared
     // to the Content-Encoding HTTP header.  Technically this is something
     // like
