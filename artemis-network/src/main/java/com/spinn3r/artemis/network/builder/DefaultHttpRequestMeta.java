@@ -20,6 +20,8 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
 
     private final String outputContentType;
 
+    private String userAgent;
+
     public DefaultHttpRequestMeta(String resource, ImmutableMap<String, String> requestHeadersMap, ImmutableMap<String, String> cookies) {
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
@@ -34,13 +36,16 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
                                    @JsonProperty("cookies") ImmutableMap<String, String> cookies,
                                    @JsonProperty("outputContent") String outputContent,
                                    @JsonProperty("outputContentEncoding") String outputContentEncoding,
-                                   @JsonProperty("outputContentType") String outputContentType) {
+                                   @JsonProperty("outputContentType") String outputContentType,
+                                   @JsonProperty("userAgent") String userAgent) {
+
         this.resource = resource;
         this.requestHeadersMap = requestHeadersMap;
         this.cookies = cookies;
         this.outputContent = outputContent;
         this.outputContentEncoding = outputContentEncoding;
         this.outputContentType = outputContentType;
+        this.userAgent = userAgent;
     }
 
     @Override
@@ -51,6 +56,11 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
     @Override
     public ImmutableMap<String, String> getRequestHeadersMap() {
         return requestHeadersMap;
+    }
+
+    @Override
+    public String getUserAgent() {
+        return userAgent;
     }
 
     @Override
@@ -82,6 +92,7 @@ public class DefaultHttpRequestMeta implements HttpRequestMeta {
                  ", outputContent='" + outputContent + '\'' +
                  ", outputContentEncoding='" + outputContentEncoding + '\'' +
                  ", outputContentType='" + outputContentType + '\'' +
+                 ", userAgent='" + userAgent + '\'' +
                  '}';
     }
 
