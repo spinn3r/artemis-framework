@@ -5,6 +5,7 @@ import com.spinn3r.artemis.network.URLResourceRequest;
 import org.junit.Test;
 
 import javax.net.ssl.SSLException;
+import javax.net.ssl.SSLHandshakeException;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -46,4 +47,11 @@ public class HttpRequestExecutorTest {
         assertFalse(isTransientHttpException(new RuntimeException(new NetworkException("", 404))));
     }
 
+    @Test
+    public void testSSLHandshakeException() throws Exception {
+
+        assertTrue(isTransientHttpException(new SSLHandshakeException("Remote host closed connection during handshake")));
+
+    }
 }
+
