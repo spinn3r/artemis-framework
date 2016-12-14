@@ -166,15 +166,18 @@ public class NetworkService extends BaseService {
 
     private void testProxyReference( ProxyReference proxyReference ) throws Exception {
 
-        Preconditions.checkNotNull( proxyReference );
+        if(networkConfig.getTestProxies()) {
 
-        String host = proxyReference.getHost();
-        int port = proxyReference.getPort();
+            Preconditions.checkNotNull(proxyReference);
 
-        info( "Waiting for proxy on %s:%s", host, port );
+            String host = proxyReference.getHost();
+            int port = proxyReference.getPort();
 
-        waitForPort.waitFor( host, port, TIMEOUT );
+            info("Waiting for proxy on %s:%s", host, port);
 
+            waitForPort.waitFor(host, port, TIMEOUT);
+
+        }
     }
 
 }

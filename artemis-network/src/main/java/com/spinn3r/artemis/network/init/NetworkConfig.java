@@ -50,6 +50,8 @@ public class NetworkConfig {
         return userAgent;
     }
 
+    private boolean testProxies = true;
+
     /**
      * Deprecated Use {@link com.spinn3r.artemis.network.builder.UserAgentsConfig} now.
      * @return
@@ -139,6 +141,10 @@ public class NetworkConfig {
         this.cookieManagerEnabled = cookieManagerEnabled;
     }
 
+    public boolean getTestProxies() {
+        return testProxies;
+    }
+
     @Override
     public String toString() {
         return "NetworkConfig{" +
@@ -156,6 +162,7 @@ public class NetworkConfig {
                  ", cookieJarReferences=" + cookieJarReferences +
                  ", cookies=" + cookies +
                  ", cookieManagerEnabled=" + cookieManagerEnabled +
+                 ", testProxies=" + testProxies +
                  '}';
     }
 

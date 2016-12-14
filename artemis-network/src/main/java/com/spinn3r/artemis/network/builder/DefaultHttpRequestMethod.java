@@ -76,7 +76,7 @@ public class DefaultHttpRequestMethod extends BaseHttpRequestMethod implements H
 
         // *** apply proxies...
 
-        if ( defaultHttpRequestBuilder.proxyRegistry != null ) {
+        if ( proxy == null && defaultHttpRequestBuilder.proxyRegistry != null ) {
 
             ProxyReference proxyReference = defaultHttpRequestBuilder.proxyRegistry.find( resource );
 
