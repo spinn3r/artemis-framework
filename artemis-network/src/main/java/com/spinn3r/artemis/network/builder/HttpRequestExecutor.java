@@ -67,8 +67,8 @@ public class HttpRequestExecutor {
                 cause = e;
 
                 if ( isTransientHttpException( e ) ) {
-                    log.warn( "HTTP request failed.  Going to retry. (sleepIntervalMillis=%,d, retryIter=%,d, resource=%s): %s",
-                              e, sleepIntervalMillis, retryIter, e.getResource(), e.getMessage() );
+                    log.warn( "HTTP request failed.  Going to retry. (sleepIntervalMillis=%,d, retryIter=%s, maxRetries=%s, resource=%s): %s",
+                              e, sleepIntervalMillis, retryIter, maxRetries, e.getResource(), e.getMessage() );
                 } else {
                     break;
                 }
@@ -77,7 +77,7 @@ public class HttpRequestExecutor {
 
         }
 
-        log.warn("Throwing non transient exception: ", cause);
+        log.warn("Throwing non transient exception: (retries=%s)", cause, retries);
         throw cause;
 
     }
