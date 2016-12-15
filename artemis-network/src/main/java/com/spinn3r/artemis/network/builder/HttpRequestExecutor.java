@@ -77,7 +77,7 @@ public class HttpRequestExecutor {
 
         }
 
-        log.warn("Throwing non transient exception: (retries=%s)", cause, retries);
+        log.warn("Encountered unrecoverable exception: (retries=%s)", cause, retries);
         throw cause;
 
     }
