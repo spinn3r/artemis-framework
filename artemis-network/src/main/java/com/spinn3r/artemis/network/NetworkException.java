@@ -27,7 +27,9 @@ public class NetworkException extends IOException {
      *
      * Example: HTTP/1.1 200 OK
      */
-    public String status = null;
+    private String status = null;
+
+    private String resource = null;
 
     public NetworkException( String message ) {
         super( message );
@@ -58,6 +60,7 @@ public class NetworkException extends IOException {
         super( request.getResource() + ": " + getMessageFromCause( cause, message ) );
 
         this.request = request;
+        this.resource = request.getResource();
         this._urlConnection = _urlConnection;
 
         boolean timeout = cause instanceof SocketTimeoutException;
@@ -79,6 +82,7 @@ public class NetworkException extends IOException {
         //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
+        this.resource = request.getResource();
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
@@ -168,6 +172,10 @@ public class NetworkException extends IOException {
 
         return responseCode;
 
+    }
+
+    public String getResource() {
+        return resource;
     }
 
     /**

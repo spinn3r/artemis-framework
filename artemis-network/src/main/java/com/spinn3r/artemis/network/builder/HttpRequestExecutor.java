@@ -67,7 +67,8 @@ public class HttpRequestExecutor {
                 cause = e;
 
                 if ( isTransientHttpException( e ) ) {
-                    log.info( "HTTP request failed (sleeping for %,d ms): %s", sleepIntervalMillis, e.getMessage() );
+                    log.warn( "HTTP request failed.  Going to retry. (sleepIntervalMillis=%,d, retryIter=%,d, resource=%s): %s",
+                              e, sleepIntervalMillis, retryIter, e.getResource(), e.getMessage() );
                 } else {
                     break;
                 }
