@@ -46,6 +46,17 @@ public class Histograph<K extends Comparable<K>> {
     }
 
     /**
+     * Take the given histograph, and merge it into the current histograph
+     */
+    public void incrAll(Histograph<K> histograph) {
+
+        for (K key : delegate.keySet()) {
+            incr(key, delegate.get(key).get());
+        }
+
+    }
+
+    /**
      * Get all keys in the index.
      */
     public Set<K> keySet() {
