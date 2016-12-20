@@ -12,6 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Maven: com.spinn3r.junit.categories:artemis-junit-categories:5.1-LATEST-6" level="project" />
+    <orderEntry type="module" module-name="artemis-junit-categories" scope="TEST" />
     <orderEntry type="module" module-name="artemis-jackson" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.6.6" level="project" />

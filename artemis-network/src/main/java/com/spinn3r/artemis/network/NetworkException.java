@@ -27,7 +27,9 @@ public class NetworkException extends IOException {
      *
      * Example: HTTP/1.1 200 OK
      */
-    public String status = null;
+    private String status = null;
+
+    private String resource = null;
 
     public NetworkException( String message ) {
         super( message );
@@ -58,6 +60,7 @@ public class NetworkException extends IOException {
         super( request.getResource() + ": " + getMessageFromCause( cause, message ) );
 
         this.request = request;
+        this.resource = request.getResource();
         this._urlConnection = _urlConnection;
 
         boolean timeout = cause instanceof SocketTimeoutException;
@@ -79,6 +82,7 @@ public class NetworkException extends IOException {
         //why doesn't java.io.IOException support nesting?
         super( request.getResource() + ": " + message );
         this.request = request;
+        this.resource = request.getResource();
         this._urlConnection = _urlConnection;
 
         if ( _urlConnection != null ) {
@@ -127,7 +131,8 @@ public class NetworkException extends IOException {
         if ( responseCode == Integer.MIN_VALUE ) {
 
             if ( request != null &&
-                ( request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
+                ( request.getResponseCode() == SSL_FAILURE ||
+                  request.getResponseCode() == STATUS_CONNECT_TIMEOUT ||
                   request.getResponseCode() == STATUS_READ_TIMEOUT ) ) {
 
                 // we have a connect or read timeout so yield to this value.
@@ -170,6 +175,10 @@ public class NetworkException extends IOException {
 
     }
 
+    public String getResource() {
+        return resource;
+    }
+
     /**
      * Return true if this NetworkException is transient and may be resolve
      * in the future.  This includes connect and read timeouts, HTTP 5xx, etc.
@@ -178,7 +187,8 @@ public class NetworkException extends IOException {
 
         int responseCode = getResponseCode();
 
-        return responseCode == STATUS_CONNECT_TIMEOUT ||
+        return responseCode == SSL_FAILURE ||
+               responseCode == STATUS_CONNECT_TIMEOUT ||
                responseCode == STATUS_READ_TIMEOUT ||
                (responseCode >= 500 && responseCode <= 599);
 
