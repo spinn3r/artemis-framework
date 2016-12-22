@@ -12,7 +12,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="artemis-junit-categories" scope="TEST" />
     <orderEntry type="module" module-name="artemis-threads" />
     <orderEntry type="module" module-name="log5j" />
     <orderEntry type="module" module-name="artemis-util" />
