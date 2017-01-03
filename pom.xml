@@ -81,6 +81,7 @@
         <module>artemis-mockito</module>
         <module>artemis-logging-test-framework</module>
         <module>artemis-zookeeper-test-framework</module>
+        <module>artemis-jetbrains-annotations</module>
 
     </modules>
 
