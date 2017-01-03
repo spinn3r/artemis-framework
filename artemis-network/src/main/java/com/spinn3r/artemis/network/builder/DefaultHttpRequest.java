@@ -261,3 +261,4 @@ public class DefaultHttpRequest implements HttpRequest {
         return effectiveCookies;
     }
 }
+
