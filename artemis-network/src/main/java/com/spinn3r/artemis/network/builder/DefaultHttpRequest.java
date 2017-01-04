@@ -233,7 +233,8 @@ public class DefaultHttpRequest implements HttpRequest {
                                            Cookies.toMap( defaultHttpRequestMethod.cookies ),
                                            defaultHttpRequestMethod.outputContent,
                                            defaultHttpRequestMethod.outputContentEncoding,
-                                           defaultHttpRequestMethod.outputContentType );
+                                           defaultHttpRequestMethod.outputContentType,
+                                           defaultHttpRequestBuilder.getUserAgent());
 
     }
 
@@ -260,3 +261,4 @@ public class DefaultHttpRequest implements HttpRequest {
         return effectiveCookies;
     }
 }
+
