@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.Multimap;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
@@ -58,4 +59,5 @@ public interface HttpRequestBuilder {
 
     String getUserAgent();
 
+    HttpRequestMethod post(String resource, Multimap<String, ?> parameters) throws NetworkException;
 }
