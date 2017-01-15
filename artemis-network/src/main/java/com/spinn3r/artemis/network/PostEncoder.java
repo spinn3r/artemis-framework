@@ -1,6 +1,9 @@
 package com.spinn3r.artemis.network;
 
-import java.net.URLEncoder;
+import com.google.common.collect.Multimap;
+import org.apache.commons.codec.Charsets;
+
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -20,7 +23,32 @@ public class PostEncoder {
 
             buff.append( entry.getKey() );
             buff.append( "=" );
-            buff.append( URLEncoder.encode( entry.getValue().toString() ) );
+            buff.append( URLEncoder.encode( entry.getValue().toString(), Charsets.UTF_8) );
+
+        }
+
+        return buff.toString();
+
+    }
+
+    public static String encode(Multimap<String,?> map) {
+
+        StringBuilder buff = new StringBuilder();
+
+        for (String key : map.keySet()) {
+
+            Collection<?> values = map.get(key);
+
+            if ( buff.length() != 0 )
+                buff.append( "&" );
+
+            for (Object value : values) {
+
+                buff.append( key );
+                buff.append( "=" );
+                buff.append( URLEncoder.encode(value.toString(), Charsets.UTF_8) );
+
+            }
 
         }
 
