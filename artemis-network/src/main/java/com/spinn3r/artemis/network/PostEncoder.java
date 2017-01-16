@@ -40,10 +40,10 @@ public class PostEncoder {
 
             Collection<?> values = map.get(key);
 
-            if ( buff.length() != 0 )
-                buff.append( "&" );
-
             for (Object value : values) {
+
+                if ( buff.length() != 0 )
+                    buff.append( "&" );
 
                 buff.append( URLEncoder.encode(key, Charsets.UTF_8));
                 buff.append( "=" );
