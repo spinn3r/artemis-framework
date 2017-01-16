@@ -1,7 +1,7 @@
 package com.spinn3r.artemis.network;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.Multimap;
-import org.apache.commons.codec.Charsets;
 
 import java.util.Collection;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class PostEncoder {
 
             buff.append( entry.getKey() );
             buff.append( "=" );
-            buff.append( URLEncoder.encode( entry.getValue().toString(), Charsets.UTF_8) );
+            buff.append( URLEncoder.encode(entry.getValue().toString(), Charsets.UTF_8) );
 
         }
 
