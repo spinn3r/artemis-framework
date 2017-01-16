@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Map;
 public class PostEncoder {
 
     @SuppressWarnings( "deprecation" )
-    public static String encode( Map<String,?> map ) {
+    public static String encode(Map<String,?> map ) {
 
         StringBuilder buff = new StringBuilder();
 
@@ -31,7 +32,7 @@ public class PostEncoder {
 
     }
 
-    public static String encode(Multimap<String,?> map) {
+    public static String encode(ImmutableMultimap<String,?> map) {
 
         StringBuilder buff = new StringBuilder();
 
