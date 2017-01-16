@@ -1,6 +1,8 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.PostEncoder;
 import com.spinn3r.artemis.network.URLResourceRequest;
@@ -102,6 +104,12 @@ public abstract class BaseHttpRequestBuilder implements HttpRequestBuilder {
 
     @Override
     public HttpRequestMethod post(String resource, Map<String, ?> parameters) throws NetworkException {
+        String outputContent = PostEncoder.encode( parameters );
+        return post( resource, outputContent, "UTF-8", "application/x-www-form-urlencoded" );
+    }
+
+    @Override
+    public HttpRequestMethod post(String resource, ImmutableMultimap<String, ?> parameters) throws NetworkException {
         String outputContent = PostEncoder.encode( parameters );
         return post( resource, outputContent, "UTF-8", "application/x-www-form-urlencoded" );
     }
