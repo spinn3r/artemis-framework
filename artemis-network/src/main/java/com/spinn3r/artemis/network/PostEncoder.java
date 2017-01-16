@@ -44,7 +44,7 @@ public class PostEncoder {
 
             for (Object value : values) {
 
-                buff.append( key );
+                buff.append( URLEncoder.encode(key, Charsets.UTF_8));
                 buff.append( "=" );
                 buff.append( URLEncoder.encode(value.toString(), Charsets.UTF_8) );
 
