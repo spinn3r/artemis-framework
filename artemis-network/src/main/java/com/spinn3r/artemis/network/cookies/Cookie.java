@@ -64,13 +64,16 @@ public class Cookie {
                    @JsonProperty("version") CookieVersion version,
                    @JsonProperty("path") String path,
                    @JsonProperty("domain") String domain,
-                   @JsonProperty("httpOnly") boolean httpOnly) {
+                   @JsonProperty("httpOnly") boolean httpOnly,
+                   @JsonProperty("maxAge") Long maxAge) {
+
         this.name = name;
         this.value = value;
         this.version = version;
         this.path = Optional.ofNullable(path);
         this.domain = Optional.ofNullable(domain);
         this.httpOnly = httpOnly;
+        this.maxAge = Optional.ofNullable(maxAge);
     }
 
     public String getName() {
