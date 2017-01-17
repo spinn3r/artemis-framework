@@ -22,6 +22,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.jetbrains.annotations</groupId>
+            <artifactId>artemis-jetbrains-annotations</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.json</groupId>
             <artifactId>artemis-json-framework</artifactId>
             <version>${project.version}</version>
