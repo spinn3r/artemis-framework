@@ -1151,6 +1151,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * </p>
+     */
+    public final String WATCH_TIME = "watch_time";
+
+    /**
+     * <p>
      * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
      * </p>
      */

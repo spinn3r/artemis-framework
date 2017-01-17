@@ -2101,6 +2101,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasWatchTime = 0;
+
+    public int hasModifiedWatchTime = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedWatchTime = false;
+
+    protected String watchTime;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasMetadataScore = 0;
 
     public int hasModifiedMetadataScore = 0;
@@ -10240,6 +10256,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedViews;
     }
 
+    public BaseContentMetadata setWatchTime ( String watchTime ) {
+
+        ++this.hasWatchTime;
+        ++this.hasModifiedWatchTime;
+
+        this.watchTime = watchTime;
+
+        hasDefinedWatchTime = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: string , name: watch_time
+     * </p>
+     */
+    public String getWatchTime() {
+
+        if ( this.constructed == false && this.hasWatchTime == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.watchTime" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.watchTime;
+    }
+
+    /**
+     * <p>
+     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: string , name: watch_time
+     * </p>
+     */
+    public Optional<String> getWatchTimeAsOptional() {
+
+        if ( this.constructed == false && this.hasWatchTime == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.watchTime );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasWatchTime () {
+        return this.hasWatchTime > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearWatchTime () {
+
+        this.hasWatchTime = 0;
+        this.hasModifiedWatchTime = 0;
+        this.hasDefinedWatchTime = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedWatchTime () {
+        return this.hasModifiedWatchTime > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedWatchTime () {
+        return this.hasDefinedWatchTime;
+    }
+
     public BaseContentMetadata setMetadataScore ( int metadataScore ) {
 
         ++this.hasMetadataScore;
@@ -10969,6 +11069,10 @@ public abstract class BaseContentMetadata
             setViews( obj.getViews() );
         }
 
+        if ( obj.hasWatchTime() ) {
+            setWatchTime( obj.getWatchTime() );
+        }
+
         if ( obj.hasMetadataScore() ) {
             setMetadataScore( obj.getMetadataScore() );
         }
@@ -11668,6 +11772,15 @@ public abstract class BaseContentMetadata
             setViews( obj.getViews() );
         }
 
+        if ( ! hasWatchTime() && obj.hasWatchTime() ) {
+            setWatchTime( obj.getWatchTime() );
+        }
+
+        if ( hasWatchTime() && getWatchTime() == null &&
+            obj.hasWatchTime() && obj.getWatchTime() != null ) {
+            setWatchTime( obj.getWatchTime() );
+        }
+
         if ( ! hasMetadataScore() && obj.hasMetadataScore() ) {
             setMetadataScore( obj.getMetadataScore() );
         }
@@ -11878,6 +11991,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedComments = 0;
 
         this.hasModifiedViews = 0;
+
+        this.hasModifiedWatchTime = 0;
 
         this.hasModifiedMetadataScore = 0;
 
@@ -12271,6 +12386,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedViews() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedWatchTime() ) {
             return true;
         }
 
@@ -13080,6 +13199,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "views=" );
             buff.append( views );
+            buff.append( " " );
+
+        }
+
+        if ( hasWatchTime > 0 ) {
+
+            buff.append( "watchTime=" );
+            buff.append( watchTime );
             buff.append( " " );
 
         }
@@ -13981,6 +14108,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( views != cmp.views ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasWatchTime() != cmp.hasWatchTime() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( watchTime, cmp.watchTime ) ) {
             return false;
         }
 
@@ -15704,6 +15840,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member watch_time from String
+
+            __name = "watchTime";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "watch_time";
+            }
+
+            if ( this.hasWatchTime > 0 ) {
+
+                if ( watchTime != null ) {
+                    generator.writeStringField( __name, watchTime );
+                }
+
+            }
+
             // ***** json encode member metadata_score from int
 
             __name = "metadataScore";
@@ -16753,6 +16905,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setViews( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member watch_time from String
+
+                case "watch_time":
+
+                    jParser.nextToken();
+                    setWatchTime( jParser.getValueAsString() );
 
                     break;
 
