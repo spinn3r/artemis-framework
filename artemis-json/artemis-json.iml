@@ -28,6 +28,8 @@
     <orderEntry type="library" name="Maven: org.msgpack:jackson-dataformat-msgpack:0.7.0-p9" level="project" />
     <orderEntry type="library" name="Maven: org.msgpack:msgpack-core:0.7.0-p9" level="project" />
     <orderEntry type="module" module-name="artemis-util" />
+    <orderEntry type="module" module-name="artemis-jetbrains-annotations" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="module" module-name="artemis-json-framework" />
     <orderEntry type="library" name="Maven: com.googlecode.java-diff-utils:diffutils:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
