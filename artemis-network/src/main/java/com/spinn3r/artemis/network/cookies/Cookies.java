@@ -60,6 +60,21 @@ public class Cookies {
 
     }
 
+    public static ImmutableMap<String,String> toMap(String requestCookies) {
+
+        Map<String,String> result = Maps.newHashMap();
+
+        String[] cookies = requestCookies.split("; ");
+
+        for (String cookie : cookies) {
+            String[] kvp = cookie.split("=");
+            result.put(kvp[0], kvp[1]);
+        }
+
+        return ImmutableMap.copyOf(result);
+
+    }
+
     public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
