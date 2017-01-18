@@ -17889,7 +17889,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: string , name: watch_time
+     * Schema type: text , name: watch_time
      * </p>
      */
     public String getWatchTime() {
@@ -17908,7 +17908,7 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: string , name: watch_time
+     * Schema type: text , name: watch_time
      * </p>
      */
     public Optional<String> getWatchTimeAsOptional() {
