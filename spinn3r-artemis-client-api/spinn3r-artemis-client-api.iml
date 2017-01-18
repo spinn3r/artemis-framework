@@ -11,6 +11,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="TEST" name="Maven: com.spinn3r.junit.categories:artemis-junit-categories:5.1-LATEST-6" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.6.6" level="project" />
     <orderEntry type="module" module-name="artemis-util" />
     <orderEntry type="module" module-name="artemis-jetbrains-annotations" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
@@ -22,6 +23,7 @@
     <orderEntry type="module" module-name="artemis-schema-core" />
     <orderEntry type="module" module-name="artemis-jackson" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.6.6" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.15" level="project" />

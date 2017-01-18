@@ -2,11 +2,14 @@ package com.spinn3r.artemis.network.cookies;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 
 import java.util.List;
 import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  *
@@ -36,7 +39,27 @@ public class Cookies {
         return ImmutableMap.copyOf(result);
 
     }
-    
+
+    public static ImmutableList<Cookie> toCookieList(Map<String,String> cookies) {
+
+        checkNotNull( cookies );
+
+        List<Cookie> result = Lists.newArrayList();
+
+        for (Map.Entry<String, String> entry : cookies.entrySet()) {
+            String name = entry.getKey();
+            String value = entry.getValue();
+
+            checkNotNull( name, "name" );
+            checkNotNull( value, "value" );
+            result.add( new Cookie(name, value) );
+
+        }
+
+        return ImmutableList.copyOf(result);
+
+    }
+
     public static ImmutableMap<String,Cookie> fromHttpRequest( HttpRequest httpRequest ) {
         return fromResponseHeadersMap( httpRequest.getResponseHeadersMap() );
     }
