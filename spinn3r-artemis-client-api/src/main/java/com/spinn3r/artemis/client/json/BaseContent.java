@@ -3895,6 +3895,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSubscriptionsDriven = 0;
+
+    public int hasModifiedSubscriptionsDriven = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSubscriptionsDriven = false;
+
+    protected int subscriptionsDriven;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasMetadataScore = 0;
 
     public int hasModifiedMetadataScore = 0;
@@ -17885,7 +17901,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * This only applies for video platforms. The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
      * </p>
      *
      * <p>
@@ -17904,7 +17920,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * This only applies for video platforms. The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
      * </p>
      *
      * <p>
@@ -17952,6 +17968,92 @@ public abstract class BaseContent
      */
     public boolean hasDefinedWatchTime () {
         return this.hasDefinedWatchTime;
+    }
+
+    public BaseContent setSubscriptionsDriven ( int subscriptionsDriven ) {
+
+        ++this.hasSubscriptionsDriven;
+        ++this.hasModifiedSubscriptionsDriven;
+
+        this.subscriptionsDriven = subscriptionsDriven;
+
+        hasDefinedSubscriptionsDriven = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * This only applies for video platforms. How many subscriptions to the channel where done from this video. Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: subscriptions_driven
+     * </p>
+     */
+    public int getSubscriptionsDriven() {
+
+        if ( this.constructed == false && this.hasSubscriptionsDriven == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.subscriptionsDriven" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.subscriptionsDriven;
+    }
+
+    /**
+     * <p>
+     * This only applies for video platforms. How many subscriptions to the channel where done from this video. Note that this field DOES NOT update dynamically.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: subscriptions_driven
+     * </p>
+     */
+    public Optional<Integer> getSubscriptionsDrivenAsOptional() {
+
+        if ( this.constructed == false && this.hasSubscriptionsDriven == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.subscriptionsDriven );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSubscriptionsDriven () {
+        return this.hasSubscriptionsDriven > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSubscriptionsDriven () {
+
+        this.hasSubscriptionsDriven = 0;
+        this.hasModifiedSubscriptionsDriven = 0;
+        this.hasDefinedSubscriptionsDriven = false;
+
+        subscriptionsDriven = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSubscriptionsDriven () {
+        return this.hasModifiedSubscriptionsDriven > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSubscriptionsDriven () {
+        return this.hasDefinedSubscriptionsDriven;
     }
 
     public BaseContent setMetadataScore ( int metadataScore ) {
@@ -18957,6 +19059,10 @@ public abstract class BaseContent
 
         if ( obj.hasWatchTime() ) {
             setWatchTime( obj.getWatchTime() );
+        }
+
+        if ( obj.hasSubscriptionsDriven() ) {
+            setSubscriptionsDriven( obj.getSubscriptionsDriven() );
         }
 
         if ( obj.hasMetadataScore() ) {
@@ -20054,6 +20160,10 @@ public abstract class BaseContent
             setWatchTime( obj.getWatchTime() );
         }
 
+        if ( ! hasSubscriptionsDriven() && obj.hasSubscriptionsDriven() ) {
+            setSubscriptionsDriven( obj.getSubscriptionsDriven() );
+        }
+
         if ( ! hasMetadataScore() && obj.hasMetadataScore() ) {
             setMetadataScore( obj.getMetadataScore() );
         }
@@ -20402,6 +20512,8 @@ public abstract class BaseContent
         this.hasModifiedViews = 0;
 
         this.hasModifiedWatchTime = 0;
+
+        this.hasModifiedSubscriptionsDriven = 0;
 
         this.hasModifiedMetadataScore = 0;
 
@@ -21071,6 +21183,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedWatchTime() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSubscriptionsDriven() ) {
             return true;
         }
 
@@ -22472,6 +22588,14 @@ public abstract class BaseContent
 
             buff.append( "watchTime=" );
             buff.append( watchTime );
+            buff.append( " " );
+
+        }
+
+        if ( hasSubscriptionsDriven > 0 ) {
+
+            buff.append( "subscriptionsDriven=" );
+            buff.append( subscriptionsDriven );
             buff.append( " " );
 
         }
@@ -23994,6 +24118,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( watchTime, cmp.watchTime ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSubscriptionsDriven() != cmp.hasSubscriptionsDriven() ) {
+            return false;
+        }
+
+        if ( subscriptionsDriven != cmp.subscriptionsDriven ) {
             return false;
         }
 
@@ -26790,6 +26923,21 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member subscriptions_driven from int
+
+            __name = "subscriptionsDriven";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "subscriptions_driven";
+            }
+
+            if ( this.hasSubscriptionsDriven > 0 ) {
+
+                if ( hasDefinedSubscriptionsDriven )
+                    generator.writeNumberField( __name, subscriptionsDriven );
+
+            }
+
             // ***** json encode member metadata_score from int
 
             __name = "metadataScore";
@@ -28558,6 +28706,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setWatchTime( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member subscriptions_driven from int
+
+                case "subscriptions_driven":
+
+                    jParser.nextToken();
+                    setSubscriptionsDriven( jParser.getIntValue() );
 
                     break;
 

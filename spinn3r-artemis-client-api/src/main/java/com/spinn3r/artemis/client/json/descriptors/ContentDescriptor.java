@@ -1151,10 +1151,17 @@ public class ContentDescriptor {
 
     /**
      * <p>
-     * This only applies for video platforms.The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
+     * This only applies for video platforms. The description of how many time this video was watch. Note that this field DOES NOT update dynamically.
      * </p>
      */
     public final String WATCH_TIME = "watch_time";
+
+    /**
+     * <p>
+     * This only applies for video platforms. How many subscriptions to the channel where done from this video. Note that this field DOES NOT update dynamically.
+     * </p>
+     */
+    public final String SUBSCRIPTIONS_DRIVEN = "subscriptions_driven";
 
     /**
      * <p>
