@@ -1123,28 +1123,28 @@ public class ContentDescriptor {
 
     /**
      * <p>
-     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of likes for this post (when we first find it).
      * </p>
      */
     public final String LIKES = "likes";
 
     /**
      * <p>
-     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of dislikes for this post (when we first find it).
      * </p>
      */
     public final String DISLIKES = "dislikes";
 
     /**
      * <p>
-     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of comments for this post (when we first find it).
      * </p>
      */
     public final String COMMENTS = "comments";
 
     /**
      * <p>
-     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of views for this post (when we first find it).
      * </p>
      */
     public final String VIEWS = "views";

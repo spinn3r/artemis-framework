@@ -41,4 +41,13 @@ public class CookiesTest {
 
     }
 
+    @Test
+    public void testToMap() throws Exception {
+
+        ImmutableMap<String, String> cookies = Cookies.toMap("guest_id=v1%3A148460110141630082; lang=en; moments_profile_moments_nav_tooltip_self=true; kdt=azDe92DEp7fBaRQLdHpbzkwSO1p3Y98nNRCnB5eV; remember_checked_on=1; twid=\"u=794670871076020224\"; auth_token=77d57eacd3e2157d7a336f627ec8c69636e0cb7f; pid=\"v3:1484685570836211414620834\"; _ga=GA1.2.959178117.1484601103; _gat=1; _twitter_sess=BAh7CiIKZmxhc2hJQzonQWN0aW9uQ29udHJvbGxlcjo6Rmxhc2g6OkZsYXNo%250ASGFzaHsABjoKQHVzZWR7ADoPY3JlYXRlZF9hdGwrCGoMH6lZAToMY3NyZl9p%250AZCIlZDA2N2VhNzQ2YmQ0NmY2NzMzZTVkODNkYjgwZTAyY2I6B2lkIiUwNTQ1%250ANGQ5NGU5YTk1MDZmZGVhZTJiNjJhOTFiZjc1NzoJdXNlcmwrCQAg1mfyPAcL--d5b21e6f38566a346f7f1c116d8360e5c55defaa");
+
+        assertEquals(11, cookies.size());
+
+    }
+
 }

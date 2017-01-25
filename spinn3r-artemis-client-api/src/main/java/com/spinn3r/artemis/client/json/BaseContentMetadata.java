@@ -9943,7 +9943,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of likes for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -9962,7 +9962,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of likes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of likes for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10029,7 +10029,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of dislikes for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10048,7 +10048,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of dislikes for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of dislikes for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10115,7 +10115,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of comments for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10134,7 +10134,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of comments for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of comments for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10201,7 +10201,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of views for this post (when we first find it).
      * </p>
      *
      * <p>
@@ -10220,7 +10220,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The number of views for this post (when we first find it).  Note that this field DOES NOT update dynamically.
+     * The number of views for this post (when we first find it).
      * </p>
      *
      * <p>
