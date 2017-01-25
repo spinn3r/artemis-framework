@@ -33,6 +33,12 @@ public class TextTableFormatter {
 
     }
 
+    public String toCSV() {
+
+        return table.toCSV();
+
+    }
+
     private ImmutableList<String> withLineNumberPrefix(List<String> data) {
 
         List<String> result = Lists.newArrayList();
@@ -290,6 +296,36 @@ public class TextTableFormatter {
 
             return justify(result);
             //return result;
+
+        }
+
+        public String toCSV() {
+
+            StringBuilder buff = new StringBuilder();
+
+            List<List<String>> data = Lists.newArrayList();
+            data.add(headings);
+            data.addAll(rows);
+
+            for (List<String> row : data) {
+
+                for (int i = 0; i < row.size(); i++) {
+
+                    if ( i > 0) {
+                        buff.append(",");
+                    }
+
+                    String cell = row.get(i);
+
+                    buff.append(cell);
+
+                }
+
+                buff.append("\n");
+
+            }
+
+            return buff.toString();
 
         }
 
