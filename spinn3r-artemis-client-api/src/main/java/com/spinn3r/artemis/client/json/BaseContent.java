@@ -3972,6 +3972,22 @@ public abstract class BaseContent
 
     protected boolean pinned;
 
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImageUserTags = 0;
+
+    public int hasModifiedImageUserTags = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImageUserTags = false;
+
+    protected Map<String,String> imageUserTags;
+
     // **** methods for this POJO
 
     public BaseContent setBucket ( long bucket ) {
@@ -18400,6 +18416,90 @@ public abstract class BaseContent
         return this.hasDefinedPinned;
     }
 
+    public BaseContent setImageUserTags ( Map<String,String> imageUserTags ) {
+
+        ++this.hasImageUserTags;
+        ++this.hasModifiedImageUserTags;
+
+        this.imageUserTags = imageUserTags;
+
+        hasDefinedImageUserTags = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Users tagged in the image and their coordinates within the image. Coordinates are expressed as a factor of the width and height using 0,0 as the top left corner, this is, in a 100x100 px image the position 0.23 , 0.55 is at 23 px from the left and 55 px from the top. This field is only valid for image social data such as Instagram or Facebook
+     * </p>
+     *
+     * <p>
+     * Schema type: map&lt;text,text&gt; , name: image_user_tags
+     * </p>
+     */
+    public Map<String,String> getImageUserTags() {
+
+        if ( this.constructed == false && this.hasImageUserTags == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.imageUserTags" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.imageUserTags;
+    }
+
+    /**
+     * <p>
+     * Users tagged in the image and their coordinates within the image. Coordinates are expressed as a factor of the width and height using 0,0 as the top left corner, this is, in a 100x100 px image the position 0.23 , 0.55 is at 23 px from the left and 55 px from the top. This field is only valid for image social data such as Instagram or Facebook
+     * </p>
+     *
+     * <p>
+     * Schema type: map&lt;text,text&gt; , name: image_user_tags
+     * </p>
+     */
+    public Optional<Map<String,String>> getImageUserTagsAsOptional() {
+
+        if ( this.constructed == false && this.hasImageUserTags == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.imageUserTags );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImageUserTags () {
+        return this.hasImageUserTags > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImageUserTags () {
+
+        this.hasImageUserTags = 0;
+        this.hasModifiedImageUserTags = 0;
+        this.hasDefinedImageUserTags = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImageUserTags () {
+        return this.hasModifiedImageUserTags > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImageUserTags () {
+        return this.hasDefinedImageUserTags;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -19079,6 +19179,10 @@ public abstract class BaseContent
 
         if ( obj.hasPinned() ) {
             setPinned( obj.getPinned() );
+        }
+
+        if ( obj.hasImageUserTags() ) {
+            setImageUserTags( obj.getImageUserTags() );
         }
 
     }
@@ -20180,6 +20284,10 @@ public abstract class BaseContent
             setPinned( obj.getPinned() );
         }
 
+        if ( ! hasImageUserTags() && obj.hasImageUserTags() ) {
+            setImageUserTags( obj.getImageUserTags() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -20522,6 +20630,8 @@ public abstract class BaseContent
         this.hasModifiedMetadataUpdates = 0;
 
         this.hasModifiedPinned = 0;
+
+        this.hasModifiedImageUserTags = 0;
 
     }
 
@@ -21203,6 +21313,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedPinned() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImageUserTags() ) {
             return true;
         }
 
@@ -22628,6 +22742,14 @@ public abstract class BaseContent
 
             buff.append( "pinned=" );
             buff.append( pinned );
+            buff.append( " " );
+
+        }
+
+        if ( hasImageUserTags > 0 ) {
+
+            buff.append( "imageUserTags=" );
+            buff.append( imageUserTags );
             buff.append( " " );
 
         }
@@ -24163,6 +24285,15 @@ public abstract class BaseContent
         }
 
         if ( pinned != cmp.pinned ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImageUserTags() != cmp.hasImageUserTags() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( imageUserTags, cmp.imageUserTags ) ) {
             return false;
         }
 
@@ -26998,6 +27129,24 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member image_user_tags from Map<String,String>
+
+            __name = "imageUserTags";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image_user_tags";
+            }
+
+            if ( this.hasImageUserTags > 0 ) {
+
+                if ( imageUserTags != null ) {
+
+                    JSON.writeStringMap( generator, __name, imageUserTags );
+
+                }
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -28756,6 +28905,15 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setPinned( jParser.getBooleanValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image_user_tags from Map<String,String>
+
+                case "image_user_tags":
+
+                    // FIXME not implemented yet.
 
                     break;
 

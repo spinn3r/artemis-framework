@@ -1193,6 +1193,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * Users tagged in the image and their coordinates within the image. Coordinates are expressed as a factor of the width and height using 0,0 as the top left corner, this is, in a 100x100 px image the position 0.23 , 0.55 is at 23 px from the left and 55 px from the top. This field is only valid for image social data such as Instagram or Facebook
+     * </p>
+     */
+    public final String IMAGE_USER_TAGS = "image_user_tags";
+
+    /**
+     * <p>
      * The underlying serialization format
      * </p>
      */
