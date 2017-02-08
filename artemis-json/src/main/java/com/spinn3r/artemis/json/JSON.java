@@ -2,6 +2,7 @@ package com.spinn3r.artemis.json;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.io.IOContext;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -94,6 +95,8 @@ public class JSON {
             return objectMapper.readValue( content, clazz );
             */
 
+        } catch (JsonParseException e) {
+            throw new RuntimeException( "Failed to parse json " + content, e );
         } catch (IOException e) {
             throw new RuntimeException( e );
         }
