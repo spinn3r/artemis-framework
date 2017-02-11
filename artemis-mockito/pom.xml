@@ -12,13 +12,12 @@
     <groupId>com.spinn3r.artemis.mockito</groupId>
     <artifactId>artemis-mockito</artifactId>
 
-
     <dependencies>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>2.7.5</version>
+            <version>${mockito.version}</version>
 
             <exclusions>
                 <exclusion>

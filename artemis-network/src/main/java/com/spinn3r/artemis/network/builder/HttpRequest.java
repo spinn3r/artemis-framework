@@ -160,8 +160,11 @@ public interface HttpRequest {
 
     default boolean isContentType(String expectedContentType) throws NetworkException {
 
-        return getContentTypes().stream()
-                                .anyMatch(contentType -> expectedContentType.equals(contentType.toLowerCase()));
+        ImmutableList<String> contentTypes = getContentTypes();
+
+        return contentTypes
+                 .stream()
+                 .anyMatch(contentType -> expectedContentType.equals(contentType.toLowerCase()));
 
     }
 
