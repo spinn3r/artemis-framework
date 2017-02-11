@@ -164,10 +164,7 @@ public interface HttpRequest {
 
         return contentTypes
                  .stream()
-                 .anyMatch(contentType -> {
-                     System.out.printf("%s vs %s\n", expectedContentType, contentType);
-                     return expectedContentType.equalsIgnoreCase(contentType);
-                 });
+                 .anyMatch(expectedContentType::equalsIgnoreCase);
 
     }
 
