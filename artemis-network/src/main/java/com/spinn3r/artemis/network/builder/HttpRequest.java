@@ -7,6 +7,7 @@ import com.spinn3r.artemis.network.cookies.Cookie;
 
 import java.io.InputStream;
 import java.net.InetAddress;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -141,5 +142,38 @@ public interface HttpRequest {
      * defined but he server as well as custom cookies set with withCookies()
      */
     ImmutableList<Cookie> getEffectiveCookies();
+
+    default boolean isHTML() throws NetworkException {
+        return isContentType("text/html") || isContentType("application/xhtml+xml");
+    }
+
+    /**
+     * Return true if this is text.  Sometimes HTML is improperly served as text.
+     */
+    default boolean isText() throws NetworkException {
+        return isContentType("text/plain");
+    }
+
+    default boolean isXML() throws NetworkException {
+        return isContentType("text/xml") || isContentType("application/xml");
+    }
+
+    default boolean isContentType(String expectedContentType) throws NetworkException {
+
+        ImmutableList<String> contentTypes = getContentTypes();
+
+        return contentTypes
+                 .stream()
+                 .anyMatch(expectedContentType::equalsIgnoreCase);
+
+    }
+
+    default ImmutableList<String> getContentTypes() throws NetworkException {
+
+        HttpContentResponseMeta httpContentResponseMeta = getHttpContentResponseMeta();
+
+        return httpContentResponseMeta.getResponseHeadersMap().get("Content-Type");
+
+    }
 
 }

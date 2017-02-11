@@ -17,6 +17,7 @@
 
         <project.surefire.maxMemory>2000M</project.surefire.maxMemory>
         <project.surefire.version>2.19.1</project.surefire.version>
+        <mockito.version>2.7.5</mockito.version>
 
     </properties>
 
@@ -94,8 +95,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.10.19</version>
-            <scope>test</scope>
+            <version>${mockito.version}</version>
 
             <exclusions>
                 <exclusion>
