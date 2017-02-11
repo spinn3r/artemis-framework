@@ -164,7 +164,10 @@ public interface HttpRequest {
 
         return contentTypes
                  .stream()
-                 .anyMatch(contentType -> expectedContentType.equals(contentType.toLowerCase()));
+                 .anyMatch(contentType -> {
+                     System.out.printf("%s vs %s\n", expectedContentType, contentType);
+                     return expectedContentType.equalsIgnoreCase(contentType);
+                 });
 
     }
 
