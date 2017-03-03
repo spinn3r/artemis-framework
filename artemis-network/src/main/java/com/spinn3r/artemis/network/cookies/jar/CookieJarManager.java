@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.log5j.Logger;
 
 import java.io.File;
@@ -16,9 +17,12 @@ public class CookieJarManager {
 
     private static final Logger log = Logger.getLogger();
 
+    private final ConfigLoader configLoader;
+
     private final List<CookieJarHolder> cookieJarHolders = Lists.newArrayList();
 
-    public CookieJarManager(List<CookieJarReference> cookieJarReferences) throws IOException {
+    CookieJarManager(ConfigLoader configLoader, List<CookieJarReference> cookieJarReferences) throws IOException {
+        this.configLoader = configLoader;
 
         for (CookieJarReference cookieJarReference : cookieJarReferences) {
             cookieJarHolders.add(createCookieJarHolder(cookieJarReference));
@@ -45,10 +49,18 @@ public class CookieJarManager {
 
         if (cookieJarReference.getPath() != null) {
 
-            log.info( "Loading cookie jar from file: %s", cookieJarReference.getPath());
+            log.info("Loading cookie jar from file: %s", cookieJarReference.getPath());
 
             File file = new File(cookieJarReference.getPath());
             CookieJar cookieJar = new FileBackedCookieJar(file);
+
+            return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
+
+        } else if ( cookieJarReference.getConfigPath() != null ) {
+
+            log.info("Loading cookie jar from config path: %s", cookieJarReference.getConfigPath());
+
+            CookieJar cookieJar = new FileBackedCookieJar(configLoader.getResource(getClass(), cookieJarReference.getConfigPath()).openStream());
 
             return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
 

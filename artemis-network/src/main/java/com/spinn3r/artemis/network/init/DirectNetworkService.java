@@ -9,6 +9,7 @@ import com.spinn3r.artemis.network.builder.cookies.StandardCookieStore;
 import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManagerFactory;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
@@ -36,9 +37,12 @@ public class DirectNetworkService extends BaseService {
 
     private final NetworkConfig networkConfig;
 
+    private final CookieJarManagerFactory cookieJarManagerFactory;
+
     @Inject
-    DirectNetworkService(NetworkConfig networkConfig) {
+    DirectNetworkService(NetworkConfig networkConfig, CookieJarManagerFactory cookieJarManagerFactory) {
         this.networkConfig = networkConfig;
+        this.cookieJarManagerFactory = cookieJarManagerFactory;
     }
 
     @Override
@@ -69,7 +73,7 @@ public class DirectNetworkService extends BaseService {
             CookieHandler.setDefault(cookieManager);
         } else {
 
-            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+            cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
 
         }
 

@@ -14,6 +14,7 @@ import com.spinn3r.artemis.network.builder.proxies.ProxyRegistry;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManagerFactory;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
@@ -37,10 +38,6 @@ public class NetworkService extends BaseService {
 
     private static final int TIMEOUT = 60000;
 
-    private final NetworkConfig networkConfig;
-
-    private final WaitForPort waitForPort;
-
     private final AtomicReferenceProvider<Proxy> proxyProvider = new AtomicReferenceProvider<>( null );
 
     private final AtomicReferenceProvider<ProxyReference> proxyReferenceProvider = new AtomicReferenceProvider<>( null );
@@ -53,10 +50,17 @@ public class NetworkService extends BaseService {
 
     private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
 
+    private final NetworkConfig networkConfig;
+
+    private final WaitForPort waitForPort;
+
+    private final CookieJarManagerFactory cookieJarManagerFactory;
+
     @Inject
-    public NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort) {
+    NetworkService(NetworkConfig networkConfig, WaitForPort waitForPort, CookieJarManagerFactory cookieJarManagerFactory) {
         this.networkConfig = networkConfig;
         this.waitForPort = waitForPort;
+        this.cookieJarManagerFactory = cookieJarManagerFactory;
     }
 
     @Override
@@ -144,9 +148,10 @@ public class NetworkService extends BaseService {
             CookieHandler.setDefault(cookieManager);
         } else {
 
-            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
+            cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
 
         }
+
     }
 
     private PrioritizedProxyReference createPrioritizedProxyReference(String name, ProxySettings proxySettings ) {

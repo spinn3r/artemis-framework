@@ -5,6 +5,7 @@ import com.spinn3r.artemis.network.cookies.CookieValueStore;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Simple file backed cookie map which is just an list of cookies storeed as maps.
@@ -20,6 +21,12 @@ public class FileBackedCookieJar extends BackedCookieJar {
     public FileBackedCookieJar( File file ) throws IOException {
 
         super(JSON.fromJSON(CookieValueStore.class, file));
+
+    }
+
+    public FileBackedCookieJar( InputStream inputSTream ) throws IOException {
+
+        super(JSON.deserialize(CookieValueStore.class, inputSTream));
 
     }
 
