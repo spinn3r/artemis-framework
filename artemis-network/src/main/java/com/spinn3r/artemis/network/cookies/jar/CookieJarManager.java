@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network.cookies.jar;
 import com.google.common.collect.Lists;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.log5j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +32,7 @@ public class CookieJarManager {
 
     }
 
+    @NotNull
     public CookieJar getCookieJar(String link ) {
 
         for (CookieJarHolder cookieJarHolder : cookieJarHolders) {
@@ -44,6 +46,7 @@ public class CookieJarManager {
 
     }
 
+    @NotNull
     private CookieJarHolder createCookieJarHolder(CookieJarReference cookieJarReference) throws IOException {
 
         Pattern pattern = Pattern.compile(cookieJarReference.getRegex());
