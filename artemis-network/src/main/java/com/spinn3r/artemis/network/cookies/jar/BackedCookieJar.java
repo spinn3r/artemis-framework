@@ -29,6 +29,11 @@ public class BackedCookieJar implements CookieJar {
         return backing.get(random.nextInt(backing.size()));
     }
 
+    @Override
+    public int size() {
+        return backing.size();
+    }
+
     // we don't require secure random for most purposes however we need to make
     // sure robots don't accidentally return the same random on startup so we
     // seed off secure random and then use random after that point.

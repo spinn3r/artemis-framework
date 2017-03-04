@@ -50,19 +50,23 @@ public class CookieJarManager {
 
         if (cookieJarReference.getPath() != null) {
 
-            log.info("Loading cookie jar from file: %s", cookieJarReference.getPath());
+            log.info("Loading cookie jar from file: %s ...", cookieJarReference.getPath());
 
             File file = new File(cookieJarReference.getPath());
             CookieJar cookieJar = new FileBackedCookieJar(file, cookieJarReference.getFormat());
+
+            log.info("Loading cookie jar from file: %s ... done (loaded %,d cookies)", cookieJarReference.getConfigPath(), cookieJar.size());
 
             return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
 
         } else if ( cookieJarReference.getConfigPath() != null ) {
 
-            log.info("Loading cookie jar from config path: %s", cookieJarReference.getConfigPath());
+            log.info("Loading cookie jar from config path: %s ...", cookieJarReference.getConfigPath());
 
             InputStream inputStream = configLoader.getResource(getClass(), cookieJarReference.getConfigPath()).openStream();
             CookieJar cookieJar = new FileBackedCookieJar(inputStream, cookieJarReference.getFormat());
+
+            log.info("Loading cookie jar from config path: %s ... done (loaded %,d cookies)", cookieJarReference.getConfigPath(), cookieJar.size());
 
             return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
 

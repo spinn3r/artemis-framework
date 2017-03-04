@@ -25,6 +25,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.spinn3r.artemis.logging</groupId>
+            <artifactId>artemis-logging</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.spinn3r.artemis.init</groupId>
             <artifactId>artemis-init-test</artifactId>
             <version>${project.version}</version>

@@ -12,4 +12,9 @@ public class EmptyCookieJar implements CookieJar {
         return new CookieValueMap();
     }
 
+    @Override
+    public int size() {
+        return 0;
+    }
+
 }

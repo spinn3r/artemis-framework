@@ -31,7 +31,7 @@ import java.util.List;
          implementation = NetworkConfig.class )
 public class DirectNetworkService extends BaseService {
 
-    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
+    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null);
 
     private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
 
@@ -63,6 +63,7 @@ public class DirectNetworkService extends BaseService {
     @Override
     public void start() throws Exception {
 
+        // TODO: I don't think the SetCookieDescription stuff is workign anymore.
         List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
         ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
@@ -71,9 +72,9 @@ public class DirectNetworkService extends BaseService {
         if ( networkConfig.isCookieManagerEnabled() ) {
             CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
             CookieHandler.setDefault(cookieManager);
-        } else {
-            cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
         }
+
+        cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
 
     }
 

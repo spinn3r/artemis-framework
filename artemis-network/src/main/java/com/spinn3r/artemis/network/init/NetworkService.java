@@ -146,11 +146,9 @@ public class NetworkService extends BaseService {
         if ( networkConfig.isCookieManagerEnabled() ) {
             CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
             CookieHandler.setDefault(cookieManager);
-        } else {
-
-            cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
-
         }
+
+        cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
 
     }
 
