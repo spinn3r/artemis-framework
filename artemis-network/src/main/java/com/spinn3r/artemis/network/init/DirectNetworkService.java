@@ -72,9 +72,7 @@ public class DirectNetworkService extends BaseService {
             CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
             CookieHandler.setDefault(cookieManager);
         } else {
-
             cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
-
         }
 
     }
