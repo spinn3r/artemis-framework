@@ -63,7 +63,7 @@ public class DirectNetworkService extends BaseService {
     @Override
     public void start() throws Exception {
 
-        // TODO: I don't think the SetCookieDescription stuff is workign anymore.
+        // TODO: I don't think the SetCookieDescription stuff is working anymore.
         List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
         ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
