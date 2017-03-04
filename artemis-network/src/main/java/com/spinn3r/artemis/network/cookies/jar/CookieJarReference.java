@@ -17,10 +17,8 @@ public class CookieJarReference {
 
     private CookieValueStore store = null;
 
-    /**
-     * @Deprecated Use getConfigPath instead.
-     */
-    @Deprecated
+    private Format format = Format.JSON;
+
     public String getPath() {
         return path;
     }
@@ -37,6 +35,10 @@ public class CookieJarReference {
         return store;
     }
 
+    public Format getFormat() {
+        return format;
+    }
+
     @Override
     public String toString() {
         return "CookieJarReference{" +
@@ -44,7 +46,16 @@ public class CookieJarReference {
                  ", path='" + path + '\'' +
                  ", configPath='" + configPath + '\'' +
                  ", store=" + store +
+                 ", format=" + format +
                  '}';
+    }
+
+    enum Format {
+
+        JSON,
+
+        JSONS
+
     }
 
 }

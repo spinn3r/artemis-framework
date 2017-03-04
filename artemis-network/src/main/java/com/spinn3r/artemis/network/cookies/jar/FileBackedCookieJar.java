@@ -1,9 +1,12 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
 import com.spinn3r.artemis.json.JSON;
+import com.spinn3r.artemis.json.JSONS;
+import com.spinn3r.artemis.network.cookies.CookieValueMap;
 import com.spinn3r.artemis.network.cookies.CookieValueStore;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -18,15 +21,34 @@ import java.io.InputStream;
  */
 public class FileBackedCookieJar extends BackedCookieJar {
 
-    public FileBackedCookieJar( File file ) throws IOException {
-
-        super(JSON.fromJSON(CookieValueStore.class, file));
-
+    public FileBackedCookieJar(File file, CookieJarReference.Format format) throws IOException {
+        super(parse(file, format));
     }
 
-    public FileBackedCookieJar( InputStream inputSTream ) throws IOException {
+    public FileBackedCookieJar(InputStream inputStream, CookieJarReference.Format format) throws IOException {
+        super(parse(inputStream, format));
+    }
 
-        super(JSON.deserialize(CookieValueStore.class, inputSTream));
+    public static CookieValueStore parse(File file, CookieJarReference.Format format) throws IOException {
+        try(InputStream inputStream = new FileInputStream(file)) {
+            return parse(inputStream, format);
+        }
+    }
+
+    public static CookieValueStore parse(InputStream inputStream, CookieJarReference.Format format) throws IOException {
+
+        switch (format) {
+
+            case JSON:
+                return JSON.deserialize(CookieValueStore.class, inputStream);
+
+            case JSONS:
+                return new CookieValueStore(JSONS.parse(CookieValueMap.class, inputStream));
+
+            default:
+                throw new IOException("Wrong format: " + format);
+
+        }
 
     }
 

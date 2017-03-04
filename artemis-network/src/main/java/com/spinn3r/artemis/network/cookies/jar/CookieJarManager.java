@@ -6,6 +6,7 @@ import com.spinn3r.log5j.Logger;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,7 +53,7 @@ public class CookieJarManager {
             log.info("Loading cookie jar from file: %s", cookieJarReference.getPath());
 
             File file = new File(cookieJarReference.getPath());
-            CookieJar cookieJar = new FileBackedCookieJar(file);
+            CookieJar cookieJar = new FileBackedCookieJar(file, cookieJarReference.getFormat());
 
             return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
 
@@ -60,7 +61,8 @@ public class CookieJarManager {
 
             log.info("Loading cookie jar from config path: %s", cookieJarReference.getConfigPath());
 
-            CookieJar cookieJar = new FileBackedCookieJar(configLoader.getResource(getClass(), cookieJarReference.getConfigPath()).openStream());
+            InputStream inputStream = configLoader.getResource(getClass(), cookieJarReference.getConfigPath()).openStream();
+            CookieJar cookieJar = new FileBackedCookieJar(inputStream, cookieJarReference.getFormat());
 
             return new CookieJarHolder(cookieJarReference, pattern, cookieJar);
 

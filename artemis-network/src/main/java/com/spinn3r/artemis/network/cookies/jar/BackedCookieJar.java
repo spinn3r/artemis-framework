@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class BackedCookieJar implements CookieJar {
 
-    private final List<CookieValueMap> backing;
+    protected final List<CookieValueMap> backing;
 
     private final Random random = createRandom();
 

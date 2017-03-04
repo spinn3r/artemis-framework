@@ -138,7 +138,7 @@ public class JSON {
             throw new NullPointerException( "inputStream" );
 
         ObjectMapper objectMapper = createObjectMapper();
-        return objectMapper.readValue( inputStream, clazz );
+        return objectMapper.readValue(inputStream, clazz);
 
     }
 
