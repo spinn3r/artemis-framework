@@ -3,6 +3,7 @@ package com.spinn3r.artemis.guava;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 
+import java.util.function.BinaryOperator;
 import java.util.stream.Collector;
 
 /**
@@ -20,6 +21,10 @@ public class ImmutableCollectors {
     public static <T> Collector<T, ImmutableSet.Builder<T>, ImmutableSet<T>> toImmutableSet() {
         return Collector.of(ImmutableSet.Builder::new, ImmutableSet.Builder::add,
                             (l, r) -> l.addAll(r.build()), ImmutableSet.Builder<T>::build);
+    }
+
+    public static <T> BinaryOperator<T> noDuplicatesMerger() {
+        return (u,v) -> { throw new IllegalStateException(String.format("Duplicate key %s", u)); };
     }
 
 }
