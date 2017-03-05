@@ -128,9 +128,10 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         defaultHttpRequestMethod.withReadTimeout( defaultReadTimeout );
         defaultHttpRequestMethod.withConnectTimeout( defaultConnectTimeout );
 
-        if( ! networkConfig.isCookieManagerEnabled() ) {
-            // now get the default cookies from the cookie jar.
-            CookieJarManager cookieJarManager = cookieJarManagerProvider.get();
+        // now get the default cookies from the cookie jar.
+        CookieJarManager cookieJarManager = cookieJarManagerProvider.get();
+
+        if (cookieJarManager != null) {
             CookieJar cookieJar = cookieJarManager.getCookieJar(resource);
             defaultHttpRequestMethod.withCookies(cookieJar.getCookies());
         }

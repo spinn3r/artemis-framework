@@ -1,5 +1,6 @@
 package com.spinn3r.artemis.network.builder;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.spinn3r.artemis.network.ResourceRequestFactory;
@@ -129,6 +130,11 @@ public abstract class BaseHttpRequestMethod implements HttpRequestMethod {
 
         return this;
 
+    }
+
+    @Override
+    public ImmutableList<Cookie> getCookies() {
+        return ImmutableList.copyOf(cookies);
     }
 
     @Override
