@@ -19,11 +19,15 @@ package com.spinn3r.artemis.corpus.test;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -49,18 +53,23 @@ public class CorporaCache {
         this.basedir = basedir;
     }
 
-    public boolean contains( String key ) {
-        String path = computePath( key );
-        File file = new File( ROOT, path );
-        boolean result = file.exists();
-        return result;
+    public boolean contains(String key) {
+
+        try {
+            ImmutableList<String> paths = computePaths(key);
+            findExistingFile(paths);
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
+        }
+
     }
 
-    public void write( String key, String data ) throws IOException {
+    public void write(String key, String data) throws IOException {
 
         checkNotNull(data, "data");
 
-        String path = computePath( key );
+        String path = computePath( key ) + ".gz";
 
         File file = new File( ROOT, path );
 
@@ -70,28 +79,33 @@ public class CorporaCache {
 
         Files.createDirectories( Paths.get( file.getParent() ) );
 
-        try( OutputStream out = new FileOutputStream( file ) ) {
-
+        try(OutputStream out = new GZIPOutputStream(new FileOutputStream(file)) ) {
             out.write( bytes );
-
         }
 
     }
 
     public String read(String key) throws IOException {
 
-        String path = computePath( key );
+        ImmutableList<String> paths = computePaths(key);
 
-        File file = new File( ROOT, path );
+        File file = findExistingFile(paths);
 
         System.out.printf( "CorporaCache reading from: %s\n", file.getAbsolutePath() );
 
-        try ( InputStream is = new FileInputStream(file) ) {
-
+        try ( InputStream is = createInputStream(file) ) {
             byte[] data = ByteStreams.toByteArray( is );
-
             return new String( data, Charsets.UTF_8 );
+        }
 
+    }
+
+    private InputStream createInputStream(File file) throws IOException {
+
+        if(file.getName().endsWith(".gz")) {
+            return new GZIPInputStream(new FileInputStream(file));
+        } else {
+            return new FileInputStream(file);
         }
 
     }
@@ -104,8 +118,26 @@ public class CorporaCache {
         this.extension = extension;
     }
 
+    protected File findExistingFile(ImmutableList<String> paths) throws FileNotFoundException {
+
+        for (String path : paths) {
+            File file = new File( ROOT, path );
+            if (file.exists()) {
+                return file;
+            }
+        }
+
+        throw new FileNotFoundException("No files exist for paths: " + paths);
+
+    }
+
     public String computePath( String key ) {
         return String.format( "%s/%s.%s.%s", basedir, parent.getName(), key, getExtension() );
+    }
+
+    public ImmutableList<String> computePaths(String key) {
+        String path = computePath(key);
+        return ImmutableList.of(path, path + ".gz");
     }
 
 }

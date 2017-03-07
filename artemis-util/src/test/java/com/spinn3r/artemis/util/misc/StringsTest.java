@@ -26,4 +26,15 @@ public class StringsTest {
         assertEquals( "123", Strings.truncate( "1234", 3 ) );
     }
 
+    @Test
+    public void testChunk() throws Exception {
+
+        assertEquals("[]", Strings.chunk("", 10).toString());
+        assertEquals("[x]", Strings.chunk("x", 1).toString());
+        assertEquals("[x, x]", Strings.chunk("xx", 1).toString());
+        assertEquals("[xx]", Strings.chunk("xxx", 2).toString());
+        assertEquals("[xx, xx]", Strings.chunk("xxxx", 2).toString());
+
+    }
+    
 }

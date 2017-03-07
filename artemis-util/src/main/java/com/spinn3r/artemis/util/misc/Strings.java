@@ -1,8 +1,10 @@
 package com.spinn3r.artemis.util.misc;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.spinn3r.artemis.guava.ImmutableCollectors;
 import difflib.Delta;
 import difflib.DiffUtils;
 import difflib.Patch;
@@ -177,6 +179,17 @@ public class Strings {
 
         return value.length();
 
+    }
+
+    /**
+     * Create fixed width chunks.
+     */
+    public static ImmutableList<String> chunk(String text, int width) {
+
+        return Splitter.fixedLength(width).splitToList(text)
+                .stream()
+                .filter( current -> current.length() == width )
+                .collect(ImmutableCollectors.toImmutableList());
     }
 
     /**

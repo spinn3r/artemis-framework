@@ -21,6 +21,7 @@ import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMeta;
 import com.spinn3r.artemis.network.builder.HttpResponseMeta;
+import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.cookies.Cookie;
@@ -112,6 +113,7 @@ public class NetworkCorporaCache implements ContentFetcher {
                               directHttpRequestBuilder
                                 .withRequestSettingsRegistry( requestSettingsRegistry )
                                 .get( link )
+                                .withProxy(ProxyReferences.create("http://localhost:9997"))
                                 .withRequestHeaders( requestHeaders )
                                 .withCookies( cookies )
                                 .execute();
