@@ -41,6 +41,12 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.spinn3r.artemis.util</groupId>
+            <artifactId>artemis-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

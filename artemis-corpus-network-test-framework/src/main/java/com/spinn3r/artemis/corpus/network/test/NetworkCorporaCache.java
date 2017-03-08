@@ -113,6 +113,7 @@ public class NetworkCorporaCache implements ContentFetcher {
                               directHttpRequestBuilder
                                 .withRequestSettingsRegistry( requestSettingsRegistry )
                                 .get( link )
+                                // FIXME: remove this.. 
                                 .withProxy(ProxyReferences.create("http://localhost:9997"))
                                 .withRequestHeaders( requestHeaders )
                                 .withCookies( cookies )
