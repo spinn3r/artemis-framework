@@ -38,11 +38,11 @@ public class CorporaCache {
 
     private static String ROOT = System.getProperty( "corpora-cache.root", "src/test/resources/" );
 
-    private String extension = "dat";
-
     private final Class<?> parent;
 
     private String basedir = "/corpora";
+
+    private String extension = "dat";
 
     public CorporaCache(Class<?> parent) {
         this.parent = parent;
@@ -51,6 +51,12 @@ public class CorporaCache {
     public CorporaCache(Class<?> parent, String basedir) {
         this.parent = parent;
         this.basedir = basedir;
+    }
+
+    public CorporaCache(Class<?> parent, String basedir, String extension) {
+        this.parent = parent;
+        this.basedir = basedir;
+        this.extension = extension;
     }
 
     public boolean contains(String key) {

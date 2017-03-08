@@ -23,12 +23,12 @@ public class Memoizer<T> {
 
     private final Settings settings;
 
-    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, Settings settings) {
+    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, Settings settings, String extension) {
         this.parent = parent;
         this.basedir = basedir;
         this.transformer = transformer;
         this.settings = settings;
-        this.corporaCache = new CorporaCache(parent, basedir);
+        this.corporaCache = new CorporaCache(parent, basedir, extension);
     }
 
     /**
@@ -77,6 +77,8 @@ public class Memoizer<T> {
 
         private final Transformer<T> transformer;
 
+        private String extension = "dat";
+
         private Settings settings = Settings.SYSTEM_PROPERTIES;
 
         public Builder(Class<?> parent, String basedir, Transformer<T> transformer) {
@@ -90,8 +92,13 @@ public class Memoizer<T> {
             return this;
         }
 
+        public Builder<T> setExtension(String extension) {
+            this.extension = extension;
+            return this;
+        }
+
         public Memoizer<T> build() {
-            return new Memoizer<>(parent, basedir, transformer, settings);
+            return new Memoizer<>(parent, basedir, transformer, settings, extension);
         }
 
     }
