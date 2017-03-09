@@ -3,6 +3,7 @@ package com.spinn3r.artemis.init;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
+import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.init.config.ConfigLoader;
 import com.spinn3r.artemis.init.config.ResourceConfigLoader;
 import com.spinn3r.artemis.util.misc.Stack;
@@ -24,14 +25,19 @@ public class LauncherTest {
 
     protected ServiceReferences serviceReferences = new ServiceReferences();
 
+    protected Caller caller = null;
+
     /**
      * Setup with no services but run an injector.
      */
     @Before
     public void setUp() throws Exception {
 
+        if (caller == null)
+            caller = new Caller(Stack.caller().getClassName());
+
         launcher = Launcher.newBuilder(configLoader)
-                           .setCaller(Stack.caller().getClassName())
+                           .setCaller(caller)
                            .setModule(module)
                            .build();
 
@@ -47,6 +53,14 @@ public class LauncherTest {
         if ( launcher != null )
             launcher.stop();
 
+    }
+
+    public void setCaller(String caller) {
+        this.caller = new Caller(caller);
+    }
+
+    public void setCaller(Class<?> caller) {
+        this.caller = new Caller(caller);
     }
 
     public void setConfigLoader(ConfigLoader configLoader) {
