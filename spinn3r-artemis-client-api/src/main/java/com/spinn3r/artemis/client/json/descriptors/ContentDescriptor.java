@@ -920,6 +920,27 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * All the image URLs representing this content
+     * </p>
+     */
+    public final String ALTERNATIVE_IMAGES_SRC = "alternative_images_src";
+
+    /**
+     * <p>
+     * The width of images in alternative_images_src
+     * </p>
+     */
+    public final String ALTERNATIVE_IMAGES_WIDTH = "alternative_images_width";
+
+    /**
+     * <p>
+     * The height of images in alternative_images_src
+     * </p>
+     */
+    public final String ALTERNATIVE_IMAGES_HEIGHT = "alternative_images_height";
+
+    /**
+     * <p>
      * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
      * </p>
      */
@@ -987,6 +1008,13 @@ public class ContentDescriptor {
      * </p>
      */
     public final String SHARED_AUTHOR_HANDLE = "shared_author_handle";
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     */
+    public final String SHARED_AUTHOR_AVATAR_IMG = "shared_author_avatar_img";
 
     /**
      * <p>

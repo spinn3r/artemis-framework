@@ -3351,6 +3351,54 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasAlternativeImagesSrc = 0;
+
+    public int hasModifiedAlternativeImagesSrc = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedAlternativeImagesSrc = false;
+
+    protected Set<String> alternativeImagesSrc;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasAlternativeImagesWidth = 0;
+
+    public int hasModifiedAlternativeImagesWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedAlternativeImagesWidth = false;
+
+    protected Set<String> alternativeImagesWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasAlternativeImagesHeight = 0;
+
+    public int hasModifiedAlternativeImagesHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedAlternativeImagesHeight = false;
+
+    protected Set<String> alternativeImagesHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasShared = 0;
 
     public int hasModifiedShared = 0;
@@ -3507,6 +3555,22 @@ public abstract class BaseContent
     public boolean hasDefinedSharedAuthorHandle = false;
 
     protected String sharedAuthorHandle;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedAuthorAvatarImg = 0;
+
+    public int hasModifiedSharedAuthorAvatarImg = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg = false;
+
+    protected String sharedAuthorAvatarImg;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -15112,6 +15176,264 @@ public abstract class BaseContent
         return this.hasDefinedImageHeight;
     }
 
+    public BaseContent setAlternativeImagesSrc ( Set<String> alternativeImagesSrc ) {
+
+        NoNullSet.validate( alternativeImagesSrc );
+
+        ++this.hasAlternativeImagesSrc;
+        ++this.hasModifiedAlternativeImagesSrc;
+
+        this.alternativeImagesSrc = alternativeImagesSrc;
+
+        hasDefinedAlternativeImagesSrc = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * All the image URLs representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_src
+     * </p>
+     */
+    public Set<String> getAlternativeImagesSrc() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesSrc == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.alternativeImagesSrc" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.alternativeImagesSrc;
+    }
+
+    /**
+     * <p>
+     * All the image URLs representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_src
+     * </p>
+     */
+    public Optional<Set<String>> getAlternativeImagesSrcAsOptional() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesSrc == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.alternativeImagesSrc );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasAlternativeImagesSrc () {
+        return this.hasAlternativeImagesSrc > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearAlternativeImagesSrc () {
+
+        this.hasAlternativeImagesSrc = 0;
+        this.hasModifiedAlternativeImagesSrc = 0;
+        this.hasDefinedAlternativeImagesSrc = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedAlternativeImagesSrc () {
+        return this.hasModifiedAlternativeImagesSrc > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedAlternativeImagesSrc () {
+        return this.hasDefinedAlternativeImagesSrc;
+    }
+
+    public BaseContent setAlternativeImagesWidth ( Set<String> alternativeImagesWidth ) {
+
+        NoNullSet.validate( alternativeImagesWidth );
+
+        ++this.hasAlternativeImagesWidth;
+        ++this.hasModifiedAlternativeImagesWidth;
+
+        this.alternativeImagesWidth = alternativeImagesWidth;
+
+        hasDefinedAlternativeImagesWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of images in alternative_images_src
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_width
+     * </p>
+     */
+    public Set<String> getAlternativeImagesWidth() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.alternativeImagesWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.alternativeImagesWidth;
+    }
+
+    /**
+     * <p>
+     * The width of images in alternative_images_src
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_width
+     * </p>
+     */
+    public Optional<Set<String>> getAlternativeImagesWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.alternativeImagesWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasAlternativeImagesWidth () {
+        return this.hasAlternativeImagesWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearAlternativeImagesWidth () {
+
+        this.hasAlternativeImagesWidth = 0;
+        this.hasModifiedAlternativeImagesWidth = 0;
+        this.hasDefinedAlternativeImagesWidth = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedAlternativeImagesWidth () {
+        return this.hasModifiedAlternativeImagesWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedAlternativeImagesWidth () {
+        return this.hasDefinedAlternativeImagesWidth;
+    }
+
+    public BaseContent setAlternativeImagesHeight ( Set<String> alternativeImagesHeight ) {
+
+        NoNullSet.validate( alternativeImagesHeight );
+
+        ++this.hasAlternativeImagesHeight;
+        ++this.hasModifiedAlternativeImagesHeight;
+
+        this.alternativeImagesHeight = alternativeImagesHeight;
+
+        hasDefinedAlternativeImagesHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of images in alternative_images_src
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_height
+     * </p>
+     */
+    public Set<String> getAlternativeImagesHeight() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.alternativeImagesHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.alternativeImagesHeight;
+    }
+
+    /**
+     * <p>
+     * The height of images in alternative_images_src
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: alternative_images_height
+     * </p>
+     */
+    public Optional<Set<String>> getAlternativeImagesHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasAlternativeImagesHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.alternativeImagesHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasAlternativeImagesHeight () {
+        return this.hasAlternativeImagesHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearAlternativeImagesHeight () {
+
+        this.hasAlternativeImagesHeight = 0;
+        this.hasModifiedAlternativeImagesHeight = 0;
+        this.hasDefinedAlternativeImagesHeight = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedAlternativeImagesHeight () {
+        return this.hasModifiedAlternativeImagesHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedAlternativeImagesHeight () {
+        return this.hasDefinedAlternativeImagesHeight;
+    }
+
     public BaseContent setShared ( boolean shared ) {
 
         ++this.hasShared;
@@ -15952,6 +16274,90 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSharedAuthorHandle () {
         return this.hasDefinedSharedAuthorHandle;
+    }
+
+    public BaseContent setSharedAuthorAvatarImg ( String sharedAuthorAvatarImg ) {
+
+        ++this.hasSharedAuthorAvatarImg;
+        ++this.hasModifiedSharedAuthorAvatarImg;
+
+        this.sharedAuthorAvatarImg = sharedAuthorAvatarImg;
+
+        hasDefinedSharedAuthorAvatarImg = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public String getSharedAuthorAvatarImg() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorAvatarImg" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorAvatarImg;
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public Optional<String> getSharedAuthorAvatarImgAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorAvatarImg );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorAvatarImg () {
+        return this.hasSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorAvatarImg () {
+
+        this.hasSharedAuthorAvatarImg = 0;
+        this.hasModifiedSharedAuthorAvatarImg = 0;
+        this.hasDefinedSharedAuthorAvatarImg = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorAvatarImg () {
+        return this.hasModifiedSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg () {
+        return this.hasDefinedSharedAuthorAvatarImg;
     }
 
     public BaseContent setReplied ( boolean replied ) {
@@ -19025,6 +19431,18 @@ public abstract class BaseContent
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( obj.hasAlternativeImagesSrc() ) {
+            setAlternativeImagesSrc( obj.getAlternativeImagesSrc() );
+        }
+
+        if ( obj.hasAlternativeImagesWidth() ) {
+            setAlternativeImagesWidth( obj.getAlternativeImagesWidth() );
+        }
+
+        if ( obj.hasAlternativeImagesHeight() ) {
+            setAlternativeImagesHeight( obj.getAlternativeImagesHeight() );
+        }
+
         if ( obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -19063,6 +19481,10 @@ public abstract class BaseContent
 
         if ( obj.hasSharedAuthorHandle() ) {
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
+        if ( obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
         }
 
         if ( obj.hasReplied() ) {
@@ -20038,6 +20460,18 @@ public abstract class BaseContent
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( ! hasAlternativeImagesSrc() && obj.hasAlternativeImagesSrc() ) {
+            setAlternativeImagesSrc( obj.getAlternativeImagesSrc() );
+        }
+
+        if ( ! hasAlternativeImagesWidth() && obj.hasAlternativeImagesWidth() ) {
+            setAlternativeImagesWidth( obj.getAlternativeImagesWidth() );
+        }
+
+        if ( ! hasAlternativeImagesHeight() && obj.hasAlternativeImagesHeight() ) {
+            setAlternativeImagesHeight( obj.getAlternativeImagesHeight() );
+        }
+
         if ( ! hasShared() && obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -20116,6 +20550,15 @@ public abstract class BaseContent
         if ( hasSharedAuthorHandle() && getSharedAuthorHandle() == null &&
             obj.hasSharedAuthorHandle() && obj.getSharedAuthorHandle() != null ) {
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
+        if ( ! hasSharedAuthorAvatarImg() && obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
+        }
+
+        if ( hasSharedAuthorAvatarImg() && getSharedAuthorAvatarImg() == null &&
+            obj.hasSharedAuthorAvatarImg() && obj.getSharedAuthorAvatarImg() != null ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
         }
 
         if ( ! hasReplied() && obj.hasReplied() ) {
@@ -20553,6 +20996,12 @@ public abstract class BaseContent
 
         this.hasModifiedImageHeight = 0;
 
+        this.hasModifiedAlternativeImagesSrc = 0;
+
+        this.hasModifiedAlternativeImagesWidth = 0;
+
+        this.hasModifiedAlternativeImagesHeight = 0;
+
         this.hasModifiedShared = 0;
 
         this.hasModifiedSharedType = 0;
@@ -20572,6 +21021,8 @@ public abstract class BaseContent
         this.hasModifiedSharedPermalink = 0;
 
         this.hasModifiedSharedAuthorHandle = 0;
+
+        this.hasModifiedSharedAuthorAvatarImg = 0;
 
         this.hasModifiedReplied = 0;
 
@@ -21160,6 +21611,18 @@ public abstract class BaseContent
             return true;
         }
 
+        if ( this.hasModifiedAlternativeImagesSrc() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedAlternativeImagesWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedAlternativeImagesHeight() ) {
+            return true;
+        }
+
         if ( this.hasModifiedShared() ) {
             return true;
         }
@@ -21197,6 +21660,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSharedAuthorHandle() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorAvatarImg() ) {
             return true;
         }
 
@@ -22434,6 +22901,30 @@ public abstract class BaseContent
 
         }
 
+        if ( hasAlternativeImagesSrc > 0 ) {
+
+            buff.append( "alternativeImagesSrc=" );
+            buff.append( alternativeImagesSrc );
+            buff.append( " " );
+
+        }
+
+        if ( hasAlternativeImagesWidth > 0 ) {
+
+            buff.append( "alternativeImagesWidth=" );
+            buff.append( alternativeImagesWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasAlternativeImagesHeight > 0 ) {
+
+            buff.append( "alternativeImagesHeight=" );
+            buff.append( alternativeImagesHeight );
+            buff.append( " " );
+
+        }
+
         if ( hasShared > 0 ) {
 
             buff.append( "shared=" );
@@ -22510,6 +23001,14 @@ public abstract class BaseContent
 
             buff.append( "sharedAuthorHandle=" );
             buff.append( sharedAuthorHandle );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorAvatarImg > 0 ) {
+
+            buff.append( "sharedAuthorAvatarImg=" );
+            buff.append( sharedAuthorAvatarImg );
             buff.append( " " );
 
         }
@@ -23938,6 +24437,33 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
+        if ( hasAlternativeImagesSrc() != cmp.hasAlternativeImagesSrc() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( alternativeImagesSrc, cmp.alternativeImagesSrc ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasAlternativeImagesWidth() != cmp.hasAlternativeImagesWidth() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( alternativeImagesWidth, cmp.alternativeImagesWidth ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasAlternativeImagesHeight() != cmp.hasAlternativeImagesHeight() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( alternativeImagesHeight, cmp.alternativeImagesHeight ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasShared() != cmp.hasShared() ) {
             return false;
         }
@@ -24024,6 +24550,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( sharedAuthorHandle, cmp.sharedAuthorHandle ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorAvatarImg() != cmp.hasSharedAuthorAvatarImg() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorAvatarImg, cmp.sharedAuthorAvatarImg ) ) {
             return false;
         }
 
@@ -26517,6 +27052,60 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member alternative_images_src from Set<String>
+
+            __name = "alternativeImagesSrc";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "alternative_images_src";
+            }
+
+            if ( this.hasAlternativeImagesSrc > 0 ) {
+
+                if ( alternativeImagesSrc != null ) {
+
+                    JSON.writeStringSet( generator, __name, alternativeImagesSrc );
+
+                }
+
+            }
+
+            // ***** json encode member alternative_images_width from Set<String>
+
+            __name = "alternativeImagesWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "alternative_images_width";
+            }
+
+            if ( this.hasAlternativeImagesWidth > 0 ) {
+
+                if ( alternativeImagesWidth != null ) {
+
+                    JSON.writeStringSet( generator, __name, alternativeImagesWidth );
+
+                }
+
+            }
+
+            // ***** json encode member alternative_images_height from Set<String>
+
+            __name = "alternativeImagesHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "alternative_images_height";
+            }
+
+            if ( this.hasAlternativeImagesHeight > 0 ) {
+
+                if ( alternativeImagesHeight != null ) {
+
+                    JSON.writeStringSet( generator, __name, alternativeImagesHeight );
+
+                }
+
+            }
+
             // ***** json encode member shared from boolean
 
             __name = "shared";
@@ -26671,6 +27260,22 @@ public abstract class BaseContent
 
                 if ( sharedAuthorHandle != null ) {
                     generator.writeStringField( __name, sharedAuthorHandle );
+                }
+
+            }
+
+            // ***** json encode member shared_author_avatar_img from String
+
+            __name = "sharedAuthorAvatarImg";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_avatar_img";
+            }
+
+            if ( this.hasSharedAuthorAvatarImg > 0 ) {
+
+                if ( sharedAuthorAvatarImg != null ) {
+                    generator.writeStringField( __name, sharedAuthorAvatarImg );
                 }
 
             }
@@ -28526,6 +29131,33 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member alternative_images_src from Set<String>
+
+                case "alternative_images_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member alternative_images_width from Set<String>
+
+                case "alternative_images_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member alternative_images_height from Set<String>
+
+                case "alternative_images_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member shared from boolean
 
                 case "shared":
@@ -28621,6 +29253,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSharedAuthorHandle( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_avatar_img from String
+
+                case "shared_author_avatar_img":
+
+                    jParser.nextToken();
+                    setSharedAuthorAvatarImg( jParser.getValueAsString() );
 
                     break;
 
