@@ -990,6 +990,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     */
+    public final String SHARED_AUTHOR_AVATAR_IMG = "shared_author_avatar_img";
+
+    /**
+     * <p>
      * True when this source was a reply, false otherwhise
      * </p>
      */
@@ -1036,6 +1043,132 @@ public class ContentDescriptor {
      * </p>
      */
     public final String VIDEO_PLAYER_HEIGHT = "video_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO1_PLAYER = "video1_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO1_PLAYER_WIDTH = "video1_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO1_PLAYER_HEIGHT = "video1_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO2_PLAYER = "video2_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO2_PLAYER_WIDTH = "video2_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO2_PLAYER_HEIGHT = "video2_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO3_PLAYER = "video3_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO3_PLAYER_WIDTH = "video3_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO3_PLAYER_HEIGHT = "video3_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO4_PLAYER = "video4_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO4_PLAYER_WIDTH = "video4_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO4_PLAYER_HEIGHT = "video4_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO4_PLAYER = "video4_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO4_PLAYER_WIDTH = "video4_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO4_PLAYER_HEIGHT = "video4_player_height";
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     */
+    public final String VIDEO5_PLAYER = "video5_player";
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO5_PLAYER_WIDTH = "video5_player_width";
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     */
+    public final String VIDEO5_PLAYER_HEIGHT = "video5_player_height";
 
     /**
      * <p>
