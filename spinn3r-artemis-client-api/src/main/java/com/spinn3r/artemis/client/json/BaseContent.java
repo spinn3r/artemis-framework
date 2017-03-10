@@ -3351,6 +3351,294 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasImage1Src = 0;
+
+    public int hasModifiedImage1Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Src = false;
+
+    protected Set<String> image1Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage1Width = 0;
+
+    public int hasModifiedImage1Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Width = false;
+
+    protected Set<String> image1Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage1Height = 0;
+
+    public int hasModifiedImage1Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Height = false;
+
+    protected Set<String> image1Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Src = 0;
+
+    public int hasModifiedImage2Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Src = false;
+
+    protected Set<String> image2Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Width = 0;
+
+    public int hasModifiedImage2Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Width = false;
+
+    protected Set<String> image2Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Height = 0;
+
+    public int hasModifiedImage2Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Height = false;
+
+    protected Set<String> image2Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Src = 0;
+
+    public int hasModifiedImage3Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Src = false;
+
+    protected Set<String> image3Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Width = 0;
+
+    public int hasModifiedImage3Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Width = false;
+
+    protected Set<String> image3Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Height = 0;
+
+    public int hasModifiedImage3Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Height = false;
+
+    protected Set<String> image3Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Src = 0;
+
+    public int hasModifiedImage4Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Src = false;
+
+    protected Set<String> image4Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Width = 0;
+
+    public int hasModifiedImage4Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Width = false;
+
+    protected Set<String> image4Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Height = 0;
+
+    public int hasModifiedImage4Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Height = false;
+
+    protected Set<String> image4Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Src = 0;
+
+    public int hasModifiedImage5Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Src = false;
+
+    protected Set<String> image5Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Width = 0;
+
+    public int hasModifiedImage5Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Width = false;
+
+    protected Set<String> image5Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Height = 0;
+
+    public int hasModifiedImage5Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Height = false;
+
+    protected Set<String> image5Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Src = 0;
+
+    public int hasModifiedImage6Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Src = false;
+
+    protected Set<String> image6Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Width = 0;
+
+    public int hasModifiedImage6Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Width = false;
+
+    protected Set<String> image6Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Height = 0;
+
+    public int hasModifiedImage6Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Height = false;
+
+    protected Set<String> image6Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasShared = 0;
 
     public int hasModifiedShared = 0;
@@ -3507,6 +3795,22 @@ public abstract class BaseContent
     public boolean hasDefinedSharedAuthorHandle = false;
 
     protected String sharedAuthorHandle;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasSharedAuthorAvatarImg = 0;
+
+    public int hasModifiedSharedAuthorAvatarImg = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg = false;
+
+    protected String sharedAuthorAvatarImg;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -15112,6 +15416,1554 @@ public abstract class BaseContent
         return this.hasDefinedImageHeight;
     }
 
+    public BaseContent setImage1Src ( Set<String> image1Src ) {
+
+        NoNullSet.validate( image1Src );
+
+        ++this.hasImage1Src;
+        ++this.hasModifiedImage1Src;
+
+        this.image1Src = image1Src;
+
+        hasDefinedImage1Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_src
+     * </p>
+     */
+    public Set<String> getImage1Src() {
+
+        if ( this.constructed == false && this.hasImage1Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage1SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Src () {
+        return this.hasImage1Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Src () {
+
+        this.hasImage1Src = 0;
+        this.hasModifiedImage1Src = 0;
+        this.hasDefinedImage1Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Src () {
+        return this.hasModifiedImage1Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Src () {
+        return this.hasDefinedImage1Src;
+    }
+
+    public BaseContent setImage1Width ( Set<String> image1Width ) {
+
+        NoNullSet.validate( image1Width );
+
+        ++this.hasImage1Width;
+        ++this.hasModifiedImage1Width;
+
+        this.image1Width = image1Width;
+
+        hasDefinedImage1Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_width
+     * </p>
+     */
+    public Set<String> getImage1Width() {
+
+        if ( this.constructed == false && this.hasImage1Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage1WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Width () {
+        return this.hasImage1Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Width () {
+
+        this.hasImage1Width = 0;
+        this.hasModifiedImage1Width = 0;
+        this.hasDefinedImage1Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Width () {
+        return this.hasModifiedImage1Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Width () {
+        return this.hasDefinedImage1Width;
+    }
+
+    public BaseContent setImage1Height ( Set<String> image1Height ) {
+
+        NoNullSet.validate( image1Height );
+
+        ++this.hasImage1Height;
+        ++this.hasModifiedImage1Height;
+
+        this.image1Height = image1Height;
+
+        hasDefinedImage1Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_height
+     * </p>
+     */
+    public Set<String> getImage1Height() {
+
+        if ( this.constructed == false && this.hasImage1Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image1_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage1HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Height () {
+        return this.hasImage1Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Height () {
+
+        this.hasImage1Height = 0;
+        this.hasModifiedImage1Height = 0;
+        this.hasDefinedImage1Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Height () {
+        return this.hasModifiedImage1Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Height () {
+        return this.hasDefinedImage1Height;
+    }
+
+    public BaseContent setImage2Src ( Set<String> image2Src ) {
+
+        NoNullSet.validate( image2Src );
+
+        ++this.hasImage2Src;
+        ++this.hasModifiedImage2Src;
+
+        this.image2Src = image2Src;
+
+        hasDefinedImage2Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_src
+     * </p>
+     */
+    public Set<String> getImage2Src() {
+
+        if ( this.constructed == false && this.hasImage2Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage2SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Src () {
+        return this.hasImage2Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Src () {
+
+        this.hasImage2Src = 0;
+        this.hasModifiedImage2Src = 0;
+        this.hasDefinedImage2Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Src () {
+        return this.hasModifiedImage2Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Src () {
+        return this.hasDefinedImage2Src;
+    }
+
+    public BaseContent setImage2Width ( Set<String> image2Width ) {
+
+        NoNullSet.validate( image2Width );
+
+        ++this.hasImage2Width;
+        ++this.hasModifiedImage2Width;
+
+        this.image2Width = image2Width;
+
+        hasDefinedImage2Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_width
+     * </p>
+     */
+    public Set<String> getImage2Width() {
+
+        if ( this.constructed == false && this.hasImage2Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage2WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Width () {
+        return this.hasImage2Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Width () {
+
+        this.hasImage2Width = 0;
+        this.hasModifiedImage2Width = 0;
+        this.hasDefinedImage2Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Width () {
+        return this.hasModifiedImage2Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Width () {
+        return this.hasDefinedImage2Width;
+    }
+
+    public BaseContent setImage2Height ( Set<String> image2Height ) {
+
+        NoNullSet.validate( image2Height );
+
+        ++this.hasImage2Height;
+        ++this.hasModifiedImage2Height;
+
+        this.image2Height = image2Height;
+
+        hasDefinedImage2Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_height
+     * </p>
+     */
+    public Set<String> getImage2Height() {
+
+        if ( this.constructed == false && this.hasImage2Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image2_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage2HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Height () {
+        return this.hasImage2Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Height () {
+
+        this.hasImage2Height = 0;
+        this.hasModifiedImage2Height = 0;
+        this.hasDefinedImage2Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Height () {
+        return this.hasModifiedImage2Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Height () {
+        return this.hasDefinedImage2Height;
+    }
+
+    public BaseContent setImage3Src ( Set<String> image3Src ) {
+
+        NoNullSet.validate( image3Src );
+
+        ++this.hasImage3Src;
+        ++this.hasModifiedImage3Src;
+
+        this.image3Src = image3Src;
+
+        hasDefinedImage3Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_src
+     * </p>
+     */
+    public Set<String> getImage3Src() {
+
+        if ( this.constructed == false && this.hasImage3Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage3SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Src () {
+        return this.hasImage3Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Src () {
+
+        this.hasImage3Src = 0;
+        this.hasModifiedImage3Src = 0;
+        this.hasDefinedImage3Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Src () {
+        return this.hasModifiedImage3Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Src () {
+        return this.hasDefinedImage3Src;
+    }
+
+    public BaseContent setImage3Width ( Set<String> image3Width ) {
+
+        NoNullSet.validate( image3Width );
+
+        ++this.hasImage3Width;
+        ++this.hasModifiedImage3Width;
+
+        this.image3Width = image3Width;
+
+        hasDefinedImage3Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_width
+     * </p>
+     */
+    public Set<String> getImage3Width() {
+
+        if ( this.constructed == false && this.hasImage3Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage3WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Width () {
+        return this.hasImage3Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Width () {
+
+        this.hasImage3Width = 0;
+        this.hasModifiedImage3Width = 0;
+        this.hasDefinedImage3Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Width () {
+        return this.hasModifiedImage3Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Width () {
+        return this.hasDefinedImage3Width;
+    }
+
+    public BaseContent setImage3Height ( Set<String> image3Height ) {
+
+        NoNullSet.validate( image3Height );
+
+        ++this.hasImage3Height;
+        ++this.hasModifiedImage3Height;
+
+        this.image3Height = image3Height;
+
+        hasDefinedImage3Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_height
+     * </p>
+     */
+    public Set<String> getImage3Height() {
+
+        if ( this.constructed == false && this.hasImage3Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image3_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage3HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Height () {
+        return this.hasImage3Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Height () {
+
+        this.hasImage3Height = 0;
+        this.hasModifiedImage3Height = 0;
+        this.hasDefinedImage3Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Height () {
+        return this.hasModifiedImage3Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Height () {
+        return this.hasDefinedImage3Height;
+    }
+
+    public BaseContent setImage4Src ( Set<String> image4Src ) {
+
+        NoNullSet.validate( image4Src );
+
+        ++this.hasImage4Src;
+        ++this.hasModifiedImage4Src;
+
+        this.image4Src = image4Src;
+
+        hasDefinedImage4Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_src
+     * </p>
+     */
+    public Set<String> getImage4Src() {
+
+        if ( this.constructed == false && this.hasImage4Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage4SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Src () {
+        return this.hasImage4Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Src () {
+
+        this.hasImage4Src = 0;
+        this.hasModifiedImage4Src = 0;
+        this.hasDefinedImage4Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Src () {
+        return this.hasModifiedImage4Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Src () {
+        return this.hasDefinedImage4Src;
+    }
+
+    public BaseContent setImage4Width ( Set<String> image4Width ) {
+
+        NoNullSet.validate( image4Width );
+
+        ++this.hasImage4Width;
+        ++this.hasModifiedImage4Width;
+
+        this.image4Width = image4Width;
+
+        hasDefinedImage4Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_width
+     * </p>
+     */
+    public Set<String> getImage4Width() {
+
+        if ( this.constructed == false && this.hasImage4Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage4WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Width () {
+        return this.hasImage4Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Width () {
+
+        this.hasImage4Width = 0;
+        this.hasModifiedImage4Width = 0;
+        this.hasDefinedImage4Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Width () {
+        return this.hasModifiedImage4Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Width () {
+        return this.hasDefinedImage4Width;
+    }
+
+    public BaseContent setImage4Height ( Set<String> image4Height ) {
+
+        NoNullSet.validate( image4Height );
+
+        ++this.hasImage4Height;
+        ++this.hasModifiedImage4Height;
+
+        this.image4Height = image4Height;
+
+        hasDefinedImage4Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_height
+     * </p>
+     */
+    public Set<String> getImage4Height() {
+
+        if ( this.constructed == false && this.hasImage4Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image4_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage4HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Height () {
+        return this.hasImage4Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Height () {
+
+        this.hasImage4Height = 0;
+        this.hasModifiedImage4Height = 0;
+        this.hasDefinedImage4Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Height () {
+        return this.hasModifiedImage4Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Height () {
+        return this.hasDefinedImage4Height;
+    }
+
+    public BaseContent setImage5Src ( Set<String> image5Src ) {
+
+        NoNullSet.validate( image5Src );
+
+        ++this.hasImage5Src;
+        ++this.hasModifiedImage5Src;
+
+        this.image5Src = image5Src;
+
+        hasDefinedImage5Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_src
+     * </p>
+     */
+    public Set<String> getImage5Src() {
+
+        if ( this.constructed == false && this.hasImage5Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage5SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Src () {
+        return this.hasImage5Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Src () {
+
+        this.hasImage5Src = 0;
+        this.hasModifiedImage5Src = 0;
+        this.hasDefinedImage5Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Src () {
+        return this.hasModifiedImage5Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Src () {
+        return this.hasDefinedImage5Src;
+    }
+
+    public BaseContent setImage5Width ( Set<String> image5Width ) {
+
+        NoNullSet.validate( image5Width );
+
+        ++this.hasImage5Width;
+        ++this.hasModifiedImage5Width;
+
+        this.image5Width = image5Width;
+
+        hasDefinedImage5Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_width
+     * </p>
+     */
+    public Set<String> getImage5Width() {
+
+        if ( this.constructed == false && this.hasImage5Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage5WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Width () {
+        return this.hasImage5Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Width () {
+
+        this.hasImage5Width = 0;
+        this.hasModifiedImage5Width = 0;
+        this.hasDefinedImage5Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Width () {
+        return this.hasModifiedImage5Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Width () {
+        return this.hasDefinedImage5Width;
+    }
+
+    public BaseContent setImage5Height ( Set<String> image5Height ) {
+
+        NoNullSet.validate( image5Height );
+
+        ++this.hasImage5Height;
+        ++this.hasModifiedImage5Height;
+
+        this.image5Height = image5Height;
+
+        hasDefinedImage5Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_height
+     * </p>
+     */
+    public Set<String> getImage5Height() {
+
+        if ( this.constructed == false && this.hasImage5Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image5_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage5HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Height () {
+        return this.hasImage5Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Height () {
+
+        this.hasImage5Height = 0;
+        this.hasModifiedImage5Height = 0;
+        this.hasDefinedImage5Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Height () {
+        return this.hasModifiedImage5Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Height () {
+        return this.hasDefinedImage5Height;
+    }
+
+    public BaseContent setImage6Src ( Set<String> image6Src ) {
+
+        NoNullSet.validate( image6Src );
+
+        ++this.hasImage6Src;
+        ++this.hasModifiedImage6Src;
+
+        this.image6Src = image6Src;
+
+        hasDefinedImage6Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_src
+     * </p>
+     */
+    public Set<String> getImage6Src() {
+
+        if ( this.constructed == false && this.hasImage6Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_src
+     * </p>
+     */
+    public Optional<Set<String>> getImage6SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Src () {
+        return this.hasImage6Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Src () {
+
+        this.hasImage6Src = 0;
+        this.hasModifiedImage6Src = 0;
+        this.hasDefinedImage6Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Src () {
+        return this.hasModifiedImage6Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Src () {
+        return this.hasDefinedImage6Src;
+    }
+
+    public BaseContent setImage6Width ( Set<String> image6Width ) {
+
+        NoNullSet.validate( image6Width );
+
+        ++this.hasImage6Width;
+        ++this.hasModifiedImage6Width;
+
+        this.image6Width = image6Width;
+
+        hasDefinedImage6Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_width
+     * </p>
+     */
+    public Set<String> getImage6Width() {
+
+        if ( this.constructed == false && this.hasImage6Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_width
+     * </p>
+     */
+    public Optional<Set<String>> getImage6WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Width () {
+        return this.hasImage6Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Width () {
+
+        this.hasImage6Width = 0;
+        this.hasModifiedImage6Width = 0;
+        this.hasDefinedImage6Width = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Width () {
+        return this.hasModifiedImage6Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Width () {
+        return this.hasDefinedImage6Width;
+    }
+
+    public BaseContent setImage6Height ( Set<String> image6Height ) {
+
+        NoNullSet.validate( image6Height );
+
+        ++this.hasImage6Height;
+        ++this.hasModifiedImage6Height;
+
+        this.image6Height = image6Height;
+
+        hasDefinedImage6Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_height
+     * </p>
+     */
+    public Set<String> getImage6Height() {
+
+        if ( this.constructed == false && this.hasImage6Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: image6_height
+     * </p>
+     */
+    public Optional<Set<String>> getImage6HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Height () {
+        return this.hasImage6Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Height () {
+
+        this.hasImage6Height = 0;
+        this.hasModifiedImage6Height = 0;
+        this.hasDefinedImage6Height = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Height () {
+        return this.hasModifiedImage6Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Height () {
+        return this.hasDefinedImage6Height;
+    }
+
     public BaseContent setShared ( boolean shared ) {
 
         ++this.hasShared;
@@ -15952,6 +17804,90 @@ public abstract class BaseContent
      */
     public boolean hasDefinedSharedAuthorHandle () {
         return this.hasDefinedSharedAuthorHandle;
+    }
+
+    public BaseContent setSharedAuthorAvatarImg ( String sharedAuthorAvatarImg ) {
+
+        ++this.hasSharedAuthorAvatarImg;
+        ++this.hasModifiedSharedAuthorAvatarImg;
+
+        this.sharedAuthorAvatarImg = sharedAuthorAvatarImg;
+
+        hasDefinedSharedAuthorAvatarImg = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public String getSharedAuthorAvatarImg() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorAvatarImg" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorAvatarImg;
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public Optional<String> getSharedAuthorAvatarImgAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorAvatarImg );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorAvatarImg () {
+        return this.hasSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorAvatarImg () {
+
+        this.hasSharedAuthorAvatarImg = 0;
+        this.hasModifiedSharedAuthorAvatarImg = 0;
+        this.hasDefinedSharedAuthorAvatarImg = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorAvatarImg () {
+        return this.hasModifiedSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg () {
+        return this.hasDefinedSharedAuthorAvatarImg;
     }
 
     public BaseContent setReplied ( boolean replied ) {
@@ -19025,6 +20961,78 @@ public abstract class BaseContent
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( obj.hasImage1Src() ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
+        if ( obj.hasImage1Width() ) {
+            setImage1Width( obj.getImage1Width() );
+        }
+
+        if ( obj.hasImage1Height() ) {
+            setImage1Height( obj.getImage1Height() );
+        }
+
+        if ( obj.hasImage2Src() ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( obj.hasImage2Width() ) {
+            setImage2Width( obj.getImage2Width() );
+        }
+
+        if ( obj.hasImage2Height() ) {
+            setImage2Height( obj.getImage2Height() );
+        }
+
+        if ( obj.hasImage3Src() ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
+        if ( obj.hasImage3Width() ) {
+            setImage3Width( obj.getImage3Width() );
+        }
+
+        if ( obj.hasImage3Height() ) {
+            setImage3Height( obj.getImage3Height() );
+        }
+
+        if ( obj.hasImage4Src() ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( obj.hasImage4Width() ) {
+            setImage4Width( obj.getImage4Width() );
+        }
+
+        if ( obj.hasImage4Height() ) {
+            setImage4Height( obj.getImage4Height() );
+        }
+
+        if ( obj.hasImage5Src() ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
+        if ( obj.hasImage5Width() ) {
+            setImage5Width( obj.getImage5Width() );
+        }
+
+        if ( obj.hasImage5Height() ) {
+            setImage5Height( obj.getImage5Height() );
+        }
+
+        if ( obj.hasImage6Src() ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( obj.hasImage6Width() ) {
+            setImage6Width( obj.getImage6Width() );
+        }
+
+        if ( obj.hasImage6Height() ) {
+            setImage6Height( obj.getImage6Height() );
+        }
+
         if ( obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -19063,6 +21071,10 @@ public abstract class BaseContent
 
         if ( obj.hasSharedAuthorHandle() ) {
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
+        if ( obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
         }
 
         if ( obj.hasReplied() ) {
@@ -20038,6 +22050,78 @@ public abstract class BaseContent
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( ! hasImage1Src() && obj.hasImage1Src() ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
+        if ( ! hasImage1Width() && obj.hasImage1Width() ) {
+            setImage1Width( obj.getImage1Width() );
+        }
+
+        if ( ! hasImage1Height() && obj.hasImage1Height() ) {
+            setImage1Height( obj.getImage1Height() );
+        }
+
+        if ( ! hasImage2Src() && obj.hasImage2Src() ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( ! hasImage2Width() && obj.hasImage2Width() ) {
+            setImage2Width( obj.getImage2Width() );
+        }
+
+        if ( ! hasImage2Height() && obj.hasImage2Height() ) {
+            setImage2Height( obj.getImage2Height() );
+        }
+
+        if ( ! hasImage3Src() && obj.hasImage3Src() ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
+        if ( ! hasImage3Width() && obj.hasImage3Width() ) {
+            setImage3Width( obj.getImage3Width() );
+        }
+
+        if ( ! hasImage3Height() && obj.hasImage3Height() ) {
+            setImage3Height( obj.getImage3Height() );
+        }
+
+        if ( ! hasImage4Src() && obj.hasImage4Src() ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( ! hasImage4Width() && obj.hasImage4Width() ) {
+            setImage4Width( obj.getImage4Width() );
+        }
+
+        if ( ! hasImage4Height() && obj.hasImage4Height() ) {
+            setImage4Height( obj.getImage4Height() );
+        }
+
+        if ( ! hasImage5Src() && obj.hasImage5Src() ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
+        if ( ! hasImage5Width() && obj.hasImage5Width() ) {
+            setImage5Width( obj.getImage5Width() );
+        }
+
+        if ( ! hasImage5Height() && obj.hasImage5Height() ) {
+            setImage5Height( obj.getImage5Height() );
+        }
+
+        if ( ! hasImage6Src() && obj.hasImage6Src() ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( ! hasImage6Width() && obj.hasImage6Width() ) {
+            setImage6Width( obj.getImage6Width() );
+        }
+
+        if ( ! hasImage6Height() && obj.hasImage6Height() ) {
+            setImage6Height( obj.getImage6Height() );
+        }
+
         if ( ! hasShared() && obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -20116,6 +22200,15 @@ public abstract class BaseContent
         if ( hasSharedAuthorHandle() && getSharedAuthorHandle() == null &&
             obj.hasSharedAuthorHandle() && obj.getSharedAuthorHandle() != null ) {
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
+        }
+
+        if ( ! hasSharedAuthorAvatarImg() && obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
+        }
+
+        if ( hasSharedAuthorAvatarImg() && getSharedAuthorAvatarImg() == null &&
+            obj.hasSharedAuthorAvatarImg() && obj.getSharedAuthorAvatarImg() != null ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
         }
 
         if ( ! hasReplied() && obj.hasReplied() ) {
@@ -20553,6 +22646,42 @@ public abstract class BaseContent
 
         this.hasModifiedImageHeight = 0;
 
+        this.hasModifiedImage1Src = 0;
+
+        this.hasModifiedImage1Width = 0;
+
+        this.hasModifiedImage1Height = 0;
+
+        this.hasModifiedImage2Src = 0;
+
+        this.hasModifiedImage2Width = 0;
+
+        this.hasModifiedImage2Height = 0;
+
+        this.hasModifiedImage3Src = 0;
+
+        this.hasModifiedImage3Width = 0;
+
+        this.hasModifiedImage3Height = 0;
+
+        this.hasModifiedImage4Src = 0;
+
+        this.hasModifiedImage4Width = 0;
+
+        this.hasModifiedImage4Height = 0;
+
+        this.hasModifiedImage5Src = 0;
+
+        this.hasModifiedImage5Width = 0;
+
+        this.hasModifiedImage5Height = 0;
+
+        this.hasModifiedImage6Src = 0;
+
+        this.hasModifiedImage6Width = 0;
+
+        this.hasModifiedImage6Height = 0;
+
         this.hasModifiedShared = 0;
 
         this.hasModifiedSharedType = 0;
@@ -20572,6 +22701,8 @@ public abstract class BaseContent
         this.hasModifiedSharedPermalink = 0;
 
         this.hasModifiedSharedAuthorHandle = 0;
+
+        this.hasModifiedSharedAuthorAvatarImg = 0;
 
         this.hasModifiedReplied = 0;
 
@@ -21160,6 +23291,78 @@ public abstract class BaseContent
             return true;
         }
 
+        if ( this.hasModifiedImage1Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage1Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage1Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Height() ) {
+            return true;
+        }
+
         if ( this.hasModifiedShared() ) {
             return true;
         }
@@ -21197,6 +23400,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedSharedAuthorHandle() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedSharedAuthorAvatarImg() ) {
             return true;
         }
 
@@ -22434,6 +24641,150 @@ public abstract class BaseContent
 
         }
 
+        if ( hasImage1Src > 0 ) {
+
+            buff.append( "image1Src=" );
+            buff.append( image1Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage1Width > 0 ) {
+
+            buff.append( "image1Width=" );
+            buff.append( image1Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage1Height > 0 ) {
+
+            buff.append( "image1Height=" );
+            buff.append( image1Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Src > 0 ) {
+
+            buff.append( "image2Src=" );
+            buff.append( image2Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Width > 0 ) {
+
+            buff.append( "image2Width=" );
+            buff.append( image2Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Height > 0 ) {
+
+            buff.append( "image2Height=" );
+            buff.append( image2Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Src > 0 ) {
+
+            buff.append( "image3Src=" );
+            buff.append( image3Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Width > 0 ) {
+
+            buff.append( "image3Width=" );
+            buff.append( image3Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Height > 0 ) {
+
+            buff.append( "image3Height=" );
+            buff.append( image3Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Src > 0 ) {
+
+            buff.append( "image4Src=" );
+            buff.append( image4Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Width > 0 ) {
+
+            buff.append( "image4Width=" );
+            buff.append( image4Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Height > 0 ) {
+
+            buff.append( "image4Height=" );
+            buff.append( image4Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Src > 0 ) {
+
+            buff.append( "image5Src=" );
+            buff.append( image5Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Width > 0 ) {
+
+            buff.append( "image5Width=" );
+            buff.append( image5Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Height > 0 ) {
+
+            buff.append( "image5Height=" );
+            buff.append( image5Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Src > 0 ) {
+
+            buff.append( "image6Src=" );
+            buff.append( image6Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Width > 0 ) {
+
+            buff.append( "image6Width=" );
+            buff.append( image6Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Height > 0 ) {
+
+            buff.append( "image6Height=" );
+            buff.append( image6Height );
+            buff.append( " " );
+
+        }
+
         if ( hasShared > 0 ) {
 
             buff.append( "shared=" );
@@ -22510,6 +24861,14 @@ public abstract class BaseContent
 
             buff.append( "sharedAuthorHandle=" );
             buff.append( sharedAuthorHandle );
+            buff.append( " " );
+
+        }
+
+        if ( hasSharedAuthorAvatarImg > 0 ) {
+
+            buff.append( "sharedAuthorAvatarImg=" );
+            buff.append( sharedAuthorAvatarImg );
             buff.append( " " );
 
         }
@@ -23938,6 +26297,168 @@ public abstract class BaseContent
         }
 
         // they should either be both false or both true...
+        if ( hasImage1Src() != cmp.hasImage1Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image1Src, cmp.image1Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage1Width() != cmp.hasImage1Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image1Width, cmp.image1Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage1Height() != cmp.hasImage1Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image1Height, cmp.image1Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Src() != cmp.hasImage2Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image2Src, cmp.image2Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Width() != cmp.hasImage2Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image2Width, cmp.image2Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Height() != cmp.hasImage2Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image2Height, cmp.image2Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Src() != cmp.hasImage3Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image3Src, cmp.image3Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Width() != cmp.hasImage3Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image3Width, cmp.image3Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Height() != cmp.hasImage3Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image3Height, cmp.image3Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Src() != cmp.hasImage4Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image4Src, cmp.image4Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Width() != cmp.hasImage4Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image4Width, cmp.image4Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Height() != cmp.hasImage4Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image4Height, cmp.image4Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Src() != cmp.hasImage5Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image5Src, cmp.image5Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Width() != cmp.hasImage5Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image5Width, cmp.image5Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Height() != cmp.hasImage5Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image5Height, cmp.image5Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Src() != cmp.hasImage6Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image6Src, cmp.image6Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Width() != cmp.hasImage6Width() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image6Width, cmp.image6Width ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Height() != cmp.hasImage6Height() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image6Height, cmp.image6Height ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasShared() != cmp.hasShared() ) {
             return false;
         }
@@ -24024,6 +26545,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( sharedAuthorHandle, cmp.sharedAuthorHandle ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasSharedAuthorAvatarImg() != cmp.hasSharedAuthorAvatarImg() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorAvatarImg, cmp.sharedAuthorAvatarImg ) ) {
             return false;
         }
 
@@ -26517,6 +29047,330 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member image1_src from Set<String>
+
+            __name = "image1Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_src";
+            }
+
+            if ( this.hasImage1Src > 0 ) {
+
+                if ( image1Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image1Src );
+
+                }
+
+            }
+
+            // ***** json encode member image1_width from Set<String>
+
+            __name = "image1Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_width";
+            }
+
+            if ( this.hasImage1Width > 0 ) {
+
+                if ( image1Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image1Width );
+
+                }
+
+            }
+
+            // ***** json encode member image1_height from Set<String>
+
+            __name = "image1Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_height";
+            }
+
+            if ( this.hasImage1Height > 0 ) {
+
+                if ( image1Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image1Height );
+
+                }
+
+            }
+
+            // ***** json encode member image2_src from Set<String>
+
+            __name = "image2Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_src";
+            }
+
+            if ( this.hasImage2Src > 0 ) {
+
+                if ( image2Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image2Src );
+
+                }
+
+            }
+
+            // ***** json encode member image2_width from Set<String>
+
+            __name = "image2Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_width";
+            }
+
+            if ( this.hasImage2Width > 0 ) {
+
+                if ( image2Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image2Width );
+
+                }
+
+            }
+
+            // ***** json encode member image2_height from Set<String>
+
+            __name = "image2Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_height";
+            }
+
+            if ( this.hasImage2Height > 0 ) {
+
+                if ( image2Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image2Height );
+
+                }
+
+            }
+
+            // ***** json encode member image3_src from Set<String>
+
+            __name = "image3Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_src";
+            }
+
+            if ( this.hasImage3Src > 0 ) {
+
+                if ( image3Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image3Src );
+
+                }
+
+            }
+
+            // ***** json encode member image3_width from Set<String>
+
+            __name = "image3Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_width";
+            }
+
+            if ( this.hasImage3Width > 0 ) {
+
+                if ( image3Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image3Width );
+
+                }
+
+            }
+
+            // ***** json encode member image3_height from Set<String>
+
+            __name = "image3Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_height";
+            }
+
+            if ( this.hasImage3Height > 0 ) {
+
+                if ( image3Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image3Height );
+
+                }
+
+            }
+
+            // ***** json encode member image4_src from Set<String>
+
+            __name = "image4Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_src";
+            }
+
+            if ( this.hasImage4Src > 0 ) {
+
+                if ( image4Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image4Src );
+
+                }
+
+            }
+
+            // ***** json encode member image4_width from Set<String>
+
+            __name = "image4Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_width";
+            }
+
+            if ( this.hasImage4Width > 0 ) {
+
+                if ( image4Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image4Width );
+
+                }
+
+            }
+
+            // ***** json encode member image4_height from Set<String>
+
+            __name = "image4Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_height";
+            }
+
+            if ( this.hasImage4Height > 0 ) {
+
+                if ( image4Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image4Height );
+
+                }
+
+            }
+
+            // ***** json encode member image5_src from Set<String>
+
+            __name = "image5Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_src";
+            }
+
+            if ( this.hasImage5Src > 0 ) {
+
+                if ( image5Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image5Src );
+
+                }
+
+            }
+
+            // ***** json encode member image5_width from Set<String>
+
+            __name = "image5Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_width";
+            }
+
+            if ( this.hasImage5Width > 0 ) {
+
+                if ( image5Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image5Width );
+
+                }
+
+            }
+
+            // ***** json encode member image5_height from Set<String>
+
+            __name = "image5Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_height";
+            }
+
+            if ( this.hasImage5Height > 0 ) {
+
+                if ( image5Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image5Height );
+
+                }
+
+            }
+
+            // ***** json encode member image6_src from Set<String>
+
+            __name = "image6Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_src";
+            }
+
+            if ( this.hasImage6Src > 0 ) {
+
+                if ( image6Src != null ) {
+
+                    JSON.writeStringSet( generator, __name, image6Src );
+
+                }
+
+            }
+
+            // ***** json encode member image6_width from Set<String>
+
+            __name = "image6Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_width";
+            }
+
+            if ( this.hasImage6Width > 0 ) {
+
+                if ( image6Width != null ) {
+
+                    JSON.writeStringSet( generator, __name, image6Width );
+
+                }
+
+            }
+
+            // ***** json encode member image6_height from Set<String>
+
+            __name = "image6Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_height";
+            }
+
+            if ( this.hasImage6Height > 0 ) {
+
+                if ( image6Height != null ) {
+
+                    JSON.writeStringSet( generator, __name, image6Height );
+
+                }
+
+            }
+
             // ***** json encode member shared from boolean
 
             __name = "shared";
@@ -26671,6 +29525,22 @@ public abstract class BaseContent
 
                 if ( sharedAuthorHandle != null ) {
                     generator.writeStringField( __name, sharedAuthorHandle );
+                }
+
+            }
+
+            // ***** json encode member shared_author_avatar_img from String
+
+            __name = "sharedAuthorAvatarImg";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_avatar_img";
+            }
+
+            if ( this.hasSharedAuthorAvatarImg > 0 ) {
+
+                if ( sharedAuthorAvatarImg != null ) {
+                    generator.writeStringField( __name, sharedAuthorAvatarImg );
                 }
 
             }
@@ -28526,6 +31396,168 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_src from Set<String>
+
+                case "image1_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_width from Set<String>
+
+                case "image1_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_height from Set<String>
+
+                case "image1_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_src from Set<String>
+
+                case "image2_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_width from Set<String>
+
+                case "image2_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_height from Set<String>
+
+                case "image2_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_src from Set<String>
+
+                case "image3_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_width from Set<String>
+
+                case "image3_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_height from Set<String>
+
+                case "image3_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_src from Set<String>
+
+                case "image4_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_width from Set<String>
+
+                case "image4_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_height from Set<String>
+
+                case "image4_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_src from Set<String>
+
+                case "image5_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_width from Set<String>
+
+                case "image5_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_height from Set<String>
+
+                case "image5_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_src from Set<String>
+
+                case "image6_src":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_width from Set<String>
+
+                case "image6_width":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_height from Set<String>
+
+                case "image6_height":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member shared from boolean
 
                 case "shared":
@@ -28621,6 +31653,16 @@ public abstract class BaseContent
 
                     jParser.nextToken();
                     setSharedAuthorHandle( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_avatar_img from String
+
+                case "shared_author_avatar_img":
+
+                    jParser.nextToken();
+                    setSharedAuthorAvatarImg( jParser.getValueAsString() );
 
                     break;
 

@@ -920,6 +920,132 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE1_SRC = "image1_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE1_WIDTH = "image1_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE1_HEIGHT = "image1_height";
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE2_SRC = "image2_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE2_WIDTH = "image2_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE2_HEIGHT = "image2_height";
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE3_SRC = "image3_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE3_WIDTH = "image3_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE3_HEIGHT = "image3_height";
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE4_SRC = "image4_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE4_WIDTH = "image4_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE4_HEIGHT = "image4_height";
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE5_SRC = "image5_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE5_WIDTH = "image5_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE5_HEIGHT = "image5_height";
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     */
+    public final String IMAGE6_SRC = "image6_src";
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     */
+    public final String IMAGE6_WIDTH = "image6_width";
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     */
+    public final String IMAGE6_HEIGHT = "image6_height";
+
+    /**
+     * <p>
      * True when this source was not published by the original user but actually shared from someone the source follows.  On microblogging platforms this is a retweet.  On others it's a shared post. 
      * </p>
      */
@@ -987,6 +1113,13 @@ public class ContentDescriptor {
      * </p>
      */
     public final String SHARED_AUTHOR_HANDLE = "shared_author_handle";
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     */
+    public final String SHARED_AUTHOR_AVATAR_IMG = "shared_author_avatar_img";
 
     /**
      * <p>
