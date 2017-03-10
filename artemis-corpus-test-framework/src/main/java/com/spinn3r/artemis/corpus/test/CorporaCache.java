@@ -44,6 +44,13 @@ public class CorporaCache {
 
     private String extension = "dat";
 
+    // FIXME: do not make this use compression by default
+
+    // FIXME: make the NetworkCache use compression by default
+
+    // FIXME: when we update documents, we accidentally create a new .gz file
+    // and NOT update the existing non-gz file.   
+
     public CorporaCache(Class<?> parent) {
         this.parent = parent;
     }
