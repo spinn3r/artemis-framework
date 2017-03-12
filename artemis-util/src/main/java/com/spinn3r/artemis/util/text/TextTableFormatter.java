@@ -20,6 +20,8 @@ public class TextTableFormatter {
     private TextTableFormatter() {
     }
 
+    // FIXME: don't allow strings wuith \n in them
+
     public String format() {
 
         List<List<String>> lines = Lists.newArrayList();
@@ -298,7 +300,7 @@ public class TextTableFormatter {
             //return result;
 
         }
-
+        
         public String toCSV() {
 
             StringBuilder buff = new StringBuilder();
