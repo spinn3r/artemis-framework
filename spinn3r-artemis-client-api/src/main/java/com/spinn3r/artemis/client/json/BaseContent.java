@@ -3362,7 +3362,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage1Src = false;
 
-    protected Set<String> image1Src;
+    protected String image1Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3378,7 +3378,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage1Width = false;
 
-    protected Set<String> image1Width;
+    protected int image1Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3394,7 +3394,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage1Height = false;
 
-    protected Set<String> image1Height;
+    protected int image1Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3410,7 +3410,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage2Src = false;
 
-    protected Set<String> image2Src;
+    protected String image2Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3426,7 +3426,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage2Width = false;
 
-    protected Set<String> image2Width;
+    protected int image2Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3442,7 +3442,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage2Height = false;
 
-    protected Set<String> image2Height;
+    protected int image2Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3458,7 +3458,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage3Src = false;
 
-    protected Set<String> image3Src;
+    protected String image3Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3474,7 +3474,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage3Width = false;
 
-    protected Set<String> image3Width;
+    protected int image3Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3490,7 +3490,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage3Height = false;
 
-    protected Set<String> image3Height;
+    protected int image3Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3506,7 +3506,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage4Src = false;
 
-    protected Set<String> image4Src;
+    protected String image4Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3522,7 +3522,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage4Width = false;
 
-    protected Set<String> image4Width;
+    protected int image4Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3538,7 +3538,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage4Height = false;
 
-    protected Set<String> image4Height;
+    protected int image4Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3554,7 +3554,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage5Src = false;
 
-    protected Set<String> image5Src;
+    protected String image5Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3570,7 +3570,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage5Width = false;
 
-    protected Set<String> image5Width;
+    protected int image5Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3586,7 +3586,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage5Height = false;
 
-    protected Set<String> image5Height;
+    protected int image5Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3602,7 +3602,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage6Src = false;
 
-    protected Set<String> image6Src;
+    protected String image6Src;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3618,7 +3618,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage6Width = false;
 
-    protected Set<String> image6Width;
+    protected int image6Width;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -3634,7 +3634,7 @@ public abstract class BaseContent
      */
     public boolean hasDefinedImage6Height = false;
 
-    protected Set<String> image6Height;
+    protected int image6Height;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -15704,9 +15704,7 @@ public abstract class BaseContent
         return this.hasDefinedImageHeight;
     }
 
-    public BaseContent setImage1Src ( Set<String> image1Src ) {
-
-        NoNullSet.validate( image1Src );
+    public BaseContent setImage1Src ( String image1Src ) {
 
         ++this.hasImage1Src;
         ++this.hasModifiedImage1Src;
@@ -15725,10 +15723,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_src
+     * Schema type: text , name: image1_src
      * </p>
      */
-    public Set<String> getImage1Src() {
+    public String getImage1Src() {
 
         if ( this.constructed == false && this.hasImage1Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image1Src" );
@@ -15744,10 +15742,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_src
+     * Schema type: text , name: image1_src
      * </p>
      */
-    public Optional<Set<String>> getImage1SrcAsOptional() {
+    public Optional<String> getImage1SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage1Src == 0 ) {
             return Optional.empty();
@@ -15790,9 +15788,7 @@ public abstract class BaseContent
         return this.hasDefinedImage1Src;
     }
 
-    public BaseContent setImage1Width ( Set<String> image1Width ) {
-
-        NoNullSet.validate( image1Width );
+    public BaseContent setImage1Width ( int image1Width ) {
 
         ++this.hasImage1Width;
         ++this.hasModifiedImage1Width;
@@ -15811,10 +15807,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_width
+     * Schema type: int , name: image1_width
      * </p>
      */
-    public Set<String> getImage1Width() {
+    public int getImage1Width() {
 
         if ( this.constructed == false && this.hasImage1Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image1Width" );
@@ -15830,10 +15826,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_width
+     * Schema type: int , name: image1_width
      * </p>
      */
-    public Optional<Set<String>> getImage1WidthAsOptional() {
+    public Optional<Integer> getImage1WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage1Width == 0 ) {
             return Optional.empty();
@@ -15860,6 +15856,8 @@ public abstract class BaseContent
         this.hasModifiedImage1Width = 0;
         this.hasDefinedImage1Width = false;
 
+        image1Width = 0;
+
     }
 
     /**
@@ -15876,9 +15874,7 @@ public abstract class BaseContent
         return this.hasDefinedImage1Width;
     }
 
-    public BaseContent setImage1Height ( Set<String> image1Height ) {
-
-        NoNullSet.validate( image1Height );
+    public BaseContent setImage1Height ( int image1Height ) {
 
         ++this.hasImage1Height;
         ++this.hasModifiedImage1Height;
@@ -15897,10 +15893,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_height
+     * Schema type: int , name: image1_height
      * </p>
      */
-    public Set<String> getImage1Height() {
+    public int getImage1Height() {
 
         if ( this.constructed == false && this.hasImage1Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image1Height" );
@@ -15916,10 +15912,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image1_height
+     * Schema type: int , name: image1_height
      * </p>
      */
-    public Optional<Set<String>> getImage1HeightAsOptional() {
+    public Optional<Integer> getImage1HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage1Height == 0 ) {
             return Optional.empty();
@@ -15946,6 +15942,8 @@ public abstract class BaseContent
         this.hasModifiedImage1Height = 0;
         this.hasDefinedImage1Height = false;
 
+        image1Height = 0;
+
     }
 
     /**
@@ -15962,9 +15960,7 @@ public abstract class BaseContent
         return this.hasDefinedImage1Height;
     }
 
-    public BaseContent setImage2Src ( Set<String> image2Src ) {
-
-        NoNullSet.validate( image2Src );
+    public BaseContent setImage2Src ( String image2Src ) {
 
         ++this.hasImage2Src;
         ++this.hasModifiedImage2Src;
@@ -15983,10 +15979,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_src
+     * Schema type: text , name: image2_src
      * </p>
      */
-    public Set<String> getImage2Src() {
+    public String getImage2Src() {
 
         if ( this.constructed == false && this.hasImage2Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image2Src" );
@@ -16002,10 +15998,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_src
+     * Schema type: text , name: image2_src
      * </p>
      */
-    public Optional<Set<String>> getImage2SrcAsOptional() {
+    public Optional<String> getImage2SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage2Src == 0 ) {
             return Optional.empty();
@@ -16048,9 +16044,7 @@ public abstract class BaseContent
         return this.hasDefinedImage2Src;
     }
 
-    public BaseContent setImage2Width ( Set<String> image2Width ) {
-
-        NoNullSet.validate( image2Width );
+    public BaseContent setImage2Width ( int image2Width ) {
 
         ++this.hasImage2Width;
         ++this.hasModifiedImage2Width;
@@ -16069,10 +16063,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_width
+     * Schema type: int , name: image2_width
      * </p>
      */
-    public Set<String> getImage2Width() {
+    public int getImage2Width() {
 
         if ( this.constructed == false && this.hasImage2Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image2Width" );
@@ -16088,10 +16082,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_width
+     * Schema type: int , name: image2_width
      * </p>
      */
-    public Optional<Set<String>> getImage2WidthAsOptional() {
+    public Optional<Integer> getImage2WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage2Width == 0 ) {
             return Optional.empty();
@@ -16118,6 +16112,8 @@ public abstract class BaseContent
         this.hasModifiedImage2Width = 0;
         this.hasDefinedImage2Width = false;
 
+        image2Width = 0;
+
     }
 
     /**
@@ -16134,9 +16130,7 @@ public abstract class BaseContent
         return this.hasDefinedImage2Width;
     }
 
-    public BaseContent setImage2Height ( Set<String> image2Height ) {
-
-        NoNullSet.validate( image2Height );
+    public BaseContent setImage2Height ( int image2Height ) {
 
         ++this.hasImage2Height;
         ++this.hasModifiedImage2Height;
@@ -16155,10 +16149,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_height
+     * Schema type: int , name: image2_height
      * </p>
      */
-    public Set<String> getImage2Height() {
+    public int getImage2Height() {
 
         if ( this.constructed == false && this.hasImage2Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image2Height" );
@@ -16174,10 +16168,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image2_height
+     * Schema type: int , name: image2_height
      * </p>
      */
-    public Optional<Set<String>> getImage2HeightAsOptional() {
+    public Optional<Integer> getImage2HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage2Height == 0 ) {
             return Optional.empty();
@@ -16204,6 +16198,8 @@ public abstract class BaseContent
         this.hasModifiedImage2Height = 0;
         this.hasDefinedImage2Height = false;
 
+        image2Height = 0;
+
     }
 
     /**
@@ -16220,9 +16216,7 @@ public abstract class BaseContent
         return this.hasDefinedImage2Height;
     }
 
-    public BaseContent setImage3Src ( Set<String> image3Src ) {
-
-        NoNullSet.validate( image3Src );
+    public BaseContent setImage3Src ( String image3Src ) {
 
         ++this.hasImage3Src;
         ++this.hasModifiedImage3Src;
@@ -16241,10 +16235,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_src
+     * Schema type: text , name: image3_src
      * </p>
      */
-    public Set<String> getImage3Src() {
+    public String getImage3Src() {
 
         if ( this.constructed == false && this.hasImage3Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image3Src" );
@@ -16260,10 +16254,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_src
+     * Schema type: text , name: image3_src
      * </p>
      */
-    public Optional<Set<String>> getImage3SrcAsOptional() {
+    public Optional<String> getImage3SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage3Src == 0 ) {
             return Optional.empty();
@@ -16306,9 +16300,7 @@ public abstract class BaseContent
         return this.hasDefinedImage3Src;
     }
 
-    public BaseContent setImage3Width ( Set<String> image3Width ) {
-
-        NoNullSet.validate( image3Width );
+    public BaseContent setImage3Width ( int image3Width ) {
 
         ++this.hasImage3Width;
         ++this.hasModifiedImage3Width;
@@ -16327,10 +16319,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_width
+     * Schema type: int , name: image3_width
      * </p>
      */
-    public Set<String> getImage3Width() {
+    public int getImage3Width() {
 
         if ( this.constructed == false && this.hasImage3Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image3Width" );
@@ -16346,10 +16338,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_width
+     * Schema type: int , name: image3_width
      * </p>
      */
-    public Optional<Set<String>> getImage3WidthAsOptional() {
+    public Optional<Integer> getImage3WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage3Width == 0 ) {
             return Optional.empty();
@@ -16376,6 +16368,8 @@ public abstract class BaseContent
         this.hasModifiedImage3Width = 0;
         this.hasDefinedImage3Width = false;
 
+        image3Width = 0;
+
     }
 
     /**
@@ -16392,9 +16386,7 @@ public abstract class BaseContent
         return this.hasDefinedImage3Width;
     }
 
-    public BaseContent setImage3Height ( Set<String> image3Height ) {
-
-        NoNullSet.validate( image3Height );
+    public BaseContent setImage3Height ( int image3Height ) {
 
         ++this.hasImage3Height;
         ++this.hasModifiedImage3Height;
@@ -16413,10 +16405,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_height
+     * Schema type: int , name: image3_height
      * </p>
      */
-    public Set<String> getImage3Height() {
+    public int getImage3Height() {
 
         if ( this.constructed == false && this.hasImage3Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image3Height" );
@@ -16432,10 +16424,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image3_height
+     * Schema type: int , name: image3_height
      * </p>
      */
-    public Optional<Set<String>> getImage3HeightAsOptional() {
+    public Optional<Integer> getImage3HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage3Height == 0 ) {
             return Optional.empty();
@@ -16462,6 +16454,8 @@ public abstract class BaseContent
         this.hasModifiedImage3Height = 0;
         this.hasDefinedImage3Height = false;
 
+        image3Height = 0;
+
     }
 
     /**
@@ -16478,9 +16472,7 @@ public abstract class BaseContent
         return this.hasDefinedImage3Height;
     }
 
-    public BaseContent setImage4Src ( Set<String> image4Src ) {
-
-        NoNullSet.validate( image4Src );
+    public BaseContent setImage4Src ( String image4Src ) {
 
         ++this.hasImage4Src;
         ++this.hasModifiedImage4Src;
@@ -16499,10 +16491,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_src
+     * Schema type: text , name: image4_src
      * </p>
      */
-    public Set<String> getImage4Src() {
+    public String getImage4Src() {
 
         if ( this.constructed == false && this.hasImage4Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image4Src" );
@@ -16518,10 +16510,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_src
+     * Schema type: text , name: image4_src
      * </p>
      */
-    public Optional<Set<String>> getImage4SrcAsOptional() {
+    public Optional<String> getImage4SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage4Src == 0 ) {
             return Optional.empty();
@@ -16564,9 +16556,7 @@ public abstract class BaseContent
         return this.hasDefinedImage4Src;
     }
 
-    public BaseContent setImage4Width ( Set<String> image4Width ) {
-
-        NoNullSet.validate( image4Width );
+    public BaseContent setImage4Width ( int image4Width ) {
 
         ++this.hasImage4Width;
         ++this.hasModifiedImage4Width;
@@ -16585,10 +16575,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_width
+     * Schema type: int , name: image4_width
      * </p>
      */
-    public Set<String> getImage4Width() {
+    public int getImage4Width() {
 
         if ( this.constructed == false && this.hasImage4Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image4Width" );
@@ -16604,10 +16594,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_width
+     * Schema type: int , name: image4_width
      * </p>
      */
-    public Optional<Set<String>> getImage4WidthAsOptional() {
+    public Optional<Integer> getImage4WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage4Width == 0 ) {
             return Optional.empty();
@@ -16634,6 +16624,8 @@ public abstract class BaseContent
         this.hasModifiedImage4Width = 0;
         this.hasDefinedImage4Width = false;
 
+        image4Width = 0;
+
     }
 
     /**
@@ -16650,9 +16642,7 @@ public abstract class BaseContent
         return this.hasDefinedImage4Width;
     }
 
-    public BaseContent setImage4Height ( Set<String> image4Height ) {
-
-        NoNullSet.validate( image4Height );
+    public BaseContent setImage4Height ( int image4Height ) {
 
         ++this.hasImage4Height;
         ++this.hasModifiedImage4Height;
@@ -16671,10 +16661,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_height
+     * Schema type: int , name: image4_height
      * </p>
      */
-    public Set<String> getImage4Height() {
+    public int getImage4Height() {
 
         if ( this.constructed == false && this.hasImage4Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image4Height" );
@@ -16690,10 +16680,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image4_height
+     * Schema type: int , name: image4_height
      * </p>
      */
-    public Optional<Set<String>> getImage4HeightAsOptional() {
+    public Optional<Integer> getImage4HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage4Height == 0 ) {
             return Optional.empty();
@@ -16720,6 +16710,8 @@ public abstract class BaseContent
         this.hasModifiedImage4Height = 0;
         this.hasDefinedImage4Height = false;
 
+        image4Height = 0;
+
     }
 
     /**
@@ -16736,9 +16728,7 @@ public abstract class BaseContent
         return this.hasDefinedImage4Height;
     }
 
-    public BaseContent setImage5Src ( Set<String> image5Src ) {
-
-        NoNullSet.validate( image5Src );
+    public BaseContent setImage5Src ( String image5Src ) {
 
         ++this.hasImage5Src;
         ++this.hasModifiedImage5Src;
@@ -16757,10 +16747,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_src
+     * Schema type: text , name: image5_src
      * </p>
      */
-    public Set<String> getImage5Src() {
+    public String getImage5Src() {
 
         if ( this.constructed == false && this.hasImage5Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image5Src" );
@@ -16776,10 +16766,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_src
+     * Schema type: text , name: image5_src
      * </p>
      */
-    public Optional<Set<String>> getImage5SrcAsOptional() {
+    public Optional<String> getImage5SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage5Src == 0 ) {
             return Optional.empty();
@@ -16822,9 +16812,7 @@ public abstract class BaseContent
         return this.hasDefinedImage5Src;
     }
 
-    public BaseContent setImage5Width ( Set<String> image5Width ) {
-
-        NoNullSet.validate( image5Width );
+    public BaseContent setImage5Width ( int image5Width ) {
 
         ++this.hasImage5Width;
         ++this.hasModifiedImage5Width;
@@ -16843,10 +16831,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_width
+     * Schema type: int , name: image5_width
      * </p>
      */
-    public Set<String> getImage5Width() {
+    public int getImage5Width() {
 
         if ( this.constructed == false && this.hasImage5Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image5Width" );
@@ -16862,10 +16850,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_width
+     * Schema type: int , name: image5_width
      * </p>
      */
-    public Optional<Set<String>> getImage5WidthAsOptional() {
+    public Optional<Integer> getImage5WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage5Width == 0 ) {
             return Optional.empty();
@@ -16892,6 +16880,8 @@ public abstract class BaseContent
         this.hasModifiedImage5Width = 0;
         this.hasDefinedImage5Width = false;
 
+        image5Width = 0;
+
     }
 
     /**
@@ -16908,9 +16898,7 @@ public abstract class BaseContent
         return this.hasDefinedImage5Width;
     }
 
-    public BaseContent setImage5Height ( Set<String> image5Height ) {
-
-        NoNullSet.validate( image5Height );
+    public BaseContent setImage5Height ( int image5Height ) {
 
         ++this.hasImage5Height;
         ++this.hasModifiedImage5Height;
@@ -16929,10 +16917,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_height
+     * Schema type: int , name: image5_height
      * </p>
      */
-    public Set<String> getImage5Height() {
+    public int getImage5Height() {
 
         if ( this.constructed == false && this.hasImage5Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image5Height" );
@@ -16948,10 +16936,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image5_height
+     * Schema type: int , name: image5_height
      * </p>
      */
-    public Optional<Set<String>> getImage5HeightAsOptional() {
+    public Optional<Integer> getImage5HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage5Height == 0 ) {
             return Optional.empty();
@@ -16978,6 +16966,8 @@ public abstract class BaseContent
         this.hasModifiedImage5Height = 0;
         this.hasDefinedImage5Height = false;
 
+        image5Height = 0;
+
     }
 
     /**
@@ -16994,9 +16984,7 @@ public abstract class BaseContent
         return this.hasDefinedImage5Height;
     }
 
-    public BaseContent setImage6Src ( Set<String> image6Src ) {
-
-        NoNullSet.validate( image6Src );
+    public BaseContent setImage6Src ( String image6Src ) {
 
         ++this.hasImage6Src;
         ++this.hasModifiedImage6Src;
@@ -17015,10 +17003,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_src
+     * Schema type: text , name: image6_src
      * </p>
      */
-    public Set<String> getImage6Src() {
+    public String getImage6Src() {
 
         if ( this.constructed == false && this.hasImage6Src == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image6Src" );
@@ -17034,10 +17022,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_src
+     * Schema type: text , name: image6_src
      * </p>
      */
-    public Optional<Set<String>> getImage6SrcAsOptional() {
+    public Optional<String> getImage6SrcAsOptional() {
 
         if ( this.constructed == false && this.hasImage6Src == 0 ) {
             return Optional.empty();
@@ -17080,9 +17068,7 @@ public abstract class BaseContent
         return this.hasDefinedImage6Src;
     }
 
-    public BaseContent setImage6Width ( Set<String> image6Width ) {
-
-        NoNullSet.validate( image6Width );
+    public BaseContent setImage6Width ( int image6Width ) {
 
         ++this.hasImage6Width;
         ++this.hasModifiedImage6Width;
@@ -17101,10 +17087,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_width
+     * Schema type: int , name: image6_width
      * </p>
      */
-    public Set<String> getImage6Width() {
+    public int getImage6Width() {
 
         if ( this.constructed == false && this.hasImage6Width == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image6Width" );
@@ -17120,10 +17106,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_width
+     * Schema type: int , name: image6_width
      * </p>
      */
-    public Optional<Set<String>> getImage6WidthAsOptional() {
+    public Optional<Integer> getImage6WidthAsOptional() {
 
         if ( this.constructed == false && this.hasImage6Width == 0 ) {
             return Optional.empty();
@@ -17150,6 +17136,8 @@ public abstract class BaseContent
         this.hasModifiedImage6Width = 0;
         this.hasDefinedImage6Width = false;
 
+        image6Width = 0;
+
     }
 
     /**
@@ -17166,9 +17154,7 @@ public abstract class BaseContent
         return this.hasDefinedImage6Width;
     }
 
-    public BaseContent setImage6Height ( Set<String> image6Height ) {
-
-        NoNullSet.validate( image6Height );
+    public BaseContent setImage6Height ( int image6Height ) {
 
         ++this.hasImage6Height;
         ++this.hasModifiedImage6Height;
@@ -17187,10 +17173,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_height
+     * Schema type: int , name: image6_height
      * </p>
      */
-    public Set<String> getImage6Height() {
+    public int getImage6Height() {
 
         if ( this.constructed == false && this.hasImage6Height == 0 ) {
             Throwable cause = new IllegalArgumentException( "this.image6Height" );
@@ -17206,10 +17192,10 @@ public abstract class BaseContent
      * </p>
      *
      * <p>
-     * Schema type: set&lt;text&gt; , name: image6_height
+     * Schema type: int , name: image6_height
      * </p>
      */
-    public Optional<Set<String>> getImage6HeightAsOptional() {
+    public Optional<Integer> getImage6HeightAsOptional() {
 
         if ( this.constructed == false && this.hasImage6Height == 0 ) {
             return Optional.empty();
@@ -17235,6 +17221,8 @@ public abstract class BaseContent
         this.hasImage6Height = 0;
         this.hasModifiedImage6Height = 0;
         this.hasDefinedImage6Height = false;
+
+        image6Height = 0;
 
     }
 
@@ -23950,6 +23938,11 @@ public abstract class BaseContent
             setImage1Src( obj.getImage1Src() );
         }
 
+        if ( hasImage1Src() && getImage1Src() == null &&
+            obj.hasImage1Src() && obj.getImage1Src() != null ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
         if ( ! hasImage1Width() && obj.hasImage1Width() ) {
             setImage1Width( obj.getImage1Width() );
         }
@@ -23959,6 +23952,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasImage2Src() && obj.hasImage2Src() ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( hasImage2Src() && getImage2Src() == null &&
+            obj.hasImage2Src() && obj.getImage2Src() != null ) {
             setImage2Src( obj.getImage2Src() );
         }
 
@@ -23974,6 +23972,11 @@ public abstract class BaseContent
             setImage3Src( obj.getImage3Src() );
         }
 
+        if ( hasImage3Src() && getImage3Src() == null &&
+            obj.hasImage3Src() && obj.getImage3Src() != null ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
         if ( ! hasImage3Width() && obj.hasImage3Width() ) {
             setImage3Width( obj.getImage3Width() );
         }
@@ -23983,6 +23986,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasImage4Src() && obj.hasImage4Src() ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( hasImage4Src() && getImage4Src() == null &&
+            obj.hasImage4Src() && obj.getImage4Src() != null ) {
             setImage4Src( obj.getImage4Src() );
         }
 
@@ -23998,6 +24006,11 @@ public abstract class BaseContent
             setImage5Src( obj.getImage5Src() );
         }
 
+        if ( hasImage5Src() && getImage5Src() == null &&
+            obj.hasImage5Src() && obj.getImage5Src() != null ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
         if ( ! hasImage5Width() && obj.hasImage5Width() ) {
             setImage5Width( obj.getImage5Width() );
         }
@@ -24007,6 +24020,11 @@ public abstract class BaseContent
         }
 
         if ( ! hasImage6Src() && obj.hasImage6Src() ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( hasImage6Src() && getImage6Src() == null &&
+            obj.hasImage6Src() && obj.getImage6Src() != null ) {
             setImage6Src( obj.getImage6Src() );
         }
 
@@ -28560,7 +28578,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image1Width, cmp.image1Width ) ) {
+        if ( image1Width != cmp.image1Width ) {
             return false;
         }
 
@@ -28569,7 +28587,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image1Height, cmp.image1Height ) ) {
+        if ( image1Height != cmp.image1Height ) {
             return false;
         }
 
@@ -28587,7 +28605,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image2Width, cmp.image2Width ) ) {
+        if ( image2Width != cmp.image2Width ) {
             return false;
         }
 
@@ -28596,7 +28614,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image2Height, cmp.image2Height ) ) {
+        if ( image2Height != cmp.image2Height ) {
             return false;
         }
 
@@ -28614,7 +28632,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image3Width, cmp.image3Width ) ) {
+        if ( image3Width != cmp.image3Width ) {
             return false;
         }
 
@@ -28623,7 +28641,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image3Height, cmp.image3Height ) ) {
+        if ( image3Height != cmp.image3Height ) {
             return false;
         }
 
@@ -28641,7 +28659,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image4Width, cmp.image4Width ) ) {
+        if ( image4Width != cmp.image4Width ) {
             return false;
         }
 
@@ -28650,7 +28668,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image4Height, cmp.image4Height ) ) {
+        if ( image4Height != cmp.image4Height ) {
             return false;
         }
 
@@ -28668,7 +28686,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image5Width, cmp.image5Width ) ) {
+        if ( image5Width != cmp.image5Width ) {
             return false;
         }
 
@@ -28677,7 +28695,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image5Height, cmp.image5Height ) ) {
+        if ( image5Height != cmp.image5Height ) {
             return false;
         }
 
@@ -28695,7 +28713,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image6Width, cmp.image6Width ) ) {
+        if ( image6Width != cmp.image6Width ) {
             return false;
         }
 
@@ -28704,7 +28722,7 @@ public abstract class BaseContent
             return false;
         }
 
-        if ( ! equalsWithNull( image6Height, cmp.image6Height ) ) {
+        if ( image6Height != cmp.image6Height ) {
             return false;
         }
 
@@ -31459,7 +31477,7 @@ public abstract class BaseContent
 
             }
 
-            // ***** json encode member image1_src from Set<String>
+            // ***** json encode member image1_src from String
 
             __name = "image1Src";
 
@@ -31470,14 +31488,12 @@ public abstract class BaseContent
             if ( this.hasImage1Src > 0 ) {
 
                 if ( image1Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image1Src );
-
+                    generator.writeStringField( __name, image1Src );
                 }
 
             }
 
-            // ***** json encode member image1_width from Set<String>
+            // ***** json encode member image1_width from int
 
             __name = "image1Width";
 
@@ -31487,15 +31503,12 @@ public abstract class BaseContent
 
             if ( this.hasImage1Width > 0 ) {
 
-                if ( image1Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image1Width );
-
-                }
+                if ( hasDefinedImage1Width )
+                    generator.writeNumberField( __name, image1Width );
 
             }
 
-            // ***** json encode member image1_height from Set<String>
+            // ***** json encode member image1_height from int
 
             __name = "image1Height";
 
@@ -31505,15 +31518,12 @@ public abstract class BaseContent
 
             if ( this.hasImage1Height > 0 ) {
 
-                if ( image1Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image1Height );
-
-                }
+                if ( hasDefinedImage1Height )
+                    generator.writeNumberField( __name, image1Height );
 
             }
 
-            // ***** json encode member image2_src from Set<String>
+            // ***** json encode member image2_src from String
 
             __name = "image2Src";
 
@@ -31524,14 +31534,12 @@ public abstract class BaseContent
             if ( this.hasImage2Src > 0 ) {
 
                 if ( image2Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image2Src );
-
+                    generator.writeStringField( __name, image2Src );
                 }
 
             }
 
-            // ***** json encode member image2_width from Set<String>
+            // ***** json encode member image2_width from int
 
             __name = "image2Width";
 
@@ -31541,15 +31549,12 @@ public abstract class BaseContent
 
             if ( this.hasImage2Width > 0 ) {
 
-                if ( image2Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image2Width );
-
-                }
+                if ( hasDefinedImage2Width )
+                    generator.writeNumberField( __name, image2Width );
 
             }
 
-            // ***** json encode member image2_height from Set<String>
+            // ***** json encode member image2_height from int
 
             __name = "image2Height";
 
@@ -31559,15 +31564,12 @@ public abstract class BaseContent
 
             if ( this.hasImage2Height > 0 ) {
 
-                if ( image2Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image2Height );
-
-                }
+                if ( hasDefinedImage2Height )
+                    generator.writeNumberField( __name, image2Height );
 
             }
 
-            // ***** json encode member image3_src from Set<String>
+            // ***** json encode member image3_src from String
 
             __name = "image3Src";
 
@@ -31578,14 +31580,12 @@ public abstract class BaseContent
             if ( this.hasImage3Src > 0 ) {
 
                 if ( image3Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image3Src );
-
+                    generator.writeStringField( __name, image3Src );
                 }
 
             }
 
-            // ***** json encode member image3_width from Set<String>
+            // ***** json encode member image3_width from int
 
             __name = "image3Width";
 
@@ -31595,15 +31595,12 @@ public abstract class BaseContent
 
             if ( this.hasImage3Width > 0 ) {
 
-                if ( image3Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image3Width );
-
-                }
+                if ( hasDefinedImage3Width )
+                    generator.writeNumberField( __name, image3Width );
 
             }
 
-            // ***** json encode member image3_height from Set<String>
+            // ***** json encode member image3_height from int
 
             __name = "image3Height";
 
@@ -31613,15 +31610,12 @@ public abstract class BaseContent
 
             if ( this.hasImage3Height > 0 ) {
 
-                if ( image3Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image3Height );
-
-                }
+                if ( hasDefinedImage3Height )
+                    generator.writeNumberField( __name, image3Height );
 
             }
 
-            // ***** json encode member image4_src from Set<String>
+            // ***** json encode member image4_src from String
 
             __name = "image4Src";
 
@@ -31632,14 +31626,12 @@ public abstract class BaseContent
             if ( this.hasImage4Src > 0 ) {
 
                 if ( image4Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image4Src );
-
+                    generator.writeStringField( __name, image4Src );
                 }
 
             }
 
-            // ***** json encode member image4_width from Set<String>
+            // ***** json encode member image4_width from int
 
             __name = "image4Width";
 
@@ -31649,15 +31641,12 @@ public abstract class BaseContent
 
             if ( this.hasImage4Width > 0 ) {
 
-                if ( image4Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image4Width );
-
-                }
+                if ( hasDefinedImage4Width )
+                    generator.writeNumberField( __name, image4Width );
 
             }
 
-            // ***** json encode member image4_height from Set<String>
+            // ***** json encode member image4_height from int
 
             __name = "image4Height";
 
@@ -31667,15 +31656,12 @@ public abstract class BaseContent
 
             if ( this.hasImage4Height > 0 ) {
 
-                if ( image4Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image4Height );
-
-                }
+                if ( hasDefinedImage4Height )
+                    generator.writeNumberField( __name, image4Height );
 
             }
 
-            // ***** json encode member image5_src from Set<String>
+            // ***** json encode member image5_src from String
 
             __name = "image5Src";
 
@@ -31686,14 +31672,12 @@ public abstract class BaseContent
             if ( this.hasImage5Src > 0 ) {
 
                 if ( image5Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image5Src );
-
+                    generator.writeStringField( __name, image5Src );
                 }
 
             }
 
-            // ***** json encode member image5_width from Set<String>
+            // ***** json encode member image5_width from int
 
             __name = "image5Width";
 
@@ -31703,15 +31687,12 @@ public abstract class BaseContent
 
             if ( this.hasImage5Width > 0 ) {
 
-                if ( image5Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image5Width );
-
-                }
+                if ( hasDefinedImage5Width )
+                    generator.writeNumberField( __name, image5Width );
 
             }
 
-            // ***** json encode member image5_height from Set<String>
+            // ***** json encode member image5_height from int
 
             __name = "image5Height";
 
@@ -31721,15 +31702,12 @@ public abstract class BaseContent
 
             if ( this.hasImage5Height > 0 ) {
 
-                if ( image5Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image5Height );
-
-                }
+                if ( hasDefinedImage5Height )
+                    generator.writeNumberField( __name, image5Height );
 
             }
 
-            // ***** json encode member image6_src from Set<String>
+            // ***** json encode member image6_src from String
 
             __name = "image6Src";
 
@@ -31740,14 +31718,12 @@ public abstract class BaseContent
             if ( this.hasImage6Src > 0 ) {
 
                 if ( image6Src != null ) {
-
-                    JSON.writeStringSet( generator, __name, image6Src );
-
+                    generator.writeStringField( __name, image6Src );
                 }
 
             }
 
-            // ***** json encode member image6_width from Set<String>
+            // ***** json encode member image6_width from int
 
             __name = "image6Width";
 
@@ -31757,15 +31733,12 @@ public abstract class BaseContent
 
             if ( this.hasImage6Width > 0 ) {
 
-                if ( image6Width != null ) {
-
-                    JSON.writeStringSet( generator, __name, image6Width );
-
-                }
+                if ( hasDefinedImage6Width )
+                    generator.writeNumberField( __name, image6Width );
 
             }
 
-            // ***** json encode member image6_height from Set<String>
+            // ***** json encode member image6_height from int
 
             __name = "image6Height";
 
@@ -31775,11 +31748,8 @@ public abstract class BaseContent
 
             if ( this.hasImage6Height > 0 ) {
 
-                if ( image6Height != null ) {
-
-                    JSON.writeStringSet( generator, __name, image6Height );
-
-                }
+                if ( hasDefinedImage6Height )
+                    generator.writeNumberField( __name, image6Height );
 
             }
 
@@ -34084,164 +34054,182 @@ public abstract class BaseContent
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image1_src from Set<String>
+                // ***** json decode member image1_src from String
 
                 case "image1_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage1Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image1_width from Set<String>
+                // ***** json decode member image1_width from int
 
                 case "image1_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage1Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image1_height from Set<String>
+                // ***** json decode member image1_height from int
 
                 case "image1_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage1Height( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image2_src from Set<String>
+                // ***** json decode member image2_src from String
 
                 case "image2_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage2Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image2_width from Set<String>
+                // ***** json decode member image2_width from int
 
                 case "image2_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage2Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image2_height from Set<String>
+                // ***** json decode member image2_height from int
 
                 case "image2_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage2Height( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image3_src from Set<String>
+                // ***** json decode member image3_src from String
 
                 case "image3_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage3Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image3_width from Set<String>
+                // ***** json decode member image3_width from int
 
                 case "image3_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage3Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image3_height from Set<String>
+                // ***** json decode member image3_height from int
 
                 case "image3_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage3Height( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image4_src from Set<String>
+                // ***** json decode member image4_src from String
 
                 case "image4_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage4Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image4_width from Set<String>
+                // ***** json decode member image4_width from int
 
                 case "image4_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage4Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image4_height from Set<String>
+                // ***** json decode member image4_height from int
 
                 case "image4_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage4Height( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image5_src from Set<String>
+                // ***** json decode member image5_src from String
 
                 case "image5_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage5Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image5_width from Set<String>
+                // ***** json decode member image5_width from int
 
                 case "image5_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage5Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image5_height from Set<String>
+                // ***** json decode member image5_height from int
 
                 case "image5_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage5Height( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image6_src from Set<String>
+                // ***** json decode member image6_src from String
 
                 case "image6_src":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage6Src( jParser.getValueAsString() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image6_width from Set<String>
+                // ***** json decode member image6_width from int
 
                 case "image6_width":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage6Width( jParser.getIntValue() );
 
                     break;
 
                 // FIXME: handle camelCase and under_score
-                // ***** json decode member image6_height from Set<String>
+                // ***** json decode member image6_height from int
 
                 case "image6_height":
 
-                    // FIXME not implemented yet.
+                    jParser.nextToken();
+                    setImage6Height( jParser.getIntValue() );
 
                     break;
 
