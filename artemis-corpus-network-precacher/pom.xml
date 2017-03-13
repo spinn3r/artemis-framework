@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>artemis-framework</artifactId>
+        <groupId>com.spinn3r.artemis</groupId>
+        <version>5.1-LATEST-6</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.spinn3r.artemis.corpus.network.test</groupId>
+    <artifactId>artemis-corpus-network-precacher</artifactId>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.corpus.network.test</groupId>
+            <artifactId>artemis-corpus-network-test-framework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spinn3r.artemis.parallel</groupId>
+            <artifactId>artemis-parallel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

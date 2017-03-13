@@ -83,6 +83,7 @@
         <module>artemis-logging-test-framework</module>
         <module>artemis-zookeeper-test-framework</module>
         <module>artemis-jetbrains-annotations</module>
+        <module>artemis-corpus-network-precacher</module>
 
     </modules>
 
