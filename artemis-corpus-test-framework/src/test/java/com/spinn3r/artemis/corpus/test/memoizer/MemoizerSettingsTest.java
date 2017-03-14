@@ -13,9 +13,9 @@ public class MemoizerSettingsTest {
 
         assertFalse(memoizerSettings.isUpdateMode(getClass()));
 
-        assertEquals("Use -Dcom.spinn3r.artemis.corpus.test.memoizer.SettingsTest:update-enabled=true to force update", memoizerSettings.failureMessage(getClass()));
+        assertEquals("Use -Dcom.spinn3r.artemis.corpus.test.memoizer.MemoizerSettingsTest:update-enabled=true to force update", memoizerSettings.failureMessage(getClass()));
 
-        System.setProperty("com.spinn3r.artemis.corpus.test.memoizer.SettingsTest:update-enabled", "true");
+        System.setProperty("com.spinn3r.artemis.corpus.test.memoizer.MemoizerSettingsTest:update-enabled", "true");
 
         assertTrue(memoizerSettings.isUpdateMode(getClass()));
 
