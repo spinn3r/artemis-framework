@@ -105,14 +105,14 @@ public class NetworkCorporaCache implements ContentFetcher {
         // the key here is raw... so we can add a suffix to include the metadata
         // we want to include.. .
 
+        CachedRequestFailure cachedRequestFailure = requestFailure(key);
+
+        if (cachedRequestFailure != null) {
+            throw new NetworkException("Original request failed and was cached: " + cachedRequestFailure.getMessage(),
+                                       cachedRequestFailure.getResponseCode());
+        }
+
         try {
-
-            CachedRequestFailure cachedRequestFailure = requestFailure(key);
-
-            if (cachedRequestFailure != null) {
-                throw new NetworkException("Original request failed and was cached: " + cachedRequestFailure.getMessage(),
-                                           cachedRequestFailure.getResponseCode());
-            }
 
             if (!cache.contains(key)) {
 

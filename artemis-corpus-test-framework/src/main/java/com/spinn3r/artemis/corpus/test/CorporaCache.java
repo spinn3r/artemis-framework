@@ -69,11 +69,12 @@ public class CorporaCache {
         this.extension = extension;
     }
 
-    public CorporaCache(Class<?> parent, String basedir, String extension, CorporaDirectory corporaDirectory) {
+    public CorporaCache(Class<?> parent, String basedir, String extension, CorporaDirectory corporaDirectory, boolean preferCompression) {
         this.parent = parent;
         this.basedir = basedir;
         this.extension = extension;
         this.corporaDirectory = corporaDirectory;
+        this.preferCompression = preferCompression;
     }
 
     public boolean contains(String key) {
@@ -94,11 +95,23 @@ public class CorporaCache {
 
         String path = computePath( key );
 
-        File file = new File( corporaDirectory.getRoot(), path );
+        File compressedFile = new File(corporaDirectory.getRoot(), path + ".gz");
+        File uncompressedFile = new File(corporaDirectory.getRoot(), path);
 
-        if( ! file.exists() && preferCompression) {
-            file = new File( corporaDirectory.getRoot(), path + ".gz" );
+        File file = null;
+
+        if (compressedFile.exists()) {
+            file = compressedFile;
+        } else if (uncompressedFile.exists()) {
+            file = uncompressedFile;
         }
+        
+        if( ! uncompressedFile.exists() && preferCompression) {
+            file = compressedFile;
+        }
+
+        if( file == null)
+            file = uncompressedFile;
 
         byte[] bytes = data.getBytes( Charsets.UTF_8 );
 
@@ -210,7 +223,7 @@ public class CorporaCache {
         }
 
         public CorporaCache build() {
-            return new CorporaCache(parent, basedir, extension, corporaDirectory);
+            return new CorporaCache(parent, basedir, extension, corporaDirectory, preferCompression);
         }
 
     }
