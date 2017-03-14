@@ -45,6 +45,8 @@ public class CorporaCache {
 
     private CorporaDirectory corporaDirectory = CorporaDirectory.SYSTEM_PROPERTIES;
 
+    private boolean preferCompression = false;
+
     // FIXME: do not make this use compression by default
 
     // FIXME: make the NetworkCache use compression by default
@@ -90,9 +92,13 @@ public class CorporaCache {
 
         checkNotNull(data, "data");
 
-        String path = computePath( key ) + ".gz";
+        String path = computePath( key );
 
         File file = new File( corporaDirectory.getRoot(), path );
+
+        if( ! file.exists() && preferCompression) {
+            file = new File( corporaDirectory.getRoot(), path + ".gz" );
+        }
 
         byte[] bytes = data.getBytes( Charsets.UTF_8 );
 
@@ -100,7 +106,7 @@ public class CorporaCache {
 
         Files.createDirectories( Paths.get( file.getParent() ) );
 
-        try(OutputStream out = new GZIPOutputStream(new FileOutputStream(file)) ) {
+        try(OutputStream out = createOutputStream(file)) {
             out.write( bytes );
         }
 
@@ -117,6 +123,16 @@ public class CorporaCache {
         try ( InputStream is = createInputStream(file) ) {
             byte[] data = ByteStreams.toByteArray( is );
             return new String( data, Charsets.UTF_8 );
+        }
+
+    }
+
+    private OutputStream createOutputStream(File file) throws IOException {
+
+        if(file.getName().endsWith(".gz")) {
+            return new GZIPOutputStream(new FileOutputStream(file));
+        } else {
+            return new FileOutputStream(file);
         }
 
     }
@@ -171,6 +187,8 @@ public class CorporaCache {
 
         private CorporaDirectory corporaDirectory = CorporaDirectory.SYSTEM_PROPERTIES;
 
+        private boolean preferCompression = false;
+
         public Builder(Class<?> parent, String basedir) {
             this.parent = parent;
             this.basedir = basedir;
@@ -183,6 +201,11 @@ public class CorporaCache {
 
         public Builder setCorporaDirectory(CorporaDirectory corporaDirectory) {
             this.corporaDirectory = corporaDirectory;
+            return this;
+        }
+
+        public Builder setPreferCompression(boolean preferCompression) {
+            this.preferCompression = preferCompression;
             return this;
         }
 

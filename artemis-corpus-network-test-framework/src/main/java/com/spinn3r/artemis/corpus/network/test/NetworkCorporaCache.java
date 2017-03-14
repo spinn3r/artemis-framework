@@ -67,6 +67,7 @@ public class NetworkCorporaCache implements ContentFetcher {
         this.directHttpRequestBuilder = directHttpRequestBuilder;
         this.cache = new CorporaCache.Builder(callerClazz, BASEDIR)
                        .setCorporaDirectory(new CorporaDirectory.Configured(ROOTDIR))
+                       .setPreferCompression(true)
                        .build();
     }
 
