@@ -62,49 +62,49 @@ public class CachedHttpRequestBuilder extends BaseHttpRequestBuilder implements 
     }
 
     @Override
-    public HttpRequestMethod get(String resource) throws NetworkException {
+    public CachedHttpRequestMethod get(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.GET, resource );
     }
 
     @Override
-    public HttpRequestMethod get(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
+    public CachedHttpRequestMethod get(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.GET, resource, outputContent, outputContentEncoding, outputContentType );
     }
 
     @Override
-    public HttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
+    public CachedHttpRequestMethod post(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.POST, resource, outputContent, outputContentEncoding, outputContentType );
     }
 
     @Override
-    public HttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
+    public CachedHttpRequestMethod put(String resource, String outputContent, String outputContentEncoding, String outputContentType) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.PUT, resource, outputContent, outputContentEncoding, outputContentType );
     }
 
     @Override
-    public HttpRequestMethod options(String resource) throws NetworkException {
+    public CachedHttpRequestMethod options(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.OPTIONS, resource );
     }
 
     @Override
-    public HttpRequestMethod head(String resource) throws NetworkException {
+    public CachedHttpRequestMethod head(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.HEAD, resource );
     }
 
     @Override
-    public HttpRequestMethod delete(String resource) throws NetworkException {
+    public CachedHttpRequestMethod delete(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.DELETE, resource );
     }
 
     @Override
-    public HttpRequestMethod trace(String resource) throws NetworkException {
+    public CachedHttpRequestMethod trace(String resource) throws NetworkException {
         checkNotNull( resource, "resource" );
         return new CachedHttpRequestMethod( this, HttpMethod.TRACE, resource );
     }

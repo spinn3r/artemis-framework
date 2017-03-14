@@ -11,6 +11,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.spinn3r.artemis.corpus.test.CorporaCache;
+import com.spinn3r.artemis.corpus.test.CorporaDirectory;
 import com.spinn3r.artemis.init.advertisements.Caller;
 import com.spinn3r.artemis.json.JSON;
 import com.spinn3r.artemis.network.NetworkException;
@@ -21,7 +22,6 @@ import com.spinn3r.artemis.network.builder.DirectHttpRequestBuilder;
 import com.spinn3r.artemis.network.builder.HttpRequest;
 import com.spinn3r.artemis.network.builder.HttpRequestMeta;
 import com.spinn3r.artemis.network.builder.HttpResponseMeta;
-import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReferences;
 import com.spinn3r.artemis.network.builder.settings.requests.RequestSettingsRegistry;
 import com.spinn3r.artemis.network.cookies.Cookie;
@@ -30,6 +30,7 @@ import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.init.NetworkConfig;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
+import org.jetbrains.annotations.Nullable;
 
 /**
  *
@@ -44,7 +45,9 @@ public class NetworkCorporaCache implements ContentFetcher {
 
     public static boolean DEFAULT_UPDATE_MODE = "true".equals( System.getProperty( UPDATE_MODE_PROPERTY_NAME ) );
 
-    private static String ROOT = System.getProperty( "network-corpora-cache.root", "/network-corpora" );
+    private static String ROOTDIR = System.getProperty("network-corpora-cache.rootdir", "src/test/resources" );
+
+    private static String BASEDIR = System.getProperty("network-corpora-cache.basedir", "/network-corpora" );
 
     private final NetworkConfig networkConfig;
 
@@ -62,7 +65,9 @@ public class NetworkCorporaCache implements ContentFetcher {
     NetworkCorporaCache(NetworkConfig networkConfig, DirectHttpRequestBuilder directHttpRequestBuilder, Class<?> callerClazz) {
         this.networkConfig = networkConfig;
         this.directHttpRequestBuilder = directHttpRequestBuilder;
-        this.cache = new CorporaCache( callerClazz, ROOT );
+        this.cache = new CorporaCache.Builder(callerClazz, BASEDIR)
+                       .setCorporaDirectory(new CorporaDirectory.Configured(ROOTDIR))
+                       .build();
     }
 
     @Override
@@ -78,6 +83,10 @@ public class NetworkCorporaCache implements ContentFetcher {
     @Override
     public String fetch(String link, ImmutableMap<String, String> requestHeaders, List<Cookie> cookies) throws NetworkException {
         return fetchCachedContent( HttpMethod.GET, link, requestHeaders, cookies, null, null, null ).getContent();
+    }
+
+    protected boolean contains(String key) {
+        return cache.contains(key);
     }
 
     public CachedContent fetchCachedContent( HttpMethod httpMethod,
@@ -97,7 +106,14 @@ public class NetworkCorporaCache implements ContentFetcher {
 
         try {
 
-            if (!cache.contains( key )) {
+            CachedRequestFailure cachedRequestFailure = requestFailure(key);
+
+            if (cachedRequestFailure != null) {
+                throw new NetworkException("Original request failed and was cached: " + cachedRequestFailure.getMessage(),
+                                           cachedRequestFailure.getResponseCode());
+            }
+
+            if (!cache.contains(key)) {
 
                 if (updateMode) {
 
@@ -113,7 +129,7 @@ public class NetworkCorporaCache implements ContentFetcher {
                               directHttpRequestBuilder
                                 .withRequestSettingsRegistry( requestSettingsRegistry )
                                 .get( link )
-                                // FIXME: remove this.. 
+                                // FIXME: remove this before we merge.
                                 .withProxy(ProxyReferences.create("http://localhost:9997"))
                                 .withRequestHeaders( requestHeaders )
                                 .withCookies( cookies )
@@ -171,8 +187,10 @@ public class NetworkCorporaCache implements ContentFetcher {
             return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
 
         } catch ( NetworkException ne ) {
+            writeRequestFailure(key, new CachedRequestFailure(ne.getMessage(), ne.getResponseCode()));
             throw ne;
         } catch (IOException e) {
+            writeRequestFailure(key, new CachedRequestFailure(e.getMessage(), -1));
             throw new NetworkException( e );
         }
 
@@ -185,6 +203,8 @@ public class NetworkCorporaCache implements ContentFetcher {
                                String outputContent,
                                String outputContentEncoding,
                                String outputContentType ) {
+
+        // FIXME: this is already moved to CachedHttpRequestMethod
 
         StringBuilder data = new StringBuilder();
 
@@ -218,22 +238,44 @@ public class NetworkCorporaCache implements ContentFetcher {
         return result;
     }
 
-    private HttpResponseMeta responseMeta( String key ) throws NetworkException {
+    @Nullable
+    private HttpResponseMeta responseMeta(String key) throws NetworkException {
         return parseMeta( key, "-response-meta", DefaultHttpResponseMeta.class );
     }
 
-    private HttpRequestMeta requestMeta( String key ) throws NetworkException {
+    @Nullable
+    private HttpRequestMeta requestMeta(String key) throws NetworkException {
         return parseMeta( key, "-request-meta", DefaultHttpRequestMeta.class );
     }
 
+    @Nullable
+    private CachedRequestFailure requestFailure(String key) throws NetworkException {
+        return parseMeta( key, "-failure", CachedRequestFailure.class );
+    }
+
+    private void writeRequestFailure(String key, CachedRequestFailure cachedRequestFailure) {
+
+        try {
+            cache.write(key + "-failure", JSON.toJSON(cachedRequestFailure));
+        } catch (IOException e) {
+
+            // I don't think runtime exception is ideal but I can't think
+            // of a cleaner strategy for now.
+
+            throw new RuntimeException("Unable to write to cache backing: ", e);
+        }
+
+    }
+
+    @Nullable
     public <T> T parseMeta( String key, String keySuffix, Class<T> clazz ) throws NetworkException {
 
         try {
 
             key = key + keySuffix;
 
-            if ( cache.contains( key ) ) {
-                String json = cache.read(key );
+            if ( cache.contains(key) ) {
+                String json = cache.read(key);
                 return JSON.fromJSON( clazz, json );
             }
 

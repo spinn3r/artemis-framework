@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.corpus.network.test;
 
 import com.spinn3r.artemis.network.NetworkException;
+import com.spinn3r.artemis.network.builder.HttpRequestMethod;
 import com.spinn3r.artemis.parallel.Worker;
 import com.spinn3r.log5j.Logger;
 
@@ -41,7 +42,16 @@ public class PrefetcherWorker implements Worker {
     private void work0(String link) {
 
         try {
-            cachedHttpRequestBuilder.get(link).execute().connect();
+
+            CachedHttpRequestMethod cachedHttpRequestMethod = cachedHttpRequestBuilder.get(link);
+
+            if(cachedHttpRequestMethod.isCached()) {
+                // already cached so nothing left to do.
+                return;
+            }
+
+            cachedHttpRequestMethod.execute().connect();
+
         } catch (NetworkException e) {
             log.error("Could not precache link: ", e, link);
         }

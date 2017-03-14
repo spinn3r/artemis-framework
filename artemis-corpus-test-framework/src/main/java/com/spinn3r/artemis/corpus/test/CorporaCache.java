@@ -18,14 +18,15 @@
 package com.spinn3r.artemis.corpus.test;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
+import com.spinn3r.artemis.corpus.test.memoizer.Memoizer;
+import com.spinn3r.artemis.corpus.test.memoizer.MemoizerSettings;
+import com.spinn3r.artemis.corpus.test.memoizer.Transformer;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Optional;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
@@ -36,13 +37,13 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class CorporaCache {
 
-    private static String ROOT = System.getProperty( "corpora-cache.root", "src/test/resources/" );
-
     private final Class<?> parent;
 
     private String basedir = "/corpora";
 
     private String extension = "dat";
+
+    private CorporaDirectory corporaDirectory = CorporaDirectory.SYSTEM_PROPERTIES;
 
     // FIXME: do not make this use compression by default
 
@@ -66,6 +67,13 @@ public class CorporaCache {
         this.extension = extension;
     }
 
+    public CorporaCache(Class<?> parent, String basedir, String extension, CorporaDirectory corporaDirectory) {
+        this.parent = parent;
+        this.basedir = basedir;
+        this.extension = extension;
+        this.corporaDirectory = corporaDirectory;
+    }
+
     public boolean contains(String key) {
 
         try {
@@ -84,7 +92,7 @@ public class CorporaCache {
 
         String path = computePath( key ) + ".gz";
 
-        File file = new File( ROOT, path );
+        File file = new File( corporaDirectory.getRoot(), path );
 
         byte[] bytes = data.getBytes( Charsets.UTF_8 );
 
@@ -134,7 +142,7 @@ public class CorporaCache {
     protected File findExistingFile(ImmutableList<String> paths) throws FileNotFoundException {
 
         for (String path : paths) {
-            File file = new File( ROOT, path );
+            File file = new File( corporaDirectory.getRoot(), path );
             if (file.exists()) {
                 return file;
             }
@@ -151,6 +159,37 @@ public class CorporaCache {
     public ImmutableList<String> computePaths(String key) {
         String path = computePath(key);
         return ImmutableList.of(path, path + ".gz");
+    }
+
+    public static class Builder {
+
+        private final Class<?> parent;
+
+        private final String basedir;
+
+        private String extension = "dat";
+
+        private CorporaDirectory corporaDirectory = CorporaDirectory.SYSTEM_PROPERTIES;
+
+        public Builder(Class<?> parent, String basedir) {
+            this.parent = parent;
+            this.basedir = basedir;
+        }
+
+        public Builder setExtension(String extension) {
+            this.extension = extension;
+            return this;
+        }
+
+        public Builder setCorporaDirectory(CorporaDirectory corporaDirectory) {
+            this.corporaDirectory = corporaDirectory;
+            return this;
+        }
+
+        public CorporaCache build() {
+            return new CorporaCache(parent, basedir, extension, corporaDirectory);
+        }
+
     }
 
 }

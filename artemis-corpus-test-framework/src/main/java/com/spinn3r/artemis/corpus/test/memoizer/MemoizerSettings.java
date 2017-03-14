@@ -3,7 +3,7 @@ package com.spinn3r.artemis.corpus.test.memoizer;
 /**
  *
  */
-public interface Settings {
+public interface MemoizerSettings {
 
     boolean isUpdateMode(Class<?> parent);
 
@@ -12,7 +12,7 @@ public interface Settings {
     /**
      * Read settings from system properties.
      */
-    Settings SYSTEM_PROPERTIES = new Settings() {
+    MemoizerSettings SYSTEM_PROPERTIES = new MemoizerSettings() {
 
         @Override
         public boolean isUpdateMode(Class<?> parent) {
@@ -30,7 +30,7 @@ public interface Settings {
 
     };
 
-    class Configured implements Settings {
+    class Configured implements MemoizerSettings {
 
         private final boolean updateMode;
 

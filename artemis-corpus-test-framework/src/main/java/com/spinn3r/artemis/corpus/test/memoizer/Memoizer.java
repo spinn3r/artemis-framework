@@ -21,13 +21,13 @@ public class Memoizer<T> {
 
     private final Transformer<T> transformer;
 
-    private final Settings settings;
+    private final MemoizerSettings memoizerSettings;
 
-    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, Settings settings, String extension) {
+    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, MemoizerSettings memoizerSettings, String extension) {
         this.parent = parent;
         this.basedir = basedir;
         this.transformer = transformer;
-        this.settings = settings;
+        this.memoizerSettings = memoizerSettings;
         this.corporaCache = new CorporaCache(parent, basedir, extension);
     }
 
@@ -52,7 +52,7 @@ public class Memoizer<T> {
             return transformer.deserialize(corporaCache.read(key));
         }
 
-        if(settings.isUpdateMode(parent)) {
+        if(memoizerSettings.isUpdateMode(parent)) {
 
             T result = callable.call();
             corporaCache.write(key, transformer.serialize(result));
@@ -60,7 +60,7 @@ public class Memoizer<T> {
             return result;
 
         } else {
-            throw new IOException(String.format("Entry is not in the cache: %s (key=%s) (%s)", name, key, settings.failureMessage(parent)));
+            throw new IOException(String.format("Entry is not in the cache: %s (key=%s) (%s)", name, key, memoizerSettings.failureMessage(parent)));
         }
 
     }
@@ -79,7 +79,7 @@ public class Memoizer<T> {
 
         private String extension = "dat";
 
-        private Settings settings = Settings.SYSTEM_PROPERTIES;
+        private MemoizerSettings memoizerSettings = MemoizerSettings.SYSTEM_PROPERTIES;
 
         public Builder(Class<?> parent, String basedir, Transformer<T> transformer) {
             this.parent = parent;
@@ -87,8 +87,8 @@ public class Memoizer<T> {
             this.transformer = transformer;
         }
 
-        public Builder<T> setSettings(Settings settings) {
-            this.settings = settings;
+        public Builder<T> setMemoizerSettings(MemoizerSettings memoizerSettings) {
+            this.memoizerSettings = memoizerSettings;
             return this;
         }
 
@@ -98,7 +98,7 @@ public class Memoizer<T> {
         }
 
         public Memoizer<T> build() {
-            return new Memoizer<>(parent, basedir, transformer, settings, extension);
+            return new Memoizer<>(parent, basedir, transformer, memoizerSettings, extension);
         }
 
     }
