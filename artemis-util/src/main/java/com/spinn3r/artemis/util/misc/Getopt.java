@@ -105,7 +105,7 @@ public class Getopt {
         return getInt( key, 0 );
     }
 
-    public int getInt( String key, int _default ) {
+    public Integer getInt( String key, Integer _default ) {
 
         if ( params.containsKey( key ) ) {
             return Integer.parseInt( params.get( key ) );

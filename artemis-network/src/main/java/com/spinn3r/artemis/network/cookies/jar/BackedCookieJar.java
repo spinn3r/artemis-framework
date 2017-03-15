@@ -12,7 +12,7 @@ import java.util.Random;
  */
 public class BackedCookieJar implements CookieJar {
 
-    private final List<CookieValueMap> backing;
+    protected final List<CookieValueMap> backing;
 
     private final Random random = createRandom();
 
@@ -27,6 +27,11 @@ public class BackedCookieJar implements CookieJar {
     @Override
     public CookieValueMap getCookies() {
         return backing.get(random.nextInt(backing.size()));
+    }
+
+    @Override
+    public int size() {
+        return backing.size();
     }
 
     // we don't require secure random for most purposes however we need to make

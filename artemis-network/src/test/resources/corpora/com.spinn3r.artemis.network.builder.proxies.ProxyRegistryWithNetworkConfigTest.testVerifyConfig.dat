@@ -10,7 +10,7 @@ NetworkConfig[
   requireProxy=true
   requests={vk_com=Request{regex='https?://(www\.)?vk\.com', userAgent='Optional.empty', cookies={}, requestHeaders={}, connectTimeout=null, readTimeout=null, followRedirects=null, followContentRedirects=false}, twitter_com=Request{regex='https?://(www\.)?twitter\.com', userAgent='Optional.empty', cookies={}, requestHeaders={}, connectTimeout=null, readTimeout=null, followRedirects=null, followContentRedirects=false}}
   executor=ExecutorConfig{maxRetries=5, sleepIntervalMillis=30000}
-  cookieJarReferences=[CookieJarReference{regex='https?://(www\.)?facebook\.com', path='null', store=[{datr=bd04V9F4B64dMqvqlehNmNe6}]}]
+  cookieJarReferences=[CookieJarReference{regex='https?://(www\.)?facebook\.com', path='null', configPath='null', store=[{datr=bd04V9F4B64dMqvqlehNmNe6}], format=JSON}]
   cookies=[SetCookieDescription{domain='facebook.com', setCookie='datr=bd04V9F4B64dMqvqlehNmNe6'}]
   cookieManagerEnabled=true
   testProxies=true

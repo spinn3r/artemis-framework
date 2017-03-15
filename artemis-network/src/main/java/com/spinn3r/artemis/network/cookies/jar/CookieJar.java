@@ -1,8 +1,5 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
-import com.google.common.collect.ImmutableList;
-import com.spinn3r.artemis.network.cookies.Cookie;
-import com.spinn3r.artemis.network.cookies.CookieMap;
 import com.spinn3r.artemis.network.cookies.CookieValueMap;
 
 /**
@@ -16,6 +13,11 @@ public interface CookieJar {
      * @return
      */
     CookieValueMap getCookies();
+
+    /**
+     * The number of cookies backing this cookie jar.
+     */
+    int size();
 
     enum Type {
 

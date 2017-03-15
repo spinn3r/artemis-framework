@@ -9,6 +9,7 @@ import com.spinn3r.artemis.network.builder.cookies.StandardCookieStore;
 import com.spinn3r.artemis.network.builder.cookies.ThreadLocalCookieStore;
 import com.spinn3r.artemis.network.cookies.SetCookieDescription;
 import com.spinn3r.artemis.network.cookies.jar.CookieJarManager;
+import com.spinn3r.artemis.network.cookies.jar.CookieJarManagerFactory;
 import com.spinn3r.artemis.network.fetcher.ContentFetcher;
 import com.spinn3r.artemis.network.fetcher.DefaultContentFetcher;
 import com.spinn3r.artemis.network.validators.DefaultHttpResponseValidators;
@@ -30,15 +31,18 @@ import java.util.List;
          implementation = NetworkConfig.class )
 public class DirectNetworkService extends BaseService {
 
-    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null );
+    private final AtomicReferenceProvider<CookieJarManager> cookieJarManagerProvider = new AtomicReferenceProvider<>(null);
 
     private final AtomicReferenceProvider<ThreadLocalCookieStore> threadLocalCookieStoreProvider = new AtomicReferenceProvider<>(null);
 
     private final NetworkConfig networkConfig;
 
+    private final CookieJarManagerFactory cookieJarManagerFactory;
+
     @Inject
-    DirectNetworkService(NetworkConfig networkConfig) {
+    DirectNetworkService(NetworkConfig networkConfig, CookieJarManagerFactory cookieJarManagerFactory) {
         this.networkConfig = networkConfig;
+        this.cookieJarManagerFactory = cookieJarManagerFactory;
     }
 
     @Override
@@ -59,6 +63,7 @@ public class DirectNetworkService extends BaseService {
     @Override
     public void start() throws Exception {
 
+        // TODO: I don't think the SetCookieDescription stuff is working anymore.
         List<SetCookieDescription> setCookieDescriptions = networkConfig.getCookies();
 
         ThreadLocalCookieStore threadLocalCookieStore = new ThreadLocalCookieStore(setCookieDescriptions);
@@ -67,11 +72,9 @@ public class DirectNetworkService extends BaseService {
         if ( networkConfig.isCookieManagerEnabled() ) {
             CookieManager cookieManager = new CookieManager(new StandardCookieStore(threadLocalCookieStore), null);
             CookieHandler.setDefault(cookieManager);
-        } else {
-
-            cookieJarManagerProvider.set(new CookieJarManager(networkConfig.getCookieJarReferences()));
-
         }
+
+        cookieJarManagerProvider.set(cookieJarManagerFactory.create(networkConfig.getCookieJarReferences()));
 
     }
 

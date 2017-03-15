@@ -1573,6 +1573,294 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasImage1Src = 0;
+
+    public int hasModifiedImage1Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Src = false;
+
+    protected String image1Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage1Width = 0;
+
+    public int hasModifiedImage1Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Width = false;
+
+    protected int image1Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage1Height = 0;
+
+    public int hasModifiedImage1Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage1Height = false;
+
+    protected int image1Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Src = 0;
+
+    public int hasModifiedImage2Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Src = false;
+
+    protected String image2Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Width = 0;
+
+    public int hasModifiedImage2Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Width = false;
+
+    protected int image2Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage2Height = 0;
+
+    public int hasModifiedImage2Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage2Height = false;
+
+    protected int image2Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Src = 0;
+
+    public int hasModifiedImage3Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Src = false;
+
+    protected String image3Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Width = 0;
+
+    public int hasModifiedImage3Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Width = false;
+
+    protected int image3Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage3Height = 0;
+
+    public int hasModifiedImage3Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage3Height = false;
+
+    protected int image3Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Src = 0;
+
+    public int hasModifiedImage4Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Src = false;
+
+    protected String image4Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Width = 0;
+
+    public int hasModifiedImage4Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Width = false;
+
+    protected int image4Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage4Height = 0;
+
+    public int hasModifiedImage4Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage4Height = false;
+
+    protected int image4Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Src = 0;
+
+    public int hasModifiedImage5Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Src = false;
+
+    protected String image5Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Width = 0;
+
+    public int hasModifiedImage5Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Width = false;
+
+    protected int image5Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage5Height = 0;
+
+    public int hasModifiedImage5Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage5Height = false;
+
+    protected int image5Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Src = 0;
+
+    public int hasModifiedImage6Src = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Src = false;
+
+    protected String image6Src;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Width = 0;
+
+    public int hasModifiedImage6Width = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Width = false;
+
+    protected int image6Width;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasImage6Height = 0;
+
+    public int hasModifiedImage6Height = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedImage6Height = false;
+
+    protected int image6Height;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasShared = 0;
 
     public int hasModifiedShared = 0;
@@ -1733,6 +2021,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasSharedAuthorAvatarImg = 0;
+
+    public int hasModifiedSharedAuthorAvatarImg = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg = false;
+
+    protected String sharedAuthorAvatarImg;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasReplied = 0;
 
     public int hasModifiedReplied = 0;
@@ -1841,6 +2145,294 @@ public abstract class BaseContentMetadata
     public boolean hasDefinedVideoPlayerHeight = false;
 
     protected int videoPlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo1Player = 0;
+
+    public int hasModifiedVideo1Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo1Player = false;
+
+    protected String video1Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo1PlayerWidth = 0;
+
+    public int hasModifiedVideo1PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo1PlayerWidth = false;
+
+    protected int video1PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo1PlayerHeight = 0;
+
+    public int hasModifiedVideo1PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo1PlayerHeight = false;
+
+    protected int video1PlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo2Player = 0;
+
+    public int hasModifiedVideo2Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo2Player = false;
+
+    protected String video2Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo2PlayerWidth = 0;
+
+    public int hasModifiedVideo2PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo2PlayerWidth = false;
+
+    protected int video2PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo2PlayerHeight = 0;
+
+    public int hasModifiedVideo2PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo2PlayerHeight = false;
+
+    protected int video2PlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo3Player = 0;
+
+    public int hasModifiedVideo3Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo3Player = false;
+
+    protected String video3Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo3PlayerWidth = 0;
+
+    public int hasModifiedVideo3PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo3PlayerWidth = false;
+
+    protected int video3PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo3PlayerHeight = 0;
+
+    public int hasModifiedVideo3PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo3PlayerHeight = false;
+
+    protected int video3PlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo4Player = 0;
+
+    public int hasModifiedVideo4Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo4Player = false;
+
+    protected String video4Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo4PlayerWidth = 0;
+
+    public int hasModifiedVideo4PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo4PlayerWidth = false;
+
+    protected int video4PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo4PlayerHeight = 0;
+
+    public int hasModifiedVideo4PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo4PlayerHeight = false;
+
+    protected int video4PlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo5Player = 0;
+
+    public int hasModifiedVideo5Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo5Player = false;
+
+    protected String video5Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo5PlayerWidth = 0;
+
+    public int hasModifiedVideo5PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo5PlayerWidth = false;
+
+    protected int video5PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo5PlayerHeight = 0;
+
+    public int hasModifiedVideo5PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo5PlayerHeight = false;
+
+    protected int video5PlayerHeight;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo6Player = 0;
+
+    public int hasModifiedVideo6Player = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo6Player = false;
+
+    protected String video6Player;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo6PlayerWidth = 0;
+
+    public int hasModifiedVideo6PlayerWidth = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo6PlayerWidth = false;
+
+    protected int video6PlayerWidth;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasVideo6PlayerHeight = 0;
+
+    public int hasModifiedVideo6PlayerHeight = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedVideo6PlayerHeight = false;
+
+    protected int video6PlayerHeight;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -7498,6 +8090,1542 @@ public abstract class BaseContentMetadata
         return this.hasDefinedImageHeight;
     }
 
+    public BaseContentMetadata setImage1Src ( String image1Src ) {
+
+        ++this.hasImage1Src;
+        ++this.hasModifiedImage1Src;
+
+        this.image1Src = image1Src;
+
+        hasDefinedImage1Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image1_src
+     * </p>
+     */
+    public String getImage1Src() {
+
+        if ( this.constructed == false && this.hasImage1Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image1_src
+     * </p>
+     */
+    public Optional<String> getImage1SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Src () {
+        return this.hasImage1Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Src () {
+
+        this.hasImage1Src = 0;
+        this.hasModifiedImage1Src = 0;
+        this.hasDefinedImage1Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Src () {
+        return this.hasModifiedImage1Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Src () {
+        return this.hasDefinedImage1Src;
+    }
+
+    public BaseContentMetadata setImage1Width ( int image1Width ) {
+
+        ++this.hasImage1Width;
+        ++this.hasModifiedImage1Width;
+
+        this.image1Width = image1Width;
+
+        hasDefinedImage1Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image1_width
+     * </p>
+     */
+    public int getImage1Width() {
+
+        if ( this.constructed == false && this.hasImage1Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image1_width
+     * </p>
+     */
+    public Optional<Integer> getImage1WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Width () {
+        return this.hasImage1Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Width () {
+
+        this.hasImage1Width = 0;
+        this.hasModifiedImage1Width = 0;
+        this.hasDefinedImage1Width = false;
+
+        image1Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Width () {
+        return this.hasModifiedImage1Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Width () {
+        return this.hasDefinedImage1Width;
+    }
+
+    public BaseContentMetadata setImage1Height ( int image1Height ) {
+
+        ++this.hasImage1Height;
+        ++this.hasModifiedImage1Height;
+
+        this.image1Height = image1Height;
+
+        hasDefinedImage1Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image1_height
+     * </p>
+     */
+    public int getImage1Height() {
+
+        if ( this.constructed == false && this.hasImage1Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image1Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image1Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image1_height
+     * </p>
+     */
+    public Optional<Integer> getImage1HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage1Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image1Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage1Height () {
+        return this.hasImage1Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage1Height () {
+
+        this.hasImage1Height = 0;
+        this.hasModifiedImage1Height = 0;
+        this.hasDefinedImage1Height = false;
+
+        image1Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage1Height () {
+        return this.hasModifiedImage1Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage1Height () {
+        return this.hasDefinedImage1Height;
+    }
+
+    public BaseContentMetadata setImage2Src ( String image2Src ) {
+
+        ++this.hasImage2Src;
+        ++this.hasModifiedImage2Src;
+
+        this.image2Src = image2Src;
+
+        hasDefinedImage2Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image2_src
+     * </p>
+     */
+    public String getImage2Src() {
+
+        if ( this.constructed == false && this.hasImage2Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image2_src
+     * </p>
+     */
+    public Optional<String> getImage2SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Src () {
+        return this.hasImage2Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Src () {
+
+        this.hasImage2Src = 0;
+        this.hasModifiedImage2Src = 0;
+        this.hasDefinedImage2Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Src () {
+        return this.hasModifiedImage2Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Src () {
+        return this.hasDefinedImage2Src;
+    }
+
+    public BaseContentMetadata setImage2Width ( int image2Width ) {
+
+        ++this.hasImage2Width;
+        ++this.hasModifiedImage2Width;
+
+        this.image2Width = image2Width;
+
+        hasDefinedImage2Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image2_width
+     * </p>
+     */
+    public int getImage2Width() {
+
+        if ( this.constructed == false && this.hasImage2Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image2_width
+     * </p>
+     */
+    public Optional<Integer> getImage2WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Width () {
+        return this.hasImage2Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Width () {
+
+        this.hasImage2Width = 0;
+        this.hasModifiedImage2Width = 0;
+        this.hasDefinedImage2Width = false;
+
+        image2Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Width () {
+        return this.hasModifiedImage2Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Width () {
+        return this.hasDefinedImage2Width;
+    }
+
+    public BaseContentMetadata setImage2Height ( int image2Height ) {
+
+        ++this.hasImage2Height;
+        ++this.hasModifiedImage2Height;
+
+        this.image2Height = image2Height;
+
+        hasDefinedImage2Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image2_height
+     * </p>
+     */
+    public int getImage2Height() {
+
+        if ( this.constructed == false && this.hasImage2Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image2Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image2Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image2_height
+     * </p>
+     */
+    public Optional<Integer> getImage2HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage2Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image2Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage2Height () {
+        return this.hasImage2Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage2Height () {
+
+        this.hasImage2Height = 0;
+        this.hasModifiedImage2Height = 0;
+        this.hasDefinedImage2Height = false;
+
+        image2Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage2Height () {
+        return this.hasModifiedImage2Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage2Height () {
+        return this.hasDefinedImage2Height;
+    }
+
+    public BaseContentMetadata setImage3Src ( String image3Src ) {
+
+        ++this.hasImage3Src;
+        ++this.hasModifiedImage3Src;
+
+        this.image3Src = image3Src;
+
+        hasDefinedImage3Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image3_src
+     * </p>
+     */
+    public String getImage3Src() {
+
+        if ( this.constructed == false && this.hasImage3Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image3_src
+     * </p>
+     */
+    public Optional<String> getImage3SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Src () {
+        return this.hasImage3Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Src () {
+
+        this.hasImage3Src = 0;
+        this.hasModifiedImage3Src = 0;
+        this.hasDefinedImage3Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Src () {
+        return this.hasModifiedImage3Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Src () {
+        return this.hasDefinedImage3Src;
+    }
+
+    public BaseContentMetadata setImage3Width ( int image3Width ) {
+
+        ++this.hasImage3Width;
+        ++this.hasModifiedImage3Width;
+
+        this.image3Width = image3Width;
+
+        hasDefinedImage3Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image3_width
+     * </p>
+     */
+    public int getImage3Width() {
+
+        if ( this.constructed == false && this.hasImage3Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image3_width
+     * </p>
+     */
+    public Optional<Integer> getImage3WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Width () {
+        return this.hasImage3Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Width () {
+
+        this.hasImage3Width = 0;
+        this.hasModifiedImage3Width = 0;
+        this.hasDefinedImage3Width = false;
+
+        image3Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Width () {
+        return this.hasModifiedImage3Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Width () {
+        return this.hasDefinedImage3Width;
+    }
+
+    public BaseContentMetadata setImage3Height ( int image3Height ) {
+
+        ++this.hasImage3Height;
+        ++this.hasModifiedImage3Height;
+
+        this.image3Height = image3Height;
+
+        hasDefinedImage3Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image3_height
+     * </p>
+     */
+    public int getImage3Height() {
+
+        if ( this.constructed == false && this.hasImage3Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image3Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image3Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image3_height
+     * </p>
+     */
+    public Optional<Integer> getImage3HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage3Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image3Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage3Height () {
+        return this.hasImage3Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage3Height () {
+
+        this.hasImage3Height = 0;
+        this.hasModifiedImage3Height = 0;
+        this.hasDefinedImage3Height = false;
+
+        image3Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage3Height () {
+        return this.hasModifiedImage3Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage3Height () {
+        return this.hasDefinedImage3Height;
+    }
+
+    public BaseContentMetadata setImage4Src ( String image4Src ) {
+
+        ++this.hasImage4Src;
+        ++this.hasModifiedImage4Src;
+
+        this.image4Src = image4Src;
+
+        hasDefinedImage4Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image4_src
+     * </p>
+     */
+    public String getImage4Src() {
+
+        if ( this.constructed == false && this.hasImage4Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image4_src
+     * </p>
+     */
+    public Optional<String> getImage4SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Src () {
+        return this.hasImage4Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Src () {
+
+        this.hasImage4Src = 0;
+        this.hasModifiedImage4Src = 0;
+        this.hasDefinedImage4Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Src () {
+        return this.hasModifiedImage4Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Src () {
+        return this.hasDefinedImage4Src;
+    }
+
+    public BaseContentMetadata setImage4Width ( int image4Width ) {
+
+        ++this.hasImage4Width;
+        ++this.hasModifiedImage4Width;
+
+        this.image4Width = image4Width;
+
+        hasDefinedImage4Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image4_width
+     * </p>
+     */
+    public int getImage4Width() {
+
+        if ( this.constructed == false && this.hasImage4Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image4_width
+     * </p>
+     */
+    public Optional<Integer> getImage4WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Width () {
+        return this.hasImage4Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Width () {
+
+        this.hasImage4Width = 0;
+        this.hasModifiedImage4Width = 0;
+        this.hasDefinedImage4Width = false;
+
+        image4Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Width () {
+        return this.hasModifiedImage4Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Width () {
+        return this.hasDefinedImage4Width;
+    }
+
+    public BaseContentMetadata setImage4Height ( int image4Height ) {
+
+        ++this.hasImage4Height;
+        ++this.hasModifiedImage4Height;
+
+        this.image4Height = image4Height;
+
+        hasDefinedImage4Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image4_height
+     * </p>
+     */
+    public int getImage4Height() {
+
+        if ( this.constructed == false && this.hasImage4Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image4Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image4Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image4_height
+     * </p>
+     */
+    public Optional<Integer> getImage4HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage4Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image4Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage4Height () {
+        return this.hasImage4Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage4Height () {
+
+        this.hasImage4Height = 0;
+        this.hasModifiedImage4Height = 0;
+        this.hasDefinedImage4Height = false;
+
+        image4Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage4Height () {
+        return this.hasModifiedImage4Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage4Height () {
+        return this.hasDefinedImage4Height;
+    }
+
+    public BaseContentMetadata setImage5Src ( String image5Src ) {
+
+        ++this.hasImage5Src;
+        ++this.hasModifiedImage5Src;
+
+        this.image5Src = image5Src;
+
+        hasDefinedImage5Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image5_src
+     * </p>
+     */
+    public String getImage5Src() {
+
+        if ( this.constructed == false && this.hasImage5Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image5_src
+     * </p>
+     */
+    public Optional<String> getImage5SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Src () {
+        return this.hasImage5Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Src () {
+
+        this.hasImage5Src = 0;
+        this.hasModifiedImage5Src = 0;
+        this.hasDefinedImage5Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Src () {
+        return this.hasModifiedImage5Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Src () {
+        return this.hasDefinedImage5Src;
+    }
+
+    public BaseContentMetadata setImage5Width ( int image5Width ) {
+
+        ++this.hasImage5Width;
+        ++this.hasModifiedImage5Width;
+
+        this.image5Width = image5Width;
+
+        hasDefinedImage5Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image5_width
+     * </p>
+     */
+    public int getImage5Width() {
+
+        if ( this.constructed == false && this.hasImage5Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image5_width
+     * </p>
+     */
+    public Optional<Integer> getImage5WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Width () {
+        return this.hasImage5Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Width () {
+
+        this.hasImage5Width = 0;
+        this.hasModifiedImage5Width = 0;
+        this.hasDefinedImage5Width = false;
+
+        image5Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Width () {
+        return this.hasModifiedImage5Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Width () {
+        return this.hasDefinedImage5Width;
+    }
+
+    public BaseContentMetadata setImage5Height ( int image5Height ) {
+
+        ++this.hasImage5Height;
+        ++this.hasModifiedImage5Height;
+
+        this.image5Height = image5Height;
+
+        hasDefinedImage5Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image5_height
+     * </p>
+     */
+    public int getImage5Height() {
+
+        if ( this.constructed == false && this.hasImage5Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image5Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image5Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image5_height
+     * </p>
+     */
+    public Optional<Integer> getImage5HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage5Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image5Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage5Height () {
+        return this.hasImage5Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage5Height () {
+
+        this.hasImage5Height = 0;
+        this.hasModifiedImage5Height = 0;
+        this.hasDefinedImage5Height = false;
+
+        image5Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage5Height () {
+        return this.hasModifiedImage5Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage5Height () {
+        return this.hasDefinedImage5Height;
+    }
+
+    public BaseContentMetadata setImage6Src ( String image6Src ) {
+
+        ++this.hasImage6Src;
+        ++this.hasModifiedImage6Src;
+
+        this.image6Src = image6Src;
+
+        hasDefinedImage6Src = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image6_src
+     * </p>
+     */
+    public String getImage6Src() {
+
+        if ( this.constructed == false && this.hasImage6Src == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Src" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Src;
+    }
+
+    /**
+     * <p>
+     * One of the images URL representing this content
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: image6_src
+     * </p>
+     */
+    public Optional<String> getImage6SrcAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Src == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Src );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Src () {
+        return this.hasImage6Src > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Src () {
+
+        this.hasImage6Src = 0;
+        this.hasModifiedImage6Src = 0;
+        this.hasDefinedImage6Src = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Src () {
+        return this.hasModifiedImage6Src > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Src () {
+        return this.hasDefinedImage6Src;
+    }
+
+    public BaseContentMetadata setImage6Width ( int image6Width ) {
+
+        ++this.hasImage6Width;
+        ++this.hasModifiedImage6Width;
+
+        this.image6Width = image6Width;
+
+        hasDefinedImage6Width = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image6_width
+     * </p>
+     */
+    public int getImage6Width() {
+
+        if ( this.constructed == false && this.hasImage6Width == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Width" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Width;
+    }
+
+    /**
+     * <p>
+     * The width of the image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image6_width
+     * </p>
+     */
+    public Optional<Integer> getImage6WidthAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Width == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Width );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Width () {
+        return this.hasImage6Width > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Width () {
+
+        this.hasImage6Width = 0;
+        this.hasModifiedImage6Width = 0;
+        this.hasDefinedImage6Width = false;
+
+        image6Width = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Width () {
+        return this.hasModifiedImage6Width > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Width () {
+        return this.hasDefinedImage6Width;
+    }
+
+    public BaseContentMetadata setImage6Height ( int image6Height ) {
+
+        ++this.hasImage6Height;
+        ++this.hasModifiedImage6Height;
+
+        this.image6Height = image6Height;
+
+        hasDefinedImage6Height = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image6_height
+     * </p>
+     */
+    public int getImage6Height() {
+
+        if ( this.constructed == false && this.hasImage6Height == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.image6Height" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.image6Height;
+    }
+
+    /**
+     * <p>
+     * The height of image
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: image6_height
+     * </p>
+     */
+    public Optional<Integer> getImage6HeightAsOptional() {
+
+        if ( this.constructed == false && this.hasImage6Height == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.image6Height );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasImage6Height () {
+        return this.hasImage6Height > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearImage6Height () {
+
+        this.hasImage6Height = 0;
+        this.hasModifiedImage6Height = 0;
+        this.hasDefinedImage6Height = false;
+
+        image6Height = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedImage6Height () {
+        return this.hasModifiedImage6Height > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedImage6Height () {
+        return this.hasDefinedImage6Height;
+    }
+
     public BaseContentMetadata setShared ( boolean shared ) {
 
         ++this.hasShared;
@@ -8340,6 +10468,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedSharedAuthorHandle;
     }
 
+    public BaseContentMetadata setSharedAuthorAvatarImg ( String sharedAuthorAvatarImg ) {
+
+        ++this.hasSharedAuthorAvatarImg;
+        ++this.hasModifiedSharedAuthorAvatarImg;
+
+        this.sharedAuthorAvatarImg = sharedAuthorAvatarImg;
+
+        hasDefinedSharedAuthorAvatarImg = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public String getSharedAuthorAvatarImg() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.sharedAuthorAvatarImg" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.sharedAuthorAvatarImg;
+    }
+
+    /**
+     * <p>
+     * The URL to the img which is an avatar for the user who originally posted this content.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: shared_author_avatar_img
+     * </p>
+     */
+    public Optional<String> getSharedAuthorAvatarImgAsOptional() {
+
+        if ( this.constructed == false && this.hasSharedAuthorAvatarImg == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.sharedAuthorAvatarImg );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasSharedAuthorAvatarImg () {
+        return this.hasSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearSharedAuthorAvatarImg () {
+
+        this.hasSharedAuthorAvatarImg = 0;
+        this.hasModifiedSharedAuthorAvatarImg = 0;
+        this.hasDefinedSharedAuthorAvatarImg = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedSharedAuthorAvatarImg () {
+        return this.hasModifiedSharedAuthorAvatarImg > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedSharedAuthorAvatarImg () {
+        return this.hasDefinedSharedAuthorAvatarImg;
+    }
+
     public BaseContentMetadata setReplied ( boolean replied ) {
 
         ++this.hasReplied;
@@ -8932,6 +11144,1542 @@ public abstract class BaseContentMetadata
      */
     public boolean hasDefinedVideoPlayerHeight () {
         return this.hasDefinedVideoPlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo1Player ( String video1Player ) {
+
+        ++this.hasVideo1Player;
+        ++this.hasModifiedVideo1Player;
+
+        this.video1Player = video1Player;
+
+        hasDefinedVideo1Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video1_player
+     * </p>
+     */
+    public String getVideo1Player() {
+
+        if ( this.constructed == false && this.hasVideo1Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video1Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video1Player;
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video1_player
+     * </p>
+     */
+    public Optional<String> getVideo1PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo1Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video1Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo1Player () {
+        return this.hasVideo1Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo1Player () {
+
+        this.hasVideo1Player = 0;
+        this.hasModifiedVideo1Player = 0;
+        this.hasDefinedVideo1Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo1Player () {
+        return this.hasModifiedVideo1Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo1Player () {
+        return this.hasDefinedVideo1Player;
+    }
+
+    public BaseContentMetadata setVideo1PlayerWidth ( int video1PlayerWidth ) {
+
+        ++this.hasVideo1PlayerWidth;
+        ++this.hasModifiedVideo1PlayerWidth;
+
+        this.video1PlayerWidth = video1PlayerWidth;
+
+        hasDefinedVideo1PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video1_player_width
+     * </p>
+     */
+    public int getVideo1PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo1PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video1PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video1PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video1_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo1PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo1PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video1PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo1PlayerWidth () {
+        return this.hasVideo1PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo1PlayerWidth () {
+
+        this.hasVideo1PlayerWidth = 0;
+        this.hasModifiedVideo1PlayerWidth = 0;
+        this.hasDefinedVideo1PlayerWidth = false;
+
+        video1PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo1PlayerWidth () {
+        return this.hasModifiedVideo1PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo1PlayerWidth () {
+        return this.hasDefinedVideo1PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo1PlayerHeight ( int video1PlayerHeight ) {
+
+        ++this.hasVideo1PlayerHeight;
+        ++this.hasModifiedVideo1PlayerHeight;
+
+        this.video1PlayerHeight = video1PlayerHeight;
+
+        hasDefinedVideo1PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video1_player_height
+     * </p>
+     */
+    public int getVideo1PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo1PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video1PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video1PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video1_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo1PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo1PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video1PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo1PlayerHeight () {
+        return this.hasVideo1PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo1PlayerHeight () {
+
+        this.hasVideo1PlayerHeight = 0;
+        this.hasModifiedVideo1PlayerHeight = 0;
+        this.hasDefinedVideo1PlayerHeight = false;
+
+        video1PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo1PlayerHeight () {
+        return this.hasModifiedVideo1PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo1PlayerHeight () {
+        return this.hasDefinedVideo1PlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo2Player ( String video2Player ) {
+
+        ++this.hasVideo2Player;
+        ++this.hasModifiedVideo2Player;
+
+        this.video2Player = video2Player;
+
+        hasDefinedVideo2Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video2_player
+     * </p>
+     */
+    public String getVideo2Player() {
+
+        if ( this.constructed == false && this.hasVideo2Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video2Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video2Player;
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video2_player
+     * </p>
+     */
+    public Optional<String> getVideo2PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo2Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video2Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo2Player () {
+        return this.hasVideo2Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo2Player () {
+
+        this.hasVideo2Player = 0;
+        this.hasModifiedVideo2Player = 0;
+        this.hasDefinedVideo2Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo2Player () {
+        return this.hasModifiedVideo2Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo2Player () {
+        return this.hasDefinedVideo2Player;
+    }
+
+    public BaseContentMetadata setVideo2PlayerWidth ( int video2PlayerWidth ) {
+
+        ++this.hasVideo2PlayerWidth;
+        ++this.hasModifiedVideo2PlayerWidth;
+
+        this.video2PlayerWidth = video2PlayerWidth;
+
+        hasDefinedVideo2PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video2_player_width
+     * </p>
+     */
+    public int getVideo2PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo2PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video2PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video2PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video2_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo2PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo2PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video2PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo2PlayerWidth () {
+        return this.hasVideo2PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo2PlayerWidth () {
+
+        this.hasVideo2PlayerWidth = 0;
+        this.hasModifiedVideo2PlayerWidth = 0;
+        this.hasDefinedVideo2PlayerWidth = false;
+
+        video2PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo2PlayerWidth () {
+        return this.hasModifiedVideo2PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo2PlayerWidth () {
+        return this.hasDefinedVideo2PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo2PlayerHeight ( int video2PlayerHeight ) {
+
+        ++this.hasVideo2PlayerHeight;
+        ++this.hasModifiedVideo2PlayerHeight;
+
+        this.video2PlayerHeight = video2PlayerHeight;
+
+        hasDefinedVideo2PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video2_player_height
+     * </p>
+     */
+    public int getVideo2PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo2PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video2PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video2PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video2_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo2PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo2PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video2PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo2PlayerHeight () {
+        return this.hasVideo2PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo2PlayerHeight () {
+
+        this.hasVideo2PlayerHeight = 0;
+        this.hasModifiedVideo2PlayerHeight = 0;
+        this.hasDefinedVideo2PlayerHeight = false;
+
+        video2PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo2PlayerHeight () {
+        return this.hasModifiedVideo2PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo2PlayerHeight () {
+        return this.hasDefinedVideo2PlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo3Player ( String video3Player ) {
+
+        ++this.hasVideo3Player;
+        ++this.hasModifiedVideo3Player;
+
+        this.video3Player = video3Player;
+
+        hasDefinedVideo3Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * SearchQueryRequestFrontendServiceTestThe URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video3_player
+     * </p>
+     */
+    public String getVideo3Player() {
+
+        if ( this.constructed == false && this.hasVideo3Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video3Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video3Player;
+    }
+
+    /**
+     * <p>
+     * SearchQueryRequestFrontendServiceTestThe URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video3_player
+     * </p>
+     */
+    public Optional<String> getVideo3PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo3Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video3Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo3Player () {
+        return this.hasVideo3Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo3Player () {
+
+        this.hasVideo3Player = 0;
+        this.hasModifiedVideo3Player = 0;
+        this.hasDefinedVideo3Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo3Player () {
+        return this.hasModifiedVideo3Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo3Player () {
+        return this.hasDefinedVideo3Player;
+    }
+
+    public BaseContentMetadata setVideo3PlayerWidth ( int video3PlayerWidth ) {
+
+        ++this.hasVideo3PlayerWidth;
+        ++this.hasModifiedVideo3PlayerWidth;
+
+        this.video3PlayerWidth = video3PlayerWidth;
+
+        hasDefinedVideo3PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video3_player_width
+     * </p>
+     */
+    public int getVideo3PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo3PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video3PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video3PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video3_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo3PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo3PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video3PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo3PlayerWidth () {
+        return this.hasVideo3PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo3PlayerWidth () {
+
+        this.hasVideo3PlayerWidth = 0;
+        this.hasModifiedVideo3PlayerWidth = 0;
+        this.hasDefinedVideo3PlayerWidth = false;
+
+        video3PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo3PlayerWidth () {
+        return this.hasModifiedVideo3PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo3PlayerWidth () {
+        return this.hasDefinedVideo3PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo3PlayerHeight ( int video3PlayerHeight ) {
+
+        ++this.hasVideo3PlayerHeight;
+        ++this.hasModifiedVideo3PlayerHeight;
+
+        this.video3PlayerHeight = video3PlayerHeight;
+
+        hasDefinedVideo3PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video3_player_height
+     * </p>
+     */
+    public int getVideo3PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo3PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video3PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video3PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video3_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo3PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo3PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video3PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo3PlayerHeight () {
+        return this.hasVideo3PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo3PlayerHeight () {
+
+        this.hasVideo3PlayerHeight = 0;
+        this.hasModifiedVideo3PlayerHeight = 0;
+        this.hasDefinedVideo3PlayerHeight = false;
+
+        video3PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo3PlayerHeight () {
+        return this.hasModifiedVideo3PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo3PlayerHeight () {
+        return this.hasDefinedVideo3PlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo4Player ( String video4Player ) {
+
+        ++this.hasVideo4Player;
+        ++this.hasModifiedVideo4Player;
+
+        this.video4Player = video4Player;
+
+        hasDefinedVideo4Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video4_player
+     * </p>
+     */
+    public String getVideo4Player() {
+
+        if ( this.constructed == false && this.hasVideo4Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video4Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video4Player;
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video4_player
+     * </p>
+     */
+    public Optional<String> getVideo4PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo4Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video4Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo4Player () {
+        return this.hasVideo4Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo4Player () {
+
+        this.hasVideo4Player = 0;
+        this.hasModifiedVideo4Player = 0;
+        this.hasDefinedVideo4Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo4Player () {
+        return this.hasModifiedVideo4Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo4Player () {
+        return this.hasDefinedVideo4Player;
+    }
+
+    public BaseContentMetadata setVideo4PlayerWidth ( int video4PlayerWidth ) {
+
+        ++this.hasVideo4PlayerWidth;
+        ++this.hasModifiedVideo4PlayerWidth;
+
+        this.video4PlayerWidth = video4PlayerWidth;
+
+        hasDefinedVideo4PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video4_player_width
+     * </p>
+     */
+    public int getVideo4PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo4PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video4PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video4PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video4_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo4PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo4PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video4PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo4PlayerWidth () {
+        return this.hasVideo4PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo4PlayerWidth () {
+
+        this.hasVideo4PlayerWidth = 0;
+        this.hasModifiedVideo4PlayerWidth = 0;
+        this.hasDefinedVideo4PlayerWidth = false;
+
+        video4PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo4PlayerWidth () {
+        return this.hasModifiedVideo4PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo4PlayerWidth () {
+        return this.hasDefinedVideo4PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo4PlayerHeight ( int video4PlayerHeight ) {
+
+        ++this.hasVideo4PlayerHeight;
+        ++this.hasModifiedVideo4PlayerHeight;
+
+        this.video4PlayerHeight = video4PlayerHeight;
+
+        hasDefinedVideo4PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video4_player_height
+     * </p>
+     */
+    public int getVideo4PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo4PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video4PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video4PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video4_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo4PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo4PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video4PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo4PlayerHeight () {
+        return this.hasVideo4PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo4PlayerHeight () {
+
+        this.hasVideo4PlayerHeight = 0;
+        this.hasModifiedVideo4PlayerHeight = 0;
+        this.hasDefinedVideo4PlayerHeight = false;
+
+        video4PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo4PlayerHeight () {
+        return this.hasModifiedVideo4PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo4PlayerHeight () {
+        return this.hasDefinedVideo4PlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo5Player ( String video5Player ) {
+
+        ++this.hasVideo5Player;
+        ++this.hasModifiedVideo5Player;
+
+        this.video5Player = video5Player;
+
+        hasDefinedVideo5Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video5_player
+     * </p>
+     */
+    public String getVideo5Player() {
+
+        if ( this.constructed == false && this.hasVideo5Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video5Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video5Player;
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video5_player
+     * </p>
+     */
+    public Optional<String> getVideo5PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo5Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video5Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo5Player () {
+        return this.hasVideo5Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo5Player () {
+
+        this.hasVideo5Player = 0;
+        this.hasModifiedVideo5Player = 0;
+        this.hasDefinedVideo5Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo5Player () {
+        return this.hasModifiedVideo5Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo5Player () {
+        return this.hasDefinedVideo5Player;
+    }
+
+    public BaseContentMetadata setVideo5PlayerWidth ( int video5PlayerWidth ) {
+
+        ++this.hasVideo5PlayerWidth;
+        ++this.hasModifiedVideo5PlayerWidth;
+
+        this.video5PlayerWidth = video5PlayerWidth;
+
+        hasDefinedVideo5PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video5_player_width
+     * </p>
+     */
+    public int getVideo5PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo5PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video5PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video5PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video5_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo5PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo5PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video5PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo5PlayerWidth () {
+        return this.hasVideo5PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo5PlayerWidth () {
+
+        this.hasVideo5PlayerWidth = 0;
+        this.hasModifiedVideo5PlayerWidth = 0;
+        this.hasDefinedVideo5PlayerWidth = false;
+
+        video5PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo5PlayerWidth () {
+        return this.hasModifiedVideo5PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo5PlayerWidth () {
+        return this.hasDefinedVideo5PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo5PlayerHeight ( int video5PlayerHeight ) {
+
+        ++this.hasVideo5PlayerHeight;
+        ++this.hasModifiedVideo5PlayerHeight;
+
+        this.video5PlayerHeight = video5PlayerHeight;
+
+        hasDefinedVideo5PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video5_player_height
+     * </p>
+     */
+    public int getVideo5PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo5PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video5PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video5PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video5_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo5PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo5PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video5PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo5PlayerHeight () {
+        return this.hasVideo5PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo5PlayerHeight () {
+
+        this.hasVideo5PlayerHeight = 0;
+        this.hasModifiedVideo5PlayerHeight = 0;
+        this.hasDefinedVideo5PlayerHeight = false;
+
+        video5PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo5PlayerHeight () {
+        return this.hasModifiedVideo5PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo5PlayerHeight () {
+        return this.hasDefinedVideo5PlayerHeight;
+    }
+
+    public BaseContentMetadata setVideo6Player ( String video6Player ) {
+
+        ++this.hasVideo6Player;
+        ++this.hasModifiedVideo6Player;
+
+        this.video6Player = video6Player;
+
+        hasDefinedVideo6Player = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video6_player
+     * </p>
+     */
+    public String getVideo6Player() {
+
+        if ( this.constructed == false && this.hasVideo6Player == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video6Player" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video6Player;
+    }
+
+    /**
+     * <p>
+     * The URL to one of the iframes which can be embedded to play this video.  HTTPS URL to iframe player. This must be a HTTPS URL which does not generate active mixed content warnings in a web browser
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: video6_player
+     * </p>
+     */
+    public Optional<String> getVideo6PlayerAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo6Player == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video6Player );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo6Player () {
+        return this.hasVideo6Player > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo6Player () {
+
+        this.hasVideo6Player = 0;
+        this.hasModifiedVideo6Player = 0;
+        this.hasDefinedVideo6Player = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo6Player () {
+        return this.hasModifiedVideo6Player > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo6Player () {
+        return this.hasDefinedVideo6Player;
+    }
+
+    public BaseContentMetadata setVideo6PlayerWidth ( int video6PlayerWidth ) {
+
+        ++this.hasVideo6PlayerWidth;
+        ++this.hasModifiedVideo6PlayerWidth;
+
+        this.video6PlayerWidth = video6PlayerWidth;
+
+        hasDefinedVideo6PlayerWidth = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video6_player_width
+     * </p>
+     */
+    public int getVideo6PlayerWidth() {
+
+        if ( this.constructed == false && this.hasVideo6PlayerWidth == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video6PlayerWidth" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video6PlayerWidth;
+    }
+
+    /**
+     * <p>
+     * The width of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video6_player_width
+     * </p>
+     */
+    public Optional<Integer> getVideo6PlayerWidthAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo6PlayerWidth == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video6PlayerWidth );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo6PlayerWidth () {
+        return this.hasVideo6PlayerWidth > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo6PlayerWidth () {
+
+        this.hasVideo6PlayerWidth = 0;
+        this.hasModifiedVideo6PlayerWidth = 0;
+        this.hasDefinedVideo6PlayerWidth = false;
+
+        video6PlayerWidth = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo6PlayerWidth () {
+        return this.hasModifiedVideo6PlayerWidth > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo6PlayerWidth () {
+        return this.hasDefinedVideo6PlayerWidth;
+    }
+
+    public BaseContentMetadata setVideo6PlayerHeight ( int video6PlayerHeight ) {
+
+        ++this.hasVideo6PlayerHeight;
+        ++this.hasModifiedVideo6PlayerHeight;
+
+        this.video6PlayerHeight = video6PlayerHeight;
+
+        hasDefinedVideo6PlayerHeight = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video6_player_height
+     * </p>
+     */
+    public int getVideo6PlayerHeight() {
+
+        if ( this.constructed == false && this.hasVideo6PlayerHeight == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.video6PlayerHeight" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.video6PlayerHeight;
+    }
+
+    /**
+     * <p>
+     * The height of one of the players iframe.
+     * </p>
+     *
+     * <p>
+     * Schema type: int , name: video6_player_height
+     * </p>
+     */
+    public Optional<Integer> getVideo6PlayerHeightAsOptional() {
+
+        if ( this.constructed == false && this.hasVideo6PlayerHeight == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.video6PlayerHeight );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasVideo6PlayerHeight () {
+        return this.hasVideo6PlayerHeight > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearVideo6PlayerHeight () {
+
+        this.hasVideo6PlayerHeight = 0;
+        this.hasModifiedVideo6PlayerHeight = 0;
+        this.hasDefinedVideo6PlayerHeight = false;
+
+        video6PlayerHeight = 0;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedVideo6PlayerHeight () {
+        return this.hasModifiedVideo6PlayerHeight > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedVideo6PlayerHeight () {
+        return this.hasDefinedVideo6PlayerHeight;
     }
 
     public BaseContentMetadata setType ( Type type ) {
@@ -11139,6 +14887,78 @@ public abstract class BaseContentMetadata
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( obj.hasImage1Src() ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
+        if ( obj.hasImage1Width() ) {
+            setImage1Width( obj.getImage1Width() );
+        }
+
+        if ( obj.hasImage1Height() ) {
+            setImage1Height( obj.getImage1Height() );
+        }
+
+        if ( obj.hasImage2Src() ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( obj.hasImage2Width() ) {
+            setImage2Width( obj.getImage2Width() );
+        }
+
+        if ( obj.hasImage2Height() ) {
+            setImage2Height( obj.getImage2Height() );
+        }
+
+        if ( obj.hasImage3Src() ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
+        if ( obj.hasImage3Width() ) {
+            setImage3Width( obj.getImage3Width() );
+        }
+
+        if ( obj.hasImage3Height() ) {
+            setImage3Height( obj.getImage3Height() );
+        }
+
+        if ( obj.hasImage4Src() ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( obj.hasImage4Width() ) {
+            setImage4Width( obj.getImage4Width() );
+        }
+
+        if ( obj.hasImage4Height() ) {
+            setImage4Height( obj.getImage4Height() );
+        }
+
+        if ( obj.hasImage5Src() ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
+        if ( obj.hasImage5Width() ) {
+            setImage5Width( obj.getImage5Width() );
+        }
+
+        if ( obj.hasImage5Height() ) {
+            setImage5Height( obj.getImage5Height() );
+        }
+
+        if ( obj.hasImage6Src() ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( obj.hasImage6Width() ) {
+            setImage6Width( obj.getImage6Width() );
+        }
+
+        if ( obj.hasImage6Height() ) {
+            setImage6Height( obj.getImage6Height() );
+        }
+
         if ( obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -11179,6 +14999,10 @@ public abstract class BaseContentMetadata
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
         }
 
+        if ( obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
+        }
+
         if ( obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -11205,6 +15029,78 @@ public abstract class BaseContentMetadata
 
         if ( obj.hasVideoPlayerHeight() ) {
             setVideoPlayerHeight( obj.getVideoPlayerHeight() );
+        }
+
+        if ( obj.hasVideo1Player() ) {
+            setVideo1Player( obj.getVideo1Player() );
+        }
+
+        if ( obj.hasVideo1PlayerWidth() ) {
+            setVideo1PlayerWidth( obj.getVideo1PlayerWidth() );
+        }
+
+        if ( obj.hasVideo1PlayerHeight() ) {
+            setVideo1PlayerHeight( obj.getVideo1PlayerHeight() );
+        }
+
+        if ( obj.hasVideo2Player() ) {
+            setVideo2Player( obj.getVideo2Player() );
+        }
+
+        if ( obj.hasVideo2PlayerWidth() ) {
+            setVideo2PlayerWidth( obj.getVideo2PlayerWidth() );
+        }
+
+        if ( obj.hasVideo2PlayerHeight() ) {
+            setVideo2PlayerHeight( obj.getVideo2PlayerHeight() );
+        }
+
+        if ( obj.hasVideo3Player() ) {
+            setVideo3Player( obj.getVideo3Player() );
+        }
+
+        if ( obj.hasVideo3PlayerWidth() ) {
+            setVideo3PlayerWidth( obj.getVideo3PlayerWidth() );
+        }
+
+        if ( obj.hasVideo3PlayerHeight() ) {
+            setVideo3PlayerHeight( obj.getVideo3PlayerHeight() );
+        }
+
+        if ( obj.hasVideo4Player() ) {
+            setVideo4Player( obj.getVideo4Player() );
+        }
+
+        if ( obj.hasVideo4PlayerWidth() ) {
+            setVideo4PlayerWidth( obj.getVideo4PlayerWidth() );
+        }
+
+        if ( obj.hasVideo4PlayerHeight() ) {
+            setVideo4PlayerHeight( obj.getVideo4PlayerHeight() );
+        }
+
+        if ( obj.hasVideo5Player() ) {
+            setVideo5Player( obj.getVideo5Player() );
+        }
+
+        if ( obj.hasVideo5PlayerWidth() ) {
+            setVideo5PlayerWidth( obj.getVideo5PlayerWidth() );
+        }
+
+        if ( obj.hasVideo5PlayerHeight() ) {
+            setVideo5PlayerHeight( obj.getVideo5PlayerHeight() );
+        }
+
+        if ( obj.hasVideo6Player() ) {
+            setVideo6Player( obj.getVideo6Player() );
+        }
+
+        if ( obj.hasVideo6PlayerWidth() ) {
+            setVideo6PlayerWidth( obj.getVideo6PlayerWidth() );
+        }
+
+        if ( obj.hasVideo6PlayerHeight() ) {
+            setVideo6PlayerHeight( obj.getVideo6PlayerHeight() );
         }
 
         if ( obj.hasType() ) {
@@ -11765,6 +15661,108 @@ public abstract class BaseContentMetadata
             setImageHeight( obj.getImageHeight() );
         }
 
+        if ( ! hasImage1Src() && obj.hasImage1Src() ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
+        if ( hasImage1Src() && getImage1Src() == null &&
+            obj.hasImage1Src() && obj.getImage1Src() != null ) {
+            setImage1Src( obj.getImage1Src() );
+        }
+
+        if ( ! hasImage1Width() && obj.hasImage1Width() ) {
+            setImage1Width( obj.getImage1Width() );
+        }
+
+        if ( ! hasImage1Height() && obj.hasImage1Height() ) {
+            setImage1Height( obj.getImage1Height() );
+        }
+
+        if ( ! hasImage2Src() && obj.hasImage2Src() ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( hasImage2Src() && getImage2Src() == null &&
+            obj.hasImage2Src() && obj.getImage2Src() != null ) {
+            setImage2Src( obj.getImage2Src() );
+        }
+
+        if ( ! hasImage2Width() && obj.hasImage2Width() ) {
+            setImage2Width( obj.getImage2Width() );
+        }
+
+        if ( ! hasImage2Height() && obj.hasImage2Height() ) {
+            setImage2Height( obj.getImage2Height() );
+        }
+
+        if ( ! hasImage3Src() && obj.hasImage3Src() ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
+        if ( hasImage3Src() && getImage3Src() == null &&
+            obj.hasImage3Src() && obj.getImage3Src() != null ) {
+            setImage3Src( obj.getImage3Src() );
+        }
+
+        if ( ! hasImage3Width() && obj.hasImage3Width() ) {
+            setImage3Width( obj.getImage3Width() );
+        }
+
+        if ( ! hasImage3Height() && obj.hasImage3Height() ) {
+            setImage3Height( obj.getImage3Height() );
+        }
+
+        if ( ! hasImage4Src() && obj.hasImage4Src() ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( hasImage4Src() && getImage4Src() == null &&
+            obj.hasImage4Src() && obj.getImage4Src() != null ) {
+            setImage4Src( obj.getImage4Src() );
+        }
+
+        if ( ! hasImage4Width() && obj.hasImage4Width() ) {
+            setImage4Width( obj.getImage4Width() );
+        }
+
+        if ( ! hasImage4Height() && obj.hasImage4Height() ) {
+            setImage4Height( obj.getImage4Height() );
+        }
+
+        if ( ! hasImage5Src() && obj.hasImage5Src() ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
+        if ( hasImage5Src() && getImage5Src() == null &&
+            obj.hasImage5Src() && obj.getImage5Src() != null ) {
+            setImage5Src( obj.getImage5Src() );
+        }
+
+        if ( ! hasImage5Width() && obj.hasImage5Width() ) {
+            setImage5Width( obj.getImage5Width() );
+        }
+
+        if ( ! hasImage5Height() && obj.hasImage5Height() ) {
+            setImage5Height( obj.getImage5Height() );
+        }
+
+        if ( ! hasImage6Src() && obj.hasImage6Src() ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( hasImage6Src() && getImage6Src() == null &&
+            obj.hasImage6Src() && obj.getImage6Src() != null ) {
+            setImage6Src( obj.getImage6Src() );
+        }
+
+        if ( ! hasImage6Width() && obj.hasImage6Width() ) {
+            setImage6Width( obj.getImage6Width() );
+        }
+
+        if ( ! hasImage6Height() && obj.hasImage6Height() ) {
+            setImage6Height( obj.getImage6Height() );
+        }
+
         if ( ! hasShared() && obj.hasShared() ) {
             setShared( obj.getShared() );
         }
@@ -11845,6 +15843,15 @@ public abstract class BaseContentMetadata
             setSharedAuthorHandle( obj.getSharedAuthorHandle() );
         }
 
+        if ( ! hasSharedAuthorAvatarImg() && obj.hasSharedAuthorAvatarImg() ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
+        }
+
+        if ( hasSharedAuthorAvatarImg() && getSharedAuthorAvatarImg() == null &&
+            obj.hasSharedAuthorAvatarImg() && obj.getSharedAuthorAvatarImg() != null ) {
+            setSharedAuthorAvatarImg( obj.getSharedAuthorAvatarImg() );
+        }
+
         if ( ! hasReplied() && obj.hasReplied() ) {
             setReplied( obj.getReplied() );
         }
@@ -11886,6 +15893,108 @@ public abstract class BaseContentMetadata
 
         if ( ! hasVideoPlayerHeight() && obj.hasVideoPlayerHeight() ) {
             setVideoPlayerHeight( obj.getVideoPlayerHeight() );
+        }
+
+        if ( ! hasVideo1Player() && obj.hasVideo1Player() ) {
+            setVideo1Player( obj.getVideo1Player() );
+        }
+
+        if ( hasVideo1Player() && getVideo1Player() == null &&
+            obj.hasVideo1Player() && obj.getVideo1Player() != null ) {
+            setVideo1Player( obj.getVideo1Player() );
+        }
+
+        if ( ! hasVideo1PlayerWidth() && obj.hasVideo1PlayerWidth() ) {
+            setVideo1PlayerWidth( obj.getVideo1PlayerWidth() );
+        }
+
+        if ( ! hasVideo1PlayerHeight() && obj.hasVideo1PlayerHeight() ) {
+            setVideo1PlayerHeight( obj.getVideo1PlayerHeight() );
+        }
+
+        if ( ! hasVideo2Player() && obj.hasVideo2Player() ) {
+            setVideo2Player( obj.getVideo2Player() );
+        }
+
+        if ( hasVideo2Player() && getVideo2Player() == null &&
+            obj.hasVideo2Player() && obj.getVideo2Player() != null ) {
+            setVideo2Player( obj.getVideo2Player() );
+        }
+
+        if ( ! hasVideo2PlayerWidth() && obj.hasVideo2PlayerWidth() ) {
+            setVideo2PlayerWidth( obj.getVideo2PlayerWidth() );
+        }
+
+        if ( ! hasVideo2PlayerHeight() && obj.hasVideo2PlayerHeight() ) {
+            setVideo2PlayerHeight( obj.getVideo2PlayerHeight() );
+        }
+
+        if ( ! hasVideo3Player() && obj.hasVideo3Player() ) {
+            setVideo3Player( obj.getVideo3Player() );
+        }
+
+        if ( hasVideo3Player() && getVideo3Player() == null &&
+            obj.hasVideo3Player() && obj.getVideo3Player() != null ) {
+            setVideo3Player( obj.getVideo3Player() );
+        }
+
+        if ( ! hasVideo3PlayerWidth() && obj.hasVideo3PlayerWidth() ) {
+            setVideo3PlayerWidth( obj.getVideo3PlayerWidth() );
+        }
+
+        if ( ! hasVideo3PlayerHeight() && obj.hasVideo3PlayerHeight() ) {
+            setVideo3PlayerHeight( obj.getVideo3PlayerHeight() );
+        }
+
+        if ( ! hasVideo4Player() && obj.hasVideo4Player() ) {
+            setVideo4Player( obj.getVideo4Player() );
+        }
+
+        if ( hasVideo4Player() && getVideo4Player() == null &&
+            obj.hasVideo4Player() && obj.getVideo4Player() != null ) {
+            setVideo4Player( obj.getVideo4Player() );
+        }
+
+        if ( ! hasVideo4PlayerWidth() && obj.hasVideo4PlayerWidth() ) {
+            setVideo4PlayerWidth( obj.getVideo4PlayerWidth() );
+        }
+
+        if ( ! hasVideo4PlayerHeight() && obj.hasVideo4PlayerHeight() ) {
+            setVideo4PlayerHeight( obj.getVideo4PlayerHeight() );
+        }
+
+        if ( ! hasVideo5Player() && obj.hasVideo5Player() ) {
+            setVideo5Player( obj.getVideo5Player() );
+        }
+
+        if ( hasVideo5Player() && getVideo5Player() == null &&
+            obj.hasVideo5Player() && obj.getVideo5Player() != null ) {
+            setVideo5Player( obj.getVideo5Player() );
+        }
+
+        if ( ! hasVideo5PlayerWidth() && obj.hasVideo5PlayerWidth() ) {
+            setVideo5PlayerWidth( obj.getVideo5PlayerWidth() );
+        }
+
+        if ( ! hasVideo5PlayerHeight() && obj.hasVideo5PlayerHeight() ) {
+            setVideo5PlayerHeight( obj.getVideo5PlayerHeight() );
+        }
+
+        if ( ! hasVideo6Player() && obj.hasVideo6Player() ) {
+            setVideo6Player( obj.getVideo6Player() );
+        }
+
+        if ( hasVideo6Player() && getVideo6Player() == null &&
+            obj.hasVideo6Player() && obj.getVideo6Player() != null ) {
+            setVideo6Player( obj.getVideo6Player() );
+        }
+
+        if ( ! hasVideo6PlayerWidth() && obj.hasVideo6PlayerWidth() ) {
+            setVideo6PlayerWidth( obj.getVideo6PlayerWidth() );
+        }
+
+        if ( ! hasVideo6PlayerHeight() && obj.hasVideo6PlayerHeight() ) {
+            setVideo6PlayerHeight( obj.getVideo6PlayerHeight() );
         }
 
         if ( type == null && obj.hasType() && obj.getType() != null ) {
@@ -12144,6 +16253,42 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedImageHeight = 0;
 
+        this.hasModifiedImage1Src = 0;
+
+        this.hasModifiedImage1Width = 0;
+
+        this.hasModifiedImage1Height = 0;
+
+        this.hasModifiedImage2Src = 0;
+
+        this.hasModifiedImage2Width = 0;
+
+        this.hasModifiedImage2Height = 0;
+
+        this.hasModifiedImage3Src = 0;
+
+        this.hasModifiedImage3Width = 0;
+
+        this.hasModifiedImage3Height = 0;
+
+        this.hasModifiedImage4Src = 0;
+
+        this.hasModifiedImage4Width = 0;
+
+        this.hasModifiedImage4Height = 0;
+
+        this.hasModifiedImage5Src = 0;
+
+        this.hasModifiedImage5Width = 0;
+
+        this.hasModifiedImage5Height = 0;
+
+        this.hasModifiedImage6Src = 0;
+
+        this.hasModifiedImage6Width = 0;
+
+        this.hasModifiedImage6Height = 0;
+
         this.hasModifiedShared = 0;
 
         this.hasModifiedSharedType = 0;
@@ -12164,6 +16309,8 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedSharedAuthorHandle = 0;
 
+        this.hasModifiedSharedAuthorAvatarImg = 0;
+
         this.hasModifiedReplied = 0;
 
         this.hasModifiedRepliedProfileLink = 0;
@@ -12177,6 +16324,42 @@ public abstract class BaseContentMetadata
         this.hasModifiedVideoPlayerWidth = 0;
 
         this.hasModifiedVideoPlayerHeight = 0;
+
+        this.hasModifiedVideo1Player = 0;
+
+        this.hasModifiedVideo1PlayerWidth = 0;
+
+        this.hasModifiedVideo1PlayerHeight = 0;
+
+        this.hasModifiedVideo2Player = 0;
+
+        this.hasModifiedVideo2PlayerWidth = 0;
+
+        this.hasModifiedVideo2PlayerHeight = 0;
+
+        this.hasModifiedVideo3Player = 0;
+
+        this.hasModifiedVideo3PlayerWidth = 0;
+
+        this.hasModifiedVideo3PlayerHeight = 0;
+
+        this.hasModifiedVideo4Player = 0;
+
+        this.hasModifiedVideo4PlayerWidth = 0;
+
+        this.hasModifiedVideo4PlayerHeight = 0;
+
+        this.hasModifiedVideo5Player = 0;
+
+        this.hasModifiedVideo5PlayerWidth = 0;
+
+        this.hasModifiedVideo5PlayerHeight = 0;
+
+        this.hasModifiedVideo6Player = 0;
+
+        this.hasModifiedVideo6PlayerWidth = 0;
+
+        this.hasModifiedVideo6PlayerHeight = 0;
 
         this.hasModifiedType = 0;
 
@@ -12479,6 +16662,78 @@ public abstract class BaseContentMetadata
             return true;
         }
 
+        if ( this.hasModifiedImage1Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage1Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage1Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage2Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage3Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage4Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage5Height() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Src() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Width() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedImage6Height() ) {
+            return true;
+        }
+
         if ( this.hasModifiedShared() ) {
             return true;
         }
@@ -12519,6 +16774,10 @@ public abstract class BaseContentMetadata
             return true;
         }
 
+        if ( this.hasModifiedSharedAuthorAvatarImg() ) {
+            return true;
+        }
+
         if ( this.hasModifiedReplied() ) {
             return true;
         }
@@ -12544,6 +16803,78 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedVideoPlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo1Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo1PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo1PlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo2Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo2PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo2PlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo3Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo3PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo3PlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo4Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo4PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo4PlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo5Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo5PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo5PlayerHeight() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo6Player() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo6PlayerWidth() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedVideo6PlayerHeight() ) {
             return true;
         }
 
@@ -13169,6 +17500,150 @@ public abstract class BaseContentMetadata
 
         }
 
+        if ( hasImage1Src > 0 ) {
+
+            buff.append( "image1Src=" );
+            buff.append( image1Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage1Width > 0 ) {
+
+            buff.append( "image1Width=" );
+            buff.append( image1Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage1Height > 0 ) {
+
+            buff.append( "image1Height=" );
+            buff.append( image1Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Src > 0 ) {
+
+            buff.append( "image2Src=" );
+            buff.append( image2Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Width > 0 ) {
+
+            buff.append( "image2Width=" );
+            buff.append( image2Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage2Height > 0 ) {
+
+            buff.append( "image2Height=" );
+            buff.append( image2Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Src > 0 ) {
+
+            buff.append( "image3Src=" );
+            buff.append( image3Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Width > 0 ) {
+
+            buff.append( "image3Width=" );
+            buff.append( image3Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage3Height > 0 ) {
+
+            buff.append( "image3Height=" );
+            buff.append( image3Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Src > 0 ) {
+
+            buff.append( "image4Src=" );
+            buff.append( image4Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Width > 0 ) {
+
+            buff.append( "image4Width=" );
+            buff.append( image4Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage4Height > 0 ) {
+
+            buff.append( "image4Height=" );
+            buff.append( image4Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Src > 0 ) {
+
+            buff.append( "image5Src=" );
+            buff.append( image5Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Width > 0 ) {
+
+            buff.append( "image5Width=" );
+            buff.append( image5Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage5Height > 0 ) {
+
+            buff.append( "image5Height=" );
+            buff.append( image5Height );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Src > 0 ) {
+
+            buff.append( "image6Src=" );
+            buff.append( image6Src );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Width > 0 ) {
+
+            buff.append( "image6Width=" );
+            buff.append( image6Width );
+            buff.append( " " );
+
+        }
+
+        if ( hasImage6Height > 0 ) {
+
+            buff.append( "image6Height=" );
+            buff.append( image6Height );
+            buff.append( " " );
+
+        }
+
         if ( hasShared > 0 ) {
 
             buff.append( "shared=" );
@@ -13249,6 +17724,14 @@ public abstract class BaseContentMetadata
 
         }
 
+        if ( hasSharedAuthorAvatarImg > 0 ) {
+
+            buff.append( "sharedAuthorAvatarImg=" );
+            buff.append( sharedAuthorAvatarImg );
+            buff.append( " " );
+
+        }
+
         if ( hasReplied > 0 ) {
 
             buff.append( "replied=" );
@@ -13301,6 +17784,150 @@ public abstract class BaseContentMetadata
 
             buff.append( "videoPlayerHeight=" );
             buff.append( videoPlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo1Player > 0 ) {
+
+            buff.append( "video1Player=" );
+            buff.append( video1Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo1PlayerWidth > 0 ) {
+
+            buff.append( "video1PlayerWidth=" );
+            buff.append( video1PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo1PlayerHeight > 0 ) {
+
+            buff.append( "video1PlayerHeight=" );
+            buff.append( video1PlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo2Player > 0 ) {
+
+            buff.append( "video2Player=" );
+            buff.append( video2Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo2PlayerWidth > 0 ) {
+
+            buff.append( "video2PlayerWidth=" );
+            buff.append( video2PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo2PlayerHeight > 0 ) {
+
+            buff.append( "video2PlayerHeight=" );
+            buff.append( video2PlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo3Player > 0 ) {
+
+            buff.append( "video3Player=" );
+            buff.append( video3Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo3PlayerWidth > 0 ) {
+
+            buff.append( "video3PlayerWidth=" );
+            buff.append( video3PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo3PlayerHeight > 0 ) {
+
+            buff.append( "video3PlayerHeight=" );
+            buff.append( video3PlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo4Player > 0 ) {
+
+            buff.append( "video4Player=" );
+            buff.append( video4Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo4PlayerWidth > 0 ) {
+
+            buff.append( "video4PlayerWidth=" );
+            buff.append( video4PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo4PlayerHeight > 0 ) {
+
+            buff.append( "video4PlayerHeight=" );
+            buff.append( video4PlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo5Player > 0 ) {
+
+            buff.append( "video5Player=" );
+            buff.append( video5Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo5PlayerWidth > 0 ) {
+
+            buff.append( "video5PlayerWidth=" );
+            buff.append( video5PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo5PlayerHeight > 0 ) {
+
+            buff.append( "video5PlayerHeight=" );
+            buff.append( video5PlayerHeight );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo6Player > 0 ) {
+
+            buff.append( "video6Player=" );
+            buff.append( video6Player );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo6PlayerWidth > 0 ) {
+
+            buff.append( "video6PlayerWidth=" );
+            buff.append( video6PlayerWidth );
+            buff.append( " " );
+
+        }
+
+        if ( hasVideo6PlayerHeight > 0 ) {
+
+            buff.append( "video6PlayerHeight=" );
+            buff.append( video6PlayerHeight );
             buff.append( " " );
 
         }
@@ -14061,6 +18688,168 @@ public abstract class BaseContentMetadata
         }
 
         // they should either be both false or both true...
+        if ( hasImage1Src() != cmp.hasImage1Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image1Src, cmp.image1Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage1Width() != cmp.hasImage1Width() ) {
+            return false;
+        }
+
+        if ( image1Width != cmp.image1Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage1Height() != cmp.hasImage1Height() ) {
+            return false;
+        }
+
+        if ( image1Height != cmp.image1Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Src() != cmp.hasImage2Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image2Src, cmp.image2Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Width() != cmp.hasImage2Width() ) {
+            return false;
+        }
+
+        if ( image2Width != cmp.image2Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage2Height() != cmp.hasImage2Height() ) {
+            return false;
+        }
+
+        if ( image2Height != cmp.image2Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Src() != cmp.hasImage3Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image3Src, cmp.image3Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Width() != cmp.hasImage3Width() ) {
+            return false;
+        }
+
+        if ( image3Width != cmp.image3Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage3Height() != cmp.hasImage3Height() ) {
+            return false;
+        }
+
+        if ( image3Height != cmp.image3Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Src() != cmp.hasImage4Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image4Src, cmp.image4Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Width() != cmp.hasImage4Width() ) {
+            return false;
+        }
+
+        if ( image4Width != cmp.image4Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage4Height() != cmp.hasImage4Height() ) {
+            return false;
+        }
+
+        if ( image4Height != cmp.image4Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Src() != cmp.hasImage5Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image5Src, cmp.image5Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Width() != cmp.hasImage5Width() ) {
+            return false;
+        }
+
+        if ( image5Width != cmp.image5Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage5Height() != cmp.hasImage5Height() ) {
+            return false;
+        }
+
+        if ( image5Height != cmp.image5Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Src() != cmp.hasImage6Src() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( image6Src, cmp.image6Src ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Width() != cmp.hasImage6Width() ) {
+            return false;
+        }
+
+        if ( image6Width != cmp.image6Width ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasImage6Height() != cmp.hasImage6Height() ) {
+            return false;
+        }
+
+        if ( image6Height != cmp.image6Height ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasShared() != cmp.hasShared() ) {
             return false;
         }
@@ -14151,6 +18940,15 @@ public abstract class BaseContentMetadata
         }
 
         // they should either be both false or both true...
+        if ( hasSharedAuthorAvatarImg() != cmp.hasSharedAuthorAvatarImg() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( sharedAuthorAvatarImg, cmp.sharedAuthorAvatarImg ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasReplied() != cmp.hasReplied() ) {
             return false;
         }
@@ -14210,6 +19008,168 @@ public abstract class BaseContentMetadata
         }
 
         if ( videoPlayerHeight != cmp.videoPlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo1Player() != cmp.hasVideo1Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video1Player, cmp.video1Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo1PlayerWidth() != cmp.hasVideo1PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video1PlayerWidth != cmp.video1PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo1PlayerHeight() != cmp.hasVideo1PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video1PlayerHeight != cmp.video1PlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo2Player() != cmp.hasVideo2Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video2Player, cmp.video2Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo2PlayerWidth() != cmp.hasVideo2PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video2PlayerWidth != cmp.video2PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo2PlayerHeight() != cmp.hasVideo2PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video2PlayerHeight != cmp.video2PlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo3Player() != cmp.hasVideo3Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video3Player, cmp.video3Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo3PlayerWidth() != cmp.hasVideo3PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video3PlayerWidth != cmp.video3PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo3PlayerHeight() != cmp.hasVideo3PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video3PlayerHeight != cmp.video3PlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo4Player() != cmp.hasVideo4Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video4Player, cmp.video4Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo4PlayerWidth() != cmp.hasVideo4PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video4PlayerWidth != cmp.video4PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo4PlayerHeight() != cmp.hasVideo4PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video4PlayerHeight != cmp.video4PlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo5Player() != cmp.hasVideo5Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video5Player, cmp.video5Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo5PlayerWidth() != cmp.hasVideo5PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video5PlayerWidth != cmp.video5PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo5PlayerHeight() != cmp.hasVideo5PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video5PlayerHeight != cmp.video5PlayerHeight ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo6Player() != cmp.hasVideo6Player() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( video6Player, cmp.video6Player ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo6PlayerWidth() != cmp.hasVideo6PlayerWidth() ) {
+            return false;
+        }
+
+        if ( video6PlayerWidth != cmp.video6PlayerWidth ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasVideo6PlayerHeight() != cmp.hasVideo6PlayerHeight() ) {
+            return false;
+        }
+
+        if ( video6PlayerHeight != cmp.video6PlayerHeight ) {
             return false;
         }
 
@@ -15583,6 +20543,282 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member image1_src from String
+
+            __name = "image1Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_src";
+            }
+
+            if ( this.hasImage1Src > 0 ) {
+
+                if ( image1Src != null ) {
+                    generator.writeStringField( __name, image1Src );
+                }
+
+            }
+
+            // ***** json encode member image1_width from int
+
+            __name = "image1Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_width";
+            }
+
+            if ( this.hasImage1Width > 0 ) {
+
+                if ( hasDefinedImage1Width )
+                    generator.writeNumberField( __name, image1Width );
+
+            }
+
+            // ***** json encode member image1_height from int
+
+            __name = "image1Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image1_height";
+            }
+
+            if ( this.hasImage1Height > 0 ) {
+
+                if ( hasDefinedImage1Height )
+                    generator.writeNumberField( __name, image1Height );
+
+            }
+
+            // ***** json encode member image2_src from String
+
+            __name = "image2Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_src";
+            }
+
+            if ( this.hasImage2Src > 0 ) {
+
+                if ( image2Src != null ) {
+                    generator.writeStringField( __name, image2Src );
+                }
+
+            }
+
+            // ***** json encode member image2_width from int
+
+            __name = "image2Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_width";
+            }
+
+            if ( this.hasImage2Width > 0 ) {
+
+                if ( hasDefinedImage2Width )
+                    generator.writeNumberField( __name, image2Width );
+
+            }
+
+            // ***** json encode member image2_height from int
+
+            __name = "image2Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image2_height";
+            }
+
+            if ( this.hasImage2Height > 0 ) {
+
+                if ( hasDefinedImage2Height )
+                    generator.writeNumberField( __name, image2Height );
+
+            }
+
+            // ***** json encode member image3_src from String
+
+            __name = "image3Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_src";
+            }
+
+            if ( this.hasImage3Src > 0 ) {
+
+                if ( image3Src != null ) {
+                    generator.writeStringField( __name, image3Src );
+                }
+
+            }
+
+            // ***** json encode member image3_width from int
+
+            __name = "image3Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_width";
+            }
+
+            if ( this.hasImage3Width > 0 ) {
+
+                if ( hasDefinedImage3Width )
+                    generator.writeNumberField( __name, image3Width );
+
+            }
+
+            // ***** json encode member image3_height from int
+
+            __name = "image3Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image3_height";
+            }
+
+            if ( this.hasImage3Height > 0 ) {
+
+                if ( hasDefinedImage3Height )
+                    generator.writeNumberField( __name, image3Height );
+
+            }
+
+            // ***** json encode member image4_src from String
+
+            __name = "image4Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_src";
+            }
+
+            if ( this.hasImage4Src > 0 ) {
+
+                if ( image4Src != null ) {
+                    generator.writeStringField( __name, image4Src );
+                }
+
+            }
+
+            // ***** json encode member image4_width from int
+
+            __name = "image4Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_width";
+            }
+
+            if ( this.hasImage4Width > 0 ) {
+
+                if ( hasDefinedImage4Width )
+                    generator.writeNumberField( __name, image4Width );
+
+            }
+
+            // ***** json encode member image4_height from int
+
+            __name = "image4Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image4_height";
+            }
+
+            if ( this.hasImage4Height > 0 ) {
+
+                if ( hasDefinedImage4Height )
+                    generator.writeNumberField( __name, image4Height );
+
+            }
+
+            // ***** json encode member image5_src from String
+
+            __name = "image5Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_src";
+            }
+
+            if ( this.hasImage5Src > 0 ) {
+
+                if ( image5Src != null ) {
+                    generator.writeStringField( __name, image5Src );
+                }
+
+            }
+
+            // ***** json encode member image5_width from int
+
+            __name = "image5Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_width";
+            }
+
+            if ( this.hasImage5Width > 0 ) {
+
+                if ( hasDefinedImage5Width )
+                    generator.writeNumberField( __name, image5Width );
+
+            }
+
+            // ***** json encode member image5_height from int
+
+            __name = "image5Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image5_height";
+            }
+
+            if ( this.hasImage5Height > 0 ) {
+
+                if ( hasDefinedImage5Height )
+                    generator.writeNumberField( __name, image5Height );
+
+            }
+
+            // ***** json encode member image6_src from String
+
+            __name = "image6Src";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_src";
+            }
+
+            if ( this.hasImage6Src > 0 ) {
+
+                if ( image6Src != null ) {
+                    generator.writeStringField( __name, image6Src );
+                }
+
+            }
+
+            // ***** json encode member image6_width from int
+
+            __name = "image6Width";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_width";
+            }
+
+            if ( this.hasImage6Width > 0 ) {
+
+                if ( hasDefinedImage6Width )
+                    generator.writeNumberField( __name, image6Width );
+
+            }
+
+            // ***** json encode member image6_height from int
+
+            __name = "image6Height";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "image6_height";
+            }
+
+            if ( this.hasImage6Height > 0 ) {
+
+                if ( hasDefinedImage6Height )
+                    generator.writeNumberField( __name, image6Height );
+
+            }
+
             // ***** json encode member shared from boolean
 
             __name = "shared";
@@ -15741,6 +20977,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member shared_author_avatar_img from String
+
+            __name = "sharedAuthorAvatarImg";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "shared_author_avatar_img";
+            }
+
+            if ( this.hasSharedAuthorAvatarImg > 0 ) {
+
+                if ( sharedAuthorAvatarImg != null ) {
+                    generator.writeStringField( __name, sharedAuthorAvatarImg );
+                }
+
+            }
+
             // ***** json encode member replied from boolean
 
             __name = "replied";
@@ -15846,6 +21098,282 @@ public abstract class BaseContentMetadata
 
                 if ( hasDefinedVideoPlayerHeight )
                     generator.writeNumberField( __name, videoPlayerHeight );
+
+            }
+
+            // ***** json encode member video1_player from String
+
+            __name = "video1Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video1_player";
+            }
+
+            if ( this.hasVideo1Player > 0 ) {
+
+                if ( video1Player != null ) {
+                    generator.writeStringField( __name, video1Player );
+                }
+
+            }
+
+            // ***** json encode member video1_player_width from int
+
+            __name = "video1PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video1_player_width";
+            }
+
+            if ( this.hasVideo1PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo1PlayerWidth )
+                    generator.writeNumberField( __name, video1PlayerWidth );
+
+            }
+
+            // ***** json encode member video1_player_height from int
+
+            __name = "video1PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video1_player_height";
+            }
+
+            if ( this.hasVideo1PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo1PlayerHeight )
+                    generator.writeNumberField( __name, video1PlayerHeight );
+
+            }
+
+            // ***** json encode member video2_player from String
+
+            __name = "video2Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video2_player";
+            }
+
+            if ( this.hasVideo2Player > 0 ) {
+
+                if ( video2Player != null ) {
+                    generator.writeStringField( __name, video2Player );
+                }
+
+            }
+
+            // ***** json encode member video2_player_width from int
+
+            __name = "video2PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video2_player_width";
+            }
+
+            if ( this.hasVideo2PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo2PlayerWidth )
+                    generator.writeNumberField( __name, video2PlayerWidth );
+
+            }
+
+            // ***** json encode member video2_player_height from int
+
+            __name = "video2PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video2_player_height";
+            }
+
+            if ( this.hasVideo2PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo2PlayerHeight )
+                    generator.writeNumberField( __name, video2PlayerHeight );
+
+            }
+
+            // ***** json encode member video3_player from String
+
+            __name = "video3Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video3_player";
+            }
+
+            if ( this.hasVideo3Player > 0 ) {
+
+                if ( video3Player != null ) {
+                    generator.writeStringField( __name, video3Player );
+                }
+
+            }
+
+            // ***** json encode member video3_player_width from int
+
+            __name = "video3PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video3_player_width";
+            }
+
+            if ( this.hasVideo3PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo3PlayerWidth )
+                    generator.writeNumberField( __name, video3PlayerWidth );
+
+            }
+
+            // ***** json encode member video3_player_height from int
+
+            __name = "video3PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video3_player_height";
+            }
+
+            if ( this.hasVideo3PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo3PlayerHeight )
+                    generator.writeNumberField( __name, video3PlayerHeight );
+
+            }
+
+            // ***** json encode member video4_player from String
+
+            __name = "video4Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video4_player";
+            }
+
+            if ( this.hasVideo4Player > 0 ) {
+
+                if ( video4Player != null ) {
+                    generator.writeStringField( __name, video4Player );
+                }
+
+            }
+
+            // ***** json encode member video4_player_width from int
+
+            __name = "video4PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video4_player_width";
+            }
+
+            if ( this.hasVideo4PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo4PlayerWidth )
+                    generator.writeNumberField( __name, video4PlayerWidth );
+
+            }
+
+            // ***** json encode member video4_player_height from int
+
+            __name = "video4PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video4_player_height";
+            }
+
+            if ( this.hasVideo4PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo4PlayerHeight )
+                    generator.writeNumberField( __name, video4PlayerHeight );
+
+            }
+
+            // ***** json encode member video5_player from String
+
+            __name = "video5Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video5_player";
+            }
+
+            if ( this.hasVideo5Player > 0 ) {
+
+                if ( video5Player != null ) {
+                    generator.writeStringField( __name, video5Player );
+                }
+
+            }
+
+            // ***** json encode member video5_player_width from int
+
+            __name = "video5PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video5_player_width";
+            }
+
+            if ( this.hasVideo5PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo5PlayerWidth )
+                    generator.writeNumberField( __name, video5PlayerWidth );
+
+            }
+
+            // ***** json encode member video5_player_height from int
+
+            __name = "video5PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video5_player_height";
+            }
+
+            if ( this.hasVideo5PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo5PlayerHeight )
+                    generator.writeNumberField( __name, video5PlayerHeight );
+
+            }
+
+            // ***** json encode member video6_player from String
+
+            __name = "video6Player";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video6_player";
+            }
+
+            if ( this.hasVideo6Player > 0 ) {
+
+                if ( video6Player != null ) {
+                    generator.writeStringField( __name, video6Player );
+                }
+
+            }
+
+            // ***** json encode member video6_player_width from int
+
+            __name = "video6PlayerWidth";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video6_player_width";
+            }
+
+            if ( this.hasVideo6PlayerWidth > 0 ) {
+
+                if ( hasDefinedVideo6PlayerWidth )
+                    generator.writeNumberField( __name, video6PlayerWidth );
+
+            }
+
+            // ***** json encode member video6_player_height from int
+
+            __name = "video6PlayerHeight";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "video6_player_height";
+            }
+
+            if ( this.hasVideo6PlayerHeight > 0 ) {
+
+                if ( hasDefinedVideo6PlayerHeight )
+                    generator.writeNumberField( __name, video6PlayerHeight );
 
             }
 
@@ -16883,6 +22411,186 @@ public abstract class BaseContentMetadata
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_src from String
+
+                case "image1_src":
+
+                    jParser.nextToken();
+                    setImage1Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_width from int
+
+                case "image1_width":
+
+                    jParser.nextToken();
+                    setImage1Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image1_height from int
+
+                case "image1_height":
+
+                    jParser.nextToken();
+                    setImage1Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_src from String
+
+                case "image2_src":
+
+                    jParser.nextToken();
+                    setImage2Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_width from int
+
+                case "image2_width":
+
+                    jParser.nextToken();
+                    setImage2Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image2_height from int
+
+                case "image2_height":
+
+                    jParser.nextToken();
+                    setImage2Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_src from String
+
+                case "image3_src":
+
+                    jParser.nextToken();
+                    setImage3Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_width from int
+
+                case "image3_width":
+
+                    jParser.nextToken();
+                    setImage3Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image3_height from int
+
+                case "image3_height":
+
+                    jParser.nextToken();
+                    setImage3Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_src from String
+
+                case "image4_src":
+
+                    jParser.nextToken();
+                    setImage4Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_width from int
+
+                case "image4_width":
+
+                    jParser.nextToken();
+                    setImage4Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image4_height from int
+
+                case "image4_height":
+
+                    jParser.nextToken();
+                    setImage4Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_src from String
+
+                case "image5_src":
+
+                    jParser.nextToken();
+                    setImage5Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_width from int
+
+                case "image5_width":
+
+                    jParser.nextToken();
+                    setImage5Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image5_height from int
+
+                case "image5_height":
+
+                    jParser.nextToken();
+                    setImage5Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_src from String
+
+                case "image6_src":
+
+                    jParser.nextToken();
+                    setImage6Src( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_width from int
+
+                case "image6_width":
+
+                    jParser.nextToken();
+                    setImage6Width( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member image6_height from int
+
+                case "image6_height":
+
+                    jParser.nextToken();
+                    setImage6Height( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member shared from boolean
 
                 case "shared":
@@ -16982,6 +22690,16 @@ public abstract class BaseContentMetadata
                     break;
 
                 // FIXME: handle camelCase and under_score
+                // ***** json decode member shared_author_avatar_img from String
+
+                case "shared_author_avatar_img":
+
+                    jParser.nextToken();
+                    setSharedAuthorAvatarImg( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
                 // ***** json decode member replied from boolean
 
                 case "replied":
@@ -17047,6 +22765,186 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setVideoPlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video1_player from String
+
+                case "video1_player":
+
+                    jParser.nextToken();
+                    setVideo1Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video1_player_width from int
+
+                case "video1_player_width":
+
+                    jParser.nextToken();
+                    setVideo1PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video1_player_height from int
+
+                case "video1_player_height":
+
+                    jParser.nextToken();
+                    setVideo1PlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video2_player from String
+
+                case "video2_player":
+
+                    jParser.nextToken();
+                    setVideo2Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video2_player_width from int
+
+                case "video2_player_width":
+
+                    jParser.nextToken();
+                    setVideo2PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video2_player_height from int
+
+                case "video2_player_height":
+
+                    jParser.nextToken();
+                    setVideo2PlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video3_player from String
+
+                case "video3_player":
+
+                    jParser.nextToken();
+                    setVideo3Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video3_player_width from int
+
+                case "video3_player_width":
+
+                    jParser.nextToken();
+                    setVideo3PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video3_player_height from int
+
+                case "video3_player_height":
+
+                    jParser.nextToken();
+                    setVideo3PlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video4_player from String
+
+                case "video4_player":
+
+                    jParser.nextToken();
+                    setVideo4Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video4_player_width from int
+
+                case "video4_player_width":
+
+                    jParser.nextToken();
+                    setVideo4PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video4_player_height from int
+
+                case "video4_player_height":
+
+                    jParser.nextToken();
+                    setVideo4PlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video5_player from String
+
+                case "video5_player":
+
+                    jParser.nextToken();
+                    setVideo5Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video5_player_width from int
+
+                case "video5_player_width":
+
+                    jParser.nextToken();
+                    setVideo5PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video5_player_height from int
+
+                case "video5_player_height":
+
+                    jParser.nextToken();
+                    setVideo5PlayerHeight( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video6_player from String
+
+                case "video6_player":
+
+                    jParser.nextToken();
+                    setVideo6Player( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video6_player_width from int
+
+                case "video6_player_width":
+
+                    jParser.nextToken();
+                    setVideo6PlayerWidth( jParser.getIntValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member video6_player_height from int
+
+                case "video6_player_height":
+
+                    jParser.nextToken();
+                    setVideo6PlayerHeight( jParser.getIntValue() );
 
                     break;
 

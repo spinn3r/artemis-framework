@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.network.cookies.jar;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spinn3r.artemis.network.cookies.CookieValueStore;
 
 /**
@@ -14,10 +13,18 @@ public class CookieJarReference {
 
     private String path = null;
 
+    private String configPath = null;
+
     private CookieValueStore store = null;
+
+    private Format format = Format.JSON;
 
     public String getPath() {
         return path;
+    }
+
+    public String getConfigPath() {
+        return configPath;
     }
 
     public String getRegex() {
@@ -28,13 +35,27 @@ public class CookieJarReference {
         return store;
     }
 
+    public Format getFormat() {
+        return format;
+    }
+
     @Override
     public String toString() {
         return "CookieJarReference{" +
                  "regex='" + regex + '\'' +
                  ", path='" + path + '\'' +
+                 ", configPath='" + configPath + '\'' +
                  ", store=" + store +
+                 ", format=" + format +
                  '}';
+    }
+
+    enum Format {
+
+        JSON,
+
+        JSONS
+
     }
 
 }

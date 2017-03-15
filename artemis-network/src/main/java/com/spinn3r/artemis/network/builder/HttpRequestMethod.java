@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.network.builder;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableList;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.builder.proxies.ProxyReference;
 import com.spinn3r.artemis.network.cookies.Cookie;
@@ -8,6 +9,7 @@ import com.spinn3r.artemis.network.cookies.CookieMap;
 
 import java.net.Proxy;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -62,6 +64,8 @@ public interface HttpRequestMethod {
     HttpRequestMethod withCookies( CookieMap cookieMap );
 
     HttpRequestMethod withCookies(Collection<Cookie> cookies);
+
+    ImmutableList<Cookie> getCookies();
 
     HttpRequestMethod withConnectTimeout( long timeout );
 
