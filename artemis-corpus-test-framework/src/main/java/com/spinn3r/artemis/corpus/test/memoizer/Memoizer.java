@@ -1,6 +1,7 @@
 package com.spinn3r.artemis.corpus.test.memoizer;
 
 import com.spinn3r.artemis.corpus.test.CorporaCache;
+import com.spinn3r.artemis.corpus.test.CorporaDirectory;
 import com.spinn3r.artemis.util.crypto.SHA1;
 import com.spinn3r.artemis.util.misc.Base64;
 
@@ -23,12 +24,15 @@ public class Memoizer<T> {
 
     private final MemoizerSettings memoizerSettings;
 
-    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, MemoizerSettings memoizerSettings, String extension) {
+    private Memoizer(Class<?> parent, String basedir, Transformer<T> transformer, MemoizerSettings memoizerSettings, String extension, CorporaDirectory corporaDirectory) {
         this.parent = parent;
         this.basedir = basedir;
         this.transformer = transformer;
         this.memoizerSettings = memoizerSettings;
-        this.corporaCache = new CorporaCache(parent, basedir, extension);
+        this.corporaCache= new CorporaCache.Builder(parent, basedir)
+                             .setExtension(extension)
+                             .setCorporaDirectory(corporaDirectory)
+                             .build();
     }
 
     /**
@@ -81,6 +85,8 @@ public class Memoizer<T> {
 
         private MemoizerSettings memoizerSettings = MemoizerSettings.SYSTEM_PROPERTIES;
 
+        private CorporaDirectory corporaDirectory = CorporaDirectory.SYSTEM_PROPERTIES;
+
         public Builder(Class<?> parent, String basedir, Transformer<T> transformer) {
             this.parent = parent;
             this.basedir = basedir;
@@ -97,8 +103,13 @@ public class Memoizer<T> {
             return this;
         }
 
+        public Builder<T> setCorporaDirectory(CorporaDirectory corporaDirectory) {
+            this.corporaDirectory = corporaDirectory;
+            return this;
+        }
+
         public Memoizer<T> build() {
-            return new Memoizer<>(parent, basedir, transformer, memoizerSettings, extension);
+            return new Memoizer<>(parent, basedir, transformer, memoizerSettings, extension, corporaDirectory);
         }
 
     }
