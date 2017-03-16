@@ -6,8 +6,10 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  *
@@ -31,6 +33,13 @@ public class LocalDates {
             // an empty value is a better solution.
             return Optional.empty();
         }
+
+    }
+
+    public static Stream<LocalDate> streamRange(LocalDate startDate, LocalDate endDate){
+
+        return Stream.iterate(startDate, d -> d.plusDays(1))
+                .limit(ChronoUnit.DAYS.between(startDate, endDate) + 1);
 
     }
 
