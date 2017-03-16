@@ -120,7 +120,7 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                     HttpRequest httpRequest;
 
-                    RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry(networkConfig.getRequests() );
+                    RequestSettingsRegistry requestSettingsRegistry = new RequestSettingsRegistry(networkConfig.getRequests());
 
                     switch (httpMethod) {
 
@@ -128,12 +128,12 @@ public class NetworkCorporaCache implements ContentFetcher {
 
                             httpRequest =
                               directHttpRequestBuilder
-                                .withRequestSettingsRegistry( requestSettingsRegistry )
-                                .get( link )
+                                .withRequestSettingsRegistry(requestSettingsRegistry)
+                                .get(link)
                                 // FIXME: remove this before we merge.
                                 .withProxy(ProxyReferences.create("http://localhost:9997"))
-                                .withRequestHeaders( requestHeaders )
-                                .withCookies( cookies )
+                                .withRequestHeaders(requestHeaders)
+                                .withCookies(cookies)
                                 .execute();
 
                             break;
@@ -141,52 +141,54 @@ public class NetworkCorporaCache implements ContentFetcher {
                         case POST:
                             httpRequest =
                               directHttpRequestBuilder
-                                .withRequestSettingsRegistry( requestSettingsRegistry )
-                                .post( link, outputContent, outputContentEncoding, outputContentType )
-                                .withRequestHeaders( requestHeaders )
-                                .withCookies( cookies )
+                                .withRequestSettingsRegistry(requestSettingsRegistry)
+                                .post(link, outputContent, outputContentEncoding, outputContentType)
+                                .withRequestHeaders(requestHeaders)
+                                .withCookies(cookies)
                                 .execute();
                             break;
 
                         default:
-                            throw new NetworkException( "HTTP method not yet supported: " + httpMethod );
+                            throw new NetworkException("HTTP method not yet supported: " + httpMethod);
                     }
 
                     String contentWithEncoding = httpRequest.getContentWithEncoding();
 
-                    String contentType = httpRequest.getResponseHeader( "Content-Type" );
+                    String contentType = httpRequest.getResponseHeader("Content-Type");
 
-                    if (contentType != null && contentType.startsWith( "text/" )) {
-                        contentWithEncoding = contentWithEncoding.replaceAll( "\r\n", "\n" );
+                    if (contentType != null && contentType.startsWith("text/")) {
+                        contentWithEncoding = contentWithEncoding.replaceAll("\r\n", "\n");
                     }
 
-                    cache.write( key, contentWithEncoding );
+                    cache.write(key, contentWithEncoding);
 
                     // now write the extended metadata...
 
                     HttpRequestMeta httpRequestMeta = httpRequest.getHttpRequestMeta();
                     HttpResponseMeta httpResponseMeta = httpRequest.getHttpResponseMeta();
 
-                    cache.write( key + "-request-meta", JSON.toJSON( httpRequestMeta ) );
-                    cache.write( key + "-response-meta", JSON.toJSON( httpResponseMeta ) );
+                    cache.write(key + "-request-meta", JSON.toJSON(httpRequestMeta));
+                    cache.write(key + "-response-meta", JSON.toJSON(httpResponseMeta));
 
-                    return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
+                    return new CachedContent(key, contentWithEncoding, httpRequestMeta, httpResponseMeta);
 
                 } else {
-                    throw new IOException( String.format( "URL is not in the cache: %s (Use -D%s=true to force update)",
-                      link, UPDATE_MODE_PROPERTY_NAME ) );
+                    throw new CachedNetworkException.NotCachedException(String.format("URL is not in the cache: %s (Use -D%s=true to force update)",
+                                                                                      link, UPDATE_MODE_PROPERTY_NAME));
                 }
 
             } else {
                 System.out.printf("Reading URL from cache: %s\n", link);
             }
 
-            String contentWithEncoding = cache.read( key );
-            HttpRequestMeta httpRequestMeta = requestMeta( key );
-            HttpResponseMeta httpResponseMeta = responseMeta( key );
+            String contentWithEncoding = cache.read(key);
+            HttpRequestMeta httpRequestMeta = requestMeta(key);
+            HttpResponseMeta httpResponseMeta = responseMeta(key);
 
-            return new CachedContent( key, contentWithEncoding, httpRequestMeta, httpResponseMeta );
+            return new CachedContent(key, contentWithEncoding, httpRequestMeta, httpResponseMeta);
 
+        } catch ( CachedNetworkException cne) {
+            throw cne;
         } catch ( NetworkException ne ) {
             writeRequestFailure(key, new CachedRequestFailure(ne.getMessage(), ne.getResponseCode()));
             throw ne;
