@@ -14,11 +14,15 @@ public class Percentage {
      * @param total
      * @return
      */
-    public static String format( double hits , double total ) throws NoPercentException {
+    public static String format( double hits , double total ) {
 
-        double perc = perc( hits, total );
+        try {
+            double perc = perc( hits, total );
 
-        return String.format( "%3.2f%%", perc );
+            return String.format( "%3.2f%%", perc );
+        } catch (NoPercentException e) {
+            return e.getMessage();
+        }
 
     }
 
