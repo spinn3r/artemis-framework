@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.spinn3r.artemis.network.NetworkException;
 import com.spinn3r.artemis.network.cookies.Cookie;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -168,11 +169,12 @@ public interface HttpRequest {
 
     }
 
+    @NotNull
     default ImmutableList<String> getContentTypes() throws NetworkException {
 
         HttpContentResponseMeta httpContentResponseMeta = getHttpContentResponseMeta();
 
-        return httpContentResponseMeta.getResponseHeadersMap().get("Content-Type");
+        return Optional.ofNullable(httpContentResponseMeta.getResponseHeadersMap().get("Content-Type")).orElse(ImmutableList.of());
 
     }
 
