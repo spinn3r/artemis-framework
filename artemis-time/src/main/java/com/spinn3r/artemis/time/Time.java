@@ -7,10 +7,10 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Represents a specific time, since unix epoch.
+ * Represents a specific time, since unix epoch.  A <code>Time</code> is just a
+ * <code>TimeRange</code> from unix epoch.
  */
-public class
-Time extends TimeRange {
+public class Time extends TimeRange {
 
     private static final ZoneId UTC = ZoneId.of("UTC");
 
@@ -58,9 +58,9 @@ Time extends TimeRange {
     @Override
     public String toString() {
         return "Time{" +
-                 "time=" + time +
-                 ", unit=" + unit +
-                 "}: " + ISO8601.format( toDate() ) ;
+                 "duration=" + duration +
+                 ", timeUnit=" + timeUnit +
+                 "}: " + ISO8601.format(toDate()) ;
     }
 
 }

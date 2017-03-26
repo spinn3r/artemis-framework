@@ -33,14 +33,16 @@ public class TimeRangeFormatter {
 
         PeriodFormatterBuilder periodFormatterBuilder = new PeriodFormatterBuilder();
         periodFormatterBuilder
-           .appendDays()
-           .appendSuffix("d")
-           .appendHours()
-           .appendSuffix( "h" )
-           .appendMinutes()
-           .appendSuffix( "m" )
-           .appendSeconds()
-           .appendSuffix("s");
+          //.appendYears()
+          //.appendSuffix("y")
+          .appendDays()
+          .appendSuffix("d")
+          .appendHours()
+          .appendSuffix( "h" )
+          .appendMinutes()
+          .appendSuffix( "m" )
+          .appendSeconds()
+          .appendSuffix("s");
 
         if ( millis < 1000 ) {
 
