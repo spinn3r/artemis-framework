@@ -57,8 +57,12 @@ public class Time extends TimeRange {
 
     @Override
     public String toString() {
+
+        // NOTE: call this time instead of ```duration``` since this is representing
+        // a time value not a time range.
+
         return "Time{" +
-                 "duration=" + duration +
+                 "time=" + duration +
                  ", timeUnit=" + timeUnit +
                  "}: " + ISO8601.format(toDate()) ;
     }
