@@ -90,6 +90,11 @@ public class TimeRange implements Comparable<TimeRange> {
     }
 
     public String format() {
+        return TimeRangeFormatter.format(this);
+    }
+
+    @Override
+    public String toString() {
 
         if( this == MAX_RANGE)
             return "max range";
@@ -121,15 +126,6 @@ public class TimeRange implements Comparable<TimeRange> {
                 throw new RuntimeException("Unknown time unit: " + timeUnit);
 
         }
-
-    }
-
-    @Override
-    public String toString() {
-        return "TimeRange{" +
-                 "duration=" + duration +
-                 ", timeUnit=" + timeUnit +
-                 '}';
     }
 
     public static TimeRange ofMillis(long millis) {
