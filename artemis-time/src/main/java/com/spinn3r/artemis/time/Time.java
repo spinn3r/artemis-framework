@@ -1,16 +1,15 @@
 package com.spinn3r.artemis.time;
 
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Represents a specific time, since unix epoch.
+ * Represents a specific time, since unix epoch.  A <code>Time</code> is just a
+ * <code>TimeRange</code> from unix epoch.
  */
-public class
-Time extends TimeRange {
+public class Time extends TimeRange {
 
     private static final ZoneId UTC = ZoneId.of("UTC");
 
@@ -37,7 +36,7 @@ Time extends TimeRange {
      * @return
      */
     public Time withRoundedMillis() {
-        return new Time( (getTimeMillis() / 1000) * 1000, TimeUnit.MILLISECONDS );
+        return new Time((toMillis() / 1000) * 1000, TimeUnit.MILLISECONDS );
     }
 
     public ZonedDateTime toZonedDateTime() {
@@ -48,7 +47,7 @@ Time extends TimeRange {
      * Get the time as a Java Date object.
      */
     public Date toDate() {
-        return new Date( getTimeMillis() );
+        return new Date(toMillis() );
     }
 
     public String toISO8601() {
@@ -57,10 +56,14 @@ Time extends TimeRange {
 
     @Override
     public String toString() {
+
+        // NOTE: call this time instead of ```duration``` since this is representing
+        // a time value not a time range.
+
         return "Time{" +
-                 "time=" + time +
-                 ", unit=" + unit +
-                 "}: " + ISO8601.format( toDate() ) ;
+                 "time=" + duration +
+                 ", timeUnit=" + timeUnit +
+                 "}: " + ISO8601.format(toDate()) ;
     }
 
 }

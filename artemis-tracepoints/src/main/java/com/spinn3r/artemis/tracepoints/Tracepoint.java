@@ -35,7 +35,7 @@ public class Tracepoint {
 
     public void release() {
 
-        released = Optional.of(clock.getTime().getTimeMillis());
+        released = Optional.of(clock.getTime().toMillis());
 
         tracepoints.release(traceKey);
 

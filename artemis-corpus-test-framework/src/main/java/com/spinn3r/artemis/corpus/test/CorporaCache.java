@@ -20,6 +20,7 @@ package com.spinn3r.artemis.corpus.test;
 import com.google.common.base.Charsets;
 import com.google.common.base.Preconditions;
 import com.google.common.io.ByteStreams;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -78,11 +79,15 @@ public class CorporaCache {
 
     }
 
+    @Nullable
     public String read(String key) throws IOException {
 
         String path = computePath( key );
 
         File file = new File( ROOT, path );
+
+        if(!file.exists())
+            return null;
 
         System.out.printf( "CorporaCache reading from: %s\n", file.getAbsolutePath() );
 

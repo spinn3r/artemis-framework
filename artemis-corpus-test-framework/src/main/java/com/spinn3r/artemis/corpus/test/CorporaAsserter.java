@@ -97,16 +97,10 @@ public class CorporaAsserter {
 
             String expected = corporaCache.read( key );
 
-            if ( expected == null ) {
-                throw new IOException( "Could not read from cache: " + expected );
-            }
-
             String path = corporaCache.computePath( key );
 
             if ( ! Objects.equals( expected, actual ) ) {
-
                 String msg = computeFailureMsg( path, expected, actual );
-
                 throw new CorporaComparisonFailure( msg, expected, actual );
 
             }
@@ -125,7 +119,11 @@ public class CorporaAsserter {
         buff.append( String.format( "path: %s\n", path ) );
         buff.append( "=== DIFF START\n\n" );
 
-        buff.append( DiffGenerator.diff( expected, actual ) );
+        if(expected != null) {
+            buff.append(DiffGenerator.diff(expected, actual));
+        } else {
+            buff.append("`expected` was null\n ");
+        }
 
         buff.append( "\n\n" );
         buff.append( "=== DIFF END\n\n" );

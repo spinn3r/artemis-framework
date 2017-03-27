@@ -4,8 +4,6 @@ import org.joda.time.Duration;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -23,7 +21,7 @@ public class TimeRangeFormatter {
 
     public static String format( TimeRange timeRange ) {
 
-        long millis = timeRange.getTimeMillis();
+        long millis = timeRange.toMillis();
 
         boolean negative = millis < 0;
 
@@ -33,14 +31,16 @@ public class TimeRangeFormatter {
 
         PeriodFormatterBuilder periodFormatterBuilder = new PeriodFormatterBuilder();
         periodFormatterBuilder
-           .appendDays()
-           .appendSuffix("d")
-           .appendHours()
-           .appendSuffix( "h" )
-           .appendMinutes()
-           .appendSuffix( "m" )
-           .appendSeconds()
-           .appendSuffix("s");
+          //.appendYears()
+          //.appendSuffix("y")
+          .appendDays()
+          .appendSuffix("d")
+          .appendHours()
+          .appendSuffix( "h" )
+          .appendMinutes()
+          .appendSuffix( "m" )
+          .appendSeconds()
+          .appendSuffix("s");
 
         if ( millis < 1000 ) {
 

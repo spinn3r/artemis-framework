@@ -22,8 +22,8 @@ public class SyntheticClocksTest {
 
         Time time = syntheticClock.getTime();
 
-        assertEquals( 1403399332247L, time.getTimeMillis() );
-        assertEquals( 1403399332000L, time.withRoundedMillis().getTimeMillis() );
+        assertEquals( 1403399332247L, time.toMillis() );
+        assertEquals( 1403399332000L, time.withRoundedMillis().toMillis() );
 
     }
 

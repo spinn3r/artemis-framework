@@ -87,7 +87,7 @@ public class TimeReference {
 
             try {
 
-                return ISO8601.parse( timestamp ).getTime();
+                return ISO8601.parse( timestamp ).getDuration();
 
             } catch (ParseException e) {
                 throw new RuntimeException( "Failed to parse ISO time: " + timestamp, e );

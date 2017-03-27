@@ -55,7 +55,7 @@ public class UptimeMetricsService extends BaseService {
             @Override
             public Long getValue() {
 
-                long uptime = clock.currentTimeMillis() - started.getTime().getTimeMillis();
+                long uptime = clock.currentTimeMillis() - started.getTime().toMillis();
 
                 long uptimeInMinutes = uptime / MILLIS_IN_MINUTE;
 
