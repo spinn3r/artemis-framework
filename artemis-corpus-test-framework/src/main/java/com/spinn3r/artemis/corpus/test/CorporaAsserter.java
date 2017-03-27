@@ -99,10 +99,8 @@ public class CorporaAsserter {
 
             String path = corporaCache.computePath( key );
 
-            String msg = computeFailureMsg( path, expected, actual );
-
             if ( ! Objects.equals( expected, actual ) ) {
-
+                String msg = computeFailureMsg( path, expected, actual );
                 throw new CorporaComparisonFailure( msg, expected, actual );
 
             }
