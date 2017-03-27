@@ -21,7 +21,7 @@ public class Uptime {
      * @return
      */
     public long toMillis() {
-        return clock.getTime().getTimeMillis() - epoch.getTimeMillis();
+        return clock.getTime().toMillis() - epoch.toMillis();
     }
 
     public String format() {

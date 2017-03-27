@@ -42,11 +42,11 @@ public class TimeRange implements Comparable<TimeRange> {
      * Get the time range in milliseconds.
      * @return
      */
-    public long getTimeMillis() {
+    public long toMillis() {
         return timeUnit.toMillis( duration );
     }
 
-    public long getTimeSeconds() {
+    public long toSeconds() {
         return timeUnit.toSeconds( duration );
     }
 
@@ -57,7 +57,7 @@ public class TimeRange implements Comparable<TimeRange> {
     @Override
     public int compareTo(TimeRange o) {
 
-        long diff = getTimeMillis() - o.getTimeMillis();
+        long diff = toMillis() - o.toMillis();
 
         if ( diff < 0 )
             return -1;

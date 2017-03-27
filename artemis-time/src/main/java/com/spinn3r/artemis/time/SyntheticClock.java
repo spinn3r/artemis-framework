@@ -77,7 +77,7 @@ public class SyntheticClock extends BaseClock {
      * @param time
      */
     public void setTime( Time time ) {
-        setCurrentTimeMillis( time.getTimeMillis() );
+        setCurrentTimeMillis( time.toMillis() );
     }
 
     public List<Slept> getSleep() {

@@ -1,7 +1,6 @@
 package com.spinn3r.artemis.time;
 
 import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -37,7 +36,7 @@ public class Time extends TimeRange {
      * @return
      */
     public Time withRoundedMillis() {
-        return new Time( (getTimeMillis() / 1000) * 1000, TimeUnit.MILLISECONDS );
+        return new Time((toMillis() / 1000) * 1000, TimeUnit.MILLISECONDS );
     }
 
     public ZonedDateTime toZonedDateTime() {
@@ -48,7 +47,7 @@ public class Time extends TimeRange {
      * Get the time as a Java Date object.
      */
     public Date toDate() {
-        return new Date( getTimeMillis() );
+        return new Date(toMillis() );
     }
 
     public String toISO8601() {

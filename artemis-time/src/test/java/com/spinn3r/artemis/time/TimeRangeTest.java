@@ -1,6 +1,5 @@
 package com.spinn3r.artemis.time;
 
-import com.spinn3r.artemis.time.TimeRange;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;
@@ -14,11 +13,11 @@ public class TimeRangeTest {
 
         TimeRange tr = new TimeRange( 5, TimeUnit.MINUTES );
 
-        assertEquals( 5 * 60 * 1000, tr.getTimeMillis() );
+        assertEquals( 5 * 60 * 1000, tr.toMillis() );
 
         tr = new TimeRange( 5 * 60 * 1000, TimeUnit.MILLISECONDS );
 
-        assertEquals( 5 * 60 * 1000, tr.getTimeMillis() );
+        assertEquals( 5 * 60 * 1000, tr.toMillis() );
 
     }
 
