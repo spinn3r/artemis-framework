@@ -136,7 +136,7 @@ public class TimeRange implements Comparable<TimeRange> {
     }
 
     public static TimeRange ofSeconds(long seconds) {
-        return new TimeRange(seconds, TimeUnit.MILLISECONDS);
+        return new TimeRange(seconds, TimeUnit.SECONDS);
     }
 
     public static TimeRange ofMinutes(long minutes) {
