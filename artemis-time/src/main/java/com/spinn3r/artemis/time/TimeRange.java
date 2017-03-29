@@ -1,5 +1,7 @@
 package com.spinn3r.artemis.time;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -18,7 +20,8 @@ public class TimeRange implements Comparable<TimeRange> {
 
     protected TimeUnit timeUnit;
 
-    public TimeRange(long duration, TimeUnit timeUnit) {
+    public TimeRange(@JsonProperty("duration") long duration,
+                     @JsonProperty("timeUnit") TimeUnit timeUnit) {
         this.duration = duration;
         this.timeUnit = timeUnit;
     }
@@ -133,7 +136,7 @@ public class TimeRange implements Comparable<TimeRange> {
     }
 
     public static TimeRange ofSeconds(long seconds) {
-        return new TimeRange(seconds, TimeUnit.MILLISECONDS);
+        return new TimeRange(seconds, TimeUnit.SECONDS);
     }
 
     public static TimeRange ofMinutes(long minutes) {
