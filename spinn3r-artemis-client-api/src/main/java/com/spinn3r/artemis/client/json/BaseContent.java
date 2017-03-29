@@ -2799,6 +2799,22 @@ public abstract class BaseContent
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasExpandedLinks = 0;
+
+    public int hasModifiedExpandedLinks = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedExpandedLinks = false;
+
+    protected Set<String> expandedLinks;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasPublished = 0;
 
     public int hasModifiedPublished = 0;
@@ -12782,6 +12798,92 @@ public abstract class BaseContent
         return this.hasDefinedLinks;
     }
 
+    public BaseContent setExpandedLinks ( Set<String> expandedLinks ) {
+
+        NoNullSet.validate( expandedLinks );
+
+        ++this.hasExpandedLinks;
+        ++this.hasModifiedExpandedLinks;
+
+        this.expandedLinks = expandedLinks;
+
+        hasDefinedExpandedLinks = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Set<String> getExpandedLinks() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.expandedLinks" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.expandedLinks;
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Optional<Set<String>> getExpandedLinksAsOptional() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.expandedLinks );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasExpandedLinks () {
+        return this.hasExpandedLinks > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearExpandedLinks () {
+
+        this.hasExpandedLinks = 0;
+        this.hasModifiedExpandedLinks = 0;
+        this.hasDefinedExpandedLinks = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedExpandedLinks () {
+        return this.hasModifiedExpandedLinks > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedExpandedLinks () {
+        return this.hasDefinedExpandedLinks;
+    }
+
     public BaseContent setPublished ( Date published ) {
 
         ++this.hasPublished;
@@ -22637,6 +22739,10 @@ public abstract class BaseContent
             setLinks( obj.getLinks() );
         }
 
+        if ( obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
+        }
+
         if ( obj.hasPublished() ) {
             setPublished( obj.getPublished() );
         }
@@ -23693,6 +23799,10 @@ public abstract class BaseContent
             setLinks( obj.getLinks() );
         }
 
+        if ( ! hasExpandedLinks() && obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
+        }
+
         if ( ! hasPublished() && obj.hasPublished() ) {
             setPublished( obj.getPublished() );
         }
@@ -24594,6 +24704,8 @@ public abstract class BaseContent
 
         this.hasModifiedLinks = 0;
 
+        this.hasModifiedExpandedLinks = 0;
+
         this.hasModifiedPublished = 0;
 
         this.hasModifiedModified = 0;
@@ -25204,6 +25316,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedLinks() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedExpandedLinks() ) {
             return true;
         }
 
@@ -26473,6 +26589,14 @@ public abstract class BaseContent
 
             buff.append( "links=" );
             buff.append( links );
+            buff.append( " " );
+
+        }
+
+        if ( hasExpandedLinks > 0 ) {
+
+            buff.append( "expandedLinks=" );
+            buff.append( expandedLinks );
             buff.append( " " );
 
         }
@@ -28255,6 +28379,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( links, cmp.links ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasExpandedLinks() != cmp.hasExpandedLinks() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( expandedLinks, cmp.expandedLinks ) ) {
             return false;
         }
 
@@ -30941,6 +31074,24 @@ public abstract class BaseContent
                 if ( links != null ) {
 
                     JSON.writeStringSet( generator, __name, links );
+
+                }
+
+            }
+
+            // ***** json encode member expanded_links from Set<String>
+
+            __name = "expandedLinks";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "expanded_links";
+            }
+
+            if ( this.hasExpandedLinks > 0 ) {
+
+                if ( expandedLinks != null ) {
+
+                    JSON.writeStringSet( generator, __name, expandedLinks );
 
                 }
 
@@ -33694,6 +33845,15 @@ public abstract class BaseContent
                 // ***** json decode member links from Set<String>
 
                 case "links":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member expanded_links from Set<String>
+
+                case "expanded_links":
 
                     // FIXME not implemented yet.
 

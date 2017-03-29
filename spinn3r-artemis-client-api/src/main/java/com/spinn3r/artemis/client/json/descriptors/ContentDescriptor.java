@@ -682,6 +682,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     */
+    public final String EXPANDED_LINKS = "expanded_links";
+
+    /**
+     * <p>
      * Date of first broadcast/publication.
      * </p>
      */
