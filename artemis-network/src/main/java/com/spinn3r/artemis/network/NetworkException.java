@@ -1,14 +1,15 @@
 package com.spinn3r.artemis.network;
 
-import com.spinn3r.log5j.Logger;
+import static com.spinn3r.artemis.network.builder.HttpRequest.SSL_FAILURE;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_CONNECT_TIMEOUT;
+import static com.spinn3r.artemis.network.builder.HttpRequest.STATUS_READ_TIMEOUT;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.UnknownHostException;
 
-import static com.spinn3r.artemis.network.builder.HttpRequest.*;
+import com.spinn3r.log5j.Logger;
 
 /**
  *
