@@ -441,13 +441,6 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
                         
                         httpURLConn.connect();      
                         
-                    } catch( SocketTimeoutException e ) {
-                        // Override SocketTimeout to include amount of time exceeded
-                        throw new SocketTimeoutException(String.format("%s (%d ms)", e.getMessage(), getConnectTimeout()));
-                    }
-
-                    try {
-                        
                         // save and store the response code.
                         int _responseCode = httpURLConn.getResponseCode();
                     
