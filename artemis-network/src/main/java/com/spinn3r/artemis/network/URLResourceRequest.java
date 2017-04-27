@@ -439,8 +439,15 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     try {
                         
-                        httpURLConn.connect();      
-                        
+                        httpURLConn.connect();
+
+                    } catch( SocketTimeoutException e ) {
+                        // Override SocketTimeout to include amount of time exceeded
+                        throw new SocketTimeoutException(String.format("Connect timeout: %s (%d ms)", e.getMessage(), getConnectTimeout()));
+                    }
+
+                    try {
+
                         // save and store the response code.
                         int _responseCode = httpURLConn.getResponseCode();
                     
@@ -448,7 +455,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
                     } catch( SocketTimeoutException e ) {
                         // Override SocketTimeout to include amount of time exceeded
-                        throw new SocketTimeoutException(String.format("%s (%d ms)", e.getMessage(), getReadTimeout()));
+                        throw new SocketTimeoutException(String.format("Read timeout: %s (%d ms)", e.getMessage(), getReadTimeout()));
                     }
 
                 } catch ( IOException e ) {
