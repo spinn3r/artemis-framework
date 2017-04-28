@@ -83,6 +83,8 @@
         <module>artemis-logging-test-framework</module>
         <module>artemis-zookeeper-test-framework</module>
         <module>artemis-jetbrains-annotations</module>
+        <module>artemis-init-test-framework</module>
+        <module>artemis-http-init-test-framework</module>
 
     </modules>
 
