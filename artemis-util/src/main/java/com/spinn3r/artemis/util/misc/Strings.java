@@ -223,6 +223,10 @@ public class Strings {
         return new ByteArrayInputStream(text.getBytes(charset));
     }
 
+    public static String head(String text, int offset, int length) {
 
+        // FIXME: bug here where we are -1 ...
+        return text.substring(offset, Math.min(offset+length, text.length()));
+    }
 
 }

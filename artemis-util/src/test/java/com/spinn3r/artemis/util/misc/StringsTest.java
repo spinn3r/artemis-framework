@@ -36,5 +36,18 @@ public class StringsTest {
         assertEquals("[xx, xx]", Strings.chunk("xxxx", 2).toString());
 
     }
-    
+
+    @Test
+    public void testHead() throws Exception {
+
+        String text = "0123456789";
+
+        assertEquals("01", Strings.head(text, 0, 2));
+        assertEquals("12", Strings.head(text, 1, 2));
+        assertEquals("89", Strings.head(text, 8, 2));
+        assertEquals("9", Strings.head(text, 9, 2));
+        assertEquals("", Strings.head(text, 10, 2));
+
+    }
+
 }
