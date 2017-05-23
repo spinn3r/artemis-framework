@@ -19,6 +19,7 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonToken;
+import com.google.common.reflect.TypeToken;
 
 import java.nio.charset.Charset;
 import java.nio.ByteBuffer;
@@ -4579,6 +4580,22 @@ public abstract class BaseContent
     public boolean hasDefinedImageUserTags = false;
 
     protected Map<String,String> imageUserTags;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasEntities = 0;
+
+    public int hasModifiedEntities = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedEntities = false;
+
+    protected Set<Map<String,String>> entities;
 
     // **** methods for this POJO
 
@@ -22248,6 +22265,92 @@ public abstract class BaseContent
         return this.hasDefinedImageUserTags;
     }
 
+    public BaseContent setEntities ( Set<Map<String,String>> entities ) {
+
+        NoNullSet.validate( entities );
+
+        ++this.hasEntities;
+        ++this.hasModifiedEntities;
+
+        this.entities = entities;
+
+        hasDefinedEntities = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Named Entities extracted from the main text using NLP
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;frozen&lt;map&lt;text,text&gt;&gt;&gt; , name: entities
+     * </p>
+     */
+    public Set<Map<String,String>> getEntities() {
+
+        if ( this.constructed == false && this.hasEntities == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.entities" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.entities;
+    }
+
+    /**
+     * <p>
+     * Named Entities extracted from the main text using NLP
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;frozen&lt;map&lt;text,text&gt;&gt;&gt; , name: entities
+     * </p>
+     */
+    public Optional<Set<Map<String,String>>> getEntitiesAsOptional() {
+
+        if ( this.constructed == false && this.hasEntities == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.entities );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasEntities () {
+        return this.hasEntities > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearEntities () {
+
+        this.hasEntities = 0;
+        this.hasModifiedEntities = 0;
+        this.hasDefinedEntities = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedEntities () {
+        return this.hasModifiedEntities > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedEntities () {
+        return this.hasDefinedEntities;
+    }
+
     /**
       * Copy the fields from the given source to the current object.
       */
@@ -23079,6 +23182,10 @@ public abstract class BaseContent
 
         if ( obj.hasImageUserTags() ) {
             setImageUserTags( obj.getImageUserTags() );
+        }
+
+        if ( obj.hasEntities() ) {
+            setEntities( obj.getEntities() );
         }
 
     }
@@ -24397,6 +24504,10 @@ public abstract class BaseContent
             setImageUserTags( obj.getImageUserTags() );
         }
 
+        if ( ! hasEntities() && obj.hasEntities() ) {
+            setEntities( obj.getEntities() );
+        }
+
     }
 
     // go through all fields and mark them as modied.
@@ -24815,6 +24926,8 @@ public abstract class BaseContent
         this.hasModifiedPinned = 0;
 
         this.hasModifiedImageUserTags = 0;
+
+        this.hasModifiedEntities = 0;
 
     }
 
@@ -25648,6 +25761,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedImageUserTags() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedEntities() ) {
             return true;
         }
 
@@ -27377,6 +27494,14 @@ public abstract class BaseContent
 
             buff.append( "imageUserTags=" );
             buff.append( imageUserTags );
+            buff.append( " " );
+
+        }
+
+        if ( hasEntities > 0 ) {
+
+            buff.append( "entities=" );
+            buff.append( entities );
             buff.append( " " );
 
         }
@@ -29257,6 +29382,15 @@ public abstract class BaseContent
             return false;
         }
 
+        // they should either be both false or both true...
+        if ( hasEntities() != cmp.hasEntities() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( entities, cmp.entities ) ) {
+            return false;
+        }
+
         // if we have reached this point then they are equal.
         return true;
 
@@ -29432,6 +29566,8 @@ public abstract class BaseContent
             if ( builder.prettyPrint ) {
                 generator.useDefaultPrettyPrinter();
             }
+
+            generator.setCodec(MAPPER);
 
             generator.disable( JsonGenerator.Feature.AUTO_CLOSE_TARGET );
 
@@ -32675,6 +32811,24 @@ public abstract class BaseContent
 
             }
 
+            // ***** json encode member entities from Set<Map<String,String>>
+
+            __name = "entities";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "entities";
+            }
+
+            if ( this.hasEntities > 0 ) {
+
+                if ( entities != null ) {
+
+                    JSON.writeSet( generator, __name, entities );
+
+                }
+
+            }
+
             generator.writeEndObject();
             generator.close();
 
@@ -34810,6 +34964,15 @@ public abstract class BaseContent
                 // ***** json decode member image_user_tags from Map<String,String>
 
                 case "image_user_tags":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member entities from Set<Map<String,String>>
+
+                case "entities":
 
                     // FIXME not implemented yet.
 

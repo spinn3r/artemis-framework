@@ -1459,6 +1459,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * Named Entities extracted from the main text using NLP
+     * </p>
+     */
+    public final String ENTITIES = "entities";
+
+    /**
+     * <p>
      * The underlying serialization format
      * </p>
      */
