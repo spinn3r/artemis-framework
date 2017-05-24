@@ -2053,6 +2053,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasRepliedLink = 0;
+
+    public int hasModifiedRepliedLink = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedRepliedLink = false;
+
+    protected String repliedLink;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasRepliedProfileLink = 0;
 
     public int hasModifiedRepliedProfileLink = 0;
@@ -10638,6 +10654,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedReplied;
     }
 
+    public BaseContentMetadata setRepliedLink ( String repliedLink ) {
+
+        ++this.hasRepliedLink;
+        ++this.hasModifiedRepliedLink;
+
+        this.repliedLink = repliedLink;
+
+        hasDefinedRepliedLink = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * The link to the original post being replied.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_link
+     * </p>
+     */
+    public String getRepliedLink() {
+
+        if ( this.constructed == false && this.hasRepliedLink == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.repliedLink" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.repliedLink;
+    }
+
+    /**
+     * <p>
+     * The link to the original post being replied.
+     * </p>
+     *
+     * <p>
+     * Schema type: text , name: replied_link
+     * </p>
+     */
+    public Optional<String> getRepliedLinkAsOptional() {
+
+        if ( this.constructed == false && this.hasRepliedLink == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.repliedLink );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasRepliedLink () {
+        return this.hasRepliedLink > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearRepliedLink () {
+
+        this.hasRepliedLink = 0;
+        this.hasModifiedRepliedLink = 0;
+        this.hasDefinedRepliedLink = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedRepliedLink () {
+        return this.hasModifiedRepliedLink > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedRepliedLink () {
+        return this.hasDefinedRepliedLink;
+    }
+
     public BaseContentMetadata setRepliedProfileLink ( String repliedProfileLink ) {
 
         ++this.hasRepliedProfileLink;
@@ -15007,6 +15107,10 @@ public abstract class BaseContentMetadata
             setReplied( obj.getReplied() );
         }
 
+        if ( obj.hasRepliedLink() ) {
+            setRepliedLink( obj.getRepliedLink() );
+        }
+
         if ( obj.hasRepliedProfileLink() ) {
             setRepliedProfileLink( obj.getRepliedProfileLink() );
         }
@@ -15856,6 +15960,15 @@ public abstract class BaseContentMetadata
             setReplied( obj.getReplied() );
         }
 
+        if ( ! hasRepliedLink() && obj.hasRepliedLink() ) {
+            setRepliedLink( obj.getRepliedLink() );
+        }
+
+        if ( hasRepliedLink() && getRepliedLink() == null &&
+            obj.hasRepliedLink() && obj.getRepliedLink() != null ) {
+            setRepliedLink( obj.getRepliedLink() );
+        }
+
         if ( ! hasRepliedProfileLink() && obj.hasRepliedProfileLink() ) {
             setRepliedProfileLink( obj.getRepliedProfileLink() );
         }
@@ -16312,6 +16425,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedSharedAuthorAvatarImg = 0;
 
         this.hasModifiedReplied = 0;
+
+        this.hasModifiedRepliedLink = 0;
 
         this.hasModifiedRepliedProfileLink = 0;
 
@@ -16779,6 +16894,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedReplied() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedRepliedLink() ) {
             return true;
         }
 
@@ -17736,6 +17855,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "replied=" );
             buff.append( replied );
+            buff.append( " " );
+
+        }
+
+        if ( hasRepliedLink > 0 ) {
+
+            buff.append( "repliedLink=" );
+            buff.append( repliedLink );
             buff.append( " " );
 
         }
@@ -18954,6 +19081,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( replied != cmp.replied ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasRepliedLink() != cmp.hasRepliedLink() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( repliedLink, cmp.repliedLink ) ) {
             return false;
         }
 
@@ -21008,6 +21144,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member replied_link from String
+
+            __name = "repliedLink";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "replied_link";
+            }
+
+            if ( this.hasRepliedLink > 0 ) {
+
+                if ( repliedLink != null ) {
+                    generator.writeStringField( __name, repliedLink );
+                }
+
+            }
+
             // ***** json encode member replied_profile_link from String
 
             __name = "repliedProfileLink";
@@ -22706,6 +22858,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setReplied( jParser.getBooleanValue() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member replied_link from String
+
+                case "replied_link":
+
+                    jParser.nextToken();
+                    setRepliedLink( jParser.getValueAsString() );
 
                     break;
 
