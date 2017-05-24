@@ -3,6 +3,7 @@ package com.spinn3r.artemis.network;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -10,6 +11,7 @@ import com.spinn3r.artemis.init.BaseLauncherTest;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 
+@Ignore
 public class ReadTimeoutTest extends BaseLauncherTest {
 
     @Inject
