@@ -19,7 +19,6 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonToken;
-import com.google.common.reflect.TypeToken;
 
 import java.nio.charset.Charset;
 import java.nio.ByteBuffer;
