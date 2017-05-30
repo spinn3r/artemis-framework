@@ -1130,6 +1130,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * The link to the original post being replied.
+     * </p>
+     */
+    public final String REPLIED_LINK = "replied_link";
+
+    /**
+     * <p>
      * The link to the profile of the person being replied to.
      * </p>
      */
