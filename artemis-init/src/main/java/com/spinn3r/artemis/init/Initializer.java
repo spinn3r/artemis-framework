@@ -39,6 +39,7 @@ public class Initializer {
 
         this.module = module;
 
+        // this logic would be very helpful to place in the launcher too
         if ( ! configLoader.isPresent() ) {
             String path = String.format("/etc/%s-%s", product, role);
             System.out.printf("Loading config data from filesystem: %s\n", path);
