@@ -74,6 +74,11 @@
                     <artifactId>joda-time</artifactId>
                 </exclusion>
 
+                <exclusion>
+                    <groupId>net.java.dev.jna</groupId>
+                    <artifactId>jna</artifactId>
+                </exclusion>
+
             </exclusions>
 
         </dependency>
