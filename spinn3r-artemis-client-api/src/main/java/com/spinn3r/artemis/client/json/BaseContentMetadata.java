@@ -1021,6 +1021,22 @@ public abstract class BaseContentMetadata
     // if a value is modified, it means that we've called setX after the object
     // has been created.
 
+    public int hasExpandedLinks = 0;
+
+    public int hasModifiedExpandedLinks = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedExpandedLinks = false;
+
+    protected Set<String> expandedLinks;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
     public int hasPublished = 0;
 
     public int hasModifiedPublished = 0;
@@ -2497,6 +2513,22 @@ public abstract class BaseContentMetadata
     public boolean hasDefinedLang = false;
 
     protected String lang;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasLangStrategy = 0;
+
+    public int hasModifiedLangStrategy = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedLangStrategy = false;
+
+    protected String langStrategy;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -5182,6 +5214,92 @@ public abstract class BaseContentMetadata
      */
     public boolean hasDefinedLinks () {
         return this.hasDefinedLinks;
+    }
+
+    public BaseContentMetadata setExpandedLinks ( Set<String> expandedLinks ) {
+
+        NoNullSet.validate( expandedLinks );
+
+        ++this.hasExpandedLinks;
+        ++this.hasModifiedExpandedLinks;
+
+        this.expandedLinks = expandedLinks;
+
+        hasDefinedExpandedLinks = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Set<String> getExpandedLinks() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.expandedLinks" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.expandedLinks;
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Optional<Set<String>> getExpandedLinksAsOptional() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.expandedLinks );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasExpandedLinks () {
+        return this.hasExpandedLinks > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearExpandedLinks () {
+
+        this.hasExpandedLinks = 0;
+        this.hasModifiedExpandedLinks = 0;
+        this.hasDefinedExpandedLinks = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedExpandedLinks () {
+        return this.hasModifiedExpandedLinks > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedExpandedLinks () {
+        return this.hasDefinedExpandedLinks;
     }
 
     public BaseContentMetadata setPublished ( Date published ) {
@@ -13034,6 +13152,90 @@ public abstract class BaseContentMetadata
         return this.hasDefinedLang;
     }
 
+    public BaseContentMetadata setLangStrategy ( String langStrategy ) {
+
+        ++this.hasLangStrategy;
+        ++this.hasModifiedLangStrategy;
+
+        this.langStrategy = langStrategy;
+
+        hasDefinedLangStrategy = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Field used to classify the language, if absent the language is provided by the post without classification
+     * </p>
+     *
+     * <p>
+     * Schema type: ascii , name: lang_strategy
+     * </p>
+     */
+    public String getLangStrategy() {
+
+        if ( this.constructed == false && this.hasLangStrategy == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.langStrategy" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.langStrategy;
+    }
+
+    /**
+     * <p>
+     * Field used to classify the language, if absent the language is provided by the post without classification
+     * </p>
+     *
+     * <p>
+     * Schema type: ascii , name: lang_strategy
+     * </p>
+     */
+    public Optional<String> getLangStrategyAsOptional() {
+
+        if ( this.constructed == false && this.hasLangStrategy == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.langStrategy );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasLangStrategy () {
+        return this.hasLangStrategy > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearLangStrategy () {
+
+        this.hasLangStrategy = 0;
+        this.hasModifiedLangStrategy = 0;
+        this.hasDefinedLangStrategy = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedLangStrategy () {
+        return this.hasModifiedLangStrategy > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedLangStrategy () {
+        return this.hasDefinedLangStrategy;
+    }
+
     public BaseContentMetadata setCategories ( Map<String,Double> categories ) {
 
         ++this.hasCategories;
@@ -14321,7 +14523,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * The quality of the metadata on this post. Used internally to audit the quality of our data.  Not very applicable to customer use.
      * </p>
      *
      * <p>
@@ -14340,7 +14542,7 @@ public abstract class BaseContentMetadata
 
     /**
      * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * The quality of the metadata on this post. Used internally to audit the quality of our data.  Not very applicable to customer use.
      * </p>
      *
      * <p>
@@ -14851,6 +15053,10 @@ public abstract class BaseContentMetadata
             setLinks( obj.getLinks() );
         }
 
+        if ( obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
+        }
+
         if ( obj.hasPublished() ) {
             setPublished( obj.getPublished() );
         }
@@ -15219,6 +15425,10 @@ public abstract class BaseContentMetadata
             setLang( obj.getLang() );
         }
 
+        if ( obj.hasLangStrategy() ) {
+            setLangStrategy( obj.getLangStrategy() );
+        }
+
         if ( obj.hasCategories() ) {
             setCategories( obj.getCategories() );
         }
@@ -15522,6 +15732,10 @@ public abstract class BaseContentMetadata
 
         if ( ! hasLinks() && obj.hasLinks() ) {
             setLinks( obj.getLinks() );
+        }
+
+        if ( ! hasExpandedLinks() && obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
         }
 
         if ( ! hasPublished() && obj.hasPublished() ) {
@@ -16127,6 +16341,15 @@ public abstract class BaseContentMetadata
             setLang( obj.getLang() );
         }
 
+        if ( ! hasLangStrategy() && obj.hasLangStrategy() ) {
+            setLangStrategy( obj.getLangStrategy() );
+        }
+
+        if ( hasLangStrategy() && getLangStrategy() == null &&
+            obj.hasLangStrategy() && obj.getLangStrategy() != null ) {
+            setLangStrategy( obj.getLangStrategy() );
+        }
+
         if ( ! hasCategories() && obj.hasCategories() ) {
             setCategories( obj.getCategories() );
         }
@@ -16297,6 +16520,8 @@ public abstract class BaseContentMetadata
         this.hasModifiedMentions = 0;
 
         this.hasModifiedLinks = 0;
+
+        this.hasModifiedExpandedLinks = 0;
 
         this.hasModifiedPublished = 0;
 
@@ -16482,6 +16707,8 @@ public abstract class BaseContentMetadata
 
         this.hasModifiedLang = 0;
 
+        this.hasModifiedLangStrategy = 0;
+
         this.hasModifiedCategories = 0;
 
         this.hasModifiedDuplicates = 0;
@@ -16638,6 +16865,10 @@ public abstract class BaseContentMetadata
         }
 
         if ( this.hasModifiedLinks() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedExpandedLinks() ) {
             return true;
         }
 
@@ -17009,6 +17240,10 @@ public abstract class BaseContentMetadata
             return true;
         }
 
+        if ( this.hasModifiedLangStrategy() ) {
+            return true;
+        }
+
         if ( this.hasModifiedCategories() ) {
             return true;
         }
@@ -17327,6 +17562,14 @@ public abstract class BaseContentMetadata
 
             buff.append( "links=" );
             buff.append( links );
+            buff.append( " " );
+
+        }
+
+        if ( hasExpandedLinks > 0 ) {
+
+            buff.append( "expandedLinks=" );
+            buff.append( expandedLinks );
             buff.append( " " );
 
         }
@@ -18083,6 +18326,14 @@ public abstract class BaseContentMetadata
 
         }
 
+        if ( hasLangStrategy > 0 ) {
+
+            buff.append( "langStrategy=" );
+            buff.append( langStrategy );
+            buff.append( " " );
+
+        }
+
         if ( hasCategories > 0 ) {
 
             buff.append( "categories=" );
@@ -18505,6 +18756,15 @@ public abstract class BaseContentMetadata
         }
 
         if ( ! equalsWithNull( links, cmp.links ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasExpandedLinks() != cmp.hasExpandedLinks() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( expandedLinks, cmp.expandedLinks ) ) {
             return false;
         }
 
@@ -19337,6 +19597,15 @@ public abstract class BaseContentMetadata
         }
 
         // they should either be both false or both true...
+        if ( hasLangStrategy() != cmp.hasLangStrategy() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( langStrategy, cmp.langStrategy ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
         if ( hasCategories() != cmp.hasCategories() ) {
             return false;
         }
@@ -20143,6 +20412,24 @@ public abstract class BaseContentMetadata
                 if ( links != null ) {
 
                     JSON.writeStringSet( generator, __name, links );
+
+                }
+
+            }
+
+            // ***** json encode member expanded_links from Set<String>
+
+            __name = "expandedLinks";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "expanded_links";
+            }
+
+            if ( this.hasExpandedLinks > 0 ) {
+
+                if ( expandedLinks != null ) {
+
+                    JSON.writeStringSet( generator, __name, expandedLinks );
 
                 }
 
@@ -21575,6 +21862,22 @@ public abstract class BaseContentMetadata
 
             }
 
+            // ***** json encode member lang_strategy from String
+
+            __name = "langStrategy";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "lang_strategy";
+            }
+
+            if ( this.hasLangStrategy > 0 ) {
+
+                if ( langStrategy != null ) {
+                    generator.writeStringField( __name, langStrategy );
+                }
+
+            }
+
             // ***** json encode member categories from Map<String,Double>
 
             __name = "categories";
@@ -22203,6 +22506,15 @@ public abstract class BaseContentMetadata
                 // ***** json decode member links from Set<String>
 
                 case "links":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member expanded_links from Set<String>
+
+                case "expanded_links":
 
                     // FIXME not implemented yet.
 
@@ -23135,6 +23447,16 @@ public abstract class BaseContentMetadata
 
                     jParser.nextToken();
                     setLang( jParser.getValueAsString() );
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member lang_strategy from String
+
+                case "lang_strategy":
+
+                    jParser.nextToken();
+                    setLangStrategy( jParser.getValueAsString() );
 
                     break;
 

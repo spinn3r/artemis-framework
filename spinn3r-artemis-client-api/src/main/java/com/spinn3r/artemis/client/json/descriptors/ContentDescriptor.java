@@ -115,7 +115,7 @@ public class ContentDescriptor {
 
     /**
      * <p>
-     * The version of Spinn3r used to write this content.  
+     * The version of the software used to write this content.  
      * </p>
      */
     public final String VERSION = "version";
@@ -227,7 +227,7 @@ public class ContentDescriptor {
 
     /**
      * <p>
-     * The set of tags assigned to this source by the either customers or spinn3r (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
+     * The set of tags assigned to this source by the either customers or us (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
      * </p>
      */
     public final String SOURCE_ASSIGNED_TAGS = "source_assigned_tags";
@@ -679,6 +679,13 @@ public class ContentDescriptor {
      * </p>
      */
     public final String LINKS = "links";
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     */
+    public final String EXPANDED_LINKS = "expanded_links";
 
     /**
      * <p>
@@ -1326,6 +1333,13 @@ public class ContentDescriptor {
 
     /**
      * <p>
+     * Field used to classify the language, if absent the language is provided by the post without classification
+     * </p>
+     */
+    public final String LANG_STRATEGY = "lang_strategy";
+
+    /**
+     * <p>
      * Provides a map between algorithmically determined categories (entertainment, politics, technology, science, sports, business, health) and their probabilities.  The probabilities are between 0.0 and 1.0 and if you sum them all they will equal 1.0.  
      * </p>
      */
@@ -1431,7 +1445,7 @@ public class ContentDescriptor {
 
     /**
      * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * The quality of the metadata on this post. Used internally to audit the quality of our data.  Not very applicable to customer use.
      * </p>
      */
     public final String METADATA_SCORE = "metadata_score";
