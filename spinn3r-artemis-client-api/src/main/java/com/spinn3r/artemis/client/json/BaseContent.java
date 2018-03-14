@@ -287,7 +287,7 @@ public abstract class BaseContent
         MEMETRACKER( 131072 ) ,
 
         /**
-         * Microblog content such as Twitter, identi.ca, etc.
+         * Microblog content such as identi.ca, etc.
          */
         MICROBLOG( 262144 ) ,
 
@@ -2795,6 +2795,22 @@ public abstract class BaseContent
     public boolean hasDefinedLinks = false;
 
     protected Set<String> links;
+
+    // if a value is modified, it means that we've called setX after the object
+    // has been created.
+
+    public int hasExpandedLinks = 0;
+
+    public int hasModifiedExpandedLinks = 0;
+
+    /**
+     * True when this field is defined and present in the database or set on the
+     * object.  This is used for JSON serialization because we skip undefined
+     * values.
+     */
+    public boolean hasDefinedExpandedLinks = false;
+
+    protected Set<String> expandedLinks;
 
     // if a value is modified, it means that we've called setX after the object
     // has been created.
@@ -5848,7 +5864,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The version of Spinn3r used to write this content.  
+     * The version of the software used to write this content.  
      * </p>
      *
      * <p>
@@ -5867,7 +5883,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The version of Spinn3r used to write this content.  
+     * The version of the software used to write this content.  
      * </p>
      *
      * <p>
@@ -7259,7 +7275,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The set of tags assigned to this source by the either customers or spinn3r (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
+     * The set of tags assigned to this source by the either customers or us (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
      * </p>
      *
      * <p>
@@ -7278,7 +7294,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The set of tags assigned to this source by the either customers or spinn3r (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
+     * The set of tags assigned to this source by the either customers or us (globally).  This is used so that your client can filter by assigned tags or search by them as well.  This is not to be confused with the tags field which are assigned by the site.  These tags are opaque strings and not human readable to avoid giving away any customer information in the API.  Any sources you manually register are assigned tags with your vendor auth code.  This will allow you to register sources, and then filter / search over them.
      * </p>
      *
      * <p>
@@ -12796,6 +12812,92 @@ public abstract class BaseContent
      */
     public boolean hasDefinedLinks () {
         return this.hasDefinedLinks;
+    }
+
+    public BaseContent setExpandedLinks ( Set<String> expandedLinks ) {
+
+        NoNullSet.validate( expandedLinks );
+
+        ++this.hasExpandedLinks;
+        ++this.hasModifiedExpandedLinks;
+
+        this.expandedLinks = expandedLinks;
+
+        hasDefinedExpandedLinks = true;
+
+        return this;
+
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Set<String> getExpandedLinks() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            Throwable cause = new IllegalArgumentException( "this.expandedLinks" );
+            throw new DataBindingException( "Member is undefined: ", cause );
+        }
+
+        return this.expandedLinks;
+    }
+
+    /**
+     * <p>
+     * Expanded version of all outbound links in the main element.  Since main is the authoritative content, without chrome or sidebar content, this can be used for ranking purposes.
+     * </p>
+     *
+     * <p>
+     * Schema type: set&lt;text&gt; , name: expanded_links
+     * </p>
+     */
+    public Optional<Set<String>> getExpandedLinksAsOptional() {
+
+        if ( this.constructed == false && this.hasExpandedLinks == 0 ) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable( this.expandedLinks );
+
+    }
+
+    /**
+     * Return true if this member has a defined value of this field.
+     */
+    public boolean hasExpandedLinks () {
+        return this.hasExpandedLinks > 0;
+    }
+
+    /**
+     * Clear this method so that it no longer has a value and won't be
+     * serialized or persisted.
+     */
+    public void clearExpandedLinks () {
+
+        this.hasExpandedLinks = 0;
+        this.hasModifiedExpandedLinks = 0;
+        this.hasDefinedExpandedLinks = false;
+
+    }
+
+    /**
+     * Return true if this member has been modified from the original value.
+     */
+    public boolean hasModifiedExpandedLinks () {
+        return this.hasModifiedExpandedLinks > 0;
+    }
+
+    /**
+     * Return true if this member has a defined value.
+     */
+    public boolean hasDefinedExpandedLinks () {
+        return this.hasDefinedExpandedLinks;
     }
 
     public BaseContent setPublished ( Date published ) {
@@ -21935,7 +22037,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * The quality of the metadata on this post. Used internally to audit the quality of our data.  Not very applicable to customer use.
      * </p>
      *
      * <p>
@@ -21954,7 +22056,7 @@ public abstract class BaseContent
 
     /**
      * <p>
-     * The quality of the metadata on this post. Used internally to audit the quality of Spinn3r data.  Not very applicable to customer use.
+     * The quality of the metadata on this post. Used internally to audit the quality of our data.  Not very applicable to customer use.
      * </p>
      *
      * <p>
@@ -22735,6 +22837,10 @@ public abstract class BaseContent
 
         if ( obj.hasLinks() ) {
             setLinks( obj.getLinks() );
+        }
+
+        if ( obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
         }
 
         if ( obj.hasPublished() ) {
@@ -23797,6 +23903,10 @@ public abstract class BaseContent
             setLinks( obj.getLinks() );
         }
 
+        if ( ! hasExpandedLinks() && obj.hasExpandedLinks() ) {
+            setExpandedLinks( obj.getExpandedLinks() );
+        }
+
         if ( ! hasPublished() && obj.hasPublished() ) {
             setPublished( obj.getPublished() );
         }
@@ -24707,6 +24817,8 @@ public abstract class BaseContent
 
         this.hasModifiedLinks = 0;
 
+        this.hasModifiedExpandedLinks = 0;
+
         this.hasModifiedPublished = 0;
 
         this.hasModifiedModified = 0;
@@ -25319,6 +25431,10 @@ public abstract class BaseContent
         }
 
         if ( this.hasModifiedLinks() ) {
+            return true;
+        }
+
+        if ( this.hasModifiedExpandedLinks() ) {
             return true;
         }
 
@@ -26592,6 +26708,14 @@ public abstract class BaseContent
 
             buff.append( "links=" );
             buff.append( links );
+            buff.append( " " );
+
+        }
+
+        if ( hasExpandedLinks > 0 ) {
+
+            buff.append( "expandedLinks=" );
+            buff.append( expandedLinks );
             buff.append( " " );
 
         }
@@ -28382,6 +28506,15 @@ public abstract class BaseContent
         }
 
         if ( ! equalsWithNull( links, cmp.links ) ) {
+            return false;
+        }
+
+        // they should either be both false or both true...
+        if ( hasExpandedLinks() != cmp.hasExpandedLinks() ) {
+            return false;
+        }
+
+        if ( ! equalsWithNull( expandedLinks, cmp.expandedLinks ) ) {
             return false;
         }
 
@@ -31077,6 +31210,24 @@ public abstract class BaseContent
                 if ( links != null ) {
 
                     JSON.writeStringSet( generator, __name, links );
+
+                }
+
+            }
+
+            // ***** json encode member expanded_links from Set<String>
+
+            __name = "expandedLinks";
+
+            if ( ! builder.camelCaseNames ) {
+                __name = "expanded_links";
+            }
+
+            if ( this.hasExpandedLinks > 0 ) {
+
+                if ( expandedLinks != null ) {
+
+                    JSON.writeStringSet( generator, __name, expandedLinks );
 
                 }
 
@@ -33846,6 +33997,15 @@ public abstract class BaseContent
                 // ***** json decode member links from Set<String>
 
                 case "links":
+
+                    // FIXME not implemented yet.
+
+                    break;
+
+                // FIXME: handle camelCase and under_score
+                // ***** json decode member expanded_links from Set<String>
+
+                case "expanded_links":
 
                     // FIXME not implemented yet.
 
