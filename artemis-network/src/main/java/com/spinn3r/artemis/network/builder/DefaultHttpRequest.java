@@ -234,7 +234,7 @@ public class DefaultHttpRequest implements HttpRequest {
                                            defaultHttpRequestMethod.outputContent,
                                            defaultHttpRequestMethod.outputContentEncoding,
                                            defaultHttpRequestMethod.outputContentType,
-                                           defaultHttpRequestBuilder.getUserAgent());
+                                           defaultHttpRequestMethod.getUserAgent());
 
     }
 
