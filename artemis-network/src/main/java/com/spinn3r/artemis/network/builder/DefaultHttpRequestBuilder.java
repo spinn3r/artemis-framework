@@ -118,7 +118,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         return configure( resource, new DefaultHttpRequestMethod( this, resource, TRACE_METHOD ) );
     }
 
-    private DefaultHttpRequestMethod configure( String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
+    private DefaultHttpRequestMethod configure(String resource, DefaultHttpRequestMethod defaultHttpRequestMethod ) {
 
         // TODO: move this to init in DefaultHttpRequestMethod?
 
@@ -137,7 +137,7 @@ public class DefaultHttpRequestBuilder extends BaseHttpRequestBuilder implements
         }
 
         if (userAgentsConfig.getUserAgents() != null && userAgentsConfig.getUserAgents().size() > 0 ) {
-            defaultHttpRequestMethod.withUserAgent(userAgentRandomizer.fetchRandomUserAgent());
+            defaultHttpRequestMethod.withUserAgent(userAgentRandomizer.fetchRandomUserAgent(resource));
         } else {
             defaultHttpRequestMethod.withUserAgent(networkConfig.getUserAgent());
         }
