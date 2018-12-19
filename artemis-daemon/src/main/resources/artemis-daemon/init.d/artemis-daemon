@@ -83,15 +83,15 @@ export PREFER_IPV6="${daemon.preferIPv6Addresses}"
 
 export JAVA_OPTS=""
 
+if [ "${USE_JAVA8}" = "true" ]; then
+    echo "Using Java 8"
+    JAVA=/usr/lib/jvm/java-8-oracle/jre/bin/java
+fi
+
 ## now load the default file to overload system settings.
 if [ -e ${DEFAULT_FILE} ]; then
     echo "Loading init.d default file: ${DEFAULT_FILE}"
     source ${DEFAULT_FILE}
-fi
-
-if [ "${USE_JAVA8}" = "true" ]; then
-    echo "Using Java 8"
-    JAVA=/usr/lib/jvm/java-8-oracle/jre/bin/java
 fi
 
 mkdir -p ${LOG_DIR}
