@@ -3,8 +3,6 @@ package com.spinn3r.artemis.util.text;
 import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.spinn3r.artemis.util.primitives.Integers;
-import javafx.util.converter.IntegerStringConverter;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -12,9 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import static java.awt.SystemColor.text;
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.*;
 
 public class LinePageReaderTest {
 
