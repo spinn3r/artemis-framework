@@ -12,14 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.ProtocolException;
-import java.net.Proxy;
-import java.net.SocketTimeoutException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -139,6 +132,7 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
     private URLConnection _urlConnection = null;
 
+    // private Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 9997));;
     private Proxy proxy = null;
 
     private boolean initConnection = false;
