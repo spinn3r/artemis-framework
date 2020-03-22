@@ -5,10 +5,12 @@ import com.spinn3r.artemis.init.Launcher;
 import com.spinn3r.artemis.network.builder.HttpRequestBuilder;
 import com.spinn3r.artemis.network.init.DirectNetworkService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@Ignore
 public class EmbeddedJettyTestTest extends EmbeddedJettyTest {
 
     public EmbeddedJettyTestTest() {
