@@ -132,8 +132,8 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
 
     private URLConnection _urlConnection = null;
 
-    private Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 9997));;
-    // private Proxy proxy = null;
+    //private Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("127.0.0.1", 9997));;
+    private Proxy proxy = null;
 
     private boolean initConnection = false;
 
