@@ -1094,11 +1094,11 @@ public class URLResourceRequest extends BaseResourceRequest implements ResourceR
     }
 
     public void setProxy(Proxy proxy) {
-//        if ( _urlConnection != null ) {
-//            throw new RuntimeException( "Unable to set proxy while already connected" );
-//        }
-//
-//        this.proxy = proxy;
+        if ( _urlConnection != null ) {
+            throw new RuntimeException( "Unable to set proxy while already connected" );
+        }
+
+        this.proxy = proxy;
     }
 
     public ExclusionHelper getExclusionHelper() {
