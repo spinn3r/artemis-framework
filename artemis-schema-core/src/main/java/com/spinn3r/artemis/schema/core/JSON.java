@@ -150,4 +150,24 @@ public class JSON {
 
     }
 
+    @Deprecated
+    public static <T> void writeMapSet(JsonGenerator generator, String name, Collection<T> set) throws IOException  {
+
+        writeSet(generator, name, set);
+    }
+
+    public static <T> void writeSet(JsonGenerator generator, String name, Collection<T> set) throws IOException  {
+        if ( set.size() == 0 )
+            return;
+
+        generator.writeFieldName( name );
+
+        generator.writeStartArray();
+
+        for ( T member : set ) {
+            generator.writeObject( member );
+        }
+
+        generator.writeEndArray();
+    }
 }
