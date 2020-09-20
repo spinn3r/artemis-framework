@@ -10,6 +10,7 @@ import java.util.function.Predicate;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import org.jetbrains.annotations.Nullable;
 
 /**
  *
@@ -154,6 +155,7 @@ public class CollectionUtils {
 
     }
 
+    @Nullable
     public static <T> T last( Collection<T> input ) {
 
         if ( input.size() == 0 )
