@@ -12,6 +12,10 @@ import static org.hamcrest.Matchers.*;
 
 public class ISO8601DateParserTest {
 
+    @Test
+    public void testParse1() {
+        ISO8601DateParser.parse("2021-02-01T00:00:00Z");
+    }
 
     @Test
     public void testPartial() throws Exception {
